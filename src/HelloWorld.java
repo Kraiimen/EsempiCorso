@@ -4,5 +4,6 @@ public class HelloWorld {
 		System.out.println("aggiunto per testare git e github");
 		System.out.println("added by Regina for testing");
 		System.out.println("testing from vs");
+		System.out.println("testing testing");
 	}	
 }
