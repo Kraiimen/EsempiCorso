@@ -44,6 +44,10 @@ public class Conditionals {
 		//tra 21 e 32
 		else if(age <= 32){
 			cost = 200;
+			// CONTROLLO ORARIO
+			if(time > 18){
+				cost *= 0.9; // cost = cost * 0.9;
+			}
 		}
 		//da 33 in poi
 		else{
