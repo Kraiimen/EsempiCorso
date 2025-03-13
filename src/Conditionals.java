@@ -27,7 +27,7 @@ public class Conditionals {
 		// se hai piu di 32 , il costo sara 300
 
 
-		int time =18: //ora spettacolo del biglietto 
+		int time =18; //ora spettacolo del biglietto 
 		//il prezzo del biglietto , se l orario e  dopo le 18, 10% di sconto
 
 		//da 0 a 15
@@ -47,14 +47,13 @@ public class Conditionals {
 		  cost =300;
 
 		if (time>18){
-		cost*= cost 0.9:
+		cost*= 0.9;
 		}
 
 		//int a = 0;
 		//if()
 
 		System.out.println(cost);
-
-		//..
+		}
 	}
 }
