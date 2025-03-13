@@ -4,5 +4,6 @@ public class HelloWorld {
 		System.out.println("aggiunto per testare git e github");
 		System.out.println("aggiunto per modificare");
 		System.out.println("aggiunto per modificare nuovamente");
+		System.out.println("test pull da main");
 	}	
 }
