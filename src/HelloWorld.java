@@ -3,5 +3,6 @@ public class HelloWorld {
 		System.out.print("Hello World!");
 		System.out.println("aggiunto per testare git e github");
 		System.out.println("test pull da main");
+		System.out.println("questo file è stato modificato");
 	}	
 }
