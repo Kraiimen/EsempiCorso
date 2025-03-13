@@ -23,18 +23,19 @@ public class Conditionals {
 
 		//Se hai meno di 15 anni, il costo sarà uguale a 50
 		//Se hai tra i 15 e i 20 anni, il costo sarà 70
-		//Se hai tra i 20 e i 32 anni, il costo sarà 200
+		//Se hai tra i 20 e i 32 anni, il costo sarà 100
+		//Se hai più di 32 anni, il costo sarà di 200
 		
-		if(age < 15){
-		  cost = 50;
+		cost = 50;
+		if (age >= 15){
+			cost = 70;
+			if(age >= 20){
+				cost = 100;
+				if(age >= 32){
+					cost = 200;
+				}
+			}
 		}
-		else if(age > 15 && age < 20){
-		  cost = 70;
-		}
-		else if(age > 20 && age < 32){
-		  cost = 200;
-		}
-		
 		System.out.println(cost);
 	}
 }
