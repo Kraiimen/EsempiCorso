@@ -10,14 +10,14 @@ public class GuessTheNumber {
         Random dice = new Random();
         int n = dice.nextInt(10001);
         Console console = System.console();
-        System.out.println("indovina il numero tra 1 e 10000");
+        System.out.println("indovina il numero tra 0 e 10000");
         int N;
         int tentativi=0;
         do{
             String NI = console.readLine();
             N = Integer.parseInt(NI);
             if(N> 10000 || N<1){
-                System.err.println("ricorda che è tra 1 e 10000");
+                System.err.println("ricorda che è tra 0 e 10000");
             }else if(N == n && tentativi ==1){
                 System.out.println("WOW al primo tentativo?");
                 tentativi =0;
