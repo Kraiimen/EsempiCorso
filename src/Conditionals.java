@@ -20,46 +20,75 @@ public class Conditionals {
 		
 		int age = 17;
 		double cost = 0;
+		int time = 18;
+		boolean isFemale = false;
+		final double = FEMALE_DISCOUNT_PERCENTAGE = 0.8;
+		final double = MALE_DISCOUNT_PERCENTAGE = 0.9;
+		final String day = "mercoledì";
 
-		//Se hai meno di oppure 15 anni, il costo sarà uguale a 50
-		//Se hai tra i 15 e i 20 anni, il costo sarà 70
-		//Se hai tra i 20 e i 32 anni, il costo sarà 200
-		//Se hai più di 32, il costo sarà 300 
+		//Se hai meno 15 anni, il costo sarà uguale a 50
+		//Se hai tra i 15 e i 20 anni (esclusi), il costo sarà 70
+		//Se hai tra i 20 e i 32 anni (esclusi), il costo sarà 100
+		//Se hai più di 32, il costo sarà 200 
 
-		//il prezzo del biglietto, se l'orario è dopo le 18:00, 10% di sconto
-		//sconto solo se hai tra 20 e 32 anni
+		//Se hai tra i 20 e i 32 anni
+		//Se sei maschio, e l'orario del biglietto è dopo le 18 oppure è Domenica--> 10% di sconto
+		//Se sei femmina, e l'orario è dopo le 15 oppure se è Mercoledì --> 20% di sconto
 
-		int time = 18; //ora spettacolo del biglietto
-
-
-		/* CONTROLLO ETA' */
-		//da 0 a 15
 		if(age <= 15){
 			cost = 50;
 		}
-		//tra 16 e 20
-		else if(age <= 20){
+		else if(age < 20){
 			cost = 70;
 		}
-		//tra 21 e 32
-		else if(age <= 32){
-			cost = 200;
-			// CONTROLLO ORARIO
-			if(time > 18){
-				cost *= 0.9; // cost = cost * 0.9;
-			}
-		}
-		//da 33 in poi
-		else{
-			cost = 300;
-		}
-		/* ------------ */
 
-		
-		//OPERATORI DI CONFRONTO == <= >= !=
+		// else if(age < 32) {
+		// 	cost = 100;
+
+		// 	if(isFemale) {
+		// 		if(time > 15){
+		// 			cost *= FEMALE_DISCOUNT_PERCENTAGE;
+		// 		}
+		// 	} else {
+		// 		if(time > 18){
+		// 			cost *= MALE_DISCOUNT_PERCENTAGE;
+		// 		}
+		// 	}
+		// }
+
+
+		// else if(age < 32 && isFemale && time > 15){
+		// 	cost *= FEMALE_DISCOUNT_PERCENTAGE;
+		// }
+		// else if(age < 32 && !isFemale && time > 18){
+		// 	cost *= MALE_DISCOUNT_PERCENTAGE;
+		// }
+		// else {
+		// 	cost = 100;
+		// }
+
+		// else if(age < 32) {
+		// 	cost = 100;
+
+		// 	if(isFemale && time > 15){
+		// 		cost *= FEMALE_DISCOUNT_PERCENTAGE;
+		// 	}else if(!isFemale && time > 18){
+		// 		cost *= MALE_DISCOUNT_PERCENTAGE;
+		// 	}
+		// }
+
+		else if(age < 32) {
+			if(isFemale && (time > 15 || day.equals("mercoledì"))){
+		 		cost *= FEMALE_DISCOUNT_PERCENTAGE;
+		 	}else if(!isFemale && (time > 15 || day.equals("domenica"))){
+		 		cost *= MALE_DISCOUNT_PERCENTAGE;
+		 	}
+		}
+
+		else {
+			cost = 200;
+		}
 
 		System.out.println(cost);
-
-		//.
 	}
 }
