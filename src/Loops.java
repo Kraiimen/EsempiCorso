@@ -41,7 +41,9 @@ public class Loops{
             }
         }while(!answer.equals("Yes") && !answer.equals("No"));
 
-
-
+        System.out.println("dammi un numero:");
+        String ns = console.readLine();
+        int n = Integer.parseInt(ns); //passami in intero la stringa ns
+        System.out.println(n + 1);
     }
 }
