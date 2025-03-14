@@ -44,10 +44,12 @@ public class Intro {
 
 		boolean bo = true;
 		boolean bo2 = false;
+		System.out.println(bo);
+		System.out.println(bo2);
 
 		boolean result = (d == 300d);
 		System.out.println(result);
-
+c
 		int t = 0;
 
 		/*
