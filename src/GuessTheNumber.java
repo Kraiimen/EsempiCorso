@@ -6,6 +6,7 @@ public class GuessTheNumber {
         Questo programma chiede al utente di indovinare il numero misterioso
         se l'utente azzecca dirà "bravo lo hai indovinato", se l'utente dice un numero più basso, il programma risponde dicendo "sbagliato, il numero è più grande" e vice versa con un numero più grande
         il programma deve anche tenere traccia del numero di tentativi
+        
         */
         Random dice = new Random();
         int n = dice.nextInt(10001);
