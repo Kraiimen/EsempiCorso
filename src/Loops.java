@@ -39,6 +39,11 @@ public class Loops {
                 System.out.println("Ti ho detto di rispondere Yes or No!");
             }
         } while (!answer.equals("Yes") && !answer.equals("No"));
+
+        System.out.println("dammi un numero qualsiasi");
+        String ns = console.readLine();
+        int n = Integer.parseInt(ns); //passami in intero la stringa ns
+        System.out.println(n + 1);
     } 
     
 } 
