@@ -19,14 +19,14 @@ public class FindBigger {
         do {
             System.out.println("Inserisci un numero o premi Q per terminare per favore :3");
             risposta = console.readLine(); // metto la console per leggere la risposta typed
-            if (!risposta.equals("Q")){ // risposta diversa da q
+            if (!risposta.equals("q")){ // risposta diversa da q
                 int n = Integer.parseInt(risposta);
                 sum += n;
             } else {
                 System.out.println("La somma è " + sum );
             }
 
-        } while(!risposta.equals("Q"));
+        } while(!risposta.equals("q"));
     }
     
 }
