@@ -28,7 +28,7 @@ public class GuessTheNumber {
             }else{
                 System.out.println("no, il numero è più grande");
             }
-            tentativi++;
+            tentativi++; // aumentiamo il numero di tentativi per ogni guess
         }while(N != n);
         tentativi =0;
     }
