@@ -1,16 +1,32 @@
 import java.util.Random;
+import java.io.Console;
 
 public class GuessTheNumber {
-    public static void main(String[] args) {
-        
+    public static void main (String[] args){
+        Console console = System.console();
         Random dice = new Random();
-        int n = dice.nextInt(100_001);
-        //continuare questo programma. Deve chiedere un numero misterioso, avere la risposta e: se azzecca stampa "bravo sei un genio"
-        // se invece il numero dell'utente è sbagliato ed è minore, stampa "Hai sbagliato, il numero magico è maggiore"
-        // se il numero è sbagliato ed è più piccolo stampa "Hai sbagliato, il numero è più piccolo"
-        // voglio che il programma conti i tentativi e li riporti a fine del processo il numero dei tentativi
+        int n = dice.nextInt(100);
 
-        
+
+        String answer;
+        int number;
+        int ntry = 0;
+        do {
+            System.out.println("indovina il numero segreto");
+            answer = console.readLine();
+            number = Integer.parseInt(answer);
+
+            if(number < n){
+                System.out.println("risposta sbagliata. il numero segreto è maggiore del numero inserito");
+                ntry ++;
+            } else if (number > n){
+                System.out.println("risposta sbagliata. il numero segreto è minore del numero inserito");
+                ntry ++;
+            } else {
+                ntry ++;
+                System.out.println("Hai indovinato il numero segreto in " + ntry + " tentativi.");
+            }
+        } while (number != n);
+
     }
-    
 }
