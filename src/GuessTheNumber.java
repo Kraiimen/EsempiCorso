@@ -30,7 +30,7 @@ public class GuessTheNumber {
                 System.out.println("no, il numero è più grande");
             }
             tentativi++;
-        }while(N != n);        
+        }while(N != n);
         
     }
 }
