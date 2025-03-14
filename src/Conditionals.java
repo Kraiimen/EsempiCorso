@@ -11,19 +11,41 @@ public class Conditionals{
 		System.out.println("X è diverso da 3, 5 o 7");
 		}
 		
-		/*scrivere del codice che controlla la variabile age per capire quanti anni hai, e se hai meno di 15 anni, cost sarà 			uguale a 50, se invece hai tra 15 e 20 anni cost sarà uguale a 70, se hai tra 20 e 32 cost sarà uguale a 100, infine se 		hai più di 32 anni, cost sarà uguale a 200, poi stampa il valore di cost*/
-		
-		int age =26;
+		/*
+		 se hai meno di 15 anni, il costo sarà uguale a 50
+		 se hai tra 15 e 20, il costo sarà 70 (i 20 sono esclusi) 
+		 se hai tra i 20 e i 32 anni, il costo sarà 100 (32 esclusi)
+		 se hai da 32 in su il costo sarà uguale a 200
+		 se sta nella fascia tra 20 e 32, è mascchio e chiede un biglietto per uno spettacolo dopo le 18 si applica uno sconto del 10% o anche se è domenica
+		 se invece è femmina gli si sconta il 20% dopo le 15 o se lo prendono di mercoledì
+		 
+		 */
+		int age =29;
 		double cost=0;
-		if(age <=15){
+		boolean isFemale = true;
+		double time = 12.00;
+		final double SM = 0.1; //SM sta per Sconto Maschi
+		final double SF = 0.2; //SF sta per sconto femmine
+		final String day = "mercoledì";
+
+		if(age <15){
 			cost = 50;
-		}else if(age >15 && age<=20){
+		}else if(age <20){
 			cost = 70;
-		}else if(age >20 && age<=32){
-			cost = 100;
-		}else if(age >32){
+		}else if (age <32){
+			cost =100;
+			if(isFemale &&(time >15 || day.equals("mercoledì"))){
+				cost -= cost*SF;
+			}else if(!isFemale && (time >18 || day.equals("domenica"))){
+			cost -= cost*SM;
+			}
+		}else{
 			cost = 200;
 		}
-		System.out.println(cost);
+		System.out.println("femmina: " + isFemale);
+		System.out.println("età: "+ age);
+		System.out.println("orario: " + time);
+		System.out.println("costo: " + cost);
+				
 	}
 }
