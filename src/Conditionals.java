@@ -95,7 +95,7 @@ public class Conditionals {
 		}
 		else if( age <= 32){
 			cost = 100;
-		    if(time >= 18 && age<=32){        //Utlizzato comparatore di logica
+		    if(orario >= 18 && age<=32){        //Utlizzato comparatore di logica
 				cost *= 0.9; // Applica lo sconto del 10%                
 		    }
 	    }

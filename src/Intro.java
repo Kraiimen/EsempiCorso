@@ -49,7 +49,6 @@ public class Intro {
 
 		boolean result = (d == 300d);
 		System.out.println(result);
-c
 		int t = 0;
 
 		/*

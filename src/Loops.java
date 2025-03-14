@@ -1,35 +1,3 @@
-public class Loops {
-    public static void main(String[] args) {
-           
-         //  1 ciclo del 1 slot eseguirà solo una volta che int=0 ,2 slot  poi valuta che i<10, 3 
-         // slot esegue e pensa due è minore di dieci e quindi continua fino a nove. 
-      for(int i = 0; i < 10; i++ ){
-           System.out.println(i);
-        }
-            System.out.println("Terminato il ciclo");
-
-        //     //ciclo For che stampa i numeri dipari da 1 a 100
-
-    //     for (int i = 0 ; i < 101; i++ ){
-    //         if(i % 2 != 0) {  // se
-    //             System.out.println(i);
-    //     }
-    // } 
-      for(int i=1; i < 100; i -=5){ 
-        System.out.println(i);
-      }
-
-      int y = 100;
-      while (y > 0) {
-        System.out.println(y);
-        y -= 5;
-      }
-        
-     
-      
-
-    }
-}
 import java.io.Console;
 
 public class Loops {
@@ -47,30 +15,35 @@ public class Loops {
         //     } //se il resto della divisione è 0 i numeri sono pari
         // }
 
-        for(int i = 100; i > 0; i -= 5) {  //questo stampa tutti i numeri da 100 a 0 tutti multipli di 5
-            System.out.println(i);
-        }
+        // for(int i = 100; i > 0; i -= 5) {  //questo stampa tutti i numeri da 100 a 0 tutti multipli di 5
+        //     System.out.println(i);
+        // }
 
-        int y = 100;
-        while(y > 0) {
-            System.out.println(y);
-            y -= 5;
-        }
+        //     int y = 100;
+        // while(y > 0) {
+        //     System.out.println(y);
+        //     y -= 5;
+        // }
 
-        int z = 100;
-        do { 
-            System.out.println(z);
-            z -= 5;
-        } while (z > 0);
+        // int z = 100;
+        // do { 
+        //     System.out.println(z);
+        //     z -= 5;
+        // } while (z > 0);
         
         String answer;
         do { 
-            System.out.print("inserisci una risposta di tipo Yes or No");
+            System.out.println("inserisci una risposta di tipo Yes or No");
+            System.out.print("Risposta: ");
             answer = console.readLine();
+            
+
+
             if(!answer.equals("Yes") && !answer.equals("No")) {
                 System.out.println("Ti ho detto di rispondere Yes or No!");
             }
-        } while (!answer.equals("Yes") && !answer.equals("No"));
+        } while 
+                (!answer.equals("Yes") && !answer.equals("No"));
 
         System.out.println("dammi un numero qualsiasi");
         String ns = console.readLine();
