@@ -22,8 +22,8 @@ public class Conditionals {
 		double cost = 0;
 		int time = 18;
 		boolean isFemale = false;
-		final double = FEMALE_DISCOUNT_PERCENTAGE = 0.8;
-		final double = MALE_DISCOUNT_PERCENTAGE = 0.9;
+		final double FEMALE_DISCOUNT_PERCENTAGE = 0.8;
+		final double MALE_DISCOUNT_PERCENTAGE = 0.9;
 		final String day = "mercoledì";
 
 		//Se hai meno 15 anni, il costo sarà uguale a 50
@@ -92,3 +92,4 @@ public class Conditionals {
 		System.out.println(cost);
 	}
 }
+
