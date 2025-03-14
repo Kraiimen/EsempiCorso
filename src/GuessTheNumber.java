@@ -22,6 +22,6 @@ public class GuessTheNumber{
                 System.out.println("hai sbagliato! Il numero magico è minore di quello inserito!");
             }
         }while(n != input);
-        System.out.println("hai impiegato " + tentativi + " tentativi");
+        System.out.println("hai impiegato " + tentativi + " tentativi.");
     }
 }
