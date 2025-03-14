@@ -1,60 +1,41 @@
 public class Intro {
 	public static void main(String[] args){
-		int num = 6;
-		
+		System.out.println("5");
+		int num =6;
 		int numero;
 		numero = 7;
-		
-
-		byte b = 22;
-		short s = 10000;
-		int i = 100000;
-		long myLong = 1000000000;
-
-		char c = 'a';
-		int y = c;		
-
-		System.out.println("5");
 		System.out.println(num);
 		System.out.println(numero);
-		
 		num = Integer.MAX_VALUE;
 		System.out.println(num);
+		byte b = 22;
+		Short s = 10000;	
+		int i = 10000;
+		long myLong = 10000000;
 
-		System.out.println(b);
-		System.out.println(s);
-		System.out.println(i);
-		System.out.println(myLong);
-
+		char c = 'a';
 		System.out.println(c);
-		System.out.println(y);
-		
-		c = (char) y;
-		System.out.println(c);
-
+		int y = c;
+		System.out.println(y);	
 		y = 100000;
-		c = (char) y;
+		c=(char) y;
 		System.out.println(c);
-
-		int x = (int) c;
+		int x = (int)c;
 		System.out.println(x);
-
-		float f = 300.0f;
+		long z = 3;
+		i = (int)z;
+		long zz = s;
+		b = (byte)i;
+		float f = 126.5f;
 		double d = f;
-
-		boolean bo = true;
+		boolean bo =true;
 		boolean bo2 = false;
-
-		boolean result = (d == 300d);
+		boolean result = d==126.5;
 		System.out.println(result);
-
-		int t = 0;
-
-		/*
-			boolean bo3 = (boolean) t; //non consentito
-		*/
-
-		boolean bo4 = (t < i);
-		System.out.println(bo4);
-	}	
+		double a1,b1;
+		a1= 0.1;
+		b1= 0.2;
+		double sum = a1+b1;
+		System.out.println(sum);
+	}
 }
