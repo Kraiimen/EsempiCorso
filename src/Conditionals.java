@@ -30,9 +30,9 @@ public class Conditionals {
 		//Se hai tra i 15 e i 20 anni (esclusi), il costo sarà 70
 		//Se hai tra i 20 e i 32 anni (esclusi), il costo sarà 100
 		//Se hai più di 32, il costo sarà 200 
-
+		
 		//Se hai tra i 20 e i 32 anni
-		//Se sei maschio, e l'orario del biglietto è dopo le 18 oppure è Domenica--> 10% di sconto
+		//Se sei maschio, e l'orario del biglietto è dopo le 18 oppure è Domenica --> 10% di sconto
 		//Se sei femmina, e l'orario è dopo le 15 oppure se è Mercoledì --> 20% di sconto
 
 		if(age <= 15){

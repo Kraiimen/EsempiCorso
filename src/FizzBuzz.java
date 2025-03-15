@@ -1,6 +1,3 @@
-import java.util.Random;
-import java.io.Console;
-
 public class FizzBuzz {
     public static void main(String[] args){
         
@@ -50,7 +47,6 @@ public class FizzBuzz {
 
         //     System.out.println(str);
         // }
-
 
         for(int i=0; i<=100; i++){
             

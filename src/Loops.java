@@ -28,15 +28,15 @@ public class Loops {
         //     z -= 5;
         // } while (z > 0);
 
-        // String answer;
-        // do {
-        //     System.out.println("Inserisci una risposta di tipo Yes or No");
-        //     answer = console.readLine();
+        String answer;
+        do {
+            System.out.println("Inserisci una risposta di tipo Yes or No");
+            answer = console.readLine();
 
-        //     if(!answer.equals("Yes") && !answer.equals("No")){
-        //         System.out.println("Ti ho detto di rispondere Yes or No");
-        //     }
+            if(!answer.equals("Yes") && !answer.equals("No")){
+                System.out.println("Ti ho detto di rispondere Yes or No");
+            }
 
-        // } while (!answer.equals("Yes") && !answer.equals("No"));
+        } while (!answer.equals("Yes") && !answer.equals("No"));
     }
 }
