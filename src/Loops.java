@@ -5,13 +5,6 @@ public class Loops {
         Console console = System.console();
 
         // Ciclo for che stampa i numeri dispari da 1 a 100
-
-        // for(int i=1; i<101; i++){
-        //     if(i % 2 != 0){
-        //         System.out.println(i);
-        //     }
-        // }
-
         
         // for(int i=1; i<101; i+=2){
         //     System.out.println(i);
@@ -35,15 +28,15 @@ public class Loops {
         //     z -= 5;
         // } while (z > 0);
 
-        String answer;
-        do {
-            System.out.println("Inserisci una risposta di tipo Yes or No");
-            answer = console.readLine();
+        // String answer;
+        // do {
+        //     System.out.println("Inserisci una risposta di tipo Yes or No");
+        //     answer = console.readLine();
 
-            if(!answer.equals("Yes") && !answer.equals("No")){
-                System.out.println("Ti ho detto di rispondere Yes or No");
-            }
+        //     if(!answer.equals("Yes") && !answer.equals("No")){
+        //         System.out.println("Ti ho detto di rispondere Yes or No");
+        //     }
 
-        } while (!answer.equals("Yes") && !answer.equals("No"));
+        // } while (!answer.equals("Yes") && !answer.equals("No"));
     }
 }
