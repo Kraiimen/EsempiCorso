@@ -24,6 +24,8 @@ public class Conditionals {
 		// se è femmina, ha uno sconto di 20% dopo le 15
 		// femmine: lo sconto viene dato alle persone che arrivano dopo le 15 oppure dev'essere un mercoledì
 		// maschi: 
+
+		
 		int age = 25;
 		double cost = 0;
 		boolean isFemale = false;
