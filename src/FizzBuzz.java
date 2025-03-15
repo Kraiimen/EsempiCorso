@@ -11,7 +11,7 @@ public class FizzBuzz{
             else if(i%5 == 0){                              // se il numero è un multiplo di 5 stampa buzz
                 System.out.println("buzz");
             }
-            if(i%3 !=0 && i%5 != 0){                        // se il numero non è un multiplo di 5 o 3, allora stampa il numero
+            if(i%3 !=0 && i%5 != 0){                        // se il numero non è un multiplo di 3 e 5, allora stampa il numero
                 System.out.println(i);
             }
         }
