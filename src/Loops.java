@@ -22,6 +22,7 @@ public class Loops {
         int y = 100;
         while(y > 0) {
             System.out.println(y);
+
             y -= 5;
         }
 
@@ -44,6 +45,7 @@ public class Loops {
         String ns = console.readLine();
         int n = Integer.parseInt(ns); //passami in intero la stringa ns
         System.out.println(n + 1);
-    } 
+    }
+     
     
 } 
