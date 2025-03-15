@@ -26,7 +26,6 @@ public class StopInput {
                 //se il numero inserito è maggiore di quello inserito in precedenza, allora diventa lui quello più grande
                 if(num > max){
                     max = num;
-                    System.out.println(max);
                 }
             }
         }while(!input.equals("q"));            //il tutto continua fino a quando non viene inserito "q" da tastiera
