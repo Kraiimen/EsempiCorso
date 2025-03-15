@@ -18,7 +18,8 @@ public class Intro {
 		System.out.println(num);
 		System.out.println(numero);
 		
-		num = Integer.MAX_VALUE;
+		num = Integer.MAX_VALUE; //sovrascrivere num con un valore massimo che un int può contenere
+		// Integer.Max_Value è una costante predefinita in Java che rappresenta il valore massimo di un int, cioè 2^31 - 1
 		System.out.println(num);
 
 		System.out.println(b);

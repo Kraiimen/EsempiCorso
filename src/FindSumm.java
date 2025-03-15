@@ -1,6 +1,26 @@
 import java.io.Console;
-public class FindBigger {
+public class FindSumm {
     public static void main(String [] args){
+        Console console = System.console();
+         int sum = 0;
+         String risposta;
+          do {
+             System.out.println("Inserisci un numero o premi Q per terminare per favore :3");
+             risposta = console.readLine(); // metto la console per leggere la risposta typed
+             if (!risposta.equals("q")){ // risposta diversa da q
+                 int n = Integer.parseInt(risposta); // converto la risposta in un numero intero
+                 sum += n;
+             } else {
+                 System.out.println("La somma è " + sum );
+             }
+         } while(!risposta.equals("q")); // quando il valore non è q continua 
+     
+    }
+    
+}
+
+// SOMMA
+
         // creerò una variabile intera che chiamo "sum" che do valore iniziale 0
         // eseguirò un ciclo
         // per ogni interazione del ciclo stamperò la stringa "inserisci un numero o premi q per terminare"
@@ -12,21 +32,4 @@ public class FindBigger {
         // altrimenti (stringua uguale q) stamperò il valore della somma e uscirò dal ciclo 
         //invece che stampare la somma stampare il numero più alto 
 
-        Console console = System.console();
-        int sum = 0;
-        String risposta;
-
-        do {
-            System.out.println("Inserisci un numero o premi Q per terminare per favore :3");
-            risposta = console.readLine(); // metto la console per leggere la risposta typed
-            if (!risposta.equals("q")){ // risposta diversa da q
-                int n = Integer.parseInt(risposta);
-                sum += n;
-            } else {
-                System.out.println("La somma è " + sum );
-            }
-
-        } while(!risposta.equals("q"));
-    }
     
-}
