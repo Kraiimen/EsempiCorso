@@ -1,7 +1,4 @@
-// chiede un numero
-// dammi un altro numero oppure premi q per smettere
-// alla fine ti stampa il numero piu grande che hai scritto
-
+//importa la libreria per l'utilizzo di Console
 import java.io.Console;
 
 public class StopInput {
