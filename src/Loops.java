@@ -4,17 +4,6 @@ public class Loops {
 	public static void main(String[] args){
         Console console = System.console();
 
-		// for(int i = 0; i < 10; ++i){
-        //     for(int j = 10; j > 0; --j){
-        //         if((j/2) > i){
-        //             System.out.print("  ");
-        //         } else {
-        //             System.out.print("* ");
-        //         }
-        //     }
-        //     System.out.println();
-        // }
-
         // for(int i = 0; i <= 100; ++i){
         //     if(i%2 == 1)
         //     {
@@ -26,6 +15,7 @@ public class Loops {
         //     System.out.println(i);
         // }
 
+        //*
         String answer;
         do{
             System.out.println("inserisci una risposta di tipo 'yes' o 'no'");
@@ -41,5 +31,6 @@ public class Loops {
         int n = Integer.parseInt(ns);
 
         System.out.println(n + 1);
+        //*/
 	}	
 }
