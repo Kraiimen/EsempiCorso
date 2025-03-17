@@ -13,7 +13,7 @@ public class GiveMeQ {
             numero = console.readLine("Dammi un numero o dammi Q: "); // leggo il valore dalla console, nella prossima riga controllo se è Q
             if(!numero.equals("Q")){
             NumeroInt = Integer.parseInt(numero);
-                if(NumeroInt > Maxnum){
+                if(NumeroInt > Maxnum){ // se il numero è più grande del Massimo attuale, viene sovrascritto al massimo
                     Maxnum = NumeroInt;
                 }
             }else if(numero.equals("Q")){

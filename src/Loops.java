@@ -1,5 +1,4 @@
 import java.io.Console;
-<<<<<<< HEAD
 public class Loops {
     public static void main (String[] args){
         Console console = System.console();
