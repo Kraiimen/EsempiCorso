@@ -23,10 +23,11 @@ public class EsNumPiuGrande{
             if (userAnswer.equals(exitChar)){ 
                 //System.out.println("OI");
                 break; //esce dal do-while quando eseguita
-            }
-            int n2 = Integer.parseInt(userAnswer);
-            if(nPiuGrande < n2){
-                nPiuGrande = n2;
+            }else{
+                int n2 = Integer.parseInt(userAnswer);
+                if(nPiuGrande < n2){
+                    nPiuGrande = n2;
+                }
             }
         }while(!userAnswer.equals(exitChar));
         System.out.println("Il numero piu grande che hai messo è: "+ nPiuGrande);
