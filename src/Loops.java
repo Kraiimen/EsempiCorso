@@ -2,6 +2,7 @@ import java.io.Console;
 
 public class Loops {
     public static void main(String[] args) {
+
         Console console = System.console();
         for( int i = 0 ; i < 10 ; i++ ) { //nel secondo slot sto dicendo dove terminare il ciclo
             System.out.println(i);
@@ -44,6 +45,7 @@ public class Loops {
         String ns = console.readLine();
         int n = Integer.parseInt(ns); //passami in intero la stringa ns
         System.out.println(n + 1);
+        
     } 
     
 } 
