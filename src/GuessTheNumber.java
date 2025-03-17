@@ -9,7 +9,7 @@ public class GuessTheNumber{
         public static void main(String[] args){
         Random dice = new Random();                 //crea un oggetto di nome "dice" e di tipo Random
         int n=dice.nextInt(100);                    //crea una variabile di tipo int e di nome "n" e inserisce al suo interno un numero intero randomico tra 0 e 100
-        int input=0;                                //inizializza una variabile di nome "input" che servirà per contenere l'intero inserito da tastiera
+        int input;                              //inizializza una variabile di nome "input" che servirà per contenere l'intero inserito da tastiera
         int tentativi=0;                            //inizializza una variabile di nome "tentativi" che verrà utilizzata come contatore
         Console console = System.console();         //crea un oggetto di nome "console" e di classe Console
 
