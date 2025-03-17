@@ -28,10 +28,10 @@ public class GuessTheNumber {
 
             attempts++;
 
-            if(ns != n && ns < n) {
+            if(ns < n) {
                 System.out.println("\nHai sbagliato, il numero da indovinare è maggiore di quello inserito");
             }
-            else if(ns != n && ns > n) {
+            else if(ns > n) {
                 System.out.println("\nHai sbagliato, il numero da indovinare è minore di quello inserito");   
             }
             else{
