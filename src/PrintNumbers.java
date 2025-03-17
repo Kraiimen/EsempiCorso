@@ -1,10 +1,7 @@
-import java.util.Random;
-import java.io.Console;
-
 public class PrintNumbers {
     public static void main (String[] args){
-        
-        // for( int i = 1 ; i < 100 ; i++ ) { //nel secondo slot sto dicendo dove terminare il ciclo
+
+        // for( int i = 1 ; i < 100 ; i++ ) { 
         //     if (i % 3 == 0 && i % 5 == 0){
         //         System.out.println("fizzbuzz");
         //     } else if (i % 3 == 0){
@@ -17,16 +14,18 @@ public class PrintNumbers {
         // }
 
         int i = 1;
+        String kw;
         do {
-            if (i % 3 == 0 && i % 5 == 0){
-                System.out.println("fizzbuzz");
+            if (i % 15 == 0){
+                kw = "fizzbuzz";    
             } else if (i % 3 == 0){
-                System.out.println("fizz");
+                kw = "fizz";    
             } else if (i % 5 == 0){
-                System.out.println("buzz");
+                kw = "buzz";     
             } else {
-                System.out.println(i);
-            }
+                kw = String.valueOf(i);
+            } 
+            System.out.println(kw);
             i ++;
         } while (i < 100);
     }

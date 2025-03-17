@@ -15,15 +15,13 @@ public class GuessTheNumber {
             System.out.println("indovina il numero segreto");
             answer = console.readLine();
             number = Integer.parseInt(answer);
+            ntry ++;
 
             if(number < n){
                 System.out.println("risposta sbagliata. il numero segreto è maggiore del numero inserito");
-                ntry ++;
             } else if (number > n){
                 System.out.println("risposta sbagliata. il numero segreto è minore del numero inserito");
-                ntry ++;
             } else {
-                ntry ++;
                 System.out.println("Hai indovinato il numero segreto in " + ntry + " tentativi.");
             }
         } while (number != n);
