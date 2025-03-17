@@ -1,5 +1,4 @@
 import java.util.Random;
-<<<<<<< HEAD
 import java.io.Console;
 public class GuessTheNumber {
 	public static void main(String[] args){
@@ -33,4 +32,5 @@ public class GuessTheNumber {
         }while(N != n);
         tentativi =0;
     }
+}
 
