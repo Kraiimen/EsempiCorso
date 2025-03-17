@@ -49,13 +49,15 @@ public class ArrayExercises {
             case 4:
                 // 4 calcolare il valore medio dei numeri contenuti nell'array
                 supporto =0;
+                double media;
                 for(int i =0; i<numbers.length;i++){
                     numbers[i] = i+1;
                 }
                 for(int i =0; i<numbers.length;i++){
                     supporto += numbers[i];
                 }
-                System.out.println("il valore medio dei numeri contenuti nell'array è: " + (supporto/numbers.length-1));
+                media = supporto/numbers.length-1;
+                System.out.println("il valore medio dei numeri contenuti nell'array è: " + media);
                 break;
             case 5:
                 // 5 calcolare e stampare il numero di multipli di due che esistono all interno del array
