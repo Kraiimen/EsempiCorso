@@ -14,6 +14,7 @@ public class FizzBuzz {
             if (y % 3 == 0 && y % 5 == 0) {
                 System.out.println(y + "  fizzbuzz");
             }
+            
         }
 
     }
