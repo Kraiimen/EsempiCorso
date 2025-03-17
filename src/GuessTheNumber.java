@@ -28,9 +28,10 @@ public class GuessTheNumber{
             }
             triesCount++;
 
-            if(triesCount >= 5 && triesCount/5 <= randomNumber.length){
-                System.out.print(" ... eccoti un suggerimento: " + randomNumber.toString().substring(0, triesCount/5));
-                for(int i = 0; i < triesCount/5; ++i){
+            Integer encapsulatedRandomNumber = randomNumber;
+            if(triesCount >= 5 && triesCount/5 <= encapsulatedRandomNumber.toString().length()){
+                System.out.print(" ... eccoti un suggerimento: " + encapsulatedRandomNumber.toString().substring(0, triesCount/5));
+                for(int i = triesCount/5; i < encapsulatedRandomNumber.toString().length(); ++i){
                     System.out.print("*");
                 }
             }
