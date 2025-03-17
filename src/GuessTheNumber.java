@@ -18,7 +18,7 @@ public class GuessTheNumber{
             System.out.println("Inserisci un numero:  ");                                                   //chiede d'inserire un input da tastiera
             String ns = console.readLine();                                                                 //crea una variabile di tipo String e di nome "ns" dentro la quale viene inserita la stringa che l'utente scrive da tastiera
             input = Integer.parseInt(ns);                                                                   //all'interno della variabile input, viene inserito il contenuto di ns convertito in Int
-            tentativi +=1;                                                                                  //il numero di tentativi viene aumentato di 1
+            tentativi ++;                                                                                  //il numero di tentativi viene aumentato di 1
 
             //controllo se l'input da tastiera(input) è maggiore o minore del numero generato(n)
             if(input < n){
