@@ -16,9 +16,9 @@ public class GuessTheNumber {
             tentativi++;
 
             if (nUtente < n) {
-                System.out.println(nUtente + " è troppo piccolo.");
+                System.out.println(nUtente + "Hai sbagliato, il numero misterioso è più piccolo.");
             } else if (nUtente > n) {
-                System.out.println(nUtente + " è troppo grande.");
+                System.out.println(nUtente + "Hai sbagliato, il numero misterioso è più grande.");
             }
 
         } while (nUtente != n);
