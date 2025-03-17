@@ -9,7 +9,6 @@ public class ArrayExercises {
         int[] numbers10 = new int[10];
         int supporto;
         boolean supportoB = true;
-        String supportoS = "";
         Random dice = new Random(); 
         switch (Es) {
             case 1:
