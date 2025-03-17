@@ -7,9 +7,8 @@ public class GiveMeQ {
         int NumeroInt;
         String numero= "";
         while(!numero.equals("Q")){
-            System.out.println("Dammi un numero");
             Console console = System.console();
-            numero = console.readLine();
+            numero = console.readLine("Dammi un numero: ");
             if(!numero.equals("Q")){
             NumeroInt = Integer.parseInt(numero);
                 if(NumeroInt > Maxnum){
