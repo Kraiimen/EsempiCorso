@@ -69,11 +69,11 @@ public class ArrayExamples {
             System.out.print(i+ " ");
         }
 
-        //tecnica dei due indici
+        //tecnica dei due puntatori
         for(int f = numbers.length-1, r=0; r< numbers.length; f--, r++){
             numbers[r]=reverse[f];
         }
-        
+
         //inverte numbers
         for(int f = numbers.length-1, r=0; r < f; f--, r++){
             int temp = numbers[r];
