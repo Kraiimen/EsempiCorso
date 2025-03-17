@@ -25,7 +25,7 @@ public class ExitOnQ {
 
        System.out.println("Numero maggiore e " + max);
    
-        
+       
        
     }
 }
