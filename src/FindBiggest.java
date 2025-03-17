@@ -12,8 +12,8 @@ public class FindBiggest{
             System.out.println("inserisci un numero, premi q per finire");
             answer = console.readLine();
             
-            if(!(answer.toUpperCase().equals("Q"))){
-                int n = Integer.parseInt(answer);
+            if(!(answer.toUpperCase().equals("Q"))){    //chiunque stia leggendo il codice, ignori il .toUpperCase() 
+                int n = Integer.parseInt(answer);    //fallisce male se non scrivo un numero o Q
                 if(maxValue < n){
                     maxValue = n;
                 }

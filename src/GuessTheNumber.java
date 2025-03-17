@@ -21,14 +21,22 @@ public class GuessTheNumber{
             chosenNumber = Integer.parseInt(sn);    //fallisce male se non scrivo un numero
             
             if(chosenNumber < randomNumber){
-                System.out.println("prova con un numero più grande");
+                System.out.print("prova con un numero più grande");
             }
             if(chosenNumber > randomNumber){
-                System.out.println("prova con un numero più piccolo");
+                System.out.print("prova con un numero più piccolo");
             }
             triesCount++;
+
+            if(triesCount >= 5 && triesCount/5 <= randomNumber.length){
+                System.out.print(" ... eccoti un suggerimento: " + randomNumber.toString().substring(0, triesCount/5));
+                for(int i = 0; i < triesCount/5; ++i){
+                    System.out.print("*");
+                }
+            }
+            System.out.println();
         }
-        System.out.printf("Congratulazioni, ci hai beccato! Ci hai messo %s tentativi\n", triesCount);
+        System.out.printf("Congratulazioni, hai trovato il numero magico (%s)\nCi hai messo %s tentativi\n", randomNumber, triesCount);
         //*/
 
     }
