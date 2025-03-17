@@ -19,10 +19,20 @@ public class ArrayExamples {
 
         int sum = 0; // Variabile che conterrà il valore della somma
 
-        System.out.print("\nSomma dei valori in numbers[]: ");
         for (int i = 0; i < numbers.length; i++) {
             sum += numbers[i]; // La somma è uguale al valore della somma + il valore nell'array a quella posizione
         } 
-        System.out.println(sum);
+        System.out.println("\nSomma dei valori in numbers[]: "+sum);
+
+        //Traccia esercizio 3: Calcolare e stampare il numero più grande
+
+        int max = numbers[0]; // Dichiariamo max e lo inizializziamo al primo valore dell'array numbers[]
+
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] > max) {
+                max = numbers[i];
+            }
+        } 
+        System.out.println("\nMassimo tra i valori in numbers[]: "+max);
     }
 }
