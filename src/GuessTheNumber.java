@@ -17,13 +17,13 @@ public class GuessTheNumber {
          //Creiamo console per scrivere nel terminale tramite tasiera
           Console console = System.console();
           // Dichiariamo  la variabile INT con la n, e la inizializziamo con dice.nextInt
-          int n = dice.nextInt(100);
-          int numGuess;
+          int n = dice.nextInt(100); // numero random ,output della linea di comando
+          int numGuess; // è il numero che l utente digiterà all interno della linea di comando
           int tentativi = 0;
 
         do { 
             System.out.print("Prova ad indovinare il numero: ");
-            String guess = console.readLine();  // Il numero inserito dalla tasteria
+            String guess = console.readLine();  // Il numero inserito dalla tasteria per la prima volta
             tentativi++;
             numGuess = Integer.parseInt(guess); // Passiamo la stringa che ci da la tastiera e mi da indietro nel Numero corrispondente alla strina delll input.
              if(numGuess == n) {

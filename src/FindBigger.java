@@ -3,7 +3,10 @@ import java.io.Console;
 // Quando inserisci la stringa q il programma termina stampando la somma del numero
 // Se l utente dicesse q come prima risposta il programma terminerà stampando la string non hai inserito nessun numero
 
+// stiamo dichiarando la classe che è pubblica (visibile a tutti) e rinominata FindBigger
 public class FindBigger {
+
+// stiamo dichiarando un metodo (Main) che viene avviato automaticamente all'inzio del p
     public static void main (String[] args){
     // Creo una variabile intera sum che avrà valore inziale 0
     // eseguirò un ciclo, 
@@ -14,6 +17,7 @@ public class FindBigger {
     // e userò il metodo parsInt per assegnare ad N un valore partendo dalla stringa risposta
     // Avendo letto il numero n aggiungerò la somma
     // Altrimenti(la stringa era uguale a (Q) stamperò il valore della somma e uscirò dal ciclo
+
         Console console = System.console();
         int sum = 0;
         String risposta;
@@ -33,3 +37,4 @@ public class FindBigger {
 
 
 }
+ 
