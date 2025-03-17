@@ -11,6 +11,6 @@ public class ExsWhileQ {
 
         } while (!input.toLowerCase().equals("q") );
         
-        System.out.print("You're done, congrats bro!");
+        System.out.print("That's it, congrats bro!");
     }
 }
