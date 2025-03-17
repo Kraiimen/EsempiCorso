@@ -21,16 +21,26 @@ public class ArrayExamples {
 
         // inserire dentro l'array numberi i quadrati dei numeri da 1 a 5
 
-        int[] numbers = new int[5]; // array contains 5 integers
-        for (int i = 0; i < numbers.length; i++)
-            numbers[i] = (int) Math.pow(i + 1, 2);
+        // int[] numbers = new int[5]; // array contains 5 integers
+        // for (int i = 0; i < numbers.length; i++)
+        // numbers[i] = (int) Math.pow(i + 1, 2);
 
-        // calcola e stampa la somma di tutti i valori che sono nell'array numbers
-        int sum = 0;
-        for (int i = 0; i < numbers.length; i++) {
-            sum += numbers[i];
+        // // calcola e stampa la somma di tutti i valori che sono nell'array numbers
+        // int sum = 0;
+        // for (int i = 0; i < numbers.length; i++) {
+        // sum += numbers[i];
+        // }
+        // System.out.println(sum);
+
+        int[] numbersToMax = new int[10];
+        int maxNumber = numbersToMax[0];
+
+        for (int i = 1; i < numbersToMax.length; i++) {
+            if (numbersToMax[i] > maxNumber) {
+                maxNumber = numbersToMax[i];
+            }
         }
-        System.out.println(sum);
+        System.out.println(maxNumber);
 
     }
 
