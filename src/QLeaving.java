@@ -22,10 +22,10 @@ public class QLeaving {
                     int inputInt = Integer.parseInt(input);
                     
                     if(inputInt > numeroPiuGrande) {
-                        numeroPiuGrande = inputInt;
+                       numeroPiuGrande = inputInt;
                     }
-                  }
+                }
                  
- }
+    }
  
 }
