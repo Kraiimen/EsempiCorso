@@ -2,23 +2,24 @@ public class Intro {
 	public static void main(String[] args){
 		int num = 6;
 		
-		int numero;
-		numero = 7;
+		int numero = 7;
+
 		
 
-		byte b = 22;
-		short s = 10000;
-		int i = 100000;
-		long myLong = 1000000000;
+		byte b = 22; //8 bit va da un numero di -128 a 127
+		short s = 10000; // 16 bit  va da -32668 a 32667
+		int i = 100000; //32 bit 
+		long myLong = 1000000000; //64 bit 
 
-		char c = 'a';
+		char c = 'a'; //carattere unicode sistema di codifica standar che assegna un valore numerico unico a ogni carattere 
 		int y = c;		
 
 		System.out.println("5");
 		System.out.println(num);
 		System.out.println(numero);
 		
-		num = Integer.MAX_VALUE;
+		num = Integer.MAX_VALUE; 
+		numero = Integer.MAX_VALUE;
 		System.out.println(num);
 
 		System.out.println(b);
