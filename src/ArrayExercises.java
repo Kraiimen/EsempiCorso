@@ -22,13 +22,16 @@ public class ArrayExercises {
         // Esercizio 10: Trovare il numero che appare più volte nell'array -es [2, 7, 12, 7, 2] - se ci sono più valori che appaiono lo stesso numero di volte basta che il programma stampi uno di questi numeri
 
 //Es 8:
-        int[] numbers = new int [20];
+        int[] numbers = {2,4,4,3,5};
         int z = 8;
         int counter = 0;
-        for(int i = 0; i < numbers.length; i++) {
-            
-        }
 
+        for(int i = 0; i < numbers.length-1; i++) {
+            if(numbers[i] + numbers[i + 1] == z) {
+                counter++;
+            }
+        }
+        System.out.println("Il numero delle coppie la cui somma è uguale a z è: " + counter);
 //Es 9:
         boolean found = false;
         for(int i = 0; i < numbers.length-2; i++) {
