@@ -1,3 +1,4 @@
+import java.lang.Math;
 public class ArrayExamples{
     public static void main(String[] args){
         int[] numbers = new int[5];
