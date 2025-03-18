@@ -54,6 +54,12 @@ public class ArrayExercises {
                 countx++;
             }
         }
+        //output array
+        System.out.println("Array: ");
+        for(int n: array){
+            System.out.print(n+" ");
+        }
+        System.out.println("");                       //a capo
 
         //ciclo esercizio 7
         for(int i=0, j=array.length-1; i<j; i++, j--){
@@ -61,6 +67,12 @@ public class ArrayExercises {
             array[j]=array[i];
             array[i]=temp;
         }
+        //output array invertito
+        System.out.println("Array invertito: ");
+        for(int n: array){
+            System.out.print(n+" ");
+        }
+        System.out.println("");                       //a capo
 
         //ciclo esercizio 8
         for(int i=0; i<array.length-1; i++){                     
@@ -106,14 +118,6 @@ public class ArrayExercises {
         System.out.println("multipli di 2 presenti nell'array: "+multiple2);
         System.out.println("il valore x è presente "+countx+" volte");
         System.out.println("due numeri consecutivi che danno come somma "+z+": "+ countSumZ);
-
-
-
-
-
-
-
-
 
     }
 }
