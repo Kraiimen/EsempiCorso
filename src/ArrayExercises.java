@@ -70,7 +70,7 @@ public class ArrayExercises{
             numbers3[i]= dice.nextInt(10); //numeri casuali da 0 a 9
         }
         int counterOutside = 0;//counter esterno che sara aggiornato se un numero è presente piu volte del precedente
-        int modalValue = -1 ; //conterra il valore modale
+        int modalValue = numbers3[0]; //conterra il valore modale
         for(int i = 0; i < numbers3.length; i++ ){
             int counterInner = 0;
             //int valueI = numbers3[i];
