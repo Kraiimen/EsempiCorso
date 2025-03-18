@@ -6,6 +6,8 @@
 
 
 
+
+
 public class ArrayExercises {
 	public static void main(String[] args) {
 		//Ex 01
@@ -78,6 +80,34 @@ public class ArrayExercises {
 		}
 		System.out.print("Il numero di volte in cui la somma di due elementi consecutivi danno il valore " + a);
 		System.out.println(" è " + counter_a);
+
+		//Ex 09
+		boolean sum_greater_12 = false;
+		for (int i = 2; i < numbers.length; i++) {
+			if ((numbers[i] + numbers[i - 1] + numbers [i -2]) > 12) {
+				sum_greater_12 = true;
+			}
+		}
+		System.out.println("Nell'array esistono 3 valori consecutivi la cui somma è maggiore di 12: " + sum_greater_12);
+
+		//Ex 10
+		int mostFound = numbers[0];
+		int maxCount = 0;
+		numbers[1] = 4; //Così 4 dovrebbe essere il num più trovato
+		for (int i = 0; i < numbers.length; i++) {
+			int count_value = 1;
+			for (int j = (i + 1); j < numbers.length; j++) {
+				if (numbers[i] == numbers[j]) {
+					count_value++;
+				}
+				if (count_value > maxCount) {
+				maxCount = count_value;
+				mostFound = numbers[i];
+				}
+			 }
+		}
+		System.out.print("Il numero trovato più volte é " + mostFound);
+		System.out.println(" trovato un numero di volte pari a " + maxCount);
 	}
 }
 
