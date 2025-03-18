@@ -84,8 +84,25 @@ public class ArrayExercises {
             System.out.println(reverse[i]); // stampo all'interno del for il reverse
         }
 // ESERCIZIO 8 dato un numero arbitrario (int z = 8) 
-// verificare quante volte nell'array succede che ne''array ci sono due numeri consecutivi in cui la somma fa z
+// verificare quante volte nell'array succede che nell'array 
+// ci sono due numeri consecutivi in cui la somma fa z
         System.out.println("\nEsercizio 8");
+        int array3[] = {2,4,4,3,5};
+        int z = 8; // dichiaro una variabile di nome z con valore 8
+        int counter = 0; // creo una variabile per contare il numero di volte in cui ci sta la somma di z
         
+        System.out.println("Array attuale: ");
+
+        for (int i = 0; i < array3.length - 1; i++){//inizia con zero e va avanti fino alla fine -1
+            System.out.println(array3[i]);
+            if(array3[i] + array3[i+1] == z){
+                counter++;
+            }
+        }
+        System.out.println("Le volte che la somma di due numeri consecutivi fa 8 è: " + counter);
+
+// ESERCIZIO 9: verificare che nell'array 
+// non esistano 3 numeri consecutivi la cui somma è maggiore di 12
+
     }
 }
