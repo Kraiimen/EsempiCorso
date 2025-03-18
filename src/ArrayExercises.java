@@ -44,9 +44,10 @@ public class ArrayExercises {
 
         // Esercizio 10: Trovare il numero che appare più volte nell'array -es [2, 7, 12, 7, 2] - se ci sono più valori che appaiono lo stesso numero di volte basta che il programma stampi uno di questi numeri
         //(COME L'HO SCRITTO IO) stampare il numero con più occorrenze nell'array (a parità non ha importanza quale stampo)
+        /*
         int[] occorrenze = new int[numbers.length];
         for(int i = 0; i < numbers.length; ++i){
-            for(int j = i+1; j < numbers.length; ++j){
+            for(int j = i; j < numbers.length; ++j){
                 if(numbers[i] == numbers[j]){
                     occorrenze[i]++;
                 }
@@ -60,6 +61,24 @@ public class ArrayExercises {
                 maxIndex = i;
             }
         }
+        //*/
+
+        int occorrenze = 1;
+        int maxOccorrenze = 0;
+        int maxIndex = 0;
+        
+        for(int i = 0; i < numbers.length; ++i){
+            for(int j = i+1; j < numbers.length; ++j){
+                if(numbers[i] == numbers[j]){
+                    occorrenze++;
+                }
+            }
+            if(maxOccorrenze < occorrenze){
+                maxOccorrenze = occorrenze;
+                maxIndex = i;
+            }
+        }
+        
         System.out.println(numbers[maxIndex]);
     }
 }
