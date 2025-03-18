@@ -41,6 +41,7 @@ public class ArrayExamples{
         // stampare il valore massimo presente nell'array
         int max = numbers[0];
         for (int i = 1; i < numbers.length; i++){
+
             if(numbers[i] > max){
                 max = numbers[i];
             }
