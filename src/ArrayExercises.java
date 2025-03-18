@@ -52,8 +52,7 @@ public class ArrayExercises {
                 // Se la somma di 3 numeri consecutivi è maggiore di 12
                 if(numbers[i-1] + numbers[i] + numbers[i+1] > 12){
                     threeNumbers = true; // Impostiamo la variabile a vero
-
-
+                        
                     // Se la variabile è vera, quindi ci sono i 3 numeri consecutivi la cui somma è maggiore di 12
                     if (threeNumbers) {
                         // Stampiamo i 3 numeri consecutivi per confermare che la loro somma è maggiore di 12
