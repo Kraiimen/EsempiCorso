@@ -1,6 +1,7 @@
 public class ArrayExamples{
     public static void main(String[] args){
         int[] numbers = new int[5];
+    
         // int numbers2[] = new int[5];
         // int x = 10;
         // int[] numbers3 = new int[x];
