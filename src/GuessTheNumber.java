@@ -3,6 +3,7 @@ import java.io.Console;
 
 public class GuessTheNumber {
     public static void main(String[] args) {
+         Console console = System.console();
         
         Random dice = new Random();
         Console console = System.console();
