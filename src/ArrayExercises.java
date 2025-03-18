@@ -59,10 +59,12 @@ public class ArrayExercises{
         //creo una variabile che conterra il valore del numero che appare piu spesso
         //creo un counter che conterà il numero di volte che appare il numero modale (ossia il numero che appare piu spesso)
         //creo un ciclo che parte da 0 e si ferma raggiunto length
-        //al suo interno mi salvo il valore il valore alla posizione iesima
-        //creo un altro ciclo inner che itera gli elementi partendo da i+1 a fino a length escluso
-        //e controllo quante volte il valore alla posizione iesima è presente nell'array per farlo usero un altro counter all interno del ciclo inner
+        //inizializzo e dichiaro la variabile counter inner che conterà quante volte è presente il valore alla posizione iesima
+        //creo un altro ciclo inner che itera gli elementi partendo da i fino a length escluso
+        //e controllo quante volte il valore alla posizione iesima è presente nell'array per farlo utilizzero il counter inner all interno del ciclo inner
         //se il counter interno è maggiore del counter esterno, aggiornare il counter esterno
+        //resetto il counter interno
+        
 
         int[] numbers3 = new int [10];
         Random dice = new Random();
@@ -86,7 +88,7 @@ public class ArrayExercises{
         }
         System.out.println("Numeri array casuale:");
         for(int i = 0; i < numbers3.length; i++){
-            System.out.print(numbers3[i] + " "); //numeri casuali da 0 a 9
+            System.out.print(numbers3[i] + " "); 
         }
         System.out.println("\nIl numero più presente dell'array compare "+ counterOutside + " volte ed è "+ modalValue);
     }
