@@ -1,7 +1,7 @@
 import java.io.Console;
 public class Methods {
     public static void main(String[] args){
-        //Console.console = System.console ();
+        // Console.console = System.console ();
 
         // System.out.print("dammi un numero > ");
         // String imput1 = console.readLine();
@@ -19,7 +19,7 @@ public class Methods {
         System.out.println("la somma è "+ result);
     }
 
-    public static int readInteger(){  //public = può essre presa ovunque, static = magico, readInteger = nome, (imput)
+    public static int readInteger(){  //public = può essere presa ovunque, static = magico, readInteger = nome, (imput)
         Console.console = System.console ();
        
         System.out.print("dammi un numero > ");
