@@ -21,5 +21,29 @@ public class ArrayExercises {
 
         // Esercizio 10: Trovare il numero che appare più volte nell'array -es [2, 7, 12, 7, 2] - se ci sono più valori che appaiono lo stesso numero di volte basta che il programma stampi uno di questi numeri
 
+//Es 8:
+        int[] numbers = new int [20];
+        int z = 8;
+        int counter = 0;
+        for(int i = 0; i < numbers.length; i++) {
+            
+        }
+
+//Es 9:
+        boolean found = false;
+        for(int i = 0; i < numbers.length-2; i++) {
+            int sum = numbers[i] + numbers[i + 1] + numbers [i + 2];
+            if(sum > 12) { 
+                found = true;
+                System.out.println("3 numeri consecutivi con sum > 12 trovati:" + numbers[i] + numbers[i + 1] + numbers[i + 2]);
+                break;
+            }
+        }
+        if (!found) { 
+            System.out.println("Nessun trio di numeri consecutivi con sum > 12");
+        }
+//ES 10:
+
+
     }
 }
