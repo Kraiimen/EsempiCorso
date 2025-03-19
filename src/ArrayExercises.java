@@ -17,7 +17,7 @@ public class ArrayExercises {
                     numbers[i] = (i+1)*(i+1);
                 }
                 for (int p : numbers) {
-                    System.out.println(p);
+                    System.out.print(p);
                 }
                 break;
             case 2:
@@ -141,30 +141,31 @@ public class ArrayExercises {
                 break;
             case 10:
                 // 10 Trovare il numero che appare più volte nell'array, se ci sono due valori con lo stesso numero di volete come massimo, va bene uno dei due o entrambi
-                supporto =0; // numero di volte in cui il numero controllato è presente nell array
-                int NUmeroControllato;
-                int NumMax =0; // numero di volte in cui cui appare il numero più alto
-                int MostO= 0; //il numero con il maggior numero di Occurrencys
+                int times =0;// numero di volte in cui il numero controllato è presente nell array
+                int controllNum;
+                int numMax =0; // numero di volte in cui cui appare il numero più alto
+                int mostO= 0; //il numero con il maggior numero di Occurrencys
                 for(int i =0; i<numbers10.length;i++){
                     numbers10[i] = dice.nextInt(11);
                 }
                 for(int i =0; i<numbers10.length;i++){
-                    NUmeroControllato = numbers10[i];
+                    controllNum = numbers10[i];
                     for(int k =0; k<numbers10.length;k++){
-                        if(numbers10[k] == NUmeroControllato){
-                            supporto++;
+                        if(numbers10[k] == controllNum){
+                            times++;
                         }
                     }
-                    if(supporto > NumMax){
-                    MostO=NUmeroControllato;
-                    NumMax=supporto; 
+                    if(times > numMax){
+                        mostO=controllNum;
+                        numMax=times; 
                     }
-                    supporto=0;
+                    times=0;
                 }    
                 for (int p : numbers10) {
                     System.out.print(p + " ");
-                }                
-                System.out.println("Il numero che appare di più volte è: " + MostO + " che appare: " + NumMax + " Volte");
+                }
+                System.out.println();                
+                System.out.println("Il numero che appare di più volte è: " + mostO + " che appare: " + numMax + " Volte");
                 break;
         
             default:
