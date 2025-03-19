@@ -36,6 +36,7 @@ public class Methods{
 
 		String longer = getLonger("Bella zio", "Bella zione");
 		System.out.println(longer);
+		printInTitlecase("hquHAJAiiiaiHIAj");
 		
 	}
 
@@ -102,6 +103,23 @@ public class Methods{
 		//posso scriverlo più compatta utilizzando l'operatore ternario
 		return s1.length() > s2.length() ? s1 : s2;  //se la booleana è vera torna la cosa a sinistra dei : , altrimenti torna quella a destra
 		//prima di ? e : posso utilizzare qualsiasi condizione booleana
+	}
+
+
+	public static void printInTitlecase(String name) {
+		System.out.println(name.length());  // .length lo uso su un oggetto qua, name, non su String(String.length), .length non è un metodo statico. Qui stampo direttamente quello che mi ritorna la funzione length() eseguita sulla stringa name
+		//Voglio rendere name con la prima maiuscola e il resto minuscolo, lo farò mettendola prima tutto in minuscolo
+		System.out.println(name.toUpperCase()); //stampa una NUOVA stringa con la funzione upper case sulla stringa name
+		String lower = name.toLowerCase(); //salvo la nuova stringa in una variabile stringa, NON CAMBIO QUELLA ORIGINALE
+		// String upper = name.toUpperCase(); se volessi farla in uppercase
+		// System.out.println(name); // qui name sarà uguale all'inizio, perché le stringhe in Java sono immutabili, la funzione non va a modificare la stringa
+		char first = name.charAt(0); //mi va a prendere il primo carattere della stringa
+		char firstUpper = Character.toUpperCase(first); // per mettere il carattere in maiuscolo uso un metodo statico che agisce sulla classe
+		//Devo ora prendere questo primo carattere e 'incollarlo' sulla stringa, voglio incollare una substring di quella originale al mio carattere maiuscolo, quindi dal secondo carattere in poi
+		//Per farlo posso utilizzare il metodo substring, che inizia all'indice che do in input
+		String substring = lower.substring(1); // prendo la stringa tutto in minuscolo che ho creato dal secondo carattere
+		String result = firstUpper + substring; //creo una stringa, somma della prima lettera maiuscola e la substringa minuscola
+		System.out.println(result); //stampo la stringa risultante
 	}
 
 }

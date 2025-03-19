@@ -61,8 +61,8 @@ public class ArrayExercises {
 		System.out.println(" è contenuto è: " + count);
 
 		//Ex 07 Invertire l'array e stamparlo.
-		int tmp = 0;
 		for (int i = 0, j = (numbers.length - 1); i < j; i++, j--) {
+			int tmp;
 			tmp = numbers[i];
 			numbers[i] = numbers[j];
 			numbers[j] = tmp;
