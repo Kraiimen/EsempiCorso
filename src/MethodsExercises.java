@@ -8,14 +8,18 @@ public class MethodsExercises {
 		String[] strings = {"", " ", "zione", "jbjibi", "Bella ziooooooo"};
 		System.out.println(longerString(strings));     //Ex 03 test
 
+		int x = 5;
+		int z = 6;
+		System.out.println(switchNums(x, z)); //Non funziona perchè non posso fare 2 return, per cui la funzione cambia i parametri, non gli argomenti
+
 		int[] numbers = {2, 4, 645, 3, 2};
 		System.out.println(higherNum(numbers)); //Ex 05 test
 
 		int[] nums = {1, 2, 2, 55};
 		System.out.println(sumNums(nums)); //Ex 06 test
 
-		String s = "bgdasd";
-		System.out.println(noVowels(s)); //Ex 07 test
+		String s = "bgdsad";
+		System.out.println(noVowelsTF(s)); //Ex 07 test
 
 		String str2 = "abcdedcba";
 		System.out.println(strPalindrome(str2));  //Ex 08 test
@@ -44,19 +48,24 @@ public class MethodsExercises {
 
 	// 3) creare una funzione che prende in input un array di stringhe, e mi ritorna la stringa piu' lunga dell array. Se sono piu' di una, me ne ritorna una qualsiasi delle piu' lunghe.
 	public static String longerString(String[] strings) {
+		if (strings.length == 0) {
+			return "";
+		}
 		String longerStr = strings[0];
 		for (int i = 1; i < strings.length; i++) {
-			if (strings[i].length() > longerStr.length()){
-				longerStr = strings[i];
+			if (strings[i].length() > longerStr.length()){					longerStr = strings[i];
 			}
 		}
 		return longerStr;
 	}
 
 	// 4) creare una funzione che scambia i valori di due numeri interi
-	//public static int switchNums(int x, int y) {
-
-	//}
+	public static int switchNums(int x, int y) {
+		int tmp = x;
+		x = y;
+		y = tmp;
+		return x; //non posso comunque tornare il risultato per la differenza tra argomenti e parametri, dovrei fare 2 return
+	}
 
 	// 5) creare una funzione che riceve in input un array di numeri interi positivi e mi restituisce il suo massimo. Se l array e' vuoto restituisce 0.
 	public static int higherNum(int[] numbers) {
@@ -82,12 +91,13 @@ public class MethodsExercises {
 	}
 
 	// 7) creare una funzione che riceve in input una stringa e mi restituisce una booleana true se la stringa non contiene vocali, false altrimenti
-	public static boolean noVowels(String str) {
+	public static boolean noVowelsTF(String str) {
 		boolean noVowels = true;
 		for (int i = 0; i < str.length(); i++) {
 			char c = str.charAt(i);
 			if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
 				noVowels = false;
+				break;
 			}
 		}
 		return noVowels;
