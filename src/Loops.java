@@ -2,7 +2,13 @@ import java.io.Console;
 
 public class Loops {
     public static void main(String[] args){
+
+        
+
+
         Console console = System.console();
+
+
 
         // Ciclo for che stampa i numeri dispari da 1 a 100
         
@@ -38,5 +44,9 @@ public class Loops {
             }
 
         } while (!answer.equals("Yes") && !answer.equals("No"));
+    }
+
+    public void prova(){
+        System.out.println("Sono prova() in Loops");
     }
 }
