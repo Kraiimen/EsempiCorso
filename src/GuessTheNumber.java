@@ -17,7 +17,7 @@ public class GuessTheNumber {
 		//System.out.print("Aiutino per test, il numero è");
 		//System.out.println(n);
 		while (num != n) {
-			System.out.println("Indovina il numero:");
+			System.out.println("Indovina il numero: ");
 			String tentativo = console.readLine();
         	num = Integer.parseInt(tentativo); //passami in intero la stringa del tentativo
 			if (num > n) {
@@ -31,8 +31,7 @@ public class GuessTheNumber {
 			}
 			tries++;
 		}
-		System.out.print("Il numero di tentativi è stato:");
-		System.out.println(tries);
+		System.out.println("Il numero di tentativi è stato: " + tries);
     }
     
 }
