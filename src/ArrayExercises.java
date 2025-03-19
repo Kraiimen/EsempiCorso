@@ -113,7 +113,7 @@ public class ArrayExercises {
         // che appaiono lo stesso numero di volte basta che il programma stampi uno di
         // questi numeri
 
-        int[] numbers = new int[] { 2, 7, 7, 7, 2 };
+        int[] numbers = new int[] { 2, 7, 12, 7, 2 };
         int popularNumber=0;
         int popularCounter=0;
 
@@ -136,6 +136,8 @@ public class ArrayExercises {
                 popularNumber = numbers[i];
             }
         }
-        System.out.println("The most frequent number is :"+popularNumber);
+        System.out.println("The most frequent number is :" + popularNumber);
+        
+        //
     }
 }
