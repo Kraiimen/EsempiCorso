@@ -1,116 +1,112 @@
-public class ArrayExamples {
-    public static void main(String[] args) {
-         int[] numbers = new int[5]; // 1 metodo più usato
-        // int numbers2[] = new int[5]; // 2 metodo per dichiarare l 'array
+public class ArrayExamples{
+    public static void main(String[] args){
+        int[] numbers = new int[5];
+        // int numbers2[] = new int[5];
         // int x = 10;
         // int[] numbers3 = new int[x];
-        // System.out.println(numbers[0]); // equivale a 0
-        // System.out.println(numbers[4]); // equivale a 4 perche si partee semptre dallo zero
+        // System.out.println(numbers[0]);
+        // System.out.println(numbers[4]);
         // System.out.println(numbers);
         // numbers[1] = 100;
         // numbers[4] = 200;
 
-        // for (int i = 0; i < numbers.length; i++) {
-        //     System.out.println("Posizione: " +   i  + " Valore " + numbers[i]); 
+        // for(int i = 0 ; i < numbers.length ; i++){
+        //     System.out.println("Posizione: " + i + " Valore: " + numbers[i]);
         // }
-        // for (int n : numbers){    // Secondo metodo per visualizzare l array
+
+        // for(int n : numbers){
         //     System.out.println(n);
-        // } 
+        // }
 
-    //    numbers[0] = 1;
-    //    numbers[1] = 2*2;
-    //    numbers[2] = 3*3;   
-    //    numbers[3] = 4*4;
-    //    numbers[4]= 5*5
-        // serve per calcolare le potenza per ogni numero dell array corrispondente all
-       for (int i = 0 ; i < numbers.length; i++){
-           numbers[i] = (i+1)*(i+1);
-           System.out.println(numbers[i]);
-       }   
-       for( int n : numbers){
-          System.out.println(n);
-       }
+        //voglio inserire dentro l'array numbers i quadrati dei numeri da 1 a 5
+        // numbers[0] = 1;
+        // numbers[1] = 2*2;
+        // numbers[2] = 3*3;
+        // numbers[3] = 4*4;
+        // numbers[4] = 5*5;
 
-       // calcolare e stampare la somma di tutti i valori che sono nell array numbers
+        for(int i = 0 ; i < numbers.length ; i++){
+            numbers[i] = (i + 1)*(i + 1);
+        }
+        for(int n : numbers){
+            System.out.println(n);
+        }
 
-       int sum = 0;
-       for (int i = 0 ; i < numbers.length; i++){
-           sum = sum + numbers[i];
-          System.out.println(sum);
-       }
-      // calcolare e stampare il massimo di tutti i valori
+        //calcolare e stampare la somma di tutti i valori che sono nell'Array numbers.
+        int sum = 0;
+        for(int i = 0 ; i < numbers.length ; i++){
+            sum = sum + numbers[i];
+        }
 
-         int max = numbers[0];
-         for (int i = numbers[1] ; i < numbers.length; i++){
+        // stampare il valore massimo presente nell'array
+        int max = numbers[0];
+        for (int i = 1; i < numbers.length; i++){
             if(numbers[i] > max){
                 max = numbers[i];
-                System.out.println(max);
             }
         }
 
-        // calcolare e stampare il numero dei numeri pari nell array
-       int counter = 0;
-       for(int i = 0 ; i < numbers.length; i++){
-            if( numbers[i] % 2 ==0){
-                counter++; // aumento ill contatore del pari
-            }
-
-       }
-      
+        // stampa il numero di numeri pari presenti nell'array
+        int counter = 0;
+        for(int i = 0; i < numbers.length; i++){
+            if(numbers[i] % 2 == 0){
+                counter++;
+            }    
+        }
         System.out.println(counter);
 
-         // in questo studio vediamo quante volte il 4 è presnete nell'array
-        int z = 4;
-        int countValue= 0;
-        for(int i = 0 ; i < numbers.length; i++){
-            if(numbers[i] == z)
-              countValue++;
-        }
-        System.out.println(countValue);
+        //stampa quante volte il numero 4 compare nell'array
+      
 
-        // Verfichiamo se il numero dell array sono oridnate in ordine crescente
+        // verifica se i numeri nell'array sono ordinati in ordine crescente
+        // immagina che l'array sia fatto così: 2, 7, 5, 8, 10
         boolean sorted = true;
-        for(int i = 1 ; i < numbers.length; i++){
-            if(numbers[i] < numbers[i-1]){  // si legge da destra se il numero precedente[i-1] è minore del numero davanti [numbers I]
-                sorted=false;  // se non è maggiore del precedente sorted == false
-                break; // se sorted è false chiudi il programma non è ordinato
-            }
-
+        for(int i = 1; i < numbers.length; i++){
+            if(numbers[i] > numbers[i-1]){
+                sorted = false;
+                break;
+            } 
         }
-        if(sorted){
-            System.out.println("l'array è ordinato");
-        } else{
+        if (sorted) {
             System.out.println("l'array non è ordinato");
+        } else {
+            System.out.println("l'array è ordinato");
         }
-
-        // voglio fare un ciclo for che stampa gli elementi dell array sulla stessa riga
-        for(int i = 0 ; i < numbers.length; i++){
+        
+        // fai un ciclo for che stampi gli elementi dell'array sulla stessa riga
+        for(int i = 0; i < numbers.length; i++){
             System.out.print(numbers[i] + " ");
         }
 
-        // crea un altro array di 5 elementi che contegna gli stessi valori dell arrray number ma al contrario
-        int [] reverse = new int[numbers.length]; // abbiamo dato il valore del numero length
-        for(int i = 0 ; i < reverse.length; i++){
-            reverse[i] = numbers[numbers.length-1-i]; // prende l array 
-            System.out.println(reverse[i]+ " ");
+        System.out.print("\n");
+
+        // crea un'altro array di 5 elementi che contenga gli stessi valori dell'array numbers ma al contrario
+        int[] reverse = new int[numbers.length];
+        for (int i = 0; i < numbers.length; i++){
+            reverse[i] = numbers[numbers.length-1-i];
+            System.out.print(reverse[i] + " ");
         }
+        // la variabile i va da 0 a number.length-1, cioè 4.                                                            0   1   2   3   4
+        //l'espressione numbers.length-1-i quando i vale 0, varrà 4. numbers.length-1-(number.length-1)                 4   3   2   1   0
 
-        // tecnica dei due indici/ puntatori
-        for ( int f = numbers.length - 1,  r =0; r < numbers.length; f-- , r++){
-        numbers[r]= reverse[f];
+        System.out.print("\n");
+
+        // tecnica dei due indici/puntatori
+        // for (int f = numbers.length-1, r = 0; r < numbers.length; f--, r++){
+        //     numbers[r] = reverse[f]; 
+        // }
+
+        // for(int i = 0; i < numbers.length; i++){
+        //     System.out.print(numbers[i] + " ");
+        // }
+
+        // inverti l'array numbers sovrascrivendolo
+        int temp = 0;
+        for (int f = numbers.length-1, r = 0; r < f; f--, r++){
+            temp = numbers[r];
+            numbers[r] = numbers[f];
+            numbers[f] = temp;
         }
-
-
-        // scambio simmetrico dell array numbers sovrascrivendolo
-        for ( int f = numbers.length - 1,  r =0; r < f ; f-- , r++){
-            int temp = numbers[r]; // temp è assegnato al valore di r nell array cioè 0
-            numbers[r]= numbers[f]; // poi in number 0 gli assegno 4
-            numbers[f] = temp; // in F salviamo quello che abbiamo salvato in temp
-            System.out.println(temp);
-        }    
-       
-
-
+        System.out.print(temp);
     }
-
 }

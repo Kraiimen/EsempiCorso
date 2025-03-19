@@ -3,7 +3,7 @@ import java.io.Console;
 public class Loops {
     public static void main(String[] args) {
         Console console = System.console();
-        for( int i = 0 ; i < 10 ; i++ ) { //nel secondo slot sto dicendo dove terminare il ciclo
+        for( int i = 0 ; i < 10 ; i++ ) { //nel secondo slot sto dicendo dove terminare il ciclo, al termine fìdi ogni ciclo  incremento 1
             System.out.println(i);
         }
         System.out.println("ciclo terminato"); 
