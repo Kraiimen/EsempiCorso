@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.io.Console;
 public class GuessTheNumber {
     public static void main(String[] args) {
