@@ -33,10 +33,10 @@ public class MethodsExercises {
 	// 2) creare una funzione che prende in input tre stringhe e mi ritorna la piu piccola delle tre. Se ad essere la piu' piccola sono in piu' di una, me ne ritorna una qualsiasi delle piu' piccole
 	public static String shorterString(String str1, String str2, String str3) {
 		String shortestString = str1;
-		if (str2.length() < str1.length()) {
+		if (str2.length() < shortestString.length()) {
 			shortestString = str2;
 		}
-		else if (str3.length() < str1.length()) {
+		else if (str3.length() < shortestString.length()) {
 			shortestString = str3;
 		}
 		return shortestString;
