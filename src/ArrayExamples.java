@@ -37,7 +37,7 @@ public class ArrayExamples{
         int sum = 0;
         for(int i = 0 ; i < numbers.length ; i++){
             sum = sum + numbers[i];
-        }
+        } 
 
         // stampare il valore massimo presente nell'array
         int max = numbers[0];
@@ -75,6 +75,16 @@ public class ArrayExamples{
                 break;
             } 
         }
+        // int x = 4; 
+        // if (x = 7) { 
+            
+        // }
+
+        // boolean z = true; 
+        // if(z = false){
+
+        // }
+
         if (sorted) {
             System.out.println("l'array è ordinato");
         } else {

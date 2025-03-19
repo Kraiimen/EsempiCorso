@@ -4,7 +4,7 @@ public class ArrayExercises {
         // Esercizio 1: Creare un array di 5 interi e inizializzarlo con i primi numeri da 1 a 5 al quadrato
         
             int[] numbers = new int[5];
-
+            
             for(int i = 0 ; i < numbers.length ; i++){
                 numbers[i]= (i+1)*(i+1);
             }
