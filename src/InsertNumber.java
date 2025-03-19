@@ -1,5 +1,4 @@
 import java.io.Console;
-import java.util.ArrayList;
 
 public class InsertNumber {
     public static void main(String[] args) {
@@ -18,7 +17,6 @@ public class InsertNumber {
         System.out.println("Dammi un numero");
         ns = console.readLine();
         x = Integer.parseInt(ns);
-        numbers.add(x);
         do{
             System.out.println("Dammi un'altro numero o scrivi q");
             ns2 = console.readLine();
