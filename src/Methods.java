@@ -19,9 +19,20 @@ public class Methods{
 
         printSum(x1 , x2);
         sum(x1 , x2); // se non c'è una variabile che la riceve, non cambia nulla invocando sum
+        // String mancoPerIdea = sum(3 , 4); questo risulterebbe in un errore perchè la funzione dichiara di essere un intero e la stiamo cercando di convertire in una stringa
+        greet();
+        int lunghezza = greetWithName("Sabrina"); // esegue la funzione e gli ritorna alla main dandogli valore int
+        System.out.println(lunghezza);
+        lunghezza = greetWithName("Marta");
+        System.out.println(lunghezza);
+        boolean even = isEven(7);
+        System.out.println(even);
+        printLenAndUpperCaseLowerCase("Tutto bene?");
+        String longer = getLonger("Pierino" , "Pluto");
     }
 
-    public static int readInteger(){
+
+    public static int readInteger(){ // è UN BLOCCO DI CODICE Riutilizzabile a mio piacimento
         // è una funzione intero che legge l'input e converte in int
         // nelle tonde ci sarebbe un imput che serve alla macchina 
         // ma ad alcune non serve mettere nulla dentro
@@ -41,9 +52,48 @@ public class Methods{
 
     }
 
+    // quello che segue è la definizione della funzione greet
+    public static void greet(){ 
+        // la keyword public significa che la funzione sarà visibile in tutto il programma
+        System.out.println("è un piacere conoscerti!"); 
+    }
+
     public static void printSum(int x , int y){
         int z = x + y;
         System.out.println(z);
     } 
     
+    public static int greetWithName(String name){
+
+        System.out.println("è un piacere conoscerti " + name);
+        int len = name.length(); // la lunghezza del nome 
+        return len;
+    }
+
+    public static boolean isEven(int x){ // variabili e parametri in una funzione esistono solo in quella funzione
+        // if(x % 2 == 0){
+        //     return true;
+        // } else{
+        //     return false;
+        // }
+        return x % 2 == 0; // se x è pari ritorna vera, se no ritorna falsa
+    }
+
+    public static void printLenAndUpperCaseLowerCase (String sentence){
+        int len = sentence.length(); // lunghezza della stringa 
+        System.out.println(len);
+        String lower = sentence.toLowerCase();
+        System.out.println(lower);
+        String upper = sentence.toUpperCase();
+        System.out.println(upper);
+    }
+
+    public static String getLonger (String s1 , String s2){
+        // if(s1.length() > s2.length()){
+        //     return s1;
+        // } else{
+        //     return s2;
+        // }
+        return s1.length() > s2.length() ? s1 : s2; // Operatore ternario (Lavora su 3 elementi) il ? segue un'espressione booleana 
+    }
 }
