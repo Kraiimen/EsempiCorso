@@ -88,17 +88,6 @@ public class Conditionals {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 		if(age < 15){
 		  cost = 50;
 		}
