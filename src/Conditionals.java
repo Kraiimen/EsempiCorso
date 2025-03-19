@@ -111,4 +111,3 @@ public class Conditionals {
 		
 		System.out.println(cost);
 	}
-}
