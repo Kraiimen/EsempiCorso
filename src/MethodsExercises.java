@@ -11,7 +11,7 @@ public class MethodsExercises {
         System.out.println("\nLa stringa più piccola tra le tre è: \"" + getShorterString(str1, str2, str3)+"\"");  
 
         // Esercizio 3
-        String strings[] = {"Ciao", "Mela", "Buonasera"};
+        String strings[] = {"Arrivederci", "Mela", "Ciao"};
         System.out.println("\nLa stringa più lunga nell'array è: \""+getLongerString(strings)+"\"");
 
         // Esercizio 4
@@ -152,6 +152,7 @@ public class MethodsExercises {
                    || lowerStr.charAt(i) == 'o' || lowerStr.charAt(i) == 'u'){
 
                     hasNotVowels = false;
+                    break;
                 }
             }
 
@@ -163,29 +164,21 @@ public class MethodsExercises {
 
         public static boolean isPalindrome(String str){
             // Se la stringa è vuota ritorniamo false
-                if(str.equals("")){
-                    return false;
-                }
+            if(str.equals("")){
+                return false;
+            }
 
             // Altrimenti controlliamo se è palindroma
-            String lowerStr = str.toLowerCase(); // Per evitare problemi durante il controllo uso la stringa in minuscolo
-            char reverseStr[] = new char[str.length()];
-            boolean isPalindrome = true;
-
-            // Inseriamo la stringa al contrario in un array
-            for (int i = 0, j = str.length() - 1; i < str.length(); i++, j--) {
-                reverseStr[i] = lowerStr.charAt(j);
-            }
+            str = str.toLowerCase(); // Per evitare problemi durante il controllo uso la stringa in minuscolo
 
             // Se troviamo una lettera diversa, non è palindroma, quindi usciamo direttamente dal ciclo
-            for (int i = 0; i < reverseStr.length; i++) {
-                if (reverseStr[i] != lowerStr.charAt(i)) {
-                    isPalindrome = false;
-                    break;
+            for (int i = 0, j = str.length() - 1; i < j; i++, j--) {
+                if (str.charAt(i) != str.charAt(j)) {
+                    return false;
                 }
             }
 
-            return isPalindrome;
+            return true;
         }
     
 }
