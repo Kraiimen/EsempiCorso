@@ -23,7 +23,7 @@ public class Loops {
         while(y > 0) {
             System.out.println(y);
             y -= 5;
-        }
+        
 
         int z = 100;
         do { 

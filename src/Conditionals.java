@@ -71,7 +71,7 @@ public class Conditionals {
 
 			}
 
-		} else {
+		} else 
 			cost = 200;
 
 		}
