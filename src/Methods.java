@@ -29,6 +29,7 @@ public class Methods{
         System.out.println(even);
         printLenAndUpperCaseLowerCase("Tutto bene?");
         String longer = getLonger("Pierino" , "Pluto");
+        printInTitleCase("pAPeRiNo");
     }
 
 
@@ -96,4 +97,18 @@ public class Methods{
         // }
         return s1.length() > s2.length() ? s1 : s2; // Operatore ternario (Lavora su 3 elementi) il ? segue un'espressione booleana 
     }
+
+    public static void printInTitleCase (String name){
+        System.out.println(name.length()); //stampa quello che ritorna della funzione length eseguita sulla stringa name, .length non è un metodo statico
+        System.out.println(name.toUpperCase()); // ritorna e crea e stampa una nuova stringa con la funzione upper case sulla stringa name
+        String upper = name.toUpperCase();
+        String lower = name.toLowerCase();
+        char first = name.charAt(0); // prende il primo carattere della stringa
+        char firstUpper = Character.toUpperCase(first); //metodo statico di character che prende l'input first 
+        String subString = lower.substring(1);
+        String result = firstUpper + subString;
+        System.out.println(result);
+        // le stringhe in java sono immutabili
+
+    } 
 }
