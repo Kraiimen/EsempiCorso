@@ -2,7 +2,7 @@ import java.util.*;
 
 public class ArrayExamples<T> {
 	public static void main(String[] args){
-        ArrayExamples<Integer> ae = new ArrayExamples<Integer>();
+        ArrayUtils<Integer> ae = new ArrayExamples<Integer>();
 
 		int[] numbers = new int[5];
         /*
@@ -121,11 +121,4 @@ public class ArrayExamples<T> {
         //stampare il numero con più occorrenze nell'array (a parità non ha importanza quale stampo)
 
 	}
-
-    // To print an array without writing the for every time
-    public void stampaArrey (T[] arrey){
-        for(int i = 0; i < arrey.length; ++i){
-            System.out.println(arrey[i]);
-        }
-    }
 }
