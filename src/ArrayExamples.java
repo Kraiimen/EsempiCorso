@@ -94,7 +94,7 @@ public class ArrayExamples{
             System.out.print(reverse[i] + " ");
         }
         // la variabile i va da 0 a number.length-1, cioè 4.                                                            0   1   2   3   4
-        //l'espressione numbers.length-1-i quando i vale 0, varrà 4. numbers.length-1-(number.length-1)                 4   3   2   1   0
+        // l'espressione numbers.length-1-i quando i vale 0, varrà 4. numbers.length-1-(number.length-1)                 4   3   2   1   0
 
         System.out.print("\n");
 
