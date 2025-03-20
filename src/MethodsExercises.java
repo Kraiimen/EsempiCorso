@@ -71,10 +71,10 @@ public class MethodsExercises {
         String stringLower = s.toLowerCase();
         for(int i=0; i<s.length(); i++){
             if(stringLower.charAt(i) == 'a' || stringLower.charAt(i) == 'e' || stringLower.charAt(i) == 'i' || stringLower.charAt(i) == 'o' || stringLower.charAt(i) == 'u'){
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 // 8) creare una funzione che riceve in input una stringa e mi restituisce una booleana true se la stringa e' palindroma, false altrimenti
     public static boolean palindrome(String s){
@@ -127,7 +127,7 @@ public class MethodsExercises {
         }
 
         //presenza di vocali nell'array
-        if(arrayVocals(s1)){
+        if(!arrayVocals(s1)){
             System.out.println("la stringa "+s1+" contiene le vocali");
         }else{
             System.out.println("la stringa "+s1+" non contiene le vocali");
