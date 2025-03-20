@@ -84,7 +84,7 @@ public class NewArray {
                 if(array10[i] == array10[j]){ //Il ciclo interno j confronta l'elemento array10[i]con ogni altro elemento array10[j].
                     counter3++; // quando trova la corrispondenza aggiunge 1 
                 }
-                if(counter3 > maxRecap){ //ontrolliamo se counter3 è maggiore di maxRecap (che tiene traccia del numero massimo di ripetizioni trovato finora).
+                if(counter3 > maxRecap){ //Controlliamo se counter3 è maggiore di maxRecap (che tiene traccia del numero massimo di ripetizioni trovato finora).
                     maxRecap = counter3;
                     numRipetuti = array10[i];
                 }
