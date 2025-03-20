@@ -53,7 +53,8 @@ public class MethodsExercises {
 		}
 		String longerStr = strings[0];
 		for (int i = 1; i < strings.length; i++) {
-			if (strings[i].length() > longerStr.length()){					longerStr = strings[i];
+			if (strings[i].length() > longerStr.length()){					
+				longerStr = strings[i];
 			}
 		}
 		return longerStr;
