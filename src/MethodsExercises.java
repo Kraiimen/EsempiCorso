@@ -1,3 +1,4 @@
+import java.util.Random;
 public class MethodsExercises{
     public static void main(String[] args){
         //es 1
@@ -18,11 +19,19 @@ public class MethodsExercises{
         System.out.println(y);
 
         //es5
-        int[] numbers = {1, 4, 3, 2};
-        System.out.println(getMax(numbers));
+        int[] random = new int[7];
+        Random dice = new Random();
+
+        for(int i = 0 ; i < random.length ; i++){
+            random[i] = dice.nextInt(100);
+            System.out.print(random[i] + " ");
+        }
+        System.out.println();
+
+        System.out.println(getMax(random));
 
         //es6
-        System.out.println(sumArray(numbers));
+        System.out.println(sumArray(random));
 
         //Arrays vuoti
         int[] empty = new int[0];
@@ -93,16 +102,11 @@ public class MethodsExercises{
     // Se l array e' vuoto restituisce 0.
 
     public static int getMax(int[] numbers){
-        if(numbers.length == 0){
-            return 0;
-        }
-        
-        int maxVal = numbers[0];
+        int maxVal = 0;
         for(int i = 1 ; i < numbers.length; i++){
             if(numbers[i] > maxVal){
                 maxVal = numbers[i];
-            }
-            
+            }           
         }
         return maxVal;
     }
