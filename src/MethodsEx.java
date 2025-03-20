@@ -36,6 +36,7 @@ public class MethodsEx{
         System.out.println("X ha il valore " + x1 + " mentre y ha il valore " + x2);
 
         // es 5
+        int[] array = {3, 1, 2, 6, 8};
 
     }
 
@@ -51,9 +52,9 @@ public class MethodsEx{
     public static String minoreDiTre(String s1 , String s2 , String s3){
         System.out.println("\n" + s1 + s2 + s3);
         System.out.println("La più corta è: ");
-        if(s1.length() < s2.length() && s1.length() < s3.length() ){
+        if(s1.length() <= s2.length() && s1.length() <= s3.length() ){
             return s1;
-        } else if(s2.length() < s1.length() && s2.length() < s3.length()){
+        } else if(s2.length() <= s1.length() && s2.length() <= s3.length()){
             return s2;
         } else {
             return s3;
@@ -87,6 +88,17 @@ public class MethodsEx{
     // ES 5 riceve in input un array di numeri interi positivi e mi restituisce il suo massimo. 
     // Se l array e' vuoto restituisce 0.
     public static int max(int[] numbers){
-        
+        if(numbers.length == 0){
+            return 0;
+        } 
+        for (int i = 0; i < numbers.length-1; i++){
+            if (numbers[i] <= 0){
+                return 0
+            }
+        }
+        int massimo = 0;
+        for (int i = 0; i < numbers.length-1; i++){
+            if(max)
+        }
     }
 }
