@@ -2,7 +2,7 @@ import java.io.Console;
 import java.util.Queue;
 
 public class Methods {
-    public static void main(String[] args) {
+    public static void main(String[] args) { // il metodo main lo chiam la Virtual machine
 
         //Tipo   //Variabile     =  Assegnazione varaibile console()
         // Console console = System.console(); 
@@ -48,6 +48,8 @@ public class Methods {
         String longer = getLonger("giovannisecondo" , "giovanni");{
             System.out.println(longer);
         }
+        
+        printInTitleCase("paPerino");
 
     }
 
@@ -116,7 +118,7 @@ public class Methods {
         System.out.println(upper);
 
     }
-
+   // funcione per ritornare il valore piu l
     public static String getLonger(String s1 , String s2){
         // if(s1.length() > s2.length()){
         //     return s1;
@@ -126,5 +128,15 @@ public class Methods {
         return s1.length() > s2.length() ? s1  : s2;  // se s1 è piu lunga di s2 ? ci stampa s1 altrimenti se è falso s2 è un simil booleano.
     }
 
-    
+    public static void printInTitleCase (String name){
+        System.out.println(name.length()); // in questo caso length non è un metodo statico perche labbaimo messo nell oggetto e stampa solo lal lunghezza
+        System.out.println(name.toUpperCase());// visto che la stringhe sono immutabili ci stampera anche  il  name in Maiuscolo
+        String upper = name.toUpperCase();
+        String lower = name.toLowerCase();
+        char first = name.charAt(0);// il metodo chatAt prende il primo carattere dell'index
+        char firstUpper = Character.toUpperCase(first);// metodo statico di character per rendere il primo carattere Maiuscolo
+        String subString = lower.substring(1); // metodo nell'oggetto  per prendere dal secondo carattere all ultimo
+        String result = firstUpper + subString;
+        System.out.println(result);  
+    }
 }

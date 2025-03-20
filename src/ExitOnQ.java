@@ -10,7 +10,7 @@ public class ExitOnQ {
 // stiamo dichiarando un metodo (Main) che viene avviato automaticamente all'inzio del p
     public static void main (String[] args){
 
-    // variabiale c di tipo Console , e gli sto dando come valore l'oggetto di tipo console
+    // variabiale c di tipo Console , invocando il metodo system.console()
         Console c = System.console();
         int max = 0;
         String input = ""; //stringa Vuota

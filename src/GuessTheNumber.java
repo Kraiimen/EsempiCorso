@@ -11,7 +11,7 @@ import java.util.Random;
 public class GuessTheNumber {
     public static void main(String[] args) {
 
-          //Creaiamo dice per creare un numero grazie alla classe random
+          //Creaiamo dice per creare un numero random grazie alla classe random
          Random dice = new Random();
 
          //Creiamo console per scrivere nel terminale tramite tasiera

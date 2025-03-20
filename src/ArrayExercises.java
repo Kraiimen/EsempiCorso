@@ -96,7 +96,7 @@ public class ArrayExercises {
          
 
 
-        // 8) Esercizio: Dato un numero arbitrario (es int z = 8) verificare quante volte succede nell'array che ci siano due numeri consecutivi la cui somma fa z
+        // Esercizio: Dato un numero arbitrario (es int z = 8) verificare quante volte succede nell'array che ci siano due numeri consecutivi la cui somma fa z
         
         int[] array8 = {4,4,2,3,4,4,2,4,4,2,2};
         int z = 8;
