@@ -16,24 +16,24 @@ public class SortingHatProcedural {
 
     // Array per il nome degli studenti e la loro preferenza di casa
     private static final String STUDENTS[][] = {
-            {"Ilario Vasco Palaia",HOUSE_NAMES[SLY_POS]},
-            {"Elvis La fata",HOUSE_NAMES[RAVE_POS]},
-            {"Regina Ghering",HOUSE_NAMES[SLY_POS]},
-            {"Luca Formica",HOUSE_NAMES[RAVE_POS]},
-            {"Davide Mazzitelli",HOUSE_NAMES[RAVE_POS]},
-            {"Piero Scarcina",HOUSE_NAMES[GRYF_POS]},
-            {"Vittorio Aquila",HOUSE_NAMES[RAVE_POS]},
-            {"Emanuele Giustiniani",HOUSE_NAMES[SLY_POS]},
-            {"Gaspare Maione",HOUSE_NAMES[GRYF_POS]},
-            {"Camilla Marchioro",HOUSE_NAMES[GRYF_POS]},
-            {"Eugenio Manganelli",HOUSE_NAMES[HUF_POS]},
-            {"Edoardo Bognanni",HOUSE_NAMES[RAVE_POS]},
-            {"Lorenzo Coretti",HOUSE_NAMES[HUF_POS]},
-            {"Sabrina Salerno",HOUSE_NAMES[HUF_POS]},
-            {"Marcello Coppolino",HOUSE_NAMES[SLY_POS]},
-            {"Stefano Pio Lorato", HOUSE_NAMES[GRYF_POS]},
-            {"Nicolo Casertano",HOUSE_NAMES[GRYF_POS]},
-            {"Alessio Basili",HOUSE_NAMES[RAVE_POS]}
+            {"Ilario Vasco Palaia",         HOUSE_NAMES[SLY_POS]},
+            {"Elvis La fata",               HOUSE_NAMES[RAVE_POS]},
+            {"Regina Ghering",              HOUSE_NAMES[SLY_POS]},
+            {"Luca Formica",                HOUSE_NAMES[RAVE_POS]},
+            {"Davide Mazzitelli",           HOUSE_NAMES[RAVE_POS]},
+            {"Piero Scarcina",              HOUSE_NAMES[GRYF_POS]},
+            {"Vittorio Aquila",             HOUSE_NAMES[RAVE_POS]},
+            {"Emanuele Giustiniani",        HOUSE_NAMES[SLY_POS]},
+            {"Gaspare Maione",              HOUSE_NAMES[GRYF_POS]},
+            {"Camilla Marchioro",           HOUSE_NAMES[GRYF_POS]},
+            {"Eugenio Manganelli",          HOUSE_NAMES[HUF_POS]},
+            {"Edoardo Bognanni",            HOUSE_NAMES[RAVE_POS]},
+            {"Lorenzo Coretti",             HOUSE_NAMES[HUF_POS]},
+            {"Sabrina Salerno",             HOUSE_NAMES[HUF_POS]},
+            {"Marcello Coppolino",          HOUSE_NAMES[SLY_POS]},
+            {"Stefano Pio Lorato",          HOUSE_NAMES[GRYF_POS]},
+            {"Nicolo Casertano",            HOUSE_NAMES[GRYF_POS]},
+            {"Alessio Basili",              HOUSE_NAMES[RAVE_POS]}
     };
 
     // Il numero di studenti che creerebbe 4 case della stessa dimensione
