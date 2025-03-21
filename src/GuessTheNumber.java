@@ -1,5 +1,5 @@
-import java.util.Random;
 import java.io.Console;
+import java.util.Random;
 
 public class GuessTheNumber {
     public static void main (String[] args){

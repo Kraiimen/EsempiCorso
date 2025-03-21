@@ -148,7 +148,7 @@ public class MethodsExercises {
 
     public static boolean hasVowels (String sentence){
         
-        boolean noVowels = true;
+        boolean noVowels = true; 
         
         char[] charArray = sentence.toLowerCase().toCharArray();
         for (int i = 0; i < charArray.length; i++){
@@ -157,7 +157,7 @@ public class MethodsExercises {
                 break;
             }
         }
-
+ 
         return noVowels;
     }
 
