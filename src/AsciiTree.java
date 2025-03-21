@@ -1,6 +1,12 @@
 import java.io.*;
-
+//DA FINIRE DI AGGIUSTARE
 public class AsciiTree {
+    private final char emptySpaceSymbol = ' ';
+    private final char triangleSymbol = '*';
+    private final String newLine = "\n";
+    private final char trunkSymbol = '|';
+    private final char groundSymbol = '_';
+
 	public static void main(String[] args){
         Console console = System.console();
 
@@ -18,48 +24,52 @@ public class AsciiTree {
         //     }
         //     System.out.println();
         // }
+        System.out.println(triangleHight);
+	}
+    public static String buildAsciiChristmasTree(int hight){
+        StringBuilder christmasTree = new StringBuilder();
+        christmasTree.append(triangle + newLine + trunk + newLine + ground);
+        return christmasTree;
+    }
+    public static StringBuilder AsciiTriangle(int hight){
+        StringBuilder triangle = new StringBuilder();   //dovrebbe esseere uno StringBuilder ma non li abbiamo ancora fatti...
+        int triangleBase = hight * 2;
 
-        String triangle = "";   //dovrebbe esseere uno StringBuilder ma non li abbiamo ancora fatti...
-        int triangleBase = triangleHight * 2;
-        char emptySpaceSymbol = ' ';
-        char triangleSymbol = '*';
-        String newLine = "\n";
-
-        for(int i = 0; i < triangleHight; ++i){
-            String triangleRow = "";
+        for(int i = 0; i < hight; ++i){
+            StringBuilder triangleRow = new StringBuilder();
             int spacesToFill = i+1;
-            int emptySpaces = triangleHight - spacesToFill;
+            int emptySpaces = hight - spacesToFill;
             int currentBase = triangleBase - (emptySpaces+1);
             boolean isLastRow = i == triangleHight-1;
 
             for(int j = 0; j < emptySpaces; ++j){
-                triangleRow += emptySpaceSymbol;
+                triangleRow.add(emptySpaceSymbol);
             }
             for(int j = 0; j < spacesToFill*2 - 1; ++j){
                 boolean isSpaceToFill = j % 2 == 0;
                 if(isSpaceToFill){
-                    triangleRow += triangleSymbol;
+                    triangleRow.add(triangleSymbol);
                 }else{
-                    triangleRow += emptySpaceSymbol;
+                    triangleRow.add(emptySpaceSymbol);
                 }
             }
             if(isLastRow == false){
-                triangleRow += newLine;
+                triangleRow.add(newLine);
             }
 
-            triangle += triangleRow;
+            triangle.add(triangleRow);
         }
-        //System.out.println(triangle);
+        return triangle;
+    }
 
-        String cristmasTree = "";
-        String trunk = "";
+    public static StringBuilder AsciiTreeTrunk(int hight){
+        StringBuilder trunk = new StringBuilder();
         int trunkHight = triangleHight/2;
         //int trunkWidth = triangleHight / 5;
         //int emptySpaces = triangleHight - trunkWidth;
-        char trunkSymbol = '|';
 
         for(int i = 0; i < trunkHight; ++i){
-            String trunkRow = "";
+            StringBuilder trunkRow = new StringBuilder();
             boolean isLastRow = i == trunkHight-1;
             for(int j = 0; j < triangleHight-1; ++j){
                 trunkRow += emptySpaceSymbol;
@@ -77,14 +87,9 @@ public class AsciiTree {
         }
 
         String ground = "";
-        char groundSymbol = '_';
 
         for(int i = 0; i < triangleBase; ++i){
             ground += groundSymbol;
         }
-
-        cristmasTree += (triangle + newLine + trunk + newLine + ground);
-
-        System.out.println(cristmasTree);
-	}	
+    }
 }
