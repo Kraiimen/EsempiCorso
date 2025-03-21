@@ -64,9 +64,7 @@ public class SortingHatProcedural {
     public static void main(String[] args) {
 
         randomize();
-        //for( String[] s  : STUDENTS){
-        //     System.out.println(Arrays.toString(s));
-        // }
+        
         assignPrefects();
 
         //dopo aver fatto la funzione randomize assegno gli studenti fino ad avere tutte un numero uguale
@@ -80,9 +78,7 @@ public class SortingHatProcedural {
         for(int i = PERFECT_CLASS_SIZE; i < PERFECT_CLASS_SIZE + EXTRA_STUDENTS; i++) {
             assignToDestination(STUDENTS[i][0], STUDENTS[i][1], true);
         }
-        for(int c : COUNTERS) {
-            System.out.println(c); 
-        } 
+        
         printFinalHouses(); 
     }
 
@@ -97,9 +93,10 @@ public class SortingHatProcedural {
             String destination = getRandomAvailableHouse(fullcapacity);  
             if(destination == null) {
                 System.out.println("ERRORE LOGICO: tutte le case risultano occupate al massimo. Terminiamo il programma");
-                return; 
+                System.exit(0); // Per terminare il programma
             }
             assignStudentToHouse(studentName, destination); 
+            System.out.println(studentName + " ... " + destination);
         }
 
     }
@@ -163,17 +160,44 @@ public class SortingHatProcedural {
         return hs[DICE.nextInt(numAvail)];
     }
 
+    // VERSIONE 2 UN PO' PIU' PULITA DEL METODO SOPRA (NIENTE PANICO)
+    // private static String getRandomAvailableHouseVERSION2(boolean fullCapacity){
+    //     String[] hs = new String[HOUSES.length];         
+    //     int numAvail = 0; 
+
+    //     for (String name : HOUSE_NAMES) {
+    //         boolean available = hasRoom(name, fullCapacity);
+    //         if (available) {
+    //             hs[numAvail] = name;
+    //             numAvail++;
+    //         }
+    //     }
+
+    //     if(numAvail == 0) {
+    //         return null; 
+    //     }
+    //     return hs[DICE.nextInt(numAvail)];
+    // }
+
+    // Metodo per calcolare la dimensione della casa
     private static int getEvenHouseSize() {
         //prendo la dimensione massima. Ci sono studenti extra? Sì, sottraggo 1, altrimenti 0
         return HOUSE_SIZE - (HAS_EXTRA_STUDENTS ? 1 : 0); 
     }
 
+    // Metodo per stampare la tabella finale
     private static void printFinalHouses() {
         //il simbolo % legge il formato e poi vanno le variabili in ordine di come le vogliamo
         String outputFormat = "%-25s%-25s%-25s%-25s%n";  
+        System.out.println();
         System.out.printf(outputFormat, HOUSE_NAMES[0], HOUSE_NAMES[1], HOUSE_NAMES[2], HOUSE_NAMES[3]); 
         for(int i = 0; i < HOUSE_SIZE; i++) {
-            System.out.printf(outputFormat, HOUSES[0][i], HOUSES[1][i],  HOUSES[2][i],  HOUSES[3][i]); 
+            System.out.printf(outputFormat, emptyIfNull(HOUSES[0][i]), emptyIfNull(HOUSES[1][i]),  emptyIfNull(HOUSES[2][i]),  emptyIfNull(HOUSES[3][i])); 
         }
+    }
+
+    // Metodo per sostituire i null con la stringa vuota nella stampa
+    private static String emptyIfNull(String str){
+        return str == null ? "" : str;
     }
 }
