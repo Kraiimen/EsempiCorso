@@ -59,7 +59,7 @@ public class SortingHatProcedural {
     private static final Scanner scanner = new Scanner(System.in);
 
     // Array di frasi per la suspanse 
-    private static final String suspense[] = {"Ah, che mente affascinante! So esattamente dove collocarti...", 
+    private static final String suspense[] = {"Ah, che mente affascinante! So esattamente dove collocarti...",
                          "Vedo dentro di te grandi qualità... la tua strada è chiara per me!",
                          "Ambizione, coraggio, saggezza o lealtà? Io so cosa ti definisce meglio!",
                          "Oh, che scelta interessante... ma ora so esattamente dove tu appartieni!",
