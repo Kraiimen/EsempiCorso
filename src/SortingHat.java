@@ -131,7 +131,7 @@ public class SortingHat {
             }
             inHouse=false;
             System.out.println();
-            System.out.println((students[randomNumber][1])+"!!!!!!!!!!!!!!!");
+            System.out.println((students[randomNumber][1])+"!!!!!!!!!!!!!!!"+"\n");
         }
 
         //ultimi due
@@ -172,7 +172,7 @@ public class SortingHat {
             }
             inHouse=false;
             System.out.println();
-            System.out.println((students[firstPhaseStudents+i][1])+"!!!!!!!!!!!!!!!");
+            System.out.println((students[firstPhaseStudents+i][1])+"!!!!!!!!!!!!!!!"+"\n");
         } 
         outHat();
         System.out.println("\n");
