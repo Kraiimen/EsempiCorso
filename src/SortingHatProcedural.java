@@ -1,14 +1,12 @@
-// Il programma lavora sulla lista di tutti gli studenti del corso per assegnare ad ogni studente ad una delle 4 casate del film di harry Potter
-// Per l 'assegnazione dello studente il programma terrà conto della preferenza dello studente assegnandolo alla casa preferita con probabilità del SLY_POS5%
-// In caso lo studente non entri nella casa preferita entrerà in una casa random
-// Il programma ad ogni assegnazione stamperà una messaggio che notifica in quale casa è stato inserito lo studente
-// Il programma terminerà con una tabella con le 4 case con i relativi studenti
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class SortingHatProcedural {
     // Array per i nomi delle case
     private static final String[] HOUSE_NAMES = {"Gryffindor","Hufflepuff","Slytherin","Ravenclaw"};
+    // Array per i prefetti (in ordine di corrispondenza delle loro case)
+    private static final String[] PREFECTS = {"Federico De Simone","Marta Petruzzelli","Carmine Erario","Filippo Aresu"};
 
     // Costanti per la posizione delle case nell'array
     private static final int GRYF_POS = 0;
@@ -38,8 +36,15 @@ public class SortingHatProcedural {
             {"Alessio Basili",HOUSE_NAMES[RAVE_POS]}
     };
 
+    // Il numero di studenti che creerebbe 4 case della stessa dimensione
+    private static final int PERFECT_CLASS_SIZE = STUDENTS.length / 4 * 4;
+
+    // Costanti per gli extra students, se il resto è != 0 allora ci sono degli studenti extra
+    private static final int EXTRA_STUDENTS = STUDENTS.length % HOUSE_NAMES.length;
+    private static final boolean HAS_EXTRA_STUDENTS = EXTRA_STUDENTS != 0;
+
     // Costante per la dimensione massima della casa (numero di persone)
-    private static final int HOUSE_SIZE = (int) Math.ceil((STUDENTS.length+4) /4 );
+    private static final int HOUSE_SIZE = (STUDENTS.length + 4)/4 + (HAS_EXTRA_STUDENTS ? 1 : 0);
 
     // Array delle quattro case
     private static final String[][] HOUSES = new String[4][HOUSE_SIZE];
@@ -50,35 +55,72 @@ public class SortingHatProcedural {
     // Oggetto DICE della classe Random
     private static final Random DICE = new Random();
 
+    // 
+    private static final Scanner scanner = new Scanner(System.in);
+
+    // Array di frasi per la suspanse 
+    private static final String suspense[] = {"Ah, che mente affascinante! So esattamente dove collocarti...", 
+                         "Vedo dentro di te grandi qualità... la tua strada è chiara per me!",
+                         "Ambizione, coraggio, saggezza o lealtà? Io so cosa ti definisce meglio!",
+                         "Oh, che scelta interessante... ma ora so esattamente dove tu appartieni!",
+                         "Non c'è alcun dubbio, il tuo destino è segnato... benvenuto nella tua nuova casa!"};
+
     /* ----- MAIN ----- */
-    public static void main(String[] args) {
-
+    public static void main(String[] args){
+        // Randomizziamo l'array di studenti
         randomize();
-        //for( String[] s  : STUDENTS){
-        //     System.out.println(Arrays.toString(s));
-        // }
 
-        for(int i = 0; i < (STUDENTS.length+4)/4*4; i++){
-            int luck = DICE.nextInt(4);  
+        // Assegniamo i prefetti alle rispettive case
+        assignPrefects();
+
+        // Assegniamo gli studenti alle case
+        for(int i = 0; i < PERFECT_CLASS_SIZE; i++){ 
 
             String studentName = STUDENTS[i][0];
             String favouriteHouse = STUDENTS[i][1];
 
-            boolean houseHasSpace = hasRoom(favouriteHouse, false);
-
-            if(luck == 0 && houseHasSpace){
-                assignStudentToHouse(studentName ,favouriteHouse);
-                System.out.println(studentName + " ... " + favouriteHouse + " come da sua preferenza"); 
-            }
+            assignToDestination(studentName, favouriteHouse, false);
         }
-    
-        //TODO il resto del programma
+        
+        // Assegniamo gli studenti extra
+        for(int i = PERFECT_CLASS_SIZE; i < PERFECT_CLASS_SIZE + EXTRA_STUDENTS; i++){
+            assignToDestination(STUDENTS[i][0], STUDENTS[i][1], true);
+        }
+
+        printFinalHouses();
+        scanner.close();
     }
 
     /* ----- FINE MAIN ----- */
 
+    // Metodo principale per assegnare gli studenti alle case (main)
+    private static void assignToDestination(String studentName, String favouriteHouse, boolean fullCapacity){
+        int luck = DICE.nextInt(4); 
+        boolean houseHasSpace = hasRoom(favouriteHouse, fullCapacity);
+
+        if(luck == 0 && houseHasSpace){
+            assignStudentToHouse(studentName, favouriteHouse);
+
+            // System.out.println("\n"+studentName + "...");
+            // delay(1500);
+
+            // System.out.println(suspense[DICE.nextInt(5)]);
+            // delay(2000);
+
+            // System.out.println(favouriteHouse.toUpperCase() + " come da sua preferenza.");
+            // scanner.nextLine();
+        } else {
+            String destination = getRandomAvailableHouse(fullCapacity);
+            if(destination == null) {
+                System.out.println("ERRORE LOGICO: tutte le case risultano occupate al massimo. Terminiamo il programma");
+                return; 
+            }
+            assignStudentToHouse(studentName, destination);
+        }
+    }
+
     // Metodo per la randomizzazione dell'array degli studenti
-    public static void randomize(){
+    private static void randomize(){
         for(int i = 0; i < 100; i++){
 
             // Generiamo due numeri casuali non uguali
@@ -99,6 +141,7 @@ public class SortingHatProcedural {
     // Metodo per controllare se dobbiamo lavorare con il limite di capacità o no
     private static boolean hasRoom(String houseName, boolean fullCapacity){
         int housePos = Arrays.asList(HOUSE_NAMES).indexOf(houseName);
+        int size = getEvenHouseSize();
 
         // Se fullCapcity è true allora lavoriamo con la dimensione massima dell'array
         if(fullCapacity){
@@ -106,7 +149,7 @@ public class SortingHatProcedural {
         } 
         // Altrimenti lo limitiamo
         else {
-            return COUNTERS[housePos] < HOUSE_SIZE - 1;
+            return COUNTERS[housePos] < size;
         }
     }
 
@@ -120,4 +163,67 @@ public class SortingHatProcedural {
         COUNTERS[housePos]++;
     }
 
+    // Metodo per assegnare i prefetti alle loro case
+    private static void assignPrefects(){
+        for (int i = 0; i < PREFECTS.length; i++) {
+            HOUSES[i][0] = PREFECTS[i];
+            COUNTERS[i]++;
+        }
+    }
+    
+    // Metodo per pescare una casa libera per assegnare randomicamente gli studenti alle case
+    private static String getRandomAvailableHouse(boolean fullCapacity){
+        String hs[] = new String[HOUSES.length];
+        int numAvail = 0; // Quante case sono disponibili
+        int size = fullCapacity ? HOUSE_SIZE : getEvenHouseSize();
+
+        for (int i = 0; i < COUNTERS.length; i++) {
+            if (COUNTERS[i] < size) {
+                hs[numAvail] = HOUSE_NAMES[i];
+                numAvail++;
+            }
+        }
+
+        if (numAvail == 0) {
+            return null;
+        }
+
+        return hs[DICE.nextInt(numAvail)];
+    }
+
+    // Metodo per calcolare la dimensione massima delle case se ci sono studenti extra
+    private static int getEvenHouseSize() {
+        return HOUSE_SIZE - (HAS_EXTRA_STUDENTS ? 1 : 0);
+    }
+
+    // Metodo per aggiungere suspance tra il nome e la casa scelta
+    private static void delay(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();  // Ripristina lo stato di interruzione
+            System.err.println("Errore nel delay: " + e.getMessage());
+        }
+    }
+
+    // Metodo per la stampa della tabella finale delle case
+    private static void printFinalHouses(){
+        String outputFormat = "| %-20s | %-20s | %-20s | %-20s |\n";
+
+        System.out.println();
+        System.out.printf(outputFormat, "GRYFFINDOR", "HUFFLEPUFF", "SLYTHERIN", "RAVENCLAW");
+
+        for (int j = 0; j < HOUSE_SIZE; j++) {
+            System.out.printf(outputFormat, 
+                    formatNullString(HOUSES[0][j]), 
+                    formatNullString(HOUSES[1][j]), 
+                    formatNullString(HOUSES[2][j]), 
+                    formatNullString(HOUSES[3][j]));
+        }
+    }
+
+    // Metodo per sostituire null con una stringa vuota
+    private static String formatNullString(String str){
+        return (str == null) ? "" : str; 
+    }
 }
