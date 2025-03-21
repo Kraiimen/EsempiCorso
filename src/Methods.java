@@ -25,6 +25,8 @@ public class Methods {
         System.out.println(lunghezza);
         lunghezza = greetWithName("Marta");
         System.out.println(lunghezza);
+        printinTitleCase("Ciao come Stai? Spero TUtto bENE");
+
     }
         // posso scriverlo meglio, così    
 
@@ -90,7 +92,23 @@ public class Methods {
         // return s1.lenght() > s2.lenght() ? s1 : s1.lenght() < s2.lenght() ? s2 : "sono della stessa lunghezza";
     }
 
-    
+    public static void printinTitleCase (String name) {
+        System.out.println(name.length()); //stampa la length della stringa
+        String upper = name.toUpperCase(); 
+        // System.out.println(name); // le stringhe sono immutabili, non è possibile cambiare una stringa, 
+                                     // quindi in questo caso l'ultimo name rimarrà in minuscolo perchè,
+                                     // .toUpperCase coinvolge solo la stringa di prima.
+        String lower = name.toLowerCase();        
+        char first = name.charAt(0); //prende il primo carattere della stringa
+        char firstUpper = Character.toUpperCase(first); //questo è un metodo statico della classe character (riconoscibile per la C maiuscola)
+        String subString = lower.substring(1); 
+        String result = firstUpper + subString;
+        System.out.println(result);  
+    }
+
+    //metodo statico: metodo che chiamo direttamente su una classe, normalmente li chiami sugli oggetti
+
+
 
 }
 
