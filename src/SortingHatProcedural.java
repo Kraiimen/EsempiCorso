@@ -3,10 +3,17 @@
 // In caso lo studente non entri nella casa preferita entrerà in una casa random
 // Il programma ad ogni assegnazione stamperà una messaggio che notifica in quale casa è stato inserito lo studente
 // Il programma terminerà con una tabella con le 4 case con i relativi studenti
+import java.io.Console;
 import java.util.Arrays;
 import java.util.Random;
 
 public class SortingHatProcedural {
+    // Array di frasi per la suspanse 
+    private static final String suspense[] = {"Ah, che mente affascinante! So esattamente dove collocarti...",
+                         "Vedo dentro di te grandi qualità... la tua strada è chiara per me!",
+                         "Ambizione, coraggio, saggezza o lealtà? Io so cosa ti definisce meglio!",
+                         "Oh, che scelta interessante... ma ora so esattamente dove tu appartieni!",
+                         "Non c'è alcun dubbio, il tuo destino è segnato... benvenuto nella tua nuova casa!"};
 
     private static final String[] HOUSE_NAMES = {"Gryffindor","Hufflepuff","Slytherin","Ravenclaw"};
 
@@ -20,7 +27,6 @@ public class SortingHatProcedural {
 
     //creazione dell'array STUDENTS
     private static final String STUDENTS[][] = {  
-
             {"Ilario Vasco Palaia",HOUSE_NAMES[SLY_POS]},
             {"Elvis La fata",HOUSE_NAMES[RAVE_POS]},
             {"Regina Ghering",HOUSE_NAMES[SLY_POS]},
@@ -39,8 +45,8 @@ public class SortingHatProcedural {
             {"Stefano Pio Lorato", HOUSE_NAMES[GRYF_POS]},
             {"Nicolo Casertano",HOUSE_NAMES[GRYF_POS]},
             {"Alessio Basili",HOUSE_NAMES[RAVE_POS]}
+    };
 
-        };
     //numero di studenti che creerebbe 4 case della stessa dimensione (nel nostro caso 20)
     private static final int PERFECT_CLASS_SIZE = STUDENTS.length/4 *4;  
 
@@ -85,10 +91,12 @@ public class SortingHatProcedural {
     private static void assignToDestination(String studentName, String favouriteHouse, boolean fullcapacity) {
         boolean houseHasSpace = hasRoom(favouriteHouse, fullcapacity);
         int luck = DICE.nextInt(4);
+
         if(luck == 0 && houseHasSpace) { 
             //assegniamo gli studenti alle case
             assignStudentToHouse(studentName ,favouriteHouse);
-            System.out.println(studentName + " ... " + favouriteHouse + " come da sua preferenza"); 
+            printStudentDestination(studentName, favouriteHouse, true);
+            waitForReturn();
         } else {
             String destination = getRandomAvailableHouse(fullcapacity);  
             if(destination == null) {
@@ -96,7 +104,8 @@ public class SortingHatProcedural {
                 System.exit(0); // Per terminare il programma
             }
             assignStudentToHouse(studentName, destination); 
-            System.out.println(studentName + " ... " + destination);
+            printStudentDestination(studentName, destination, false);
+            waitForReturn();
         }
 
     }
@@ -199,5 +208,34 @@ public class SortingHatProcedural {
     // Metodo per sostituire i null con la stringa vuota nella stampa
     private static String emptyIfNull(String str){
         return str == null ? "" : str;
+    }
+
+    // Metodo per aggiungere suspance tra il nome e la casa scelta
+    private static void delay(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            // Impossibile, il programma è mono thread
+        }
+    }
+
+    // Metodo per aspettare che l'utente schiacci return per vedere il destino del prossimo studente
+    private static void waitForReturn(){
+        Console console = System.console();
+        console.readLine();
+    }
+
+    // Metodo per stampare il sorteggio dello studente nella casa
+    private static void printStudentDestination(String studentName, String houseName, boolean wasLucky){
+        System.out.println("\n"+studentName + "...");
+        delay(1000);
+        System.out.println(suspense[DICE.nextInt(5)]);
+        delay(1500);
+
+        if (wasLucky) {
+            System.out.println(houseName.toUpperCase()+" come da sua preferenza!");
+        } else {
+            System.out.println(houseName.toUpperCase()+" !");
+        }
     }
 }
