@@ -40,18 +40,18 @@ public class SortingHat{
 
 
         //devo randomizzare l'ordine degli studenti, faccio un giro di scambi
-        for(int i = 0 ; i < students.length ; i++){
-            Random dice = new Random();
-            int n = dice.nextInt(students.length);
-                String temp1 = students[i][0];
-                String temp2 = students[i][1];
-                students[i][0] = students[n][0];
-                students[i][1] = students[n][1];
-                students[n][0] = temp1;
-                students[n][1] = temp2;
-        }
+        // for(int i = 0 ; i < students.length ; i++){
+        //     Random dice = new Random();
+        //     int n = dice.nextInt(students.length);
+        //     String temp1 = students[i][0];
+        //     String temp2 = students[i][1];
+        //     students[i][0] = students[n][0];
+        //     students[i][1] = students[n][1];
+        //     students[n][0] = temp1;
+        //     students[n][1] = temp2;
+        // }
 
-        // randomize(students);
+        randomize(students);
 
 
 
@@ -145,23 +145,22 @@ public class SortingHat{
         return houseSorted;
     }
 
-    // public static String[][] randomize(String[][] arr){
-    //     String temp1 = " ";
-    //     String temp2 = " ";
-    //     for(int i = 0 ; i < arr.length ; i++){
-    //         for(int j=0 ; j<i;){
-    //             Random dice = new Random();
-    //             int n = dice.nextInt(arr.length-1);
-    //             temp1 = arr[i][j];
-    //             temp2 = arr[i][j+1];
-    //             arr[i][j] = arr[n][j];
-    //             arr[i][j+1] = arr[n][j+1];
-    //             arr[n][j] = temp1;
-    //             arr[n][j+1] = temp2;
-    //         }
-    //     }
-    //     return arr;
-    // }
+    public static void randomize(String[][] arr){
+        String temp1 = " ";
+        String temp2 = " ";
+        int j = 0;
+        int z = 1;
+        for(int i = 0 ; i < arr.length ; i++){
+                Random dice = new Random();
+                int n = dice.nextInt(arr.length);
+                temp1 = arr[i][j];
+                temp2 = arr[i][z];
+                arr[i][j] = arr[n][j];
+                arr[i][z] = arr[n][z];
+                arr[n][j] = temp1;
+                arr[n][z] = temp2;
+        }
+    }
     
     
 }
