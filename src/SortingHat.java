@@ -30,10 +30,6 @@ public class SortingHat {
                         "    \"\"\"--_______--\"\"\"\r\n" + 
                         "");
     }
-
-
-
-
     public static void main(String[] args) {
         outHat();
         String[] gryffindor = new String[6];
@@ -57,6 +53,7 @@ public class SortingHat {
         int firstPhaseStudents=students.length-lastStudents;
         int addSize = 0;
         int addStudentsSize = 0;
+        boolean correctInput = false;
 
         //assegnazione dei prefetti
         gryffindor[0]= students[3][0];
@@ -85,9 +82,16 @@ public class SortingHat {
             //scelta preferenza
             System.out.println(students[randomNumber][0]+"!   VIENI PURE!");
             System.out.println("Dove ti piacerebbe andare?");
-            System.out.println("Gryffindor: 0\t Slytherin: 1\t Ravenclaw: 2\t Hufflepuff: 3\t");
-            preference = console.readLine();
-            pref = Integer.parseInt(preference);
+            do{ //chiede un input tra 0,1,2,3
+                System.out.println("Gryffindor: 0\t Slytherin: 1\t Ravenclaw: 2\t Hufflepuff: 3\t");
+                preference = console.readLine();
+                if(preference.equals("0") || preference.equals("1") || preference.equals("2") || preference.equals("3")){         //se l'input è diverso da 0,1,2,3 il ciclo si ripete, altrimenti finisce impostando correctInput a true
+                    correctInput=true;
+                }
+            }while(!correctInput);
+            correctInput=false; //assegna false per verificare l'input nella prossima iterazione
+
+            pref = Integer.parseInt(preference);//prende l'input e lo inserisce in pref
 
             //ciclo per vedere se lo studente è da inserire o meno nella casa scelta, se esce 1 allora s'inserisce nella casa che ha scelto, altrimenti una a caso
             randomHouse = r.nextInt(4);
@@ -107,7 +111,7 @@ public class SortingHat {
                 if(pref==1 && slytherin[slytherin.length-lastStudents+addSize]==null){
                     freeIndex = freeSpace(slytherin);
                     if(freeIndex!=0){
-                        slytherin[freeIndex] = students[randomNumber][0];   //dentro lo spazio libero inserisce lo studente
+                        slytherin[freeIndex] = students[randomNumber][0];   
                         students[randomNumber][1] = "Slytherin";
                         inHouse=true;
                     }
@@ -115,7 +119,7 @@ public class SortingHat {
                 if(pref==2 && ravenclaw[ravenclaw.length-lastStudents+addSize]==null){
                     freeIndex = freeSpace(ravenclaw);
                     if(freeIndex!=0){
-                        ravenclaw[freeIndex] = students[randomNumber][0];   //dentro lo spazio libero inserisce lo studente
+                        ravenclaw[freeIndex] = students[randomNumber][0];   
                         students[randomNumber][1] = "Ravenclaw";
                         inHouse=true;
                     }
@@ -123,7 +127,7 @@ public class SortingHat {
                 if(pref==3 && hufflepuff[hufflepuff.length-lastStudents+addSize]==null){
                     freeIndex = freeSpace(hufflepuff);
                     if(freeIndex!=0){
-                        hufflepuff[freeIndex] = students[randomNumber][0];   //dentro lo spazio libero inserisce lo studente
+                        hufflepuff[freeIndex] = students[randomNumber][0];   
                         students[randomNumber][1] = "Hufflepuff";
                         inHouse=true;
                     }
@@ -143,23 +147,3 @@ public class SortingHat {
         outputHouses(gryffindor, slytherin, ravenclaw, hufflepuff);
     }
 }
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
