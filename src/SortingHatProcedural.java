@@ -7,6 +7,7 @@
 //il programma notificherà l assegnazione di uno studente in una casa
 //il programma stampera una tabella con le 4 case con i relativi studenti
 import java.util.Random;
+import java.util.Arrays;
 
 public class SortingHatProcedural{//static, mi permette di usare la variabile in qualunque parte del programma
     private static final String [] HOUSE_NAMES = {"Gryffindor","Hufflepuff","Slytherin","Ravenclaw"};
@@ -48,10 +49,10 @@ public class SortingHatProcedural{//static, mi permette di usare la variabile in
     private static final Random DICE = new Random();
 
     private static final int EXTRA_STUDENTS = STUDENTS.length % HOUSE_NAMES.length;
-    private static final boolean HAS_EXTRASTUDENTS = EXTRA_STUDENTS != 0;
-    private static final int HOUSE_SIZE = (STUDENTS.length+4)/4.0 + HAS_EXTRA_STUDENTS ? 1 : 0;
+    private static final boolean HAS_EXTRA_STUDENTS = EXTRA_STUDENTS != 0;
+    private static final int HOUSE_SIZE = (STUDENTS.length+4)/4 + (HAS_EXTRA_STUDENTS ? 1 : 0);
     //crea un array contenente 4 array di grandezza 6
-    private static final String [][] HOUSES =new string [4][HOUSE_SIZE];
+    private static final String [][] HOUSES =new String [4][HOUSE_SIZE];
     //il numeri di studenti che creerebbe 4 case della stessa dimensione 
     private static final int PERFECT_CLASS_SIZE = STUDENTS.length/4*4;
 
@@ -68,12 +69,13 @@ public class SortingHatProcedural{//static, mi permette di usare la variabile in
             assignToDestination(studentName, favouriteHouse, false); //il false tiene conto della dimensione ridotta
 
         }
-        for(int i = PERFECT_CLASS_SIZE; i > PERFECT_CLASS_SIZE + EXTRA_STUDENTS; i++){
-            assignToDestination(STUDENTS[I][0], STUDENTS[i][1], true); //true perche lavoriamo in full capacity 
+        for(int i = PERFECT_CLASS_SIZE; i < PERFECT_CLASS_SIZE + EXTRA_STUDENTS; i++){
+            assignToDestination(STUDENTS[i][0], STUDENTS[i][1], true); //true perche lavoriamo in full capacity 
         }
-        for (int c : COUNTERS){
-            System.out.println(c);
-        }
+        // for (int c : COUNTERS){
+        //     System.out.println(c);
+        // }
+        printFinalHouses();
     }
     private static void assignToDestination(String studentName, String favouriteHouse, boolean fullCapacity){
         int luck = DICE.nextInt(4);
@@ -119,8 +121,8 @@ public class SortingHatProcedural{//static, mi permette di usare la variabile in
     //funzione che assegna uno studente a una casa sulla base delle sue preferenze
     private static void assignStudentToHouse(String studentName, String houseName){
         int housePos = Arrays.asList(HOUSE_NAMES).indexOf(houseName); //crea momentaneamente una lista che usa il metodo index of per vedere a che indice sta il valore houseName
-        int studentPos = COUNTERS[HousePos];//da la prima posizione libera
-        HOUSES[housesPos][studentPos] = studentName; // va a infilare lo studente nella casa housepos nella posizione studentpos
+        int studentPos = COUNTERS[housePos];//da la prima posizione libera
+        HOUSES[housePos][studentPos] = studentName; // va a infilare lo studente nella casa housepos nella posizione studentpos
         COUNTERS[housePos]++;
     }
     private static void assignPrefects(){
@@ -145,9 +147,7 @@ public class SortingHatProcedural{//static, mi permette di usare la variabile in
             return null; //ritorna null se non ci sono case disponibili
         }
         //ritorna una casa sorteggiata tra le disponibili
-        return hs[dice.nextInt(numAvail)];
-
-
+        return hs[DICE.nextInt(numAvail)];
     }
     private static int getEvenHouseSize(){
         return HOUSE_SIZE - (HAS_EXTRA_STUDENTS ? 1 : 0);
