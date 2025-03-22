@@ -3,10 +3,17 @@
 // In caso lo studente non entri nella casa preferita entrerà in una casa random
 // Il programma ad ogni assegnazione stamperà una messaggio che notifica in quale casa è stato inserito lo studente
 // Il programma terminerà con una tabella con le 4 case con i relativi studenti
+import java.io.Console;
 import java.util.Arrays;
 import java.util.Random;
 
 public class SortingHatProcedural {
+    // Array di frasi per la suspanse 
+    private static final String suspense[] = {"Ah, che mente affascinante! So esattamente dove collocarti...",
+                         "Vedo dentro di te grandi qualità... la tua strada è chiara per me!",
+                         "Ambizione, coraggio, saggezza o lealtà? Io so cosa ti definisce meglio!",
+                         "Oh, che scelta interessante... ma ora so esattamente dove tu appartieni!",
+                         "Non c'è alcun dubbio, il tuo destino è segnato... benvenuto nella tua nuova casa!"};
 
     private static final String[] HOUSE_NAMES = {"Gryffindor","Hufflepuff","Slytherin","Ravenclaw"};
 
@@ -20,13 +27,12 @@ public class SortingHatProcedural {
 
     //creazione dell'array STUDENTS
     private static final String STUDENTS[][] = {  
-
             {"Ilario Vasco Palaia",HOUSE_NAMES[SLY_POS]},
             {"Elvis La fata",HOUSE_NAMES[RAVE_POS]},
             {"Regina Ghering",HOUSE_NAMES[SLY_POS]},
             {"Luca Formica",HOUSE_NAMES[RAVE_POS]},
             {"Davide Mazzitelli",HOUSE_NAMES[RAVE_POS]},
-            {"Piero Scarcina",HOUSE_NAMES[GRYF_POS]},git 
+            {"Piero Scarcina",HOUSE_NAMES[GRYF_POS]},
             {"Vittorio Aquila",HOUSE_NAMES[RAVE_POS]},
             {"Emanuele Giustiniani",HOUSE_NAMES[SLY_POS]},
             {"Gaspare Maione",HOUSE_NAMES[GRYF_POS]},
@@ -39,9 +45,9 @@ public class SortingHatProcedural {
             {"Stefano Pio Lorato", HOUSE_NAMES[GRYF_POS]},
             {"Nicolo Casertano",HOUSE_NAMES[GRYF_POS]},
             {"Alessio Basili",HOUSE_NAMES[RAVE_POS]}
+    };
 
-        };
-    //numero di studenti che creerebbe 4 case della stessa dimensione (nel nostro caso 20)
+    //numero di studenti che creerebbe 4 case della stessa dimensione (nel nostro caso 16)
     private static final int PERFECT_CLASS_SIZE = STUDENTS.length/4 *4;  
 
     private static final int EXTRA_STUDENTS = STUDENTS.length % HOUSE_NAMES.length;
@@ -63,10 +69,10 @@ public class SortingHatProcedural {
 
     public static void main(String[] args) {
 
+        System.out.println(PERFECT_CLASS_SIZE);
+
         randomize();
-        //for( String[] s  : STUDENTS){
-        //     System.out.println(Arrays.toString(s));
-        // }
+        
         assignPrefects();
 
         //dopo aver fatto la funzione randomize assegno gli studenti fino ad avere tutte un numero uguale
@@ -80,26 +86,28 @@ public class SortingHatProcedural {
         for(int i = PERFECT_CLASS_SIZE; i < PERFECT_CLASS_SIZE + EXTRA_STUDENTS; i++) {
             assignToDestination(STUDENTS[i][0], STUDENTS[i][1], true);
         }
-        for(int c : COUNTERS) {
-            System.out.println(c); 
-        } 
+        
         printFinalHouses(); 
     }
 
     private static void assignToDestination(String studentName, String favouriteHouse, boolean fullcapacity) {
         boolean houseHasSpace = hasRoom(favouriteHouse, fullcapacity);
         int luck = DICE.nextInt(4);
+
         if(luck == 0 && houseHasSpace) { 
             //assegniamo gli studenti alle case
             assignStudentToHouse(studentName ,favouriteHouse);
-            System.out.println(studentName + " ... " + favouriteHouse + " come da sua preferenza"); 
+            printStudentDestination(studentName, favouriteHouse, true);
+            waitForReturn();
         } else {
             String destination = getRandomAvailableHouse(fullcapacity);  
             if(destination == null) {
                 System.out.println("ERRORE LOGICO: tutte le case risultano occupate al massimo. Terminiamo il programma");
-                return; 
+                System.exit(0); // Per terminare il programma
             }
             assignStudentToHouse(studentName, destination); 
+            printStudentDestination(studentName, destination, false);
+            waitForReturn();
         }
 
     }
@@ -163,17 +171,73 @@ public class SortingHatProcedural {
         return hs[DICE.nextInt(numAvail)];
     }
 
+    // VERSIONE 2 UN PO' PIU' PULITA DEL METODO SOPRA (NIENTE PANICO)
+    // private static String getRandomAvailableHouseVERSION2(boolean fullCapacity){
+    //     String[] hs = new String[HOUSES.length];         
+    //     int numAvail = 0; 
+
+    //     for (String name : HOUSE_NAMES) {
+    //         boolean available = hasRoom(name, fullCapacity);
+    //         if (available) {
+    //             hs[numAvail] = name;
+    //             numAvail++;
+    //         }
+    //     }
+
+    //     if(numAvail == 0) {
+    //         return null; 
+    //     }
+    //     return hs[DICE.nextInt(numAvail)];
+    // }
+
+    // Metodo per calcolare la dimensione della casa
     private static int getEvenHouseSize() {
         //prendo la dimensione massima. Ci sono studenti extra? Sì, sottraggo 1, altrimenti 0
         return HOUSE_SIZE - (HAS_EXTRA_STUDENTS ? 1 : 0); 
     }
 
+    // Metodo per stampare la tabella finale
     private static void printFinalHouses() {
         //il simbolo % legge il formato e poi vanno le variabili in ordine di come le vogliamo
         String outputFormat = "%-25s%-25s%-25s%-25s%n";  
+        System.out.println();
         System.out.printf(outputFormat, HOUSE_NAMES[0], HOUSE_NAMES[1], HOUSE_NAMES[2], HOUSE_NAMES[3]); 
         for(int i = 0; i < HOUSE_SIZE; i++) {
-            System.out.printf(outputFormat, HOUSES[0][i], HOUSES[1][i],  HOUSES[2][i],  HOUSES[3][i]); 
+            System.out.printf(outputFormat, emptyIfNull(HOUSES[0][i]), emptyIfNull(HOUSES[1][i]),  emptyIfNull(HOUSES[2][i]),  emptyIfNull(HOUSES[3][i])); 
+        }
+    }
+
+    // Metodo per sostituire i null con la stringa vuota nella stampa
+    private static String emptyIfNull(String str){
+        return str == null ? "" : str;
+    }
+
+    // Metodo per aggiungere suspance tra il nome e la casa scelta
+    private static void delay(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            // Impossibile, il programma è mono thread
+        }
+    }
+
+    // Metodo per aspettare che l'utente schiacci return per vedere il destino del prossimo studente
+    private static void waitForReturn(){
+        Console console = System.console();
+        console.readLine();
+    }
+
+    // Metodo per stampare il sorteggio dello studente nella casa
+    private static void printStudentDestination(String studentName, String houseName, boolean wasLucky){
+        System.out.println("\n"+studentName + "...");
+        delay(1000);
+        System.out.println(suspense[DICE.nextInt(5)]);
+        delay(1500);
+
+        if (wasLucky) {
+            System.out.println(houseName.toUpperCase()+" come da sua preferenza!");
+        } else {
+            System.out.println(houseName.toUpperCase()+" !");
         }
     }
 }
