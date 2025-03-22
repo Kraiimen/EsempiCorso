@@ -1,159 +1,241 @@
+// Il programma lavora sulla lista di tutti gli studenti del corso per assegnare ad ogni studente ad una delle 4 casate del film di harry Potter
+// Per l 'assegnazione dello studente il programma terrà conto della preferenza dello studente assegnandolo alla casa preferita con probabilità del SLY_POS5%
+// In caso lo studente non entri nella casa preferita entrerà in una casa random
+// Il programma ad ogni assegnazione stamperà una messaggio che notifica in quale casa è stato inserito lo studente
+// Il programma terminerà con una tabella con le 4 case con i relativi studenti
+import java.io.Console;
 import java.util.Arrays;
 import java.util.Random;
 
-// Il programma lavora sulla lista di tutti gli studenti del corso,
-// Per assegnare ogni studente ad una delle 4 casate di harry potter.
-// Per l'assegnazione dello studente terrà conto della preferenza dello studente per una probabilità extra del 25%
-// Nel caso in cui lo studente non entri nella casa preferita verrà assegnato a una casa random tra le 4
-// Il programma ad ogni assegnazione stamperà una riga per notificare l'assegnazione
-// Il programma terminerà stampando una tabella con le 4 case e i relativi studenti
-
 public class SortingHatProcedural {
-	private static final String[] HOUSE_NAMES = {"Gryffindor", "Hufflepuff", "Slytherin", "Ravenclaw"};
-	private static final int GRYF_POSE = 0;
-	private static final int HUFF_POSE = 1;
-	private static final int SLYT_POSE = 2;
-	private static final int RAVE_POSE = 3;
+    // Array di frasi per la suspanse 
+    private static final String suspense[] = {"Ah, che mente affascinante! So esattamente dove collocarti...",
+                         "Vedo dentro di te grandi qualità... la tua strada è chiara per me!",
+                         "Ambizione, coraggio, saggezza o lealtà? Io so cosa ti definisce meglio!",
+                         "Oh, che scelta interessante... ma ora so esattamente dove tu appartieni!",
+                         "Non c'è alcun dubbio, il tuo destino è segnato... benvenuto nella tua nuova casa!"};
 
-	private static final String[] PREFECTS = {"Federico De Simone", "Marta Petruzzelli", "Carmine Erario", "Filippo Aresu"};
-	private static final String STUDENTS[][] = {  // private così che sia visibile solo in questa classe, ma static per essere visibile in tutto il file
-            {"Ilario Vasco Palaia", HOUSE_NAMES[SLYT_POSE]},
-            {"Elvis La fata", HOUSE_NAMES[RAVE_POSE]},
-            {"Regina Ghering", HOUSE_NAMES[SLYT_POSE]},
-            {"Luca Formica", HOUSE_NAMES[RAVE_POSE]},
-            {"Davide Mazzitelli", HOUSE_NAMES[RAVE_POSE]},
-            {"Piero Scarcina", HOUSE_NAMES[GRYF_POSE]},
-            {"Vittorio Aquila", HOUSE_NAMES[RAVE_POSE]},
-            {"Emanuele Giustiniani", HOUSE_NAMES[SLYT_POSE]},
-            {"Gaspare Maione", HOUSE_NAMES[GRYF_POSE]},
-            {"Camilla Marchioro", HOUSE_NAMES[GRYF_POSE]},
-            {"Eugenio Manganelli", HOUSE_NAMES[HUFF_POSE]},
-            {"Edoardo Bognanni", HOUSE_NAMES[RAVE_POSE]},
-            {"Lorenzo Coretti", HOUSE_NAMES[HUFF_POSE]},
-            {"Sabrina Salerno", HOUSE_NAMES[HUFF_POSE]},
-            {"Marcello Coppolino", HOUSE_NAMES[SLYT_POSE]},
-            {"Stefano Pio Lorato", HOUSE_NAMES[GRYF_POSE]},
-            {"Nicolo Casertano", HOUSE_NAMES[GRYF_POSE]},
-            {"Alessio Basili", HOUSE_NAMES[RAVE_POSE]}
+    private static final String[] HOUSE_NAMES = {"Gryffindor","Hufflepuff","Slytherin","Ravenclaw"};
+
+    //numero correlato alla posizione delle case
+    private static final int GRYF_POS = 0;
+    private static final int HUF_POS = 1;
+    private static final int SLY_POS  = 2;
+    private static final int RAVE_POS  = 3;
+
+    private static final String[] PREFECTS = {"Federico De Simone","Marta Petruzzelli","Carmine Erario","Filippo Aresu"};
+
+    //creazione dell'array STUDENTS
+    private static final String STUDENTS[][] = {  
+            {"Ilario Vasco Palaia",HOUSE_NAMES[SLY_POS]},
+            {"Elvis La fata",HOUSE_NAMES[RAVE_POS]},
+            {"Regina Ghering",HOUSE_NAMES[SLY_POS]},
+            {"Luca Formica",HOUSE_NAMES[RAVE_POS]},
+            {"Davide Mazzitelli",HOUSE_NAMES[RAVE_POS]},
+            {"Piero Scarcina",HOUSE_NAMES[GRYF_POS]},
+            {"Vittorio Aquila",HOUSE_NAMES[RAVE_POS]},
+            {"Emanuele Giustiniani",HOUSE_NAMES[SLY_POS]},
+            {"Gaspare Maione",HOUSE_NAMES[GRYF_POS]},
+            {"Camilla Marchioro",HOUSE_NAMES[GRYF_POS]},
+            {"Eugenio Manganelli",HOUSE_NAMES[HUF_POS]},
+            {"Edoardo Bognanni",HOUSE_NAMES[RAVE_POS]},
+            {"Lorenzo Coretti",HOUSE_NAMES[HUF_POS]},
+            {"Sabrina Salerno",HOUSE_NAMES[HUF_POS]},
+            {"Marcello Coppolino",HOUSE_NAMES[SLY_POS]},
+            {"Stefano Pio Lorato", HOUSE_NAMES[GRYF_POS]},
+            {"Nicolo Casertano",HOUSE_NAMES[GRYF_POS]},
+            {"Alessio Basili",HOUSE_NAMES[RAVE_POS]}
     };
 
-	// Numero di studenti che creerebbe 4 case di identica dimensione
-	private static final int PERFECT_CLASS_SIZE = STUDENTS.length / 4 * 4;
-	private static final int EXTRA_STUDENTS = STUDENTS.length % HOUSE_NAMES.length;
-	private static final boolean HAS_EXTRA_STUDENTS = (EXTRA_STUDENTS != 0);  // Questa booleana mi dice se ho studenti extra o meno
-	private static final int[] COUNTERS = new int[4]; // Questo array tiene traccia degli studenti messi per ogni casa, quindi ad esempio [0] corrisponderà Grifondoro
-	private static final int HOUSE_SIZE = (STUDENTS.length + 4) / 4 + (HAS_EXTRA_STUDENTS ? 1 : 0);
-	private static final String[][] HOUSES = new String[4][HOUSE_SIZE];
-	private static final Random DICE = new Random(); // creo un oggetto DICE di tipo Random
+    //numero di studenti che creerebbe 4 case della stessa dimensione (nel nostro caso 20)
+    private static final int PERFECT_CLASS_SIZE = STUDENTS.length/4 *4;  
 
-	public static void main(String[] args) {
-		randomize();
-		//for (String[] s : STUDENTS) { // Controllo se ha randomizzato
-		//	System.out.println(Arrays.toString(s)); // Arrays è una classe con funzioni utili per lavorare sugli array
-		// }
+    private static final int EXTRA_STUDENTS = STUDENTS.length % HOUSE_NAMES.length;
 
-		assignPrefects(); // Assegno i 4 prefetti
+    //mi dice se ho degli extra oppure no  
+    private static final boolean HAS_EXTRA_STUDENTS = EXTRA_STUDENTS != 0;  
 
-		for (int i = 0; i < PERFECT_CLASS_SIZE; i++) {    //Essendo un int dividendo per 4 e moltiplicando per 4 e tolgo lo scarto (Es. 22/4 = 5)
+    // Questo array tiene traccia del numero di studenti messi in ogni casa
+    private static final int[] COUNTERS = new int[4]; 
 
-			String studentName = STUDENTS[i][0];
-			String favoriteHouse = STUDENTS[i][1]; // Vedo quale sia la casa preferita dello studente in questione
-			
-			assignToDestination(studentName, favoriteHouse, false);
-		}
-		for (int i = PERFECT_CLASS_SIZE; i < PERFECT_CLASS_SIZE + EXTRA_STUDENTS; i++) {
-			assignToDestination(STUDENTS[i][0], STUDENTS[i][1], true);
-		}
-		for (int c : COUNTERS) {
-			System.out.println(c);
-		}
-		printFinalHouses();
-	}
+    //la dimensione della casa sarà quella perfetta ma ci aggiungo 1 nel caso ci sia un extra student
+    private static final int HOUSE_SIZE = (STUDENTS.length + 4)/4 + (HAS_EXTRA_STUDENTS ? 1 : 0); 
+    
+    //nuovo array di array per le houses
+    private static final String[][] HOUSES = new String[4][HOUSE_SIZE];
 
-	private static void assignToDestination(String studentName, String favoriteHouse, boolean fullCapacity) {
-		boolean houseHasSpace = hasRoom(favoriteHouse, fullCapacity); //false perché inizialmente non vogliamo lavorare in full capacity
-		int luck = DICE.nextInt(4);
-		if (luck == 0 && houseHasSpace) {
-			assignStudentToHouse(studentName, favoriteHouse);
-			System.out.println(studentName + " ..... " + favoriteHouse + " come da sua preferenza");
-		} else {
-			String destination = getRandomAvailableHouse(fullCapacity);
-			if (destination == null) {
-				System.out.println("Errore logico, tutte le case risultano occupate al massimo, terminiamo il programma");
-				return; // Quando ritorna (return) la main il programma termina
-			}
-			assignStudentToHouse(studentName, destination);
-		}
-	}
+    //creiamo un oggetto DICE di tipo Random
+    private static final Random DICE = new Random(); 
 
-	public static void randomize() {
-		// Faccio uno shuffle che per 100 volte prende 2 studenti a caso nell'array e li scambia
-		for (int i = 0; i < 100; i++) {
-			int n1 = DICE.nextInt(STUDENTS.length);
-			int n2;
-			do { 
-				n2 = DICE.nextInt(STUDENTS.length);
-			} while (n2 == n1);  // Continua ad estrarre n2 finché non sarà diverso da n1, evitando di scambiare uno studente con sé stesso
-			
-			String[] temp = STUDENTS[n1];
-			STUDENTS[n1] = STUDENTS[n2];
-			STUDENTS[n2] = temp; //Così ho scambiato posizione di nome e preferenza di 2 studenti
-		}
-	}
+    public static void main(String[] args) {
 
-	private static boolean hasRoom(String houseName, boolean fullCapacity) {
-		int housePos = Arrays.asList(HOUSE_NAMES).indexOf(houseName); // Crea momentaneamente una lista a partire da quell'array e chiede alla lista in che posizione contiene la parola houseName
-		int size = getEvenHouseSize();  //se HAS_EXTRA_STUDENTS è vero mi darà 1 (- 1) se no mi darà 0 (- 0)
-		if (fullCapacity) {
-			return COUNTERS[housePos] < HOUSE_SIZE; // Se siamo in fullCapacity vado avanti e mi ritorna true
-		} else {
-			return COUNTERS[housePos] < size;  //Quando non siamo in fullCapacity mi ritorna false e così riempio prima tutte le case fino a 5 studenti
-		}
-	}
+        randomize();
+        
+        assignPrefects();
 
-	//Funzione che assega ad uno studente una casa a cui daremo un nome
-	private static void assignStudentToHouse(String studentName, String houseName) {
-		int housePos = Arrays.asList(HOUSE_NAMES).indexOf(houseName);  // Posizione della casa nell'array delle case a partire dal suo nome
-		int studentPos = COUNTERS[housePos];  // Il contatore che traccia la posizione dello studente nella casa
-		HOUSES[housePos][studentPos] = studentName; 
-		COUNTERS[housePos]++;
-	}
+        //dopo aver fatto la funzione randomize assegno gli studenti fino ad avere tutte un numero uguale
+        for(int i = 0; i < PERFECT_CLASS_SIZE; i++) {  
+            //lanciamo il dado per gli studenti fortunati e altri                     
+            String studentName = STUDENTS[i][0];
+            String favouriteHouse = STUDENTS[i][1];
+            //tiene conto che la dimensione può essere ridotta
+            assignToDestination(studentName, favouriteHouse, false); 
+        }
+        for(int i = PERFECT_CLASS_SIZE; i < PERFECT_CLASS_SIZE + EXTRA_STUDENTS; i++) {
+            assignToDestination(STUDENTS[i][0], STUDENTS[i][1], true);
+        }
+        
+        printFinalHouses(); 
+    }
 
-	private static void assignPrefects() { // Vado ad assegnare i 4 prefetti alle 4 case prescelte
-		for (int i = 0; i < PREFECTS.length; i++) {
-			HOUSES[i][0] = PREFECTS[i];
-			COUNTERS[i]++;
-		}
-	}
+    private static void assignToDestination(String studentName, String favouriteHouse, boolean fullcapacity) {
+        boolean houseHasSpace = hasRoom(favouriteHouse, fullcapacity);
+        int luck = DICE.nextInt(4);
 
-	private static String getRandomAvailableHouse(boolean fullCapacity) {
-		String[] hs = new String[HOUSES.length];
-		int numAvail = 0;
-		int size = fullCapacity ? HOUSE_SIZE : getEvenHouseSize();
+        if(luck == 0 && houseHasSpace) { 
+            //assegniamo gli studenti alle case
+            assignStudentToHouse(studentName ,favouriteHouse);
+            printStudentDestination(studentName, favouriteHouse, true);
+            waitForReturn();
+        } else {
+            String destination = getRandomAvailableHouse(fullcapacity);  
+            if(destination == null) {
+                System.out.println("ERRORE LOGICO: tutte le case risultano occupate al massimo. Terminiamo il programma");
+                System.exit(0); // Per terminare il programma
+            }
+            assignStudentToHouse(studentName, destination); 
+            printStudentDestination(studentName, destination, false);
+            waitForReturn();
+        }
 
-		for (int i = 0; i < COUNTERS.length; i++) {
-			if (COUNTERS[i] < size) {
-				hs[numAvail] = HOUSE_NAMES[i];
-				numAvail++;
-			}
-		}
-		if (numAvail == 0) {
-			return null;
-		}
-		return hs[DICE.nextInt(numAvail)];
-	}
+    }
 
-	// Prendo la dimensione massima. Ci sono studenti extra? Sì, sottraggo 1, altrimenti 0
-	private static int getEvenHouseSize () {
-		return HOUSE_SIZE - (HAS_EXTRA_STUDENTS ? 1 : 0);
-	}
+    public static void randomize(){ //come secondo blocco vado a creare una funzione randomize
+        for(int i = 0; i < 100; i++){ //i < 100 perchè facciamo il ciclo 100 volte
+            int n1 = DICE.nextInt(STUDENTS.length);// prendiamo un numero randomico nel range di STUDENTS.length e lo assegniamo a n1
+            int n2; 
+            do{         //il "do while" la prima volta la prima volta va senza condizione
+                n2 = DICE.nextInt(STUDENTS.length); //crea un secondo numero randomico 
+            } while(n2 == n1); //riprova a creare il secondo numero se venisse uguale al primo(non vogliamo scambiare un numero dell'array con se stesso)
+            String[] temp = STUDENTS[n1]; //dichiariamo un array di stringhe "temp". n1 e n2 sono le posizioni degli studenti all'interno dell'array STUDENTS
+            STUDENTS[n1] = STUDENTS[n2];
+            STUDENTS[n2] = temp; 
+        }
+    }
 
-	private static void printFinalHouses () {
-		String outputFormat = "%-25s%-25s%-25s%-25s%n";
-		System.out.printf(outputFormat, HOUSE_NAMES[0], HOUSE_NAMES[1], HOUSE_NAMES[2], HOUSE_NAMES[3]);
-		for (int i = 0; i < HOUSE_SIZE; i++) {
-			System.out.printf(outputFormat, HOUSES[0][i], HOUSES[1][i], HOUSES[2][i], HOUSES[3][i]);
-		}
-	}
+      //Funzione per vedere se in una casa c'e spazio
 
+    private static boolean hasRoom(String houseName, boolean fullCapacity){ 
+        int housePos = Arrays.asList(HOUSE_NAMES).indexOf(houseName);//Crea una lista momentanea a partire dall'array e chiede l'index
+        int size = getEvenHouseSize();  
+
+        if(fullCapacity){
+            return COUNTERS[housePos] < HOUSE_SIZE; //se siamo in fullCapacity vado avanti e mi ritorna se il numero di studenti è minore dello spazio nella casa
+        } else {
+            return COUNTERS[housePos] < size; //la dimensione della casa risulta inferiore di 1 nel caso in cui il numero di studenti non si divida con il numero delle case 
+        }
+    }
+
+    // Funzione che assegna ad uno studente una casa che gli daremo il nome
+
+    private static void assignStudentToHouse(String studentName , String houseName){
+        int housePos = Arrays.asList(HOUSE_NAMES).indexOf(houseName); // Posizione della case nell'array delle case a partire dal suo nome
+        int studentPos = COUNTERS[housePos]; // il contatore che traccia la posizione dello studente nella casa
+        HOUSES[housePos][studentPos] = studentName;
+        COUNTERS[housePos]++;
+    }
+
+    private static void assignPrefects() { //prima di assegnare gli studenti alle case assegneremo i 4 prefetti, uno per ogni casa
+        for(int i = 0; i < PREFECTS.length; i++) {
+            HOUSES[i][0] = PREFECTS[i]; 
+            COUNTERS[i]++; 
+        }
+    }
+
+    private static String getRandomAvailableHouse(boolean fullCapacity) {
+        String[] hs = new String[HOUSES.length];         
+        //conta quante case sto trovando disponibili
+        int numAvail = 0; 
+        int size = fullCapacity ? HOUSE_SIZE : getEvenHouseSize();
+        for(int i = 0; i < COUNTERS.length; i++) {
+            if(COUNTERS[i] < size) { 
+                hs[numAvail] = HOUSE_NAMES[i]; 
+                numAvail++; 
+            }
+        }
+        if(numAvail == 0) {
+            return null; 
+        }
+        return hs[DICE.nextInt(numAvail)];
+    }
+
+    // VERSIONE 2 UN PO' PIU' PULITA DEL METODO SOPRA (NIENTE PANICO)
+    // private static String getRandomAvailableHouseVERSION2(boolean fullCapacity){
+    //     String[] hs = new String[HOUSES.length];         
+    //     int numAvail = 0; 
+
+    //     for (String name : HOUSE_NAMES) {
+    //         boolean available = hasRoom(name, fullCapacity);
+    //         if (available) {
+    //             hs[numAvail] = name;
+    //             numAvail++;
+    //         }
+    //     }
+
+    //     if(numAvail == 0) {
+    //         return null; 
+    //     }
+    //     return hs[DICE.nextInt(numAvail)];
+    // }
+
+    // Metodo per calcolare la dimensione della casa
+    private static int getEvenHouseSize() {
+        //prendo la dimensione massima. Ci sono studenti extra? Sì, sottraggo 1, altrimenti 0
+        return HOUSE_SIZE - (HAS_EXTRA_STUDENTS ? 1 : 0); 
+    }
+
+    // Metodo per stampare la tabella finale
+    private static void printFinalHouses() {
+        //il simbolo % legge il formato e poi vanno le variabili in ordine di come le vogliamo
+        String outputFormat = "%-25s%-25s%-25s%-25s%n";  
+        System.out.println();
+        System.out.printf(outputFormat, HOUSE_NAMES[0], HOUSE_NAMES[1], HOUSE_NAMES[2], HOUSE_NAMES[3]); 
+        for(int i = 0; i < HOUSE_SIZE; i++) {
+            System.out.printf(outputFormat, emptyIfNull(HOUSES[0][i]), emptyIfNull(HOUSES[1][i]),  emptyIfNull(HOUSES[2][i]),  emptyIfNull(HOUSES[3][i])); 
+        }
+    }
+
+    // Metodo per sostituire i null con la stringa vuota nella stampa
+    private static String emptyIfNull(String str){
+        return str == null ? "" : str;
+    }
+
+    // Metodo per aggiungere suspance tra il nome e la casa scelta
+    private static void delay(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            // Impossibile, il programma è mono thread
+        }
+    }
+
+    // Metodo per aspettare che l'utente schiacci return per vedere il destino del prossimo studente
+    private static void waitForReturn(){
+        Console console = System.console();
+        console.readLine();
+    }
+
+    // Metodo per stampare il sorteggio dello studente nella casa
+    private static void printStudentDestination(String studentName, String houseName, boolean wasLucky){
+        System.out.println("\n"+studentName + "...");
+        delay(1000);
+        System.out.println(suspense[DICE.nextInt(5)]);
+        delay(1500);
+
+        if (wasLucky) {
+            System.out.println(houseName.toUpperCase()+" come da sua preferenza!");
+        } else {
+            System.out.println(houseName.toUpperCase()+" !");
+        }
+    }
 }
