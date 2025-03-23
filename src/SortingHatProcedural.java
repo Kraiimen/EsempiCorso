@@ -4,9 +4,10 @@
 // Ad ogni assegnazione di uno studente ad una casa, viene stampata l'estrazione
 // Alla fine del programma ci sarà una tabella con le 4 case e i suoi rispettivi studenti
 
-import java.io.Console;
-import java.util.Arrays;
-import java.util.Random;
+// importare librerie 
+import java.io.Console; // permette l'utente di mettere input al programma
+import java.util.Arrays; // permette di usare metodi sugli array
+import java.util.Random; // per fare il random 
 
 public class SortingHatProcedural {
     // Array di frasi per la suspense 
@@ -55,7 +56,7 @@ public class SortingHatProcedural {
     private static final int PERFECT_CLASS_SIZE = STUDENTS.length/4 *4;  
 
     // Prende il resto della divisione tra il numero degli studenti e il numero di case (che sarebbe il numero di studenti in più)
-    private static final int EXTRA_STUDENTS = STUDENTS.length % HOUSE_NAMES.length;
+    private static final int EXTRA_STUDENTS = STUDENTS.length % HOUSE_NAMES.length; // modulo 
 
     // Se la costante è true vuol dire che si sono sudenti extra  
     private static final boolean HAS_EXTRA_STUDENTS = EXTRA_STUDENTS != 0;  
@@ -88,7 +89,7 @@ public class SortingHatProcedural {
 
             // In questo caso, visto che stiamo ipotizzando che non ci sono studenti extra, fullCapacity è false
             // fullCapacity = false --> considera la dimensione della casa (HOUSE_SIZE) senza studenti extra  
-            assignToDestination(studentName, favouriteHouse, false); 
+            assignToDestination(studentName, favouriteHouse, false); // argomrnti
         }
 
         // Ciclo for per iterare gli studenti extra rimasti
@@ -104,7 +105,7 @@ public class SortingHatProcedural {
     }
 
     // Metodo per assegnare lo studente alla casa
-    private static void assignToDestination(String studentName, String favouriteHouse, boolean fullCapacity) {
+    private static void assignToDestination(String studentName, String favouriteHouse, boolean fullCapacity) { // parametri
         boolean houseHasSpace = hasRoom(favouriteHouse, fullCapacity); // true se la casa ha spazio
         int luck = DICE.nextInt(4); // Numero casuale da 0 a 3
 
@@ -183,7 +184,7 @@ public class SortingHatProcedural {
 
     // Metodo che restituisce una casa casuale tra quelle libere
     private static String getRandomAvailableHouse(boolean fullCapacity) {
-        String[] hs = new String[HOUSES.length]; // Array di stringhe locale        
+        String[] hs = new String[HOUSES.length]; // Array di stringhe locale    . ha la dimensione di houses.length    
         int numAvail = 0; // Contatore di case con posti liberi
         // Se fullCapacity è true, restituisce la dimensione massima della casa, altrimenti quella diminuita
         int size = fullCapacity ? HOUSE_SIZE : getEvenHouseSize();
