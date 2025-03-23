@@ -11,7 +11,7 @@ public class SortingHat {
         }
     }
 
-    public static int freeSpace(String[] array){
+    public static int freeSpace(String[] array){    //funzione per controllare se è disponibile una posizione all'interno della casa
         for(int i=1; i<array.length; i++){
             if(array[i]==null){
                 return i;
@@ -19,7 +19,22 @@ public class SortingHat {
         }
         return 0;
     }
-    public static void outHat(){
+    public static void outputTextLine(String s){   //funzione per stampare carattere per carattere una stringa
+        for(int i=0; i<s.length(); i++){
+            System.out.print(s.charAt(i));
+            delay();
+        }
+        System.out.println();
+    }
+
+    public static void delay(){                   //funzione utilizzata per inserire un tempo di attesa nella stampa dei caratteri di outputTextLine
+        try{
+            Thread.sleep(50);                     //attende 50 millisecondi
+        }catch(InterruptedException e){
+
+        }
+    }
+    public static void outHat(){                                      //funzione per stampare il cappello magico
         System.out.println("            .\n"+
                         "           /:\\\r\n" + 
                         "          /;:.\\\r\n" + 
@@ -61,14 +76,11 @@ public class SortingHat {
         ravenclaw[0]= students[1][0];
         hufflepuff[0]= students[2][0];
         
-        //stampa delle case con i prefetti appena inseriti
-        System.out.println("I PREFETTI SONO STATI ASSEGNATI ALLE 4 CASE!\n");
-        outputHouses(gryffindor, slytherin, ravenclaw, hufflepuff);
-
+        outputTextLine("I PREFETTI SONO STATI ASSEGNATI ALLE 4 CASE!");
 
         //ciclo scelta
         for(int i=4; i<firstPhaseStudents+addStudentsSize; i++){
-            System.out.println("CHE VENGA IL PROSSIMO!");
+            outputTextLine("CHE VENGA IL PROSSIMO!");
             //se è già stato scelto lo studente
             while(!choice){                             
                 randomNumber = r.nextInt(4,firstPhaseStudents+addStudentsSize);
@@ -78,9 +90,8 @@ public class SortingHat {
             }
             choice=false; //studente scelto non presente nelle casate
 
-
             //scelta preferenza
-            System.out.println(students[randomNumber][0]+"!   VIENI PURE!");
+            outputTextLine(students[randomNumber][0]+"! VIENI PURE!");
             System.out.println("Dove ti piacerebbe andare?");
             do{ //chiede un input tra 0,1,2,3
                 System.out.println("Gryffindor: 0\t Slytherin: 1\t Ravenclaw: 2\t Hufflepuff: 3\t");
@@ -134,14 +145,16 @@ public class SortingHat {
                 }
                 pref = r.nextInt(4);
             }
+            //aggiunge iterazioni al for in base al numero di studenti ancora da assegnare, quando le case sono a pari numero di studenti
             if(i==firstPhaseStudents-1){
                 addSize++;
                 addStudentsSize=lastStudents;
             }
             inHouse=false;
             System.out.println();
-            System.out.println((students[randomNumber][1])+"!!!!!!!!!!!!!!!"+"\n");
+            outputTextLine("Benvenuto in "+(students[randomNumber][1])+"!");
         }
+        //stampa finale del cappello + la lista delle case
         outHat();
         System.out.println("\n");
         outputHouses(gryffindor, slytherin, ravenclaw, hufflepuff);
