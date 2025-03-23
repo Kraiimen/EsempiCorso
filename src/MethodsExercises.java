@@ -82,7 +82,7 @@ public class MethodsExercises {
             return 0; 
         } 
         
-        for (int i=0; i < array.length -1; i++){ // se l'array è 3 1 2 6 8 
+        for (int i=0; i < array.length; i++){ // se l'array è 3 1 2 6 8 
             if (array[i] <= 0 ){
                 return 0;
             }                 
