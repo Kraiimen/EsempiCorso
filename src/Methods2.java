@@ -22,9 +22,9 @@ public class Methods2 {
         int [] somma = {1,2,3,4,5,6,7}; //6 esercizio
         System.out.println("il numero massimo di questo array è " + arraySum(somma));
 
-        String vocali = "zzzzql"; // 7 esercizio
+        String vocali = "zzzql"; // 7 esercizio
         boolean risultato = controlloVocali(vocali);
-        System.out.println(risultato + "  Nella stringa non ci sono vocali");
+        System.out.println("Nella stringa non ci sono vocali?   " + risultato);
 
 
         String palindromo = "jhon";
@@ -41,8 +41,8 @@ public class Methods2 {
 
     public static char lastChar(String str){
 
-        String upper = str.toUpperCase(); // Dichiara una varabile di tipo String col nome upper che contiene str in minuscolo
-        char last = upper.charAt (str.length()-1); // Dichiara una variabile di tipo char col nome last che contiene l 'ultimo caratterer di str'
+        String upper = str.toUpperCase(); // Dichiara una varabile di tipo String col nome upper che contiene str in maiuscolo
+        char last = upper.charAt(str.length()-1); // Dichiara una variabile di tipo char col nome last che contiene l 'ultimo caratterer di str'
         return last;
     } 
 
@@ -123,11 +123,11 @@ public class Methods2 {
     // 7) creare una funzione che riceve in input una stringa e mi restituisce una booleana true se la stringa non contiene vocali, false altrimenti
     
      public static boolean controlloVocali(String str){
-        str = str.toLowerCase();
+        str = str.toUpperCase();
 
         for(int i = 0; i < str.length(); i++){
             char currentchar = str.charAt(i);
-            if( currentchar == 'a' || currentchar == 'e' || currentchar == 'i' ||currentchar == 'o' || currentchar == 'u'){
+            if( currentchar == 'A' || currentchar == 'E' || currentchar == 'I' ||currentchar == 'O' || currentchar == 'U'){
                 return false;
             }
         } 
@@ -144,7 +144,6 @@ public class Methods2 {
                 return false;
             }    
         } 
-        
         return true;
     } 
     
