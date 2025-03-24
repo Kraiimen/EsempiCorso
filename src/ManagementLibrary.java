@@ -46,11 +46,24 @@ public class  ManagementLibrary{
 
     public static void main(String [] args){
 
+        loanBook("Mia", "Il Piccolo Principe");
+        loanBook("Mia", "I Promessi Sposi");
+        loanBook("Mia", "Cime Tempestose");
+        bringBackBook("Mia", "Il Piccolo Principe");
+
+
+
+        printBooks();
+        printUsersBooks();
+
+
+
+
 
     }
 
     public static void loanBook(String user, String title){
-        int bookPosition = bookPosition(title); //mi restituisce la posizione del libro nell array BOOKS
+        int bookPosition = getBookPosition(title); //mi restituisce la posizione del libro nell array BOOKS
         //Mi restituisce la posizione dell user in NAMES_USERS che è la stesssa che utilizzo per BOOKS_LOANED
         int indexUsers = Arrays.asList(NAMES_USERS).indexOf(user); 
         int roomAvailable = getRoomAvailable(indexUsers);//mi restituisce la prima cella disponibile
@@ -58,7 +71,7 @@ public class  ManagementLibrary{
         if (bookPosition != -1 && isAvailable(bookPosition) && roomAvailable != -1){
             BOOKS_LOANED[indexUsers][roomAvailable] = BOOKS[bookPosition][0];
             modifyStatus(bookPosition);
-            System.out.println(NAMES_USERS[indexUsers] + "ha preso in prestito: " + BOOKS_LOANED[indexUsers][roomAvailable])
+            System.out.println(NAMES_USERS[indexUsers] + " ha preso in prestito: " + BOOKS_LOANED[indexUsers][roomAvailable]);
         } else {
             System.out.println("Non puoi prendere in prestito il libro");
         }
@@ -72,9 +85,9 @@ public class  ManagementLibrary{
         if(bookPosition != -1 && !isAvailable(bookPosition) && indexBookOfUser != -1){
             BOOKS_LOANED[indexUsers][indexBookOfUser] = "";
             modifyStatus(bookPosition);
-            System.out.println(NAMES_USERS[indexUsers] + "ha restituito: " + BOOKS[bookPosition][0]);
+            System.out.println(NAMES_USERS[indexUsers] + " ha restituito: " + BOOKS[bookPosition][0]);
         } else {
-            System.out.println("Errore nell'esecuzione dell'operazione, ricontrolla i dati inseriti.")
+            System.out.println("Errore nell'esecuzione dell'operazione, ricontrolla i dati inseriti.");
         }
     }
     public static int getBookPosition(String title){
@@ -85,6 +98,7 @@ public class  ManagementLibrary{
         }
         return -1; // se il libro non è mai stato presente in libreria
     }
+    // Controlla che il libro è disponibile
     public static boolean isAvailable(int position){
         if (BOOKS[position][2].equals("Disponibile")){
             return true;
@@ -92,6 +106,7 @@ public class  ManagementLibrary{
             return false;
         }
     }
+    //verifica se l utente puo prendere in prestito e se lo ha ritorna l indice 
     public static int getRoomAvailable (int userPosition){
         for (int i = 0; i < N_LOAN_BOOKS; i++){
             if (BOOKS_LOANED[userPosition][i] == null || BOOKS_LOANED[userPosition][i].equals("")){
@@ -107,5 +122,20 @@ public class  ManagementLibrary{
             BOOKS[bookPosition][2] = "Disponibile";
         }
     }
-    
+    public static void printBooks(){
+        for (int i = 0; i < BOOKS.length; i++){
+            System.out.println("- " + BOOKS[i][0] + " " + BOOKS[i][1] + " " + BOOKS[i][2]);
+        }
+    }
+    public static void printUsersBooks(){
+        for (int i = 0; i < NAMES_USERS.length; i++){
+            System.out.print(NAMES_USERS[i] + ":");
+            for (int j = 0; j < N_LOAN_BOOKS ; j++){
+                System.out.print(" " +BOOKS_LOANED[i][j]);
+            }
+            System.out.println();
+        }
+
+
+    }
 }
