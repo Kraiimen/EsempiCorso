@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class SortingHatProcedural {
-    // Array di frasi per la suspanse 
+    // Array di frasi per la suspense 
     private static final String SUSPENCE[] = {"Ah, che mente affascinante! So esattamente dove collocarti...",
                          "Vedo dentro di te grandi qualità... la tua strada è chiara per me!",
                          "Ambizione, coraggio, saggezza o lealtà? Io so cosa ti definisce meglio!",
@@ -21,8 +21,8 @@ public class SortingHatProcedural {
     // Costanti per ricordare la posizione delle case nell'array HOUSE_NAMES
     private static final int GRYF_POS = 0;
     private static final int HUF_POS = 1;
-    private static final int SLY_POS  = 2;
-    private static final int RAVE_POS  = 3;
+    private static final int SLY_POS = 2;
+    private static final int RAVE_POS = 3;
 
     // Array per i nomi dei prefetti (in corrispondenza della loro casa che si trova in HOUSE_NAMES)
     private static final String[] PREFECTS = {"Federico De Simone","Marta Petruzzelli","Carmine Erario","Filippo Aresu"};
@@ -76,7 +76,6 @@ public class SortingHatProcedural {
     private static final Random DICE = new Random(); 
 
     public static void main(String[] args) {
-
         randomize(); // Randomizziamo l'array di studenti
         
         assignPrefects(); // Assegniamo i prefetti nelle loro case
