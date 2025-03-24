@@ -298,4 +298,8 @@ public class SortingHatProcedural {
         Console console = System.console();
         console.readLine(); // Aspetta il return
     }   
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main
