@@ -129,7 +129,7 @@ public class Conditionals {
 
 		
 		//*
-		age = 50;
+		cost = 50;
 		if(age >= 15 && age < 20){
 			cost = 70;
 		}

@@ -2,7 +2,7 @@ import java.util.*;
 
 public class ArrayExamples<T> {
 	public static void main(String[] args){
-        ArrayUtils<Integer> ae = new ArrayExamples<Integer>();
+        ArrayUtils<Integer> ae = new ArrayUtils<Integer>();
 
 		int[] numbers = new int[5];
         /*

@@ -8,6 +8,12 @@ public class SortingHat {
     private static final int RAVE_POS  = 2;
     private static final int SLY_POS  = 3;
 
+    private static final String SUSPENCE[] = {"Ah, che mente affascinante! So esattamente dove collocarti...",
+                         "Vedo dentro di te grandi qualità... la tua strada è chiara per me!",
+                         "Ambizione, coraggio, saggezza o lealtà? Io so cosa ti definisce meglio!",
+                         "Oh, che scelta interessante... ma ora so esattamente dove tu appartieni!",
+                         "Non c'è alcun dubbio, il tuo destino è segnato... benvenuto nella tua nuova casa!"};
+
     private static final String[][] PREFECTS_WITH_PREFERENCES = new String[][]{
             {"Federico De Simone", HOUSE_NAMES[SLY_POS]},
             {"Marta Petruzzelli", HOUSE_NAMES[HUF_POS]},
@@ -44,15 +50,16 @@ public class SortingHat {
     private static final int[] COUNTERS = new int[HOUSE_NAMES.length]; // Questo array tiene traccia degli studenti messi per ogni casa
     private static final Random DICE = new Random();
 
-    private static final int COLUMN_SPACES  = 22;
+    private static final int COLUMN_SPACES = 22;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args){
         sortHouses(true);
 
+        System.out.println("\n");
         printHousesInColumns();
     }
 
-	public static void sortHouses(boolean isPrefectsSortingRigged) throws InterruptedException {
+	public static void sortHouses(boolean isPrefectsSortingRigged){
         //houses = addHousesName(houses);      //aggiunge i nomi delle case
 
         //-------------------AGGIUNGO I PREFETTI coff coff CASUALMENTE coff coff--------------------
@@ -66,7 +73,7 @@ public class SortingHat {
         randomizer();
 
         //----FACCIO IL SORT DI UN SOTTO-ARRAY DEGLI STUDENTI (senza i prefetti e l'ultimo studente di ogni casa)----
-        sortStudents(1, HOUSE_SIZE-1);      //start = 1 perchè i prefetti ci sono già, end = HOUSE_SIZE-1 perchè non metto l'ultimo studente
+        sortStudents(0, HOUSE_SIZE-1);      //start = 1 perchè i prefetti ci sono già, end = HOUSE_SIZE-1 perchè non metto l'ultimo studente
         
         //-----------FACCIO IL SORT DI UN SOTTO-ARRAY DEGLI STUDENTI (solo ultimo studente di ogni casa)-------------
         sortStudents(HOUSE_SIZE-1, HOUSE_SIZE);
@@ -93,28 +100,24 @@ public class SortingHat {
         }
     }
 
-    public static void sortStudents(int startPosition, int endPosition) throws InterruptedException {
-        int start = (startPosition-1) * HOUSES.length;
+    public static void sortStudents(int startPosition, int endPosition){
+        int start = startPosition * HOUSES.length;
 
         int endIndex = STUDENTS_WITH_PREFERENCES.length - ((endPosition-1) * HOUSES.length);
-        endIndex = endIndex < 0 ? 0 : endIndex;
+        endIndex = endIndex < 0 ? STUDENTS_WITH_PREFERENCES.length : STUDENTS_WITH_PREFERENCES.length - endIndex;
 
-        for(int i = start; i < STUDENTS_WITH_PREFERENCES.length - endIndex; ++i){
-            int chosenHouse = 0;
-
+        for(int i = start; i < endIndex; ++i){
             boolean isPreferenceChecked = false;
             boolean canSort = false;
 
             while(canSort == false){
-                chosenHouse = DICE.nextInt(4);
+                int chosenHouse = DICE.nextInt(HOUSES.length);
 
                 boolean isHouseFull = COUNTERS[chosenHouse] == endPosition;
 
                 boolean isPreference = STUDENTS_WITH_PREFERENCES[i][PREF_POS].toUpperCase().equals(HOUSE_NAMES[chosenHouse].toUpperCase());
 
-                if(isHouseFull){
-                    canSort = false;
-                }else {
+                if(isHouseFull == false){
                     canSort = true;
                     if(isPreferenceChecked == false && isPreference == false){
                         canSort = false;
@@ -124,7 +127,9 @@ public class SortingHat {
                 if(canSort){
                     HOUSES[chosenHouse][COUNTERS[chosenHouse]] = STUDENTS_WITH_PREFERENCES[i][STUD_POS];
                     COUNTERS[chosenHouse]++;
-                    printSortingCall(STUDENTS_WITH_PREFERENCES[i][STUD_POS], chosenHouse);
+
+                    //printSortingCall(STUDENTS_WITH_PREFERENCES[i][STUD_POS], chosenHouse);
+                    printStudentDestination(STUDENTS_WITH_PREFERENCES[i][STUD_POS], chosenHouse, isPreference);
                 }
             }
         }
@@ -133,10 +138,8 @@ public class SortingHat {
     //--------------------------------STAMPA DELLE CASE IN COLONNE----------------------------
     public static void printHousesInColumns(){
         StringBuilder textToPrint = new StringBuilder();
-        textToPrint.append("\n");
         textToPrint.append(printHousesNamesInColumns());
         textToPrint.append(printHousesStudentsInColumns());
-        textToPrint.append("\n");
 
         System.out.print(textToPrint);
     }
@@ -157,10 +160,10 @@ public class SortingHat {
     public static StringBuilder printHousesStudentsInColumns(){
         StringBuilder sb = new StringBuilder();
 
-        for(int i = 0; i < HOUSES[0].length; ++i){
+        for(int i = 0; i < HOUSE_SIZE; ++i){
             for(int j = 0; j < HOUSES.length; ++j){
-                //25 spazzi
-                String nameToPrint = HOUSES[j][i] == null ? "" : HOUSES[j][i];
+                //22 spazzi
+                String nameToPrint = emptyIfNull(HOUSES[j][i]);
                 sb.append(nameToPrint);
                 
                 int blankSpaces = HOUSES[j][i] == null ? COLUMN_SPACES : COLUMN_SPACES - HOUSES[j][i].length();
@@ -194,19 +197,48 @@ public class SortingHat {
     }
     //*/
 
-    //*
-    public static void printSortingCall(String studente, int chosenHouseIndex) throws InterruptedException {
-        System.out.print(studente);
-        Thread.sleep(1000);          //aspetto 1 secondo
+    /*
+    public static void printSortingCall(String student, int chosenHouseIndex){
+        System.out.print(student);
+        wait(1000);          //aspetto 1 secondo
 
         for(int i = 0; i < 3; ++i){
             System.out.print("  .  ");
-            Thread.sleep(1000);      //aspetto 1 secondo
+            wait(1000);      //aspetto 1 secondo
         }
         
         System.out.print(HOUSE_NAMES[chosenHouseIndex]);
         System.out.println();
-        Thread.sleep(200);           //aspetto 1/5 secondo
+        wait(250);           //aspetto 1/4 secondo
     }
     //*/
+
+    private static void wait(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            // Impossibile, il programma è mono thread
+        }
+    }
+    // Metodo per stampare il sorteggio dello studente nella casa
+    private static void printStudentDestination(String studentName, int chosenHouseIndex, boolean isPreference){
+        System.out.println("\n"+studentName + "...");
+        wait(1000); // Aggiungiamo suspense
+        System.out.println(SUSPENCE[DICE.nextInt(5)]); // Stampiamo una frase casuale dell'array SUSPENCE[]
+        wait(1500); // Aggiungiamo suspense
+
+        System.out.print(HOUSE_NAMES[chosenHouseIndex].toUpperCase());
+
+        if (isPreference) {
+            // Se lo studente è fortunato, stampiamo la stringa con "come da sua preferenza"
+            System.out.print(" come da sua preferenza!");
+        }
+        System.out.println();
+    }
+
+    // Metodo per sostituire i null con la stringa vuota nella stampa
+    private static String emptyIfNull(String str){
+        // Se la stringa è null, la sostituiamo con ""
+        return str == null ? "" : str;
+    }
 }
