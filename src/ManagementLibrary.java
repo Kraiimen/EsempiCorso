@@ -61,7 +61,7 @@ public class  ManagementLibrary{
 
 
     }
-
+    //funzione per prendere in prestito un libro
     public static void loanBook(String user, String title){
         int bookPosition = getBookPosition(title); //mi restituisce la posizione del libro nell array BOOKS
         //Mi restituisce la posizione dell user in NAMES_USERS che è la stesssa che utilizzo per BOOKS_LOANED
@@ -76,11 +76,12 @@ public class  ManagementLibrary{
             System.out.println("Non puoi prendere in prestito il libro");
         }
     }
+    //funzione per restituire un libro 
     public static void bringBackBook(String user, String title){
         int bookPosition = getBookPosition(title); //mi restituisce la posizione del libro nell array BOOKS
         //Mi restituisce la posizione dell user in NAMES_USERS che è la stesssa che utilizzo per BOOKS_LOANED
         int indexUsers = Arrays.asList(NAMES_USERS).indexOf(user); 
-        //ci restituisce l indice del libro tra i libri presi in prestito dall user
+        //ci restituisce l indice del libro tra i libri presi in prestito dall user, se non lo trova ritorna -1
         int indexBookOfUser =Arrays.asList(BOOKS_LOANED[indexUsers]).indexOf(title);
         if(bookPosition != -1 && !isAvailable(bookPosition) && indexBookOfUser != -1){
             BOOKS_LOANED[indexUsers][indexBookOfUser] = "";
@@ -106,7 +107,7 @@ public class  ManagementLibrary{
             return false;
         }
     }
-    //verifica se l utente puo prendere in prestito e se lo ha ritorna l indice 
+    //verifica se l utente puo prendere in prestito e se lo ha ritorna ls posizione dentro BOOKS_Loaned dove puo inserire il libro  altrimenti ritorna -1
     public static int getRoomAvailable (int userPosition){
         for (int i = 0; i < N_LOAN_BOOKS; i++){
             if (BOOKS_LOANED[userPosition][i] == null || BOOKS_LOANED[userPosition][i].equals("")){
@@ -115,6 +116,7 @@ public class  ManagementLibrary{
         }
         return -1;
     }
+    //modifica lo status, se disponibile mette indisponibile e viceversa
     public static void modifyStatus(int bookPosition){
         if (BOOKS[bookPosition][2].equals("Disponibile")){
             BOOKS[bookPosition][2] = "Indisponibile";
@@ -122,11 +124,13 @@ public class  ManagementLibrary{
             BOOKS[bookPosition][2] = "Disponibile";
         }
     }
+    // stampa i libri
     public static void printBooks(){
         for (int i = 0; i < BOOKS.length; i++){
             System.out.println("- " + BOOKS[i][0] + " " + BOOKS[i][1] + " " + BOOKS[i][2]);
         }
     }
+    // stampa l'utente e i libri che ha preso in prestito
     public static void printUsersBooks(){
         for (int i = 0; i < NAMES_USERS.length; i++){
             System.out.print(NAMES_USERS[i] + ":");
