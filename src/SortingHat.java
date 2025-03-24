@@ -32,7 +32,7 @@ public class SortingHat {
             System.out.println(Arrays.toString(s));
         }
 
-        String[] houses = {"Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"};
+        String[] houseNames = {"Gryffindor", "Slytherin", "Ravenclaw", "Hufflepuff"};
         int[] hCounter = {1, 1, 1, 1};
 
         // int grCounter = 1;
@@ -40,24 +40,24 @@ public class SortingHat {
         // int rvCounter = 1;
         // int hpCounter = 1;
 
-        String[] gryffindor = new String[6];
-        String[] slytherin = new String[6];
-        String[] ravenclaw = new String[6];
-        String[] hufflepuff = new String[6];
+        int extraStudents = students.length % houseNames.length;
+        int reducedHouseSize = (students.length + 4) / houseNames.length;
+        int houseSize = extraStudents != 0 ? reducedHouseSize + 1 : reducedHouseSize;
+        String[][] houses = new String[houseNames.length][houseSize];
 
-        gryffindor[0] = "Federico De Simone";
-        slytherin[0] = "Carmine Erario";
-        ravenclaw[0] = "Filippo Aresu";
-        hufflepuff[0] = "Marta Petruzzelli";
+        houses[0][0] = "Federico De Simone";
+        houses[1][0] = "Carmine Erario";
+        houses[2][0] = "Filippo Aresu";
+        houses[3][0] = "Marta Petruzzelli";
 
         for (int i = 0; i < students.length; i++){
             String name = students[i][0];
             String housePreference = students[i][1];
             int hIndex = -1;
 
-            if (!housePreference.isEmpty() && preference(dice)) {
-                for (int j = 0; j < houses.length; j++) {
-                    if (houses[j].equals(housePreference) && hCounter[j] < 5) {
+            if (!housePreference.isEmpty() && isLucky(dice)) {
+                for (int j = 0; j < houseNames.length; j++) {
+                    if (houseNames[j].equals(housePreference) && hCounter[j] < reducedHouseSize) {
                         hIndex = j;
                         break;
                     }
@@ -65,25 +65,25 @@ public class SortingHat {
             }
 
             if (hIndex == -1) {
-                hIndex = getAvailableHouse(hCounter, dice, houses);
+                hIndex = getAvailableRandomHouse(hCounter, dice, houseNames, houseSize, reducedHouseSize);
             }
 
-            if (hCounter[hIndex] < 6) {
+            if (hCounter[hIndex] < houseSize) {
                 switch(hIndex){
                     case 0:
-                        gryffindor[hCounter[0]] = name;
+                        houses[0][hCounter[0]] = name;
                         hCounter[0]++;
                         break;
                     case 1:
-                        slytherin[hCounter[1]] = name;
+                        houses[1][hCounter[1]] = name;
                         hCounter[1]++;
                         break;
                     case 2:
-                        ravenclaw[hCounter[2]] = name;
+                        houses[2][hCounter[2]] = name;
                         hCounter[2]++;
                         break;
                     case 3:
-                        hufflepuff[hCounter[3]] = name;
+                        houses[3][hCounter[3]] = name;
                         hCounter[3]++;
                         break;
                 }
@@ -94,56 +94,55 @@ public class SortingHat {
         }
  
         // for (int i = 0; i < students.length; i++){
-        //     for (int j = 0; j < 2; j++)
-                
+        //     for (int j = 0; j < 2; j++){
         //         System.out.print(students[i][j]+" ");
-                
-        //       System.out.println();
+        //     }
+        //     System.out.println();
         // }
 
         for (int i = 0; i < houses.length; i++) {
-            System.out.println(houses[i] + ":");
+            System.out.println(houseNames[i] + ":");
             switch (i) {
                 case 0:
-                    printStudents(gryffindor);
+                    printStudents(houses[0]);
                     break;
                 case 1:
-                    printStudents(slytherin);
+                    printStudents(houses[1]);
                     break;
                 case 2:
-                    printStudents(ravenclaw);
+                    printStudents(houses[2]);
                     break;
                 case 3:
-                    printStudents(hufflepuff);
+                    printStudents(houses[3]);
                     break;
             }
         }
 
     }
 
-    public static boolean preference(Random dice){
-        return dice.nextInt(4) == 3;
+    public static boolean isLucky(Random dice){
+        return dice.nextInt(4) == 0;
     }
 
-    public static int getAvailableHouse(int[] hCounter, Random dice, String[] houses){
+    public static int getAvailableRandomHouse(int[] hCounter, Random dice, String[] houseNames, int houseSize, int reducedHouseSize){
 
         boolean allFull = true;
-        int hIndex;
+        int hIndex = -1;
 
-        for (int j = 0; j < houses.length; j++) {
-            if (hCounter[j] < 5) {
+        for (int j = 0; j < houseNames.length; j++) {
+            if (hCounter[j] < reducedHouseSize) {
                 allFull = false;
                 break;
             } 
         }
         if(allFull){
             do {
-                hIndex = dice.nextInt(houses.length);  
-            } while (hCounter[hIndex] >= 6);
+                hIndex = dice.nextInt(houseNames.length);  
+            } while (hCounter[hIndex] >= houseSize);
         } else {
             do {
-                hIndex = dice.nextInt(houses.length);  
-            } while (hCounter[hIndex] >= 5);
+                hIndex = dice.nextInt(houseNames.length);  
+            } while (hCounter[hIndex] >= reducedHouseSize);
         }
 
         return hIndex;
@@ -153,7 +152,7 @@ public class SortingHat {
     public static void printStudents(String[] house) {
         for (String student : house) {
             if (student != null) {
-                System.out.printf("|    " + student + "  |");
+                System.out.printf("|    " + student + "     ");
             }
         }
         System.out.println();

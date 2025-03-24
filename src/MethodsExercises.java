@@ -29,12 +29,12 @@ public class MethodsExercises {
         // esecuzione es 5
 
         int[] random = {1, 6, 3, 8, 0};
-        // Random dice = new Random();
+        Random dice = new Random();
         
-        // for(int i = 0; i < random.length; i++){
-        //     random[i] = dice.nextInt(10);
-        //     System.out.print(random[i] + " ");
-        // }
+        for(int i = 0; i < random.length; i++){
+            random[i] = dice.nextInt(10);
+            System.out.print(random[i] + " ");
+        }
 
         int maxNum = maxArrayNum(random);
         System.out.println("\nIl numero più grande dell'array è: " + maxNum);
