@@ -36,16 +36,21 @@ public class SortingHatProcedural {
 
         };
 
-    private static final int HOUSE_SIZE = (int)Math.ceil((STUDENTS.length+4)/4); //Math.ceil arrotonda per eccesso in numero intero
+    //Math.ceil arrotonda per eccesso in numero intero
     private static final String[][] HOUSES = new String[4][HOUSE_SIZE];
+    private static final int EXTRA_STUDENTS = STUDENTS.length % HOUSES_NAMES.length;
+    private static final boolean HAS_EXTRA_STUDENTS = EXTRA_STUDENTS != 0;
     private static final int[] COUNTERS = new int[4]; // Questo array tiene traccia degli studenti messi per ogni casa
+    private static final int HOUSE_SIZE = (STUDENTS.length+4)/4 + {HAS_EXTRA_STUDENTS ? 1 : 0};
     private static final Random DICE = new Random();
+    
     public static void main(String[] args) {
 
-      randomize();
-     //for( String[] s  : STUDENTS){
-     //     System.out.println(Arrays.toString(s));
-     // }
+        randomize();
+        //for( String[] s  : STUDENTS){
+        //     System.out.println(Arrays.toString(s));
+        // }
+        assignPrefetcs();
 
       for(int i = 0; i < (STUDENTS.length+4)/4*4; i++){
         int luck = DICE.nextInt(4);  
@@ -78,10 +83,11 @@ public class SortingHatProcedural {
 
     private static boolean hasRoom(String houseName, boolean fullCapacity){
         int housePos = Arrays.asList(HOUSE_NAMES).indexOf(houseName);//Crea una lista momentanea a partire dall'array e chiede l'index
+        int size = HOUSE_SIZE - (HAS_EXTRA_STUDENTS ? 1 : 0);
         if(fullCapacity){
             return COUNTERS[housePos] < HOUSE_SIZE;
         } else {
-            return COUNTERS[housePos] < HOUSE_SIZE-1;
+            return COUNTERS[housePos] < size;
         }
     }
 
@@ -92,6 +98,34 @@ public class SortingHatProcedural {
         int studentPos = COUNTERS[housePos]; // il contatore che traccia la posizione dello studente nella casa
         HOUSES[housePos][studentPos] = studentName;
         COUNTERS[housePos]++;
+    }
+
+    private static void assignPrefects() {
+        for(int i = 0; i < PREFECTS.length; i++) {
+            HOUSES[i][0] = PREFECTS[i]; 
+            COUNTERS[i]++;
+        }
+    }
+
+    private static String getRandomAvaibleHouse(boolean fullCapacity) {
+        String[] hs = new String[HOUSES.length];
+        int numAvail = 0;
+        int size = fullCapacity ? HOUSE_SIZE ; getEvenHouseSize();
+        for(int i = 0; i < COUNTERS.length; i++) {
+            if(COUNTERS[i] < HOUSE_SIZE) {
+                hs[numAvail] = HOUSE_NAMES[i];
+                numAvail++;
+            }
+        }
+        if(numAvail == 0) {
+            return null;
+        }
+        return hs[] DICE.nextInt(numAvail);
+    }
+
+    private static int getEvenHouseSize() {
+        return HOUSE_SIZE - (HAS_EXTRA_STUDENTS ? 1 : 0);
+
     }
 
 }
