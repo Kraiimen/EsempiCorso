@@ -40,7 +40,7 @@ public class  ManagementLibrary{
             {"Cime Tempestose","Emily Brontë", "Disponibile"},
             { "Dracula","Bram Stoker", "Disponibile"}
     };
-
+    //private static int exitNum = -1;
     private static final String [][] BOOKS_LOANED = new String[N_USERS][N_LOAN_BOOKS];
     private static final String [] NAMES_USERS = {"Leo", "Mia", "Eli", "Noa", "Gio", "Lia", "Teo", "Zoe", "Ray", "Kim"};
 
@@ -88,7 +88,7 @@ public class  ManagementLibrary{
             modifyStatus(bookPosition);
             System.out.println(NAMES_USERS[indexUsers] + " ha restituito: " + BOOKS[bookPosition][0]);
         } else {
-            System.out.println("Errore nell'esecuzione dell'operazione, ricontrolla i dati inseriti.");
+            System.out.println("Errore nell'esecuzione dell'operazione.");
         }
     }
     public static int getBookPosition(String title){
@@ -107,7 +107,7 @@ public class  ManagementLibrary{
             return false;
         }
     }
-    //verifica se l utente puo prendere in prestito e se lo ha ritorna ls posizione dentro BOOKS_Loaned dove puo inserire il libro  altrimenti ritorna -1
+    //verifica se l utente puo prendere in prestito e se lo ha ritorna la posizione dentro BOOKS_Loaned dove puo inserire il libro  altrimenti ritorna -1
     public static int getRoomAvailable (int userPosition){
         for (int i = 0; i < N_LOAN_BOOKS; i++){
             if (BOOKS_LOANED[userPosition][i] == null || BOOKS_LOANED[userPosition][i].equals("")){
