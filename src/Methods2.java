@@ -31,8 +31,23 @@ public class Methods2 {
         boolean risultato2 =  Methods2.isPalindrome(palindromo);
         System.out.println("La stringa è palindroma : " + risultato2);
 
+        int numero = 3;
+        System.out.println("Il numero è pari   " + isPari(numero));
 
+        String nome = "Stefano";
+        System.out.println("Ciao mi chiamo  " + saluta(nome));
 
+        int calcolo = calcolaAreaRettangolo(53, 31);
+        System.out.println("Il calcolo del rettangolo  " + (calcolo));
+
+        int maggiore = trovaMaggiore(10, 4, 8);
+        System.out.println("Il numero maggiore è  " + (maggiore));
+
+        String inverita = invertiStringa("Stefano");
+        System.out.println("La stringa" +  inverita);
+
+       int numeros = calcolaFattoriale(6);
+       System.out.println("Il fattoriale   " +  numeros);
 
 
     }    
@@ -146,8 +161,59 @@ public class Methods2 {
         } 
         return true;
     } 
+
+    public static boolean isPari(int numero) {
+        // Un numero è pari se il resto della divisione per 2 è 0
+        return numero % 2 == 0;
+    }
     
+
+    public static String saluta(String nome){
+    
+        return nome;
+    }
+    
+
+    public static int calcolaAreaRettangolo(int base, int altezza) {
+        return base * altezza;
+    }
+
+
+    public static int trovaMaggiore(int a, int b, int c) {
+        int maggiore = a; // Inizialmente assumiamo che 'a' sia il maggiore
+    
+        // Verifichiamo se 'b' è maggiore di 'maggiore'
+        if (b > maggiore) {
+            maggiore = b;
+        }
+        
+        // Verifichiamo se 'c' è maggiore di 'maggiore'
+        if (c > maggiore) {
+            maggiore = c;
+        }
+        
+        // Restituiamo il numero più grande
+        return maggiore;
+    }
+
+    public static String invertiStringa(String str) {
+        String temp = str;
+        str = temp;
+        return str;
+    }
+
+    public static int calcolaFattoriale(int numero) {
+        int fattoriale = 1; // Il fattoriale di 0 o 1 è 1
+        for (int i = 2; i <= numero; i++) {
+            fattoriale *= i; // Moltiplica il valore corrente del fattoriale per i
+        }
+        return fattoriale; // Restituisce il fattoriale calcolato
+    }
+
 }       
+
+
+
       
     
 

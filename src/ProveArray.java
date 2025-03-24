@@ -1,4 +1,4 @@
-public class Prove {
+public class ProveArray {
     public static void main(String[] args) {
 
         // 1) Fai la somma dell'array
@@ -29,7 +29,7 @@ public class Prove {
        int numero = 5;
        int counter= 0;
 
-       for(int i = 0 ; i< array3.length; i++){
+       for(int i = 0 ; i < array3.length; i++){
             if(array3[i] == numero){
             counter++;
             }
@@ -82,7 +82,7 @@ public class Prove {
 
          System.out.println(); // per creare uno spazio vuoto
 
-         // Secondo metodo per invertire l 'array' USANDONE SOLO UN ARRAY
+         // Secondo metodo per invertire l 'array' USANDO SOLO UN ARRAY
          
         for(int l = array6.length-1, f= 0; f < l ; l-- , f++){
             int temp = array6[f];

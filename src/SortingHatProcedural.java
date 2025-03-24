@@ -73,7 +73,7 @@ public class SortingHatProcedural {
 
         //dopo aver fatto la funzione randomize assegno gli studenti fino ad avere tutte un numero uguale
         for(int i = 0; i < PERFECT_CLASS_SIZE; i++) {  
-            //lanciamo il dado per gli studenti fortunati e altri                     
+                              
             String studentName = STUDENTS[i][0];
             String favouriteHouse = STUDENTS[i][1];
             //tiene conto che la dimensione può essere ridotta
