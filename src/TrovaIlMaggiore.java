@@ -16,9 +16,9 @@ public class TrovaIlMaggiore {
                  }
              } else {
                  System.out.println("Il numero più alto che mi hai dato è " + max );
-                 break;
              }
          } while(!risposta.equals("q")); // quando il valore non è q continua
+
 
     }
     
