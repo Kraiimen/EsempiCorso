@@ -26,13 +26,15 @@ public class MethodsExercises {
         getSum(arraySum); 
         System.out.println("La somma dell'array è " + getSum(arraySum) + " ");   
         
-        String inputString2 = "SRTWRDTPLMNGHFGHF"; 
-        System.out.println(getVowels(inputString2)); 
+        // String inputString2 = "SRTWRDTPLMNGHFGHF"; 
+        // System.out.println(getVowels(inputString2)); 
 
+        String getPalyndrome = "OSSO"; 
+        System.out.println("La frase che hai messo è palindroma: " + palyndromeString(getPalyndrome)); 
 
-     } 
+    } 
 
-    
+     
     
 
     //1) creare una funzione che prende in input una stringa e mi ritorna il suo ultimo carattere in maiuscolo
@@ -152,8 +154,17 @@ public class MethodsExercises {
     //8) creare una funzione che riceve in input una stringa e mi restituisce una booleana true se la stringa e' palindroma, false altrimenti
     public static boolean palyndromeString(String getPalyndrome) {
 
-        
+        boolean palyndromeStringTrue = true; 
+        String stringWithoutSpaces = getPalyndrome.replaceAll("\\s", "");
 
+        char[] charArray = stringWithoutSpaces.toLowerCase().toCharArray();
+        //uso questo per far andare una variabile su e una variabile giù, mentre controllano
+        for(int i = charArray.length-1, j = 0; j < i; j++, i--){
+            if(charArray[i] != charArray[j]){
+                palyndromeStringTrue = false;
+                break;
+            }
+        }
+        return palyndromeStringTrue;  
     }
-
 }

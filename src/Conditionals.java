@@ -68,12 +68,10 @@ public class Conditionals {
 
 			} else if(!isFemale && (orario > 18 || day.equals("domenica"))) { //importanza delle parentesi
 				cost -= cost * MALE_DISCOUNT_PERCENTAGE; // un operatore booleano esegue solo due fattori alla volta
-
 			}
 
 		} else {
 			cost = 200;
-
 		}
 		
 		//se la persona sta nella fascia tra 20 e 32, è maschio e chiede un biglietto 

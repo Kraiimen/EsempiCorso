@@ -4,6 +4,7 @@
 
 public class ArrayExercises {
     public static void main(String[] args){
+
         
         // Esercizio 1: Creare un array di 5 interi e inizializzarlo con i primi numeri da 1 a 5 al quadrato
         int[] numbers = new int[5];
@@ -138,6 +139,6 @@ public class ArrayExercises {
             System.out.println("- Non ci sono numeri che appaiono più volte nell'array");
         }
         // un for dentro un for con due contatori diversi, tipo "i" e "k", con il ciclo for normale 
-
     }
+
 }

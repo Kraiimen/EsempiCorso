@@ -1,78 +1,87 @@
-import java.io.Console; 
-public class Methods {
-    public static void main(String[] args) {
-        // Console console = System.console(); //permetto di leggere la risposta
+import java.io.Console;
+public class Methods{
+    public static void main(String[] args){
+        // Console console = System.console();// .console è una funzione la variabile ha ol nome console, C è nome classe e c è il nome
 
-        // System.out.print("Dammi un numero -> "); 
-        // String input1 = console.readLine(); 
-        // int x1 = Integer.parseInt(input1); 
-        // System.out.println();
-        // System.out.print("Dammi un numero -> ");
-        // String input2 = console.readLine(); 
+        // System.out.println("Dammi un numero > ");
+        // String input1 = console.readLine(); // creo stringa di nome input e deve leggere la console
+        // int x1 = Integer.parseInt(input1);
+        // System.out.println("Dammi il secondo numero > ");
+        // String input2 = console.readLine();
         // int x2 = Integer.parseInt(input2);
 
-        int x1 = readInteger(); 
-        int x2 = readInteger(); 
+        int x1 = readInteger();
+        int x2 = readInteger();
 
-        System.out.println("La somma dei due numeri è -> " + (x1 + x2));  
-        
-        int result = sum(x1, x2); 
-        System.out.println("La somma dei due numeri è " + result); 
-        printSum(x1, x2); 
-        sum(x1, x2); //se non c'è una variabile che la riceve, non cambia nulla invocare sum
+        System.out.println("La somma dei due numeri è " + (x1 + x2));
+        int result = sum(x1 , x2);
+        System.out.println("la somma dei due numeri è " + result);
+
+        printSum(x1 , x2);
+        sum(x1 , x2); // se non c'è una variabile che la riceve, non cambia nulla invocando sum
+        // String mancoPerIdea = sum(3 , 4); questo risulterebbe in un errore perchè la funzione dichiara di essere un intero e la stiamo cercando di convertire in una stringa
         greet();
-        int lunghezza = greetWithName("Nicolò");
+        int lunghezza = greetWithName("Sabrina"); // esegue la funzione e gli ritorna alla main dandogli valore int
         System.out.println(lunghezza);
         lunghezza = greetWithName("Marta");
         System.out.println(lunghezza);
-        printinTitleCase("Ciao come Stai? Spero TUtto bENE");
-
+        boolean even = isEven(7);
+        System.out.println(even);
+        printLenAndUpperCaseLowerCase("Tutto bene?");
+        String longer = getLonger("Pierino" , "Pluto");
+        printInTitleCase("pAPeRiNo");
     }
-        // posso scriverlo meglio, così    
 
-    public static int readInteger() {
+
+    public static int readInteger(){ // è UN BLOCCO DI CODICE Riutilizzabile a mio piacimento
+        // è una funzione intero che legge l'input e converte in int
+        // nelle tonde ci sarebbe un imput che serve alla macchina 
+        // ma ad alcune non serve mettere nulla dentro
+        // nelle {} c'è il body della funzione
         Console console = System.console();
+        System.out.println("Dammi un numero intero > ");
+        String input = console.readLine();
+        int x = Integer.parseInt(input); //legge dall'input un numero e la trasforma in un intero
+        return x; // e la fa ritornare come numero intero
 
-        System.out.print("Dammi un numero -> "); 
-        String input = console.readLine(); 
-        int x = Integer.parseInt(input); 
-        return x; 
     }
 
-    public static int sum(int x, int y) {
+    public static int sum(int x, int y){ // int: mi torna un intero
+    // funzione che prenderà x e y e farà una somma
         int z = x + y;
         return z;
+
     }
 
-    public static void greet() {
-        System.out.println("E' un piacere conoscerti");
+    // quello che segue è la definizione della funzione greet
+    public static void greet(){ 
+        // la keyword public significa che la funzione sarà visibile in tutto il programma
+        System.out.println("è un piacere conoscerti!"); 
     }
 
-    public static void printSum(int x, int y){ // uso una funzione per non scrivere righe e righe 
+    public static void printSum(int x , int y){
         int z = x + y;
-        System.out.println(z); 
-    }
-
-    // una funzione è un blocco di codice riutilizzabile
-
-    public static int greetWithName(String name) {
-        System.out.println("E' un piacere conoscerti " + name);
-        int lunghezza = name.length(); // per le stringhe .length è una funzione e va tra due parentesi
-        // len conta i caratteri della stringa, quindi la sua lunghezza    
-        return lunghezza;  
-    }
+        System.out.println(z);
+    } 
     
-    public static boolean isEven(int x) { //ritorna true se un numero int datogli in input è pari
-        // if(x % 2 == 0) {
-        //     return true; 
-        // } else {             //finchè non metto else non posso ritornare niente, 
-        //     return false;    //ha bisogno di sapere cosa succede in tutti i casi
-        // }                    
-        return x % 2 == 0; // modo elegante per scrivere questa funzione
+    public static int greetWithName(String name){
+
+        System.out.println("è un piacere conoscerti " + name);
+        int len = name.length(); // la lunghezza del nome 
+        return len;
     }
 
-    public static void printLenAndUppercaseLowercase(String sentence) {
-        int len = sentence.length();
+    public static boolean isEven(int x){ // variabili e parametri in una funzione esistono solo in quella funzione
+        // if(x % 2 == 0){
+        //     return true;
+        // } else{
+        //     return false;
+        // }
+        return x % 2 == 0; // se x è pari ritorna vera, se no ritorna falsa
+    }
+
+    public static void printLenAndUpperCaseLowerCase (String sentence){
+        int len = sentence.length(); // lunghezza della stringa 
         System.out.println(len);
         String lower = sentence.toLowerCase();
         System.out.println(lower);
@@ -80,37 +89,26 @@ public class Methods {
         System.out.println(upper);
     }
 
-    public static String getLonger (String s1 , String s2) {
-        // if(s1.length() > s2.length()) {
+    public static String getLonger (String s1 , String s2){
+        // if(s1.length() > s2.length()){
         //     return s1;
-        // } else {
+        // } else{
         //     return s2;
-        // } 
-        
-        return s1.length() > s2.length() ? s1 : s2; 
-
-        // return s1.lenght() > s2.lenght() ? s1 : s1.lenght() < s2.lenght() ? s2 : "sono della stessa lunghezza";
+        // }
+        return s1.length() > s2.length() ? s1 : s2; // Operatore ternario (Lavora su 3 elementi) il ? segue un'espressione booleana 
     }
 
-    public static void printinTitleCase (String name) {
-        System.out.println(name.length()); //stampa la length della stringa
-        String upper = name.toUpperCase(); 
-        // System.out.println(name); // le stringhe sono immutabili, non è possibile cambiare una stringa, 
-                                     // quindi in questo caso l'ultimo name rimarrà in minuscolo perchè,
-                                     // .toUpperCase coinvolge solo la stringa di prima.
-        String lower = name.toLowerCase();        
-        char first = name.charAt(0); //prende il primo carattere della stringa
-        char firstUpper = Character.toUpperCase(first); //questo è un metodo statico della classe character (riconoscibile per la C maiuscola)
-        String subString = lower.substring(1); 
+    public static void printInTitleCase (String name){
+        System.out.println(name.length()); //stampa quello che ritorna della funzione length eseguita sulla stringa name, .length non è un metodo statico
+        System.out.println(name.toUpperCase()); // ritorna e crea e stampa una nuova stringa con la funzione upper case sulla stringa name
+        String upper = name.toUpperCase();
+        String lower = name.toLowerCase();
+        char first = name.charAt(0); // prende il primo carattere della stringa
+        char firstUpper = Character.toUpperCase(first); //metodo statico di character che prende l'input first 
+        String subString = lower.substring(1);
         String result = firstUpper + subString;
-        System.out.println(result);  
-    }
+        System.out.println(result);
+        // le stringhe in java sono immutabili
 
-    //metodo statico: metodo che chiamo direttamente su una classe, normalmente li chiami sugli oggetti
-
-
-
+    } 
 }
-
-
-
