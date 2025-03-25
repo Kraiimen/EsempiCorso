@@ -63,7 +63,7 @@ public class FunzioniEsercizi{
     public static int findMax( int[] numbers){
         int max = numbers[0];
         for(int i = 0; i < numbers.length; i++){
-            if( numbers.length == 0 || numbers[i] == null){
+            if( numbers.length == 0 || numbers[i] == 0){
                 System.out.println(0);
                 return 0;
             } else{
@@ -79,7 +79,7 @@ public class FunzioniEsercizi{
     public static int findSum(int[] numbers){
         int somma = 0;
         for(int i = 0; i < numbers.length; i++){
-            if(numbers.length == 0 || numbers[i] == null || numbers[i] < 0){
+            if(numbers.length == 0 || numbers[i] == 0 || numbers[i] < 0){
                 System.out.println(-1);
                 return -1;
             } else{

@@ -11,7 +11,7 @@ public class Calcolatrice {
         int n;
         int m;
         String answer;
-        Console console;
+        Console console = System.console();
         System.out.println("dammi un qualsiasi numero");
         answer = console.readLine(); //quando voglio prendere un input dall'utente
         n = Integer.parseInt(answer);

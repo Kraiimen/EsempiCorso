@@ -22,8 +22,5 @@ public class FizzBuzz {
 
 
     }
-<<<<<<< HEAD
-     
-=======
->>>>>>> 445fc58468d78a004a8006031cc4e92d3ba595cd
+
 }

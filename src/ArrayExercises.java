@@ -93,16 +93,11 @@ public class ArrayExercises {
         
         // Esercizio 1: Creare un array di 5 interi e inizializzarlo con i primi numeri da 1 a 5 al quadrato
         
-            int[] numbers = new int[5];
+        int[] numbers = new int[5];
             
-            for(int i = 0 ; i < numbers.length ; i++){
+        for(int i = 0 ; i < numbers.length ; i++){
                 numbers[i]= (i+1)*(i+1);
-            }
         }
         System.out.println("Le volte che la somma di due numeri consecutivi fa 8 è: " + counter);
-
-// ESERCIZIO 9: verificare che nell'array 
-// non esistano 3 numeri consecutivi la cui somma è maggiore di 12
-
     }
 }
