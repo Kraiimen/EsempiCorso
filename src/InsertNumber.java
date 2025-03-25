@@ -10,7 +10,7 @@ public class InsertNumber {
 //  cosi, finche non scrivi q.
 // quando scrivi q
 // ti risponde con il numero piu grande che gli hai dato
-
+       // int[] numbers;
         String ns;
         String ns2;
         int x;
@@ -18,7 +18,7 @@ public class InsertNumber {
         System.out.println("Dammi un numero");
         ns = console.readLine();
         x = Integer.parseInt(ns);
-        numbers.add(x);
+       // numbers.add(x);
         do{
             System.out.println("Dammi un'altro numero o scrivi q");
             ns2 = console.readLine();
