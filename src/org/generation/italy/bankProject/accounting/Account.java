@@ -1,14 +1,23 @@
 package org.generation.italy.bankProject.accounting;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Account {
+    private static int lastId;
     private double balance;
     private int id;
     private LocalDate creationDate;
+    private ArrayList movements;
+
 
     public Account() {
-
+        lastId++;
+        id = lastId;
+    }
+    public Account(double initialBalance) {
+        this();
+        balance = initialBalance; //Account è il nome di tutti e due i costruttori, ma li differenzierò perchè avranno parametri diversi.
     }
     public void printBalance() {
         System.out.printf("il conto con id %d ha come saldo %f%n", id, balance);
@@ -44,5 +53,5 @@ public class Account {
     }
 
     //un' "array list" è una struttura dati simile all'array, più intelligente e che mi dà più servizi. è un array sotto steroidi.
-    //una delle principali feature è che si autoridimensiona, se gli dò 101 elementi,
+    //una delle principali feature è che si autoridimensiona, se gli dò 101 elementi, e gli dò il limite di 100,
 }
