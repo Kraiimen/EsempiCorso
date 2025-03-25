@@ -9,10 +9,10 @@ public class Account { //la visibilità di default vuol dire visibile all'intern
 
     //ATTRIBUTI - FIELDS - VARIABILI DEGLI OGGETTI
     private static int lastId; // prima quelle static e poi quella instances. serve assegnare a ogni id che creo un id differenza. deve essere statica altrimenti si resetta a 0
-    private double bal;
-    private int id;
+    private double balance;// la sua balance
+    private int id; // il suo identificativo
     private LocalDate creationDate; // caratteristica che da la data di creazione
-    private ArrayList movements;
+    private ArrayList movements; // lista dei movimenti fatti del conto corrente
     // Quando il compilatore vede il nome di una classe si chiede "Questa classe viene da Java.lang?" ovvero il package base del linguaggio java
     // se questo non è vero, si chiede "è dello stesso package di questa classe?" quindi se in un file si vuole usare una classe che sta nello stesso package del file, non c'è bisogno di importarla
     // se non la trova nemmeno li controllerà la lista degli import all' inizio file
@@ -23,12 +23,12 @@ public class Account { //la visibilità di default vuol dire visibile all'intern
        lastId++;
        id = lastId;
        //this(0);
-        creationDate = LocalDate.now();
+        creationDate = LocalDate.now(); // è un metodo statico, chiamato sulla classe
     }
     public Account(double initialBalance){
         this();
-        //questo this è un'invocazione del costruttore di questa Classe che non prendono argomenti ovvero Account(sopra
-        bal = initialBalance; //account è il nome di tutti e due i costruttori, ma li differenzierò perchè avranno parametri diversi
+        //questo this è un'invocazione del costruttore di questa Classe che non prendono argomenti ovvero Account(sopra, non ha parametri di input
+        balance = initialBalance; //account è il nome di tutti e due i costruttori, ma li differenzierò perchè avranno parametri diversi
     }
     public Account(double initialBalance, LocalDate creationDate){
         this(initialBalance);
@@ -42,28 +42,28 @@ public class Account { //la visibilità di default vuol dire visibile all'intern
 
     // FUNZIONI - prima quelle importanti poi le getter o le setter
     public void printBalance(){
-        System.out.printf("Il conto con id %d ha come saldo %f%n", id, bal);
+        System.out.printf("Il conto con id %d ha come saldo %f%n", id, balance);
     }
     public double deposit(double amount){ // deposito
-        bal += amount;
-        return bal;
+        balance += amount;
+        return balance;
     }
     public double withdraw(double amount){ // prelievo
         doInternalOperation();
-        bal -= amount;
-        return bal;
+        balance -= amount;
+        return balance;
     }
     private void doInternalOperation(){
 
     }
     public double getBalance(){
-        return bal / 100; // ritorna in euro, non centesimi
+        return balance; // ritorna in euro, non centesimi
     }
     public void setBalance(double newBalance){
-        if (newBalance <= 0){ // se il balance è minore di 0 ritorna nulla
+        if (newBalance < 0){ // se il balance è minore di 0 ritorna nulla
             return; // funzione terminata
         }
-        bal = newBalance;
+        balance = newBalance;
     }
     public LocalDate getCreationDate() {
         return creationDate;
