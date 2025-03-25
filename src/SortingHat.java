@@ -1,5 +1,5 @@
 import java.util.Random;
-
+// questo commento serve per provare il push di intelij
 public class SortingHat {
     //questo metodo serve solamente a far scrivere il discorso del cappello
     public static void sortingHatSpeach() throws InterruptedException{
