@@ -20,7 +20,7 @@ public class ObjectArray{
         // nuova array stringhe che spezza la prima stringa dal caratte , quindi divide in due array 0 nome 1 casata 
 
         String x = "Lorenzo";
-        if
+        // if
         // in alternativa le stringhe messe randomiche nelle casate 
     }
 }

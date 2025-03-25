@@ -93,12 +93,12 @@ public class MethodsEx{
         } 
         for (int i = 0; i < numbers.length-1; i++){
             if (numbers[i] <= 0){
-                return 0
+                return 0;
             }
         }
         int massimo = 0;
         for (int i = 0; i < numbers.length-1; i++){
-            if(max)
+            if(max);
         }
     }
 }
