@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class SortingHatProcedural {
-    // Array di frasi per la suspanse 
+    // Array di frasi per la suspense 
     private static final String SUSPENCE[] = {"Ah, che mente affascinante! So esattamente dove collocarti...",
                          "Vedo dentro di te grandi qualità... la tua strada è chiara per me!",
                          "Ambizione, coraggio, saggezza o lealtà? Io so cosa ti definisce meglio!",
