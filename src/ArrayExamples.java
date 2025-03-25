@@ -14,7 +14,7 @@ public class ArrayExamples {
             numbers[i] = (i+1)*(i+1); // Abbreviazione di quello fatto sopra
             System.out.println("- numbers["+i+"]: "+numbers[i]);
         }
-
+        
         //Traccia esercizio 2: Calcolare e stampare la somma di tutti i valori all'interno dell'array numbers[]
 
         int sum = 0; // Variabile che conterrà il valore della somma
