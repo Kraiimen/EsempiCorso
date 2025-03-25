@@ -1,5 +1,5 @@
 import java.util.Random;
-import java.util.Arrays;
+//import java.util.Arrays;
 
 public class SortingHat {
     private static final String[] HOUSE_NAMES = new String[]{"Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"};
