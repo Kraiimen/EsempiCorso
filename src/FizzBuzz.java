@@ -1,15 +1,69 @@
 public class FizzBuzz {
-    public static void main (String[] args){
-        for (int i=1; i < 100; i++){ // ci stampa tutti i numeri fino a 100
-            if(i % 3 == 0 && i % 5 == 0 ){ //se multiplo di 3 e 5 dice fizzbuzz
-                System.out.println("FizzBuzz!"); 
-            } else if ( i % 5 == 0) { //se multiplo di 5 dice buzz
-                System.out.println("Buzz!"); 
-            } else if ( i % 3 == 0) { //se multiplo di 3 dice fizz
-                System.out.println ("Fizzz");
-            } else { // il resto è normale
-                System.out.println(i);
+    public static void main(String[] args){
+        
+        //da 0 a 100
+        //se il numero è un multiplo di 3, deve stampare fizz
+        //se multiplo di 5, buzz
+        //se multiplo di 3 e di 5, fizzBuzz
+        //se nessuna di queste cose, il numero
+
+        String str = null;
+
+        // for(int i=0; i<=100; i++){
+        //     if(i % 5 == 0){
+        //         if(i % 3 == 0){
+        //             str = "FizzBuzz";
+        //         } else {
+        //             str = "Buzz";
+        //         }
+        //     }
+        //     else if(i % 3 == 0){
+        //         if(i % 5 == 0){
+        //             str = "FizzBuzz";
+        //         } else {
+        //             str = "Fizz";
+        //         }           
+        //     }
+        //     else{
+        //         str = String.valueOf(i);
+        //     }
+
+        //     System.out.println(str);
+        // }
+
+        // for(int i=0; i<=100; i++){
+        //     if(i % 5 == 0 && i % 3 == 0){
+        //         str = "FizzBuzz";
+        //     }
+        //     else if(i % 5 == 0){
+        //         str = "Buzz";
+        //     }
+        //     else if(i % 3 == 0){
+        //         str = "Fizz";         
+        //     }
+        //     else{
+        //         str = String.valueOf(i);
+        //     }
+
+        //     System.out.println(str);
+        // }
+
+        for(int i=0; i<=100; i++){
+            
+            if(i % 15 == 0){
+                str = "FizzBuzz";
             }
+            else if(i % 5 == 0){
+                str = "Buzz";
+            }
+            else if(i % 3 == 0){
+                str = "Fizz";         
+            }
+            else{
+                str = String.valueOf(i);
+            }
+
+            System.out.println(str);
         }
     }
 }

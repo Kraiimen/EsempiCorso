@@ -43,8 +43,8 @@ public class Intro {
 		float f = 300.0f;
 		double d = f;
 
-		boolean bo1 = true;
-		boolean bo2 = false;
+		// boolean bo = true;
+		// boolean bo2 = false;
 
 		boolean result = (d == 300d);
 		System.out.println(result);
