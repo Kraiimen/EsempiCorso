@@ -1,10 +1,5 @@
 public class ArrayExercises {
     public static void main(String[] args){
-<<<<<<< HEAD
-        // Esercizio 1: Creare un array di 5 interi e inizializzarlo con i primi numeri da 1 a 5 al quadrato
-        
-            int[] numbers = new int[5];
-=======
 // es 1: creare un array di 5 interi e inizializzarlo con i primi numeri da 1 a 5 al quadrato
 // es 2 calcolare e stampare il valore della somma di tutti i numeri dell'array 
 // es 3 calcolare e stampare il valore minimo contenuto nell'array
@@ -97,7 +92,6 @@ public class ArrayExercises {
         int counter = 0; // creo una variabile per contare il numero di volte in cui ci sta la somma di z
         
         System.out.println("Array attuale: ");
->>>>>>> main
 
         for (int i = 0; i < array3.length - 1; i++){//inizia con zero e va avanti fino alla fine -1
             System.out.println(array3[i]);

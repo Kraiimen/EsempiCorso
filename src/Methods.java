@@ -110,10 +110,5 @@ public class Methods{
         System.out.println(result);
         // le stringhe in java sono immutabili
 
-<<<<<<< HEAD
-        
-
-=======
->>>>>>> main
     } 
 }

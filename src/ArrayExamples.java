@@ -1,13 +1,7 @@
 public class ArrayExamples{
     public static void main(String[] args){
-<<<<<<< HEAD
-        int[] numbers = new int[5];
-    
-        // int numbers2[] = new int[5];
-=======
         int[] numbers = new int[5]; // è un array di interi in grado di tenere 5 interi
         // int numbers2 [] = new int [5]; //  le [] servono per dichiarare l'array e dentro si dichiara la dimensione di essa
->>>>>>> main
         // int x = 10;
         // int[] numbers3 = new int [x];
 
