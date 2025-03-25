@@ -1,7 +1,8 @@
 package org.generation.italy.bankProject.accounting;
 import java.time.LocalDate;//Fully Qualified Name, scrivendo il nome completo 
 //non ho bisogno di fare l'import.
-
+//Le classi ne package default Java non sono importabili, perchè
+//il pack default non ha nome.
 public class Account {
 
     double balance;
@@ -10,18 +11,18 @@ public class Account {
     //nel java.lang, se non la trova la va a cercare nel package, se non la trova
     //prima di dare errore, andrà a leggere la lista degli import.
 
-    void printBalance(){
+    public void printBalance(){
         System.out.printf("IL CONTO CON ID %d HA COME SALDO %f%n", id, balance);
         //Quando stamperò al posto di %d andrà id; al posto di %n andrà balance.
         
     }
 
-    double deposit(double amount){
+    public double deposit(double amount){
         balance += amount;
         return balance;
     }
 
-    double withdraw(double amount){
+    public double withdraw(double amount){
         balance -= amount;
         return balance;
     }
