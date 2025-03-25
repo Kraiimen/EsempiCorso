@@ -40,21 +40,13 @@ public class SortingHat {
         houses[3][1] = "Carmine Erario";
 
         luckyStudents(students, houses);
-
-        // for (int i = 0; i < students.length; i++) {
-        //     System.out.println(students[i][0] + " " + students[i][1]);
-        
-        // }
         testremainingStudents(students, houses);
 
-        // for (int i = 0; i < students.length; i++) {
-        //     System.out.println(students[i][0] + " " + students[i][1]);
-        
-        // }
+
         System.out.println("--------");
 
         for (int i = 0; i < houses[0].length; i++) {
-            System.out.println(houses[0][i] + "     |     " + houses[1][i] + "     |     "  + houses[2][i] + "     |     " + houses[3][i]);
+            System.out.println (houses[0][i] + "     |     " + houses[1][i] + "     |     "  + houses[2][i] + "     |     " + houses[3][i]);
             
         }
     }
@@ -105,21 +97,6 @@ public class SortingHat {
     //     }
     // }
 
-    public static void roundRobinFill(String[][] array, String[] elements) {
-        int rowCount = array.length; // Numero di righe
-        int index = 0; // Indice degli elementi
-    
-        for (int i = 0; i < elements.length; i++) {
-            int row = i % rowCount;  // Cicla tra le righe (distribuzione circolare)
-            
-            for (int col = 0; col < array[row].length; col++) {
-                if (array[row][col] == null) {  // Trova il primo spazio libero
-                    array[row][col] = elements[index++];
-                    break;
-                }
-            }
-        }
-    }
     
     public static void testremainingStudents(String students[][], String[][] houses) {
         int currentHouse = 0; 
