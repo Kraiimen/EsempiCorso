@@ -1,4 +1,4 @@
-public class ArrayExercises {
+public class ArraysExercises {
      public static void main(String[] args){
          
          // Esercizio 1: Creare un array di 5 interi e inizializzarlo con i primi numeri da 1 a 5 al quadrato
