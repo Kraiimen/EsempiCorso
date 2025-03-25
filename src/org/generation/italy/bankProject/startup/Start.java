@@ -10,5 +10,6 @@ public class Start {
         x.printBalance(); //adesso che il valore è stato modificato se printiamo uscirà 100.
         x.withdraw(60); //adesso invece ritiriamo 60 con la funzione withdraw.
         x.printBalance(); //e printiamo il nuovo bilancio sarà 100-60 = 40.
+        x.setBalance(100);
     }
 }
