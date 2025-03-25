@@ -11,10 +11,10 @@ public class RipassoPersonale {
         f2(numeri);
         System.out.println(numeri[0]); // stamperà 100, perchè abbiamo modificato il valore della cella, non l'indirizzo
         Integer i1 = 10; // boxing, il compilatore crea un oggetto di tipo integer e ci inserisce la primativa
-        Integer i2 = Integer.valueOf(i:20); // fa la stessa cosa della linea sopra
+        Integer i2 = 20;//Integer.valueOf(i : 20); // fa la stessa cosa della linea sopra
         swap(i1 , i2);
-        Syatem.out.println(i1); // stampa 10, gli oggetti non si possono cambiare gli indirizzi
-        System.out.println (numeri1 , numeri2);
+        System.out.println(i1); // stampa 10, gli oggetti non si possono cambiare gli indirizzi
+        System.out.println (numeri[1] + numeri[2]);
         String s1 = "pippo";
         String s2 = "pluto";
         swapStrings(s1 , s2);
@@ -22,7 +22,7 @@ public class RipassoPersonale {
     }
 
     public static void f1(int z){ // nuova funzione, ha x come parametro, z è una copia di x
-        z += 3 // incremento x di 3 è la stessa cosa di scrivere x = x + 3
+        z += 3; // incremento x di 3 è la stessa cosa di scrivere x = x + 3
         System.out.println("All'interno di f1: " + z); // stampa per prima essendo evocata nella main, stampa 13
         System.out.println(global); // stampa per prima, valore 100
         global++; // incrementa di 1 il valore di global
@@ -34,13 +34,14 @@ public class RipassoPersonale {
     }
     public static void swap(Integer z1 , Integer z2){ // sono copie di indirizzi
     // gli integer non sono modificabili
-        z1.setValue(100);
+        //z1.intValue(100);
         Integer temp = z1; // si sono scambiati gli indirizzi
         z1 = z2;
         z2 = temp;
         // stiamo cambiano le copie, non gli indirizzi originali 
     }
     public static void trySwap(int[] ns1 , int[] ns2){
+        int temp = 0;
         ns1 = ns2;
         ns1[0] = temp;
     }

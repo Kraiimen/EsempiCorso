@@ -1,6 +1,6 @@
 package org.generation.italy.bankProject.startup;
 
-import org.generation.italy.bankProject.accounting.Account;
+import org.generation.italy.bankProject.accounting.Account; // importa
 
 public class Start {
     public static void main(String[] args) {
@@ -10,5 +10,10 @@ public class Start {
         x.printBalance(); // adesso che il valore è stato modificato se printiamo uscirà 100
         x.withdraw(60); // adesso invece ritiriamo 60 con la funzione withdraw 
         x.printBalance(); // e printassimo il nuovo bilandio sarà 100-60
+        // invoco la funzione print balance alla classe x
+//        System.out.println(x.bal / 100);
+//        x.bal = x.bal + 100_00;  operazioni possibili solo in caso di variabile public, da evitare
+        //x.bal = 100000000;
+        x.setBalance(100);
     }
 }
