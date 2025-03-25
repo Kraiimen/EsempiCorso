@@ -6,7 +6,7 @@ public class FizzBuzz {
             } else if ( i % 5 == 0) { //se multiplo di 5 dice buzz
                 System.out.println("Buzz!"); 
             } else if ( i % 3 == 0) { //se multiplo di 3 dice fizz
-                System.out.println ("Fizzz");
+                System.out.println ("Fizz");
             } else { // il resto è normale
                 System.out.println(i);
             }
