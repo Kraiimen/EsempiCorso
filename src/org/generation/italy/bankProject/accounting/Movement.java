@@ -20,7 +20,7 @@ public class Movement {
 
     // 3) FUNZIONI - prima quell importanti
     }
-    public double getAmount(){
+    public double getAmount(double amount){
         return amount;
     }
     public double getCurrentBalance() {

@@ -106,5 +106,32 @@ public class Conditionals {
 		
       	System.out.println(cost);
 
+
+		int numero= 12;
+		if(numero < 9 && numero % 3 == 0) {
+			System.out.println("Il" + numero + "è minore ed è dipari");
+		} else if (numero > 10 && numero % 2 == 0) {
+			System.out.println("Il numero" + numero + "è maggiore ed è pari");
+		}else {
+			System.out.println("Nessuna condizione soddisfatta");
+		}
+		// Utlizzo di switch
+		String nome = "Jhon";
+		switch(nome){
+			case "MArio":
+				System.out.println("Ciao sono "+ nome);
+				break;
+			case "Jhon":
+				System.out.println("Ciao sono "+ nome);
+				break;
+			case "Giovanni":
+				System.out.println("Ciao sono "+ nome);
+				break;
+		}
+
+
+
+
 	}
+
 }
