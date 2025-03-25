@@ -49,6 +49,14 @@ public class Methods2 {
        int numeros = calcolaFattoriale(6);
        System.out.println("Il fattoriale   " +  numeros);
 
+       String nome1 = "Stefano";
+       String nomeInvertito = invertiStringa(nome);
+       System.out.println("Nome invertito: " + nomeInvertito);
+
+
+       int[] numeriPari = {1,3,6,8,10,12};
+       System.out.println("i numeri pari sono " + contaNumeriPari(numeriPari));
+
 
     }    
 
@@ -196,11 +204,21 @@ public class Methods2 {
         return maggiore;
     }
 
+
+
+    //Funzione per invertire il nome
+
     public static String invertiStringa(String str) {
-        String temp = str;
-        str = temp;
-        return str;
+        String temp = "";
+        // Ciclo per invertire la stringa
+        for (int i = str.length() - 1; i >= 0; i--) {
+            temp += str.charAt(i); // Aggiunge ogni carattere dall'ultimo al primo
+        }
+        return temp;
     }
+
+
+
 
     public static int calcolaFattoriale(int numero) {
         int fattoriale = 1; // Il fattoriale di 0 o 1 è 1
@@ -209,6 +227,16 @@ public class Methods2 {
         }
         return fattoriale; // Restituisce il fattoriale calcolato
     }
+
+    public static int contaNumeriPari(int[] numeri) {
+        int counter= 0;
+        for(int i = 0; i < numeri.length; i++){
+            if(numeri[i] % 2 == 0){
+                counter++;
+            }
+        } return counter;
+    }
+
 
 }       
 

@@ -1,4 +1,4 @@
-public class ProveArray {
+public class ArrayProve {
     public static void main(String[] args) {
 
         // 1) Fai la somma dell'array
