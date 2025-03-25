@@ -1,4 +1,4 @@
-import java.io.Console;
+/*import java.io.Console;
 
 public class Loops {
     public static void main(String[] args) {
@@ -46,4 +46,4 @@ public class Loops {
         //String ns = console.readLine();
         //int n = Integer.parseInt(ns); //passami in intero la stringa ns
        // System.out.println(n + 1);
-}
+} */
