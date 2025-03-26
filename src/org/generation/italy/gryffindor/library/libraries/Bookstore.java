@@ -1,7 +1,6 @@
-package org.generation.italy.gryffindor.library;
+package org.generation.italy.gryffindor.library.libraries;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class Bookstore {
 //    Creare una classe biblioteca.
@@ -16,12 +15,23 @@ public class Bookstore {
 //    appartenenti a quella categoria.
 //    Voglio un altro metodo che mi restituisce il costo totale di tutti i libri che hanno un certo autore di cui do nome e cognome tra i suoi autori.
 //    Infine un metodo che mi stampa tutti i dati di un libro di cui io do il titolo. Se ci fossero piu libri con lo stesso titolo, me li deve stampare tutti.
-//         /--------/ ATTRIBUTI
 
+//         /--------/ ATTRIBUTI
     private String name;
     private ArrayList books;
 
+    //     /---------/ CONSTRUCTORS
+    public Bookstore(String name){
+        this.name = name;
+        books = new ArrayList();
+    }
+
     //          /------/ METHODS
+    public void addBook(Book b){
+        if(books != null){
+            books.add(b);
+        }
+    }
     public int getTotalBooks(){
         if(books == null) {
             return 0;
@@ -90,17 +100,25 @@ public class Bookstore {
         }
 
         int max = 0;
+        Category result=null;
+
         for(Category c : Category.values()){
             int booksPerCategory = 0;
+
             if(containsOnlyBooks()){
                 for(Object obj : books){
                     Book b = (Book) obj;
+                    if(b.getCategory() == c){
+                        booksPerCategory++;
+                    }
+                }
+                if(booksPerCategory>max){
+                    max=booksPerCategory;
+                    result = c;
                 }
             }
-
-
         }
-
+        return result;
     }
 
     //         /------/ METHODS /-/ GETTER & SETTER
@@ -116,5 +134,4 @@ public class Bookstore {
     public void setBooks(ArrayList b){
         books = b;
     }
-
 }
