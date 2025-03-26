@@ -45,7 +45,7 @@ public class Intro {
 
 		boolean bo1 = true;
 		boolean bo2 = false;
-		System.out.println(bo);
+		System.out.println(bo1);
 		System.out.println(bo2);
 
 		boolean result = (d == 300d);
