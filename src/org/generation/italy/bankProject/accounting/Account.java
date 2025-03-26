@@ -11,7 +11,6 @@ public class Account {
 
     //ATTRIBUTI or FIELDS or VARIABILI DEGLI OGGETTI
     private static int lastId; //usando "static" ogni conto avrà il suo lastId
-    public double bal;
     private int id;
     private LocalDate creationDate;
     private ArrayList movements;
@@ -31,7 +30,6 @@ public class Account {
 //        lastId++;
 //        id = lastId;
         this();
-        bal = initialBalance;  //Account è il nome di tutti e due i costruttori, ma li differenzierò perché avranno parametri diversi
     }
     public Account(double initialBalance, LocalDate creationDate) {
         this(initialBalance);
@@ -45,34 +43,25 @@ public class Account {
 
     //FUNZIONI - prima quelle importanti poi le getter o setter
     public void printBalance(){
-        System.out.printf("Il conto con id %d ha come saldo %f%n", id, bal);
     }
     public double deposit(double amount){
-        bal += amount;
-        return bal;
     }
     public double withdraw(double amount){
         doInternalOperation();
-        bal -= amount;
-        return bal;
     }
     private void doInternalOperation(){
 
     }
     public double getBalance(){
-        return bal / 100;
     }
     public void setBalance(double newBalance){
         if(newBalance <= 0){
             return;
         }
-        bal = newBalance;
     }
     public LocalDate getCreationDate() {
         return creationDate;
     }
-    public void setCreationDate(LocalDate cr) {
-        creationDate = cr;
     }
 
 
