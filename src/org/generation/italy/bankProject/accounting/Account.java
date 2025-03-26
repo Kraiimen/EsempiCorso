@@ -11,7 +11,7 @@ public class Account {
 
     //ATTRIBUTI or FIELDS or VARIABILI DEGLI OGGETTI
     private static int lastId; //usando "static" ogni conto avrà il suo lastId
-    public double bal;
+    private double balance;
     private int id;
     private LocalDate creationDate;
     private ArrayList movements;
@@ -24,14 +24,14 @@ public class Account {
     public Account() {
         lastId++;
         id = lastId;
-//        this(0);
+        // this(0);
         creationDate = LocalDate.now();
     }
     public Account(double initialBalance) {
-//        lastId++;
-//        id = lastId;
+        //lastId++;
+        //id = lastId;
         this();
-        bal = initialBalance;  //Account è il nome di tutti e due i costruttori, ma li differenzierò perchè avranno parametri diversi
+        balance = initialBalance;  //Account è il nome di tutti e due i costruttori, ma li differenzierò perchè avranno parametri diversi
     }
     public Account(double initialBalance, LocalDate creationDate) {
         this(initialBalance);
@@ -45,28 +45,28 @@ public class Account {
 
     //FUNZIONI - prima quelle importanti poi le getter o setter
     public void printBalance(){
-        System.out.printf("Il conto con id %d ha come saldo %f%n", id, bal);
+        System.out.printf("Il conto con id %d ha come saldo %f%n", id, balance);
     }
     public double deposit(double amount){
-        bal += amount;
-        return bal;
+        balance += amount;
+        return balance;
     }
     public double withdraw(double amount){
         doInternalOperation();
-        bal -= amount;
-        return bal;
+        balance -= amount;
+        return balance;
     }
     private void doInternalOperation(){
 
     }
     public double getBalance(){
-        return bal / 100;
+        return balance;
     }
     public void setBalance(double newBalance){
         if(newBalance <= 0){
             return;
         }
-        bal = newBalance;
+        balance = newBalance;
     }
     public LocalDate getCreationDate() {
         return creationDate;

@@ -18,6 +18,8 @@ public class Movement {
         this.operationTime = operationTime;
         this.type = type;
     }
+
+    //metodi dell'oggetto
     public double getAmount() {
         return amount;
     }
