@@ -258,8 +258,7 @@ public class SortingHatProcedural {
         // Variabile per la formattazione della stringa
         // % è un carattere speciale per indicare da dove inizia la stringa che passeremo
         // - significa che stiamo indentando la stringa a sinistra  
-        // 25 è il numero fisso di caratteri che occuperà la stringa (a prescindere da quanto sia lunga)
-        // s signigica che tutto quello tra il % ed s è una stringa
+        // 25 è il numero fisso di caratteri che occuperà la stringa (a prescindere da quanto sia lunga) 
         String outputFormat = "%-25s%-25s%-25s%-25s%n";  
         
         System.out.println(); // Aggiungiamo una riga vuota nel terminale
