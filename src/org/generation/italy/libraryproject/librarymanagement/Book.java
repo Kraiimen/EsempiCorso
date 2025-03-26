@@ -9,7 +9,10 @@ public class Book {
     private static int fantasyCounter = 0;
     private static int historyCounter = 0;
     private static int javaCodingCounter = 0;
+
+    // ArrayList dove andranno gli oggetti di tipo Book
     private static ArrayList booksArrayList = new ArrayList();
+
     private String title;
     private int numPages;
     private double price;
@@ -29,63 +32,74 @@ public class Book {
         this.category = category;
 
         incrementCounter(category);
-        booksArrayList.add(this);
+        booksArrayList.add(this); // Aggiungiamo l'oggetto creato all'ArrayList
     }
 
     // METODI
-    public void incrementCounter(Categories category) {
-       booksCounter++;
-       if(category == Categories.FICTION) {
-           fictionCounter++;
-       }else if(category == Categories.NON_FICTION) {
-           nonFictionCounter++;
-       }else if(category == Categories.FANTASY) {
-           fantasyCounter++;
-       }else if(category == Categories.HISTORY) {
-           historyCounter++;
-       }else{
-           javaCodingCounter++;
-       }
+
+    // Incrementa il contatore dei libri generale e della categoria specifica
+    private void incrementCounter(Categories category){
+        booksCounter++;
+
+        if(category == Categories.FICTION){
+            fictionCounter++;
+        }else if(category == Categories.NON_FICTION){
+            nonFictionCounter++;
+        }else if(category == Categories.FANTASY){
+            fantasyCounter++;
+        }else if(category == Categories.HISTORY){
+            historyCounter++;
+        }else{
+            javaCodingCounter++;
+        }
     }
-    public int getNumberOfBooksByCategory(Categories category) {
-        if(category == Categories.FICTION) {
+
+    // Metodo che ritorna il numero di libri per categoria
+    public int getNumberOfBooksByCategories(Categories category){
+        if(category == Categories.FICTION){
             return fictionCounter;
-        }else if(category == Categories.NON_FICTION) {
+        }else if(category == Categories.NON_FICTION){
             return nonFictionCounter;
-        }else if(category == Categories.FANTASY) {
+        }else if(category == Categories.FANTASY){
             return fantasyCounter;
-        }else if(category == Categories.HISTORY) {
+        }else if(category == Categories.HISTORY){
             return historyCounter;
-        }else if(category == Categories.JAVA_CODING) {
+        }else if (category == Categories.JAVA_CODING){
             return javaCodingCounter;
         }else{
             return 0;
         }
     }
 
-    public double getTotalCostOfbooksByAuthor(String Authors) {
+    // Metodo che ritorna il costo totale dei libri per autore
+    public double getTotalCostOfBooksByAuthor(String authors){
         double totalCost = 0;
-        for(Object obj : booksArrayList) {
+
+        for(Object obj : booksArrayList){
             Book b = (Book) obj;
-            if(b.authors.equals(authors)) {
+            if(b.authors.equals(authors)){
                 totalCost += b.price;
             }
         }
+
         return totalCost;
     }
 
-    public void getBooksByTitle(String title) {
-        String format = "Titolo: %s | Numero di pagine: %d | Costo: %f | Autore/i: %s | Anno di pubblicazione: %d | Categoria: %s";
-        for(Object obj : booksArrayList) {
+    // Metodo che stampa i dati del libro in base al titolo
+    public void getBooksByTitle(String title){
+        String format = "\nTitolo: %s | Numero di pagine: %d | Costo: %f | Autore/i: %s | Anno di pubblicazione: %d | Casa editrice: %s | Categoria: %s";
+
+        for(Object obj : booksArrayList){
             Book b = (Book) obj;
-            if(b.title.equals(title)) {
+            if(b.title.equals(title)){
                 System.out.printf(format, b.title, b.numPages, b.price, b.authors, b.releaseDate, b.publishingHouse, b.category.toString());
             }
         }
+
     }
 
+    // Getter dell'attributo booksCounter
     public int getBooksCounter() {
         return booksCounter;
     }
-
 }
