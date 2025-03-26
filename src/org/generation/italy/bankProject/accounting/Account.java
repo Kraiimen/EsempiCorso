@@ -62,10 +62,9 @@ public class Account {
     public LocalDate getCreationDate() {
         return creationDate;
     }
-    }
-
-
 }
+
+
 
 
 //lo stato di una classe è l'insieme delle sue variabili
