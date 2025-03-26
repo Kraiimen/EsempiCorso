@@ -1,6 +1,7 @@
 package org.generation.italy.bankProject.accounting; // sta dchiarando a quale package appartiene
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Account { //la visibilità di default vuol dire visibile all'interno del suo package
@@ -9,7 +10,7 @@ public class Account { //la visibilità di default vuol dire visibile all'intern
 
     //ATTRIBUTI - FIELDS - VARIABILI DEGLI OGGETTI
     private static int lastId; // prima quelle static e poi quella instances. serve assegnare a ogni id che creo un id differenza. deve essere statica altrimenti si resetta a 0
-    private double balance;// la sua balance
+    public double balance;// la sua balance
     private int id; // il suo identificativo
     private LocalDate creationDate; // caratteristica che da la data di creazione
     private ArrayList movements; // lista dei movimenti fatti del conto corrente
@@ -22,8 +23,9 @@ public class Account { //la visibilità di default vuol dire visibile all'intern
     public Account(){ // è un costruttore
        lastId++;
        id = lastId;
-       //this(0);
-        creationDate = LocalDate.now(); // è un metodo statico, chiamato sulla classe
+       // this(0);
+       creationDate = LocalDate.now(); // è un metodo statico, chiamato sulla classe
+       movements = new ArrayList();
     }
     public Account(double initialBalance){
         this();
@@ -42,14 +44,26 @@ public class Account { //la visibilità di default vuol dire visibile all'intern
 
     // FUNZIONI - prima quelle importanti poi le getter o le setter
     public void printBalance(){
-        System.out.printf("Il conto con id %d ha come saldo %f%n", id, balance);
+        System.out.println("Durante questa esecuzione di printBalance this è uguale a " + this);
+        System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
+    // esegue la funzione printf , da la stringa il %d ci finisce l'id che è un intero, %f mette la double balance e la %n mette a capo
+    // id e balance sono variabili di questo oggetto,(per esempio x)
+    // in un costruttore o in un metodo, this indica l'oggetto in cui sto lavorando con quel metodo
     public double deposit(double amount){ // deposito
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
+        // Creo un oggetto di tipo movement chiamandolo move, mettendo in input tutti gli argomenti, affidandoci al file della classe movement
+        movements.add(move); // stiamo aggiungendo questo nuovo oggetto (move) a movements
         balance += amount;
         return balance;
     }
     public double withdraw(double amount){ // prelievo
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDROWAL);
         doInternalOperation();
+        movements.add(move);
+        // viene creato un oggetto di tipo movement che registra il tipo di movimento e aggiunge alla lista il tipo di movimento
+        // questo tipo di movimento viene messo dentro alla lista di array 'movements'
+        // add è un metodo per aggiungere il movement nella lista dei movements (aggiungere questa funzione nella lista array)
         balance -= amount;
         return balance;
     }
@@ -68,8 +82,29 @@ public class Account { //la visibilità di default vuol dire visibile all'intern
     public LocalDate getCreationDate() {
         return creationDate;
     }
-    public void setCreationDate(LocalDate cr) {
-        creationDate = cr;
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+    //questo this, il campo creation date sul campo in cui lo sto creando
+    public double getSumDeposits(){
+        double sum = 0;
+//        Object o1 = movements.get(0);
+//        Movement m1 = (Movement)o1;
+        //Movement m1 = (Movement)movements.get(0); // questo metodo prende il primo elemento dell'array list
+        // cast forzato, il compilatore non si fida che dentro l'array ci siano solo movements. mettendo Movement dentro le parentesi
+        // forzando il compilatore a leggere soltanto i tipi movements.
+        // m1 è un indirizzo del movimento di tipo Movement
+        for(int i = 0; i < movements.size(); i++){
+            Object ob = movements.get(i);
+            Movement m = (Movement)ob;
+            if(m.getType() == MovementType.DEPOSIT){
+                sum += m.getAmount();
+            }
+        }// abbiamo trasformato array movements in un tipo object generico, e poi castarlo in movements
+        // controlla nell'if se nella lista degli array ci sono dei depositi. gettype DEPOSIT è i valore dei tipi di movimento
+        //aggiunge il valore del deposito alla somma di sum se il tipo di movimento è DEPOSIT
+        return sum;
     }
 }
 
