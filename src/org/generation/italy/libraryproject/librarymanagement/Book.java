@@ -1,5 +1,7 @@
 package org.generation.italy.libraryproject.librarymanagement;
 
+import java.util.ArrayList;
+
 public class Book {
     private static int booksCounter = 0;
     private static int fictionCounter = 0;
@@ -7,6 +9,7 @@ public class Book {
     private static int fantasyCounter = 0;
     private static int historyCounter = 0;
     private static int javaCodingCounter = 0;
+    private static ArrayList booksArrayList = new ArrayList();
     private String title;
     private int numPages;
     private double price;
@@ -24,11 +27,13 @@ public class Book {
         this.releaseDate = releaseDate;
         this.publishingHouse = publishingHouse;
         this.category = category;
+
         incrementCounter(category);
+        booksArrayList.add(this);
     }
 
     // METODI
-    public void incrementCounter(Categories category){
+    private void incrementCounter(Categories category){
         booksCounter++;
         if(category == Categories.FICTION){
             fictionCounter++;
@@ -43,7 +48,7 @@ public class Book {
         }
     }
 
-    public int getNumberOfBooks(Categories category){
+    public int getNumberOfBooksByCategories(Categories category){
         if(category == Categories.FICTION){
             return fictionCounter;
         }else if(category == Categories.NON_FICTION){
@@ -56,6 +61,27 @@ public class Book {
             return javaCodingCounter;
         }else{
             return 0;
+        }
+    }
+
+    public double getTotalCostOfBooksByAuthor(String authors){
+        double totalCost = 0;
+        for(Object obj : booksArrayList){
+            Book b = (Book) obj;
+            if(b.authors.equals(authors)){
+                totalCost += b.price;
+            }
+        }
+        return totalCost;
+    }
+
+    public void getBooksByTitle(String title){
+        String format = "Titolo: %s | Numero di pagine: %d | Costo: %f | Autore/i: %s | Anno di pubblicazione: %d | Casa editrice: %s | Categoria: %s";
+        for(Object obj : booksArrayList){
+            Book b = (Book) obj;
+            if(b.title.equals(title)){
+                System.out.printf(format, b.title, b.numPages, b.price, b.authors, b.releaseDate, b.publishingHouse, b.category.toString());
+            }
         }
     }
 
