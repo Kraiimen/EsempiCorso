@@ -16,7 +16,10 @@ public class Start {
         x.withdraw(60);
         x.printBalance();
         Movement m1 = new Movement(100.0, x.getBalance(), LocalDateTime.now(), MovementType.DEPOSIT);
-        x.printBalance();
 
+        double depositSum = x.getDepositSum();
+        System.out.println(depositSum);
+
+        x.printMovements();
     }
 }

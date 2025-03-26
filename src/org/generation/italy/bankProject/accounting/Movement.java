@@ -1,6 +1,7 @@
 package org.generation.italy.bankProject.accounting;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Movement {
     private double amount;
@@ -13,6 +14,18 @@ public class Movement {
         this.currentBalance = currentBalance;
         this.operationTime = operationTime;
         this.type = type;
+    }
+
+    public String toString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String formattedData = operationTime.format(formatter);
+
+        return String.format("------------------\n" +
+                             "TYPE: %-10s\n" +
+                             "AMOUNT: %.2f€\n" +
+                             "DATA: %s\n" +
+                             "------------------",
+                             type, amount, formattedData);
     }
 
     public double getAmount(){
