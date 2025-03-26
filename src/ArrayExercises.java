@@ -105,4 +105,6 @@ public class ArrayExercises {
 // non esistano 3 numeri consecutivi la cui somma è maggiore di 12
 
     }
-}
+} 
+
+
