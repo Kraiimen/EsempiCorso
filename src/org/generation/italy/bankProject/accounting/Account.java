@@ -1,6 +1,7 @@
 package org.generation.italy.bankProject.accounting;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Account {
@@ -11,7 +12,7 @@ public class Account {
 
     //ATTRIBUTI or FIELDS or VARIABILI DEGLI OGGETTI
     private static int lastId; //usando "static" ogni conto avrà il suo lastId
-    public double bal;
+    private double balance;
     private int id;
     private LocalDate creationDate;
     private ArrayList movements;
@@ -26,12 +27,14 @@ public class Account {
         id = lastId;
 //        this(0);
         creationDate = LocalDate.now();
+        movements = new ArrayList();
+
     }
     public Account(double initialBalance) {
 //        lastId++;
 //        id = lastId;
         this();
-        bal = initialBalance;  //Account è il nome di tutti e due i costruttori, ma li differenzierò perchè avranno parametri diversi
+        balance = initialBalance;  //Account è il nome di tutti e due i costruttori, ma li differenzierò perchè avranno parametri diversi
     }
     public Account(double initialBalance, LocalDate creationDate) {
         this(initialBalance);
@@ -45,28 +48,34 @@ public class Account {
 
     //FUNZIONI - prima quelle importanti poi le getter o setter
     public void printBalance(){
-        System.out.printf("Il conto con id %d ha come saldo %f%n", id, bal);
+        System.out.println("Durante quetsa esecuzione, this è uguale a " +this);
+        System.out.printf("Il conto con id %d ha come saldo %f%n", /*this.*/id, /*this.*/balance);
     }
     public double deposit(double amount){
-        bal += amount;
-        return bal;
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
+        movements.add(move);
+        balance += amount;
+        return balance;
+
     }
     public double withdraw(double amount){
         doInternalOperation();
-        bal -= amount;
-        return bal;
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
+        movements.add(move);
+        balance -= amount;
+        return balance;
     }
     private void doInternalOperation(){
 
     }
     public double getBalance(){
-        return bal / 100;
+        return balance;
     }
     public void setBalance(double newBalance){
         if(newBalance <= 0){
             return;
         }
-        bal = newBalance;
+        balance = newBalance;
     }
     public LocalDate getCreationDate() {
         return creationDate;
@@ -75,6 +84,20 @@ public class Account {
         creationDate = cr;
     }
 
+    public double getSumDeposits() {
+        double sum = 0;
+        Movement m1 = (Movement)movements.get(0); //procedimento simile alle [] dell'array
+
+        for(int i = 0; i < movements.size(); i++) {
+            Object ob = movements.get(i);
+            Movement m = (Movement)ob;
+            if(m.getType() == MovementType.DEPOSIT) {
+               sum += m.getAmount();
+               //sum = sum + m.getAmount();
+            }
+        }
+        return sum;
+    }
 
 }
 

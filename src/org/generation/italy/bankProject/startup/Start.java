@@ -23,6 +23,16 @@ public class Start {
 //        Account y = new Account(1000);
         Movement m1 = new Movement(100.0, 10000.0, LocalDateTime.now(), MovementType.DEPOSIT);
         Movement m2 = new Movement(100.0, 10000.0, LocalDateTime.now(), MovementType.WITHDRAWAL);
-        Account z = new Account(10000);
+//        Account z = new Account(10000);
+//        System.out.println("l'inidrizzo di z è " +z);
+//        Account w = new Account(20000);
+//        System.out.println("l'inidrizzo di w è " +w);
+//        System.out.println("sto per chiamare printBalance su z facendo z.printBalance");
+//        //System.out.println(z.bal);
+//        //System.out.println(w.bal);
+//        z.printBalance();
+//        w.printBalance();
+        double depositSum = x.getSumDeposits();
+        System.out.println(depositSum);
     }
 }
