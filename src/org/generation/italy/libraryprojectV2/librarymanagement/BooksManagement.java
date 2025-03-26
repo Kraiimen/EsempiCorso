@@ -1,46 +1,37 @@
-package org.generation.italy.libraryproject.librarymanagement;
+package org.generation.italy.libraryprojectV2.librarymanagement;
 
 import java.util.ArrayList;
 
-public class Book {
-    private static int booksCounter = 0;
-    private static int fictionCounter = 0;
-    private static int nonFictionCounter = 0;
-    private static int fantasyCounter = 0;
-    private static int historyCounter = 0;
-    private static int javaCodingCounter = 0;
+public class BooksManagement {
+    private int booksCounter;
+    private int fictionCounter;
+    private int nonFictionCounter;
+    private int fantasyCounter;
+    private int historyCounter;
+    private int javaCodingCounter;
 
     // ArrayList dove andranno gli oggetti di tipo Book
-    private static ArrayList booksArrayList = new ArrayList();
+    private ArrayList booksArrayList;
 
-    private String title;
-    private int numPages;
-    private double price;
-    private String authors;
-    private int releaseDate;
-    private String publishingHouse;
-    private Categories category;
-
-    // COSTRUTTORI
-    public Book(String title, int numPages, double price, String authors, int releaseDate, String publishingHouse, Categories category) {
-        this.title = title;
-        this.numPages = numPages;
-        this.price = price;
-        this.authors = authors;
-        this.releaseDate = releaseDate;
-        this.publishingHouse = publishingHouse;
-        this.category = category;
-
-        incrementCounter(category);
-        booksArrayList.add(this); // Aggiungiamo l'oggetto creato all'ArrayList
+    public BooksManagement(){
+        booksArrayList = new ArrayList();
     }
 
     // METODI
 
-    // Incrementa il contatore dei libri generale e della categoria specifica
-    private void incrementCounter(Categories category){
+    // Aggiunge il libro creato all'ArrayList e aumenta il contatore dei libri
+    public void addBook(Book book){
+        booksArrayList.add(book);
         booksCounter++;
 
+        // Aumenta il contatore dei libri di una categoria specifica
+        incrementCounter(book.getCategory());
+
+//        book.setId(booksCounter);
+    }
+
+    // Incrementa il contatore dei libri generale e della categoria specifica
+    private void incrementCounter(Categories category){
         if(category == Categories.FICTION){
             fictionCounter++;
         }else if(category == Categories.NON_FICTION){
@@ -77,8 +68,8 @@ public class Book {
 
         for(Object obj : booksArrayList){
             Book b = (Book) obj;
-            if(b.authors.contains(authors)){
-                totalCost += b.price;
+            if(b.getAuthors().contains(authors)){
+                totalCost += b.getPrice();
             }
         }
 
@@ -91,14 +82,23 @@ public class Book {
 
         for(Object obj : booksArrayList){
             Book b = (Book) obj;
-            if(b.title.equals(title)){
-                System.out.printf(format, b.title, b.numPages, b.price, b.authors, b.releaseDate, b.publishingHouse, b.category.toString());
+            if(b.getTitle().equals(title)){
+                System.out.printf(format, b.getTitle(), b.getNumPages(), b.getPrice(), b.getAuthors(), b.getReleaseDate(), b.getPublishingHouse(), b.getCategory().toString());
             }
         }
 
     }
 
-    // Getter dell'attributo booksCounter
+    public void categoryThatAppearsTheMost(){
+        int max = fictionCounter;
+    }
+
+//    public String getBookTitle(int bookId){
+//        Book b = (Book) booksArrayList.get(bookId-1);
+//        return b.getTitle();
+//    }
+
+    // Getters
     public int getBooksCounter() {
         return booksCounter;
     }
