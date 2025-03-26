@@ -71,7 +71,7 @@ public class Account { //la visibilità di default vuol dire visibile all'intern
 
     }
     public double getBalance(){
-        return balance; // ritorna in euro, non centesimi
+        return balance;
     }
     public void setBalance(double newBalance){
         if (newBalance < 0){ // se il balance è minore di 0 ritorna nulla
@@ -105,6 +105,23 @@ public class Account { //la visibilità di default vuol dire visibile all'intern
         // controlla nell'if se nella lista degli array ci sono dei depositi. gettype DEPOSIT è i valore dei tipi di movimento
         //aggiunge il valore del deposito alla somma di sum se il tipo di movimento è DEPOSIT
         return sum;
+    }
+    // voglio un metodo che mi dia la somma delle cifre relative a movimenti di un tipo che gli passo in input(deposit o withdrawn)
+    // questi movimenti di cui avrò la somma devono essere compresi in un range di date che passo in input
+    //a questa funzione passerò un valore double che sarà la soglia sotto la quale non voglio vedere i movimenti
+    // double sum = c.getTotalAmountFor(MovementType.WITHDRAWAL, LocalDate.of(2025,1,15), LocalDate.of(2025,2,20), 200.0)
+    public double getTotalAmountFor(MovementType type, LocalDate start, LocalDate end, double lowerBound){
+        double totalAmount = 0;
+        for(Object ob : movements){
+            Movement m = (Movement)ob;
+            LocalDate movementDate = m.getOperationTime().toLocalDate();
+            // nel movement che abbiamo registrato dobbiamo compararlo con quello che immetiamo
+            boolean isInRange = movementDate.isAfter(start) && movementDate.isBefore();
+            if(m.getType() == type && isInRange && m.getAmount() >= lowerBound){
+                totalAmount += m.getAmount();
+            }
+        }
+        return totalAmount;
     }
 }
 
