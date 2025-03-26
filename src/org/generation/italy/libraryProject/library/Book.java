@@ -43,7 +43,7 @@ public class Book {
     public Category getCategoryType() {
         return categoryType;
     }
-
+  // Se implementiamo questo metodo verrà chiamato automaticamente quando manderò ìn input un oggetto.
     public String toString(){
         return "Title: "+ title + "\nNumPages: " + numPages + "\nCost: " + cost + "\nAuthor: " + author + "\nYear of Publication: " + yearPub + "\nPublishingHouse: "+ pubHouse + "\nCategory Type: "+ categoryType;
     }
