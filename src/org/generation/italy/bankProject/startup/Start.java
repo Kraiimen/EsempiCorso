@@ -4,6 +4,7 @@ import org.generation.italy.bankProject.accounting.Account;
 import org.generation.italy.bankProject.accounting.Movement;
 import org.generation.italy.bankProject.accounting.MovementType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -20,9 +21,17 @@ public class Start {
 //        x.bal = x.bal + 100_00;         }operazioni possibili solo in caso di variabile public, da evitare.
 //        x.bal = 100000000;
         x.setBalance(100);
+        x.printBalance();
+        x.setBalance(-100);
+        x.printBalance();
+        System.out.println(x.getBalance());
 //        Account y = new Account(1000);
         Movement m1 = new Movement(100.0, 10000.0, LocalDateTime.now(), MovementType.DEPOSIT);
         Movement m2 = new Movement(100.0, 10000.0, LocalDateTime.now(), MovementType.WITHDRAWAL);
         Account z = new Account(10000);
+        LocalDate endOfMarch = LocalDate.of(2025,3,31);
+        Account t = new Account(10000, endOfMarch);
+        double depositSum = x.getSumDeposity();
+        System.out.println(depositSum);
     }
 }
