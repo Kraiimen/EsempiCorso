@@ -116,7 +116,7 @@ public class Account { //la visibilità di default vuol dire visibile all'intern
             Movement m = (Movement)ob;
             LocalDate movementDate = m.getOperationTime().toLocalDate();
             // nel movement che abbiamo registrato dobbiamo compararlo con quello che immetiamo
-            boolean isInRange = movementDate.isAfter(start) && movementDate.isBefore();
+            boolean isInRange = movementDate.isAfter(start) && movementDate.isBefore(end);
             if(m.getType() == type && isInRange && m.getAmount() >= lowerBound){
                 totalAmount += m.getAmount();
             }
