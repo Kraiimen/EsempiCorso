@@ -86,7 +86,7 @@ public class Account {
 	//double sum = c.getTotalAmountFor(MovementType.WITHDRAWAL, localDate.of(2025,1,15), LocalDateof(2025,2,20), double 200.0)
 	public double getTotalAmountFor(MovementType type, LocalDate start, LocalDate end, double lowerBound) {
 		double totalAmount = 0;
-		for (Object ob : movements) {
+		for (Object ob : movements) {  // Per ogni Object ob
 			Movement m = (Movement)ob;  // Cast dell'Object a Movement
 			LocalDate movementDate = m.getOperationTime().toLocalDate();
 			boolean isInRange = movementDate.isAfter(start) && movementDate.isBefore(end);
