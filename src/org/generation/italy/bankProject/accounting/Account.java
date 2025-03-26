@@ -98,12 +98,22 @@ public class Account {
         }
         return sum;
     }
-    //somma delle cifre relative a movimenti di un tipo che passo in input che devono essere compresi in un range di date che passo in input
-    //alla funzione passerò un valore in double e lei dovrà considerare solo i movimenti che hanno un amount maggiore al valore dato
-    // double sum = c.getTotalAmountFor(MovementType.WITHDRAWAL, LocalDate.of(2025,1,15),LocalDate.of(2025,2,20), 200.0);
-public double getTotalAmountFor
-
-
+    //voglio un metodo che mi dia la somma delle cifre relative a movimenti di un tipo che gli passo in input (deposit o withdrawal)
+    //questi movimenti di cui avrò la somma devono essere compresi in un range di date che passo in input
+    //a questa funzione passerò un valore double che sarà la soglia sotto la quale non voglio vedere i movimenti
+    //double sum = c.getTotalAmountFor(MovementType.WITHDRAWAL , LocalDate.of(2025,1,15) , LocalDate.of(2025,2,20) , 200.0)
+    public double getTotalAmountFor(MovementType type, LocalDate start, LocalDate end, double lowerBound){
+        double totalAmount = 0;
+        for(Object ob : movements){
+            Movement m = (Movement)ob;
+            LocalDate movementDate = m.getOperationTime().toLocalDate();
+            boolean isInRange = movementDate.isAfter(start) && movementDate.isBefore(end);
+            if(m.getType() == type && isInRange && m.getAmount() >= lowerBound){
+                totalAmount += m.getAmount();
+            }
+        }
+        return totalAmount;
+    }
 }
 
 
