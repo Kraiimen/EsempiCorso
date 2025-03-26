@@ -1,108 +1,143 @@
+
+
 public class ArrayExercises {
-    public static void main(String[] args){
-// es 1: creare un array di 5 interi e inizializzarlo con i primi numeri da 1 a 5 al quadrato
-// es 2 calcolare e stampare il valore della somma di tutti i numeri dell'array 
-// es 3 calcolare e stampare il valore minimo contenuto nell'array
-// es 4 calcolare il valore medio contenuti  nell'array (somma dei valori, sarà un double)
-// es 5 calcolare e stampare il numero di multipli di 2 che esistono all'interno dall'array (multipli di due)
-// es 6 dato un valore arbitrario(int x = 4) calcolare e stampare il numero di volte in cui l'array contiene il valore di x
-// es 7 creare un codice che inverta l'array
+    public static void main(String[] args) {
+        //Esercizio 1: Creare un array di 5 interi e inizializzarlo con i primi numeri da 1 a 5 al quadrato
 
-// es 8 dato un numero arbitrario (int z = 8) verificare quante volte nell'array succede che ne''array ci sono due numeri consecutivi in cui la somma fa z
-// es 9 verificare che nell'array non esistano 3 numeri consecutivi la cui somma è maggiore di 12
-// es 10 trovare il numero in cui appare più volte nell'array (2, 7, 12, 2, 7) va bene anche uno dei due
+        //int[] squareNumbers = new int[5];
+        //for(int i = 0; i < squareNumbers.length-1; i++) {squareNumbers[i] = (i+1) * (i+1);
+        //}
 
-// ESERCIZIO 1 creare un array di 5 interi e inizializzarlo con i primi numeri da 1 a 5 al quadrato
-        System.out.println("Esercizio 1: ");
-        int [] array1 = new int [5]; // creo una array che chiamo numbers di 5 interi
-        for (int i = 0; i < array1.length ; i++) { //creo un ciclo, creando un intero di valore 0 di nome i, inizio iniziando da 1 all'ultimo, + 1 
-            array1[i] = (i + 1)* (i + 1); // array 1 è assegnato a i e sta a array+1 x array+1 quindi è array al quadrato
-        }
-        for (int n : array1){ // i : è for each 
-            System.out.println(n); // stampa ogni array al quadrato
-        }
+        //Esercizio 1.5 assegna all'array il quadrato di un qualsiasi numero all'interno di un array
 
-// ESERCIZIO 2 calcolare e stampare il valore della somma di tutti i numeri dell'array 
-        System.out.println("\nEsercizio 2: ");
-        int somma = 0; // creo una variabile intera con valore 0
-        for(int i = 0; i < array1.length; i++){ // creo un ciclo delle array
-            somma = somma + array1[i]; //somma equivale a valore della somma + aarray assegnato a i
-        }
-        System.out.println("La somma di tutti i numeri dell'array è: " + somma); // stampo la somma 
-
-// ESERCIZIO 3 calcolare e stampare il valore minimo contenuto nell'array
-        System.out.println("\nEsercizio 3: ");
-        int min = array1[0]; // assegno variabile min al primo array
-        for(int i = 0; i < array1.length; i++){ // inizio ciclo
-            if (array1[i] < min){ // se l'array è minore del primo
-                min = array1[i]; // allora l'array i è il nuovo minimo dell'array
-            }
-        }
-        System.out.println("Il valore minimo è: " + min);
-
-// ESERCIZIO 4 calcolare il valore medio contenuti  nell'array (somma dei valori, sarà un double)
-        System.out.println("\nEsercizio 4: ");
-        double[] array2 = {1.0, 2.0, 3.0, 4.0, 5.0};
-        double som = 0; // dichiaro e inizializzo dell'array con 5 valori
-        for (double numero : array2){ // ciclo for - each per calcolare la somma di tutti gli elementi
-            som += numero; 
-        }
-        double valMedio = som/array2.length; //la media si ottiene dividendo gli elementi dell'array
-        System.out.println("\nla somma è " + som);
-        System.out.println("la media è " + valMedio);
-
-// ESERCIZIO 5 calcolare e stampare il numero di multipli di 2 che esistono all'interno dall'array (multipli di due)   
-        System.out.println("\nEsercizio 5: ");
-        int count = 0; // contatore dei multipli di 2
-        System.out.println("I multipli di 2 sono: ");
-        for(int i = 0; i < array1.length; i++){
-            if (array1[i] % 2 == 0 ){ // controlla se è multiplo di 2 
-                System.out.println(array1[i] + " ");
-                count++;  //stampa il numero e incrementa il contatore
-            }
-        }    
-        System.out.println("\nNumero totale di multipli di 2: " + count);
-
-// ESERCIZIO 6 dato un valore arbitrario(int x = 4) calcolare e stampare il numero di volte in cui l'array contiene il valore di x
-        System.out.println("\nEsercizio 6: ");
-        int x = 4; // assegno il valore di 4 alla nuova variabile 
-        int coun = 0; // dichiaro una variabile per contare le numero di volte che c'è il valore di x
-        System.out.println("Le numero di volte in cui l'array contiene il valore di 4 è: ");
-        for(int i = 0; i < array1.length; i++){
-            if (array1[i] == 4){ // se array è uguale a 4 allora aggiunge 1 al conto 
-                coun++;
-            }
-        } 
-        System.out.println(coun);
-
-// ESERCIZIO 7 creare un codice che inverta l'array
-        System.out.println("\nEsercizio 7");
-        System.out.println("\nArray inverso: ");
-        int[] reverse = new int[array1.length]; // creo una nuova array che chiamo reverse dell'array già esistente
-        for (int i = 0; i < array1.length; i++){ // creo un ciclo con l'interezza dell'array nome reverse
-            reverse[i] = array1[array1.length-1-i]; // copia i valori dell'array originale ma in ordine inverso 
-            System.out.println(reverse[i]); // stampo all'interno del for il reverse
-        }
-// ESERCIZIO 8 dato un numero arbitrario (int z = 8) 
-// verificare quante volte nell'array succede che nell'array 
-// ci sono due numeri consecutivi in cui la somma fa z
-        System.out.println("\nEsercizio 8");
-        int array3[] = {2,4,4,3,5};
-        int z = 8; // dichiaro una variabile di nome z con valore 8
-        int counter = 0; // creo una variabile per contare il numero di volte in cui ci sta la somma di z
+        // for(int es2 = 0; es2 < squareNumbers.length-1; es2++) {
+        //     squareNumbers[es2] = squareNumbers[es2] * squareNumbers[es2];
+        //     System.out.println(squareNumbers[es2]); //Check
+        // }
         
-        System.out.println("Array attuale: ");
 
-        for (int i = 0; i < array3.length - 1; i++){//inizia con zero e va avanti fino alla fine -1
-            System.out.println(array3[i]);
-            if(array3[i] + array3[i+1] == z){
-                counter++;
+
+        
+        //Esercizio 2: Calcolare e stampare il valore della somma di tutti i numeri contenuti nell'array
+
+        // int sum = 0;
+        // for (int es2 = 0; es2 < 5; es2++) {
+        //     sum += squareNumbers[es2];
+        // }
+        // System.out.println(sum);
+
+
+
+
+        //Esercizio 3: Calcolare e stampare il valore minimo contenuto nell'array
+
+
+
+
+        
+        //Esercizio 4: Calcolare il valore medio dei numeri contenuti nell'array(somma dei valori/numero di valori -- sarà un double)
+
+        // double[] array4 = {5.0,7.0,9.0,12.0,15.0};
+        // double sum = 0;
+        // for(int es4 = 0; es4 < array4.length; es4++) {
+        //     sum += array4[es4];
+        // }
+        // double valoreMedio = sum/array4.length;
+        // System.out.println(valoreMedio);
+
+
+        //Esercizio 5: Calcolare e stampare il numero di multipli di due che esistono all'interno dell'array
+
+
+
+
+        //Esercizio 6: Dato un valore arbitrario es(int x = 4) calcolare e stampare il numero di volte in cui l'array contiene il valore x
+
+
+
+
+        //Esercizio 7: Crea un codice che inverte un array
+
+        // int[] array7 = {1,2,3,4,5,6,7,8,9,10};
+        // for(int es7 = 0, es7_1 = array7.length-1; es7 < es7_1; es7_1--, es7++) {
+        //      int storeValue = array7[es7_1];
+        //      array7[es7_1] = array7[es7];
+        //      array7[es7] = storeValue;
+             
+        // }
+        //     for(int b = 0; b < array7.length; b++) {
+        //         System.out.println(array7[b]);
+        //     }
+            
+        //Esercizio 8: Dato un numero arbitrario es.(int z = 4), 
+        //verificare quante volte succede nell'array che ci siano due numeri consecuitivi la cui somma fa z
+
+        // int[] array8 = {2,2,1,2,2,1,2,2};
+        // int z = 4;
+        // int counter = 0;
+        // for(int es8 = 0; es8 < array8.length -1; es8++) {
+        //     if(array8[es8] + array8[es8+1] == z) {
+        //         counter++;
+        //     }    
+        // }
+        // System.out.println(counter); 
+
+        //Esercizio 9: Verificare che nell'array non esistano tre numeri consecutivi la cui somma è maggiore di 12
+
+        // int[] array9 = {0,2,6,6,2,1,1,3};
+        // boolean check = true;
+        // for(int es9 = 0; es9 < array9.length-2; es9++) {
+        //     if(array9[es9] + array9[es9+1] + array9[es9+2] < 12) {
+        //         System.out.println("nessuna somma di 3 valori consecutivi supera 12");
+        //         check = false;
+        //         break;
+        //     }
+        // }
+        // if(check == true) {
+        //     System.out.println("la somma di 3 numeri consecutivi è maggiore di 12");
+        // }
+
+
+        //Esercizio 10: Trovare il numero che appare più volte nell'array [2, 7 , 12, 7 , 2] - se i due valori più comuni appaiono lo stesso numero di volte stamparne solo 1.
+
+        int[] array10 = {2,7,12,7,2};
+        int counter = 0;
+        int maxCount = 0;
+        outer:for(int es10 = 0; es10 < array10.length; es10++) {
+            boolean check10 = true;
+            for(int es10_2 = 0; es10_2 < array10.length; es10_2++) {
+                if(array10[es10] == array10[es10_2]) {
+                    counter++;
+                    
+                    System.out.println(array10[es10_2]);
+                    // break outer;
+                    if(counter > maxCount){
+                        maxCount = counter;
+                    }
+
+                    break;
+                }
             }
         }
-        System.out.println("Le volte che la somma di due numeri consecutivi fa 8 è: " + counter);
 
-// ESERCIZIO 9: verificare che nell'array 
-// non esistano 3 numeri consecutivi la cui somma è maggiore di 12
+        //ESERCIZIO 11 ORDINA UN ARRAY IN ORDINE CRESCENTE CON IL BUBBLE SORT
+        int[] array11 = {555,3,11,76,99,123,155};
+        boolean swapped;
 
+        for(int i = 0; i < array11.length-1; i++){
+            //swapped = false;
+            //for(int j = 0; j < array11.length; j++){
+                if(array11[i] > array11[i+1]){
+                    int temp = array11[i];
+                    array11[i] = array11[i+1];
+                    array11[i+1] = temp;
+                }
+            }
+        for (int es11 = 0; es11 < array11.length-1; es11++){
+            System.out.print(array11[es11] + " ");
+        }
+
+        //}
     }
 }
+
