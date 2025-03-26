@@ -75,11 +75,29 @@ public class Account {
 			Object ob = movements.get(i);
 			Movement m = (Movement)ob;
 			if (m.getType() == MovementType.DEPOSIT) {
-				sum += m.getAmount(); //Se l'if è rispettato vado a sommare al totale l'amount dell'oggetto Momevent
+				sum += m.getAmount(); //Se l'if è rispettato vado a sommare al totale l'amount dell'oggetto Movement
 			}
 		}
 		return sum;
 	}
+
+	// Voglio un metodo che mi dia la somma delle cifre relative a movimenti (operazioni) di un tipo che gli passo in input (deposit o withdrawal), i movimenti devono essere compresi in un range di Date cge gli passo in input
+	// Alla funzione devo passare un valore double che sarà la soglia sotto la quale non voglio vedere i movimenti
+	//double sum = c.getTotalAmountFor(MovementType.WITHDRAWAL, localDate.of(2025,1,15), LocalDateof(2025,2,20), double 200.0)
+	public double getTotalAmountFor(MovementType type, LocalDate start, LocalDate end, double lowerBound) {
+		double totalAmount = 0;
+		for (Object ob : movements) {
+			Movement m = (Movement)ob;  // Cast dell'Object a Movement
+			LocalDate movementDate = m.getOperationTime().toLocalDate();
+			boolean isInRange = movementDate.isAfter(start) && movementDate.isBefore(end);
+			if(m.getType() == type && isInRange && m.getAmount() >= lowerBound) {
+				totalAmount += m.getAmount();
+			}
+		}
+		return totalAmount;
+	}
+
+
 
 	private void doInternalOperation() {
 
