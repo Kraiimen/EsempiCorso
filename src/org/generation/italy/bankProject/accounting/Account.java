@@ -11,7 +11,6 @@ public class Account {
 
 
     //ATTRIBUTI or FIELDS or VARIABILI DEGLI OGGETTI
-
     private static int lastId; //usando "static" ogni conto avrà il suo lastId
     private double balance;
     private int id;
@@ -23,7 +22,6 @@ public class Account {
 
 
     //COSTRUTTORI
-
     public Account() {
         lastId++;
         id = lastId;
@@ -100,5 +98,4 @@ public class Account {
         }
         return sum;
     }
-
 }
