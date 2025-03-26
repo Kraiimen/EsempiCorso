@@ -39,9 +39,9 @@ public class Account {
     }
 
     public double deposit(double amount){
-        Movement deposit = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
         balance += amount;
-        movements.add(deposit);
+        movements.add(move);
         return balance;
     }
 
@@ -76,6 +76,7 @@ public class Account {
             if(m.getType() == MovementType.DEPOSIT) {
                 sum += m.getAmount();
             }
+
         }
         return sum;
     }
