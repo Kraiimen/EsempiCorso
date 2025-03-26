@@ -25,7 +25,7 @@ public class Account {
     public Account() {
         lastId++;
         id = lastId;
-        //this(0);
+//        this(0);
         creationDate = LocalDate.now();
         movements = new ArrayList();
     }
@@ -47,16 +47,18 @@ public class Account {
 
     //FUNZIONI - prima quelle importanti poi le getter o setter
     public void printBalance(){
-        System.out.printf("Il conto con id %d ha come saldo %f%n", id, balance);
+        System.out.println("durante questa esecuzione di printBalance this è uguale a " +this);
+        System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
     public double deposit(double amount){
-        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT );
         movements.add(move);
         balance += amount;
         return balance;
     }
     public double withdraw(double amount){
-        Movement move = new Movement (amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
+        doInternalOperation();
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
         movements.add(move);
         balance -= amount;
         return balance;
@@ -76,10 +78,26 @@ public class Account {
     public LocalDate getCreationDate() {
         return creationDate;
     }
-    public void setCreationDate(LocalDate cr) {
-        creationDate = cr;
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
     }
+    public double getSumDeposits(){
+        double sum = 0;
+//        movements.add(0,"pippo");
+//        Object o1 = movements.get(0);
+//        Movement m1 = (Movement)o1;
+        for(int i = 0 ; i < movements.size() ; i++) {
+            Object ob = movements.get(i);
+            Movement m = (Movement)ob;
+//            Movement m2 = (Movement)movements.get(i);
+            if(m.getType() == MovementType.DEPOSIT) {
+                sum += m.getAmount();
+//                sum = sum + m.getAmount();
 
+            }
+        }
+        return sum;
+    }
 
 }
 
