@@ -8,7 +8,7 @@ public class Account { //la visibilità di default vuol dire visibile all'intern
     // in un file java può essere presente solo una classe pubblica che deve essere chiamata come il file
     // private = visibile solo nella classe che lo definisce (utilizzando prettamente per le variabili) private != cybersecurity
 
-    //ATTRIBUTI - FIELDS - VARIABILI DEGLI OGGETTI
+    //ATTRIBUTI - FIELDS - VARIABILI DEGLI OGGETTI/ CLASSE
     private static int lastId; // prima quelle static e poi quella instances. serve assegnare a ogni id che creo un id differenza. deve essere statica altrimenti si resetta a 0
     public double balance;// la sua balance
     private int id; // il suo identificativo
