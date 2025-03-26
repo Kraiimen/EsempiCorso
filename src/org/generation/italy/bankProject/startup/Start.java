@@ -23,6 +23,5 @@ public class Start {
 //        Account y = new Account(1000);
         Movement m1 = new Movement(100.0, 10000.0, LocalDateTime.now(), MovementType.DEPOSIT);
         Movement m2 = new Movement(100.0, 10000.0, LocalDateTime.now(), MovementType.WITHDRAWAL);
-        Account z = new Account(10000);
     }
 }
