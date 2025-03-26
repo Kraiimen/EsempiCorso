@@ -3,7 +3,7 @@ package org.generation.italy.libraryProject.library;
 import java.time.LocalDate;
 
 public class Book {
-    private String title;   // Variabili di istanza
+    private String title;   // Variabili di istanza dell oggetto
     private int numPages;
     private double cost;
     private String author;
