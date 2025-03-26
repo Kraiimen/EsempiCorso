@@ -2,10 +2,10 @@ public class ArrayExamples {
     public static void main(String[] args) {
         int numbers[] = new int[5];
 
-        //Traccia esercizio 1: Voglio inserire dentro l'array numbers i quadrati dei numeri da 1 a 5
+        // Traccia esercizio 1: Voglio inserire dentro l'array numbers i quadrati dei numeri da 1 a 5
 
-        //Inseriamo nell'array numbers[] i numeri interi da 1 alla lunghezza dell'array (5 in questo caso)
-        //E calcoliamo il quadrato di ogni valore e lo sostituiamo nell'array numbers[]
+        // Inseriamo nell'array numbers[] i numeri interi da 1 alla lunghezza dell'array (5 in questo caso)
+        // E calcoliamo il quadrato di ogni valore e lo sostituiamo nell'array numbers[]
         System.out.println("\nQuadrati dei numeri in numbers[]:");
         for(int i=0; i<numbers.length; i++){
             // numbers[i] = i+1; // Valori da 1 alla lunghezza dell'array
@@ -15,7 +15,7 @@ public class ArrayExamples {
             System.out.println("- numbers["+i+"]: "+numbers[i]);
         }
         
-        //Traccia esercizio 2: Calcolare e stampare la somma di tutti i valori all'interno dell'array numbers[]
+        // Traccia esercizio 2: Calcolare e stampare la somma di tutti i valori all'interno dell'array numbers[]
 
         int sum = 0; // Variabile che conterrà il valore della somma
 
@@ -25,7 +25,7 @@ public class ArrayExamples {
 
         System.out.println("\nSomma dei valori in numbers[]: "+sum);
 
-        //Traccia esercizio 3: Calcolare e stampare il numero più grande
+        // Traccia esercizio 3: Calcolare e stampare il numero più grande
 
         int max = numbers[0]; // Dichiariamo max e lo inizializziamo al primo valore dell'array numbers[]
 

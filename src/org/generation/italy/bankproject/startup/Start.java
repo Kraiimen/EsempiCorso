@@ -4,8 +4,6 @@ import org.generation.italy.bankproject.accounting.Account;
 
 public class Start {
     public static void main(String[] args) {
-        Account a = new Account();
-
-        a.name = "prova";
+        Account a = new Account("", 0);
     }
 }
