@@ -13,10 +13,16 @@ public class Start {
         x.withdraw(60); // adesso invece ritiriamo 60 con la funzione withdraw
         x.printBalance(); // e printassimo il nuovo bilandio sarà 100-60
 //        System.out.println(x.bal/100);
-//        x.bal += 10_000;
+//        x.balance += 10_000;
         x.setBalance(100);
-        Account y = new Account();
+//        Account y = new Account();
         Movement m1 = new Movement(100.0, 100000.0, LocalDateTime.now(), MovementType.DEPOSIT);
         Movement m2 = new Movement(100.0, 100000.0, LocalDateTime.now(), MovementType.WITHDRAWAL);
+//        Account z = new Account(10_000);
+//        Account w = new Account(20_000);
+//        z.printBalance();
+//        w.printBalance();
+        double depositSum = x.getSumDeposits();
+        System.out.println(depositSum);
     }
 }

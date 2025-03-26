@@ -22,7 +22,7 @@ public class Movement {
         return this.currentBalance;
     }
     public LocalDateTime getOperationTime(){
-        return operationTime;
+        return this.operationTime;
     }
     public MovementType getType(){
         return this.type;
