@@ -93,10 +93,22 @@ public class Account {
             Movement m = (Movement)ob;
             if(m.getType() == MovementType.DEPOSIT) {
                sum += m.getAmount();
-               //sum = sum + m.getAmount();
+               //sum = sum + tm.getAmoun();
             }
         }
         return sum;
+    }
+    public double getTotalAmountFor(MovementType, LocalDate start, LocalDate end, double lowerBound) {
+        double totalAmount = 0;
+        for(Object ob: movements) {
+            Movement m = (Movement)ob;
+            LocalDate movementDate = m.getOperationTime().toLocalDate();
+            boolean isInRange = movementDate.isAfter(start) && movementDate.isBefore(end);
+            if(m.getType() == type && isInRange && m.getAmount() >= lowerBound) {
+                totalAmount += m.getAmount();
+            }
+        }
+        return totalAmount;
     }
 
 }
