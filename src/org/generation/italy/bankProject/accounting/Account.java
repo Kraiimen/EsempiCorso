@@ -98,6 +98,11 @@ public class Account {
         }
         return sum;
     }
+    //somma delle cifre relative a movimenti di un tipo che passo in input che devono essere compresi in un range di date che passo in input
+    //alla funzione passerò un valore in double e lei dovrà considerare solo i movimenti che hanno un amount maggiore al valore dato
+    // double sum = c.getTotalAmountFor(MovementType.WITHDRAWAL, LocalDate.of(2025,1,15),LocalDate.of(2025,2,20), 200.0);
+public double getTotalAmountFor
+
 
 }
 
