@@ -17,7 +17,7 @@ public class Account {
     private ArrayList movements;
     // Quando il compilatore vede il nome di una classe si chiede "Questa classe viene da Java.lang?" ovvero il package base del linguaggio java
     // se questo non è vero, si chiede "è dello stesso package di questa classe?" quindi se in un file si vuole usare una classe che sta nello stesso package del file, non c'è bisogno di importarla
-    // se non la trova nemmeno li controllerà la lista degli import ad inizio file
+    // se non la trova nemmeno li controllerà la lista degli import a inizio file
 
 
     //COSTRUTTORI
@@ -31,7 +31,7 @@ public class Account {
 //        lastId++;
 //        id = lastId;
         this();
-        bal = initialBalance;  //Account è il nome di tutti e due i costruttori, ma li differenzierò perchè avranno parametri diversi
+        bal = initialBalance;  //Account è il nome di tutti e due i costruttori, ma li differenzierò perché avranno parametri diversi
     }
     public Account(double initialBalance, LocalDate creationDate) {
         this(initialBalance);
@@ -40,7 +40,7 @@ public class Account {
     //invoco il costruttore (non necessario crearlo in quanto in assenza di costruttori in una classe il compilatore usa quello di default)
     // non c'è il tipo di ritorno perché il costruttore ritorna SEMPRE l'indirizzo dell'oggetto
     //il costruttore va sull' heap e mi alloca la memoria per contenere l'oggetto e inizializza le variabili dell'oggetto con i valori di default poi mi restituisce l'indirizzo
-    //Inzializza a valori di default le variabili dell'oggetto
+    //Inizializza a valori di default le variabili dell'oggetto
 
 
     //FUNZIONI - prima quelle importanti poi le getter o setter
