@@ -1,13 +1,29 @@
-package org.generation.italy.gryffindor.library;
+package org.generation.italy.gryffindor.library.libraries;
 
 import java.util.ArrayList;
 
 public class Bookstore {
+
     //        /---------/ ATTRIBUTI
     private String name;
     private ArrayList books;
 
-    //       /-METHODS-/
+    //       /---------/  CONSTRUCTORS
+
+    public Bookstore(String name) {
+        this.name = name;
+        books = new ArrayList();
+    }
+
+
+    //       /---------/ METHODS
+
+    public void addBook(Book b) {
+        if(books != null) {
+            books.add(b);
+        }
+    }
+
     public int getTotalBooks() {
         if (books == null) {
             return 0;
@@ -59,6 +75,9 @@ public class Bookstore {
     }
 
     public void printBookData(String title) {
+        if(books == null) {
+            return;
+        }
         if (containsOnlyBooks()) {
             for (Object obj : books) {
                 Book b = (Book)obj;
@@ -67,7 +86,34 @@ public class Bookstore {
                     System.out.println();
                 }
             }
+        }
+    }
 
+    public Category mostCommonCategory() {
+        if (books == null) {
+            return null;
+        }
+
+        int max = 0;
+        Category result = null;
+
+        for(Category c : Category.values()) {
+            int booksPerCategory = 0;
+
+            if (containsOnlyBooks()) {
+                for (Object obj : books) {
+                    Book b = (Book) obj;
+                    if (b.getCategory() == c) {
+                        booksPerCategory++;
+                    }
+                }
+            }
+            if (booksPerCategory > max) {
+                max = booksPerCategory;
+                result = c;
+            }
+        }
+        return result;
     }
 
 

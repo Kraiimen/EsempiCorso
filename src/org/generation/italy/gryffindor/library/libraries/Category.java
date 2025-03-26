@@ -1,4 +1,4 @@
-package org.generation.italy.gryffindor.library;
+package org.generation.italy.gryffindor.library.libraries;
 
 public enum Category {
     NARRATIVE,

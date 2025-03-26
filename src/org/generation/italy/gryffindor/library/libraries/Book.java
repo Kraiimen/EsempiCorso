@@ -1,8 +1,6 @@
-package org.generation.italy.gryffindor.library;
+package org.generation.italy.gryffindor.library.libraries;
 
-import java.time.LocalDate;
 import java.time.Year;
-import java.util.ArrayList;
 
 public class Book {
     //        /---------/ ATTRIBUTI
@@ -10,9 +8,21 @@ public class Book {
     private double price;
     private int pages;
     private String authors;
-    private Year year;
+    private Year release;
     private String editor;
     private Category cat;
+
+    //        /---------/ CONSTRUCTORS
+
+    public Book(String title, double price, int pages, String authors, Year release, String editor, Category cat) {
+        this.title = title;
+        this.price = price;
+        this.pages = pages;
+        this.authors = authors;
+        this.release = release;
+        this.editor = editor;
+        this.cat = cat;
+    }
 
 
     @Override
@@ -21,7 +31,7 @@ public class Book {
                    "Il prezzo è: " + price + "\n" +
                    "Il numero di pagine è: " + pages + "\n" +
                    "Il libro è stato scritto da: " + authors + "\n" +
-                   "L'anno di pubblicazione è: " + year.toString() + "\n" +
+                   "L'anno di pubblicazione è: " + release.toString() + "\n" +
                    "L'editore è: " + editor + "\n" +
                    "La categoria è: " + cat.toString();
         return s;
@@ -54,11 +64,11 @@ public class Book {
     public void setAuthors(String a) {
         authors = a;
     }
-    public Year getYear() {
-        return year;
+    public Year getRelease() {
+        return release;
     }
-    public void setYear(Year y) {
-        year = y;
+    public void setRelease(Year y) {
+        release = y;
     }
     public String getEditor() {
         return editor;
