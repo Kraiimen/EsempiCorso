@@ -70,6 +70,9 @@ public class Bookstore {
         return totCost;
     }
     public void printData(String title) {
+        if(books == null) {
+            return;
+        }
         if(containsOnlyBooks()) {
             for (Object obj : books) {
                 Book b = (Book) obj;
@@ -79,6 +82,25 @@ public class Bookstore {
                 }
             }
         }
+    }
+    // Metodo che ritorni la categoria a cui appartengono più libri
+    public Category mostCommonCategory(){
+        if(books == null) {
+            return null;
+        }
+
+        int max = 0;
+        for(Category c : Category.values()){
+            int booksPerCategory = 0;
+            if(containsOnlyBooks()){
+                for(Object obj : books){
+                    Book b = (Book) obj;
+                }
+            }
+
+
+        }
+
     }
 
     //         /------/ METHODS /-/ GETTER & SETTER
