@@ -15,7 +15,7 @@ public class Wizard extends Player {
 
     public int castFireball(Entity attacked){
         int damageMade= this.getAttackDamage();
-        if(spellPoints>0){
+        if(spellPoints>=5){
             spellPoints-=5;
             damageMade *= 4;
             System.out.printf("%s is Casting a fireball on %s for %d damage", this.getName(), attacked.getName(),damageMade);
