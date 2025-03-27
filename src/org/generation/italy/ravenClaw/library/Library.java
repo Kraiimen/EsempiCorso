@@ -71,14 +71,14 @@ public class Library {
             }
         }
     }
-    public String getBiggestGenre() {
+    public Genre getBiggestGenre() {
         int max = 0;
-        String genre = "";
+        Genre genre = null;
         for(Genre g : Genre.values()) {
             int numberOfBooksByGenre = getNumberByGenre(g);
             if(numberOfBooksByGenre > max) {
                 max = numberOfBooksByGenre;
-                genre = g.toString();
+                genre = g;
             }
         }
         return genre;

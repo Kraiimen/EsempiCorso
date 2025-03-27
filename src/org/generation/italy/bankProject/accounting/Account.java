@@ -26,11 +26,13 @@ public class Account {
 //        this(0);
         creationDate = LocalDate.now();
     }
+
     public Account(double initialBalance) {
 //        lastId++;
 //        id = lastId;
         this();
     }
+
     public Account(double initialBalance, LocalDate creationDate) {
         this(initialBalance);
         this.creationDate = creationDate;
@@ -42,27 +44,36 @@ public class Account {
 
 
     //FUNZIONI - prima quelle importanti poi le getter o setter
-    public void printBalance(){
+    public void printBalance() {
     }
-    public double deposit(double amount){
+
+    public double deposit(double amount) {
+        return amount;
     }
-    public double withdraw(double amount){
+
+    public double withdraw(double amount) {
         doInternalOperation();
+        return amount;
     }
-    private void doInternalOperation(){
+
+    private void doInternalOperation() {
 
     }
-    public double getBalance(){
-    }
-    public void setBalance(double newBalance){
-        if(newBalance <= 0){
+
+//    public double getBalance() {
+//    }
+
+    public void setBalance(double newBalance) {
+        if (newBalance <= 0) {
             return;
         }
     }
+
     public LocalDate getCreationDate() {
         return creationDate;
     }
 }
+
 
 
 
