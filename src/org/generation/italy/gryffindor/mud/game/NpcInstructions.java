@@ -1,6 +1,6 @@
 package org.generation.italy.gryffindor.mud.game;
 
-public enum NpcInstruction {
+public enum NpcInstructions {
     SPEAK,
     ATTACK,
     SELL,
