@@ -1,11 +1,11 @@
 package org.generation.italy.bankProject.startup;
 
 import org.generation.italy.bankProject.accounting.Account;
+import org.generation.italy.bankProject.accounting.CaymanAccount;
 import org.generation.italy.bankProject.accounting.Movement;
 import org.generation.italy.bankProject.accounting.MovementType;
 
 import java.time.LocalDateTime;
-
 
 public class Start {
 
@@ -23,5 +23,8 @@ public class Start {
 //        Account y = new Account(1000);
         Movement m1 = new Movement(100.0, 10000.0, LocalDateTime.now(), MovementType.DEPOSIT);
         Movement m2 = new Movement(100.0, 10000.0, LocalDateTime.now(), MovementType.WITHDRAWAL);
+
+        CaymanAccount ca = new CaymanAccount();
+        double newBalance = ca.deposit(3000);
     }
 }
