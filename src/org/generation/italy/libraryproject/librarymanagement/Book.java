@@ -3,12 +3,12 @@ package org.generation.italy.libraryproject.librarymanagement;
 import java.util.ArrayList;
 
 public class Book {
-    private static int booksCounter = 0;
-    private static int fictionCounter = 0;
-    private static int nonFictionCounter = 0;
-    private static int fantasyCounter = 0;
-    private static int historyCounter = 0;
-    private static int javaCodingCounter = 0;
+    private static int booksCounter;
+    private static int fictionCounter;
+    private static int nonFictionCounter;
+    private static int fantasyCounter;
+    private static int historyCounter;
+    private static int javaCodingCounter;
 
     // ArrayList dove andranno gli oggetti di tipo Book
     private static ArrayList booksArrayList = new ArrayList();
