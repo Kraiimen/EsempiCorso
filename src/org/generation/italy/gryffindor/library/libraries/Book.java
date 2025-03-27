@@ -3,7 +3,7 @@ package org.generation.italy.gryffindor.library.libraries;
 import java.time.Year;
 
 public class Book {
-    //         /-ATTRIBUTI-/
+    // /-----------/ ATTRIBUTI (FIELDS) /-----------/
     private String title;
     private double price;
     private int pages;
@@ -12,7 +12,7 @@ public class Book {
     private String editor;
     private Category cat;
 
-    //     /---------/ CONSTRUCTORS
+    // /-----------/ CONSTRUCTORS /-----------/
     public Book(String title, double price, int pages, String authors, Year release, String editor, Category cat){
         this.title = title;
         this.price = price;
@@ -23,8 +23,10 @@ public class Book {
         this.cat = cat;
     }
 
-    @Override
+    // /-----------/ METODI /-----------/
+    @Override   //MAGIA (∩ ͡° ͜ʖ ͡°)⊃━☆ﾟ. *
     public String toString(){
+        //non dovrebbe essere necessario fare release.toString() e cat.toString(), però just in case (poi controllerò)
         String s = "il titolo è: " + title + "\n" +
                    "il prezzo è: " + price + "\n" +
                    "il numero di pagine è: " + pages + "\n" +
@@ -36,7 +38,7 @@ public class Book {
     }
 
 
-    //        /-METHODS-/ GETTER & SETTER
+    // /-----------/ METHODS - GETTER & SETTER /-----------/
     public String getTitle(){
         return title;
     }
