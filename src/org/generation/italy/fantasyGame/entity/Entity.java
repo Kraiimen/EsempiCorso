@@ -5,11 +5,13 @@ public class Entity{
     private String name;
     private int healthPoints;
     private int maxHp;
+    protected int damage;
 
-    public Entity(String name, int maxHp){
+    public Entity(String name, int maxHp, int damage){
         this.name = name;
         this.maxHp = maxHp;
         healthPoints= this.maxHp;
+        this.damage = damage;
     }
 
     public int sleep(){
@@ -42,5 +44,8 @@ public class Entity{
     }
     public String getName(){
         return name;
+    }
+    public int getDamage(){
+        return damage;
     }
 }
