@@ -4,7 +4,7 @@ public class Npc extends Entity{
     // /-----------/ ATTRIBUTI (FIELDS) /-----------/
     private int earnedXP;
     private boolean canBeAttacked;
-    private NpcInstructions instruction;
+    private NpcInstruction instruction;
 
     // /-----------/ CONSTRUCTORS /-----------/
     public Npc(String name, int maxHealthPoint, int damage, int xp, boolean canBeAttacked, NpcInstructions instructions) {
@@ -35,10 +35,10 @@ public class Npc extends Entity{
     public void setCanBeAttacked(boolean canBeAttacked) {
         this.canBeAttacked = canBeAttacked;
     }
-    public NpcInstructions getInstruction() {
+    public NpcInstruction getInstruction() {
         return instruction;
     }
-    public void setInstruction(NpcInstructions instruction) {
+    public void setInstruction(NpcInstruction instruction) {
         this.instruction = instruction;
     }
 }
