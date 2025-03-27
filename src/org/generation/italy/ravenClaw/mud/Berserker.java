@@ -9,9 +9,10 @@ public class Berserker extends Player{
 
     @Override
     public void attack(Entity attacked){
+        int berserkChance = 10;
         int damageMade = getAttackDamage();
         Random dice = new Random();
-        int x = dice.nextInt(9);
+        int x = dice.nextInt(berserkChance);
         if(x == 0){
             damageMade *= 2;
             System.out.println("Berserk mode activated.");
