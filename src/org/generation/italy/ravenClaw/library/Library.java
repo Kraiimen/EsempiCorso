@@ -71,18 +71,18 @@ public class Library {
             }
         }
     }
-    public String getBiggestGenre() {
+    public Genre getBiggestGenre() {
         int max = 0;
-        String genre = "";
+        Genre genreOut = null; // mi faccio una variabile per lo store del genere con più libri
         for(Genre g : Genre.values()) {
             int numberOfBooksByGenre = getNumberByGenre(g);
             if(numberOfBooksByGenre > max) {
                 max = numberOfBooksByGenre;
-                genre = g.toString();
+                genreOut = g; // updato il genere con più libri
             }
         }
-        return genre;
-    }
+        return genreOut; // returno il genere con il maggior numero di libri
+        }
 }
 
 //Metodo Bonus: ritornare la categoria che ha più libri. Non deve cambiare se aggiungo e tolgo categorie dal programma.
