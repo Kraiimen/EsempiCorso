@@ -40,6 +40,10 @@ public class Intro {
 		int x = (int) c;
 		System.out.println(x);
 
+		int a= 3;
+		String b = "billy";
+		a.toString()
+
 		float f = 300.0f;
 		double d = f;
 
