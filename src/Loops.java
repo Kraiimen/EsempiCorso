@@ -15,7 +15,7 @@ public class Loops {
         //     System.out.println(i);
         // }
 
-        //*
+        /*
         String answer;
         do{
             System.out.println("inserisci una risposta di tipo 'yes' o 'no'");
@@ -31,6 +31,26 @@ public class Loops {
         int n = Integer.parseInt(ns);
 
         System.out.println(n + 1);
+
+        for(int i = 0; i < 5; ++i){
+            for(int j = 0; j < 5; ++j){
+                System.out.printf("(i = %d; j = %d) ", i, j);
+            }
+            System.out.println();
+        }
+        int[][] array = new int[5][5];
+        for(int i = 0; i < array.length; ++i){
+            for(int j = 0; j < array[i].length; ++j){
+                if(i == j){
+                    System.out.print("\\");
+                }else if((i+j) == array.length-1){
+                    System.out.print("/");
+                }else{
+                    System.out.print("*");
+                }
+            }
+            System.out.println();
+        }
         //*/
 	}	
 }
