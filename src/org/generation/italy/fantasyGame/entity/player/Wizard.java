@@ -5,7 +5,7 @@ public class Wizard extends Player{
 
 
     public Wizard(String name, int maxHp, String namePlayer){
-        super(name, maxHp, namePlayer, 5);
+        super(name, maxHp, 5, namePlayer);
         intelligence = 10;
     }
     public void fireAttack(){
@@ -14,7 +14,8 @@ public class Wizard extends Player{
     public void runAway(){
         System.out.println("Run Away");
     }
-    public void manageAttack(int hP){
+
+    public void manageAttackNpc(int hP){
         while(getHealthPoints() > 20){
             fireAttack();
             if(hP == 0){

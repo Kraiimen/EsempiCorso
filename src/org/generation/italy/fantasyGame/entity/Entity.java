@@ -13,27 +13,31 @@ public class Entity{
         healthPoints= this.maxHp;
         this.damage = damage;
     }
+    public int healMissingHpPercent(double healPercent){
+        int missingHp = maxHp - healthPoints;
+        double heal = missingHp * healPercent;
+        healthPoints += (int)heal;
+        return healthPoints;
+    }
 
-    public int sleep(){
-        int missingHp = maxHp - healthPoints;
-        double addHealth = missingHp * 0.2;
-        healthPoints += (int)addHealth;
-        return healthPoints;
+    public void sleep(){
+        healMissingHpPercent(0.2);
+        System.out.println("Hai dormito e hai " + healthPoints);
     }
-    public int eat(){
-        int missingHp = maxHp - healthPoints;
-        double addHealth = missingHp * 0.3;
-        healthPoints += (int)addHealth;
-        return healthPoints;
+    public void eat(){
+        healMissingHpPercent(0.3);
+        System.out.println("Hai mangiato e hai " + healthPoints);
     }
-    public void attack(String name){
-        System.out.println(this.name + " attacca " + name);
+    public void attack(Entity target){
+        target.subtractHealthPoints(damage);
+        System.out.println(name + " attacca " + target.getName() + " facendo " + damage + " danni ");
+        System.out.println(target.getName() + " Ha ancora " + target.getHealthPoints() + " / " + target.maxHp);
     }
-    public void addPoint(int points){
-        healthPoints += points;
+    public void addHealthPoints(int hp){
+        healthPoints += hp;
     }
-    public void subPoint(int points){
-        healthPoints -= points;
+    public void subtractHealthPoints(int hp){
+        healthPoints -= hp;
     }
 
     public int getHealthPoints() {

@@ -5,7 +5,7 @@ import java.util.Random;
 public class Berserker extends Player {
 
     public Berserker(String name, int maxHp, String namePlayer){
-        super(name, maxHp, namePlayer, 10);
+        super(name, maxHp, 10, namePlayer);
     }
     public void berserk(){
         Random rand = new Random();

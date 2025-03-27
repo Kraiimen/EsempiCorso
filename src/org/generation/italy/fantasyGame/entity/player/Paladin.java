@@ -4,7 +4,7 @@ public class Paladin extends Player {
     private boolean isVirgin;
 
     public Paladin(String name, int maxHp, String namePlayer, boolean isVirgin) {
-        super(name, maxHp, namePlayer, 10);
+        super(name, maxHp, 10, namePlayer);
         this.isVirgin = isVirgin;
     }
     public void spearAttack(){
