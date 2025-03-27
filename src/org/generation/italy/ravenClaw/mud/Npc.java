@@ -1,5 +1,6 @@
 package org.generation.italy.ravenClaw.mud;
 
+
 public class Npc extends Entity{
     private int xpOnDeath;
     private boolean canBeAttacked;

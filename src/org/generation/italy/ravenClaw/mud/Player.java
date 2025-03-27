@@ -1,5 +1,6 @@
 package org.generation.italy.ravenClaw.mud;
 
+
 public class Player extends Entity{
     private String playerName;
     private Long exp;
