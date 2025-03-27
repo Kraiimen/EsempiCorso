@@ -1,16 +1,17 @@
 package org.generation.italy.videogame.playerclasses;
 
-import org.generation.italy.videogame.models.EntityType;
 import org.generation.italy.videogame.models.Player;
 
 public class Paladin extends Player {
     private boolean isVirgin;
 
-    public Paladin(String playerName, EntityType entityType, int hpValue, boolean isVirgin){
-        super(playerName, entityType, hpValue);
+    // COSTRUTTORE
+    public Paladin(String name, int maxHP, int hpValue, String playerName, boolean isVirgin){
+        super(name, maxHP, hpValue, playerName);
         this.isVirgin = isVirgin;
     }
 
+    // Il paladino usa la lancia per attaccare
     public void attackWithSpear(){
         System.out.println(getPlayerName() + " is attacking using the Spear!");
     }
