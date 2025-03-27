@@ -3,21 +3,21 @@ package org.generation.italy.libraryprojectV2.librarymanagement;
 public class Book {
 //    private int id;
     private String title;
-    private int numPages;
+    private int pageCount;
     private double price;
     private String authors;
     private int releaseDate;
-    private String publishingHouse;
+    private String publisher;
     private Categories category;
 
     // Costruttore
-    public Book(String title, int numPages, double price, String authors, int releaseDate, String publishingHouse, Categories category) {
+    public Book(String title, int pageCount, double price, String authors, int releaseDate, String publisher, Categories category) {
         this.title = title;
-        this.numPages = numPages;
+        this.pageCount = pageCount;
         this.price = price;
         this.authors = authors;
         this.releaseDate = releaseDate;
-        this.publishingHouse = publishingHouse;
+        this.publisher = publisher;
         this.category = category;
     }
 
@@ -25,8 +25,8 @@ public class Book {
     public String getTitle() {
         return title;
     }
-    public int getNumPages() {
-        return numPages;
+    public int getPageCount() {
+        return pageCount;
     }
     public double getPrice() {
         return price;
@@ -37,8 +37,8 @@ public class Book {
     public int getReleaseDate() {
         return releaseDate;
     }
-    public String getPublishingHouse() {
-        return publishingHouse;
+    public String getPublisher() {
+        return publisher;
     }
     public Categories getCategory() {
         return category;

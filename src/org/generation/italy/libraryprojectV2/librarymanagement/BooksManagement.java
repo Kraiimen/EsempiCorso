@@ -11,27 +11,27 @@ public class BooksManagement {
     private int javaCodingCounter;
 
     // ArrayList dove andranno gli oggetti di tipo Book
-    private ArrayList booksArrayList;
+    private ArrayList books;
 
     public BooksManagement(){
-        booksArrayList = new ArrayList();
+        books = new ArrayList();
     }
 
     // METODI
 
     // Aggiunge il libro creato all'ArrayList e aumenta il contatore dei libri
     public void addBook(Book book){
-        booksArrayList.add(book);
+        books.add(book);
         booksCounter++;
 
         // Aumenta il contatore dei libri di una categoria specifica
-        incrementCounter(book.getCategory());
+        incrementCategoryCounter(book.getCategory());
 
 //        book.setId(booksCounter);
     }
 
     // Incrementa il contatore dei libri generale e della categoria specifica
-    private void incrementCounter(Categories category){
+    private void incrementCategoryCounter(Categories category){
         if(category == Categories.FICTION){
             fictionCounter++;
         }else if(category == Categories.NON_FICTION){
@@ -66,10 +66,10 @@ public class BooksManagement {
     public double getTotalCostOfBooksByAuthor(String authors){
         double totalCost = 0;
 
-        for(Object obj : booksArrayList){
-            Book b = (Book) obj;
-            if(b.getAuthors().contains(authors)){
-                totalCost += b.getPrice();
+        for(Object obj : books){
+            Book book = (Book) obj;
+            if(book.getAuthors().contains(authors)){
+                totalCost += book.getPrice();
             }
         }
 
@@ -80,10 +80,10 @@ public class BooksManagement {
     public void getBooksByTitle(String title){
         String format = "\nTitolo: %s | Numero di pagine: %d | Costo: %f | Autore/i: %s | Anno di pubblicazione: %d | Casa editrice: %s | Categoria: %s";
 
-        for(Object obj : booksArrayList){
+        for(Object obj : books){
             Book b = (Book) obj;
             if(b.getTitle().equals(title)){
-                System.out.printf(format, b.getTitle(), b.getNumPages(), b.getPrice(), b.getAuthors(), b.getReleaseDate(), b.getPublishingHouse(), b.getCategory().toString());
+                System.out.printf(format, b.getTitle(), b.getPageCount(), b.getPrice(), b.getAuthors(), b.getReleaseDate(), b.getPublisher(), b.getCategory().toString());
             }
         }
 
@@ -100,6 +100,6 @@ public class BooksManagement {
 
     // Getters
     public int getBooksCounter() {
-        return booksCounter;
+        return books.size();
     }
 }
