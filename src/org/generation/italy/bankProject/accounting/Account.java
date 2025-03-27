@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Account /*extends /*Object*/ {
+public class Account extends Object{  //extends object è implicito
     //la visibilità di default vuol dire visibile all'interno del suo package
     //in un file java può essere presente solo una classe pubblica che deve essere chiamata come il file
     //private = visibile solo nella classe che lo definisce (utilizzato prettamente per le variabili) private != cybersecurity
@@ -32,7 +32,7 @@ public class Account /*extends /*Object*/ {
     public Account(double initialBalance) {
 //        lastId++;
 //        id = lastId;
-        //this();
+        this();
         balance = initialBalance;  //Account è il nome di tutti e due i costruttori, ma li differenzierò perché avranno parametri diversi
     }
     public Account(double initialBalance, LocalDate creationDate) {
@@ -51,7 +51,7 @@ public class Account /*extends /*Object*/ {
         System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
     public double deposit(double amount){
-        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT );
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
         movements.add(move);
         balance += amount;
         return balance;
