@@ -1,3 +1,4 @@
+
 package org.generation.italy.libraryProject.library;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,11 +9,12 @@ public class Library {
 
     public Library(String name) {  //
         this.name = name;
-        booksList = new ArrayList();
+        booksList = new ArrayList();//  sto inizializzando booklist  come un arraylist vuoto,se non lo inizializzo è null il valore
     }
+
     // Funzione per il totale dei libri nella Library
 
-    public int totalBooks() {  // ricaviamo la somma dei libri senza condizioni perchè arraylist è nella classe
+    public int totalBooks() {  // ricaviamo il totale dei libri senza condizioni perchè arraylist è nella classe
         return booksList.size();
     }
 
@@ -26,16 +28,16 @@ public class Library {
 
     public int totalByCategory(Category categoryType) {
         int sum = 0;
-        for (int i = 0; i < booksList.size(); i++) { // size() riprende la lunghezza dell'array
-            Book b1 = (Book) booksList.get(i); //prende uno specifica cella nell'array in base alla condizone
-            if (b1.getCategoryType() == categoryType) {
+        for(int i = 0; i < booksList.size(); i++) { // size() riprende la lunghezza dell'array
+            Book b1 = (Book) booksList.get(i); // stiamo castando a Book l oggetto in indice i all interno dell'arraylist(booklist)
+            if (b1.getCategoryType() == categoryType) { // la categoria del libro è uguale alla categoria che stiamo controllando?
                 sum++;
             }
         }
         return sum;
     }
 
-    // Funzione per stampare il titolo di un libro
+    // Funzione per stampare un libro
     public void printBooks() {
         for (Object o : booksList) {
             Book b = (Book) o;
@@ -67,7 +69,7 @@ public class Library {
     }
 
     public Category getMostPopularCategory(){
-        Category[] categories = Category.values();
+        Category[] categories = Category.values();//
         int[] categoryCounter = new int[categories.length]; // crea un array con tutte le category esistenti anche se ne aggiugiamo altre
         for(Object obj : booksList){
             Book b = (Book)obj;
