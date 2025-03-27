@@ -3,7 +3,7 @@ package org.generation.italy.mud.model;
 public class NPC extends Entity{
     protected int xpValue;
     protected boolean canBeAttacked;
-    protected String genericInstructions
+    protected String genericInstructions;
 
     public NPC(String name, String description, int hp, int maxHp, int xpValue,
                boolean canBeAttacked, String genericInstructions) {
