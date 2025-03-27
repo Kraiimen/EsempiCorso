@@ -1,52 +1,73 @@
 package org.generation.italy.videogame.models;
 
+import java.util.Random;
+
 public class Entity {
     private final int MAX_DAMAGE_POSSIBLE;
-    private final int MAX_HP;
-    private EntityTypes entityType;
-    private int currentHP;
+    private int maxHP;
+    private EntityType type;
+    private int hpValue;
 
     // COSTRUTTORE
-    public Entity(EntityTypes entityType, int currentHP, int MAX_HP){
-        this.entityType = entityType;
-        this.currentHP = currentHP;
-        this.MAX_HP = MAX_HP;
+    public Entity(EntityType entityType, int hpValue){
+        this.type = entityType;
+        this.hpValue = hpValue;
         this.MAX_DAMAGE_POSSIBLE=9999;
+        setMaxHP(entityType);
+    }
+
+    public int getMissingHP(){
+        return maxHP - hpValue;
     }
 
     public void healHP(int hpToRestore){
-        if(hpToRestore > MAX_HP - currentHP){
-            currentHP = MAX_HP;
+        if(hpToRestore > getMissingHP()){
+            hpValue = maxHP;
             System.out.println("Max HP restored! c: ");
         }
         else {
-            currentHP += hpToRestore;
-            System.out.printf("HP restored: +%-4d%nCurrent HP: %4d%n", hpToRestore, currentHP);
+            hpValue += hpToRestore;
+            System.out.printf("HP restored: +%-4d%nCurrent HP: %4d%n", hpToRestore, hpValue);
         }
     }
 
     public void damageTaken(int damageInflicted){
         System.out.printf("Damage taken: %4d%n", damageInflicted);
-        if (currentHP - damageInflicted <= 0){
-            System.out.println("Game over bitch!!!");
+        if (hpValue - damageInflicted <= 0){
+            System.out.println(this.type.toString() + " is dead!!!");
         }
         else {
-            currentHP -= damageInflicted;
-            System.out.printf("Current HP: %4d%n", currentHP);
+            hpValue -= damageInflicted;
+            System.out.printf("Current HP: %4d%n", hpValue);
         }
     }
 
     public void sleep(){
-        currentHP += (int)Math.ceil((MAX_HP-currentHP)*0.2);
+        hpValue += (int)Math.ceil(getMissingHP()*0.2);
     }
 
     public void eat(){
-        currentHP += (int)Math.ceil((MAX_HP-currentHP)*0.3);
+        hpValue += (int)Math.ceil(getMissingHP()*0.3);
     }
 
     public void attackEntity(Entity entityToAttack){
-        System.out.println(this.entityName+" is attacking "+entityToAttack.entityName);
+        int damage = getRandomDamage();
+        System.out.println(this.type.toString() + " is attacking " + entityToAttack.type.toString() + "!");
+        System.out.println(this.type.toString() + " inflicted " + damage + " to " + entityToAttack.type.toString() + "!");
+        entityToAttack.damageTaken(damage);
     }
 
+    private void setMaxHP(EntityType entityType){
+        if(entityType == EntityType.PLAYER){
+            maxHP = 1000;
+        } else{
+            maxHP = 1500;
+        }
+    }
+
+    public int getRandomDamage(){
+        Random random = new Random();
+        return random.nextInt(101);
+    }
 
 }
