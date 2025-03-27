@@ -48,7 +48,7 @@ public class Library {
 //        return sum;
 //    }
 
-    public double getTotalByAuthor2(String author) {
+    public double getTotalByAuthor(String author) {
         double sum = 0;
         String authorLower = author.toLowerCase();
         for(Object b : bookList) {
