@@ -1,6 +1,7 @@
 package org.generation.italy.bankproject.startup;
 
 import org.generation.italy.bankproject.accounting.Account;
+import org.generation.italy.bankproject.accounting.evasion.CaymanAccount;
 import org.generation.italy.bankproject.accounting.Movement;
 import org.generation.italy.bankproject.accounting.MovementType;
 
@@ -41,6 +42,11 @@ public class Start {
 
 		double depositSum = x.getSumDeposits();
 		System.out.println("Il totale depositato è: " + depositSum);
+		CaymanAccount ca = new CaymanAccount();   // Finchè non costruisco un costruttore in CaymanAccount potrò usare solo quello di default, perché i costruttori non vengono ereditati
+		double newBalance = ca.deposit(3000);
+		ca.printBalance();
+		ca.withdraw(50);
+		ca.printBalance();
 
 	}
 }

@@ -9,7 +9,7 @@ public class Account {
 	private static int lastId;
 	// Inizialmente lastId vale 0. Lo 'static' lo rende appartenente alla classe, e non agli oggetti.
 	// Con lo static esiste una sola variabile lastId posseduta dalla classe e condivisa da tutti gli oggetti
-	private double balance; // saldo
+	protected double balance; // saldo
 	private int id;
 	private LocalDate creationDate;
 	private ArrayList movements;   // ArrayList generics non specializzato, indirizzo all'array list con dentro null per ora
