@@ -5,16 +5,24 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Account {
+    //in un file java può essere presente solo una classe pubblica che deve essere chiamata come il file
+
     //------------------FIELDS--------------------
     private static int lastId;
     private double balance;
     private int id;
     private LocalDate creationDate;
     private ArrayList movements;
+    // Quando il compilatore vede il nome di una classe si chiede "Questa classe viene da Java.lang?" ovvero il package base del linguaggio java
+    // se questo non è vero, si chiede "è dello stesso package di questa classe?" quindi se in un file si vuole usare una classe che sta nello stesso package del file, non c'è bisogno di importarla
+    // se non la trova nemmeno li controllerà la lista degli import a inizio file
 
+
+    //COSTRUTTORI
     public Account(){
         lastId++;
         id = lastId;
+//        this(0);
         creationDate = LocalDate.now();
         movements = new ArrayList();
     }
@@ -27,6 +35,8 @@ public class Account {
         this.creationDate = creationDate;
     }
 
+
+    //FUNZIONI - prima quelle importanti poi le getter o setter
     public void printBalance(){
         System.out.printf("il tuo conto con in %d ha come saldo %f%n", id, balance);
     }
@@ -115,3 +125,7 @@ public class Account {
 
 }
 
+
+//lo stato di una classe è l'insieme delle sue variabili
+//una variabile è privata se non vogliamo che il resto del programma sappia che esiste perché la vogliamo modificare come vogliamo
+//quindi le variabili degli oggetti (lo stato della classe) dovrebbero di norma sempre essere private
