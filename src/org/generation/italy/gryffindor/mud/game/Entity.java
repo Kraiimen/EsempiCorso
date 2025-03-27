@@ -25,6 +25,7 @@ public class Entity {
     }
     public void attack(Entity target){
         if(target != null){
+            target.setCurrentHealthPoint(target.currentHealthPoint - 10);
             System.out.println(name +  " attacca " + target.name);
         }
     }

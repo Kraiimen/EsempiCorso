@@ -21,6 +21,24 @@ public class Player extends Entity{
         System.out.println("sto facendo il logout");
     }
 
+    @Override
+    public void attack(Entity target){
+        Npc enemy;
+        boolean canBeAttacked = true;
+        long earnedExp = 0;
+        if(target.getClass() == Npc.class) {
+            enemy = (Npc)target;
+            canBeAttacked = enemy.getCanBeAttacked();
+            earnedExp = enemy.getEarnedXP();
+        }
+        if(target != null && canBeAttacked){
+            target.setCurrentHealthPoint(target.getCurrentHealthPoint() - 10);
+            System.out.println(playerName +  " attacca " + target.getName());
+            if (target.getCurrentHealthPoint() <= 0) {
+                currentExpPoint += earnedExp;
+            }
+        }
+    }
 
 
 
