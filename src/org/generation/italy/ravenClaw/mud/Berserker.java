@@ -7,8 +7,7 @@ public class Berserker extends Player{
         super(name, maxHp, attackDamage, playerName);
     }
 
-    @Override
-    public void attack(Entity attacked){
+    private int berserk(){
         int berserkChance = 10;
         int damageMade = getAttackDamage();
         Random dice = new Random();
@@ -17,6 +16,12 @@ public class Berserker extends Player{
             damageMade *= 2;
             System.out.println("Berserk mode activated.");
         }
+        return damageMade;
+    }
+
+    @Override
+    public void attack(Entity attacked){
+        int damageMade = berserk();
         attacked.hurt(damageMade);
         System.out.printf("%s is attacking %s for %d damage", getName(), attacked.getName(), damageMade);
     }
