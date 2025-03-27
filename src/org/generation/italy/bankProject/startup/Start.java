@@ -1,6 +1,7 @@
 package org.generation.italy.bankProject.startup;
 
 import org.generation.italy.bankProject.accounting.Account;
+import org.generation.italy.bankProject.accounting.CaymanAccount;
 import org.generation.italy.bankProject.accounting.Movement;
 import org.generation.italy.bankProject.accounting.MovementType;
 
@@ -33,5 +34,11 @@ public class Start {
 //        w.printBalance();
         double depositSum = x.getSumDeposits();
         System.out.println(depositSum);
+        CaymanAccount ca = new CaymanAccount();
+        double newBalance = ca.deposit(3000);
+        ca.printBalance();
+        ca.withdraw(50);
+        ca.printBalance();
     }
+
 }

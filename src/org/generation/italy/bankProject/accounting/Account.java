@@ -12,7 +12,7 @@ public class Account {
 
     //ATTRIBUTI or FIELDS or VARIABILI DEGLI OGGETTI
     private static int lastId; //usando "static" ogni conto avrà il suo lastId
-    private double balance;
+    protected double balance;
     private int id;
     private LocalDate creationDate;
     private ArrayList movements;
