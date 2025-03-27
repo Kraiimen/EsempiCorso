@@ -1,11 +1,12 @@
 import java.io.*;
 //DA FINIRE DI AGGIUSTARE
 public class AsciiTree {
-    private final char emptySpaceSymbol = ' ';
-    private final char triangleSymbol = '*';
-    private final String newLine = "\n";
-    private final char trunkSymbol = '|';
-    private final char groundSymbol = '_';
+    //*
+    private static final char emptySpaceSymbol = ' ';
+    private static final char triangleSymbol = '*';
+    private static final String newLine = "\n";
+    private static final char trunkSymbol = '|';
+    private static final char groundSymbol = '_';
 
 	public static void main(String[] args){
         Console console = System.console();
@@ -24,12 +25,12 @@ public class AsciiTree {
         //     }
         //     System.out.println();
         // }
-        System.out.println(triangleHight);
+        System.out.println(buildAsciiChristmasTree(triangleHight));
 	}
     public static String buildAsciiChristmasTree(int hight){
         StringBuilder christmasTree = new StringBuilder();
-        christmasTree.append(triangle + newLine + trunk + newLine + ground);
-        return christmasTree;
+        christmasTree.append(AsciiTriangle(hight) + newLine + AsciiTreeTrunk(hight) + newLine + AsciiTreeGround(hight));
+        return christmasTree.toString();
     }
     public static StringBuilder AsciiTriangle(int hight){
         StringBuilder triangle = new StringBuilder();   //dovrebbe esseere uno StringBuilder ma non li abbiamo ancora fatti...
@@ -40,56 +41,62 @@ public class AsciiTree {
             int spacesToFill = i+1;
             int emptySpaces = hight - spacesToFill;
             int currentBase = triangleBase - (emptySpaces+1);
-            boolean isLastRow = i == triangleHight-1;
+            boolean isLastRow = i == hight-1;
 
             for(int j = 0; j < emptySpaces; ++j){
-                triangleRow.add(emptySpaceSymbol);
+                triangleRow.append(emptySpaceSymbol);
             }
             for(int j = 0; j < spacesToFill*2 - 1; ++j){
                 boolean isSpaceToFill = j % 2 == 0;
                 if(isSpaceToFill){
-                    triangleRow.add(triangleSymbol);
+                    triangleRow.append(triangleSymbol);
                 }else{
-                    triangleRow.add(emptySpaceSymbol);
+                    triangleRow.append(emptySpaceSymbol);
                 }
             }
             if(isLastRow == false){
-                triangleRow.add(newLine);
+                triangleRow.append(newLine);
             }
 
-            triangle.add(triangleRow);
+            triangle.append(triangleRow);
         }
         return triangle;
     }
 
     public static StringBuilder AsciiTreeTrunk(int hight){
         StringBuilder trunk = new StringBuilder();
-        int trunkHight = triangleHight/2;
+        int trunkHight = hight/2;
         //int trunkWidth = triangleHight / 5;
         //int emptySpaces = triangleHight - trunkWidth;
 
         for(int i = 0; i < trunkHight; ++i){
             StringBuilder trunkRow = new StringBuilder();
             boolean isLastRow = i == trunkHight-1;
-            for(int j = 0; j < triangleHight-1; ++j){
-                trunkRow += emptySpaceSymbol;
+            for(int j = 0; j < hight-1; ++j){
+                trunkRow.append(emptySpaceSymbol);
             }
             // for(int j = 0; j < trunkWidth; ++j){
             //     trunkRow += trunkSymbol;
             // }
-            trunkRow += trunkSymbol;
+            trunkRow.append(trunkSymbol);
 
             if(isLastRow == false){
-                trunkRow += newLine;
+                trunkRow.append(newLine);
             }
 
-            trunk += trunkRow;
+            trunk.append(trunkRow);
         }
-
-        String ground = "";
-
-        for(int i = 0; i < triangleBase; ++i){
-            ground += groundSymbol;
-        }
+        return trunk;
     }
+
+    private static StringBuilder AsciiTreeGround(int hight){
+        StringBuilder ground = new StringBuilder();
+
+        for(int i = 0; i < hight*2; ++i){
+            ground.append(groundSymbol);
+        }
+        return ground;
+    }
+
+     //*/
 }
