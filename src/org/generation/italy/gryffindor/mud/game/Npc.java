@@ -3,7 +3,7 @@ package org.generation.italy.gryffindor.mud.game;
 public class Npc extends Entity{
     private int earnedXP;
     private boolean canBeAttacked;
-    private NpcInstructions instruction;
+    private NpcInstruction instruction;
 
 
     public void giveInstructions() {
@@ -26,10 +26,10 @@ public class Npc extends Entity{
     public void setCanBeAttacked(boolean canBeAttacked) {
         this.canBeAttacked = canBeAttacked;
     }
-    public NpcInstructions getInstruction() {
+    public NpcInstruction getInstruction() {
         return instruction;
     }
-    public void setInstruction(NpcInstructions instruction) {
+    public void setInstruction(NpcInstruction instruction) {
         this.instruction = instruction;
     }
 }
