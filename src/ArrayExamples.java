@@ -67,6 +67,16 @@ public class ArrayExamples{
                 break;
             } 
         }
+        // int x = 4; 
+        // if (x = 7) { 
+            
+        // }
+
+        // boolean z = true; 
+        // if(z = false){
+
+        // }
+
         if (sorted) {
             System.out.println("l'array non è ordinato");
         } else {

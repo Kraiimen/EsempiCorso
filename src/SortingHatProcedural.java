@@ -161,7 +161,7 @@ public class SortingHatProcedural {
             return COUNTERS[housePos] < HOUSE_SIZE;  
         } else {
             // Altrimenti, il metodo ritorna true se c'è ancora spazio nella casa (considerando la dimensione ridotta della casa) (nel nostro caso 5)
-            return COUNTERS[housePos] < size;  
+            return COUNTERS[housePos] < size;
         }
     }
 
