@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Account {
+public class Account /*extends /*Object*/ {
     //la visibilità di default vuol dire visibile all'interno del suo package
     //in un file java può essere presente solo una classe pubblica che deve essere chiamata come il file
     //private = visibile solo nella classe che lo definisce (utilizzato prettamente per le variabili) private != cybersecurity
@@ -12,7 +12,7 @@ public class Account {
 
     //ATTRIBUTI or FIELDS or VARIABILI DEGLI OGGETTI
     private static int lastId; //usando "static" ogni conto avrà il suo lastId
-    private double balance;
+    protected double balance;
     private int id;
     private LocalDate creationDate;
     private ArrayList movements;
@@ -32,7 +32,7 @@ public class Account {
     public Account(double initialBalance) {
 //        lastId++;
 //        id = lastId;
-        this();
+        //this();
         balance = initialBalance;  //Account è il nome di tutti e due i costruttori, ma li differenzierò perché avranno parametri diversi
     }
     public Account(double initialBalance, LocalDate creationDate) {
