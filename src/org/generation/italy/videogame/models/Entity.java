@@ -3,12 +3,12 @@ package org.generation.italy.videogame.models;
 public class Entity {
     private final int MAX_DAMAGE_POSSIBLE;
     private final int MAX_HP;
-    private String entityName;
+    private EntityTypes entityType;
     private int currentHP;
 
     // COSTRUTTORE
-    public Entity(String entityName, int currentHP, int MAX_HP){
-        this.entityName = entityName;
+    public Entity(EntityTypes entityType, int currentHP, int MAX_HP){
+        this.entityType = entityType;
         this.currentHP = currentHP;
         this.MAX_HP = MAX_HP;
         this.MAX_DAMAGE_POSSIBLE=9999;
@@ -27,7 +27,7 @@ public class Entity {
 
     public void damageTaken(int damageInflicted){
         System.out.printf("Damage taken: %4d%n", damageInflicted);
-        if (currentHP - damageInflicted<=0){
+        if (currentHP - damageInflicted <= 0){
             System.out.println("Game over bitch!!!");
         }
         else {
