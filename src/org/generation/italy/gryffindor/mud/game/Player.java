@@ -1,19 +1,19 @@
 package org.generation.italy.gryffindor.mud.game;
 
 public class Player extends Entity{
-
+    // /-----------/ ATTRIBUTI (FIELDS) /-----------/
     private String playerName;
     private long currentExpPoint;
 
-
-    public Player(String playerName, String name, int maxHealthPoint){
-        super(name, maxHealthPoint);
+    // /-----------/ CONSTRUCTORS /-----------/
+    public Player(String name, int maxHealthPoint, int damage, String playerName){
+        super(name, maxHealthPoint, damage);
         this.playerName = playerName;
         currentExpPoint = 0;
     }
 
 
-
+    // /-----------/ METHODS /-----------/
     public void login(){
         System.out.println("sto facendo il login");
     }
@@ -26,14 +26,16 @@ public class Player extends Entity{
         Npc enemy;
         boolean canBeAttacked = true;
         long earnedExp = 0;
+
         if(target.getClass() == Npc.class) {
             enemy = (Npc)target;
             canBeAttacked = enemy.getCanBeAttacked();
             earnedExp = enemy.getEarnedXP();
         }
         if(target != null && canBeAttacked){
-            target.setCurrentHealthPoint(target.getCurrentHealthPoint() - 10);
             System.out.println(playerName +  " attacca " + target.getName());
+
+            target.setCurrentHealthPoint(target.getCurrentHealthPoint() - getDamage());
             if (target.getCurrentHealthPoint() <= 0) {
                 currentExpPoint += earnedExp;
             }
@@ -42,7 +44,7 @@ public class Player extends Entity{
 
 
 
-
+    // /-----------/ METHODS - GETTER & SETTER /-----------/
     public String getPlayerName(){
         return playerName;
     }
@@ -57,5 +59,4 @@ public class Player extends Entity{
             currentExpPoint = exp;
         }
     }
-
 }

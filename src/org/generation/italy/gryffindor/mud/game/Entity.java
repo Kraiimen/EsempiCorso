@@ -1,23 +1,28 @@
 package org.generation.italy.gryffindor.mud.game;
 
 public class Entity {
+    // /-----------/ ATTRIBUTI (FIELDS) /-----------/
     private String name;
     private int currentHealthPoint;
     private int maxHealthPoint;
+    private int damage;
 
-
-    public Entity(String name, int maxHealthPoint){
+    // /-----------/ CONSTRUCTORS /-----------/
+    public Entity(String name, int maxHealthPoint, int damage){
         this.name = name;
         this.maxHealthPoint = maxHealthPoint;
         this.currentHealthPoint = maxHealthPoint;
+        this.damage = damage;
     }
 
+    // /-----------/ METHODS /-----------/
     public void sleep(){
         regenHP(0.2);
     }
     public void eat(){
         regenHP(0.3);
     }
+
     private void regenHP(double percent){
         int missingHP = maxHealthPoint - currentHealthPoint;
         int regenHP = (int)(missingHP * percent);
@@ -25,13 +30,13 @@ public class Entity {
     }
     public void attack(Entity target){
         if(target != null){
-            target.setCurrentHealthPoint(target.currentHealthPoint - 10);
+            target.setCurrentHealthPoint(target.currentHealthPoint - damage);
             System.out.println(name +  " attacca " + target.name);
         }
     }
 
 
-
+    // /-----------/ METHODS - GETTER & SETTER /-----------/
     public String getName(){
         return name;
     }
@@ -53,6 +58,15 @@ public class Entity {
     public void setMaxHealthPoint(int maxhp) {
         if(maxhp > 0){
             maxHealthPoint = maxhp;
+        }
+    }
+    public int getDamage(){
+        return damage;
+    }
+
+    public void setDamage(int dmg) {
+        if(dmg >= 0){
+            damage = dmg;
         }
     }
 }
