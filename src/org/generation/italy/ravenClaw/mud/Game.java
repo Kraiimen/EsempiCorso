@@ -28,7 +28,7 @@ public class Game {
         player.printSheet();
 
         Npc prisonGuy = new Npc("Prison jerk", 30,15,40,true);
-        Weapon rustySword = new Weapon("Rusty sword", 0 , 5);
+        Weapon rustySword = new Weapon("Rusty sword", 0 , 5, 5);
         choice = console.readLine("\nYou wake up in a stone cell, there is a rusty sword to your right \n if you want to pick it up type PICK \n otherwise type NO");
         if(choice.equalsIgnoreCase("PICK")){
             player.pickUpitem((Item)rustySword);
