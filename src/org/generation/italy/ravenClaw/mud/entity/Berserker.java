@@ -24,7 +24,7 @@ public class Berserker extends Player{
     public void attack(Entity attacked){
         int damageMade = berserk();
         attacked.hurt(damageMade);
-        System.out.printf("%s is attacking %s for %d damage%s\n",getEntityColor(), getName(), attacked.getName(), damageMade, getResetColor());
+        System.out.printf("%s%s is attacking %s for %d damage%s\n",getEntityColor(), getName(), attacked.getName(), damageMade, getResetColor());
     }
     @Override
     public void printSheet(){
