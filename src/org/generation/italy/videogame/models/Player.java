@@ -4,15 +4,25 @@ public class Player extends Entity{
     private long playerEXP;
     private String playerName;
 
-    public Player( String playerName, String EntityName, int hpValue) {
-        super();
+    // COSTRUTTORE
+    public Player(String name, int maxHP, int hpValue, String playerName){
+        super(name, maxHP, hpValue);
+        this.playerName = playerName;
     }
 
-    public void logIn() {
-        System.out.println(playerName + "Joined!");
+    // Il giocatore fa il logIn
+    public void logIn(){
+        System.out.println(playerName + " connected!");
     }
 
-    public void logOut() {
-        System.out.println(playerName + " disconnected");
+    // Il giocatore fa il logOut
+    public void logOut(){
+        System.out.println(playerName + " disconnected :(");
+    }
+
+    // Getters
+    public String getPlayerName(){
+        return playerName;
     }
 }
+
