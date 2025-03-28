@@ -16,6 +16,7 @@ public class Berserker extends Player{
         Random r = new Random();
         int n = r.nextInt(10);
         if (n == 0){
+            System.out.println("IRA BERSERKER!");
             return 2;
         }
         return 1;

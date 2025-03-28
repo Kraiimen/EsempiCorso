@@ -32,7 +32,7 @@ public class Entity {
         if(canNotAttack(target)) {
             return;
         }
-        target.setCurrentHealthPoint(target.currentHealthPoint - damage);
+        target.setCurrentHealthPoint(target.getCurrentHealthPoint() - getDamage());
         System.out.println(name +  " attacca " + target.name);
 
         if(target.isDead()){
