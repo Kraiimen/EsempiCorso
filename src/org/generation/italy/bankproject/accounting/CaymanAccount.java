@@ -29,7 +29,7 @@ public class CaymanAccount extends Account{
     @Override
     public double deposit(double amt){
         evadeTax();
-        balance += amt;
-        return balance;
+        setBalance(getBalance() + amt);
+        return getBalance();
     }
 }

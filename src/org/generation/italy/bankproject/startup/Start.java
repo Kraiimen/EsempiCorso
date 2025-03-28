@@ -28,7 +28,7 @@ public class Start {
         x.printBalance();
         System.out.println(balancex);
         Movement m1 = new Movement(100.00, x.getBalance(), LocalDateTime.now(), MovementType.DEPOSIT);
-        double depositSum = x.getSumDeposit();
-        System.out.println(depositSum);
+//        double depositSum = x.getSumDeposit();
+//        System.out.println(depositSum);
    }
 }

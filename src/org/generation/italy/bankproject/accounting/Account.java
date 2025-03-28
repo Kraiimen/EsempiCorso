@@ -41,7 +41,7 @@ public class Account {
     public double deposit(double amount){
         Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
         balance += amount;
-        movements.add(move);
+        //movements.add(move);
         return balance;
     }
 
@@ -65,21 +65,21 @@ public class Account {
     public double getBalance(){
         //avevamo un conto bancario la cui singola cifra indicata 1 euro ed ora indica 1 centesimo dunque
         //facciamo / 100 per far in modo che il print euro.cent avvenga correttamente (es 100 centesimi = 1.00 euro)
-        return balance / 100;
+        return balance;
 
     }
-    public double getSumDeposit() {
-        double sum = 0;
-        for(int i = 0; i < movements.size(); i++){
-            Object ob = movements.get(i);
-            Movement m = (Movement)ob;
-            if(m.getType() == MovementType.DEPOSIT) {
-                sum += m.getAmount();
-            }
-
-        }
-        return sum;
-    }
+//    public double getSumDeposit() {
+//        double sum = 0;
+//        for(int i = 0; i < movements.size(); i++){
+//            Object ob = movements.get(i);
+//            Movement m = (Movement)ob;
+//            if(m.getType() == MovementType.DEPOSIT) {
+//                sum += m.getAmount();
+//            }
+//
+//        }
+//        return sum;
+//    }
 
     public LocalDate getCreationDate() {
         return creationDate;
