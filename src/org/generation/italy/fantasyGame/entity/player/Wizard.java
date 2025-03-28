@@ -22,6 +22,19 @@ public class Wizard extends MagicalPlayer{
         System.out.println("Run Away");
     }
 
+    @Override
+    public void attack(Entity target){
+        if(getHealthPoints() < 20){
+            runAway();
+        } else {
+            int n = rand.nextInt(1, 6);
+            if((n == 4) && (mana >= 1)){
+                fireAttack();
+                mana--;
+            }
+        }
+    }
+
     public void manageAttackNpc(Npc npc){
         while(getHealthPoints() > 20){
             attack(npc);
@@ -69,11 +82,15 @@ class Duck{
     public void quack(){
         System.out.println("Quak Quak");
     }
+    public void fly(){
+        System.out.println("Fly");
+    }
 }
 class RubberDuck extends Duck {
     public void swim(){
         System.out.println("Sto galleggiando");
     }
+    @Override
     public void quack(){
         System.out.println("Squeak Squeak");
     }

@@ -2,7 +2,7 @@ package org.generation.italy.fantasyGame.entity;
 
 import java.util.Random;
 
-public class Entity{
+public abstract class Entity{
     //ATTRIBUTI DELL'ISTANZA
     private String name;
     private int healthPoints;
@@ -34,11 +34,7 @@ public class Entity{
         healMissingHpPercent(0.3);
         System.out.println("Hai mangiato e hai " + healthPoints);
     }
-    public void attack(Entity target){
-        target.subtractHealthPoints(damage);
-        System.out.println(name + " attacca " + target.getName() + " facendo " + damage + " danni ");
-        System.out.println(target.getName() + " Ha ancora " + target.getHealthPoints() + " / " + target.maxHp);
-    }
+    public abstract void attack(Entity target);
     public void addHealthPoints(int hp){
         healthPoints += hp;
     }
