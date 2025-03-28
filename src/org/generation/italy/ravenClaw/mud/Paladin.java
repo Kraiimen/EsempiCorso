@@ -31,7 +31,7 @@ public class Paladin extends Player {
         return random.nextInt(diceFaces) > 0;
     }
 
-    private void getCorrupt(){
+    private void getCorrupted(){
         isVirgin = false;
         System.out.printf("The heart of %s has been corrupted, there is no turning back ",getName());
     }
@@ -39,7 +39,7 @@ public class Paladin extends Player {
     public void attemptedCorruption(Npc npc){
         System.out.printf("%s is attempting to corrupt %s", npc.getName(), getName());
         if (getHealthPoints() <= getMaxHp() * 0.2){
-            getCorrupt();
+            getCorrupted();
         } else {
             System.out.printf("The heart of %s remains pure... today.", getName());
         }
