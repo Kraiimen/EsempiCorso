@@ -1,6 +1,4 @@
-package org.generation.italy.bankProject.accounting.evasion;
-
-import org.generation.italy.bankProject.accounting.Account;
+package org.generation.italy.bankProject.accounting.accounts;
 
 import java.time.LocalDate;
 

@@ -1,7 +1,7 @@
 package org.generation.italy.bankProject.startup;
 
-import org.generation.italy.bankProject.accounting.Account;
-import org.generation.italy.bankProject.accounting.evasion.CaymanAccount;
+import org.generation.italy.bankProject.accounting.accounts.Account;
+import org.generation.italy.bankProject.accounting.accounts.CaymanAccount;
 import org.generation.italy.bankProject.accounting.Movement;
 import org.generation.italy.bankProject.accounting.MovementType;
 
