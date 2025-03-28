@@ -18,7 +18,7 @@ public class Wizard extends Player {
         if(spellPoints>=5){
             spellPoints-=5;
             damageMade *= 4;
-            System.out.printf("%s%s is Casting a fireball on %s for %d damage%s%s\n",getEntityColor(), this.getName(), attacked.getName(),damageMade,getResetColor());
+            System.out.printf("%s%s is Casting a fireball on %s for %d damage%s\n",getEntityColor(), this.getName(), attacked.getName(),damageMade,getResetColor());
         }else{
             damageMade *= 0;
             System.out.printf("%s%s tried to cast a fireball on %s but failed%s\n",getEntityColor(), this.getName(), attacked.getName(),getResetColor());
