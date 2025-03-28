@@ -9,70 +9,44 @@ public class Game {
         Console console = System.console();
         Random dice = new Random();
         String choice;
-        Wizard playerW = null;
-        Paladin playerP = null;
-        Berserker playerB = null;
+        Player player = null;  // POLYMORPHIC VARIABLE
+        String playerClass = console.readLine("Che classe vuoi giocare? Wizard, Berserker, Paladin: ");
+        String playerName = console.readLine("Come vuoi chiamare il tuo eroe? ");
+        String realPlayerName = console.readLine("Giocatore, come ti chiami? ");
 
-        String playerClass = console.readLine("che clase vuoi giocare, Wizard, Berseker, Paladin \n");
         if(playerClass.equalsIgnoreCase("wizard")){
-            playerW = new Wizard(console.readLine("Come vuoi chiamare il tuo eroe? "),dice.nextInt(50)+1,dice.nextInt(10)+1,console.readLine("Giocatore, come ti chiami "), dice.nextInt(100)+6);
-            playerW.printSheet();
-        }else if(playerClass.equalsIgnoreCase("paladin")){
-            playerP = new Paladin(console.readLine("Come vuoi chiamare il tuo eroe? "),dice.nextInt(50)+25,dice.nextInt(20)+1,console.readLine("Giocatore, come ti chiami "));
-            playerP.printSheet();
+            player = new Wizard(playerName, dice.nextInt(50) + 1, dice.nextInt(10) + 1, realPlayerName, dice.nextInt(100) + 6);
+        } else if(playerClass.equalsIgnoreCase("paladin")){
+            player = new Paladin(playerName, dice.nextInt(50) + 25, dice.nextInt(20) + 1, realPlayerName);
         } else if (playerClass.equalsIgnoreCase("berserker")) {
-            playerB = new Berserker(console.readLine("Come vuoi chiamare il tuo eroe? "),dice.nextInt(50)+50,dice.nextInt(15)+1,console.readLine("Giocatore, come ti chiami "));
-            playerB.printSheet();
+            player = new Berserker(playerName, dice.nextInt(50) + 50, dice.nextInt(15) + 1, realPlayerName);
         }
+        player.printSheet();
+
         Npc prisonGuy = new Npc("Prison jerk", 5,15,40,true);
         System.out.println("\nti risvegli in una cella fatta di roccia, hai una spada arrugginita alla tua destra, \n un umano dai lunghi capelli neri ti squadra dal fondo della cella \n Hey \n che ti guardi?,cerchi rogne!?\n");
         choice = console.readLine("Sembrerebbe che questo tizio non sia troppo cordiale,\n se vuoi attaccarlo scrivi ATTACCA , \n se invece vuoi richiamare una guardia scrivi URLA ");
+
         if(choice.equalsIgnoreCase("ATTACCA")){
-            if(playerClass.equalsIgnoreCase("wizard")){
-                playerW.castFireball(prisonGuy);
-            }else if(playerClass.equalsIgnoreCase("paladin")){
-                playerP.attack(prisonGuy);
-            } else if (playerClass.equalsIgnoreCase("berserker")) {
-                playerB.attack(prisonGuy);
+            player.attack(prisonGuy);
+            if(prisonGuy.isDead()){
+                choice= console.readLine("\nil rompipalle è morto, trovi del pane tra le sue cose, \n se vuoi mangiarlo scrivi MANGIA, \n sennò scrivi NO ");
+            }else{
+                prisonGuy.attack(player);
             }
-            choice= console.readLine("\nil rompipalle è morto, trovi del pane tra le sue cose, \n se vuoi mangiarlo scrivi MANGIA, \n sennò scrivi NO ");
             if (choice.equalsIgnoreCase("MANGIA")){
-                if(playerClass.equalsIgnoreCase("wizard")){
-                    playerW.eat();
-                }else if(playerClass.equalsIgnoreCase("paladin")){
-                    playerP.eat();
-                } else if (playerClass.equalsIgnoreCase("berserker")) {
-                    playerB.eat();
-                }
+                player.eat();
             }
 
         } else if (choice.equalsIgnoreCase("URLA")) {
             System.out.println("\n urli a squarciagola, ma nessuno arriva \n il tizzio sembra irritarsi, e alzatosi dalla sua branda ti da un pugno \n E statti un pò zitto!\n");
-            if(playerClass.equalsIgnoreCase("wizard")){
-                prisonGuy.attack(playerW);
-            }else if(playerClass.equalsIgnoreCase("paladin")){
-                prisonGuy.attack(playerP);
-            } else if (playerClass.equalsIgnoreCase("berserker")) {
-                prisonGuy.attack(playerB);
-            }
+            prisonGuy.attack(player);
             choice = console.readLine("\n vuoi contrattaccare?, il tizzio sembra molto mal messo \n scrivi YES per contrattaccare \n scrivi NO per non contrattaccare e andare a dormire");
 
             if (choice.equalsIgnoreCase("YES")){
-                if(playerClass.equalsIgnoreCase("wizard")){
-                    playerW.castFireball(prisonGuy);
-                }else if(playerClass.equalsIgnoreCase("paladin")){
-                    playerP.attack(prisonGuy);
-                } else if (playerClass.equalsIgnoreCase("berserker")) {
-                    playerB.attack(prisonGuy);
-                }
+                player.attack(prisonGuy);
             }else if (choice.equalsIgnoreCase("NO")){
-                if(playerClass.equalsIgnoreCase("wizard")){
-                    playerW.sleep();
-                }else if(playerClass.equalsIgnoreCase("paladin")){
-                    playerP.sleep();
-                } else if (playerClass.equalsIgnoreCase("berserker")) {
-                    playerB.sleep();
-                }
+                player.sleep();
             }
         }
         System.out.println("\nhai completato questo esempio di gioco del nostro gioco CONGRATULAZIONI!!");
