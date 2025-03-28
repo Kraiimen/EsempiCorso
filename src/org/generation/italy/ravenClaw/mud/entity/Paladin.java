@@ -3,7 +3,7 @@ package org.generation.italy.ravenClaw.mud.entity;
 import java.util.Random;
 
 public class Paladin extends Player {
-    private boolean isVirgin = false;
+    private boolean isVirgin = true;
 
     public Paladin(String name, int maxHp, int attackDamage, String playerName,String color){
         super(name,  maxHp,  attackDamage, playerName,color);
