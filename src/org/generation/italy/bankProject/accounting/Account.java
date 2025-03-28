@@ -12,7 +12,7 @@ public class Account {
 
     //ATTRIBUTI or FIELDS or VARIABILI DEGLI OGGETTI
     private static int lastId; //usando "static" ogni conto avrà il suo lastId
-    private double balance;
+    protected double balance;
     private int id;
     private LocalDate creationDate;
     private ArrayList movements;
@@ -52,7 +52,7 @@ public class Account {
     }
     public double deposit(double amount){
         Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT );
-        movements.add(move);
+        movements.add((Object) move);
         balance += amount;
         return balance;
     }
@@ -88,13 +88,16 @@ public class Account {
 //        Movement m1 = (Movement)o1;
         for(int i = 0 ; i < movements.size() ; i++) {
             Object ob = movements.get(i);
-            Movement m = (Movement)ob;
+            if(ob instanceof Movement){
+                Movement m = (Movement)ob;
 //            Movement m2 = (Movement)movements.get(i);
-            if(m.getType() == MovementType.DEPOSIT) {
-                sum += m.getAmount();
+                if(m.getType() == MovementType.DEPOSIT) {
+                    sum += m.getAmount();
 //                sum = sum + m.getAmount();
 
+                }
             }
+
         }
         return sum;
     }

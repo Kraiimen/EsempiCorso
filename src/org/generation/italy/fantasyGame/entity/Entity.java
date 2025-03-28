@@ -1,11 +1,14 @@
 package org.generation.italy.fantasyGame.entity;
 
+import java.util.Random;
+
 public class Entity{
     //ATTRIBUTI DELL'ISTANZA
     private String name;
     private int healthPoints;
     private int maxHp;
     protected int damage;
+    protected Random rand = new Random();
 
     public Entity(String name, int maxHp, int damage){
         this.name = name;
@@ -14,6 +17,9 @@ public class Entity{
         this.damage = damage;
     }
     public int healMissingHpPercent(double healPercent){
+        if(isFullyHealed()){
+            return healthPoints;
+        }
         int missingHp = maxHp - healthPoints;
         double heal = missingHp * healPercent;
         healthPoints += (int)heal;
@@ -51,5 +57,14 @@ public class Entity{
     }
     public int getDamage(){
         return damage;
+    }
+    private boolean isFullyHealed(){
+        return healthPoints == maxHp;
+    }
+    public boolean isSeriouslyDamaged(){
+        return healthPoints <= maxHp/2;
+    }
+    public boolean isDead(){
+        return healthPoints <= 0;
     }
 }

@@ -7,8 +7,10 @@ public class Player extends Entity {
     private String playerName;
 
 
-    public Player(String name, int maxHp, int damage, String playerName){
+    public Player(String name, int maxHp, int damage, String playerName, long exp){
         super(name, maxHp, damage);
+        this.playerName = playerName;
+        this.exp = exp;
     }
     public void logIn(){
         System.out.println(this.playerName + "Is logged in game");
