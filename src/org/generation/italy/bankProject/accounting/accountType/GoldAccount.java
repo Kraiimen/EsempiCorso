@@ -18,8 +18,8 @@ public class GoldAccount extends Account {
             Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
             movements.add(move);
             for (int i = 0; i < movements.size(); i++) {
-                if ((i % 10 == 0) && (move.getType() == MovementType.DEPOSIT)) {
-                    balance += 1;
+                if ((movements.size() % 10 == 0) && (move.getType() == MovementType.DEPOSIT)) {
+                    balance += 0.1;
                 }
             }
             return balance;
