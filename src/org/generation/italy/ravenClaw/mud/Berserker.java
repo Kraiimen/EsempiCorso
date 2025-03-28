@@ -3,6 +3,7 @@ package org.generation.italy.ravenClaw.mud;
 import java.util.Random;
 
 public class Berserker extends Player{
+
     public Berserker(String name, int maxHp, int attackDamage, String playerName){
         super(name, maxHp, attackDamage, playerName);
     }

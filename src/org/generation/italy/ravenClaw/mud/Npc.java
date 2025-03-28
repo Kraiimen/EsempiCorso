@@ -18,9 +18,19 @@ public class Npc extends Entity{
         }
     }
 
+    public int getXpOnDeath() {
+        return xpOnDeath;
+    }
 
+    public void setXpOnDeath(int xpOnDeath) {
+        this.xpOnDeath = xpOnDeath;
+    }
 
+    public boolean isCanBeAttacked() {
+        return canBeAttacked;
+    }
 
-
-
+    public void setCanBeAttacked(boolean canBeAttacked) {
+        this.canBeAttacked = canBeAttacked;
+    }
 }

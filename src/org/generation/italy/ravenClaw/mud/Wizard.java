@@ -40,4 +40,12 @@ public class Wizard extends Player {
     public void setIntelligence(int intelligence) {
         this.intelligence = intelligence;
     }
+
+    public int getSpellPoints() {
+        return spellPoints;
+    }
+
+    public void setSpellPoints(int spellPoints) {
+        this.spellPoints = spellPoints;
+    }
 }

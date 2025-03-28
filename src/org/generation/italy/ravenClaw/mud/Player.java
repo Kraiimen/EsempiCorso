@@ -18,12 +18,16 @@ public class Player extends Entity{
             System.out.println("I'm logging in");
             isOnLine = true;
         }
-
-
     }
 
+    public String getPlayerName(){return playerName;}
+    public void setPlayerName(String playerName){this.playerName = playerName;}
 
+    public Long getExp() {return exp;}
+    public void setExp(Long exp) {this.exp = exp;}
 
+    public boolean isOnLine() {return isOnLine;}
+    public void setOnLine(boolean onLine) {isOnLine = onLine;}
 }
 
 
