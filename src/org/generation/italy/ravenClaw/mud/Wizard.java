@@ -34,7 +34,7 @@ public class Wizard extends Player {
     }
     @Override
     public void printSheet(){
-        System.out.printf("your name is %s a Wizard, you've got %d HP and your base damage is %d you have %d intelligence points\n", this.getName(),this.getHealthPoints(),this.getAttackDamage(),this.getIntelligence());
+        System.out.printf("your name is %s the Wizard, you've got %d HP and your base damage is %d you have %d intelligence points\n", this.getName(),this.getHealthPoints(),this.getAttackDamage(),this.getIntelligence());
     }
     public int getIntelligence() {
         return intelligence;

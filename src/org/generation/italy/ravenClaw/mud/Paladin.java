@@ -52,7 +52,7 @@ public class Paladin extends Player {
         }else{
             virgin = "you are not a virgin";
         }
-        System.out.printf("your name is %s a Paladin, you've got %d HP and your base damage is %d %s\n", this.getName(),this.getHealthPoints(),this.getAttackDamage(),virgin);
+        System.out.printf("your name is %s the Paladin, you've got %d HP and your base damage is %d %s\n", this.getName(),this.getHealthPoints(),this.getAttackDamage(),virgin);
     }
 
     public boolean isVirgin() {

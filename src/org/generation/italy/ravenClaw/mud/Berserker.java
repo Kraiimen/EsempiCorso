@@ -28,6 +28,6 @@ public class Berserker extends Player{
     }
     @Override
     public void printSheet(){
-        System.out.printf("your name is %s a Berserker, you've got %d HP and your base damage is %d\n", this.getName(),this.getHealthPoints(),this.getAttackDamage());
+        System.out.printf("your name is %s the Berserker, you've got %d HP and your base damage is %d\n", this.getName(),this.getHealthPoints(),this.getAttackDamage());
     }
 }
