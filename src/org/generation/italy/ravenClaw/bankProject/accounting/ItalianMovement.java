@@ -1,7 +1,4 @@
-package org.generation.italy.ravenClaw.bankProject.accounting.accounts;
-
-import org.generation.italy.ravenClaw.bankProject.accounting.Movement;
-import org.generation.italy.ravenClaw.bankProject.accounting.MovementType;
+package org.generation.italy.ravenClaw.bankProject.accounting;
 
 import java.time.LocalDateTime;
 
