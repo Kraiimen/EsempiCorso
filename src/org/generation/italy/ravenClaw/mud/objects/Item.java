@@ -33,6 +33,6 @@ public class Item {
     }
 
     public void setType(ItemType type) {
-        type = type;
+        this.type = type;
     }
 }
