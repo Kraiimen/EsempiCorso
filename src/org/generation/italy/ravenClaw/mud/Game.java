@@ -28,10 +28,10 @@ public class Game {
         player.printSheet();
 
         Npc prisonGuy = new Npc("Prison jerk", 30,15,40,true);
-        Weapon rustySword = new Weapon("Rusty sword", 0 , 5, 5);
+        Weapon rustySword = new Weapon("Rusty sword", 0 , 5,5);
         choice = console.readLine("\nYou wake up in a stone cell, there is a rusty sword to your right \n if you want to pick it up type PICK \n otherwise type NO");
         if(choice.equalsIgnoreCase("PICK")){
-            player.pickUpitem((Item)rustySword);
+            player.pickUpitem(rustySword);
             System.out.printf("you pick up the %s this boosts your attack damage to %d",rustySword.getName(),player.getAttackDamage());
         }
         System.out.println(" \n a man with long black hair stares at you from the other side of the cell. \n Hey \n What are you looking at? Are you looking for trouble?!\n");
