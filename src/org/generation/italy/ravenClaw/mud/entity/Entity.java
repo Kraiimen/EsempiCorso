@@ -1,5 +1,11 @@
-package org.generation.italy.ravenClaw.mud;
+package org.generation.italy.ravenClaw.mud.entity;
 
+
+import org.generation.italy.ravenClaw.mud.objects.Item;
+import org.generation.italy.ravenClaw.mud.objects.ItemType;
+import org.generation.italy.ravenClaw.mud.objects.Weapon;
+
+import java.util.ArrayList;
 
 public class Entity {
     private String name;
@@ -7,6 +13,7 @@ public class Entity {
     private int maxHp;
     private int attackDamage; //danno base della creatura
     private boolean isDead;
+    private ArrayList inventory =  new ArrayList();
 
 
     public Entity(String name, int maxHp, int attackDamage){
@@ -59,6 +66,16 @@ public class Entity {
     public void printSheet(){
         System.out.printf("your name is %s you've got &d HP and your base damage is %d\n", name,healthPoints,attackDamage);
     }
+
+    public void pickUpitem (Item item){
+        inventory.add(item);
+        if(item.getType() == ItemType.WEAPON){
+            Weapon weapon = (Weapon)item;
+            attackDamage += weapon.getDamageMod();
+        }
+    }
+
+
     public String getName(){return name;}
     public void setName(String name){this.name = name;}
 
