@@ -38,6 +38,7 @@ public class Player extends Entity{
             target.setCurrentHealthPoint(target.getCurrentHealthPoint() - getDamage());
             if (target.getCurrentHealthPoint() <= 0) {
                 currentExpPoint += earnedExp;
+                System.out.println(target.getName() + " è morto");
             }
         }
     }
