@@ -6,7 +6,6 @@ public class Item {
     private int weight;
     private ItemType type;
 
-
     public Item (String name, int value, int weight){
         this.name = name;
         this.value = value;
