@@ -37,10 +37,12 @@ public class Entity {
         int hpLost = maxHp - healthPoints;
         if (receivedHeal <= hpLost) {
             healthPoints += receivedHeal;
+            System.out.printf(" %s heals %d HP \n", name,receivedHeal);
         }else{
             healthPoints = maxHp;
+            System.out.println("You are already at full HP");
         }
-        System.out.printf(" %s heals %d HP \n", name,receivedHeal);
+
 
     }
     public void eat(){
