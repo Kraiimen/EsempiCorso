@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Account extends Object{  //extends object è implicito
+public abstract class Account extends Object{  //extends object è implicito
     //la visibilità di default vuol dire visibile all'interno del suo package
     //in un file java può essere presente solo una classe pubblica che deve essere chiamata come il file
     //private = visibile solo nella classe che lo definisce (utilizzato prettamente per le variabili) private != cybersecurity
@@ -15,7 +15,7 @@ public class Account extends Object{  //extends object è implicito
     protected double balance;
     private int id;
     private LocalDate creationDate;
-    private ArrayList movements;
+    protected ArrayList movements;
     // Quando il compilatore vede il nome di una classe si chiede "Questa classe viene da Java.lang?" ovvero il package base del linguaggio java
     // se questo non è vero, si chiede "è dello stesso package di questa classe?" quindi se in un file si vuole usare una classe che sta nello stesso package del file, non c'è bisogno di importarla
     // se non la trova nemmeno li controllerà la lista degli import a inizio file
@@ -50,12 +50,8 @@ public class Account extends Object{  //extends object è implicito
         System.out.println("durante questa esecuzione di printBalance this è uguale a " +this);
         System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
-    public double deposit(double amount){
-        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
-        movements.add(move);
-        balance += amount;
-        return balance;
-    }
+    public abstract double deposit(double amount);
+
     public double withdraw(double amount){
         doInternalOperation();
         Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
