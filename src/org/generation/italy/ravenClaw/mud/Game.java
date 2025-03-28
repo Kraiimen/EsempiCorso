@@ -49,7 +49,16 @@ public class Game {
             choice = console.readLine("\n vuoi contrattaccare?, il tizzio sembra molto mal messo \n scrivi YES per contrattaccare \n scrivi NO per non contrattaccare e andare a dormire");
 
             if (choice.equalsIgnoreCase("YES")){
-                player.attack(prisonGuy);
+                while(!prisonGuy.isDead()){
+
+                    player.attack(prisonGuy);
+                    if (!prisonGuy.isDead()){
+                        prisonGuy.attack(player);
+                    }
+                    if(player.isDead()){
+                        break;
+                    }
+                }
             }else if (choice.equalsIgnoreCase("NO")){
                 player.sleep();
             }
