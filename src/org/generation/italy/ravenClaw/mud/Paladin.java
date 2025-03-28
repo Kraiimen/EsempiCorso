@@ -7,8 +7,8 @@ public class Paladin extends Player {
 
     public Paladin(String name, int maxHp, int attackDamage, String playerName){
         super(name,  maxHp,  attackDamage, playerName);
-
     }
+
     //attacco con lancia che dipende dal fatto che sia corrotto o meno
     @Override
     public void attack(Entity attacked){
@@ -30,7 +30,6 @@ public class Paladin extends Player {
         Random random = new Random();
         return random.nextInt(diceFaces) > 0;
     }
-
     public void getCorrupt(){
         isVirgin = false;
         System.out.printf("The heart of %s has been corrupted, there is no turning back ",getName());
