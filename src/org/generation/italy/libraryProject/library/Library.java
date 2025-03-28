@@ -20,7 +20,7 @@ public class Library {
 
     public void addBook(String title, int numPages, double cost, String author, LocalDate yearPub, String pubHouse, Category categoryType) {
         Book b = new Book(title, numPages, cost, author, yearPub, pubHouse, categoryType);
-        booksList.add(b);// usaimo il metodo add per agigungere i  libri nella library
+        booksList.add(b);// usaimo il metodo add per aggiungere i  libri nella library
     }
     // Funzione per calcolare il totale by category
 
@@ -68,29 +68,27 @@ public class Library {
 
     public Category getMostPopularCategory(){
         Category[] categories = Category.values();
-        int[] categoryCounter = new int[categories.length];
-
+        int[] categoryCounter = new int[categories.length]; // crea un array con tutte le category esistenti anche se ne aggiugiamo altre
         for(Object obj : booksList){
             Book b = (Book)obj;
             for(int i = 0; i < categoryCounter.length; i++){
-                if(categories[i] == b.getCategoryType()){
+                if (categories[i] == b.getCategoryType()){
                     categoryCounter[i]++;
                     break;
                 }
             }
         }
-
         int max = 0;
         int pos = 0;
         for(int i = 0; i < categoryCounter.length; i++){
-            if(categoryCounter[i] > max){
+            if (categoryCounter[i] > max){
                 max = categoryCounter[i];
-                pos = i;
+                pos = i; // ci da la posizione dell max nell'array
             }
         }
-
         return categories[pos];
     }
+
 
 
 
