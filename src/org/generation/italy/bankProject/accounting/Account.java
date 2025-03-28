@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Account {
+public class Account extends Object{  //extends object è implicito
     //la visibilità di default vuol dire visibile all'interno del suo package
     //in un file java può essere presente solo una classe pubblica che deve essere chiamata come il file
     //private = visibile solo nella classe che lo definisce (utilizzato prettamente per le variabili) private != cybersecurity
@@ -12,7 +12,7 @@ public class Account {
 
     //ATTRIBUTI or FIELDS or VARIABILI DEGLI OGGETTI
     private static int lastId; //usando "static" ogni conto avrà il suo lastId
-    private double balance;
+    protected double balance;
     private int id;
     private LocalDate creationDate;
     private ArrayList movements;
@@ -51,7 +51,7 @@ public class Account {
         System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
     public double deposit(double amount){
-        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT );
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
         movements.add(move);
         balance += amount;
         return balance;
@@ -98,7 +98,22 @@ public class Account {
         }
         return sum;
     }
-
+    //voglio un metodo che mi dia la somma delle cifre relative a movimenti di un tipo che gli passo in input (deposit o withdrawal)
+    //questi movimenti di cui avrò la somma devono essere compresi in un range di date che passo in input
+    //a questa funzione passerò un valore double che sarà la soglia sotto la quale non voglio vedere i movimenti
+    //double sum = c.getTotalAmountFor(MovementType.WITHDRAWAL , LocalDate.of(2025,1,15) , LocalDate.of(2025,2,20) , 200.0)
+    public double getTotalAmountFor(MovementType type, LocalDate start, LocalDate end, double lowerBound){
+        double totalAmount = 0;
+        for(Object ob : movements){
+            Movement m = (Movement)ob;
+            LocalDate movementDate = m.getOperationTime().toLocalDate();
+            boolean isInRange = movementDate.isAfter(start) && movementDate.isBefore(end);
+            if(m.getType() == type && isInRange && m.getAmount() >= lowerBound){
+                totalAmount += m.getAmount();
+            }
+        }
+        return totalAmount;
+    }
 }
 
 
