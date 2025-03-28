@@ -16,14 +16,20 @@ public class ItalianAccount extends Account {
 
     @Override
     public double deposit(double amount){
-        amount *= 0.9;
         tax = amount *0.1;
+        amount *= 0.9;
         balance += amount;
         Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
         movements.add(move);
-        System.out.println("Grazie pezzente");
+        System.out.println("Grazie pezzente" + " tassa " + tax + " bilancio " + balance);
         movements.add(tax);
         return balance;
+    }
+    public void printItalianMovement (){
+        for(Object o: movements){
+            Movement m1 = (Movement) o;
+
+        }
     }
 
 

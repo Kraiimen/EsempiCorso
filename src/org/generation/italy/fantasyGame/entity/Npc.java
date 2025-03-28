@@ -1,6 +1,6 @@
 package org.generation.italy.fantasyGame.entity;
 
-public class Npc extends Entity{
+public abstract class Npc extends Entity{
     private int expGain;
     private boolean canBeAttacked;
     private String generalInstructions;
