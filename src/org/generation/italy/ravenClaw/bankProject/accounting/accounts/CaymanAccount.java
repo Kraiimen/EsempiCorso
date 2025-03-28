@@ -1,4 +1,4 @@
-package org.generation.italy.ravenClaw.bankProject.accounting.evasion;
+package org.generation.italy.ravenClaw.bankProject.accounting.accounts;
 
 import org.generation.italy.ravenClaw.bankProject.accounting.Account;
 
