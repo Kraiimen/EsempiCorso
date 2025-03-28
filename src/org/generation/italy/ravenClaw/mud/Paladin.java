@@ -59,7 +59,5 @@ public class Paladin extends Player {
         return isVirgin;
     }
 
-    public void setVirgin(boolean virgin) {
-        isVirgin = virgin;
-    }
+
 }
