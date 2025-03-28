@@ -5,8 +5,8 @@ public class Wizard extends Player {
     private int intelligence;
     private int spellPoints;
 
-    public Wizard (String name, int maxHp, int attackDamage,String playerName,int intelligence ){
-        super(name, maxHp, attackDamage,playerName);
+    public Wizard (String name, int maxHp, int attackDamage,String playerName,int intelligence,String color){
+        super(name, maxHp, attackDamage,playerName,color);
         if(intelligence >=0 && intelligence<=100){
             this.intelligence = intelligence;
         }
@@ -18,10 +18,10 @@ public class Wizard extends Player {
         if(spellPoints>=5){
             spellPoints-=5;
             damageMade *= 4;
-            System.out.printf("%s is Casting a fireball on %s for %d damage\n", this.getName(), attacked.getName(),damageMade);
+            System.out.printf("%s%s is Casting a fireball on %s for %d damage%s%s\n",getEntityColor(), this.getName(), attacked.getName(),damageMade,getResetColor());
         }else{
             damageMade *= 0;
-            System.out.printf("%s tried to cast a fireball on %s but failed\n", this.getName(), attacked.getName());
+            System.out.printf("%s%s tried to cast a fireball on %s but failed%s\n",getEntityColor(), this.getName(), attacked.getName(),getResetColor());
         }
 
         return damageMade;
@@ -34,7 +34,7 @@ public class Wizard extends Player {
     }
     @Override
     public void printSheet(){
-        System.out.printf("your name is %s the Wizard, you've got %d HP and your base damage is %d you have %d intelligence points\n", this.getName(),this.getHealthPoints(),this.getAttackDamage(),this.getIntelligence());
+        System.out.printf("%syour name is %s the Wizard, you've got %d HP and your base damage is %d you have %d intelligence points%s\n",getEntityColor(), this.getName(),this.getHealthPoints(),this.getAttackDamage(),this.getIntelligence(),getResetColor());
     }
     public int getIntelligence() {
         return intelligence;

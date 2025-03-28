@@ -5,8 +5,8 @@ public class Npc extends Entity{
     private int xpOnDeath;
     private boolean canBeAttacked;
 
-    public Npc(String name, int maxHp, int attackDamage, int xpOnDeath, boolean canBeAttacked){
-        super(name, maxHp, attackDamage);
+    public Npc(String name, int maxHp, int attackDamage, int xpOnDeath, boolean canBeAttacked,String color){
+        super(name, maxHp, attackDamage,color);
         this.xpOnDeath = xpOnDeath;
         this.canBeAttacked = canBeAttacked;
     }
