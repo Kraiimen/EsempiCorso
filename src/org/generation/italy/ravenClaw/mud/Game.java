@@ -35,7 +35,8 @@ public class Game {
                     prisonGuy.attack(player);
                 }
                 if(player.isDead()){
-                    break;
+                    System.out.println("SEI MORTO");
+                    System.exit(0);
                 }
             }
             choice= console.readLine("\nil rompipalle è morto, trovi del pane tra le sue cose, \n se vuoi mangiarlo scrivi MANGIA, \n sennò scrivi NO ");
@@ -56,15 +57,13 @@ public class Game {
                         prisonGuy.attack(player);
                     }
                     if(player.isDead()){
-                        break;
+                        System.out.println("SEI MORTO");
+                        System.exit(0);
                     }
                 }
             }else if (choice.equalsIgnoreCase("NO")){
                 player.sleep();
             }
-        }
-        if(player.isDead()){
-            System.out.println("SEI MORTO");
         }
         System.out.println("\nhai completato questo esempio di gioco del nostro gioco CONGRATULAZIONI!!");
     }
