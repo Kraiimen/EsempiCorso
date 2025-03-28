@@ -1,4 +1,4 @@
-package org.generation.italy.ravenClaw.mud;
+package org.generation.italy.ravenClaw.mud.entity;
 
 
 public class Npc extends Entity{
@@ -18,9 +18,19 @@ public class Npc extends Entity{
         }
     }
 
+    public int getXpOnDeath() {
+        return xpOnDeath;
+    }
 
+    public void setXpOnDeath(int xpOnDeath) {
+        this.xpOnDeath = xpOnDeath;
+    }
 
+    public boolean getCanBeAttacked() {
+        return canBeAttacked;
+    }
 
-
-
+    public void setCanBeAttacked(boolean canBeAttacked) {
+        this.canBeAttacked = canBeAttacked;
+    }
 }

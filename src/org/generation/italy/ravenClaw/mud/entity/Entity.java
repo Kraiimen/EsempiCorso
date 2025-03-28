@@ -1,11 +1,19 @@
-package org.generation.italy.ravenClaw.mud;
+package org.generation.italy.ravenClaw.mud.entity;
 
+
+import org.generation.italy.ravenClaw.mud.objects.Item;
+import org.generation.italy.ravenClaw.mud.objects.ItemType;
+import org.generation.italy.ravenClaw.mud.objects.Weapon;
+
+import java.util.ArrayList;
 
 public class Entity {
     private String name;
     private int healthPoints;
     private int maxHp;
     private int attackDamage; //danno base della creatura
+    private boolean isDead;
+    private ArrayList inventory =  new ArrayList();
 
 
     public Entity(String name, int maxHp, int attackDamage){
@@ -13,24 +21,36 @@ public class Entity {
         this.maxHp = maxHp;
         this.attackDamage = attackDamage;
         healthPoints = maxHp;
+        isDead = false;
     }
     //METODI COMBATTIMENTO
     public void hurt(int receivedDamage){ //received damage è il danno che infligge la creatura attaccante
         healthPoints -= receivedDamage; //scalare il danno dai punti vita
+        if(healthPoints<=0){
+            isDead = true;
+
+        }
     }
     public void attack(Entity attacked){
         int damageMade = attackDamage;  //variabile modificabile che prende come minimo il danno dell'attaccante
+        System.out.printf(" %s is attacking %s for %d damage\n ", name, attacked.getName(),damageMade);
         attacked.hurt(damageMade);
-        System.out.printf("%s is attacking %s for %d damage", this.name, attacked.getName(),damageMade);
+        if(attacked.isDead){
+            System.out.println(attacked.getName() + " has died by that hit\n ");
+        }
     }
     //METODI DI RISTORO
     private void heal(int receivedHeal){
         int hpLost = maxHp - healthPoints;
         if (receivedHeal <= hpLost) {
             healthPoints += receivedHeal;
+            System.out.printf(" %s heals %d HP \n", name,receivedHeal);
         }else{
             healthPoints = maxHp;
+            System.out.println("You are already at full HP");
         }
+
+
     }
     public void eat(){
         int hpLost = maxHp - healthPoints;
@@ -42,6 +62,20 @@ public class Entity {
         int lifeRestored = (int)(hpLost * 0.2);
         heal(lifeRestored);
     }
+
+    public void printSheet(){
+        System.out.printf("your name is %s you've got &d HP and your base damage is %d\n", name,healthPoints,attackDamage);
+    }
+
+    public void pickUpitem (Item item){
+        inventory.add(item);
+        if(item.getType() == ItemType.WEAPON){
+            Weapon weapon = (Weapon)item;
+            attackDamage += weapon.getDamageMod();
+        }
+    }
+
+
     public String getName(){return name;}
     public void setName(String name){this.name = name;}
 
@@ -54,5 +88,6 @@ public class Entity {
     public int getAttackDamage(){return attackDamage;}
     public void setAttackDamage(int attackDamage){this.attackDamage = attackDamage;}
 
-
+    public boolean isDead() {return isDead;}
+    public void setDead(boolean dead) {isDead = dead;}
 }

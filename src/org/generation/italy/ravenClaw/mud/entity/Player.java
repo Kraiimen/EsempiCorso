@@ -1,4 +1,4 @@
-package org.generation.italy.ravenClaw.mud;
+package org.generation.italy.ravenClaw.mud.entity;
 
 
 public class Player extends Entity{
@@ -18,12 +18,13 @@ public class Player extends Entity{
             System.out.println("I'm logging in");
             isOnLine = true;
         }
-
-
     }
 
+    public String getPlayerName(){return playerName;}
+    public void setPlayerName(String playerName){this.playerName = playerName;}
 
-
+    public Long getExp() {return exp;}
+    public void setExp(Long exp) {this.exp = exp;}
 }
 
 
