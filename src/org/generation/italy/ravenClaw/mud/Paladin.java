@@ -31,7 +31,7 @@ public class Paladin extends Player {
         return random.nextInt(diceFaces) > 0;
     }
 
-    public void getCorrupt(){
+    private void getCorrupt(){
         isVirgin = false;
         System.out.printf("The heart of %s has been corrupted, there is no turning back ",getName());
     }
