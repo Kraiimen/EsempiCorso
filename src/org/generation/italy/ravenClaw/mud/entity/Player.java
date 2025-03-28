@@ -6,8 +6,8 @@ public class Player extends Entity{
     private Long exp;
     private boolean isOnLine;
 
-    public Player(String name, int maxHp, int attackDamage, String playerName){
-        super(name, maxHp, attackDamage);
+    public Player(String name, int maxHp, int attackDamage, String playerName,String color){
+        super(name, maxHp, attackDamage,color);
         this.playerName = playerName;
     }
     public void changeStatus(){
