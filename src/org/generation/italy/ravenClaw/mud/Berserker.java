@@ -26,4 +26,8 @@ public class Berserker extends Player{
         attacked.hurt(damageMade);
         System.out.printf("%s is attacking %s for %d damage", getName(), attacked.getName(), damageMade);
     }
+    @Override
+    public void printSheet(){
+        System.out.printf("your name is %s a Berserker, you've got %d HP and your base damage is %d", this.getName(),this.getHealthPoints(),this.getAttackDamage());
+    }
 }

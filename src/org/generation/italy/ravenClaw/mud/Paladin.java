@@ -44,6 +44,16 @@ public class Paladin extends Player {
             System.out.printf("The heart of %s remains pure... today.", getName());
         }
     }
+    @Override
+    public void printSheet(){
+        String virgin;
+        if(isVirgin){
+            virgin = "you are a virgin";
+        }else{
+            virgin = "you are not a virgin";
+        }
+        System.out.printf("your name is %s a Paladin, you've got %d HP and your base damage is %d %s", this.getName(),this.getHealthPoints(),this.getAttackDamage(),virgin);
+    }
 
     public boolean isVirgin() {
         return isVirgin;
