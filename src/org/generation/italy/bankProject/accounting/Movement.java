@@ -3,6 +3,8 @@ package org.generation.italy.bankProject.accounting;
 //import java.time.LocalDateTime;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+
 public class Movement {
     protected static int lastId;
     private double amount;
@@ -31,5 +33,13 @@ public class Movement {
     public MovementType getType() {
         return type;
     }
+
+    public String toString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String formattedData = getOperationTime().format(formatter);
+        return "ID: " + lastId + "\nMovement amount: "+ getAmount() + "\nYour balance: " + getCurrentBalance() + "\nOperation time: "
+                + formattedData + "\nMovement Type: " + getType();
+    }
+
 
 }

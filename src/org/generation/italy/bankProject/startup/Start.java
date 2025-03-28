@@ -1,5 +1,6 @@
 package org.generation.italy.bankProject.startup;
 
+import org.generation.italy.bankProject.accounting.accountType.GoldAccount;
 import org.generation.italy.bankProject.accounting.accountType.ItalianAccount;
 
 
@@ -13,6 +14,30 @@ public class Start {
         ItalianAccount it2 = new ItalianAccount(10000);
         it2.deposit(100);
         it2.printItalianMovement();
+
+
+        GoldAccount gold = new GoldAccount(1000);
+        gold.deposit(100);
+        gold.deposit(100);
+        gold.deposit(100);
+        gold.deposit(100);
+        gold.deposit(100);
+        gold.deposit(100);
+        gold.deposit(100);
+        gold.deposit(100);
+        gold.deposit(100);
+        gold.deposit(100);
+        gold.deposit(100);
+        gold.printGoldMovement();
+
+
+
+
+
+
+
+
+
     }
 
 }
