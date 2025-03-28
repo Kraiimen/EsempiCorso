@@ -101,6 +101,10 @@ public abstract class Account{  //extends object è implicito
         return totalAmount;
     }
 
+    protected void addMovement(Movement m){
+        movements.add(m);
+    }
+
     // /--GETTER & SETTER-----/
 
     public double getBalance(){

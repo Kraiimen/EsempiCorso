@@ -23,6 +23,13 @@ public class CaymanAccount extends Account {
     private void evadeTax(){
        System.out.println("evado le tasse con l'aiuto del commercialista Elvis");
     }
+
+    @Override
+    public double withdraw(double amount) {
+        balance -= amount;
+        return balance;
+    }
+
     @Override
     public double deposit(double amt){
         evadeTax();
@@ -35,8 +42,4 @@ public class CaymanAccount extends Account {
 //        nums = new int[4];
 //        final int n = 3;
 //    }
-
-
-
-
 }
