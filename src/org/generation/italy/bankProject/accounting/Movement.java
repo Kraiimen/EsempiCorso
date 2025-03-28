@@ -30,4 +30,5 @@ public class Movement {
     public MovementType getType() {
         return type;
     }
+
 }
