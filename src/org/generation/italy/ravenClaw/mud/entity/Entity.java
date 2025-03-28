@@ -54,7 +54,7 @@ public class Entity {
     }
     public void eat(){
         int hpLost = maxHp - healthPoints;
-        int lifeRestored = (int)(hpLost * 0.3); //essendo il 30% esce un double e quindi è necessario castare ad int
+        int lifeRestored = (int)(hpLost * 0.3); //essendo il 30% esce un double e quindi è necessario castare a int
         heal(lifeRestored);
     }
     public void sleep(){
