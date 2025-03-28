@@ -10,7 +10,7 @@ public class Bank {
 
 
     public void gestisciConto(Account account){
-        if(account.getBalance() > MINIMUM_FOR_DEPOSIT){
+        if(account.getBalance() < MINIMUM_FOR_DEPOSIT){
             account.deposit(ACCOUNT_DEPOSIT_BONUS);
         }else if(account.getBalance()> MAX_BEFORE_WITHDRAW){
             account.withdraw(ACCOUNT_DEPOSIT_MALUS);
