@@ -1,6 +1,6 @@
 package org.generation.italy.ravenClaw.bankProject.accounting.evasion;
 
-import org.generation.italy.bankProject.accounting.Account;
+import org.generation.italy.ravenClaw.bankProject.accounting.Account;
 
 import java.time.LocalDate;
 
