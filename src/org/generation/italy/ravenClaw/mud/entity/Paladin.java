@@ -1,4 +1,4 @@
-package org.generation.italy.ravenClaw.mud;
+package org.generation.italy.ravenClaw.mud.entity;
 
 import java.util.Random;
 
