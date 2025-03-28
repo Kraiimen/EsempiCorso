@@ -1,37 +1,45 @@
 package org.generation.italy.fantasyGame.entity;
 
-public class Entity{
+import java.util.Random;
+
+public abstract class Entity{
     //ATTRIBUTI DELL'ISTANZA
     private String name;
     private int healthPoints;
     private int maxHp;
+    protected int damage;
+    protected Random rand = new Random();
 
-    public Entity(String name, int maxHp){
+    public Entity(String name, int maxHp, int damage){
         this.name = name;
         this.maxHp = maxHp;
         healthPoints= this.maxHp;
+        this.damage = damage;
+    }
+    public int healMissingHpPercent(double healPercent){
+        if(isFullyHealed()){
+            return healthPoints;
+        }
+        int missingHp = maxHp - healthPoints;
+        double heal = missingHp * healPercent;
+        healthPoints += (int)heal;
+        return healthPoints;
     }
 
-    public int sleep(){
-        int missingHp = maxHp - healthPoints;
-        double addHealth = missingHp * 0.2;
-        healthPoints += (int)addHealth;
-        return healthPoints;
+    public void sleep(){
+        healMissingHpPercent(0.2);
+        System.out.println("Hai dormito e hai " + healthPoints);
     }
-    public int eat(){
-        int missingHp = maxHp - healthPoints;
-        double addHealth = missingHp * 0.3;
-        healthPoints += (int)addHealth;
-        return healthPoints;
+    public void eat(){
+        healMissingHpPercent(0.3);
+        System.out.println("Hai mangiato e hai " + healthPoints);
     }
-    public void attack(String name){
-        System.out.println(this.name + " attacca " + name);
+    public abstract void attack(Entity target);
+    public void addHealthPoints(int hp){
+        healthPoints += hp;
     }
-    public void addPoint(int points){
-        healthPoints += points;
-    }
-    public void subPoint(int points){
-        healthPoints -= points;
+    public void subtractHealthPoints(int hp){
+        healthPoints -= hp;
     }
 
     public int getHealthPoints() {
@@ -42,5 +50,17 @@ public class Entity{
     }
     public String getName(){
         return name;
+    }
+    public int getDamage(){
+        return damage;
+    }
+    private boolean isFullyHealed(){
+        return healthPoints == maxHp;
+    }
+    public boolean isSeriouslyDamaged(){
+        return healthPoints <= maxHp/2;
+    }
+    public boolean isDead(){
+        return healthPoints <= 0;
     }
 }
