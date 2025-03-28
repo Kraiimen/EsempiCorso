@@ -21,13 +21,16 @@ public class Entity {
         healthPoints -= receivedDamage; //scalare il danno dai punti vita
         if(healthPoints<=0){
             isDead = true;
-            System.out.println(name + " has died ");
+
         }
     }
     public void attack(Entity attacked){
         int damageMade = attackDamage;  //variabile modificabile che prende come minimo il danno dell'attaccante
+        System.out.printf(" %s is attacking %s for %d damage\n ", name, attacked.getName(),damageMade);
         attacked.hurt(damageMade);
-        System.out.printf(" %s is attacking %s for %d damage ", name, attacked.getName(),damageMade);
+        if(attacked.isDead){
+            System.out.println(attacked.getName() + " has died by that hit\n ");
+        }
     }
     //METODI DI RISTORO
     private void heal(int receivedHeal){
@@ -37,7 +40,7 @@ public class Entity {
         }else{
             healthPoints = maxHp;
         }
-        System.out.printf(" %s heals %d HP ", name,receivedHeal);
+        System.out.printf(" %s heals %d HP \n", name,receivedHeal);
 
     }
     public void eat(){
@@ -52,7 +55,7 @@ public class Entity {
     }
 
     public void printSheet(){
-        System.out.printf("your name is %s you've got &d HP and your base damage is %d", name,healthPoints,attackDamage);
+        System.out.printf("your name is %s you've got &d HP and your base damage is %d\n", name,healthPoints,attackDamage);
     }
     public String getName(){return name;}
     public void setName(String name){this.name = name;}

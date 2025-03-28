@@ -15,7 +15,7 @@ public class Berserker extends Player{
         int x = dice.nextInt(berserkChance);
         if(x == 0){
             damageMade *= 2;
-            System.out.println("Berserk mode activated.");
+            System.out.println("Berserk mode activated.\n");
         }
         return damageMade;
     }
@@ -24,10 +24,10 @@ public class Berserker extends Player{
     public void attack(Entity attacked){
         int damageMade = berserk();
         attacked.hurt(damageMade);
-        System.out.printf("%s is attacking %s for %d damage", getName(), attacked.getName(), damageMade);
+        System.out.printf("%s is attacking %s for %d damage\n", getName(), attacked.getName(), damageMade);
     }
     @Override
     public void printSheet(){
-        System.out.printf("your name is %s a Berserker, you've got %d HP and your base damage is %d", this.getName(),this.getHealthPoints(),this.getAttackDamage());
+        System.out.printf("your name is %s a Berserker, you've got %d HP and your base damage is %d\n", this.getName(),this.getHealthPoints(),this.getAttackDamage());
     }
 }

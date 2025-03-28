@@ -23,17 +23,22 @@ public class Game {
         }
         player.printSheet();
 
-        Npc prisonGuy = new Npc("Prison jerk", 5,15,40,true);
+        Npc prisonGuy = new Npc("Prison jerk", 30,15,40,true);
         System.out.println("\nti risvegli in una cella fatta di roccia, hai una spada arrugginita alla tua destra, \n un umano dai lunghi capelli neri ti squadra dal fondo della cella \n Hey \n che ti guardi?,cerchi rogne!?\n");
         choice = console.readLine("Sembrerebbe che questo tizio non sia troppo cordiale,\n se vuoi attaccarlo scrivi ATTACCA , \n se invece vuoi richiamare una guardia scrivi URLA ");
 
         if(choice.equalsIgnoreCase("ATTACCA")){
-            player.attack(prisonGuy);
-            if(prisonGuy.isDead()){
-                choice= console.readLine("\nil rompipalle è morto, trovi del pane tra le sue cose, \n se vuoi mangiarlo scrivi MANGIA, \n sennò scrivi NO ");
-            }else{
-                prisonGuy.attack(player);
+            while(!prisonGuy.isDead()){
+
+                player.attack(prisonGuy);
+                if (!prisonGuy.isDead()){
+                    prisonGuy.attack(player);
+                }
+                if(player.isDead()){
+                    break;
+                }
             }
+            choice= console.readLine("\nil rompipalle è morto, trovi del pane tra le sue cose, \n se vuoi mangiarlo scrivi MANGIA, \n sennò scrivi NO ");
             if (choice.equalsIgnoreCase("MANGIA")){
                 player.eat();
             }
@@ -48,6 +53,9 @@ public class Game {
             }else if (choice.equalsIgnoreCase("NO")){
                 player.sleep();
             }
+        }
+        if(player.isDead()){
+            System.out.println("SEI MORTO");
         }
         System.out.println("\nhai completato questo esempio di gioco del nostro gioco CONGRATULAZIONI!!");
     }
