@@ -10,9 +10,9 @@ public class Game {
         Random dice = new Random();
         String choice;
         Player player = null;  // POLYMORPHIC VARIABLE
-        String playerClass = console.readLine("Che classe vuoi giocare? Wizard, Berserker, Paladin: ");
-        String playerName = console.readLine("Come vuoi chiamare il tuo eroe? ");
-        String realPlayerName = console.readLine("Giocatore, come ti chiami? ");
+        String playerClass = console.readLine("Which class do you want to play? Wizard, Berserker, Paladin: ");
+        String playerName = console.readLine("What do you want to name your hero? ");
+        String realPlayerName = console.readLine("Player, what is your name? ");
 
         if(playerClass.equalsIgnoreCase("wizard")){
             player = new Wizard(playerName, dice.nextInt(50) + 1, dice.nextInt(10) + 1, realPlayerName, dice.nextInt(100) + 6);
@@ -24,40 +24,37 @@ public class Game {
         player.printSheet();
 
         Npc prisonGuy = new Npc("Prison jerk", 30,15,40,true);
-        System.out.println("\nti risvegli in una cella fatta di roccia, hai una spada arrugginita alla tua destra, \n un umano dai lunghi capelli neri ti squadra dal fondo della cella \n Hey \n che ti guardi?,cerchi rogne!?\n");
-        choice = console.readLine("Sembrerebbe che questo tizio non sia troppo cordiale,\n se vuoi attaccarlo scrivi ATTACCA , \n se invece vuoi richiamare una guardia scrivi URLA ");
+        System.out.println("\nYou wake up in a stone cell, there is a rusty sword to your right, \n a man with long black hair stares at you from the other side of the cell. \n Hey \n What are you looking at? Are you looking for trouble?!\n");
+        choice = console.readLine("It seems this guy isn't very friendly.\n If you want to attack him, type ATTACK, \n If you want to call a guard, type SHOUT ");
 
-        if(choice.equalsIgnoreCase("ATTACCA")){
+        if(choice.equalsIgnoreCase("ATTACK")){
             while(!prisonGuy.isDead()){
-
                 player.attack(prisonGuy);
                 if (!prisonGuy.isDead()){
                     prisonGuy.attack(player);
                 }
                 if(player.isDead()){
-                    System.out.println("SEI MORTO");
+                    System.out.println("YOU DIED");
                     System.exit(0);
                 }
             }
-            choice= console.readLine("\nil rompipalle è morto, trovi del pane tra le sue cose, \n se vuoi mangiarlo scrivi MANGIA, \n sennò scrivi NO ");
-            if (choice.equalsIgnoreCase("MANGIA")){
+            choice= console.readLine("\nThe troublemaker is dead, you find some bread among his belongings. \n If you want to eat it, type EAT, \n otherwise, type NO ");
+            if (choice.equalsIgnoreCase("EAT")){
                 player.eat();
             }
-
-        } else if (choice.equalsIgnoreCase("URLA")) {
-            System.out.println("\n urli a squarciagola, ma nessuno arriva \n il tizzio sembra irritarsi, e alzatosi dalla sua branda ti da un pugno \n E statti un pò zitto!\n");
+        } else if (choice.equalsIgnoreCase("SHOUT")) {
+            System.out.println("\n You shout at the top of your lungs, but no one arrives. \n The guy seems irritated, and getting up from his cot, he punches you. \n Shut up for a bit!\n");
             prisonGuy.attack(player);
-            choice = console.readLine("\n vuoi contrattaccare?, il tizzio sembra molto mal messo \n scrivi YES per contrattaccare \n scrivi NO per non contrattaccare e andare a dormire");
+            choice = console.readLine("\nDo you want to counterattack? The guy seems very weakened. \n Type YES to counterattack \n Type NO to not counterattack and go to sleep");
 
             if (choice.equalsIgnoreCase("YES")){
                 while(!prisonGuy.isDead()){
-
                     player.attack(prisonGuy);
                     if (!prisonGuy.isDead()){
                         prisonGuy.attack(player);
                     }
                     if(player.isDead()){
-                        System.out.println("SEI MORTO");
+                        System.out.println("YOU DIED");
                         System.exit(0);
                     }
                 }
@@ -65,6 +62,6 @@ public class Game {
                 player.sleep();
             }
         }
-        System.out.println("\nhai completato questo esempio di gioco del nostro gioco CONGRATULAZIONI!!");
+        System.out.println("\nYou have completed this sample game of our game. CONGRATULATIONS!!");
     }
 }
