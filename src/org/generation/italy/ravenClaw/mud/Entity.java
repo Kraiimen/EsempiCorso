@@ -24,7 +24,7 @@ public class Entity {
         System.out.printf("%s is attacking %s for %d damage", this.name, attacked.getName(),damageMade);
     }
     //METODI DI RISTORO
-    public void heal(int receivedHeal){
+    private void heal(int receivedHeal){
         int hpLost = maxHp - healthPoints;
         if (receivedHeal <= hpLost) {
             healthPoints += receivedHeal;
