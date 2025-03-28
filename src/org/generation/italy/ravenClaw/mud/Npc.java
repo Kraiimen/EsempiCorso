@@ -26,7 +26,7 @@ public class Npc extends Entity{
         this.xpOnDeath = xpOnDeath;
     }
 
-    public boolean isCanBeAttacked() {
+    public boolean getCanBeAttacked() {
         return canBeAttacked;
     }
 
