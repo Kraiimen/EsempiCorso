@@ -4,7 +4,7 @@ package org.generation.italy.bankProject.accounting;
 
 import java.time.*;
 public class Movement {
-
+    protected static int lastId;
     private double amount;
     private double currentBalance;
     private LocalDateTime operationTime;
@@ -17,6 +17,7 @@ public class Movement {
         this.currentBalance = currentBalance;
         this.operationTime = operationTime;
         this.type = type;
+        ++lastId;
     }
     public double getAmount() {
         return amount;

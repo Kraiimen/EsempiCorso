@@ -1,11 +1,6 @@
 package org.generation.italy.bankProject.startup;
 
-import org.generation.italy.bankProject.accounting.accountType.CaymanAccount;
-import org.generation.italy.bankProject.accounting.Movement;
-import org.generation.italy.bankProject.accounting.MovementType;
 import org.generation.italy.bankProject.accounting.accountType.ItalianAccount;
-
-import java.time.LocalDateTime;
 
 
 public class Start {
@@ -14,7 +9,10 @@ public class Start {
         ItalianAccount it1 = new ItalianAccount(10000);
         it1.deposit(100);
         System.out.println();
-
+        it1.printItalianMovement();
+        ItalianAccount it2 = new ItalianAccount(10000);
+        it2.deposit(100);
+        it2.printItalianMovement();
     }
 
 }

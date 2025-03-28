@@ -68,6 +68,8 @@ public class Wizard extends MagicalPlayer{
         //Duck x1 = new Wizard("Merlino", 100,"Stefano");
         w.playWithDuck(x);
         RubberDuck rb = new RubberDuck();
+        SuperDuck sp = new SuperDuck();
+
         w.playWithDuck((Duck)rb); // Upcast si va verso la Superclass , invece il Downcast va verso una sottoclasse denominato unsafe
         //x = (Duck)rb;
         rb = (RubberDuck) x;
