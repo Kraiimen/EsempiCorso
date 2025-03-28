@@ -6,6 +6,7 @@ public class Entity {
     private int healthPoints;
     private int maxHp;
     private int attackDamage; //danno base della creatura
+    private boolean isDead;
 
 
     public Entity(String name, int maxHp, int attackDamage){
@@ -13,15 +14,19 @@ public class Entity {
         this.maxHp = maxHp;
         this.attackDamage = attackDamage;
         healthPoints = maxHp;
+        isDead = false;
     }
     //METODI COMBATTIMENTO
     public void hurt(int receivedDamage){ //received damage è il danno che infligge la creatura attaccante
         healthPoints -= receivedDamage; //scalare il danno dai punti vita
+        if(healthPoints<=0){
+            isDead = true;
+        }
     }
     public void attack(Entity attacked){
         int damageMade = attackDamage;  //variabile modificabile che prende come minimo il danno dell'attaccante
         attacked.hurt(damageMade);
-        System.out.printf("%s is attacking %s for %d damage", this.name, attacked.getName(),damageMade);
+        System.out.printf("%s is attacking %s for %d damage", name, attacked.getName(),damageMade);
     }
     //METODI DI RISTORO
     private void heal(int receivedHeal){
@@ -31,6 +36,8 @@ public class Entity {
         }else{
             healthPoints = maxHp;
         }
+        System.out.printf("%s heals %d HP", name,receivedHeal);
+
     }
     public void eat(){
         int hpLost = maxHp - healthPoints;
@@ -54,5 +61,6 @@ public class Entity {
     public int getAttackDamage(){return attackDamage;}
     public void setAttackDamage(int attackDamage){this.attackDamage = attackDamage;}
 
-
+    public boolean isDead() {return isDead;}
+    public void setDead(boolean dead) {isDead = dead;}
 }
