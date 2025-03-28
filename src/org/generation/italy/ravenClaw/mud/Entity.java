@@ -25,7 +25,12 @@ public class Entity {
     }
     //METODI DI RISTORO
     public void heal(int receivedHeal){
-        healthPoints += receivedHeal;
+        int hpLost = maxHp - healthPoints;
+        if (receivedHeal <= hpLost) {
+            healthPoints += receivedHeal;
+        }else{
+            healthPoints = maxHp;
+        }
     }
     public void eat(){
         int hpLost = maxHp - healthPoints;
