@@ -6,21 +6,25 @@ public class Start {
     public static void main(String[] args){
         Paladin p = new Paladin("Paladin", 200, 10, "Spalmen", true);
         Wizard w = new Wizard("Wizard", 80, 10, "Pagapollo", 99);
-        Berserker b = new Berserker("Berserker", 120, 10, "Spalmen");
+        Berserker b = new Berserker("Berserker", 120, 10, "Heracles");
         Npc villager = new Npc("Villager", 10000000, 100000, 0, false, NpcInstruction.SPEAK);
         Npc goblin = new Npc("Goblin", 35, 6, 5, true, NpcInstruction.ATTACK);
 
         System.out.println("Inizia il combattimento nel villaggio\n");
         p.attack(goblin);
         p.attackWithLance();
+
         w.attack(goblin);
         w.castFireBall();
+
         b.attack(villager);
         villager.giveInstructions();
+
         goblin.giveInstructions();
-        goblin.attack(villager);
+        goblin.attack(p);
         System.out.println();
 
+        goblin.attack(p);
         p.attack(goblin);
         w.attack(goblin);
         b.attack(w);
