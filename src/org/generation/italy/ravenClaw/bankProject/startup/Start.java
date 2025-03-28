@@ -1,9 +1,6 @@
-package org.generation.italy.bankProject.startup;
+package org.generation.italy.ravenClaw.bankProject.startup;
 
-import org.generation.italy.bankProject.accounting.Account;
-import org.generation.italy.bankProject.accounting.evasion.CaymanAccount;
-import org.generation.italy.bankProject.accounting.Movement;
-import org.generation.italy.bankProject.accounting.MovementType;
+import org.generation.italy.ravenClaw.bankProject.accounting.*;
 
 import java.time.LocalDateTime;
 
