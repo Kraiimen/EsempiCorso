@@ -38,6 +38,7 @@ public class Berserker extends Player{
             System.out.println(getPlayerName() +  " attacca " + target.getName());
             if (target.getCurrentHealthPoint() <= 0) {
                 setCurrentExpPoint(getCurrentExpPoint() + earnedExp);
+                System.out.println(target.getName() + " è morto");
             }
         }
     }

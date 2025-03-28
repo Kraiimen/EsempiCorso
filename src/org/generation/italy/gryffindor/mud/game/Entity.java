@@ -32,6 +32,10 @@ public class Entity {
         if(target != null){
             target.setCurrentHealthPoint(target.currentHealthPoint - damage);
             System.out.println(name +  " attacca " + target.name);
+
+            if(target.getCurrentHealthPoint() <= 0){
+                System.out.println(target.name + " è morto");
+            }
         }
     }
 

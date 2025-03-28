@@ -38,12 +38,12 @@ public class Loops {
             }
             System.out.println();
         }
-        int[][] array = new int[5][5];
-        for(int i = 0; i < array.length; ++i){
-            for(int j = 0; j < array[i].length; ++j){
+        int lunghezza = 5;
+        for(int i = 0; i < lunghezza; ++i){
+            for(int j = 0; j < lunghezza; ++j){
                 if(i == j){
                     System.out.print("\\");
-                }else if((i+j) == array.length-1){
+                }else if((i+j) == lunghezza-1){
                     System.out.print("/");
                 }else{
                     System.out.print("*");
