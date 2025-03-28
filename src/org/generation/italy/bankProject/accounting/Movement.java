@@ -5,30 +5,30 @@ package org.generation.italy.bankProject.accounting;
 import java.time.*;
 public class Movement {
 
-    private double amount;//variabile oggetti ammount
+    private double amount;
     private double currentBalance;
     private LocalDateTime operationTime;
-    private MovementType type; // importato enum
+    private MovementType type;
 
-    // costruttore
-    public Movement(double amount, double currentBalance, LocalDateTime operationTime, MovementType type){
-        this.amount = amount; // this assegna il parametro alla variabile amount dell'oggetto che stiamo costruendo
+    //costruttore
+    public Movement(double amount, double currentBalance, LocalDateTime operationTime, MovementType type) {
+        //this è un puntatore che indica l'oggetto che stiamo creando (this.amount)
+        this.amount = amount;
         this.currentBalance = currentBalance;
         this.operationTime = operationTime;
         this.type = type;
-        // this è una keyword per dare lo stesso nome dei parametri che devo utilizzare. dentro il costruttore che sta creando un oggetto
     }
-
-    public double getAmount(){
+    public double getAmount() {
         return amount;
     }
-    public double getCurrentBalance(){
+    public double getCurrentBalance() {
         return currentBalance;
     }
-    public LocalDateTime getOperationTime(){
+    public LocalDateTime getOperationTime() {
         return operationTime;
     }
-    public MovementType getType(){
+    public MovementType getType() {
         return type;
     }
+
 }
