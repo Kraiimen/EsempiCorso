@@ -52,13 +52,7 @@ public abstract class Account extends Object{  //extends object è implicito
     }
     public abstract double deposit(double amount);
 
-    public double withdraw(double amount){
-        doInternalOperation();
-        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
-        movements.add(move);
-        balance -= amount;
-        return balance;
-    }
+    public abstract double withdraw(double amount);
     private void doInternalOperation(){
 
     }
@@ -79,17 +73,12 @@ public abstract class Account extends Object{  //extends object è implicito
     }
     public double getSumDeposits(){
         double sum = 0;
-//        movements.add(0,"pippo");
-//        Object o1 = movements.get(0);
-//        Movement m1 = (Movement)o1;
         for(int i = 0 ; i < movements.size() ; i++) {
             Object ob = movements.get(i);
             Movement m = (Movement)ob;
 //            Movement m2 = (Movement)movements.get(i);
             if(m.getType() == MovementType.DEPOSIT) {
                 sum += m.getAmount();
-//                sum = sum + m.getAmount();
-
             }
         }
         return sum;
@@ -109,6 +98,22 @@ public abstract class Account extends Object{  //extends object è implicito
             }
         }
         return totalAmount;
+    }
+
+    public void printAllMovement() {
+        for (Object obj : movements) {
+            Movement m1 = (Movement) obj;
+            System.out.println(m1);
+        }
+    }
+
+    public void printByType(MovementType type) {
+        for (Object obj : movements) {
+            Movement m1 = (Movement) obj;
+            if(m1.getType() == type) {
+                System.out.println(m1);
+            }
+        }
     }
 }
 

@@ -17,18 +17,31 @@ public class ItalianAccount extends Account {
 
     @Override
     public double deposit(double amount){
-        tax = amount *0.1;
-        amount *= 0.9;
-        balance += amount;
-        ItalianMovement move = new ItalianMovement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT, tax);
+        tax = 0.1;
+        double taxedAmount = amount * tax;
+        amount -= taxedAmount;
+        ItalianMovement move = new ItalianMovement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT, taxedAmount);
         movements.add(move);
-        System.out.println("Grazie pezzente per la tassa " + tax + " bilancio " + balance);
+        balance += amount;
+        System.out.println("Grazie pezzente per la tassa di " + taxedAmount + "€. Il tuo bilancio ora è di " + balance + "€.");
         return balance;
     }
 
-    public void printItalianMovement (){
-        for(Object o: movements){
-            ItalianMovement m1 = (ItalianMovement) o;
+    @Override
+    public double withdraw(double amount){
+        tax = 0;
+        double taxedAmount = amount * tax;
+        double newAmount = amount - taxedAmount;
+        ItalianMovement move = new ItalianMovement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL, taxedAmount);
+        movements.add(move);
+        balance -= amount;
+        return balance;
+    }
+
+    @Override
+    public void printAllMovement (){
+        for(Object obj: movements){
+            ItalianMovement m1 = (ItalianMovement) obj;
             System.out.println(m1);
         }
     }
