@@ -21,6 +21,7 @@ public class Library {
     public int getNumberBooks() {
         return bookList.size();
     }
+
     public int getNumberByGenre(Genre genre) {
         int counter = 0;
         for(Object b : bookList) {
