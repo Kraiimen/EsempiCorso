@@ -97,6 +97,6 @@ public class Esercizi {
         // deve stampare un camp vuoto, immetti una coordinata e mette la x
         char tris[][] = new char[3][3];
             
-        }
     }
 }
+
