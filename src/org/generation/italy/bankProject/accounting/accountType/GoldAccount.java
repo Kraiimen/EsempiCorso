@@ -13,7 +13,7 @@ public class GoldAccount extends Account {
             super(initialBalance);
         }
 
-
+    @Override
     public double deposit(double amount) {
         balance += amount;
         Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
@@ -31,14 +31,16 @@ public class GoldAccount extends Account {
         if (depositCount % 10 == 0) {
             balance += 1;
         }
-
         return balance;
     }
 
-    public void printGoldMovement () {
-        for (Object o : movements) {
-            Movement m1 = (Movement) o;
-            System.out.println(m1);
-        }
+    @Override
+    public double withdraw(double amount) {
+        int withdrawCounter = 0;
+        balance -= amount;
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
+        movements.add(move);
+        return balance;
     }
+
 }

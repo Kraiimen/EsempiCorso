@@ -1,42 +1,62 @@
 package org.generation.italy.bankProject.startup;
 
+import org.generation.italy.bankProject.accounting.MovementType;
+import org.generation.italy.bankProject.accounting.accountType.Bank;
 import org.generation.italy.bankProject.accounting.accountType.GoldAccount;
 import org.generation.italy.bankProject.accounting.accountType.ItalianAccount;
+import org.generation.italy.bankProject.accounting.accountType.PlatinumAccount;
 
 
 public class Start {
 
     public static void main(String[] args) {
-        ItalianAccount it1 = new ItalianAccount(10000);
+        ItalianAccount it1 = new ItalianAccount(1);
         it1.deposit(100);
         System.out.println();
-        it1.printItalianMovement();
-        ItalianAccount it2 = new ItalianAccount(10000);
-        it2.deposit(100);
-        it2.printItalianMovement();
 
 
-        GoldAccount gold = new GoldAccount(1000);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.printGoldMovement();
+//        GoldAccount gold = new GoldAccount(1000);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.printGoldMovement();
 
+        PlatinumAccount pl = new PlatinumAccount(3000);
 
+//        pl.deposit(100);
+//        pl.deposit(100);
+//        pl.deposit(100);
+//        pl.deposit(100);
+//        pl.deposit(100);
+//        pl.deposit(100);
+//        pl.deposit(100);
+//        pl.deposit(100);
+//        pl.deposit(100);
+//        pl.deposit(100);
+//        pl.printPlatinumMovement();
+        pl.deposit(100);
+        pl.withdraw(100);
+        pl.withdraw(100);
+        pl.withdraw(100);
+        pl.withdraw(100);
+        pl.withdraw(100);
+        pl.withdraw(100);
+        pl.withdraw(100);
+        pl.withdraw(100);
+        pl.withdraw(100);
+        pl.withdraw(100);
+        pl.printAllMovement(MovementType.WITHDRAWAL);
 
-
-
-
-
-
+        Bank b = new Bank();
+        b.gestisciConto(it1);
 
     }
 

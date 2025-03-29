@@ -39,29 +39,25 @@ public abstract class Account extends Object{  //extends object è implicito
         this(initialBalance);
         this.creationDate = creationDate;
     }
-    //invoco il costruttore (non necessario crearlo in quanto in assenza di costruttori in una classe il compilatore usa quello di default)
-    // non c'è il tipo di ritorno perché il costruttore ritorna SEMPRE l'indirizzo dell'oggetto
-    //il costruttore va sull' heap e mi alloca la memoria per contenere l'oggetto e inizializza le variabili dell'oggetto con i valori di default poi mi restituisce l'indirizzo
-    //Inizializza a valori di default le variabili dell'oggetto
-
 
     //FUNZIONI - prima quelle importanti poi le getter o setter
+
     public void printBalance(){
         System.out.println("durante questa esecuzione di printBalance this è uguale a " +this);
         System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
     public abstract double deposit(double amount);
 
-    public double withdraw(double amount){
-        doInternalOperation();
-        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
-        movements.add(move);
-        balance -= amount;
-        return balance;
-    }
-    private void doInternalOperation(){
+    public abstract double withdraw(double amount);
+//        doInternalOperation();
+//        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
+//        movements.add(move);
+//        balance -= amount;
+//        return balance;
+//    }
+//    private void doInternalOperation(){
 
-    }
+//    }
     public double getBalance(){
         return balance;
     }
@@ -93,5 +89,16 @@ public abstract class Account extends Object{  //extends object è implicito
             }
         }
         return sum;
+    }
+
+    public void printAllMovement(MovementType type) {
+        for (Object o : movements) {
+            Movement m1 = (Movement) o;
+            if (m1.getType() == type) {
+                System.out.println("Account ID " + id);
+                System.out.println(m1);
+                System.out.println();
+            }
+        }
     }
 }
