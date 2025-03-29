@@ -24,7 +24,7 @@ public class CaymanAccount extends Account {
     @Override
     public double deposit(double amt){
         evadeTax();
-        setBalance(getBalance() += amt);
+        setBalance(getBalance() + amt);
         return getBalance();
     }
 //    public void temp(){                   ESEMPIO DI DIFFERENZA FRA FINAL PRIMITIVA E FINAL PER UN OGGETTO
