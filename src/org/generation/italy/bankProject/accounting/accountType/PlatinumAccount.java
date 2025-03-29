@@ -14,12 +14,12 @@ public class PlatinumAccount extends GoldAccount {
     @Override
     public double deposit(double amount) {
         balance += amount;
-        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
-        movements.add(move);
 
-        int depositCounter = 0;
-        for(int i = 0; i < movements.size(); i++){
-            if(move.getType() == MovementType.DEPOSIT){
+        int depositCounter = 1;
+
+        for(Object obj : movements){
+            Movement m1 = (Movement) obj;
+            if(m1.getType() == MovementType.DEPOSIT){
                 depositCounter++;
             }
         }
@@ -28,6 +28,9 @@ public class PlatinumAccount extends GoldAccount {
             balance +=10;
             System.out.println("Bonus");
         }
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
+        movements.add(move);
+
         return balance;
     }
 

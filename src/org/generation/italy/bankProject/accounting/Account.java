@@ -111,6 +111,7 @@ public abstract class Account extends Object{  //extends object è implicito
         for (Object obj : movements) {
             Movement m1 = (Movement) obj;
             if(m1.getType() == type) {
+                System.out.println("Account ID: " + id);
                 System.out.println(m1);
             }
         }
