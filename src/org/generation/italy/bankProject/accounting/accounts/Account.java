@@ -1,15 +1,19 @@
-package org.generation.italy.bankProject.accounting;
+package org.generation.italy.bankProject.accounting.accounts;
+
+import org.generation.italy.bankProject.accounting.Movement;
+import org.generation.italy.bankProject.accounting.MovementType;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Account {
+public abstract class Account {
     //in un file java può essere presente solo una classe pubblica che deve essere chiamata come il file
 
-    //------------------FIELDS--------------------
-    private static int lastId;
-    private double balance;
+
+    //ATTRIBUTI or FIELDS or VARIABILI DEGLI OGGETTI
+    private static int lastId; //usando "static" ogni conto avrà il suo lastId
+    protected double balance;
     private int id;
     private LocalDate creationDate;
     private ArrayList movements;
@@ -40,21 +44,29 @@ public class Account {
     public void printBalance(){
         System.out.printf("il tuo conto con in %d ha come saldo %f%n", id, balance);
     }
+    public abstract double deposit(double amount);
 
-    public double deposit(double amount){
-        Movement m = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
-        movements.add(m);
-        balance += amount;
-        return balance;
-    }
-    public double withdraw(double amount){
-        if((balance - amount) >= 0){
-            Movement m = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
-            movements.add(m);
-            balance -= amount;
+    public abstract double withdraw(double amount);
+
+    public double totalDeposits(){
+        double total = 0;
+        if(doesMovementsContainsOnlyMovementTypes()){
+            //è meglio fare così, ma usa i generics
+//            for(Movement movement : (ArrayList<Movement>) movements){
+//                if(movement.getType() == MovementType.DEPOSIT){
+//                    total += movement.getAmount();
+//                }
+//            }
+            for(Object obj : movements){
+                Movement movement = (Movement)obj;
+                if(movement.getType() == MovementType.DEPOSIT){
+                    total += movement.getAmount();
+                }
+            }
         }
-        return balance;
+        return total;
     }
+
 
     //Somma dei movimenti superiori ad una soglia passata in input,
     //di un tipo passato da input, in un range di date, passate in input,
@@ -80,49 +92,25 @@ public class Account {
         return total;
     }
 
-    public double totalDeposits(){
-        double total = 0;
-        if(doesMovementsContainsOnlyMovementTypes()){
-            //è meglio fare così, ma usa i generics
-//            for(Movement movement : (ArrayList<Movement>) movements){
-//                if(movement.getType() == MovementType.DEPOSIT){
-//                    total += movement.getAmount();
-//                }
-//            }
-            for(Object obj : movements){
-                Movement movement = (Movement)obj;
-                if(movement.getType() == MovementType.DEPOSIT){
-                    total += movement.getAmount();
-                }
-            }
-        }
-        return total;
+    protected void addMovement(Movement m){
+        movements.add(m);
     }
 
-    private boolean doesMovementsContainsOnlyMovementTypes(){
-        for(Object obj : movements){
-            if(obj.getClass() != Movement.class){
-                return false;
-            }
-        }
-        return true;
+    // /------GETTER & SETTER-----/
+    public double getBalance(){
+        return balance;
     }
-
-    //---------------GETTER & SETTER-----------------
+    public void setBalance(double newBalance){
+        if(newBalance > 0){
+            balance = newBalance;
+        }
+    }
     public LocalDate getCreationDate() {
         return creationDate;
     }
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
-
-    public double getBalance(){
-        return balance;
-    }
-    public void setBalance(double balance){
-        this.balance = balance;
-    }
-
 }
 
 

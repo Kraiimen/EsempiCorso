@@ -29,14 +29,29 @@ public class Entity {
         currentHealthPoint = currentHealthPoint + regenHP;
     }
     public void attack(Entity target){
-        if(target != null){
-            target.setCurrentHealthPoint(target.currentHealthPoint - damage);
-            System.out.println(name +  " attacca " + target.name);
-
-            if(target.getCurrentHealthPoint() <= 0){
-                System.out.println(target.name + " è morto");
-            }
+        if(canNotAttack(target)) {
+            return;
         }
+        target.setCurrentHealthPoint(target.getCurrentHealthPoint() - getDamage());
+        System.out.println(name +  " attacca " + target.name);
+
+        if(target.isDead()){
+            handleEnemyDeath(target);
+        }
+    }
+
+    protected boolean canNotAttack(Entity target){
+        return target == null || target.isDead();
+    }
+
+    public boolean isDead(){
+        return currentHealthPoint <= 0;
+    }
+    protected void handleEnemyDeath(Entity target){
+        target.death();
+    }
+    protected void death(){
+        System.out.println(name + " è morto");
     }
 
 

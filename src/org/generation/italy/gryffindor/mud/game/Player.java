@@ -22,28 +22,26 @@ public class Player extends Entity{
     }
 
     @Override
-    public void attack(Entity target){
-        Npc enemy;
-        boolean canBeAttacked = true;
-        long earnedExp = 0;
-
-        if(target.getClass() == Npc.class) {
-            enemy = (Npc)target;
-            canBeAttacked = enemy.getCanBeAttacked();
-            earnedExp = enemy.getEarnedXP();
+    protected boolean canNotAttack(Entity target){
+        boolean res = super.canNotAttack(target);
+        if ( !(res) && isNpc(target)){
+            Npc npc = (Npc)target;
+            res = !(npc.getCanBeAttacked());
         }
-        if(target != null && canBeAttacked){
-            System.out.println(playerName +  " attacca " + target.getName());
-
-            target.setCurrentHealthPoint(target.getCurrentHealthPoint() - getDamage());
-            if (target.getCurrentHealthPoint() <= 0) {
-                currentExpPoint += earnedExp;
-                System.out.println(target.getName() + " è morto");
-            }
+        return res;
+    }
+    @Override
+    protected void handleEnemyDeath(Entity target){
+        super.handleEnemyDeath(target);
+        if(isNpc(target)){
+            Npc npc = (Npc)target;
+            currentExpPoint += npc.getEarnedXP();
         }
     }
 
-
+    protected boolean isNpc(Entity target){
+        return target.getClass() == Npc.class;
+    }
 
     // /-----------/ METHODS - GETTER & SETTER /-----------/
     public String getPlayerName(){
