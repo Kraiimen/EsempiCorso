@@ -14,15 +14,23 @@ public class Entity {
     private int attackDamage; //danno base della creatura
     private boolean isDead;
     private ArrayList inventory =  new ArrayList();
+    private String entityColor;
+    private String resetColor = "\033[0m";
 
+    public Entity(String name, int maxHp, int attackDamage,String color){
+        this(name,maxHp,attackDamage);
+        this.entityColor = color;
 
+    }
     public Entity(String name, int maxHp, int attackDamage){
         this.name = name;
         this.maxHp = maxHp;
         this.attackDamage = attackDamage;
         healthPoints = maxHp;
         isDead = false;
+
     }
+
     //METODI COMBATTIMENTO
     public void hurt(int receivedDamage){ //received damage è il danno che infligge la creatura attaccante
         healthPoints -= receivedDamage; //scalare il danno dai punti vita
@@ -54,7 +62,7 @@ public class Entity {
     }
     public void eat(){
         int hpLost = maxHp - healthPoints;
-        int lifeRestored = (int)(hpLost * 0.3); //essendo il 30% esce un double e quindi è necessario castare ad int
+        int lifeRestored = (int)(hpLost * 0.3); //essendo il 30% esce un double e quindi è necessario castare a int
         heal(lifeRestored);
     }
     public void sleep(){
@@ -90,4 +98,9 @@ public class Entity {
 
     public boolean isDead() {return isDead;}
     public void setDead(boolean dead) {isDead = dead;}
+
+    public String getEntityColor() {return entityColor;}
+    public void setEntityColor(String entityColor) {this.entityColor = entityColor;}
+
+    public String getResetColor() {return resetColor;}
 }
