@@ -88,6 +88,7 @@ public class Account {
     public void setCreationDate(LocalDate CD) {
         creationDate = CD;
     }
+    public int getId(){return id;}
 
 
     //un arraylist è una struttura dati simile all'array, potremmo definirla "Più intelligente" in quanto tale
