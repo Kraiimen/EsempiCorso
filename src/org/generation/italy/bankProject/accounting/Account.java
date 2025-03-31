@@ -114,7 +114,11 @@ public class Account extends Object{  //extends object è implicito
         }
         return totalAmount;
     }
+    public int getId() {
+        return id;
+    }
 }
+
 
 
 //lo stato di una classe è l'insieme delle sue variabili
