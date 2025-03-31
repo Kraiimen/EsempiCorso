@@ -114,7 +114,15 @@ public class Account extends Object{  //extends object è implicito
         }
         return totalAmount;
     }
-    public int getId() {
+//     public int getSum(int[] numbers){
+//        int sum = 0;
+//        for(int i = 0; i < numbers.length; i++){
+//            sum += numbers[i];
+//
+//        }
+//        return sum;
+//     }
+    public int getId(){
         return id;
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface AccountRepository {
 
-    int saveAccount(Account a);
-    ArrayList<Account> getAll();
-    void upDateAccount(Account a);
+     int saveAccount(Account a);
+     ArrayList<Account> getAll();//<> Questo ArrayList non lavora più con object, ma con oggetti di classe Account
+     void upDateAccount(Account a);
 }
