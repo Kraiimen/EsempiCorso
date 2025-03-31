@@ -94,8 +94,6 @@ public class SortingHatProcedural {
         // Ciclo for per iterare gli studenti extra rimasti
         // Parte da dove ci siamo fermati nel ciclo precedente
         // Termina quando finisce il numero di studenti extra
-
-
         for(int i = PERFECT_CLASS_SIZE; i < PERFECT_CLASS_SIZE + EXTRA_STUDENTS; i++) {
             // In questo caso, visto che stiamo mettendo gli studenti extra, fullCapacity è true
             // fullCapacity = true --> considera la dimensione della casa (HOUSE_SIZE) con studenti extra  
@@ -161,7 +159,7 @@ public class SortingHatProcedural {
             return COUNTERS[housePos] < HOUSE_SIZE;  
         } else {
             // Altrimenti, il metodo ritorna true se c'è ancora spazio nella casa (considerando la dimensione ridotta della casa) (nel nostro caso 5)
-            return COUNTERS[housePos] < size;
+            return COUNTERS[housePos] < size;  
         }
     }
 

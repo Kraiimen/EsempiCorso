@@ -48,7 +48,7 @@ public class Library {
 
     public double totalCostByAuthor(String author) {
         double costTotal = 0;
-        for (Object o : booksList) { // for each simile al fro ,per ogni oggetto di tipo Oggetto che si torva all'interno di booklist
+        for (Object o : booksList) { // for each simile al for, per ogni oggetto di tipo Oggetto che si torva all'interno di booklist
             Book b = (Book) o;
             if (b.getAuthor().equals(author)) {
                 costTotal += b.getCost();
