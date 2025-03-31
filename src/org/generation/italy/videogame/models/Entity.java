@@ -3,71 +3,107 @@ package org.generation.italy.videogame.models;
 import java.util.Random;
 
 public class Entity {
-    private final int MAX_DAMAGE_POSSIBLE;
-    private int maxHP;
-    private EntityType type;
-    private int hpValue;
+    Random random = new Random();
+    private final int MAX_BASE_DAMAGE_POSSIBLE;
+    private final int MIN_CRITICAL_DAMAGE_POSSIBLE;
+    private final int MAX_CRITICAL_DAMAGE_POSSIBLE;
+    private String name;
+    private int maxHP; // Punti vita massimi (diverso per ogni entità)
+    private int hpValue; // Punti vita attuali dell'entità
+    private int damage;
 
     // COSTRUTTORE
-    public Entity(EntityType entityType, int hpValue){
-        this.type = entityType;
+    public Entity(String name, int maxHP, int hpValue){
+        this.name = name;
+        this.maxHP = maxHP;
         this.hpValue = hpValue;
-        this.MAX_DAMAGE_POSSIBLE=9999;
-        setMaxHP(entityType);
+        this.MAX_BASE_DAMAGE_POSSIBLE = 999; // Il danno massimo possibile da un attacco base è 100
+        this.MIN_CRITICAL_DAMAGE_POSSIBLE = 1000; // Il danno minimo di un attacco critico
+        this.MAX_CRITICAL_DAMAGE_POSSIBLE = 9999; // Il danno massimo possibile da una attacco critico è 9999
     }
 
+    // Cura l'entità
+    public void healHP(int hpToRestore){
+        // Se il numero di HP da assegnare è oltre maxHP
+        if(hpToRestore > getMissingHP()){
+            hpValue = maxHP; // Riempiamo la barra della vita
+            System.out.println(name+": max HP restored! c: ");
+        }
+        else {
+            hpValue += hpToRestore; // Altrimenti aggiungi gli HP
+            System.out.printf(name+": HP restored: +%-4d%n%s: current HP: %4d%n", hpToRestore, name, hpValue);
+        }
+    }
+
+    // Danno che l'entità riceve (Diminuisce HP)
+    public void takeDamage(int damageInflicted){
+        System.out.printf("%s: damage taken: %4d%n", name, damageInflicted);
+        // Se il danno ricevuto è maggiore della vita (quindi arriviamo a 0)
+        if (hpValue - damageInflicted <= 0){
+            System.out.println(name + " is dead!!!"); // L'entità muore
+        }
+        else {
+            hpValue -= damageInflicted; // Altrimenti diminuisci gli HP
+            System.out.printf(name+": current HP: %4d%n", hpValue);
+        }
+    }
+
+    // L'entità recupera il 20% della vita persa quando dorme
+    public void sleep(){
+        healHP((int)Math.ceil(getMissingHP()*0.2));
+    }
+
+    // L'entità recupera il 30% della vita persa quando mangia
+    public void eat(){
+        healHP((int)Math.ceil(getMissingHP()*0.3));
+    }
+
+    // L'entità attacca un'altra entità
+    public void attackEntity(Entity entityToAttack){
+        setAttackDamage();
+        System.out.println(name + " is attacking " + entityToAttack.name + "!");
+        System.out.println(name + " inflicted " + getDamage() + " to " + entityToAttack.name + "!");
+        entityToAttack.takeDamage(getDamage()); // Diminuiamo gli HP dell'entità attaccata
+    }
+
+    // Danno random da 0 a 999 (Attacco base)
+    public int getRandomBaseDamage(){
+        return random.nextInt(MAX_BASE_DAMAGE_POSSIBLE + 1);
+    }
+
+    // Danno random da 1000 a 9999 (Attacco critico)
+    public int getRandomCriticalDamage(){
+        return random.nextInt(MIN_CRITICAL_DAMAGE_POSSIBLE,MAX_CRITICAL_DAMAGE_POSSIBLE + 1);
+    }
+
+    // 10% di possibilità di fare attacco critico
+    public void setAttackDamage(){
+        if(random.nextDouble(1) <= 0.1){
+            setDamage(getRandomCriticalDamage());
+            return;
+        }
+
+        setDamage(getRandomBaseDamage());
+    }
+
+    // Calcola gli HP persi
     public int getMissingHP(){
         return maxHP - hpValue;
     }
 
-    public void healHP(int hpToRestore){
-        if(hpToRestore > getMissingHP()){
-            hpValue = maxHP;
-            System.out.println("Max HP restored! c: ");
-        }
-        else {
-            hpValue += hpToRestore;
-            System.out.printf("HP restored: +%-4d%nCurrent HP: %4d%n", hpToRestore, hpValue);
-        }
+    public int getDamage() {
+        return damage;
     }
 
-    public void damageTaken(int damageInflicted){
-        System.out.printf("Damage taken: %4d%n", damageInflicted);
-        if (hpValue - damageInflicted <= 0){
-            System.out.println(this.type.toString() + " is dead!!!");
-        }
-        else {
-            hpValue -= damageInflicted;
-            System.out.printf("Current HP: %4d%n", hpValue);
-        }
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
-    public void sleep(){
-        hpValue += (int)Math.ceil(getMissingHP()*0.2);
+    public String getName() {
+        return name;
     }
 
-    public void eat(){
-        hpValue += (int)Math.ceil(getMissingHP()*0.3);
+    public int getMAX_BASE_DAMAGE_POSSIBLE() {
+        return MAX_BASE_DAMAGE_POSSIBLE;
     }
-
-    public void attackEntity(Entity entityToAttack){
-        int damage = getRandomDamage();
-        System.out.println(this.type.toString() + " is attacking " + entityToAttack.type.toString() + "!");
-        System.out.println(this.type.toString() + " inflicted " + damage + " to " + entityToAttack.type.toString() + "!");
-        entityToAttack.damageTaken(damage);
-    }
-
-    private void setMaxHP(EntityType entityType){
-        if(entityType == EntityType.PLAYER){
-            maxHP = 1000;
-        } else{
-            maxHP = 1500;
-        }
-    }
-
-    public int getRandomDamage(){
-        Random random = new Random();
-        return random.nextInt(101);
-    }
-
 }

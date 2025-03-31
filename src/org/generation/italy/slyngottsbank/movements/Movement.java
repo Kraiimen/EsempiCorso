@@ -1,23 +1,28 @@
-package org.generation.italy.bankProject.accounting;
+package org.generation.italy.slyngottsbank.movements;
 
-//import java.time.LocalDateTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import java.time.*;
 public class Movement {
-
     private double amount;
     private double currentBalance;
     private LocalDateTime operationTime;
     private MovementType type;
+    private static int lastId = 0;
+    private int id;
 
-    //costruttore
+
+    // COSTRUTTORE
     public Movement(double amount, double currentBalance, LocalDateTime operationTime, MovementType type) {
-        //this è un puntatore che indica l'oggetto che stiamo creando (this.amount)
         this.amount = amount;
         this.currentBalance = currentBalance;
         this.operationTime = operationTime;
         this.type = type;
+        lastId++;
+        id = lastId;
     }
+
+    // GETTERS
     public double getAmount() {
         return amount;
     }
@@ -31,4 +36,11 @@ public class Movement {
         return type;
     }
 
+    @Override
+    public String toString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        return "N. transazione " + id + ": €" + amount + " " + operationTime.format(formatter) + " " + type + "\n";
+    }
 }
+
