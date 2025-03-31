@@ -18,18 +18,21 @@ public class Methods{
         System.out.println("la somma dei due numeri è " + result);
 
         printSum(x1 , x2);
-        sum(x1 , x2); // se non c'è una variabile che la riceve, non cambia nulla invocando sum
-        // String mancoPerIdea = sum(3 , 4); questo risulterebbe in un errore perchè la funzione dichiara di essere un intero e la stiamo cercando di convertire in una stringa
-        greet();
-        int lunghezza = greetWithName("Sabrina"); // esegue la funzione e gli ritorna alla main dandogli valore int
-        System.out.println(lunghezza);
-        lunghezza = greetWithName("Marta");
-        System.out.println(lunghezza);
-        boolean even = isEven(7);
-        System.out.println(even);
-        printLenAndUpperCaseLowerCase("Tutto bene?");
-        String longer = getLonger("Pierino" , "Pluto");
-        printInTitleCase("pAPeRiNo");
+        sum(x1 , x2); //se non c'è una variabile che la riceve, non cambia nulla invocando sum
+
+        int nameLength = greetWithName("Sabrina");
+        System.out.println(nameLength);
+
+        boolean checkEven = isEven(5);
+        System.out.println(checkEven);
+
+        printLenAndUpperCaseLowerCase("Ciao coMe Stai?");
+
+        String longer = getLonger("12345678", "a2345678");
+        System.out.println(longer);
+
+        printInTitleCase("marta");
+        
     }
 
 
@@ -62,53 +65,55 @@ public class Methods{
     public static void printSum(int x , int y){
         int z = x + y;
         System.out.println(z);
-    } 
-    
-    public static int greetWithName(String name){
+    }
 
+    public static int greetWithName(String name){
         System.out.println("è un piacere conoscerti " + name);
-        int len = name.length(); // la lunghezza del nome 
+        int len = name.length();
         return len;
     }
 
-    public static boolean isEven(int x){ // variabili e parametri in una funzione esistono solo in quella funzione
-        // if(x % 2 == 0){
+    public static boolean isEven(int number){
+        
+        // if(number % 2 == 0){
         //     return true;
-        // } else{
+        // }else{
         //     return false;
-        // }
-        return x % 2 == 0; // se x è pari ritorna vera, se no ritorna falsa
+        // } 
+
+        return number % 2 == 0; // il risultato di questa espressione è già una booleana se number % 2 == 0 è vero dà true, se no dà false
     }
 
-    public static void printLenAndUpperCaseLowerCase (String sentence){
-        int len = sentence.length(); // lunghezza della stringa 
-        System.out.println(len);
-        String lower = sentence.toLowerCase();
-        System.out.println(lower);
-        String upper = sentence.toUpperCase();
-        System.out.println(upper);
+     public static void printLenAndUpperCaseLowerCase (String sentence){
+
+        int len = sentence.length();
+        System.out.println(sentence + " è lungo " + len + " caratteri.");
+        System.out.println(sentence.toLowerCase() + " " + sentence.toUpperCase());
+
     }
 
-    public static String getLonger (String s1 , String s2){
-        // if(s1.length() > s2.length()){
-        //     return s1;
-        // } else{
-        //     return s2;
+    public static String getLonger (String str1, String str2){
+
+        // if(str1.length() > str2.length()){ // se sono uguali ritorna il secondo valore dell'espressione
+        //     return str1;
+        // }else{
+        //     return str2;
         // }
-        return s1.length() > s2.length() ? s1 : s2; // Operatore ternario (Lavora su 3 elementi) il ? segue un'espressione booleana 
+
+        return str1.length() > str2.length() ? str1 : str2;
+
     }
 
     public static void printInTitleCase (String name){
-        System.out.println(name.length()); //stampa quello che ritorna della funzione length eseguita sulla stringa name, .length non è un metodo statico
-        System.out.println(name.toUpperCase()); // ritorna e crea e stampa una nuova stringa con la funzione upper case sulla stringa name
-        String upper = name.toUpperCase();
+        System.out.println(name.length());
+        System.out.println(name.toUpperCase().charAt(0) + name.substring(1));  
+        
         String lower = name.toLowerCase();
-        char first = name.charAt(0); // prende il primo carattere della stringa
-        char firstUpper = Character.toUpperCase(first); //metodo statico di character che prende l'input first 
-        String subString = lower.substring(1);
+        char first = name.charAt(0);                    // .charAt prende solo il carattere indicato
+        char firstUpper = Character.toUpperCase(first);
+        String subString = lower.substring(1);          // .substring ti crea una sottostringa a partire dall'indice indicato
         String result = firstUpper + subString;
         System.out.println(result);
-        // le stringhe in java sono immutabili
+    }
 
-    } 
 }

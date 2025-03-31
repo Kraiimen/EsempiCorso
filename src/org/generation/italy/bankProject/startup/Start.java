@@ -1,7 +1,11 @@
 package org.generation.italy.bankProject.startup;
 
+import org.generation.italy.bankProject.accounting.MovementType;
 import org.generation.italy.bankProject.accounting.accountType.GoldAccount;
 import org.generation.italy.bankProject.accounting.accountType.ItalianAccount;
+import org.generation.italy.bankProject.accounting.accountType.PlatinumAccount;
+
+import java.time.LocalDate;
 
 
 public class Start {
@@ -10,25 +14,70 @@ public class Start {
         ItalianAccount it1 = new ItalianAccount(10000);
         it1.deposit(100);
         System.out.println();
-        it1.printItalianMovement();
+        it1.printAllMovement();
         ItalianAccount it2 = new ItalianAccount(10000);
         it2.deposit(100);
-        it2.printItalianMovement();
+        it2.printAllMovement();
+
+        System.out.println();
+
+        GoldAccount gold = new GoldAccount(10000);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.printByType(MovementType.DEPOSIT);
+
+        PlatinumAccount pl = new PlatinumAccount(1000);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        double deposit = pl.deposit(10);
+        pl.printByType(MovementType.DEPOSIT);
+        System.out.println(deposit);
+
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        double withdraw = pl.withdraw(100);
+//        pl.printByType(MovementType.WITHDRAWAL);
+//        System.out.println(withdraw);
 
 
-        GoldAccount gold = new GoldAccount(1000);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.deposit(100);
-        gold.printGoldMovement();
+
+
 
 
 

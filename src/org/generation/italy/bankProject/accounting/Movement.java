@@ -6,7 +6,8 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class Movement {
-    protected static int lastId;
+    protected static int mvId;
+    protected int id;
     private double amount;
     private double currentBalance;
     private LocalDateTime operationTime;
@@ -19,7 +20,8 @@ public class Movement {
         this.currentBalance = currentBalance;
         this.operationTime = operationTime;
         this.type = type;
-        ++lastId;
+        mvId++;
+        id = mvId;
     }
     public double getAmount() {
         return amount;
@@ -34,10 +36,15 @@ public class Movement {
         return type;
     }
 
+    public void setCurrentBalance(double currentBalance) {
+        this.currentBalance = currentBalance;
+    }
+
+    @Override
     public String toString(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String formattedData = getOperationTime().format(formatter);
-        return "ID: " + lastId + "\nMovement amount: "+ getAmount() + "\nYour balance: " + getCurrentBalance() + "\nOperation time: "
+        return "ID: " + id + "\nMovement amount: "+ getAmount() + "\nYour new balance: " + getCurrentBalance() + "\nOperation time: "
                 + formattedData + "\nMovement Type: " + getType();
     }
 
