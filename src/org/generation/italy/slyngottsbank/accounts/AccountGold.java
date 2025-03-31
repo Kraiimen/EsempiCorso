@@ -1,5 +1,5 @@
 package org.generation.italy.slyngottsbank.accounts;
 
-public class AccountGold extends Account {
+public class AccountGold {
 
 }
