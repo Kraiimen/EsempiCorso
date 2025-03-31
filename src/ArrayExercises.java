@@ -91,18 +91,13 @@ public class ArrayExercises {
         int z = 8; // dichiaro una variabile di nome z con valore 8
         int counter = 0; // creo una variabile per contare il numero di volte in cui ci sta la somma di z
         
-        System.out.println("Array attuale: ");
-
-        for (int i = 0; i < array3.length - 1; i++){//inizia con zero e va avanti fino alla fine -1
-            System.out.println(array3[i]);
-            if(array3[i] + array3[i+1] == z){
-                counter++;
-            }
+        // Esercizio 1: Creare un array di 5 interi e inizializzarlo con i primi numeri da 1 a 5 al quadrato
+        
+        int[] numbers = new int[5];
+            
+        for(int i = 0 ; i < numbers.length ; i++){
+                numbers[i]= (i+1)*(i+1);
         }
         System.out.println("Le volte che la somma di due numeri consecutivi fa 8 è: " + counter);
-
-// ESERCIZIO 9: verificare che nell'array 
-// non esistano 3 numeri consecutivi la cui somma è maggiore di 12
-
     }
 }

@@ -1,4 +1,4 @@
-package org.generation.italy.bankProject.accounting.evasion;
+package org.generation.italy.bankProject.accounting.accountType;
 
 import org.generation.italy.bankProject.accounting.Account;
 
@@ -25,6 +25,7 @@ public class CaymanAccount extends Account {
     private void evadeTax(){
        System.out.println("evado le tasse con l'aiuto del commercialista Elvis");
     }
+
     @Override
     public double deposit(double amt){
         evadeTax();
