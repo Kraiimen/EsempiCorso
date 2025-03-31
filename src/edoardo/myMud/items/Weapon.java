@@ -1,4 +1,4 @@
-package edoardo.myMud.Items;
+package edoardo.myMud.items;
 
 import edoardo.myMud.Item;
 

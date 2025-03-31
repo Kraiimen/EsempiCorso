@@ -1,7 +1,7 @@
 package edoardo.myMud;
 
-import edoardo.myMud.Items.DefensiveGear;
-import edoardo.myMud.Items.Weapon;
+import edoardo.myMud.items.DefensiveGear;
+import edoardo.myMud.items.Weapon;
 
 import java.util.Random;
 
