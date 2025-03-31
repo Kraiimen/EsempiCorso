@@ -40,6 +40,7 @@ public class Movement {
         this.currentBalance = currentBalance;
     }
 
+    @Override
     public String toString(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String formattedData = getOperationTime().format(formatter);

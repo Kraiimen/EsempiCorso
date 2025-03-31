@@ -65,6 +65,11 @@ public abstract class Account extends Object{  //extends object è implicito
         }
         balance = newBalance;
     }
+
+    public int getId() {
+        return id;
+    }
+
     public LocalDate getCreationDate() {
         return creationDate;
     }
@@ -115,6 +120,18 @@ public abstract class Account extends Object{  //extends object è implicito
                 System.out.println(m1);
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj == null){
+            return false;
+        }
+        if(!(obj instanceof Account)){
+            return false;
+        }
+        Account other = (Account)obj;
+        return other.balance == this.balance;
     }
 }
 
