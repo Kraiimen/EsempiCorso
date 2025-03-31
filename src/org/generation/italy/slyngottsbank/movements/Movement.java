@@ -22,22 +22,26 @@ public class Movement {
         id = lastId;
     }
 
+
     // GETTERS
     public double getAmount() {
         return amount;
     }
+
     public double getCurrentBalance() {
         return currentBalance;
     }
+
     public LocalDateTime getOperationTime() {
         return operationTime;
     }
+
     public MovementType getType() {
         return type;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         return "N. transazione " + id + ": €" + amount + " " + operationTime.format(formatter) + " " + type + "\n";
