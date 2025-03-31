@@ -1,6 +1,9 @@
 package org.generation.italy.bankProject.accounting;
 
+import java.util.ArrayList;
+
 public class Bank {
+    private ArrayList<Account> accounts;
     public void manageAccount(Account account){
         if(account.balance < 1000){
             account.deposit(200);
@@ -14,6 +17,9 @@ public class Bank {
             System.out.println("Your balance is: " + account.balance);
         }
 
+    }
+    public void loadAccounts(AccountRepository repository){
+        accounts = repository.getAll();
     }
 }
 
