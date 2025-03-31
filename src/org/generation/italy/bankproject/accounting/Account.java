@@ -123,5 +123,9 @@ public class Account {
 		this.creationDate = creationDate;                  // In un metodo il this significa il campo creationDate del metodo che sto costruendo
 	}
 
+	public int getId() {
+		return id;
+	}
+
 
 }
