@@ -22,4 +22,8 @@ public class FileAccountRepository implements AccountRepository {
     public void upDateAccount(Account a) {
         System.out.println("Esecuzione del metodo upDate nel FileAccountRepository");
     }
+
+    public int getBalance(){
+        return getBalance();
+    }
 }

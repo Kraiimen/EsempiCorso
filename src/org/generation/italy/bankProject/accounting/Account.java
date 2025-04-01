@@ -90,6 +90,9 @@ public abstract class Account extends Object{  //extends object è implicito
         }
         return sum;
     }
+    public int getId(){
+        return id;
+    }
 
     public void printAllMovement(MovementType type) {
         for (Object o : movements) {

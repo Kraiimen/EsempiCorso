@@ -17,10 +17,10 @@ public class Start {
         ItalianAccount it1 = new ItalianAccount(10000);
         it1.deposit(100);
         System.out.println();
-        it1.printAllMovement();
+        it1.printAllMovement(MovementType.WITHDRAWAL);
         ItalianAccount it2 = new ItalianAccount(10000);
         it2.deposit(100);
-        it2.printAllMovement();
+        it2.printAllMovement(MovementType.DEPOSIT);
 
         System.out.println();
 
@@ -60,7 +60,6 @@ public class Start {
         pl.deposit(10);
         pl.deposit(10);
         double deposit = pl.deposit(10);
-        pl.printByType(MovementType.DEPOSIT);
         System.out.println(deposit);
 
 //        pl.withdraw(100);
@@ -81,6 +80,9 @@ public class Start {
           FileAccountRepository fr = new FileAccountRepository();
           DbAccountRepository dr = new DbAccountRepository();
           b.loadAccounts(fr);
+          b.loadAccounts(dr);
+          b.loadAccounts(dr);
+
 
 
 
