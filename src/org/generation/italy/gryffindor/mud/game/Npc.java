@@ -1,5 +1,5 @@
-package org.generation.italy.gryffindor.mud.game;
-
-public class Npc extends Entity{
-
-}
+//package org.generation.italy.gryffindor.mud.game;
+//
+//public class Npc extends Entity{
+//
+//}
