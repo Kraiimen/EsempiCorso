@@ -60,6 +60,11 @@ public class Account {
         }
         this.balance = newBalance;
     }
+
+    public int getId(){
+        return id;
+    }
+
     public void setCreationDate(LocalDate creationDate){
         this.creationDate = creationDate;
     }
