@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class Start {
 
     public static void main(String[] args) {
+        /*
         Account x = new Account(); // creiamo un oggetto di tipo Account
         x.printBalance(); // se printassimo il valore di balance, che non è stato inizializzato nella classe uscirebbe 0.00
         x.deposit(100); // andiamo ad aggiungere 100 al bilancio usando la funzione deposit
@@ -40,6 +41,7 @@ public class Start {
         ca.withdraw(50);
         ca.printBalance();
         ca.deposit(1000);
+        //*/
     }
 }
 
