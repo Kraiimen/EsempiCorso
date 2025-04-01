@@ -12,3 +12,4 @@ public class DefensiveGear extends Item {
 
     }
 }
+
