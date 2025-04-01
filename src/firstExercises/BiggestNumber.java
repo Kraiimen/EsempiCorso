@@ -1,3 +1,5 @@
+package firstExercises;
+
 import java.io.Console;
 
 public class BiggestNumber {

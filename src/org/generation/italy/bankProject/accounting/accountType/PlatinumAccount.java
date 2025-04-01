@@ -9,7 +9,7 @@ public class PlatinumAccount extends GoldAccount {
 
     public PlatinumAccount(double initialBalance){
         super(initialBalance);
-        bonus = 10;
+//        int bonus = 10;
     }
 
     @Override
