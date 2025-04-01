@@ -6,7 +6,7 @@ public abstract class MotorCycle implements Vehicle {
 
     public MotorCycle(){
         isOn = false;
-        isKickStandingOn = false;
+        isKickStandingOn = true;
     }
 
     @Override
@@ -26,8 +26,9 @@ public abstract class MotorCycle implements Vehicle {
         System.out.println(message);
         isOn = !isOn;
         useKickStanding();
+        System.out.println();
     }
-    public void useKickStanding(){     //al momento la logica di isHandBrakeOn non è gestita
+    public void useKickStanding(){     //al momento la logica di isKickStandingOn non è gestita
         isKickStandingOn = !isKickStandingOn;
         if (isKickStandingOn){
             System.out.println("ho messo il cavalletto");

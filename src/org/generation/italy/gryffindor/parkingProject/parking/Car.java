@@ -6,7 +6,7 @@ public abstract class Car implements Vehicle{
 
     public Car(){
         isOn = false;
-        isHandBrakeOn = false;
+        isHandBrakeOn = true;
     }
 
     @Override
@@ -25,10 +25,11 @@ public abstract class Car implements Vehicle{
     private void changeEngineState(String message){
         System.out.println(message);
         isOn = !isOn;
-        useHandBreak();
+        useHandBrake();
+        System.out.println();
     }
 
-    public void useHandBreak(){     //al momento la logica di isHandBrakeOn non è gestita
+    public void useHandBrake(){     //al momento la logica di isHandBrakeOn non è gestita
         isHandBrakeOn = !isHandBrakeOn;
         if (isHandBrakeOn){
             System.out.println("ho messo il freno a mano");
@@ -40,7 +41,7 @@ public abstract class Car implements Vehicle{
     public boolean getIsOn(){
         return isOn;
     }
-    public boolean getIsHandBreakOn(){
+    public boolean getIsHandBrakeOn(){
         return isHandBrakeOn;
     }
 }
