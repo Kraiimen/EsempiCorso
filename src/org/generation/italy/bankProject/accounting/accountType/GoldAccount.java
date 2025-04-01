@@ -35,6 +35,11 @@ public class GoldAccount extends Account {
         return balance;
     }
 
+    @Override
+    public double withdraw(double amount) {
+        return 0;
+    }
+
     public void printGoldMovement () {
         for (Object o : movements) {
             Movement m1 = (Movement) o;
