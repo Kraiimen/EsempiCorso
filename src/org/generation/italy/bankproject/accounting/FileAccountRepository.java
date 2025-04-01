@@ -18,6 +18,6 @@ public class FileAccountRepository implements AccountRepository{
 
     @Override
     public void updateAccount() {
-        System.out.println("Esecuzione del metodo updateAccount nel FileAccouuntRepository");
+        System.out.println("Esecuzione del metodo updateAccount nel FileAccountRepository");
     }
 }

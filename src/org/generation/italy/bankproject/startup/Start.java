@@ -3,9 +3,7 @@ package org.generation.italy.bankproject.startup;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import org.generation.italy.bankproject.accounting.Account;
-import org.generation.italy.bankproject.accounting.Movement;
-import org.generation.italy.bankproject.accounting.MovementType;
+import org.generation.italy.bankproject.accounting.*;
 
 
 public class Start {
@@ -30,5 +28,10 @@ public class Start {
 //        Movement m1 = new Movement(100.00, x.getBalance(), LocalDateTime.now(), MovementType.DEPOSIT);
 //        double depositSum = x.getSumDeposit();
 //        System.out.println(depositSum);
-   }
+        Bank b = new Bank();
+        FileAccountRepository fr = new FileAccountRepository();
+        b.loadAccounts(fr);
+        DbAccountRepository dr = new DbAccountRepository();
+        b.loadAccounts(dr);
+    }
 }
