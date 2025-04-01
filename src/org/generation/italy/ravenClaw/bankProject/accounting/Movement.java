@@ -3,7 +3,7 @@ package org.generation.italy.ravenClaw.bankProject.accounting;
 //import java.time.LocalDateTime;
 
 import java.time.*;
-public class Movement {
+public class Movement{
 
     private double amount;
     private double currentBalance;

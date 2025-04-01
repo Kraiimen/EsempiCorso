@@ -20,7 +20,6 @@ public class Entity {
     public Entity(String name, int maxHp, int attackDamage,String color){
         this(name,maxHp,attackDamage);
         this.entityColor = color;
-
     }
     public Entity(String name, int maxHp, int attackDamage){
         this.name = name;
@@ -28,7 +27,6 @@ public class Entity {
         this.attackDamage = attackDamage;
         healthPoints = maxHp;
         isDead = false;
-
     }
 
     //METODI COMBATTIMENTO
@@ -36,7 +34,6 @@ public class Entity {
         healthPoints -= receivedDamage; //scalare il danno dai punti vita
         if(healthPoints<=0){
             isDead = true;
-
         }
     }
     public void attack(Entity attacked){
@@ -57,8 +54,6 @@ public class Entity {
             healthPoints = maxHp;
             System.out.println("You are already at full HP");
         }
-
-
     }
     public void eat(){
         int hpLost = maxHp - healthPoints;

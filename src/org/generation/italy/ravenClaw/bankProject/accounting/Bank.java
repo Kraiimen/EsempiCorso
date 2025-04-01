@@ -8,7 +8,6 @@ public class Bank {
     private static final int ACCOUNT_DEPOSIT_BONUS =200;
     private static final int ACCOUNT_DEPOSIT_MALUS =500;
 
-
     public void gestisciConto(Account account){
         if(account.getBalance() < MINIMUM_FOR_DEPOSIT){
             account.deposit(ACCOUNT_DEPOSIT_BONUS);
@@ -17,5 +16,5 @@ public class Bank {
         }
         System.out.println("Il tuo saldo attuale è: " +  account.getBalance());
     }
-
+    
 }

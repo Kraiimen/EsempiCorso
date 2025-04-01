@@ -33,6 +33,4 @@ public class GoldAccount extends Account {
             return getBalance();
         }
     }
-
-
 }
