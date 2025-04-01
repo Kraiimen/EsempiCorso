@@ -13,6 +13,6 @@ public class Bank {
         }else{
             System.out.println("Your balance is: " + account.balance);
         }
-
     }
+
 }
