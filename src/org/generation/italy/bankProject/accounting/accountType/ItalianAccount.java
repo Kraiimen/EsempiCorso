@@ -1,3 +1,4 @@
+
 package org.generation.italy.bankProject.accounting.accountType;
 
 import org.generation.italy.bankProject.accounting.Account;
