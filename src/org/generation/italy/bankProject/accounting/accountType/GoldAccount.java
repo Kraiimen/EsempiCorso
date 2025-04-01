@@ -7,7 +7,7 @@ import org.generation.italy.bankProject.accounting.MovementType;
 
 import java.time.LocalDateTime;
 
-public class GoldAccount extends Account {
+public abstract class GoldAccount extends Account {
 
     public GoldAccount(double initialBalance){
             super(initialBalance);
