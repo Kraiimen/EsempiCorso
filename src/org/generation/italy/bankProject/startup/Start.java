@@ -1,46 +1,100 @@
 package org.generation.italy.bankProject.startup;
 
-import org.generation.italy.bankProject.accounting.Account;
-import org.generation.italy.bankProject.accounting.evasion.CaymanAccount;
-import org.generation.italy.bankProject.accounting.Movement;
+import org.generation.italy.bankProject.DbAccountRepository;
+import org.generation.italy.bankProject.accounting.Bank;
+import org.generation.italy.bankProject.accounting.FileAccountRepository;
 import org.generation.italy.bankProject.accounting.MovementType;
+import org.generation.italy.bankProject.accounting.accountType.GoldAccount;
+import org.generation.italy.bankProject.accounting.accountType.ItalianAccount;
+import org.generation.italy.bankProject.accounting.accountType.PlatinumAccount;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 public class Start {
 
     public static void main(String[] args) {
-        Account x = new Account(); // creiamo un oggetto di tipo Account
-        x.printBalance(); // se printassimo il valore di balance, che non è stato inizializzato nella classe uscirebbe 0.00
-        x.deposit(100); // andiamo ad aggiungere 100 al bilancio usando la funzione deposit
-        x.printBalance(); // adesso che il valore è stato modificato se printiamo uscirà 100
-        x.withdraw(60); // adesso invece ritiriamo 60 con la funzione withdraw 
-        x.printBalance(); // e printassimo il nuovo bilandio sarà 100-60
-//        System.out.println(x.bal / 100);
-//        x.bal = x.bal + 100_00;         }operazioni possibili solo in caso di variabile public, da evitare.
-//        x.bal = 100000000;
-        x.setBalance(100);
-//        Account y = new Account(1000);
-        Movement m1 = new Movement(100.0, 10000.0, LocalDateTime.now(), MovementType.DEPOSIT);
-        Movement m2 = new Movement(100.0, 10000.0, LocalDateTime.now(), MovementType.WITHDRAWAL);
-//        Account z = new Account(10000);
-//        System.out.println("l'indirizzo di z è " + z);
-//        Account w = new Account (20000);
-//        System.out.println("l'indirizzo di w è " + w);
-//        System.out.println("sto per chiamare printBalance su z facendo z.printBalance");
-//        z.printBalance();
-//        System.out.println("sto per chiamare printBalance su w facendo w.printBalance");
-//        w.printBalance();
-        double depositSum = x.getSumDeposits();
-        System.out.println(depositSum);
-        CaymanAccount ca = new CaymanAccount();
-        double newBalance = ca.deposit(3000);
-        ca.printBalance();
-        ca.withdraw(50);
-        ca.printBalance();
-        ca.deposit(1000);
+        ItalianAccount it1 = new ItalianAccount(10000);
+        it1.deposit(100);
+        System.out.println();
+        it1.printAllMovement();
+        ItalianAccount it2 = new ItalianAccount(10000);
+        it2.deposit(100);
+        it2.printAllMovement();
+
+        System.out.println();
+
+        GoldAccount gold = new GoldAccount(10000);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.deposit(100);
+//        gold.printByType(MovementType.DEPOSIT);
+
+        PlatinumAccount pl = new PlatinumAccount(1000);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        pl.deposit(10);
+        double deposit = pl.deposit(10);
+        pl.printByType(MovementType.DEPOSIT);
+        System.out.println(deposit);
+
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        pl.withdraw(100);
+//        double withdraw = pl.withdraw(100);
+//        pl.printByType(MovementType.WITHDRAWAL);
+//        System.out.println(withdraw);
+          Bank b = new Bank();
+          FileAccountRepository fr = new FileAccountRepository();
+          DbAccountRepository dr = new DbAccountRepository();
+          b.loadAccounts(fr);
+
+
+
+
+
+
+
+
+
+
+
+
     }
+
 }
 
 // Devono esistere 3 tipi di conto: il conto Cayman, il conto Italiano e il conto Gold. Nessuna delle 3 deve essere figlia delle altre due

@@ -2,16 +2,16 @@ public class Intro {
 	public static void main(String[] args){
 		int num = 6;
 		
-		int numero;
-		numero = 7;
+		int numero = 7;
+
 		
 
-		byte b = 22;
-		short s = 10000;
-		int i = 100000;
-		long myLong = 1000000000;
+		byte b = 22; //8 bit va da un numero di -128 a 127
+		short s = 10000; // 16 bit  va da -32668 a 32667
+		int i = 100000; //32 bit 
+		long myLong = 1000000000; //64 bit 
 
-		char c = 'a';
+		char c = 'a'; //carattere unicode sistema di codifica standar che assegna un valore numerico unico a ogni carattere 
 		int y = c;		
 
 		System.out.println("5");
@@ -43,8 +43,8 @@ public class Intro {
 		float f = 300.0f;
 		double d = f;
 
-		boolean bo1 = true;
-		boolean bo2 = false;
+		// boolean bo1 = true;
+		// boolean bo2 = false;
 
 		boolean result = (d == 300d);
 		System.out.println(result);
