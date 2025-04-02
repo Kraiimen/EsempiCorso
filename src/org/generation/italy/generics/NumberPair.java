@@ -1,9 +1,9 @@
 package org.generation.italy.generics;
 
-public class Pair<T,U> {
+public class NumberPair<T extends Number,U extends Number> {
     private T first;
     private U second;
-    public Pair(T first, U second) {
+    public NumberPair(T first, U second) {
         this.first = first;
         this.second = second;
     }
@@ -15,5 +15,8 @@ public class Pair<T,U> {
     }
     public void setSecond(U second) {
         this.second = second;
+    }
+    public double getSum() {
+        return first.doubleValue() + second.doubleValue();
     }
 }
