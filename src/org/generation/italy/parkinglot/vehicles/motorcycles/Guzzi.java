@@ -9,12 +9,12 @@ public class Guzzi extends Motorcycle {
 
     @Override
     public void startEngine() {
-
+        System.out.println("La Guzzi con targa \""+plate+"\" è accesa.");
     }
 
     @Override
     public void stopEngine() {
-
+        System.out.println("La Guzzi con targa \""+plate+"\" è spenta.");
     }
 
 
