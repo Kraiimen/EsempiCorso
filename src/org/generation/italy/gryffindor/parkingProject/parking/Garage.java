@@ -15,4 +15,11 @@ public class Garage<T extends Car, U extends Motorcycle>{
        motorcycles.add(moto);
        return motorcycles.size();
     }
+
+//    public void park(T t) { // Questi due metodi funzionano, pur prendendo in input due Objects ed essendo quindi ugualu
+//                            // Questo grazie a una "magia" del compiler
+//    }
+//    public void park(U u) {
+//
+//    }
 }
