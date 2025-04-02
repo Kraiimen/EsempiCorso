@@ -1,4 +1,4 @@
-package org.generation.italy.bankproject.generics;
+package org.generation.italy.bankProject.generics;
 
 import java.util.ArrayList;
 import java.util.HashMap;

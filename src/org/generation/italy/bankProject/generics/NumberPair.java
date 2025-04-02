@@ -1,4 +1,4 @@
-package org.generation.italy.bankproject.generics;
+package org.generation.italy.bankProject.generics;
 
 public class NumberPair<T extends Number,U extends Number>{
     private T first;

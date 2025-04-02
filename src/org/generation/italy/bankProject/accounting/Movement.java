@@ -1,10 +1,7 @@
 //Classe per tener conto della cronologia dei movimenti.
-package org.generation.italy.bankproject.accounting;
+package org.generation.italy.bankProject.accounting;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class Movement {
     //public static final String WITHDRAWAL = "WITHDRAWAL"; //public static sono soluzioni weakly typed in questo caso

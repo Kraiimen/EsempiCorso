@@ -1,4 +1,4 @@
-package org.generation.italy.bankproject.generics;
+package org.generation.italy.bankProject.generics;
 
 public class Pair<T,U> {
     private T first;

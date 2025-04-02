@@ -1,4 +1,4 @@
-package org.generation.italy.bankproject.interfaces;
+package org.generation.italy.bankProject.interfaces;
 
 public class Start {
     public static void main(String[] args){

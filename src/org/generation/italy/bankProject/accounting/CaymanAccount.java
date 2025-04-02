@@ -1,4 +1,4 @@
-package org.generation.italy.bankproject.accounting;
+package org.generation.italy.bankProject.accounting;
 
 import java.time.LocalDate;
 

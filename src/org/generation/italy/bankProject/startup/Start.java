@@ -1,9 +1,8 @@
-package org.generation.italy.bankproject.startup;
+package org.generation.italy.bankProject.startup;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import org.generation.italy.bankproject.accounting.*;
+import org.generation.italy.bankProject.accounting.*;
 
 
 public class Start {

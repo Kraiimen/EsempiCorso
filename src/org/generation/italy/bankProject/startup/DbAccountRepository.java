@@ -1,7 +1,7 @@
-package org.generation.italy.bankproject.startup;
+package org.generation.italy.bankProject.startup;
 
-import org.generation.italy.bankproject.accounting.Account;
-import org.generation.italy.bankproject.accounting.AccountRepository;
+import org.generation.italy.bankProject.accounting.Account;
+import org.generation.italy.bankProject.accounting.AccountRepository;
 
 import java.util.ArrayList;
 
