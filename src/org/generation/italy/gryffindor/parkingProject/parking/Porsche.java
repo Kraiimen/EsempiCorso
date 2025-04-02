@@ -1,0 +1,4 @@
+package org.generation.italy.gryffindor.parkingProject.parking;
+
+public class Porsche extends Car{
+}
