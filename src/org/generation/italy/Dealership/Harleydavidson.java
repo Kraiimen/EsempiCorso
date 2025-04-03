@@ -1,4 +1,4 @@
 package org.generation.italy.Dealership;
 
-public class Harleydavidson extends Motorcycle {
+public class HarleyDavidson extends Motorcycle {
 }
