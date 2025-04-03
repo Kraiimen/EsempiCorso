@@ -25,9 +25,19 @@ public class AccountCayman extends Account {
     
 
     @Override
-    public double deposit(double amount) {
+    public void deposit(double amount) {
         evadeTax();
         balance += amount;
-        return amount;
     }
+
+    @Override
+    public void withdraw(double amount){
+        balance -= amount;
+    }
+
+    @Override
+    public String getAccountName(){
+        return "Cayman";
+    }
+
 }
