@@ -3,6 +3,7 @@ package org.generation.italy.bankProject.accounting.accountType;
 import org.generation.italy.bankProject.accounting.Account;
 import org.generation.italy.bankProject.accounting.Movement;
 import org.generation.italy.bankProject.accounting.MovementType;
+import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -38,8 +39,13 @@ public class CaymanAccount extends Account {
 
     @Override
     public double withdraw(double amount){
-        evadeTax();
-        balance -= amount;
+        try {
+            checkAmountForWithdraw(amount);
+            evadeTax();
+            balance -= amount;
+        } catch(InvalidAmountException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
         return balance;
     }
 

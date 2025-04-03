@@ -1,5 +1,7 @@
 package org.generation.italy.bankProject.accounting;
 
+import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
 import org.generation.italy.bankProject.accounting.exceptions.NegativeBalanceException;
 
 import java.time.LocalDate;
@@ -135,6 +137,17 @@ public abstract class Account extends Object{  //extends object è implicito
         Account other = (Account)obj;
         return other.balance == this.balance;
     }
+    public void checkAmountForWithdraw(double amount) throws InvalidAmountException{//scrivo throws perchè descrive la funzione
+        if(amount > balance){
+            throw new InvalidAmountException();//scrivo throw perchè questo è un comando
+        }
+    }
+    public void checkAmountForDeposit(double amount) throws ExcessiveDepositException{
+        if(amount > 100_000){
+            throw new ExcessiveDepositException();
+        }
+    }
+
 }
 
 
