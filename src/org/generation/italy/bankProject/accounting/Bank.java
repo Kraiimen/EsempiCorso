@@ -18,9 +18,7 @@ public class Bank {
         }
 
     }
-    public void loadAccounts(AccountRepository repository){
-        accounts = repository.getAll();
-    }
+
 }
 
 
