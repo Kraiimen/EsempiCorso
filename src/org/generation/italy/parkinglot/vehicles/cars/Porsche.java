@@ -9,11 +9,11 @@ public class Porsche extends Car {
 
     @Override
     public void startEngine() {
-
+        System.out.println("La Porsche con targa \""+plate+"\" è accesa.");
     }
 
     @Override
     public void stopEngine() {
-
+        System.out.println("La Porsche con targa \""+plate+"\" è spenta.");
     }
 }

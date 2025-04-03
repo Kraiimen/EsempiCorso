@@ -9,11 +9,11 @@ public class Harley extends Motorcycle {
 
     @Override
     public void startEngine() {
-
+        System.out.println("La Harley con targa \""+plate+"\" è accesa.");
     }
 
     @Override
     public void stopEngine() {
-
+        System.out.println("La Harley con targa \""+plate+"\" è spenta.");
     }
 }

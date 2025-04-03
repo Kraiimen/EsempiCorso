@@ -16,9 +16,26 @@ public class Main {
         Harley harleyBlu = new Harley("ehe3h");
         Guzzi guzziGialla = new Guzzi("ah5ah");
 
+        porscheNera.startEngine();
         garage.parkCar(porscheNera);
+        porscheNera.stopEngine();
+
+        System.out.println();
+
+        ferrariRossa.startEngine();
         garage.parkCar(ferrariRossa);
+        ferrariRossa.stopEngine();
+
+        System.out.println();
+
+        harleyBlu.startEngine();
         garage.parkMotorcycle(harleyBlu);
+        harleyBlu.stopEngine();
+
+        System.out.println();
+        
+        guzziGialla.startEngine();
         garage.parkMotorcycle(guzziGialla);
+        guzziGialla.stopEngine();
     }
 }

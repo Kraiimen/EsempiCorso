@@ -9,11 +9,11 @@ public class Ferrari extends Car {
 
     @Override
     public void startEngine() {
-
+        System.out.println("La Ferrari con targa \""+plate+"\" è accesa.");
     }
 
     @Override
     public void stopEngine() {
-
+        System.out.println("La Ferrari con targa \""+plate+"\" è spenta.");
     }
 }
