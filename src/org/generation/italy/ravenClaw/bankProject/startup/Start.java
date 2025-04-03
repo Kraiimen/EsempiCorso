@@ -1,6 +1,8 @@
 package org.generation.italy.ravenClaw.bankProject.startup;
 
 import org.generation.italy.ravenClaw.bankProject.accounting.*;
+import org.generation.italy.ravenClaw.bankProject.accounting.accounts.CaymanAccount;
+import org.generation.italy.ravenClaw.bankProject.accounting.accounts.ItalianAccount;
 
 
 import java.time.LocalDateTime;
@@ -9,6 +11,8 @@ import java.time.LocalDateTime;
 public class Start {
 
     public static void main(String[] args) {
+        Account a = new ItalianAccount(500);
+        System.out.println(a.withdraw(600));
 
     }
 }

@@ -7,6 +7,8 @@ import org.generation.italy.ravenClaw.bankProject.accounting.accounts.*;
 // per quanto riguarda i deposit tutti i conti tranne il cayman non possono depositare piu' di 100000 euro, se lo fanno lanciare un eccezione di tipo ExcessiveDepositException
 // il famoso metodo evadeTax ha una possibilita' su 10 di fallire con un eccezione di tipo GuardiaDiFinanzaException
 
+
+
 public class Bank {
     private static final int MINIMUM_FOR_DEPOSIT =1000;
     private static final int MAX_BEFORE_WITHDRAW =2000;

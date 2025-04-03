@@ -3,6 +3,7 @@ package org.generation.italy.ravenClaw.bankProject.accounting.accounts;
 import org.generation.italy.ravenClaw.bankProject.accounting.Account;
 import org.generation.italy.ravenClaw.bankProject.accounting.Movement;
 import org.generation.italy.ravenClaw.bankProject.accounting.MovementType;
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
 
 import java.time.LocalDateTime;
 
@@ -24,10 +25,13 @@ public class PlatinumAccount extends Account {
 
     @Override
     public double deposit(double amount) {
-
         if (amount <= 0) {
             return getBalance();
-        } else {
+        }
+        try {
+            if (amount > 100_000) {
+                throw new ExcessiveDepositException();
+            }
             Movement move = new Movement(amount, getBalance(), LocalDateTime.now(), MovementType.DEPOSIT);
             getMovements().add(move);
             giveBonus();
@@ -36,8 +40,14 @@ public class PlatinumAccount extends Account {
             if (nDeposit % DEPOSIT_TO_BONUS == 0) {
                 setBalance(getBalance() + PLATINUM_DEPOSIT_BONUS);
             }
-            return getBalance();
+
+        } catch (ExcessiveDepositException e){
+            System.out.println("Error: " + e.getMessage());
+
         }
+        return getBalance();
+
+
     }
 
     @Override

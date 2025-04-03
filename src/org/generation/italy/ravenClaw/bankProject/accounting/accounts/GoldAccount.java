@@ -3,6 +3,7 @@ package org.generation.italy.ravenClaw.bankProject.accounting.accounts;
 import org.generation.italy.ravenClaw.bankProject.accounting.Account;
 import org.generation.italy.ravenClaw.bankProject.accounting.Movement;
 import org.generation.italy.ravenClaw.bankProject.accounting.MovementType;
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,10 +20,13 @@ public class GoldAccount extends Account {
 
     @Override
     public double deposit(double amount){
-
         if(amount <= 0 ) {
             return getBalance();
-        } else {
+        }
+        try {
+            if (amount > 100_000) {
+                throw new ExcessiveDepositException();
+            }
             Movement move = new Movement(amount,getBalance(), LocalDateTime.now(), MovementType.DEPOSIT);
             getMovements().add(move);
             nDeposit++;
@@ -30,9 +34,17 @@ public class GoldAccount extends Account {
             if(nDeposit % DEPOSIT_TO_BONUS == 0 ){
                 setBalance(getBalance() + GOLD_BONUS );
             }
-            return getBalance();
+        } catch (ExcessiveDepositException e){
+            System.out.println("Error: " + e.getMessage());
         }
+            return getBalance();
     }
 
-
+    @Override
+    public double withdraw(double amount) {
+        Movement move = new Movement(amount, getBalance(), LocalDateTime.now(), MovementType.WITHDRAWAL);
+        getMovements().add(move);
+        setBalance(getBalance()-amount);
+        return getBalance();
+    }
 }
