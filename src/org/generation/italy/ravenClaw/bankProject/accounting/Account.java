@@ -1,8 +1,5 @@
 package org.generation.italy.ravenClaw.bankProject.accounting;
 
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -37,23 +34,10 @@ public abstract class Account {
 
     public abstract double deposit(double amount);
 
-
-    public double withdraw (double amount) {
-
-        try {
-            if (amount > balance) {
-                throw new InvalidAmountException("Non hai tutti sti soldi, ti dò quei pochi spicci che hai");
-            }
-            Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
-            movements.add(move);
-            balance -= amount;
-
-        } catch (InvalidAmountException e){
-            System.out.println("Error: "+ e.getMessage());
-            Movement move = new Movement(balance, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
-            movements.add(move);
-            balance -= balance;
-        }
+    public double withdraw(double amount) {
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
+        movements.add(move);
+        balance -= amount;
         return balance;
     }
 

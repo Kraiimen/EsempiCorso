@@ -3,7 +3,6 @@ package org.generation.italy.ravenClaw.bankProject.accounting.accounts;
 import org.generation.italy.ravenClaw.bankProject.accounting.Account;
 import org.generation.italy.ravenClaw.bankProject.accounting.Movement;
 import org.generation.italy.ravenClaw.bankProject.accounting.MovementType;
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
 import org.generation.italy.ravenClaw.bankProject.accounting.movements.ItalianMovement;
 
 import java.time.LocalDateTime;
@@ -21,19 +20,11 @@ public class ItalianAccount extends Account {
         if(amount < 0){
             return getBalance();
         }
-        try {
-            if (amount > 100_000) {
-                throw new ExcessiveDepositException();
-            }
-            double tax = calculateTaxes(amount);
-            double amountAfterTax = amount - tax;
-            setBalance(getBalance() + amountAfterTax);
-            System.out.println("Grazie per aver pagato il 10% di tasse per il ponte sullo stretto");
-            getMovements().add(new ItalianMovement(amountAfterTax, getBalance(), LocalDateTime.now(), MovementType.DEPOSIT, tax));
-        } catch (ExcessiveDepositException e){
-            System.out.println("Error: " + e.getMessage());
-
-        }
+        double tax = calculateTaxes(amount);
+        double amountAfterTax = amount - tax;
+        setBalance(getBalance() + amountAfterTax);
+        System.out.println("Grazie per aver pagato il 10% di tasse per il ponte sullo stretto");
+        getMovements().add(new ItalianMovement(amountAfterTax, getBalance(), LocalDateTime.now(), MovementType.DEPOSIT, tax));
         return getBalance();
     }
     private double calculateTaxes(double amount){
