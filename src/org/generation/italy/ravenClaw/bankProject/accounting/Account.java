@@ -1,5 +1,6 @@
 package org.generation.italy.ravenClaw.bankProject.accounting;
 
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.CarmineException;
 import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
 import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
 
@@ -35,25 +36,12 @@ public abstract class Account {
         System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
 
-    public abstract double deposit(double amount);
+    public abstract double deposit(double amount) throws Exception;
 
-
-    public double withdraw (double amount) {
-
-        try {
-            if (amount > balance) {
-                throw new InvalidAmountException("Non hai tutti sti soldi, ti dò quei pochi spicci che hai");
-            }
-            Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
-            movements.add(move);
-            balance -= amount;
-
-        } catch (InvalidAmountException e){
-            System.out.println("Error: "+ e.getMessage());
-            Movement move = new Movement(balance, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
-            movements.add(move);
-            balance -= balance;
-        }
+    public double withdraw(double amount) throws InvalidAmountException {
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
+        movements.add(move);
+        balance -= amount;
         return balance;
     }
 

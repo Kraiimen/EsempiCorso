@@ -5,6 +5,8 @@ import org.generation.italy.ravenClaw.bankProject.accounting.accounts.CaymanAcco
 import org.generation.italy.ravenClaw.bankProject.accounting.accounts.GoldAccount;
 import org.generation.italy.ravenClaw.bankProject.accounting.accounts.ItalianAccount;
 import org.generation.italy.ravenClaw.bankProject.accounting.accounts.PlatinumAccount;
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.CarmineException;
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
 import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
 import org.generation.italy.ravenClaw.mud.entity.Paladin;
 
@@ -22,7 +24,15 @@ public class Start {
             GoldAccount ga = new GoldAccount(1000);
             ga.withdraw(1200);
             pa.withdraw(1400);
-        } catch (InvalidAmountException e){
+            for (int i = 0; i < 20; i++) {
+                ca.deposit(200_000);
+            }
+            ia.deposit(200_000);
+        } catch (InvalidAmountException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (ExcessiveDepositException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (CarmineException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
