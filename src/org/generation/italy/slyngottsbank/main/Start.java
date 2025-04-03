@@ -19,19 +19,23 @@ public class Start {
         } catch (InvalidAmountException e) {
             System.out.println(e.getMessage());
         }
-        ita1.printBalance();
-        ita1.printMovement();
-        AccountCayman cay1 = new AccountCayman(1000);
-        cay1.deposit(100);
-        cay1.printBalance();
-        cay1.printMovement();
-        Bank.checkAndAdjustBalanceAccount(ita1);
-        ita1.printBalance();
-        Bank.checkAndAdjustBalanceAccount(cay1);
-        cay1.printBalance();
-        cay1.deposit(2000);
-        Bank.checkAndAdjustBalanceAccount(cay1);
-        cay1.printBalance();
+
+//        ita1.printBalance();
+//        ita1.printMovement();
+//
+//        AccountCayman cay1 = new AccountCayman(1000);
+//        cay1.deposit(100);
+//        cay1.printBalance();
+//        cay1.printMovement();
+//
+//        Bank.checkAndAdjustBalanceAccount(ita1);
+//        ita1.printBalance();
+//
+//        Bank.checkAndAdjustBalanceAccount(cay1);
+//        cay1.printBalance();
+//        cay1.deposit(2000);
+//        Bank.checkAndAdjustBalanceAccount(cay1);
+//        cay1.printBalance();
 
 
     }

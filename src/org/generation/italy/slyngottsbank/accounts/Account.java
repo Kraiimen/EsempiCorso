@@ -47,9 +47,7 @@ public abstract class Account {
     public abstract void deposit(double amount);
 
     public void withdraw(double amount) throws InvalidAmountException {
-        if (amount > balance) {
-            throw new InvalidAmountException();
-        }
+        checkAmount(amount);
         Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
         movements.add(move);
         balance -= amount;
@@ -111,4 +109,9 @@ public abstract class Account {
 
     public abstract String getAccountName();
 
+    public void checkAmount(double amount) throws InvalidAmountException{
+        if (amount > balance) {
+            throw new InvalidAmountException();
+        }
+    }
 }

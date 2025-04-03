@@ -1,5 +1,7 @@
 package org.generation.italy.slyngottsbank.accounts;
 
+import org.generation.italy.slyngottsbank.exceptions.InvalidAmountException;
+
 import java.time.LocalDate;
 
 public class AccountCayman extends Account {
@@ -38,7 +40,8 @@ public class AccountCayman extends Account {
     }
 
     @Override
-    public void withdraw(double amount){
+    public void withdraw(double amount) throws InvalidAmountException {
+        checkAmount(amount);
         balance -= amount;
     }
 
