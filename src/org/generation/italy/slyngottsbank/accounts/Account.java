@@ -1,6 +1,9 @@
 package org.generation.italy.slyngottsbank.accounts;
+
+import org.generation.italy.slyngottsbank.exceptions.InvalidAmountException;
 import org.generation.italy.slyngottsbank.movements.Movement;
 import org.generation.italy.slyngottsbank.movements.MovementType;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,11 +34,11 @@ public abstract class Account {
     }
 
     // METODI
-    public void printBalance(){
+    public void printBalance() {
         System.out.printf("Il conto %s con id %d ha come saldo %.2f%n", getAccountName(), id, balance);
     }
 
-//    public  double deposit(double amount){
+    //    public  double deposit(double amount){
 //        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
 //        movements.add(move);
 //        balance += amount;
@@ -43,18 +46,21 @@ public abstract class Account {
 //    }
     public abstract void deposit(double amount);
 
-    public void withdraw(double amount){
+    public void withdraw(double amount) throws InvalidAmountException {
+        if (amount > balance) {
+            throw new InvalidAmountException();
+        }
         Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
         movements.add(move);
         balance -= amount;
     }
 
-    public double getBalance(){
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(double newBalance){
-        if(newBalance <= 0){
+    public void setBalance(double newBalance) {
+        if (newBalance <= 0) {
             return;
         }
         balance = newBalance;
@@ -68,14 +74,14 @@ public abstract class Account {
         this.creationDate = creationDate;
     }
 
-    public double getSumDeposits(){
+    public double getSumDeposits() {
         double sum = 0;
 
-        for(int i = 0 ; i < movements.size() ; i++) {
+        for (int i = 0; i < movements.size(); i++) {
             Object ob = movements.get(i);
-            Movement m = (Movement)ob;
+            Movement m = (Movement) ob;
 
-            if(m.getType() == MovementType.DEPOSIT) {
+            if (m.getType() == MovementType.DEPOSIT) {
                 sum += m.getAmount();
 
             }
@@ -83,21 +89,21 @@ public abstract class Account {
         return sum;
     }
 
-    public double getTotalAmountFor(MovementType type, LocalDate start, LocalDate end, double lowerBound){
+    public double getTotalAmountFor(MovementType type, LocalDate start, LocalDate end, double lowerBound) {
         double totalAmount = 0;
-        for(Object ob : movements){
-            Movement m = (Movement)ob;
+        for (Object ob : movements) {
+            Movement m = (Movement) ob;
             LocalDate movementDate = m.getOperationTime().toLocalDate();
             boolean isInRange = movementDate.isAfter(start) && movementDate.isBefore(end);
-            if(m.getType() == type && isInRange && m.getAmount() >= lowerBound){
+            if (m.getType() == type && isInRange && m.getAmount() >= lowerBound) {
                 totalAmount += m.getAmount();
             }
         }
         return totalAmount;
     }
 
-    public void printMovement(){
-        for(Object ob : movements){
+    public void printMovement() {
+        for (Object ob : movements) {
             Movement obj = (Movement) ob;
             System.out.print(obj);
         }

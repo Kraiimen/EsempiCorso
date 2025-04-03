@@ -11,7 +11,7 @@ public class AccountItaly extends Account {
     final double TAX_PERCENTAGE = 0.1;
 
 
-    public AccountItaly(double initialBalance, LocalDate creationDate ){
+    public AccountItaly(double initialBalance, LocalDate creationDate) {
         super(initialBalance, creationDate);
 
     }
@@ -25,9 +25,8 @@ public class AccountItaly extends Account {
     }
 
     @Override
-    public String getAccountName(){
+    public String getAccountName() {
         return "Italy";
     }
-
 
 }
