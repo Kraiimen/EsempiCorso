@@ -15,7 +15,7 @@ public class ItalianMovement extends Movement {
     public String toString(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String formattedData = getOperationTime().format(formatter);
-        return "ID: " + id + "\nMovement amount: "+ getAmount() + "\nYour balance: " + getCurrentBalance() + "\nOperation time: "
+        return "\nMovement amount: "+ getAmount() + "\nYour balance: " + "\nOperation time: "
                 + formattedData + "\nMovement Type: " + getType() + "\nTax for this movement: " + tax;
     }
 }
