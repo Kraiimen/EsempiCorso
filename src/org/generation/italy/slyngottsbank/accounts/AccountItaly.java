@@ -17,11 +17,17 @@ public class AccountItaly extends Account {
     }
 
     @Override
-    public double deposit(double amount) {
+    public void deposit(double amount) {
         balance += amount * (1 - TAX_PERCENTAGE);
         Movement moveIta = new Movement(amount * (1 - TAX_PERCENTAGE), balance, LocalDateTime.now(), MovementType.DEPOSIT);
         movements.add(moveIta);
-        return balance;
+        System.out.println("Grazie di aver pagato le tasse :)");
     }
+
+    @Override
+    public String getAccountName(){
+        return "Italy";
+    }
+
 
 }

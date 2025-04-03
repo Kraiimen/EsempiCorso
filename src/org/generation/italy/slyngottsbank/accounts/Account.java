@@ -32,7 +32,7 @@ public abstract class Account {
 
     // METODI
     public void printBalance(){
-        System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
+        System.out.printf("Il conto %s con id %d ha come saldo %.2f%n", getAccountName(), id, balance);
     }
 
 //    public  double deposit(double amount){
@@ -41,13 +41,12 @@ public abstract class Account {
 //        balance += amount;
 //        return balance;
 //    }
-    public abstract double deposit(double amount);
+    public abstract void deposit(double amount);
 
-    public double withdraw(double amount){
+    public void withdraw(double amount){
         Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
         movements.add(move);
         balance -= amount;
-        return balance;
     }
 
     public double getBalance(){
@@ -103,5 +102,7 @@ public abstract class Account {
             System.out.print(obj);
         }
     }
+
+    public abstract String getAccountName();
 
 }
