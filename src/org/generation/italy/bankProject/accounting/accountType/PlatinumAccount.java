@@ -3,6 +3,7 @@ package org.generation.italy.bankProject.accounting.accountType;
 import org.generation.italy.bankProject.accounting.Account;
 import org.generation.italy.bankProject.accounting.Movement;
 import org.generation.italy.bankProject.accounting.MovementType;
+import org.generation.italy.bankProject.accounting.exceptions.InavlidAmountException;
 
 import java.time.LocalDateTime;
 
@@ -33,20 +34,25 @@ public class PlatinumAccount extends Account {
 
         @Override
         public double withdraw(double amount) {
-            int withdrawCounter = 1;
-            balance -= amount;
-            for (Object o : movements) {
-                Movement m2 = (Movement) o;
-                if (m2.getType() == MovementType.WITHDRAWAL) {
-                    withdrawCounter++;
+            try {
+                checkAmountForWithdraw(amount);
+                int withdrawCounter = 1;
+                balance -= amount;
+                for (Object o : movements) {
+                    Movement m2 = (Movement) o;
+                    if (m2.getType() == MovementType.WITHDRAWAL) {
+                        withdrawCounter++;
+                    }
                 }
+                if (withdrawCounter % 10 == 0 && amount >= 100) {
+                    balance += 10;
+                    System.out.println("Congratulazione hai ricevuto 10$ per i tuoi 10 prelievi precendenti: " + balance);
+                }
+                Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
+                movements.add(move);
+            } catch(InavlidAmountException e){
+                System.out.println("Error: +" + e.getMessage());
             }
-            if (withdrawCounter % 10 == 0 && amount >= 100) {
-                balance += 10;
-                System.out.println("Congratulazione hai ricevuto 10$ per i tuoi 10 prelievi precendenti: " + balance);
-            }
-            Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
-            movements.add(move);
             return balance;
 
         }

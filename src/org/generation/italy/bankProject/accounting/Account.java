@@ -1,5 +1,6 @@
 package org.generation.italy.bankProject.accounting;
 
+import org.generation.italy.bankProject.accounting.exceptions.InavlidAmountException;
 import org.generation.italy.bankProject.accounting.exceptions.NegativeBalanceException;
 
 import java.time.LocalDate;
@@ -51,13 +52,7 @@ public abstract class Account extends Object{  //extends object è implicito
     public abstract double deposit(double amount);
 
     public abstract double withdraw(double amount);
-//        doInternalOperation();
-//        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
-//        movements.add(move);
-//        balance -= amount;
-//        return balance;
-//    }
-//    private void doInternalOperation(){
+
 
 //    }
     public double getBalance(){
@@ -104,6 +99,12 @@ public abstract class Account extends Object{  //extends object è implicito
                 System.out.println(m1);
                 System.out.println();
             }
+        }
+    }
+
+    public void checkAmountForWithdraw(double amount) throws InavlidAmountException {
+        if(amount > balance){
+            throw new InavlidAmountException();
         }
     }
 }
