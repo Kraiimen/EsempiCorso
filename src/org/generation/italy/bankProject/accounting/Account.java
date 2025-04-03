@@ -64,14 +64,13 @@ public class Account {
     }
 
         public void setBalance(double newBalance) {
-            try {
                 if (newBalance <= 0) {
-                    throw new NegativeBalanceException(); // Lancia l'eccezione
+                    System.out.println("Un conto non può essere settato ad un balance negativo");
+                    return;
                 }
+
                 balance = newBalance; // Assegna il nuovo saldo
-            } catch (NegativeBalanceException e) {
-                System.out.println("Errore: " + e.getMessage()); // Stampa il messaggio dell'eccezione
-            }
+
         }
 
 
