@@ -3,10 +3,14 @@ package org.generation.italy.bankProject.accounting.accountType;
 import org.generation.italy.bankProject.accounting.Account;
 import org.generation.italy.bankProject.accounting.Movement;
 import org.generation.italy.bankProject.accounting.MovementType;
+import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.exceptions.GuardiaDiFinanzaException;
 import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
 
+import java.security.Guard;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Random;
 
 public class CaymanAccount extends Account {
     private String secretCode;
@@ -26,26 +30,27 @@ public class CaymanAccount extends Account {
         this.secretCode = secretCode;
     }
 
-    private void evadeTax(){
-       System.out.println("evado le tasse con l'aiuto del commercialista Elvis");
+    private void evadeTax()throws GuardiaDiFinanzaException{
+        Random random = new Random();
+        int j = random.nextInt(10);
+        if(j == 9){
+            throw new GuardiaDiFinanzaException();
+        }
+        System.out.println("evado le tasse con l'aiuto del commercialista Elvis");
     }
 
     @Override
-    public double deposit(double amt){
+    public double deposit(double amt)throws GuardiaDiFinanzaException {
         evadeTax();
         balance += amt;
         return balance;
     }
 
     @Override
-    public double withdraw(double amount){
-        try {
-            checkAmountForWithdraw(amount);
-            evadeTax();
-            balance -= amount;
-        } catch(InvalidAmountException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+    public double withdraw(double amount) throws InvalidAmountException, GuardiaDiFinanzaException{
+        checkAmountForWithdraw(amount);
+        evadeTax();
+        balance -= amount;
         return balance;
     }
 

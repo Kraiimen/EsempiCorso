@@ -18,35 +18,29 @@ public class ItalianAccount extends Account {
     }
 
     @Override
-    public double deposit(double amount){
-        try {
-            checkAmountForDeposit(amount);
-            tax = 0.1;
-            double taxedAmount = amount * tax;
-            amount -= taxedAmount;
-            ItalianMovement move = new ItalianMovement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT, taxedAmount);
-            movements.add(move);
-            balance += amount;
-            System.out.println("Grazie pezzente per la tassa di " + taxedAmount + "€. Il tuo bilancio ora è di " + balance + "€.");
-        } catch(ExcessiveDepositException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+    public double deposit(double amount)throws ExcessiveDepositException{
+
+        checkAmountForDeposit(amount);
+        tax = 0.1;
+        double taxedAmount = amount * tax;
+        amount -= taxedAmount;
+        ItalianMovement move = new ItalianMovement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT, taxedAmount);
+        movements.add(move);
+        balance += amount;
+        System.out.println("Grazie pezzente per la tassa di " + taxedAmount + "€. Il tuo bilancio ora è di " + balance + "€.");
         return balance;
     }
 
     @Override
-    public double withdraw(double amount){
-        try {
-            checkAmountForWithdraw(amount);//Prima questo, se questo funziona non lancia l'errore ed esegue il withdraw.
-            tax = 0;
-            double taxedAmount = amount * tax;
-            double newAmount = amount - taxedAmount;
-            ItalianMovement move = new ItalianMovement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL, taxedAmount);
-            movements.add(move);
-            balance -= amount;
-        } catch (InvalidAmountException e) {//Se try non funziona, passa al catch ci notifica l'eccezione e blocca il prelievo e stampa il print.
-            System.out.println("Error: " + e.getMessage());
-        }
+    public double withdraw(double amount) throws InvalidAmountException{
+
+        checkAmountForWithdraw(amount);//Prima questo, se questo funziona non lancia l'errore ed esegue il withdraw.
+        tax = 0;
+        double taxedAmount = amount * tax;
+        double newAmount = amount - taxedAmount;
+        ItalianMovement move = new ItalianMovement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL, taxedAmount);
+        movements.add(move);
+        balance -= amount;
 
         return balance;
     }
