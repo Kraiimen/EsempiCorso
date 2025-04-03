@@ -1,5 +1,6 @@
-package org.generation.italy.ravenClaw.bankProject.accounting.movements;
+package org.generation.italy.ravenClaw.bankProject.accounting.accounts.ItalianMovement;
 
+import org.generation.italy.ravenClaw.bankProject.accounting.Account;
 import org.generation.italy.ravenClaw.bankProject.accounting.Movement;
 import org.generation.italy.ravenClaw.bankProject.accounting.MovementType;
 

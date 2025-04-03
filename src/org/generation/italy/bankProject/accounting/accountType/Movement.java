@@ -1,8 +1,10 @@
-package org.generation.italy.ravenClaw.bankProject.accounting;
+package org.generation.italy.bankProject.accounting.accountType;
 
 //import java.time.LocalDateTime;
 
-import java.time.*;
+import org.generation.italy.bankProject.accounting.MovementType;
+
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Movement {
