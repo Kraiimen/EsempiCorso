@@ -1,4 +1,4 @@
 package org.generation.italy.Dealership;
 
-public class Porsche extends Car{
+public class Guzzi extends Motorcycle{
 }

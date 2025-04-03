@@ -21,33 +21,12 @@ public class Start {
         ItalianAccount it2 = new ItalianAccount(10000);
         it2.deposit(100);
         it2.printAllMovement();
+        it2.withdraw(10_200);
+        System.out.println(it2.getBalance());
 
         System.out.println();
 
         GoldAccount gold = new GoldAccount(10000);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.deposit(100);
-//        gold.printByType(MovementType.DEPOSIT);
 
         PlatinumAccount pl = new PlatinumAccount(1000);
         pl.deposit(10);
@@ -63,20 +42,7 @@ public class Start {
         pl.printByType(MovementType.DEPOSIT);
         System.out.println(deposit);
 
-//        pl.withdraw(100);
-//        pl.withdraw(100);
-//        pl.withdraw(100);
-//        pl.withdraw(100);
-//        pl.withdraw(100);
-//        pl.withdraw(100);
-//        pl.withdraw(100);
-//        pl.withdraw(100);
-//        pl.withdraw(100);
-//        pl.withdraw(100);
-//        pl.withdraw(100);
-//        double withdraw = pl.withdraw(100);
-//        pl.printByType(MovementType.WITHDRAWAL);
-//        System.out.println(withdraw);
+
           Bank b = new Bank();
           FileAccountRepository fr = new FileAccountRepository();
           DbAccountRepository dr = new DbAccountRepository();

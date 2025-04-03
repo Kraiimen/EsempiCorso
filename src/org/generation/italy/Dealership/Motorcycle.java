@@ -1,15 +1,15 @@
 package org.generation.italy.Dealership;
 
-public abstract class Motorcycle implements Veihcle{
+public abstract class Motorcycle implements Vehicle {
     private boolean isMoveable;
     @Override
-    public void StartEngine() {
-        System.out.println("La macchina è accesa");
+    public void startEngine() {
+        System.out.println("La moto è accesa ");
     }
 
     @Override
     public void turnOffEngine() {
-        System.out.println("La macchina è spenta");
+        System.out.println("La moto è spenta ");
     }
     public void putOnStand(){
         isMoveable = false;
