@@ -41,7 +41,7 @@ public class AccountCayman extends Account {
 
     @Override
     public void withdraw(double amount) throws InvalidAmountException {
-        checkAmount(amount);
+        checkAmountWithdraw(amount);
         balance -= amount;
     }
 

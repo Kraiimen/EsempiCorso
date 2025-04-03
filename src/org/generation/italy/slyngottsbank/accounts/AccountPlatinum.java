@@ -28,7 +28,7 @@ public class AccountPlatinum extends AccountGold {
 
     @Override
     public void withdraw(double amount) throws InvalidAmountException {
-        checkAmount(amount);
+        checkAmountWithdraw(amount);
         if (amount >= 100) {
             withdrawCounter++;
         }
