@@ -1,5 +1,8 @@
 package org.generation.italy.ravenClaw.bankProject.accounting;
 
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,9 +35,9 @@ public abstract class Account {
         System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
 
-    public abstract double deposit(double amount);
+    public abstract double deposit(double amount) throws InvalidAmountException, ExcessiveDepositException;
 
-    public double withdraw(double amount) {
+    public double withdraw(double amount) throws InvalidAmountException {
         Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
         movements.add(move);
         balance -= amount;

@@ -3,6 +3,8 @@ package org.generation.italy.ravenClaw.bankProject.accounting.accounts;
 import org.generation.italy.ravenClaw.bankProject.accounting.Account;
 import org.generation.italy.ravenClaw.bankProject.accounting.Movement;
 import org.generation.italy.ravenClaw.bankProject.accounting.MovementType;
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
 import org.generation.italy.ravenClaw.bankProject.accounting.movements.ItalianMovement;
 
 import java.time.LocalDateTime;
@@ -16,9 +18,12 @@ public class ItalianAccount extends Account {
     }
 
     @Override
-    public double deposit(double amount){
-        if(amount < 0){
-            return getBalance();
+    public double deposit(double amount) throws InvalidAmountException, ExcessiveDepositException{
+        if(amount <= 0){
+            throw new InvalidAmountException("Non puoi depositare cifre minori o uguale a 0");
+        }
+        if(amount > 100000){
+            throw new ExcessiveDepositException();
         }
         double tax = calculateTaxes(amount);
         double amountAfterTax = amount - tax;

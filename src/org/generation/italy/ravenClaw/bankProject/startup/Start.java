@@ -1,6 +1,12 @@
 package org.generation.italy.ravenClaw.bankProject.startup;
 
 import org.generation.italy.ravenClaw.bankProject.accounting.*;
+import org.generation.italy.ravenClaw.bankProject.accounting.accounts.CaymanAccount;
+import org.generation.italy.ravenClaw.bankProject.accounting.accounts.GoldAccount;
+import org.generation.italy.ravenClaw.bankProject.accounting.accounts.ItalianAccount;
+import org.generation.italy.ravenClaw.bankProject.accounting.accounts.PlatinumAccount;
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
+import org.generation.italy.ravenClaw.mud.entity.Paladin;
 
 
 import java.time.LocalDateTime;
@@ -9,7 +15,16 @@ import java.time.LocalDateTime;
 public class Start {
 
     public static void main(String[] args) {
-
+        try {
+            PlatinumAccount pa = new PlatinumAccount(1000);
+            CaymanAccount ca = new CaymanAccount(1000);
+            ItalianAccount ia = new ItalianAccount(1000);
+            GoldAccount ga = new GoldAccount(1000);
+            ga.withdraw(1200);
+            pa.withdraw(1400);
+        } catch (InvalidAmountException e){
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }
 // STEP 1

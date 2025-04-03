@@ -3,6 +3,7 @@ package org.generation.italy.ravenClaw.bankProject.accounting.accounts;
 import org.generation.italy.ravenClaw.bankProject.accounting.Account;
 import org.generation.italy.ravenClaw.bankProject.accounting.Movement;
 import org.generation.italy.ravenClaw.bankProject.accounting.MovementType;
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
 
 import java.time.LocalDateTime;
 
@@ -41,9 +42,12 @@ public class PlatinumAccount extends Account {
     }
 
     @Override
-    public double withdraw(double amount) {
-        if( getBalance() - amount < 0 && amount > 0){
-            return getBalance();
+    public double withdraw(double amount) throws InvalidAmountException {
+        if(amount < 0 ){
+            throw new InvalidAmountException("Inserisci un importo positivo");
+        }
+        if(getBalance() < amount){
+            throw new InvalidAmountException("Il tuo bilancio è minore di quanto stai provando a ritirare");
         }
         Movement move = new Movement(amount, getBalance(), LocalDateTime.now(), MovementType.WITHDRAWAL);
         setBalance(getBalance() - amount);
