@@ -38,12 +38,8 @@ public class AccountCayman extends Account {
 //    }
 
     @Override
-    public void deposit(double amount) {
-        try {
-            evadeTax();
-        } catch (PoliceException e) {
-            System.out.println(e.getMessage());
-        }
+    public void deposit(double amount) throws PoliceException{
+        evadeTax();
         balance += amount;
     }
 
@@ -58,7 +54,7 @@ public class AccountCayman extends Account {
         return "Cayman";
     }
 
-    public void taxEvasionFailure() throws PoliceException {
+    private void taxEvasionFailure() throws PoliceException {
         Random random = new Random();
         boolean isCaught = random.nextDouble(1) <= 0.1;
 

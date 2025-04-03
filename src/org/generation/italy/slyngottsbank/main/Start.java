@@ -4,6 +4,7 @@ import org.generation.italy.slyngottsbank.accounts.AccountCayman;
 import org.generation.italy.slyngottsbank.accounts.AccountItaly;
 import org.generation.italy.slyngottsbank.exceptions.ExcessiveDepositException;
 import org.generation.italy.slyngottsbank.exceptions.InvalidAmountException;
+import org.generation.italy.slyngottsbank.exceptions.PoliceException;
 
 import java.time.LocalDate;
 
@@ -31,7 +32,11 @@ public class Start {
 //        ita1.printMovement();
 //
         AccountCayman cay1 = new AccountCayman(1000);
-        cay1.deposit(100);
+        try {
+            cay1.deposit(100);
+        } catch (PoliceException e) {
+            System.out.println(e.getMessage());
+        }
 
 //        cay1.printBalance();
 //        cay1.printMovement();
