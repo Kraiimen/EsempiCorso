@@ -13,27 +13,25 @@ public class PlatinumAccount extends GoldAccount {
     }
 
     @Override
-    public double withdraw(double amount){
-        try {
-            checkAmountForWithdraw(amount);
-            balance -= amount;
-            int withdrawalCounter = 1;
-            for (Object obj : movements) {
-                Movement m1 = (Movement) obj;
-                if ((m1.getType() == MovementType.WITHDRAWAL) && (amount >= 100)) {
-                    withdrawalCounter++;
-                }
+    public double withdraw(double amount) throws InvalidAmountException{
+
+        checkAmountForWithdraw(amount);
+        balance -= amount;
+        int withdrawalCounter = 1;
+        for (Object obj : movements) {
+            Movement m1 = (Movement) obj;
+            if ((m1.getType() == MovementType.WITHDRAWAL) && (amount >= 100)) {
+                withdrawalCounter++;
             }
-            System.out.println(withdrawalCounter);
-            if (withdrawalCounter % 10 == 0) {
-                balance += 10;
-                System.out.println("Bonus");
-            }
-            Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
-            movements.add(move);
-        } catch(InvalidAmountException e){
-            System.out.println("Error: " + e.getMessage());
         }
+        System.out.println(withdrawalCounter);
+        if (withdrawalCounter % 10 == 0) {
+            balance += 10;
+            System.out.println("Bonus");
+        }
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
+        movements.add(move);
+
         return balance;
     }
 

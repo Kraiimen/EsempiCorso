@@ -54,9 +54,9 @@ public abstract class Account extends Object{  //extends object è implicito
         System.out.println("durante questa esecuzione di printBalance this è uguale a " +this);
         System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
-    public abstract double deposit(double amount);
+    public abstract double deposit(double amount)throws ExcessiveDepositException;
 
-    public abstract double withdraw(double amount);
+    public abstract double withdraw(double amount)throws InvalidAmountException;
     private void doInternalOperation(){
 
     }
