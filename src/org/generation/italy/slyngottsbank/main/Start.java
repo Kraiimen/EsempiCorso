@@ -1,8 +1,8 @@
 package org.generation.italy.slyngottsbank.main;
 
-import org.generation.italy.slyngottsbank.accountmanagement.Bank;
 import org.generation.italy.slyngottsbank.accounts.AccountCayman;
 import org.generation.italy.slyngottsbank.accounts.AccountItaly;
+import org.generation.italy.slyngottsbank.exceptions.ExcessiveDepositException;
 import org.generation.italy.slyngottsbank.exceptions.InvalidAmountException;
 
 import java.time.LocalDate;
@@ -20,11 +20,19 @@ public class Start {
             System.out.println(e.getMessage());
         }
 
+        try {
+            ita1.deposit(120000);
+        } catch (ExcessiveDepositException e) {
+            System.out.println(e.getMessage());
+        }
+
+
 //        ita1.printBalance();
 //        ita1.printMovement();
 //
-//        AccountCayman cay1 = new AccountCayman(1000);
-//        cay1.deposit(100);
+        AccountCayman cay1 = new AccountCayman(1000);
+        cay1.deposit(100);
+
 //        cay1.printBalance();
 //        cay1.printMovement();
 //

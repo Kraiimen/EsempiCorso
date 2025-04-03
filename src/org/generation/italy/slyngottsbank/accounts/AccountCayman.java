@@ -1,30 +1,34 @@
 package org.generation.italy.slyngottsbank.accounts;
 
 import org.generation.italy.slyngottsbank.exceptions.InvalidAmountException;
+import org.generation.italy.slyngottsbank.exceptions.PoliceException;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 public class AccountCayman extends Account {
     private String secretCode;
 
 
-    public AccountCayman(){
+    public AccountCayman() {
         this(10_000);
     }
 
-    public AccountCayman(double initialBalance){
+    public AccountCayman(double initialBalance) {
         super(initialBalance);
         secretCode = "xxx";
     }
 
-    public AccountCayman(double initialBalance, LocalDate initialDate, String secretCode){
+    public AccountCayman(double initialBalance, LocalDate initialDate, String secretCode) {
         super(initialBalance, initialDate);
         this.secretCode = secretCode;
     }
 
-    private void evadeTax(){
+    private void evadeTax() throws PoliceException {
+        taxEvasionFailure();
         System.out.println("evado le tasse con l'aiuto del commercialista Elvis");
     }
+
 
 //    @Override
 //    public double deposit(double amt){
@@ -35,19 +39,31 @@ public class AccountCayman extends Account {
 
     @Override
     public void deposit(double amount) {
-        evadeTax();
+        try {
+            evadeTax();
+        } catch (PoliceException e) {
+            System.out.println(e.getMessage());
+        }
         balance += amount;
     }
 
     @Override
     public void withdraw(double amount) throws InvalidAmountException {
-        checkAmountWithdraw(amount);
+        checkWithdrawAmount(amount);
         balance -= amount;
     }
 
     @Override
-    public String getAccountName(){
+    public String getAccountName() {
         return "Cayman";
     }
 
+    public void taxEvasionFailure() throws PoliceException {
+        Random random = new Random();
+        boolean isCaught = random.nextDouble(1) <= 0.1;
+
+        if (isCaught) {
+            throw new PoliceException();
+        }
+    }
 }

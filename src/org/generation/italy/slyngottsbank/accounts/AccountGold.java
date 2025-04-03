@@ -1,5 +1,6 @@
 package org.generation.italy.slyngottsbank.accounts;
 
+import org.generation.italy.slyngottsbank.exceptions.ExcessiveDepositException;
 import org.generation.italy.slyngottsbank.exceptions.InvalidAmountException;
 import org.generation.italy.slyngottsbank.movements.Movement;
 import org.generation.italy.slyngottsbank.movements.MovementType;
@@ -15,7 +16,8 @@ public class AccountGold extends Account {
     }
 
     @Override
-    public void deposit(double amount) {
+    public void deposit(double amount) throws ExcessiveDepositException {
+        checkDepositAmount(amount);
         balance += amount;
         Movement moveGold = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
         movements.add(moveGold);

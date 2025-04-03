@@ -1,5 +1,6 @@
 package org.generation.italy.slyngottsbank.accounts;
 
+import org.generation.italy.slyngottsbank.exceptions.ExcessiveDepositException;
 import org.generation.italy.slyngottsbank.exceptions.InvalidAmountException;
 import org.generation.italy.slyngottsbank.movements.Movement;
 import org.generation.italy.slyngottsbank.movements.MovementType;
@@ -47,7 +48,7 @@ public abstract class Account {
     public abstract void deposit(double amount);
 
     public void withdraw(double amount) throws InvalidAmountException {
-        checkAmountWithdraw(amount);
+        checkWithdrawAmount(amount);
         Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
         movements.add(move);
         balance -= amount;
@@ -109,9 +110,15 @@ public abstract class Account {
 
     public abstract String getAccountName();
 
-    public void checkAmountWithdraw(double amount) throws InvalidAmountException{
+    protected void checkWithdrawAmount(double amount) throws InvalidAmountException {
         if (amount > balance) {
             throw new InvalidAmountException();
+        }
+    }
+
+    protected void checkDepositAmount(double amount) throws ExcessiveDepositException {
+        if (amount > 100000) {
+            throw new ExcessiveDepositException();
         }
     }
 }
