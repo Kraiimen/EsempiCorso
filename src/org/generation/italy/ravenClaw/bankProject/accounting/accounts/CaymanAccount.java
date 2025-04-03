@@ -1,18 +1,13 @@
 package org.generation.italy.ravenClaw.bankProject.accounting.accounts;
 
 import org.generation.italy.ravenClaw.bankProject.accounting.Account;
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.CarmineException;
 
 import java.time.LocalDate;
-import java.util.Random;
 
 public class CaymanAccount extends Account {
     private String secretCode;
 
     public CaymanAccount(){
-//        super();  non necessario, viene invocato comunque
-//        super(10_000);
-//        secretCode = "xxx";
         this(10_000);
     }
     public CaymanAccount(double initialBalance){
@@ -21,37 +16,12 @@ public class CaymanAccount extends Account {
     }
 
     private void evadeTax(){
-        Random dice = new Random();
-        try {
-            if(dice.nextInt(10) == 0) {
-                throw new CarmineException();
-            } else {
-                System.out.println("evado le tasse con l'aiuto del commercialista Elvis");
-            }
-        } catch(CarmineException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        System.out.println("evado le tasse con l'aiuto del commercialista Elvis");
     }
-
     @Override
     public double deposit(double amt){
         evadeTax();
         setBalance(getBalance() + amt);
         return getBalance();
     }
-
-
-
-
-
-//    public void temp(){                   ESEMPIO DI DIFFERENZA FRA FINAL PRIMITIVA E FINAL PER UN OGGETTO
-//        final int[] nums ={1,2,3,4,5};    UN METODO FINAL PUO' ESSERE EREDITATO MA NON OVERRIDATO
-//        nums[0] = 25;                     UNA CLASSE FINAL NON PUO' ESSERE EREDITATA
-//        nums = new int[4];
-//        final int n = 3;
-//    }
-
-
-
-
 }

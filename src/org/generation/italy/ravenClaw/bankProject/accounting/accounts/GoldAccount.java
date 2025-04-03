@@ -3,8 +3,6 @@ package org.generation.italy.ravenClaw.bankProject.accounting.accounts;
 import org.generation.italy.ravenClaw.bankProject.accounting.Account;
 import org.generation.italy.ravenClaw.bankProject.accounting.Movement;
 import org.generation.italy.ravenClaw.bankProject.accounting.MovementType;
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,45 +17,22 @@ public class GoldAccount extends Account {
         super(balance);
     }
 
-//    @Override
-//    public double deposit(double amount){
-//        if(amount <= 0 ) {
-//            return getBalance();
-//        }
-//        try {
-//            if (amount > 100_000) {
-//                throw new ExcessiveDepositException();
-//            }
-//            Movement move = new Movement(amount,getBalance(), LocalDateTime.now(), MovementType.DEPOSIT);
-//            getMovements().add(move);
-//            nDeposit++;
-//            setBalance(getBalance() + amount);
-//            if(nDeposit % DEPOSIT_TO_BONUS == 0 ){
-//                setBalance(getBalance() + GOLD_BONUS );
-//            }
-//        } catch (ExcessiveDepositException e){
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//            return getBalance();
-//    }
-
     @Override
-    public double deposit(double amount) {
-        try {
-            if (amount > getBalance()) {
-                throw new InvalidAmountException("Non hai tutti sti soldi, ti dò quei pochi spicci che hai");
+    public double deposit(double amount){
+
+        if(amount <= 0 ) {
+            return getBalance();
+        } else {
+            Movement move = new Movement(amount,getBalance(), LocalDateTime.now(), MovementType.DEPOSIT);
+            getMovements().add(move);
+            nDeposit++;
+            setBalance(getBalance() + amount);
+            if(nDeposit % DEPOSIT_TO_BONUS == 0 ){
+                setBalance(getBalance() + GOLD_BONUS );
             }
-            Movement move = new Movement(amount, getBalance(), LocalDateTime.now(), MovementType.WITHDRAWAL);
-            getMovements().add(move);
-            setBalance(getBalance()-amount);
-
-        } catch (InvalidAmountException e){
-            System.out.println("Error: "+ e.getMessage());
-            Movement move = new Movement(getBalance(), getBalance(), LocalDateTime.now(), MovementType.WITHDRAWAL);
-            getMovements().add(move);
-            setBalance(getBalance() - getBalance());
+            return getBalance();
         }
-
-        return getBalance();
     }
+
+
 }

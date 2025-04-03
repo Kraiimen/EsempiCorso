@@ -35,10 +35,10 @@ public abstract class Account {
         System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
 
+    public abstract double deposit(double amount);
 
 
-
-    public double deposit(double amount) throws ExcessiveDepositException {
+    public double withdraw (double amount) {
 
         try {
             if (amount > balance) {

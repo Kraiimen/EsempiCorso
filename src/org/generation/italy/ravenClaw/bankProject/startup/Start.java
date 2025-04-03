@@ -2,26 +2,32 @@ package org.generation.italy.ravenClaw.bankProject.startup;
 
 import org.generation.italy.ravenClaw.bankProject.accounting.*;
 import org.generation.italy.ravenClaw.bankProject.accounting.accounts.CaymanAccount;
+import org.generation.italy.ravenClaw.bankProject.accounting.accounts.GoldAccount;
+import org.generation.italy.ravenClaw.bankProject.accounting.accounts.ItalianAccount;
+import org.generation.italy.ravenClaw.bankProject.accounting.accounts.PlatinumAccount;
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
+import org.generation.italy.ravenClaw.mud.entity.Paladin;
+
+
+import java.time.LocalDateTime;
 
 
 public class Start {
 
     public static void main(String[] args) {
-        Account a = new CaymanAccount(10000000);
-        System.out.println(a.deposit(600));
-        System.out.println(a.deposit(600));
-        System.out.println(a.deposit(600));
-        System.out.println(a.deposit(600));
-        System.out.println(a.deposit(600));
-        System.out.println(a.deposit(600));
-        System.out.println(a.deposit(600));
-        System.out.println(a.deposit(600));
-        System.out.println(a.deposit(600));
-        System.out.println(a.deposit(600));
+        try {
+            PlatinumAccount pa = new PlatinumAccount(1000);
+            CaymanAccount ca = new CaymanAccount(1000);
+            ItalianAccount ia = new ItalianAccount(1000);
+            GoldAccount ga = new GoldAccount(1000);
+            ga.withdraw(1200);
+            pa.withdraw(1400);
+        } catch (InvalidAmountException e){
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }
-
-//STEP 1
+// STEP 1
 // Devono esistere 3 tipi di conto: il conto Cayman, il conto Italiano e il conto Gold. Nessuna delle 3 deve essere figlia delle altre due
 // Il metodo deposita deve essere diverso per tutte e tre.
 // Il conto Cayman evade le tasse e non registra il movimento
@@ -32,7 +38,7 @@ public class Start {
 // Platinum: Ogni 10 depositi ti regala 10€. Ogni 10 withdraw maggiori di 100€ ti regala 10€.
 // Creare una classe Bank che ha un metodo che si chiama gestisciConto() che deve poter ricevere in input qualsiasi conto e ne stamperà il saldo. Se il saldo è minore di 1000€ ci deposita sopra 200€ (eseguendo il deposito specifico di quel conto). Se il saldo è maggiore di 2000€ ritira 500€
 
-//STEP 2
+// STEP 2
 // voglio che per quanto riguarda il metodo withdraw , per i tutti i conti tranne gold account, non si possa ritirare piu' del saldo,
 // e se si prova a farlo, lanciare un eccezione di tipo InvalidAmountException
 // per quanto riguarda i deposit tutti i conti tranne il cayman non possono depositare piu' di 100000 euro, se lo fanno lanciare un eccezione di tipo ExcessiveDepositException
