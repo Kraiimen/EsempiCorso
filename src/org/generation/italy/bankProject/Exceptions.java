@@ -1,5 +1,9 @@
 package org.generation.italy.bankProject;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Exceptions {
     public static void main(String[] args){
 //        try {
@@ -8,6 +12,11 @@ public class Exceptions {
 //            System.out.println();
 //        }
         f1();
+        try (FileReader res = new FileReader("file.txt")) {
+            int i = res.read();
+        } catch (IOException e){
+            System.out.println("Errore" + e.getMessage());
+        }
 
         }
 

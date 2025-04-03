@@ -1,5 +1,7 @@
 package org.generation.italy.bankProject.accounting;
 
+import org.generation.italy.bankProject.accounting.exceptions.NegativeBalanceException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -44,24 +46,36 @@ public class Account {
         return balance;
     }
 
-    public double withdraw(double amount){
+    public double withdraw(double amount) {
         double balancebefore = this.balance;
-        if(balance - amount >= 0) {
+        try {
+            if (balance < amount) {
+                throw new NegativeBalanceException();
+            }
+
+
             balance -= amount;
-            Movement withdraw = new Movement(amount,balancebefore, LocalDateTime.now() ,MovementType.WITHDRAWAL);
+            Movement withdraw = new Movement(amount, balancebefore, LocalDateTime.now(), MovementType.WITHDRAWAL);
+            return balance;
+        } catch (NegativeBalanceException e) {
+            System.out.println("Errore :" + e.getMessage());
+            return balance;
         }
-        return balance;
-
     }
 
-    public void setBalance(double newBalance) {
-        if(newBalance <= 0){
-            return;
+        public void setBalance(double newBalance) {
+            try {
+                if (newBalance <= 0) {
+                    throw new NegativeBalanceException(); // Lancia l'eccezione
+                }
+                balance = newBalance; // Assegna il nuovo saldo
+            } catch (NegativeBalanceException e) {
+                System.out.println("Errore: " + e.getMessage()); // Stampa il messaggio dell'eccezione
+            }
         }
-        balance = newBalance;
-    }
 
-    public double getBalance(){
+
+        public double getBalance(){
         //avevamo un conto bancario la cui singola cifra indicata 1 euro ed ora indica 1 centesimo dunque
         //facciamo / 100 per far in modo che il print euro.cent avvenga correttamente (es 100 centesimi = 1.00 euro)
         return balance;

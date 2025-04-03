@@ -1,5 +1,7 @@
 package org.generation.italy.bankProject.accounting;
 
+import org.generation.italy.bankProject.accounting.exceptions.NegativeBalanceException;
+
 import java.time.LocalDate;
 
 public class CaymanAccount extends Account{
@@ -27,9 +29,11 @@ public class CaymanAccount extends Account{
     }
 
     @Override
-    public double deposit(double amt){
-        evadeTax();
-        setBalance(getBalance() + amt);
+    public double deposit(double amt)  {
+
+            evadeTax();
+            setBalance(getBalance() + amt);
+
         return getBalance();
     }
 }
