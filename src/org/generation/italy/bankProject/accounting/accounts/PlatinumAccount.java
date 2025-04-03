@@ -1,6 +1,7 @@
 package org.generation.italy.bankProject.accounting.accounts;
 
 import org.generation.italy.bankProject.accounting.*;
+import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.ExcessiveDepositException;
 
 import java.time.*;
 
@@ -23,7 +24,10 @@ public class PlatinumAccount extends GoldAccount{
 
     // /--METHODS--/
     @Override
-    public double deposit(double amount){
+    public double deposit(double amount) throws ExcessiveDepositException {
+        if (amount > 100_000) {
+            throw new ExcessiveDepositException();
+        }
         setTotDeposits(getTotDeposits()+1); //totDeposits++
         if(getTotDeposits() % 10 == 0){
             Movement bonus = new Movement(BONUS_PLATINUM, balance, LocalDateTime.now(), MovementType.BONUS);

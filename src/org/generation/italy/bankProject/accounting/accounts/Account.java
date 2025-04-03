@@ -1,7 +1,13 @@
 package org.generation.italy.bankProject.accounting.accounts;
-
+// voglio che per quanto riguarda il metodo withdraw , per i tutti i conti tranne gold account, non si possa ritirare piu' del saldo,
+// e se si prova a farlo, lanciare un eccezione di tipo InvalidAmountException
+// per quanto riguarda i deposit tutti i conti tranne il cayman non possono depositare piu' di 100000 euro, se lo fanno lanciare un eccezione di tipo ExcessiveDepositException
+// il famoso metodo evadeTax ha una possibilita' su 10 di fallire con un eccezione di tipo GuardiaDiFinanzaException
 import org.generation.italy.bankProject.accounting.Movement;
 import org.generation.italy.bankProject.accounting.MovementType;
+import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.GuardiaDiFinanzaException;
+import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.InvalidAmountException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -53,13 +59,13 @@ public abstract class Account{  //extends object è implicito
 //        System.out.println("durante questa esecuzione di printBalance this è uguale a " +this);
         System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
-    public abstract double deposit(double amount);
+    public abstract double deposit(double amount) throws ExcessiveDepositException, GuardiaDiFinanzaException;
 //        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
 //        movements.add(move);
 //        balance += amount;
 //        return balance;
 
-    public abstract double withdraw(double amount);
+    public abstract double withdraw(double amount) throws InvalidAmountException;
 //        doInternalOperation();
 //        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
 //        movements.add(move);
