@@ -37,7 +37,8 @@ public class GoldAccount extends Account {
 
     @Override
     public double withdraw(double amount) {
-        return 0;
+        balance -= amount;
+        return balance;
     }
 
     public void printGoldMovement () {

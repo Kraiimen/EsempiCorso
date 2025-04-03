@@ -1,5 +1,8 @@
 package org.generation.italy.bankProject.startup;
 
+import org.generation.italy.bankProject.DbAccountRepository;
+import org.generation.italy.bankProject.accounting.Bank;
+import org.generation.italy.bankProject.accounting.FileAccountRepository;
 import org.generation.italy.bankProject.accounting.MovementType;
 import org.generation.italy.bankProject.accounting.accountType.GoldAccount;
 import org.generation.italy.bankProject.accounting.accountType.ItalianAccount;
@@ -74,7 +77,10 @@ public class Start {
 //        double withdraw = pl.withdraw(100);
 //        pl.printByType(MovementType.WITHDRAWAL);
 //        System.out.println(withdraw);
-
+          Bank b = new Bank();
+          FileAccountRepository fr = new FileAccountRepository();
+          DbAccountRepository dr = new DbAccountRepository();
+          b.loadAccounts(fr);
 
 
 
