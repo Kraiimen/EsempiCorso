@@ -40,12 +40,6 @@ public abstract class Account {
         this.creationDate = creationDate;
     }
 
-    //invoco il costruttore (non necessario crearlo in quanto in assenza di costruttori in una classe il compilatore usa quello di default)
-    // non c'è il tipo di ritorno perché il costruttore ritorna SEMPRE l'indirizzo dell'oggetto
-    //il costruttore va sull' heap e mi alloca la memoria per contenere l'oggetto e inizializza le variabili dell'oggetto con i valori di default poi mi restituisce l'indirizzo
-    //Inizializza a valori di default le variabili dell'oggetto
-
-
     //FUNZIONI - prima quelle importanti poi le getter o setter
 
     public void printBalance(){
