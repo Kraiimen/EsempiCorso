@@ -45,7 +45,7 @@ public abstract class Account {
 //        balance += amount;
 //        return balance;
 //    }
-    public abstract void deposit(double amount) throws ExcessiveDepositException;
+    public abstract void deposit(double amount) throws ExcessiveDepositException, PoliceException;
 
     public void withdraw(double amount) throws InvalidAmountException {
         checkWithdrawAmount(amount);
