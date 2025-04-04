@@ -16,9 +16,6 @@ public abstract class Account {
     private int id;
     private LocalDate creationDate;
     private ArrayList movements;
-    // Quando il compilatore vede il nome di una classe si chiede "Questa classe viene da Java.lang?" ovvero il package base del linguaggio java
-    // se questo non è vero, si chiede "è dello stesso package di questa classe?" quindi se in un file si vuole usare una classe che sta nello stesso package del file, non c'è bisogno di importarla
-    // se non la trova nemmeno li controllerà la lista degli import a inizio file
 
 
     //COSTRUTTORI
