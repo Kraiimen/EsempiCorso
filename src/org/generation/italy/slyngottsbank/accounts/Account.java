@@ -2,6 +2,7 @@ package org.generation.italy.slyngottsbank.accounts;
 
 import org.generation.italy.slyngottsbank.exceptions.ExcessiveDepositException;
 import org.generation.italy.slyngottsbank.exceptions.InvalidAmountException;
+import org.generation.italy.slyngottsbank.exceptions.PoliceException;
 import org.generation.italy.slyngottsbank.movements.Movement;
 import org.generation.italy.slyngottsbank.movements.MovementType;
 
