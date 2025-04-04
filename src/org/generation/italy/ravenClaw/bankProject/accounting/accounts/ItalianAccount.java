@@ -19,12 +19,9 @@ public class ItalianAccount extends Account {
 
     @Override
     public double deposit(double amount) throws InvalidAmountException, ExcessiveDepositException{
-        if(amount <= 0){
-            throw new InvalidAmountException("Non puoi depositare cifre minori o uguale a 0");
-        }
-        if(amount > 100000){
-            throw new ExcessiveDepositException();
-        }
+        isAmountValid(amount);
+        isDepositTooBig(amount);
+
         double tax = calculateTaxes(amount);
         double amountAfterTax = amount - tax;
         setBalance(getBalance() + amountAfterTax);

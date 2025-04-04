@@ -47,17 +47,11 @@ public abstract class Account {
 
     public double getSumDeposits() {
         double sum = 0;
-//        movements.add(0,"pippo");
-//        Object o1 = movements.get(0);
-//        Movement m1 = (Movement)o1;
         for (int i = 0; i < movements.size(); i++) {
             Object ob = movements.get(i);
             Movement m = (Movement) ob;
-//            Movement m2 = (Movement)movements.get(i);
             if (m.getType() == MovementType.DEPOSIT) {
                 sum += m.getAmount();
-//                sum = sum + m.getAmount();
-
             }
         }
         return sum;
@@ -75,6 +69,22 @@ public abstract class Account {
         return totalAmount;
     }
 
+    public void isAmountValid(double amount ) throws InvalidAmountException {
+        if(amount <= 0 ) {
+            throw new InvalidAmountException("Error: dammi un numero positivo");
+        }
+
+    }
+    public void isDepositTooBig(double amount) throws ExcessiveDepositException{
+        if(amount > 100_000){
+            throw new ExcessiveDepositException();
+        }
+    }
+    public void areThereFunds(double amount) throws InvalidAmountException{
+        if(getBalance() < amount){
+            throw new InvalidAmountException("Il tuo bilancio è minore di quanto stai provando a ritirare");
+        }
+    }
 
     public double getBalance() {
         return balance;

@@ -22,12 +22,12 @@ public class Start {
             CaymanAccount ca = new CaymanAccount(1000);
             ItalianAccount ia = new ItalianAccount(1000);
             GoldAccount ga = new GoldAccount(1000);
+            ia.deposit(200_000);
             ga.withdraw(1200);
             pa.withdraw(1400);
             for (int i = 0; i < 20; i++) {
                 ca.deposit(200_000);
             }
-            ia.deposit(200_000);
         } catch (InvalidAmountException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (ExcessiveDepositException e) {
@@ -49,7 +49,7 @@ public class Start {
 // Creare una classe Bank che ha un metodo che si chiama gestisciConto() che deve poter ricevere in input qualsiasi conto e ne stamperà il saldo. Se il saldo è minore di 1000€ ci deposita sopra 200€ (eseguendo il deposito specifico di quel conto). Se il saldo è maggiore di 2000€ ritira 500€
 
 // STEP 2
-// voglio che per quanto riguarda il metodo withdraw , per i tutti i conti tranne gold account, non si possa ritirare piu' del saldo,
+// voglio che per quanto riguarda il metodo withdraw, per i tutti i conti tranne gold account, non si possa ritirare piu' del saldo,
 // e se si prova a farlo, lanciare un eccezione di tipo InvalidAmountException
 // per quanto riguarda i deposit tutti i conti tranne il cayman non possono depositare piu' di 100000 euro, se lo fanno lanciare un eccezione di tipo ExcessiveDepositException
 // il famoso metodo evadeTax ha una possibilita' su 10 di fallire con un eccezione di tipo GuardiaDiFinanzaException

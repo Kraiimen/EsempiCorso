@@ -27,12 +27,9 @@ public class PlatinumAccount extends Account {
     @Override
     public double deposit(double amount) throws ExcessiveDepositException, InvalidAmountException {
 
-        if (amount <= 0) {
-            throw new InvalidAmountException("Error: dammi un numero positivo");
-        }
-        if(amount > 100_000){
-            throw new ExcessiveDepositException();
-        }
+        isAmountValid(amount);
+        isDepositTooBig(amount);
+
         Movement move = new Movement(amount, getBalance(), LocalDateTime.now(), MovementType.DEPOSIT);
         getMovements().add(move);
         giveBonus();
@@ -43,16 +40,11 @@ public class PlatinumAccount extends Account {
         }
         return getBalance();
     }
-
-
     @Override
     public double withdraw(double amount) throws InvalidAmountException {
-        if(amount < 0 ){
-            throw new InvalidAmountException("Inserisci un importo positivo");
-        }
-        if(getBalance() < amount){
-            throw new InvalidAmountException("Il tuo bilancio è minore di quanto stai provando a ritirare");
-        }
+        isAmountValid(amount);
+        areThereFunds(amount);
+
         Movement move = new Movement(amount, getBalance(), LocalDateTime.now(), MovementType.WITHDRAWAL);
         setBalance(getBalance() - amount);
         getMovements().add(move);
