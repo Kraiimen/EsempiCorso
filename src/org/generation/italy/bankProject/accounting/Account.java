@@ -52,8 +52,6 @@ public class Account {
             if (balance < amount) {
                 throw new NegativeBalanceException();
             }
-
-
             balance -= amount;
             Movement withdraw = new Movement(amount, balancebefore, LocalDateTime.now(), MovementType.WITHDRAWAL);
             return balance;

@@ -1,5 +1,6 @@
-package org.generation.italy.bankProject.startup;
+package org.generation.italy.bankProject.accounting.startup;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import org.generation.italy.bankProject.accounting.*;
@@ -29,8 +30,17 @@ public class Start {
 //        System.out.println(depositSum);
         Bank b = new Bank();
         FileAccountRepository fr = new FileAccountRepository();
-        b.loadAccounts(fr);
+        try {
+            b.loadAccounts(fr);
+        } catch (IOException e){
+        System.out.println("Errore: " + e.getMessage());
+    }
         DbAccountRepository dr = new DbAccountRepository();
-        b.loadAccounts(dr);
+        try {
+            b.loadAccounts(dr);
+        } catch (IOException e){
+            System.out.println("Errore: " + e.getMessage());
+        }
+
     }
 }
