@@ -1,9 +1,6 @@
 package org.generation.italy.vehiclesRental;
 
-import org.generation.italy.bankProject.accounting.Account;
-
 import java.time.Year;
-import java.time.format.DateTimeFormatter;
 
 public abstract class Vehicle {
     private String plate;

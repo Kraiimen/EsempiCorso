@@ -1,7 +1,7 @@
-package org.generation.italy.bankProject.accounting.accountType;
+package org.generation.italy.hufflepuff.bankProject.accounting.accountType;
 
-import org.generation.italy.bankProject.accounting.exceptions.GuardiaDiFinanzaException;
-import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
+import org.generation.italy.hufflepuff.bankProject.accounting.exceptions.GuardiaDiFinanzaException;
+import org.generation.italy.hufflepuff.bankProject.accounting.exceptions.InvalidAmountException;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -10,9 +10,6 @@ public class CaymanAccount extends Account {
     private String secretCode;
 
     public CaymanAccount(){
-//        super();  non necessario, viene invocato comunque
-//        super(10_000);
-//        secretCode = "xxx";
         this(10_000);
     }
     public CaymanAccount(double initialBalance){
@@ -24,7 +21,7 @@ public class CaymanAccount extends Account {
         this.secretCode = secretCode;
     }
 
-    private void evadeTax()throws GuardiaDiFinanzaException{
+    private void evadeTax()throws GuardiaDiFinanzaException {
         Random random = new Random();
         int j = random.nextInt(10);
         if(j == 9){
@@ -41,7 +38,7 @@ public class CaymanAccount extends Account {
     }
 
     @Override
-    public double withdraw(double amount) throws InvalidAmountException, GuardiaDiFinanzaException{
+    public double withdraw(double amount) throws InvalidAmountException, GuardiaDiFinanzaException {
         checkAmountForWithdraw(amount);
         evadeTax();
         balance -= amount;
@@ -54,8 +51,4 @@ public class CaymanAccount extends Account {
 //        nums = new int[4];
 //        final int n = 3;
 //    }
-
-
-
-
 }

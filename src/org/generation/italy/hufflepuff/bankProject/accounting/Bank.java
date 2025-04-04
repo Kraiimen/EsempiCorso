@@ -1,7 +1,7 @@
-package org.generation.italy.bankProject.accounting;
+package org.generation.italy.hufflepuff.bankProject.accounting;
 
-import org.generation.italy.bankProject.accounting.accountType.Account;
-import org.generation.italy.bankProject.accounting.exceptions.NegativeBalanceException;
+import org.generation.italy.hufflepuff.bankProject.accounting.accountType.Account;
+import org.generation.italy.hufflepuff.bankProject.accounting.exceptions.NegativeBalanceException;
 
 import java.util.ArrayList;
 

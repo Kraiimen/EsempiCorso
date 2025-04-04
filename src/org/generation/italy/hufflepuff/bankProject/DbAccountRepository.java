@@ -1,8 +1,8 @@
-package org.generation.italy.bankProject;
+package org.generation.italy.hufflepuff.bankProject;
 
 
-import org.generation.italy.bankProject.accounting.accountType.Account;
-import org.generation.italy.bankProject.accounting.AccountRepository;
+import org.generation.italy.hufflepuff.bankProject.accounting.accountType.Account;
+import org.generation.italy.hufflepuff.bankProject.accounting.AccountRepository;
 
 import java.util.ArrayList;
 

@@ -1,11 +1,12 @@
-package org.generation.italy.bankProject.accounting;
+package org.generation.italy.bankProject.accounting.accountType;
 
+import org.generation.italy.bankProject.accounting.Movement;
+import org.generation.italy.bankProject.accounting.MovementType;
 import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositException;
 import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
 import org.generation.italy.bankProject.accounting.exceptions.NegativeBalanceException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public abstract class Account extends Object{  //extends object è implicito

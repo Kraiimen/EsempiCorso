@@ -1,7 +1,6 @@
 package org.generation.italy.bankProject.startup;
 
 import org.generation.italy.bankProject.DbAccountRepository;
-import org.generation.italy.bankProject.accounting.Account;
 import org.generation.italy.bankProject.accounting.Bank;
 import org.generation.italy.bankProject.accounting.FileAccountRepository;
 import org.generation.italy.bankProject.accounting.MovementType;
@@ -9,8 +8,6 @@ import org.generation.italy.bankProject.accounting.accountType.*;
 import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositException;
 import org.generation.italy.bankProject.accounting.exceptions.GuardiaDiFinanzaException;
 import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
-
-import java.time.LocalDate;
 
 
 public class Start {
