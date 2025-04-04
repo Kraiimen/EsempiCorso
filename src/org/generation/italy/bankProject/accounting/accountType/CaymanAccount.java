@@ -1,15 +1,10 @@
 package org.generation.italy.bankProject.accounting.accountType;
 
 import org.generation.italy.bankProject.accounting.Account;
-import org.generation.italy.bankProject.accounting.Movement;
-import org.generation.italy.bankProject.accounting.MovementType;
-import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositException;
 import org.generation.italy.bankProject.accounting.exceptions.GuardiaDiFinanzaException;
 import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
 
-import java.security.Guard;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Random;
 
 public class CaymanAccount extends Account {

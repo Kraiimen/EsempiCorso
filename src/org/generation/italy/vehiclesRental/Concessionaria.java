@@ -1,8 +1,5 @@
 package org.generation.italy.vehiclesRental;
 
-import org.generation.italy.bankProject.accounting.Movement;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Concessionaria {
