@@ -12,8 +12,8 @@ public class InMemoryAccountRepository implements AccountRepository {
     private static Map<Integer, Account> accounts = new HashMap<>();
     static {
         InMemoryClientRepository clientRepository = new InMemoryClientRepository();
-        Client c1234 = clientRepository.getByClientCode("1234");
-        Client c5678 = clientRepository.getByClientCode("5678");
+        Client c1234 = clientRepository.getByClientCode("1234").get();
+        Client c5678 = clientRepository.getByClientCode("5678").get();
         accounts.put(idCounter++, new CaymanAccount(1000).withId(idCounter).withOwner(c1234));
         accounts.put(idCounter++, new GoldAccount(2000).withId(idCounter).withOwner(c1234));
         accounts.put(idCounter++, new CaymanAccount(3000, LocalDate.of(2023, 1, 1), "1234").withId(idCounter).withOwner(c5678));
@@ -87,7 +87,12 @@ public class InMemoryAccountRepository implements AccountRepository {
     }
 
     @Override
-    public Account getAccountById(int id) {
-        return accounts.get(id);
+    public Optional<Account> getAccountById(int id) {
+       // return Optional.ofNullable(accounts.get(id));§
+        if(accounts.containsKey(id)) {
+            return Optional.of(accounts.get(id));
+        } else {
+            return Optional.empty();
+        }
     }
 }

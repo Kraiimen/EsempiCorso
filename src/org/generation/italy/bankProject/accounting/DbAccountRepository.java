@@ -1,13 +1,10 @@
-package org.generation.italy.bankProject;
+package org.generation.italy.bankProject.accounting;
 
-
-import org.generation.italy.bankProject.accounting.Account;
-import org.generation.italy.bankProject.accounting.AccountRepository;
-import org.generation.italy.bankProject.accounting.DataException;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Set;
 
 public class DbAccountRepository implements AccountRepository {
@@ -65,7 +62,7 @@ public class DbAccountRepository implements AccountRepository {
     }
 
     @Override
-    public Account getAccountById(int id) throws DataException {
-        return null;
+    public Optional<Account> getAccountById(int id) throws DataException {
+        return Optional.empty();
     }
 }

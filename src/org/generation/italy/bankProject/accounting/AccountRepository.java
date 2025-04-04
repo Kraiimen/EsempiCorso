@@ -3,10 +3,7 @@ package org.generation.italy.bankProject.accounting;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public interface AccountRepository {
 
@@ -17,6 +14,6 @@ public interface AccountRepository {
      Set<Account> getAllMoreActiveThan(int numMovements) throws DataException;;
      Set<Account> getByClientCode(String clientCode) throws DataException;;
      Set<Account> getByBalanceAndDateRange(double balance, LocalDate start, LocalDate end) throws DataException;;
-     Account getAccountById(int id) throws DataException;;
+     Optional<Account> getAccountById(int id) throws DataException;;
 
 }

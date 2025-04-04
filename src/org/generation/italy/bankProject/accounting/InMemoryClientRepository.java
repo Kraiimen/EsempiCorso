@@ -1,9 +1,6 @@
 package org.generation.italy.bankProject.accounting;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class InMemoryClientRepository implements ClientRepository {
     private static final Map<String, Client> clients = new HashMap<>();
@@ -13,8 +10,8 @@ public class InMemoryClientRepository implements ClientRepository {
         clients.put("9101", new Client("9101", "Bianchi", "Anna", "03/03/1985"));
     }
     @Override
-    public Client getByClientCode(String clientCode) {
-        return clients.get(clientCode);
+    public Optional<Client> getByClientCode(String clientCode) {
+        return Optional.ofNullable(clients.get(clientCode));
     }
 
     @Override

@@ -1,9 +1,9 @@
 package org.generation.italy.bankProject.accounting;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Set;
 
 public class FileAccountRepository implements AccountRepository {
@@ -56,7 +56,7 @@ public class FileAccountRepository implements AccountRepository {
     }
 
     @Override
-    public Account getAccountById(int id) throws DataException {
-        return null;
+    public Optional<Account> getAccountById(int id) throws DataException {
+        return Optional.empty();
     }
 }
