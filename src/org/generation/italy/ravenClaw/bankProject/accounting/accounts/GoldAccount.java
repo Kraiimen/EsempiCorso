@@ -22,12 +22,9 @@ public class GoldAccount extends Account {
     @Override
     public double deposit(double amount) throws ExcessiveDepositException,InvalidAmountException {
 
-        if(amount <= 0 ) {
-            throw new InvalidAmountException("Error: dammi un numero positivo");
-        }
-        if(amount > 100_000){
-            throw new ExcessiveDepositException();
-        }
+        isAmountValid(amount);
+        isDepositTooBig(amount);
+
         Movement move = new Movement(amount, getBalance(), LocalDateTime.now(), MovementType.DEPOSIT);
         getMovements().add(move);
         nDeposit++;
