@@ -17,6 +17,12 @@ import java.time.LocalDateTime;
 public class Start {
 
     public static void main(String[] args) {
+//        Account x = new GoldAccount(100);
+//        try {
+//            x.temp();
+//        } catch (ExcessiveDepositException e) {
+//            throw new RuntimeException(e);
+//        }
         try {
             PlatinumAccount pa = new PlatinumAccount(1000);
             CaymanAccount ca = new CaymanAccount(1000);
@@ -34,6 +40,13 @@ public class Start {
             System.out.println("Error: " + e.getMessage());
         } catch (CarmineException e) {
             System.out.println("Error: " + e.getMessage());
+        }
+    }
+    public static void handleAccount(Account x) {
+        try {
+            x.deposit(100);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -34,6 +34,9 @@ public class GoldAccount extends Account {
         }
         return getBalance();
     }
-
+//    @Override
+//    public void temp() {
+//
+//    }
 
 }

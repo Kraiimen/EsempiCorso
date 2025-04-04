@@ -1,8 +1,7 @@
 package org.generation.italy.ravenClaw.bankProject.accounting;
 
 import org.generation.italy.ravenClaw.bankProject.accounting.accounts.*;
-
-
+import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
 
 
 public class Bank {
@@ -21,4 +20,12 @@ public class Bank {
 //        System.out.println("Il tuo saldo attuale è: " +  account.getBalance());
 //    }
 //
+//    public void f1() {
+//        Account x = new GoldAccount(100);
+//        try {
+//            x.temp();
+//        } catch (ExcessiveDepositException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }
