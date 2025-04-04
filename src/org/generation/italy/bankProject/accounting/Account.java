@@ -1,5 +1,7 @@
 package org.generation.italy.bankProject.accounting;
 
+import org.generation.italy.bankProject.accounting.exceptions.NegativeBalanceException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -59,9 +61,9 @@ public abstract class Account extends Object{  //extends object è implicito
     public double getBalance(){
         return balance;
     }
-    public void setBalance(double newBalance){
+    public void setBalance(double newBalance) throws NegativeBalanceException {
         if(newBalance <= 0){
-            return;
+            throw  new NegativeBalanceException("Il saldo non può essere negativo");
         }
         balance = newBalance;
     }
