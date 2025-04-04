@@ -1,3 +1,5 @@
+package firstExercises;
+
 import java.io.Console;
 import java.util.Random;
 // static appartiene alla classe e non all'istanza della classe

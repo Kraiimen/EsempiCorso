@@ -1,3 +1,5 @@
+package firstExercises;
+
 import java.util.Random;
 
 public class MethodsExercises {

@@ -1,3 +1,5 @@
+package firstExercises;
+
 public class ArrayExamples{
     public static void main(String[] args){
         int[] numbers = new int[5]; // è un array di interi in grado di tenere 5 interi
