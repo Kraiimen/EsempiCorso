@@ -1,5 +1,6 @@
 package org.generation.italy.slyngottsbank.accounts;
 
+import org.generation.italy.slyngottsbank.exceptions.ExcessiveDepositException;
 import org.generation.italy.slyngottsbank.movements.Movement;
 import org.generation.italy.slyngottsbank.movements.MovementType;
 
@@ -11,13 +12,14 @@ public class AccountItaly extends Account {
     final double TAX_PERCENTAGE = 0.1;
 
 
-    public AccountItaly(double initialBalance, LocalDate creationDate ){
+    public AccountItaly(double initialBalance, LocalDate creationDate) {
         super(initialBalance, creationDate);
 
     }
 
     @Override
-    public void deposit(double amount) {
+    public void deposit(double amount) throws ExcessiveDepositException {
+        checkDepositAmount(amount);
         balance += amount * (1 - TAX_PERCENTAGE);
         Movement moveIta = new Movement(amount * (1 - TAX_PERCENTAGE), balance, LocalDateTime.now(), MovementType.DEPOSIT);
         movements.add(moveIta);
@@ -25,9 +27,8 @@ public class AccountItaly extends Account {
     }
 
     @Override
-    public String getAccountName(){
+    public String getAccountName() {
         return "Italy";
     }
-
 
 }
