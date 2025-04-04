@@ -5,7 +5,7 @@ import org.generation.italy.slyngottsbank.exceptions.PoliceException;
 
 import java.time.LocalDate;
 import java.util.Random;
- @Deprecated
+
 public class AccountCayman extends Account {
     private String secretCode;
 

@@ -7,7 +7,7 @@ import org.generation.italy.slyngottsbank.movements.MovementType;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
- @Deprecated
+
 public class AccountPlatinum extends AccountGold {
     private int depositCounter;
     private int withdrawCounter;
