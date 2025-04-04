@@ -129,6 +129,9 @@ public abstract class Account{  //extends object è implicito
         this.creationDate = creationDate;
     }
 
+    public int getId() {
+        return id;
+    }
 }
 
 
