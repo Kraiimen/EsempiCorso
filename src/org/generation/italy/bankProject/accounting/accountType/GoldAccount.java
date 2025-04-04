@@ -9,23 +9,19 @@ import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositEx
 import java.time.LocalDateTime;
 
 public class GoldAccount extends Account {
-
+    protected int bonus;
     public GoldAccount(double initialBalance){
             super(initialBalance);
-        }
+            bonus = 1;
+    }
 
 
     public double deposit(double amount) throws ExcessiveDepositException{
 
         checkAmountForDeposit(amount);
-
         balance += amount;
-        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
-        movements.add(move);
-
-
         // Conta quanti depositi sono stati fatti fino ad ora
-        int depositCount = 0;
+        int depositCount = 1;
         for (Object o : movements) {
             Movement m = (Movement) o;
             if (m.getType() == MovementType.DEPOSIT) {
@@ -34,9 +30,10 @@ public class GoldAccount extends Account {
         }
         // Ogni 10 depositi, aggiungi 1 al saldo
         if (depositCount % 10 == 0) {
-            balance += 1;
+            balance += bonus;
         }
-
+        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
+        movements.add(move);
         return balance;
     }
 

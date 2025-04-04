@@ -44,7 +44,17 @@ public class Movement {
     public MovementType getType() {
         return type;
     }
-    public String toString(){ DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"); String formattedData = getOperationTime().format(formatter); return "ID: " + id + "\nMovement amount: "+ getAmount() + "\nYour balance: " + getCurrent() + "\nOperation time: " + formattedData + "\nMovement Type: " + getType(); }
+
+    public int getId(){
+        return id;
+    }
+
+    public String toString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String formattedData = getOperationTime().format(formatter);
+        return "ID: " + id + "\nMovement amount: "+ getAmount() + "\nYour balance: " + getCurrent()
+                + "\nOperation time: " + formattedData + "\nMovement Type: " + getType();
+    }
 }
 
 
