@@ -4,46 +4,49 @@ import org.generation.italy.bankProject.accounting.Account;
 import org.generation.italy.bankProject.accounting.ItalianMovement;
 import org.generation.italy.bankProject.accounting.Movement;
 import org.generation.italy.bankProject.accounting.MovementType;
+import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositException;
 
 import java.time.LocalDateTime;
 
 public class GoldAccount extends Account {
     protected int bonus;
-
     public GoldAccount(double initialBalance){
-        super(initialBalance);
-        bonus = 1;
+            super(initialBalance);
+            bonus = 1;
     }
 
-    @Override
-    public double deposit(double amount) {
+
+    public double deposit(double amount) throws ExcessiveDepositException{
+
+        checkAmountForDeposit(amount);
         balance += amount;
-
-        int depositCounter = 1;
-
-        for(Object obj : movements){
-            Movement m1 = (Movement) obj;
-            if(m1.getType() == MovementType.DEPOSIT){
-                depositCounter++;
+        // Conta quanti depositi sono stati fatti fino ad ora
+        int depositCount = 1;
+        for (Object o : movements) {
+            Movement m = (Movement) o;
+            if (m.getType() == MovementType.DEPOSIT) {
+                depositCount++;
             }
         }
-        System.out.println(depositCounter);
-        if(depositCounter % 10 == 0){
-            balance +=bonus;
-            System.out.println("Bonus");
+        // Ogni 10 depositi, aggiungi 1 al saldo
+        if (depositCount % 10 == 0) {
+            balance += bonus;
         }
         Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.DEPOSIT);
         movements.add(move);
-
         return balance;
     }
 
     @Override
-    public double withdraw(double amount){
+    public double withdraw(double amount) {
         balance -= amount;
-        Movement move = new Movement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
-        movements.add(move);
         return balance;
     }
 
+    public void printGoldMovement () {
+        for (Object o : movements) {
+            Movement m1 = (Movement) o;
+            System.out.println(m1);
+        }
+    }
 }
