@@ -19,11 +19,7 @@ public class InMemoryAccountRepository implements AccountRepository {
 
     @Override
     public ArrayList<Account> getAll() throws DataException {
-        ArrayList<Account> accounts = new ArrayList<Account>();
-        for(Account i : savedAccounts){
-            accounts.add(i);
-        }
-        return accounts;
+        return new ArrayList<Account>(savedAccounts);
     }
 
     @Override
