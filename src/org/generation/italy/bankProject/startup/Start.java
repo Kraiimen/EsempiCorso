@@ -15,7 +15,8 @@ import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountExcep
 
 import java.time.LocalDate;
 
-
+//Introdurre una classe cliente, un cliente ha un nome, un cognome, una data di nascita, un codice banca(string)
+//un cliente deve avere dei conti
 public class Start {
 
     public static void main(String[] args) {

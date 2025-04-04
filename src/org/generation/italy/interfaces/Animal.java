@@ -3,17 +3,20 @@ package org.generation.italy.interfaces;
 public interface Animal {
     void breathe();
     void eat();
-    double getWeight(); //METODO ASTRATTO
-    //IL SEGUENTE METODO IMPLEMENTA IL DESIGN PATTERN TEMPLATE
-    default void euthanize(){//METODO DEFAULT, metodo concreto che ne chiama uno astratto
-        System.out.println("Lo faccio fuori col gas o con una puttanata di programmazione");
-        double w = getWeight();//POTEVO CHIAMARE getWeight anche senza dichiarare la variabile
-            if(w < 10){
-                System.out.println("Ti seppellisco");
-            } else {
-                System.out.println("Ti do fuoco");
-            }
 
+    double getWeight();
 
+    //il seguente metodo implementa il design pattern template
+    //è un metodo concreto che ne invoca uno astratto: getWeight()
+    default void euthanize() {
+        System.out.println("Faccio fuori l'animaletto col gas, o con una puttanata di programmazione");
+        //potevo farla senza variabile
+        double w = getWeight();
+        if(w < 10) {
+            System.out.println("Ti seppellisco nel giardino");
+        } else {
+            System.out.println("Facciamo un bel falò");
+        }
     }
+
 }

@@ -5,10 +5,9 @@ import java.util.Set;
 
 public class HashExamples {
     public static void main(String[] args){
-    Employee e1 = new Employee("Alessio", "Basili", "1");
-    Employee e2 = new Employee("Alessio", "Basili", "2");
-    Employee e3 = new Employee("Alessio", "Basili", "1");
-
+        Employee e1 = new Employee("Giorgio", "Vanni", "1");
+        Employee e2 = new Employee("Giorgio", "Vanni", "2");
+        Employee e3 = new Employee("Giorgio", "Vanni", "1");
 
         Set<Employee> emps = new HashSet<>();
         emps.add(e1);
