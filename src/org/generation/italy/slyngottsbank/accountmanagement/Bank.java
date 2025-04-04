@@ -2,8 +2,7 @@ package org.generation.italy.slyngottsbank.accountmanagement;
 
 import org.generation.italy.slyngottsbank.accounts.Account;
 
-public class Bank {
-
+public class Bank  {
     public static void checkAndAdjustBalanceAccount(Account account) {
 
         if (account.getBalance() <= 1000) {
@@ -12,5 +11,6 @@ public class Bank {
             account.withdraw(500);
         }
     }
+
 
 }

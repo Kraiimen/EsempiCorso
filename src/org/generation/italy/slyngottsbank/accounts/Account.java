@@ -5,12 +5,13 @@ import org.generation.italy.slyngottsbank.exceptions.InvalidAmountException;
 import org.generation.italy.slyngottsbank.exceptions.PoliceException;
 import org.generation.italy.slyngottsbank.movements.Movement;
 import org.generation.italy.slyngottsbank.movements.MovementType;
+import org.generation.italy.slyngottsbank.repositories.AccountRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-@Deprecated
-public abstract class Account {
+
+public abstract class Account  {
     protected static int lastId;
     protected double balance;
     protected int id;
