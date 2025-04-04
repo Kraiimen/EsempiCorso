@@ -4,7 +4,7 @@ package org.generation.italy.bankProject.accounting;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-
+//Prova al volo
 public class Movement {
     protected static int mvId;
     protected int id;
