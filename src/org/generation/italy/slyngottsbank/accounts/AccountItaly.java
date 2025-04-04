@@ -6,7 +6,7 @@ import org.generation.italy.slyngottsbank.movements.MovementType;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
+ @Deprecated
 public class AccountItaly extends Account {
 
     final double TAX_PERCENTAGE = 0.1;

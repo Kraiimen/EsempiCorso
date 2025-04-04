@@ -9,7 +9,7 @@ import org.generation.italy.slyngottsbank.movements.MovementType;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
+@Deprecated
 public abstract class Account {
     protected static int lastId;
     protected double balance;
