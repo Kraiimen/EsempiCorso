@@ -11,11 +11,11 @@ public interface AccountRepository {
 
     int saveAccount(Account a) throws DataException;
     ArrayList<Account> getAll() throws DataException;//<> Questo ArrayList non lavora più con object, ma con oggetti di classe Account
-    void upDateAccount(Account a);
+    void updateAccount(Account a);
     boolean deleteAccount(int id);
     Set<Account> getAllMoreActiveThan(int numMovements);
-    Set<Account> getByClientId(int clientId);
+    Set<Account> getByClientCode(String clientCode);
     Set<Account> getByBalanceAndDateRange(double balance, LocalDate start, LocalDate end);
-    Account getAccountById(int id);
+    Account getAccountByClientCode(String clientCode);
 
 }
