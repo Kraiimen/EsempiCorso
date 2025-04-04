@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Account {
+public abstract class Account {
     //la visibilità di default vuol dire visibile all'interno del suo package
     //in un file java può essere presente solo una classe pubblica che deve essere chiamata come il file
     //private = visibile solo nella classe che lo definisce (utilizzato prettamente per le variabili) private != cybersecurity
@@ -39,6 +39,7 @@ public class Account {
         this(initialBalance);
         this.creationDate = creationDate;
     }
+
     //invoco il costruttore (non necessario crearlo in quanto in assenza di costruttori in una classe il compilatore usa quello di default)
     // non c'è il tipo di ritorno perché il costruttore ritorna SEMPRE l'indirizzo dell'oggetto
     //il costruttore va sull' heap e mi alloca la memoria per contenere l'oggetto e inizializza le variabili dell'oggetto con i valori di default poi mi restituisce l'indirizzo
@@ -46,6 +47,7 @@ public class Account {
 
 
     //FUNZIONI - prima quelle importanti poi le getter o setter
+
     public void printBalance(){
         System.out.println("durante questa esecuzione di printBalance this è uguale a " +this);
         System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
