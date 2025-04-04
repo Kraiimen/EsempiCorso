@@ -1,5 +1,7 @@
 package org.generation.italy.bankProject.accounting;
 
+import org.generation.italy.ravenClaw.bankProject.accounting.accounts.CaymanAccount;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -41,4 +43,32 @@ public class Client {
     public int hashCode() {
         return clientCode.hashCode();
     }
+
+    public String getClientCode() {
+        return clientCode;
+    }
+
+    public void setClientCode(String clientCode) {
+        this.clientCode = clientCode;
+    }
+
+    public int getNumberOfAccounts(){
+        return ownedAccounts.size();
+    }
+    public double getTotalBalance(){
+        double totalBalance = 0;
+        for(Account account : ownedAccounts){
+            totalBalance += account.getBalance();
+        }
+        return totalBalance;
+    }
+    public boolean isATaxEvader(){
+        for(Object account : ownedAccounts){
+            if(account instanceof CaymanAccount) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+

@@ -9,24 +9,50 @@ public class InMemoryClientRepository implements ClientRepository {
 
 
 
-//    @Override
-//    public Client getByClientCode(String clientCode) {
-//        return clientHashSet.contains();
-//    }
+    @Override
+    public Client getByClientCode(String clientCode) throws NullPointerException {
+        if(clientHashSet.contains(clientCode)){
+            for(Client i : clientHashSet){
+                if(i.getClientCode().equals(clientCode)){
+                    return i;
+                }
+            }
+        }
+        throw new NullPointerException(); //QUESTA è UN ECCEZIONE GENERICA DA SOSTITUIRE
+
+    }
 
     @Override
     public Set<Client> getByNumAccounts(int numAccounts) {
-        return Set.of();
+        HashSet<Client> clientsByNumAccounts= new HashSet<>();
+        for(Client i : clientHashSet){
+            if(i.getNumberOfAccounts() == numAccounts){
+                clientsByNumAccounts.add(i);
+            }
+        }
+        return clientsByNumAccounts;
+
     }
 
     @Override
     public Set<Client> getByTotalBalance(double balance) {
-        return Set.of();
+        HashSet<Client> clientsByTotalBalance= new HashSet<>();
+        for(Client i : clientHashSet){
+            if(i.getTotalBalance() >= balance){
+                clientsByTotalBalance.add(i);
+            }
+        }
+        return clientsByTotalBalance;
     }
 
     @Override
     public Set<Client> getAllTaxEvaders() {
-        return Set.of();
+        HashSet<Client> taxEvaders = new HashSet<>();
+        for(Client i : clientHashSet){
+            if(i.isATaxEvader()){
+                taxEvaders.add(i);
+            }
+        }
+        return taxEvaders;
     }
-
 }

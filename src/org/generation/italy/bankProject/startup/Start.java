@@ -1,14 +1,10 @@
 package org.generation.italy.bankProject.startup;
 
-import org.generation.italy.bankProject.DbAccountRepository;
 import org.generation.italy.bankProject.accounting.Bank;
-import org.generation.italy.bankProject.accounting.FileAccountRepository;
 import org.generation.italy.bankProject.accounting.MovementType;
 import org.generation.italy.bankProject.accounting.accountType.GoldAccount;
 import org.generation.italy.bankProject.accounting.accountType.ItalianAccount;
 import org.generation.italy.bankProject.accounting.accountType.PlatinumAccount;
-
-import java.time.LocalDate;
 
 //Introdurre una classe cliente, un cliente ha un nome, un cognome, una data di nascita, un codice banca(string)
 //un cliente deve avere dei conti

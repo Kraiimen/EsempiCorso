@@ -1,5 +1,6 @@
 package org.generation.italy.ravenClaw.bankProject.accounting;
 
+import org.generation.italy.bankProject.accounting.Client;
 import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.CarmineException;
 import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
 import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
@@ -110,4 +111,29 @@ public abstract class Account {
 //    protected void temp() throws ExcessiveDepositException{
 //    }
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Account)) {
+            return false;
+        }
+        Account other = (Account) obj;
+        return other.id == this.id;
+    }
+
+        @Override
+        public int hashCode() {
+            return id;
+        }
 }
