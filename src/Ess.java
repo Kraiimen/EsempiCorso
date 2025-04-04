@@ -565,13 +565,162 @@ public class Ess {
 //        names.add("Paolo");
 //        System.out.println(names);
 
-        ArrayList<Integer> interi = new ArrayList<>();
-        interi.add(1);
-        interi.add(2);
-        interi.add(3);
-        interi.add(4);
-        System.out.println(interi);
+//        ArrayList<Integer> interi = new ArrayList<>();
+//        interi.add(1);
+//        interi.add(2);
+//        interi.add(3);
+//        interi.add(4);
+//        System.out.println(interi);
 
+//                                     🏁 Recap Exercises (Up to Methods)
+//        1. Basic Variable and Data Type Exercise
+//        Declare variables of the following types: int, double, char, and String.
+//
+//        Assign a value to each variable and print them.
+//        int num = 1;
+//        double num2 = 2;
+//        char c = 'c';
+//        String s = "Hello";
 
-      }
+//        2. Arithmetic Operations
+//        Write a program that takes two integers as input and prints the result
+//        of adding, subtracting, multiplying, and dividing the numbers.
+
+//          int a = 10;
+//          int b = 5;
+//          int c = a+b;
+//          int c1 = a-b;
+//          int c2 = a*b;
+//          int c3 = a/b);
+
+//        Write a program that checks if a number is positive, negative, or zero.
+//        Task: Ask the user for a number and display a message:
+//        "The number is positive", "The number is negative", or "The number is zero" depending on the input.
+
+//        Scanner input = new Scanner(System.in);
+//        System.out.println("Give me a number i'll tell you if it's positive, negative or 0");
+//        int a = input.nextInt();
+//        if(a > 0){
+//            System.out.println(a + " it's positive");
+//        }else if (a < 0){
+//            System.out.println(a + " it's negative");
+//        }else{
+//            System.out.println(a + " è 0");
+//        }
+
+//        5. For Loop
+//        Write a program that prints numbers from 1 to 10.
+
+//        for(int a = 0; a <= 10 ; a++){
+//            System.out.println(a);
+//        }
+
+//        Task: Use a for loop to print all numbers from 1 to 100 that are divisible by 3.
+//        for(int num = 0; num <= 100; num++){
+//            if(num % 3 == 0){
+//                System.out.println("divisible by 3 babe");
+//            }else{
+//                System.out.println(num);
+//            }
+//        }
+
+//        Write a program that asks the user for a number and sums all integers from 1 to that number using a while loop.
+//        Scanner input = new Scanner(System.in);
+//        int a = input.nextInt();
+//        int start = 0;
+//        while(start < a) {
+//            start++;
+//            System.out.println(start);
+
+//        Task: Using a while loop, sum all the numbers between 1 and 100.
+//        int limit = 100;
+//        int start = 1;
+//        int sum = 0;
+//        while(start<=limit){
+//            sum+= start;
+//            start++;
+//        }
+//        System.out.println(sum);
+
+//
+//        7. Array Basics
+//        Declare an array of 5 integers, assign values to each element, and print all elements.
+//
+//        Task: Create an array of 5 string names and print each name on a new line.
+
+//        int[] array = {2,4,6,8,10};
+//        for(int i = 0; i< array.length; i++){
+//            System.out.println(array[i]);
+//        }
+
+//        String[] names = {"pippo" , "pino" , "aldo", "giovanni" , "giacomo"};
+//        for(int i = 0; i< names.length; i++) {
+//            System.out.println(names[i]);
+//        }
+
+//        8. Array Operations
+//        Write a program that finds the largest and smallest number in an array of integers.
+//        Task: Given an array of 10 integers, find and print the largest and smallest values.
+
+//        int[] nums = {2,4,6,8,10};
+//        int min = Integer.MAX_VALUE;
+//        int max = Integer.MIN_VALUE;
+//        for(int i = 0; i< nums.length; i++){
+//            if(nums[i] < min){
+//                min = nums[i];
+//            }
+//            if(nums[i] > max){
+//                max = nums[i];
+//            }
+//        }
+//        System.out.println("il minore è " + min + " il maggiore è " + max);
+
+//        9. Array and Loop Combination
+//        Write a program that calculates the average of all numbers in an array.
+
+//        int[] nums = {2,4,6,8,10};
+//        int sum = 0;
+//        int tot = 0;
+//        for(int i = 0;i< nums.length; i++){
+//            sum+=nums[i];
+//        }
+//        tot = sum/nums.length;
+//        System.out.println(tot);
+
+//        10. Basic Input/Output
+//        Write a program that takes a string input from the user and prints "Hello, <name>!".
+//        Task: Take the user’s first and last name and print a greeting using both names.
+
+//        Scanner input = new Scanner(System.in);
+//        System.out.println("What's your name?");
+//        String nome = input.next();
+//        System.out.println("what about your surname?");
+//        String cognome = input.next();
+//        System.out.println("Hello " + nome +" "+ cognome + "!");
+
+//    }
+//    Exercises:
+//    Here are some practice exercises to work on:
+//    Create a method that multiplies two numbers and returns the result.
+//    Write a method that takes an integer and returns whether it is even or odd (as a string: "Even" or "Odd").
+//    Create a method that calculates the factorial of a number (e.g., 5! = 5 * 4 * 3 * 2 * 1).
+//    Write a method that takes two strings as parameters and prints them in reverse order.
+
+//    public int multi(int a , int b){
+//        int c=a*b;
+//        return c;
+//    }
+//    public void isEvenOirIsOdd(int a){
+//    if(a % 2 == 0 ){
+//        System.out.println("it is even");
+//    }else{
+//        System.out.println("it is odd");
+//    }
+//    public int andonio(int a){
+//    int factorial = 1;
+//    for(int i = 1;i <= a ;i++){
+//        factorial *= i;
+//    }
+//    return factorial;
+    }
 }
