@@ -1,5 +1,7 @@
 package org.generation.italy.bankProject.accounting;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Bank {
@@ -19,7 +21,11 @@ public class Bank {
 
     }
     public void loadAccounts(AccountRepository repository){
-        accounts = repository.getAll();
+        try {
+            accounts = repository.getAll();
+        } catch (DataException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

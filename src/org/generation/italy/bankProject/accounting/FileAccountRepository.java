@@ -1,5 +1,7 @@
 package org.generation.italy.bankProject.accounting;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FileAccountRepository implements AccountRepository {
@@ -12,10 +14,18 @@ public class FileAccountRepository implements AccountRepository {
     }
 
     @Override
-    public ArrayList<Account> getAll() {
-        System.out.println("Esecuzione del metodo getAll nel FileAccountRepository");
-        ArrayList<Account> all = new ArrayList<>();
-        return all;
+    public ArrayList<Account> getAll() throws DataException {
+        try {
+            System.out.println("Esecuzione del metodo getAll nel FileAccountRepository");
+            ArrayList<Account> all = new ArrayList<>();
+            if(Math.random() < 0.5) {
+                throw new IOException("In realtà non sto andando su un file");
+            }
+            return all;
+        } catch(IOException e) {
+            throw new DataException("Errore nel caricamento degli account da file ", e);
+        }
+
     }
 
     @Override
