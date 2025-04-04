@@ -35,6 +35,9 @@ public class Movement {
     public MovementType getType() {
         return type;
     }
+    public MovementType getId() {
+        return type;
+    }
 
     public void setCurrentBalance(double currentBalance) {
         this.currentBalance = currentBalance;
