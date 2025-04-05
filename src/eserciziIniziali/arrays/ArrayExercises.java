@@ -1,3 +1,5 @@
+package eserciziIniziali.arrays;
+
 public class ArrayExercises {
     public static void main(String[] args){
 // es 1: creare un array di 5 interi e inizializzarlo con i primi numeri da 1 a 5 al quadrato

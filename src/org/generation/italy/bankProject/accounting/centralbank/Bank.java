@@ -12,7 +12,7 @@ public class Bank {
     private static final double MAX_BALANCE = 2000;
     private static final double BUFF_BALANCE = 200;
     private static final double NERF_BALANCE = 500;
-    private ArrayList<Account> bankAccounts;
+    private ArrayList<Account> bankAccounts;    //da modificare, deve avere i fake DB
 
     // /-CONSTRUCTORS--/
     public Bank(){

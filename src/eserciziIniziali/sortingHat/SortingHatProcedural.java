@@ -1,4 +1,4 @@
-// Il programma assegna ad ogni studente una casa, basandosi sul film di Harry Potter
+package eserciziIniziali.sortingHat;// Il programma assegna ad ogni studente una casa, basandosi sul film di Harry Potter
 // Se lo studente è fortunato, diamo la possibilità di assegnarlo alla casa che preferisce --> questo avviene con un numero casuale da 0 a 3
 // Se lo studente non è fortunato, prendiamo una casa casuale che ha ancora spazio
 // Ad ogni assegnazione di uno studente ad una casa, viene stampata l'estrazione

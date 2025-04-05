@@ -1,3 +1,5 @@
+package eserciziIniziali.loops;
+
 import java.io.Console;
 public class Loops {
     public static void main(String[] args) {

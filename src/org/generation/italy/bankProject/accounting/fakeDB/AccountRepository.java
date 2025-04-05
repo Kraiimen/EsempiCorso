@@ -1,4 +1,4 @@
-package org.generation.italy.bankProject.accounting.fakedb;
+package org.generation.italy.bankProject.accounting.fakeDB;
 
 import org.generation.italy.bankProject.accounting.accounts.Account;
 import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.DataException;

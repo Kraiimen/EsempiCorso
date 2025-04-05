@@ -1,9 +1,9 @@
-// una semplice calcolatrice 
+package eserciziIniziali.loops;// una semplice calcolatrice
 // importo la console per leggere l'input dell'utente 
 // creo una variabile di tipo int che chiamo x con il valore 0 
 // dichiaro la string risposta 1
 // dichiaro la string risposta x
-// dichiaro la tring risposta y 
+// dichiaro la string risposta y
 // inizio un ciclo, stampa "cosa ti serve? Moltiplicazione Divisione Sottrazione o Addizione? oppure premi X per uscire"
 // se la risposta non è x e la risposta equivale a una delle opzioni elencate
     //es. se risposta equals moltiplicazione 

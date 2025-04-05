@@ -1,3 +1,5 @@
+package eserciziIniziali.arrays;
+
 public class Ripetizione {
     public static void main(String[] args) {
 

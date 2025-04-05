@@ -1,3 +1,5 @@
+package eserciziIniziali.basics;
+
 public class Intro {
 	public static void main(String[] args){
 		int num = 6;

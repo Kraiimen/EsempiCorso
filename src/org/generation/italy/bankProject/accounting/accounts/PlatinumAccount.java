@@ -1,9 +1,8 @@
 package org.generation.italy.bankProject.accounting.accounts;
 
-import org.generation.italy.bankProject.accounting.*;
+import org.generation.italy.bankProject.accounting.Client;
 import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.ExcessiveDepositException;
-import org.generation.italy.bankProject.accounting.movements.Movement;
-import org.generation.italy.bankProject.accounting.movements.MovementType;
+import org.generation.italy.bankProject.accounting.movements.*;
 
 import java.time.*;
 

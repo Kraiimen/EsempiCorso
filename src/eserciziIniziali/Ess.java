@@ -1,5 +1,4 @@
-import java.io.Console;
-import java.util.Scanner;
+package eserciziIniziali;
 
 public class Ess {
     public static void main(String[] args){
