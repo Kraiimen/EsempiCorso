@@ -1,5 +1,9 @@
 package org.generation.italy.bankProject.accounting;
 
+import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
+import org.generation.italy.bankProject.accounting.exceptions.NegativeBalanceException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -50,21 +54,26 @@ public abstract class Account extends Object{  //extends object è implicito
         System.out.println("durante questa esecuzione di printBalance this è uguale a " +this);
         System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
-    public abstract double deposit(double amount);
+    public abstract double deposit(double amount)throws ExcessiveDepositException;
 
-    public abstract double withdraw(double amount);
+    public abstract double withdraw(double amount)throws InvalidAmountException;
     private void doInternalOperation(){
 
     }
     public double getBalance(){
         return balance;
     }
-    public void setBalance(double newBalance){
+    public void setBalance(double newBalance) throws NegativeBalanceException {
         if(newBalance <= 0){
-            return;
+            throw  new NegativeBalanceException("Il saldo non può essere negativo");
         }
         balance = newBalance;
     }
+
+    public int getId() {
+        return id;
+    }
+
     public LocalDate getCreationDate() {
         return creationDate;
     }
@@ -116,6 +125,40 @@ public abstract class Account extends Object{  //extends object è implicito
             }
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Account)) {
+            return false;
+        }
+        Account other = (Account) obj;
+        return other.id == this.id;
+    }
+
+        @Override
+        public int hashCode(){
+            return Integer.hashCode(id);
+        }
+
+
+
+
+
+
+    public void checkAmountForWithdraw(double amount) throws InvalidAmountException{//scrivo throws perchè descrive la funzione
+        if(amount > balance){
+            throw new InvalidAmountException();//scrivo throw perchè questo è un comando
+        }
+    }
+    public void checkAmountForDeposit(double amount) throws ExcessiveDepositException{
+        if(amount > 100_000){
+            throw new ExcessiveDepositException();
+        }
+    }
+
 }
 
 
