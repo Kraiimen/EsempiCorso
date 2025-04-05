@@ -119,6 +119,10 @@ public abstract class Account extends Object{  //extends object è implicito
         }
     }
 
+    public boolean createdInRange(LocalDate start, LocalDate end) {
+        return creationDate.isAfter(start.minusDays(1)) && creationDate.isBefore(end);
+    }
+
 
     public int getNumMovements() {
         return movements.size();
