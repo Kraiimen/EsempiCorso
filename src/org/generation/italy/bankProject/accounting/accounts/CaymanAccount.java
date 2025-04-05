@@ -1,5 +1,6 @@
 package org.generation.italy.bankProject.accounting.accounts;
 
+import org.generation.italy.bankProject.accounting.Client;
 import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.GuardiaDiFinanzaException;
 import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.InvalidAmountException;
 
@@ -9,18 +10,18 @@ import java.util.Random;
 public class CaymanAccount extends Account {
     private String secretCode;
 
-    public CaymanAccount(){
+    public CaymanAccount(Client client){
 //        super();  non necessario, viene invocato comunque
 //        super(10_000);
 //        secretCode = "xxx";
-        this(10_000);
+        this(10_000, client);
     }
-    public CaymanAccount(double initialBalance){
-        super(initialBalance);
+    public CaymanAccount(double initialBalance, Client client){
+        super(initialBalance, client);
         secretCode = "xxx";
     }
-    public CaymanAccount(double initialBalance, LocalDate initialDate, String secretCode){
-        super(initialBalance, initialDate);
+    public CaymanAccount(double initialBalance, LocalDate initialDate, String secretCode, Client client){
+        super(initialBalance, initialDate, client);
         this.secretCode = secretCode;
     }
 

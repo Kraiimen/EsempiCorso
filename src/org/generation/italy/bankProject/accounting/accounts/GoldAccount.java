@@ -2,6 +2,8 @@ package org.generation.italy.bankProject.accounting.accounts;
 
 import org.generation.italy.bankProject.accounting.*;
 import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.movements.Movement;
+import org.generation.italy.bankProject.accounting.movements.MovementType;
 
 import java.time.*;
 
@@ -11,15 +13,16 @@ public class GoldAccount extends Account {
 
 
     // /--CONSTRUCTORS--/
-    public GoldAccount() {
+    public GoldAccount(Client client) {
+        super(client);
     }
 
-    public GoldAccount(double initialBalance) {
-        super(initialBalance);
+    public GoldAccount(double initialBalance, Client client) {
+        super(initialBalance, client);
     }
 
-    public GoldAccount(double initialBalance, LocalDate initialDate) {
-        super(initialBalance, initialDate);
+    public GoldAccount(double initialBalance, LocalDate initialDate, Client client) {
+        super(initialBalance, initialDate, client);
     }
 
     // /--METHODS--/

@@ -3,6 +3,8 @@ package org.generation.italy.bankProject.accounting.accounts;
 import org.generation.italy.bankProject.accounting.*;
 import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.ExcessiveDepositException;
 import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.InvalidAmountException;
+import org.generation.italy.bankProject.accounting.movements.ItalianMovement;
+import org.generation.italy.bankProject.accounting.movements.MovementType;
 
 import java.time.*;
 
@@ -11,15 +13,16 @@ public class ItalianAccount extends Account {
 
     //  /--CONSTRUCTORS--/
 
-    public ItalianAccount() {
+    public ItalianAccount(Client client) {
+        super(client);
     }
 
-    public ItalianAccount(double initialBalance) {
-        super(initialBalance);
+    public ItalianAccount(double initialBalance, Client client) {
+        super(initialBalance, client);
     }
 
-    public ItalianAccount(double initialBalance, LocalDate initialDate) {
-        super(initialBalance, initialDate);
+    public ItalianAccount(double initialBalance, LocalDate initialDate, Client client) {
+        super(initialBalance, initialDate, client);
     }
 
     // /--METHODS--/

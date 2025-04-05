@@ -1,8 +1,8 @@
-package org.generation.italy.bankProject.accounting;
+package org.generation.italy.bankProject.accounting.movements;
 
 import java.time.LocalDateTime;
 
-public class ItalianMovement extends Movement{
+public class ItalianMovement extends Movement {
 
     private double paidTaxes;
 

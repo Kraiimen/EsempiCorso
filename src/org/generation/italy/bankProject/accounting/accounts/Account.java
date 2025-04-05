@@ -3,14 +3,14 @@ package org.generation.italy.bankProject.accounting.accounts;
 // e se si prova a farlo, lanciare un eccezione di tipo InvalidAmountException
 // per quanto riguarda i deposit tutti i conti tranne il cayman non possono depositare piu' di 100000 euro, se lo fanno lanciare un eccezione di tipo ExcessiveDepositException
 // il famoso metodo evadeTax ha una possibilita' su 10 di fallire con un eccezione di tipo GuardiaDiFinanzaException
-import org.generation.italy.bankProject.accounting.Movement;
-import org.generation.italy.bankProject.accounting.MovementType;
+import org.generation.italy.bankProject.accounting.Client;
+import org.generation.italy.bankProject.accounting.movements.Movement;
+import org.generation.italy.bankProject.accounting.movements.MovementType;
 import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.ExcessiveDepositException;
 import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.GuardiaDiFinanzaException;
 import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.InvalidAmountException;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public abstract class Account{  //extends object è implicito
@@ -25,27 +25,29 @@ public abstract class Account{  //extends object è implicito
     private int id;
     private LocalDate creationDate;
     private ArrayList movements;
+    private Client client;
     // Quando il compilatore vede il nome di una classe si chiede "Questa classe viene da Java.lang?" ovvero il package base del linguaggio java
     // se questo non è vero, si chiede "è dello stesso package di questa classe?" quindi se in un file si vuole usare una classe che sta nello stesso package del file, non c'è bisogno di importarla
     // se non la trova nemmeno li controllerà la lista degli import a inizio file
 
 
     //COSTRUTTORI
-    public Account() {
+    public Account(Client client) {
+        this.client = client;
         lastId++;
         id = lastId;
 //        this(0);
         creationDate = LocalDate.now();
         movements = new ArrayList();
     }
-    public Account(double initialBalance) {
+    public Account(double initialBalance, Client client) {
 //        lastId++;
 //        id = lastId;
-        this();
+        this(client);
         balance = initialBalance;  //Account è il nome di tutti e due i costruttori, ma li differenzierò perché avranno parametri diversi
     }
-    public Account(double initialBalance, LocalDate creationDate) {
-        this(initialBalance);
+    public Account(double initialBalance, LocalDate creationDate, Client client) {
+        this(initialBalance, client);
         this.creationDate = creationDate;
     }
     //invoco il costruttore (non necessario crearlo in quanto in assenza di costruttori in una classe il compilatore usa quello di default)
@@ -111,6 +113,18 @@ public abstract class Account{  //extends object è implicito
         movements.add(m);
     }
 
+    public boolean isCreatedAfter(LocalDate start){
+        return creationDate.isAfter(start);
+    }
+    public boolean isCreatedBefore(LocalDate end){
+        return creationDate.isBefore(end);
+    }
+
+    public boolean isCreatedInRange(LocalDate start, LocalDate end){
+        return isCreatedAfter(start) && isCreatedBefore(end);
+    }
+
+
     // /--GETTER & SETTER-----/
 
     public double getBalance(){
@@ -131,6 +145,14 @@ public abstract class Account{  //extends object è implicito
 
     public int getId() {
         return id;
+    }
+
+    public ArrayList getMovements() {
+        return movements;
+    }
+
+    public Client getClient() {
+        return client;
     }
 }
 
