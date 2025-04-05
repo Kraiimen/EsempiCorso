@@ -1,11 +1,8 @@
 package org.generation.italy.bankProject.accounting.accountType;
 
 import org.generation.italy.bankProject.accounting.Account;
-import org.generation.italy.bankProject.accounting.Movement;
-import org.generation.italy.bankProject.accounting.MovementType;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class CaymanAccount extends Account {
     private String secretCode;

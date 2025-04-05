@@ -1,11 +1,8 @@
 package org.generation.italy.bankProject.startup;
 
-import org.generation.italy.bankProject.accounting.MovementType;
 import org.generation.italy.bankProject.accounting.accountType.GoldAccount;
 import org.generation.italy.bankProject.accounting.accountType.ItalianAccount;
 import org.generation.italy.bankProject.accounting.accountType.PlatinumAccount;
-
-import java.time.LocalDate;
 
 
 public class Start {
