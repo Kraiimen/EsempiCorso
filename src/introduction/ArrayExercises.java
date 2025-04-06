@@ -1,3 +1,5 @@
+package introduction;
+
 public class ArrayExercises {
     public static void main(String[] args) {
 
@@ -113,9 +115,9 @@ public class ArrayExercises {
         // che appaiono lo stesso numero di volte basta che il programma stampi uno di
         // questi numeri
 
-        int[] numbers = new int[] { 2, 7, 12, 7, 2 };
-        int popularNumber=0;
-        int popularCounter=0;
+        int[] numbers = new int[]{2, 7, 12, 7, 2};
+        int popularNumber = 0;
+        int popularCounter = 0;
 
         // va per ogni numero e inizializza il suo counter
         for (int i = 0; i < numbers.length; i++) {
@@ -137,7 +139,7 @@ public class ArrayExercises {
             }
         }
         System.out.println("The most frequent number is :" + popularNumber);
-        
+
         //
     }
 }

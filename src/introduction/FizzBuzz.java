@@ -1,3 +1,5 @@
+package introduction;
+
 public class FizzBuzz {
     public static void main(String[] args) {
 
@@ -8,12 +10,12 @@ public class FizzBuzz {
 // -se il numero è un multiplo sia di 3 che di 5, deve stampare fizzbuzz
 // -se no, stampa il numero
 
-        for( int i = 0 ; i < 100 ; i++ ) {
-            if (( i % 3 == 0) && (i % 5 == 0)){
+        for (int i = 0; i < 100; i++) {
+            if ((i % 3 == 0) && (i % 5 == 0)) {
                 System.out.println("FIZZBUZZ");
-            } else if (i % 3 == 0){
+            } else if (i % 3 == 0) {
                 System.out.println("FIZZ");
-            }else if (i % 5 == 0){
+            } else if (i % 5 == 0) {
                 System.out.println("BUZZ");
             } else System.out.println(i);
         }

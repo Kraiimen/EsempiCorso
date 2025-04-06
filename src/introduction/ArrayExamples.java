@@ -1,4 +1,4 @@
-import java.lang.Math;
+package introduction;
 
 public class ArrayExamples {
     public static void main(String[] args) {

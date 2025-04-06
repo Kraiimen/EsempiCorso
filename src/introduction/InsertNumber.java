@@ -1,5 +1,6 @@
+package introduction;
+
 import java.io.Console;
-import java.util.ArrayList;
 
 public class InsertNumber {
     public static void main(String[] args) {

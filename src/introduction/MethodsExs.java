@@ -1,3 +1,5 @@
+package introduction;
+
 public class MethodsExs {
 
     public static void main(String[] args) {
@@ -15,7 +17,7 @@ public class MethodsExs {
 
         String stringCheck = "hi";
         System.out.println(containsVowels(stringCheck));
-        
+
         IntObj a = new IntObj(3);
         IntObj b = new IntObj(4);
         swapNumbers(a, b);
@@ -111,7 +113,7 @@ public class MethodsExs {
     // booleana true se la stringa contiene vocali, false altrimenti
 
     public static boolean containsVowels(String s) {
-        char[] vowels = new char[] { 'a', 'o', 'u', 'i', 'e' };
+        char[] vowels = new char[]{'a', 'o', 'u', 'i', 'e'};
         for (int i = 0; i < s.length(); i++) {
             for (char vowel : vowels) {
                 if (s.charAt(i) == vowel) {

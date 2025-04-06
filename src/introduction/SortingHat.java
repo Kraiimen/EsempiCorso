@@ -1,12 +1,14 @@
+package introduction;
+
 import java.util.Random;
 
 public class SortingHat {
     public static void main(String[] args) throws InterruptedException {
-        String[] studentsToAssign = { "Ilario", "Elvis", "Regina",
+        String[] studentsToAssign = {"Ilario", "Elvis", "Regina",
                 "Luca", "Davide", "Piero",
                 "Vittorio", "Emanuele", "Gaspare", "Camilla", "Eugenio", "Edoardo", "Lorenzo", "Sabrina", "Marcello",
-                "Stefano", "Nicolò", "Alessio" };
-        int[] preferences = { 0, 2, 0, 2, 2, 1, 2, 0, 1, 1, 3, 2, 3, 3, 0, -1, -1, -1 };
+                "Stefano", "Nicolò", "Alessio"};
+        int[] preferences = {0, 2, 0, 2, 2, 1, 2, 0, 1, 1, 3, 2, 3, 3, 0, -1, -1, -1};
 
         String[][] houses = new String[4][6]; // 4 case, ognuna 6 studenti
 
@@ -20,7 +22,7 @@ public class SortingHat {
         for (int i = 0; i < studentsToAssign.length; i++) { // assegna ogni studente ad una casa
             while (true) { // all'infinito fino al break
                 int houseRandom = random.nextInt(5); // dice a 5 facce, la quinta è la preferenza, aumenta la
-                                                     // probabilità da
+                // probabilità da
                 // 20 a 40%. genera un numero da 0 a 4
                 if (houseRandom == 4) { // 4 corrisponde alla preferenza
                     if (preferences[i] == -1) { // preferenza non espressa

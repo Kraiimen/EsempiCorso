@@ -1,3 +1,5 @@
+package introduction;
+
 import java.io.Console;
 import java.util.Random;
 
