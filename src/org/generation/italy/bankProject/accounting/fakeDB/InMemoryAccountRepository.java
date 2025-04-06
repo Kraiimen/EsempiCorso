@@ -9,24 +9,23 @@ import java.time.LocalDate;
 
 public class InMemoryAccountRepository implements AccountRepository {
 
-    private Map<Integer,Account> savedAccounts;
+    private static Map<Integer,Account> savedAccounts = new HashMap<>();
 
-
-    public InMemoryAccountRepository(){
-        savedAccounts = new HashMap<>();
-    }
-    public InMemoryAccountRepository(HashMap<Integer, Account> savedAccounts){
-        this.savedAccounts = savedAccounts;
-    }
+    //Si potrebbe creare una copia static dei metodi per renderli statici come logicamente dovrebbero essere, però sarebbe una zozzeria
+    //perchè avresti dei metodi non statici che richiamano i metodi statici per poter comunque implementare l'interfaccia, ma usarli staticamente come ha senso fare.
 
     @Override
     public int saveAccount(Account a) throws DataException {
         savedAccounts.put(a.getId(),a);
         return savedAccounts.size();
     }
-
+    public void saveAccounts(List<Account> accounts){
+        for(Account a : accounts){
+            saveAccount(a);
+        }
+    }
     @Override
-    public ArrayList<Account> getAll() throws DataException {
+    public  ArrayList<Account> getAll() throws DataException {
         return new ArrayList<Account>(savedAccounts.values());
     }
 
@@ -80,5 +79,9 @@ public class InMemoryAccountRepository implements AccountRepository {
     @Override
     public Account getAccountById(int id) {
         return savedAccounts.get(id);
+    }
+
+    public static Map<Integer, Account> getSavedAccounts() {
+        return savedAccounts;
     }
 }

@@ -1,39 +1,76 @@
 package org.generation.italy.bankProject.startup;
 
 
+import org.generation.italy.bankProject.accounting.Client;
+import org.generation.italy.bankProject.accounting.accounts.*;
+import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.GuardiaDiFinanzaException;
+import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.InvalidAmountException;
+import org.generation.italy.bankProject.accounting.fakeDB.InMemoryAccountRepository;
+import org.generation.italy.bankProject.accounting.fakeDB.InMemoryClientRepository;
+import org.generation.italy.bankProject.accounting.movements.Movement;
+import org.generation.italy.bankProject.accounting.movements.MovementType;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class Start {
 
     public static void main(String[] args) {
-        /*
-        Account x = new Account(); // creiamo un oggetto di tipo Account
-        x.printBalance(); // se printassimo il valore di balance, che non è stato inizializzato nella classe uscirebbe 0.00
-        x.deposit(100); // andiamo ad aggiungere 100 al bilancio usando la funzione deposit
-        x.printBalance(); // adesso che il valore è stato modificato se printiamo uscirà 100
-        x.withdraw(60); // adesso invece ritiriamo 60 con la funzione withdraw 
-        x.printBalance(); // e printassimo il nuovo bilandio sarà 100-60
-//        System.out.println(x.bal / 100);
-//        x.bal = x.bal + 100_00;         }operazioni possibili solo in caso di variabile public, da evitare.
-//        x.bal = 100000000;
-        x.setBalance(100);
-//        Account y = new Account(1000);
-        Movement m1 = new Movement(100.0, 10000.0, LocalDateTime.now(), MovementType.DEPOSIT);
-        Movement m2 = new Movement(100.0, 10000.0, LocalDateTime.now(), MovementType.WITHDRAWAL);
-//        Account z = new Account(10000);
-//        System.out.println("l'indirizzo di z è " + z);
-//        Account w = new Account (20000);
-//        System.out.println("l'indirizzo di w è " + w);
-//        System.out.println("sto per chiamare printBalance su z facendo z.printBalance");
-//        z.printBalance();
-//        System.out.println("sto per chiamare printBalance su w facendo w.printBalance");
-//        w.printBalance();
-        double depositSum = x.getSumDeposits();
-        System.out.println(depositSum);
-        CaymanAccount ca = new CaymanAccount();
-        double newBalance = ca.deposit(3000);
-        ca.printBalance();
-        ca.withdraw(50);
-        ca.printBalance();
-        ca.deposit(1000);
+        //*
+        Random r = new Random();
+
+        Client client1 = new Client("Emanuele","Giustiniani", LocalDate.of(2001,2,24));
+        Client client2 = new Client("Francesco","Totti", LocalDate.of(1976,9,27));
+        Client client3 = new Client("George","Foreman", LocalDate.of(1949,1,10));
+        //cayman accounts
+        Account cay1 = new CaymanAccount(client1);
+        Account cay2 = new CaymanAccount(1000,client1);
+        Account cay3 = new CaymanAccount(1000,LocalDate.now(),"1234",client1);
+        //ita accounts
+        Account ita1 = new ItalianAccount(client2);
+        Account ita2 = new ItalianAccount(100_000,client2);
+        Account ita3 = new ItalianAccount(100_000,LocalDate.now(),client2);
+        //gold accounts
+        Account gold1 = new GoldAccount(client2);
+        Account gold2 = new GoldAccount(100_000,client2) ;
+        Account gold3 = new GoldAccount(100_00,LocalDate.now(),client2) ;
+        Account gold4 = new GoldAccount(50_000,LocalDate.now(),client3) ;
+        //plat accounts
+        Account plat1 = new PlatinumAccount(100_000_000,LocalDate.now(),client1);
+        Account plat2 = new PlatinumAccount(1_000_000, LocalDate.now(),client2) ;
+        Account plat3 = new PlatinumAccount(client2) ;
+        Account plat4 = new PlatinumAccount(250_000, LocalDate.now(), client3) ;
+        //associa gli account ai clienti
+        client1.addAccounts(List.of(new Account[]{cay1, cay2, cay3, plat1}));
+        client2.addAccounts(List.of(new Account[]{ita1, ita2, ita3, gold1, gold2, gold3, plat2, plat3}));
+        client3.addAccounts(List.of(new Account[]{gold4, plat4}));
+        //creazione istanze inmemoryaccount/inmemoryclient repository
+        InMemoryClientRepository clientRepository = new InMemoryClientRepository();
+        InMemoryAccountRepository accountRepository = new InMemoryAccountRepository();
+        //aggiunta al fakedb di accounts e clients
+        clientRepository.saveClients(List.of(new Client[]{client1, client2, client3}));
+        accountRepository.saveAccounts(List.of(new Account[]{cay1, cay2, cay3, ita1, ita2, ita3, gold1, gold2, gold3, gold4, plat1, plat2, plat3, plat4}));
+
+        try{
+            for(Account a : InMemoryAccountRepository.getSavedAccounts().values()){
+                a.deposit(r.nextInt(10_000));
+            }
+        } catch (ExcessiveDepositException e) {
+            System.out.println(e.getMessage());
+        } catch (GuardiaDiFinanzaException e){
+            System.out.println(e.getMessage());
+        }
+        try {
+            for(Account a : InMemoryAccountRepository.getSavedAccounts().values()){
+                a.withdraw(r.nextInt(10_000));
+            }
+        } catch (InvalidAmountException e) {
+            System.out.println(e.getMessage());
+        }
         //*/
     }
 }

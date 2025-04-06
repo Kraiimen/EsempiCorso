@@ -5,18 +5,20 @@ import org.generation.italy.bankProject.accounting.accounts.Account;
 import org.generation.italy.bankProject.accounting.accounts.CaymanAccount;
 import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.DataException;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class InMemoryClientRepository implements ClientRepository {
-    private Map<String, Client> savedClients;
+    private static Map<String, Client> savedClients = new HashMap<>();
 
     @Override
     public String saveClient(Client c) throws DataException {
         savedClients.put(c.getClientCode(), c);
         return c.getClientCode();
+    }
+    public void saveClients(List<Client> clients) throws DataException {
+        for(Client c : clients){
+            saveClient(c);
+        }
     }
 
     @Override
@@ -80,5 +82,9 @@ public class InMemoryClientRepository implements ClientRepository {
             }
         }
         return clients;
+    }
+
+    public static Map<String, Client> getSavedClients() {
+        return savedClients;
     }
 }

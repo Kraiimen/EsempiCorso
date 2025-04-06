@@ -4,6 +4,7 @@ import org.generation.italy.bankProject.accounting.accounts.Account;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Client {
@@ -45,6 +46,11 @@ public class Client {
 
     public boolean addAccount(Account a){
         return accounts.put(a.getId(), a) == null;
+    }
+    public void addAccounts(List<Account> accounts){
+        for(Account a : accounts){
+            addAccount(a);
+        }
     }
 
 
