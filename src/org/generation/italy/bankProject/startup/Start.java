@@ -36,14 +36,14 @@ public class Start {
         Account ita3 = new ItalianAccount(100_000,LocalDate.now(),client2);
         //gold accounts
         Account gold1 = new GoldAccount(client2);
-        Account gold2 = new GoldAccount(100_000,client2) ;
-        Account gold3 = new GoldAccount(100_00,LocalDate.now(),client2) ;
-        Account gold4 = new GoldAccount(50_000,LocalDate.now(),client3) ;
+        Account gold2 = new GoldAccount(100_000,client2);
+        Account gold3 = new GoldAccount(100_00,LocalDate.now(),client2);
+        Account gold4 = new GoldAccount(50_000,LocalDate.now(),client3);
         //plat accounts
         Account plat1 = new PlatinumAccount(100_000_000,LocalDate.now(),client1);
-        Account plat2 = new PlatinumAccount(1_000_000, LocalDate.now(),client2) ;
-        Account plat3 = new PlatinumAccount(client2) ;
-        Account plat4 = new PlatinumAccount(250_000, LocalDate.now(), client3) ;
+        Account plat2 = new PlatinumAccount(1_000_000, LocalDate.now(),client2);
+        Account plat3 = new PlatinumAccount(client2);
+        Account plat4 = new PlatinumAccount(250_000, LocalDate.now(), client3);
         //associa gli account ai clienti
         client1.addAccounts(List.of(new Account[]{cay1, cay2, cay3, plat1}));
         client2.addAccounts(List.of(new Account[]{ita1, ita2, ita3, gold1, gold2, gold3, plat2, plat3}));
