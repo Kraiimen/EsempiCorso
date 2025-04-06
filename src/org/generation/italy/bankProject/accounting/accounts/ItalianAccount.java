@@ -1,6 +1,10 @@
 package org.generation.italy.bankProject.accounting.accounts;
 
-import org.generation.italy.bankProject.accounting.*;
+import org.generation.italy.bankProject.accounting.Client;
+import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.InvalidAmountException;
+import org.generation.italy.bankProject.accounting.movements.*;
+
 import java.time.*;
 
 public class ItalianAccount extends Account {
@@ -8,21 +12,25 @@ public class ItalianAccount extends Account {
 
     //  /--CONSTRUCTORS--/
 
-    public ItalianAccount() {
+    public ItalianAccount(Client client) {
+        super(client);
     }
 
-    public ItalianAccount(double initialBalance) {
-        super(initialBalance);
+    public ItalianAccount(double initialBalance, Client client) {
+        super(initialBalance, client);
     }
 
-    public ItalianAccount(double initialBalance, LocalDate initialDate) {
-        super(initialBalance, initialDate);
+    public ItalianAccount(double initialBalance, LocalDate initialDate, Client client) {
+        super(initialBalance, initialDate, client);
     }
 
     // /--METHODS--/
 
     @Override
-    public double deposit(double amount) {
+    public double deposit(double amount) throws ExcessiveDepositException {
+        if (amount > 100_000) {
+            throw new ExcessiveDepositException();
+        }
         double tax = amount * TAXES;
         amount -= tax;
 
@@ -34,7 +42,10 @@ public class ItalianAccount extends Account {
     }
 
     @Override
-    public double withdraw(double amount) {
+    public double withdraw(double amount) throws InvalidAmountException {
+        if(getBalance() < amount) {
+            throw new InvalidAmountException();
+        }
         ItalianMovement move = new ItalianMovement(amount, balance, LocalDateTime.now(), MovementType.WITHDRAWAL);
         addMovement(move);
         balance -= amount;
