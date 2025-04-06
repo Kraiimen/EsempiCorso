@@ -78,7 +78,7 @@ public abstract class Account {
         }
         double total = 0;
 
-        for(Movement m : movementss){
+        for(Movement m : movements){
             boolean isCorrectType = m.getType() == type;
             boolean isValidAmount = m.getAmount() >= lowerBound;
 
@@ -104,6 +104,15 @@ public abstract class Account {
 
     public boolean isCreatedInRange(LocalDate start, LocalDate end){
         return isCreatedAfter(start) && isCreatedBefore(end);
+    }
+
+    private boolean doesMovementsContainsOnlyMovementTypes(){
+        for(Object obj : movements){
+            if(obj.getClass() != Movement.class){
+                return false;
+            }
+        }
+        return true;
     }
 
     // /------GETTER & SETTER-----/

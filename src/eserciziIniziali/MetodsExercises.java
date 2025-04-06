@@ -1,3 +1,5 @@
+package eserciziIniziali;
+
 public class MetodsExercises{
     public static void main(String[] args){
         System.out.println(getLowerLastChar("ossA") + "\n");
