@@ -17,16 +17,19 @@ public abstract class Account {
     private int id;
     private LocalDate creationDate;
     private ArrayList movements;
+    private String ownerCode;
 
 
 
     //COSTRUTTORI
-    public Account(double balance) {
+    public Account(double balance, String ownerCode) {
         lastId++;
         id = lastId;
         this.balance = balance;
         creationDate = LocalDate.now();
         movements = new ArrayList();
+        this.ownerCode = ownerCode;
+
     }
 
 
@@ -109,5 +112,14 @@ public abstract class Account {
     }
 //    protected void temp() throws ExcessiveDepositException{
 //    }
+    public int getNumberOfMovements(){
+        return movements.size();
+    }
+    public int getId(){
+        return id;
+    }
 
+    public String getOwnerCode() {
+        return ownerCode;
+    }
 }

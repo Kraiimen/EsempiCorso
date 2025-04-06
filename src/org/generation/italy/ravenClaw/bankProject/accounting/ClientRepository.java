@@ -1,4 +1,5 @@
-package org.generation.italy.bankProject.accounting;
+package org.generation.italy.ravenClaw.bankProject.accounting;
+
 import java.util.Set;
 
 public interface ClientRepository {

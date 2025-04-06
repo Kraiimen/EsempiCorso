@@ -1,4 +1,6 @@
-package org.generation.italy.bankProject.accounting;
+package org.generation.italy.ravenClaw.bankProject.accounting;
+
+import org.generation.italy.ravenClaw.bankProject.accounting.accounts.CaymanAccount;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ public class Client {
     private String firstName;
     private LocalDate birthDate;
     //Scegli come il client ha i propri conti
-    ArrayList<Account> ownedAccounts = new ArrayList<>();
+    private ArrayList<Account> ownedAccounts = new ArrayList<>();
 
     public Client(String clientCode, String lastName, String firstName, LocalDate birthDate) {
         this.clientCode = clientCode;
@@ -40,5 +42,22 @@ public class Client {
     @Override
     public int hashCode() {
         return clientCode.hashCode();
+    }
+    public int getNumAccounts(){return ownedAccounts.size();}
+    public double getTotalBalance (){
+        double totalBalance = 0;
+        for(Account a : ownedAccounts){
+            totalBalance += a.getBalance();
+        }
+        return totalBalance;
+    }
+    public boolean isTaxEvader() {
+        for (Account a : ownedAccounts) {
+            if (a instanceof CaymanAccount) {
+                return true;
+            }
+
+        }
+        return false;
     }
 }
