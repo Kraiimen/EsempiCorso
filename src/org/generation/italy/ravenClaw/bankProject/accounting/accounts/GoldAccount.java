@@ -15,8 +15,8 @@ public class GoldAccount extends Account {
     private int nDeposit = 0;
 
 
-    public GoldAccount(double balance){
-        super(balance);
+    public GoldAccount(double balance, String ownerCode){
+        super(balance,ownerCode);
     }
 
     @Override

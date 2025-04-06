@@ -20,8 +20,8 @@ public class PlatinumAccount extends Account {
     private int nWithdraw = 0;
 
 
-    public PlatinumAccount(double balance){
-        super(balance);
+    public PlatinumAccount(double balance, String ownerCode){
+        super(balance, ownerCode);
     }
 
     @Override
