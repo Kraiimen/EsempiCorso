@@ -1,10 +1,10 @@
-package org.generation.italy.ravenClaw.bankProject.accounting.accounts;
+package org.generation.italy.bankProject.accounting.bankProject.accounting.accounts;
 
-import org.generation.italy.ravenClaw.bankProject.accounting.Account;
-import org.generation.italy.ravenClaw.bankProject.accounting.Movement;
-import org.generation.italy.ravenClaw.bankProject.accounting.MovementType;
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
+import org.generation.italy.bankProject.accounting.bankProject.accounting.Account;
+import org.generation.italy.bankProject.accounting.bankProject.accounting.Movement;
+import org.generation.italy.bankProject.accounting.bankProject.accounting.MovementType;
+import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.InvalidAmountException;
 
 import java.time.LocalDateTime;
 

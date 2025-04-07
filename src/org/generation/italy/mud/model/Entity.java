@@ -5,7 +5,7 @@ import java.util.Random;
 public class Entity {
     protected String name;
     protected String description;
-    private int hp;
+    protected int hp;
     protected int maxHp;
     protected Random random ;
 

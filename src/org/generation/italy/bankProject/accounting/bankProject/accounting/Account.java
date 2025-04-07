@@ -1,8 +1,7 @@
-package org.generation.italy.ravenClaw.bankProject.accounting;
+package org.generation.italy.bankProject.accounting.bankProject.accounting;
 
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.CarmineException;
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
+import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.InvalidAmountException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -78,12 +77,12 @@ public abstract class Account {
         }
 
     }
-    public void isDepositTooBig(double amount) throws ExcessiveDepositException{
+    public void isDepositTooBig(double amount) throws ExcessiveDepositException {
         if(amount > 100_000){
             throw new ExcessiveDepositException();
         }
     }
-    public void areThereFunds(double amount) throws InvalidAmountException{
+    public void areThereFunds(double amount) throws InvalidAmountException {
         if(getBalance() < amount){
             throw new InvalidAmountException("Il tuo bilancio è minore di quanto stai provando a ritirare");
         }

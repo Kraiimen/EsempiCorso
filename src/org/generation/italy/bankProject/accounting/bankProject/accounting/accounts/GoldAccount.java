@@ -1,13 +1,12 @@
-package org.generation.italy.ravenClaw.bankProject.accounting.accounts;
+package org.generation.italy.bankProject.accounting.bankProject.accounting.accounts;
 
-import org.generation.italy.ravenClaw.bankProject.accounting.Account;
-import org.generation.italy.ravenClaw.bankProject.accounting.Movement;
-import org.generation.italy.ravenClaw.bankProject.accounting.MovementType;
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.InvalidAmountException;
+import org.generation.italy.bankProject.accounting.bankProject.accounting.Account;
+import org.generation.italy.bankProject.accounting.bankProject.accounting.Movement;
+import org.generation.italy.bankProject.accounting.bankProject.accounting.MovementType;
+import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.InvalidAmountException;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class GoldAccount extends Account {
     private static final int DEPOSIT_TO_BONUS = 10;
@@ -20,7 +19,7 @@ public class GoldAccount extends Account {
     }
 
     @Override
-    public double deposit(double amount) throws ExcessiveDepositException,InvalidAmountException {
+    public double deposit(double amount) throws ExcessiveDepositException, InvalidAmountException {
 
         isAmountValid(amount);
         isDepositTooBig(amount);

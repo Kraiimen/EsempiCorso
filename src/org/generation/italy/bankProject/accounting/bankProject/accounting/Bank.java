@@ -1,7 +1,4 @@
-package org.generation.italy.ravenClaw.bankProject.accounting;
-
-import org.generation.italy.ravenClaw.bankProject.accounting.accounts.*;
-import org.generation.italy.ravenClaw.bankProject.accounting.exceptions.ExcessiveDepositException;
+package org.generation.italy.bankProject.accounting.bankProject.accounting;
 
 
 public class Bank {
