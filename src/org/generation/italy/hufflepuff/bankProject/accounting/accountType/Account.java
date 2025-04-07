@@ -1,5 +1,6 @@
 package org.generation.italy.hufflepuff.bankProject.accounting.accountType;
 
+import org.generation.italy.hufflepuff.bankProject.accounting.Client;
 import org.generation.italy.hufflepuff.bankProject.accounting.Movement;
 import org.generation.italy.hufflepuff.bankProject.accounting.MovementType;
 import org.generation.italy.hufflepuff.bankProject.accounting.exceptions.ExcessiveDepositException;
@@ -16,6 +17,7 @@ public abstract class Account extends Object{  //extends object è implicito
 
 
     //ATTRIBUTI or FIELDS or VARIABILI DEGLI OGGETTI
+    private Client owner;
     private static int lastId; //usando "static" ogni conto avrà il suo lastId
     protected double balance;
     private int id;
@@ -73,6 +75,22 @@ public abstract class Account extends Object{  //extends object è implicito
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public Client getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Client owner) {
+        this.owner = owner;
+    }
+
+    public String getOwnerClientCode(){
+        return owner.getClientCode();
     }
 
     public LocalDate getCreationDate() {
@@ -136,7 +154,7 @@ public abstract class Account extends Object{  //extends object è implicito
             return false;
         }
         Account other = (Account)obj;
-        return other.balance == this.balance;
+        return other.id == this.id;
     }
 
     @Override
@@ -157,6 +175,16 @@ public abstract class Account extends Object{  //extends object è implicito
 
     public ArrayList getMovements() {
         return movements;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "owner=" + owner +
+                ", balance=" + balance +
+                ", id=" + id +
+                ", creationDate=" + creationDate +
+                '}';
     }
 }
 

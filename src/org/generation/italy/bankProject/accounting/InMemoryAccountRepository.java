@@ -3,7 +3,6 @@ package org.generation.italy.bankProject.accounting;
 import org.generation.italy.bankProject.accounting.accountType.CaymanAccount;
 import org.generation.italy.bankProject.accounting.accountType.GoldAccount;
 import org.generation.italy.bankProject.accounting.accountType.ItalianAccount;
-import org.generation.italy.bankProject.accounting.accountType.Account;
 
 import java.time.LocalDate;
 import java.util.*;

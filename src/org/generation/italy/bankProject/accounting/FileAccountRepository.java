@@ -1,7 +1,5 @@
 package org.generation.italy.bankProject.accounting;
 
-import org.generation.italy.bankProject.accounting.accountType.Account;
-
 import java.util.ArrayList;
 
 public class FileAccountRepository implements AccountRepository {

@@ -1,22 +1,19 @@
-package org.generation.italy.bankProject.accounting.accountType;
+package org.generation.italy.bankProject.accounting;
 
-import org.generation.italy.bankProject.accounting.Movement;
-import org.generation.italy.bankProject.accounting.MovementType;
-import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositException;
-import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
 import org.generation.italy.bankProject.accounting.exceptions.NegativeBalanceException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public abstract class Account extends Object{  //extends object è implicito
+public abstract class Account implements Comparable<Account> {  //extends object è implicito
     //la visibilità di default vuol dire visibile all'interno del suo package
     //in un file java può essere presente solo una classe pubblica che deve essere chiamata come il file
     //private = visibile solo nella classe che lo definisce (utilizzato prettamente per le variabili) private != cybersecurity
 
 
     //ATTRIBUTI or FIELDS or VARIABILI DEGLI OGGETTI
-    private static int lastId; //usando "static" ogni conto avrà il suo lastId
+    protected Client owner;
     protected double balance;
     private int id;
     private LocalDate creationDate;
@@ -28,15 +25,10 @@ public abstract class Account extends Object{  //extends object è implicito
 
     //COSTRUTTORI
     public Account() {
-        lastId++;
-        id = lastId;
-//        this(0);
         creationDate = LocalDate.now();
         movements = new ArrayList();
     }
     public Account(double initialBalance) {
-//        lastId++;
-//        id = lastId;
         this();
         balance = initialBalance;  //Account è il nome di tutti e due i costruttori, ma li differenzierò perché avranno parametri diversi
     }
@@ -55,9 +47,9 @@ public abstract class Account extends Object{  //extends object è implicito
         System.out.println("durante questa esecuzione di printBalance this è uguale a " +this);
         System.out.printf("Il conto con id %d ha come saldo %f%n", this.id, this.balance);
     }
-    public abstract double deposit(double amount)throws ExcessiveDepositException;
+    public abstract double deposit(double amount);
 
-    public abstract double withdraw(double amount)throws InvalidAmountException;
+    public abstract double withdraw(double amount);
     private void doInternalOperation(){
 
     }
@@ -127,6 +119,16 @@ public abstract class Account extends Object{  //extends object è implicito
         }
     }
 
+    public boolean createdInRange(LocalDate start, LocalDate end) {
+        return creationDate.isAfter(start.minusDays(1)) && creationDate.isBefore(end);
+    }
+
+
+    public int getNumMovements() {
+        return movements.size();
+    }
+
+
     @Override
     public boolean equals(Object obj){
         if(obj == null){
@@ -136,19 +138,53 @@ public abstract class Account extends Object{  //extends object è implicito
             return false;
         }
         Account other = (Account)obj;
-        return other.balance == this.balance;
-    }
-    public void checkAmountForWithdraw(double amount) throws InvalidAmountException{//scrivo throws perchè descrive la funzione
-        if(amount > balance){
-            throw new InvalidAmountException();//scrivo throw perchè questo è un comando
-        }
-    }
-    public void checkAmountForDeposit(double amount) throws ExcessiveDepositException{
-        if(amount > 100_000){
-            throw new ExcessiveDepositException();
-        }
+        return other.id == this.id;
     }
 
+    @Override
+    public int hashCode(){
+        return Integer.hashCode(id);
+    }
+
+    public Account withId(int id) {
+        this.id = id;
+        return this;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Client getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Client owner) {
+        this.owner = owner;
+    }
+
+    public String getOwnerClientCode() {
+        return owner.getClientCode();
+    }
+
+    public Account withOwner(Client owner) {
+        this.owner = owner;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "owner=" + owner +
+                ", balance=" + balance +
+                ", id=" + id +
+                ", creationDate=" + creationDate +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Account a){
+        return Double.compare(this.balance, a.balance);
+    }
 }
 
 

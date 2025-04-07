@@ -1,13 +1,6 @@
 package org.generation.italy.bankProject.accounting;
 
-import org.generation.italy.bankProject.accounting.accountType.Account;
-
-import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 public interface AccountRepository {

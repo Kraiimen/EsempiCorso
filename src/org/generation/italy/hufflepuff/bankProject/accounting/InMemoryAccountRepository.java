@@ -11,10 +11,12 @@ import java.util.Map;
 import java.util.Set;
 
 public class InMemoryAccountRepository implements AccountRepository {
+    private static int idCounter = 1;
     private static Map<Integer, Account> accounts = new HashMap<>();
 
     @Override
     public int saveAccount(Account a) throws DataException {
+        a.setId(idCounter++);
         if (accounts.containsKey(a.getId())) {
             throw new DataException("Account with this ID already exists");
         }
@@ -47,7 +49,7 @@ public class InMemoryAccountRepository implements AccountRepository {
 
     @Override
     public Set<Account> getAllMoreActiveThan(int numMovements) throws DataException {
-        Set<Account> allMoreActiveThanAccounts = new HashSet<Account>();
+        Set<Account> allMoreActiveThanAccounts = new HashSet<>();
         for(Account a : accounts.values()){
             if(a.getMovements().size() >= numMovements){
                 allMoreActiveThanAccounts.add(a);
@@ -58,18 +60,29 @@ public class InMemoryAccountRepository implements AccountRepository {
 
     @Override
     public Set<Account> getByClientCode(String clientCode) throws DataException {
-        Set<Account> accByClientCode = new HashSet<>();
-        
-        return accByClientCode;
+        Set<Account> accountByClientCode = new HashSet<>();
+        for(Account a : accounts.values()){
+            if(a.getOwnerClientCode().equals(clientCode)){
+                accountByClientCode.add(a);
+            }
+        }
+        return accountByClientCode;
     }
 
     @Override
     public Set<Account> getByBalanceAndDateRange(double balance, LocalDate start, LocalDate end) throws DataException {
-        return Set.of();
+        Set<Account> accountByBalanceAndDateRange = new HashSet<>();
+        for(Account a : accounts.values()){
+            boolean isInRange = a.getCreationDate().isAfter(start) && a.getCreationDate().isBefore(end);
+            if(a.getBalance() > balance && isInRange){
+                accountByBalanceAndDateRange.add(a);
+            }
+        }
+        return accountByBalanceAndDateRange;
     }
 
     @Override
     public Account getAccountById(int id) throws DataException {
-        return null;
+        return accounts.get(id);
     }
 }

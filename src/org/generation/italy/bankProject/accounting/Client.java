@@ -1,6 +1,5 @@
 package org.generation.italy.bankProject.accounting;
 
-import org.generation.italy.bankProject.accounting.accountType.Account;
 import org.generation.italy.bankProject.accounting.accountType.CaymanAccount;
 
 import java.util.ArrayList;
