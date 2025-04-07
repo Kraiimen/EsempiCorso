@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Developer {
+public class Developer implements Comparable<Developer>{
     private String firstname;
     private String lastname;
     private List<String> languages;
@@ -16,15 +16,24 @@ public class Developer {
         languages.add(firstLanguage);
     }
 
-    public Optional<String> getFirstLanguage(){
+    public void addLanguage(String newLanguage){
+        languages.add(newLanguage);
+    }
+
+    public Optional<String> getFirstLanguage() {
         if(languages.size() > 0){
             return Optional.of(languages.get(0));
         }
         return Optional.empty();
     }
 
-    public void hitYourHead(){
+    public void hitYourHead() {
         languages.clear();
+    }
+
+    @Override
+    public int compareTo(Developer o) {
+        return this.lastname.compareTo(o.lastname);
     }
 
     public String getFirstname() {
@@ -33,4 +42,8 @@ public class Developer {
     public String getLastname() {
         return lastname;
     }
+    public int getNumLanguages() {
+        return languages.size();
+    }
+
 }

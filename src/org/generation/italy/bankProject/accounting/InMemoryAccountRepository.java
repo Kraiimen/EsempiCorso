@@ -31,7 +31,7 @@ public class InMemoryAccountRepository implements AccountRepository {
     }
 
     @Override
-    public Iterable<Account> getAll() throws DataException {
+    public Collection<Account> getAll() throws DataException {
         return new HashSet<>(accounts.values());
     }
 
@@ -94,5 +94,21 @@ public class InMemoryAccountRepository implements AccountRepository {
         } else {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public Iterable<Account> getAllOrderedByBalance() throws DataException {
+        Collection<Account> ia = getAll();
+        List<Account> acs = new ArrayList<>(ia);
+        Collections.sort(acs);
+        return acs;
+    }
+
+    @Override
+    public Iterable<Account> getAllByCreationDateDesc() throws DataException {
+        Collection<Account> ia = getAll();
+        List<Account> acs = new ArrayList<>(ia);
+        Collections.sort(acs, new AccountComparatorByCreationDateDesc());
+        return acs;
     }
 }
