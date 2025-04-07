@@ -45,15 +45,15 @@ public class Start {
         Account plat3 = new PlatinumAccount(client2);
         Account plat4 = new PlatinumAccount(250_000, LocalDate.now(), client3);
         //associa gli account ai clienti
-        client1.addAccounts(List.of(new Account[]{cay1, cay2, cay3, plat1}));
-        client2.addAccounts(List.of(new Account[]{ita1, ita2, ita3, gold1, gold2, gold3, plat2, plat3}));
-        client3.addAccounts(List.of(new Account[]{gold4, plat4}));
+        client1.addAccounts(List.of(cay1, cay2, cay3, plat1));
+        client2.addAccounts(List.of(ita1, ita2, ita3, gold1, gold2, gold3, plat2, plat3));
+        client3.addAccounts(List.of(gold4, plat4));
         //creazione istanze inmemoryaccount/inmemoryclient repository
         InMemoryClientRepository clientRepository = new InMemoryClientRepository();
         InMemoryAccountRepository accountRepository = new InMemoryAccountRepository();
         //aggiunta al fakedb di accounts e clients
-        clientRepository.saveClients(List.of(new Client[]{client1, client2, client3}));
-        accountRepository.saveAccounts(List.of(new Account[]{cay1, cay2, cay3, ita1, ita2, ita3, gold1, gold2, gold3, gold4, plat1, plat2, plat3, plat4}));
+        clientRepository.saveClients(List.of(client1, client2, client3));
+        accountRepository.saveAccounts(List.of(cay1, cay2, cay3, ita1, ita2, ita3, gold1, gold2, gold3, gold4, plat1, plat2, plat3, plat4));
 
         try{
             for(Account a : InMemoryAccountRepository.getSavedAccounts().values()){
