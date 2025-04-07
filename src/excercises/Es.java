@@ -1,3 +1,5 @@
+package excercises;
+
 public class Es {
     public static void main(String[] args) {
         // Dato un array di stringhe con 22 stringhe, dividerlo il più equamente possibile in 4 array

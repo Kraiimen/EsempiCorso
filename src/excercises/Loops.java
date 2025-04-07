@@ -1,3 +1,5 @@
+package excercises;
+
 import java.io.Console;
 
 public class Loops {

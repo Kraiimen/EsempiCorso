@@ -1,4 +1,4 @@
-package ExceptionsExample;
+package exceptionsExample;
 
 public class Account {
     private double balance;

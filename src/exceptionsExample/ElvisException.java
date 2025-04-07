@@ -1,4 +1,4 @@
-package ExceptionsExample;
+package exceptionsExample;
 
 public class ElvisException extends Exception {
     public ElvisException() {

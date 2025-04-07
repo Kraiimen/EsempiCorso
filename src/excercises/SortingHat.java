@@ -1,3 +1,5 @@
+package excercises;
+
 import java.util.Random;
 
 //FUNZIONA MA MANCA IL CONTROLLO PER LE DUE CASE CHE AVRANNO UNA PERSONA IN PIU'
