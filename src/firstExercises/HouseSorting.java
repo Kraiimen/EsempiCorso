@@ -1,3 +1,5 @@
+package firstExercises;
+
 public class HouseSorting {
     public static void main(String[] args) {
         String[] student = {"Ilario Palaia, Serpeverde" , "Elvis La Fata, Corvonero" , "Regina Ghering, Serpeverde" , 

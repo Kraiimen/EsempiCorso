@@ -13,7 +13,7 @@ public abstract class Account extends Object{  //extends object è implicito
 
 
     //ATTRIBUTI or FIELDS or VARIABILI DEGLI OGGETTI
-    private static int lastId; //usando "static" ogni conto avrà il suo lastId
+    protected Client owner;
     protected double balance;
     private int id;
     private LocalDate creationDate;
@@ -25,15 +25,10 @@ public abstract class Account extends Object{  //extends object è implicito
 
     //COSTRUTTORI
     public Account() {
-        lastId++;
-        id = lastId;
-//        this(0);
         creationDate = LocalDate.now();
         movements = new ArrayList();
     }
     public Account(double initialBalance) {
-//        lastId++;
-//        id = lastId;
         this();
         balance = initialBalance;  //Account è il nome di tutti e due i costruttori, ma li differenzierò perché avranno parametri diversi
     }
@@ -124,6 +119,16 @@ public abstract class Account extends Object{  //extends object è implicito
         }
     }
 
+    public boolean createdInRange(LocalDate start, LocalDate end) {
+        return creationDate.isAfter(start.minusDays(1)) && creationDate.isBefore(end);
+    }
+
+
+    public int getNumMovements() {
+        return movements.size();
+    }
+
+
     @Override
     public boolean equals(Object obj){
         if(obj == null){
@@ -133,7 +138,47 @@ public abstract class Account extends Object{  //extends object è implicito
             return false;
         }
         Account other = (Account)obj;
-        return other.balance == this.balance;
+        return other.id == this.id;
+    }
+
+    @Override
+    public int hashCode(){
+        return Integer.hashCode(id);
+    }
+
+    public Account withId(int id) {
+        this.id = id;
+        return this;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Client getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Client owner) {
+        this.owner = owner;
+    }
+
+    public String getOwnerClientCode() {
+        return owner.getClientCode();
+    }
+
+    public Account withOwner(Client owner) {
+        this.owner = owner;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "owner=" + owner +
+                ", balance=" + balance +
+                ", id=" + id +
+                ", creationDate=" + creationDate +
+                '}';
     }
 }
 
