@@ -6,6 +6,7 @@ import org.generation.italy.bankProject.accounting.exceptions.accountExceptions.
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class /* extends Object */ Account{  //extends object è implicito e quindi non necessario
     //la visibilità di default vuol dire visibile all'interno del suo package
@@ -101,6 +102,17 @@ public abstract class /* extends Object */ Account{  //extends object è implici
         return isCreatedAfter(start) && isCreatedBefore(end);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return getId() == account.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
 
     // /--GETTER & SETTER-----/
 

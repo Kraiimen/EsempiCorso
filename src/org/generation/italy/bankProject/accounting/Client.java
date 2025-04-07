@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Client {
     private static String lastClientCode;
@@ -53,6 +54,17 @@ public class Client {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return getClientCode().equals(client.getClientCode());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getClientCode());
+    }
 
     //   /--GETTER & SETTER--/
 
