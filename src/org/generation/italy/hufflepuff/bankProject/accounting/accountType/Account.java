@@ -138,6 +138,12 @@ public abstract class Account extends Object{  //extends object è implicito
         Account other = (Account)obj;
         return other.balance == this.balance;
     }
+
+    @Override
+    public int hashCode(){
+        return Integer.hashCode(id);
+    }
+
     public void checkAmountForWithdraw(double amount) throws InvalidAmountException {//scrivo throws perchè descrive la funzione
         if(amount > balance){
             throw new InvalidAmountException();//scrivo throw perchè questo è un comando
@@ -149,6 +155,9 @@ public abstract class Account extends Object{  //extends object è implicito
         }
     }
 
+    public ArrayList getMovements() {
+        return movements;
+    }
 }
 
 
