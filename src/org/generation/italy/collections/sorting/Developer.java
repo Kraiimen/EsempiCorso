@@ -16,7 +16,9 @@ public class Developer implements Comparable<Developer> {
         languages.add(firstLanguage);
     }
 
-
+    public void addLanguage(String newLanguage) {
+        languages.add(newLanguage);
+    }
     public Optional<String> getFirstLanguage() {
         if(languages.size() > 0) {
             return Optional.of(languages.get(0));
@@ -31,6 +33,9 @@ public class Developer implements Comparable<Developer> {
     }
     public String getLastName() {
         return lastName;
+    }
+    public int getNumLanguages() {
+        return languages.size();
     }
 
     @Override

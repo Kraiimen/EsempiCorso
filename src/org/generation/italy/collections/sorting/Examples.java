@@ -1,8 +1,8 @@
 package org.generation.italy.collections.sorting;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Optional;
 
 public class Examples {
@@ -27,7 +27,16 @@ public class Examples {
         int x = dev1.compareTo(dev2);
         System.out.println(x);
         Collections.sort(developers);
-
-
+        Comparable<Developer> c1 = dev1;
+        Comparable<Developer> c2 = dev2;
+        Collections.sort(developers);
+        for(Developer d : developers) {
+            System.out.println(d.getFirstName());
+        }
+        Comparator<Developer> cd = new DeveloperComparatorByNumLanguages();
+        Collections.sort(developers,cd);
+        for(Developer d : developers) {
+            System.out.println(d.getFirstName());
+        }
     }
 }
