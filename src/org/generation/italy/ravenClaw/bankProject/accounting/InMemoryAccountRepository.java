@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class InMemoryAccountRepository implements AccountRepository {
-    private HashMap<Integer, Account> accountHashMap = new HashMap<>();
+    private static HashMap<Integer, Account> accountHashMap = new HashMap<>();
 
     @Override
     public int saveAccount(Account a) {
