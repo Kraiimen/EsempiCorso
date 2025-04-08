@@ -1,4 +1,4 @@
-// Il programma lavora sulla lista di tutti gli studenti del corso per assegnare ad ogni studente ad una delle 4 casate del film di harry Potter
+package javaIntroduction;// Il programma lavora sulla lista di tutti gli studenti del corso per assegnare ad ogni studente ad una delle 4 casate del film di harry Potter
 // Per l 'assegnazione dello studente il programma terrà conto della preferenza dello studente assegnandolo alla casa preferita con probabilità del SLY_POS5%
 // In caso lo studente non entri nella casa preferita entrerà in una casa random
 // Il programma ad ogni assegnazione stamperà una messaggio che notifica in quale casa è stato inserito lo studente

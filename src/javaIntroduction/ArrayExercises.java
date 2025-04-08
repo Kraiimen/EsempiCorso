@@ -1,11 +1,4 @@
-
-
-
-
-
-
-
-
+package javaIntroduction;
 
 
 public class ArrayExercises {

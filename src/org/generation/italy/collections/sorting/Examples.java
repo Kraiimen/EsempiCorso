@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class Examples {
     public static void main(String[] args) {
-        Developer dev1 = new Developer("Piero", "Scarcina", "Java");
+        Developer dev1 = new Developer("Pietro", "Scarcina", "Java");
         System.out.println(dev1.getFirstLanguage());
         dev1.hitYourHead(); // Svuoto l'ArrayList coi linguaggi
         Optional<String> optFirst = dev1.getFirstLanguage();
@@ -30,12 +30,25 @@ public class Examples {
 //        Comparable<Developer> c1 = (Comparable<Developer>)dev1; //Così compateTo compara due elementi
 //        Comparable<Developer> c2 = (Comparable<Developer>)dev2;
         Collections.sort(developers);
-        Comparator<Developer> cd = new DeveloperComparatorByNumLanguages();
-        Collections.sort(developers, cd); // Ora il metodo sort ordinerà in base al Comparator
+        System.out.println("Ordinamento con Comparable");
         for(Developer d : developers) {
             System.out.println(d.getFirstname());
         }
-
+        Comparator<Developer> cd = new DeveloperComparatorByNumLanguages();
+        Collections.sort(developers, cd); // Ora il metodo sort ordinerà in base al Comparator
+        Collections.sort(developers, (o1,o2) -> o1.getNumLanguages() - o2.getNumLanguages()); // Usando le lambda expression
+        System.out.println("Ordinamento con Comparator");
+        for(Developer d : developers) {
+            System.out.println(d.getFirstname());
+        }
+        // Voglio usare una lambda expression per ordinarli tramite lunghezza del nome decrescente
+        Collections.sort(developers, (o1, o2) -> o2.getFirstname().length() - o1.getFirstname().length());
+        System.out.println("Ordinamento con Lambda");
+        for(Developer d : developers) {
+            System.out.println(d.getFirstname());
+        }
+        // E se ho già una funzione (Utilities) che fa quello che voglio?
+        Collections.sort(developers, Utilities::compareDevsByNameLengthDesc);
 
     }
 }

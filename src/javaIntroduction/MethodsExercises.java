@@ -1,3 +1,5 @@
+package javaIntroduction;
+
 public class MethodsExercises {
 	public static void main(String[] args) {
 		//String lastLetterUpperCase = lastLetterUpperCase("HAjajiajjaim");

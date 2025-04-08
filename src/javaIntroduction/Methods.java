@@ -1,3 +1,5 @@
+package javaIntroduction;
+
 import java.io.Console;
 
 public class Methods{

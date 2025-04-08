@@ -1,3 +1,5 @@
+package javaIntroduction;
+
 public class BidimensionalArrays {
 	public static void main(String[] args) {
 		int[][] matrix = new int[4][6]; // Array di 4 array con ogni array di 6 elementi (matrice 4x6)
