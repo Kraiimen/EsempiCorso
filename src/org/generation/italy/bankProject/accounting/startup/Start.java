@@ -30,17 +30,17 @@ public class Start {
 //        System.out.println(depositSum);
         Bank b = new Bank();
         FileAccountRepository fr = new FileAccountRepository();
-        try {
-            b.loadAccounts(fr);
-        } catch (IOException e){
-        System.out.println("Errore: " + e.getMessage());
-    }
-        DbAccountRepository dr = new DbAccountRepository();
-        try {
-            b.loadAccounts(dr);
-        } catch (IOException e){
-            System.out.println("Errore: " + e.getMessage());
-        }
+//        try {
+//            b.loadAccounts(fr);
+//        } catch (IOException e){
+//        System.out.println("Errore: " + e.getMessage());
+//    }
+//        DbAccountRepository dr = new DbAccountRepository();
+//        try {
+//            b.loadAccounts(dr);
+//        } catch (IOException e){
+//            System.out.println("Errore: " + e.getMessage());
+//        }
 
     }
 }
