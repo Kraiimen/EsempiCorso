@@ -6,6 +6,7 @@ import org.generation.italy.bankProject.accounting.accountType.ItalianAccount;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class InMemoryElvisAccountRepository implements AccountRepository {
@@ -58,6 +59,15 @@ public class InMemoryElvisAccountRepository implements AccountRepository {
 
     @Override
     public Set<Account> getAllMoreActiveThan(int numMovements) throws DataException {
+//        Set<Account> moreActiveAccounts = new HashSet<>();
+//        for(Account a:accounts.values()){
+//            if(a.getNumMovements() >= numMovements){
+//                moreActiveAccounts.add(a);
+//            }
+//        }
+//        return moreActiveAccounts;
+//        Predicate<Account> prac = new AccountFilterByNumMovements(numMovements);
+//        return accounts.values().stream().filter(prac).collect(Collectors.toSet());
         return accounts.values().stream().filter(account -> account.getNumMovements() > numMovements)
                                          .collect(Collectors.toSet());
     }
@@ -83,11 +93,15 @@ public class InMemoryElvisAccountRepository implements AccountRepository {
 
     @Override
     public Iterable<Account> getAllOrderedByBalance() throws DataException {
-        return null;
+        return accounts.values().stream()
+                .sorted((o1, o2) -> Double.compare(o2.getBalance(), o1.getBalance()))
+                .collect(Collectors.toSet());
     }
 
     @Override
     public Iterable<Account> getAllByCreationDateDesc() throws DataException {
-        return null;
+//        return accounts.values().stream().sorted((o1, o2) -> o2.getCreationDate().compareTo(o1.getCreationDate())).collect(Collectors.toSet());
+//        return accounts.values().stream().sorted(Comparator.comparing(a -> a.getCreationDate())).collect(Collectors.toSet());
+        return accounts.values().stream().sorted(Comparator.comparing(Account::getCreationDate).reversed()).collect(Collectors.toSet());
     }
 }
