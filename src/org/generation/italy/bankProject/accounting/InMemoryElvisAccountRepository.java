@@ -34,7 +34,7 @@ public class InMemoryElvisAccountRepository implements AccountRepository {
     }
 
     @Override
-    public Iterable<Account> getAll() throws DataException {
+    public Collection<Account> getAll() throws DataException {
         return new HashSet<>(accounts.values());
     }
 
@@ -79,5 +79,15 @@ public class InMemoryElvisAccountRepository implements AccountRepository {
     @Override
     public Optional<Account> getAccountById(int id) throws DataException {
         return Optional.ofNullable(accounts.get(id));
+    }
+
+    @Override
+    public Iterable<Account> getAllOrderedByBalance() throws DataException {
+        return null;
+    }
+
+    @Override
+    public Iterable<Account> getAllByCreationDateDesc() throws DataException {
+        return null;
     }
 }
