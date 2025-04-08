@@ -1,6 +1,8 @@
 package org.generation.italy.bankProject.accounting;
 
 import org.generation.italy.bankProject.accounting.exceptions.NegativeBalanceException;
+import org.generation.italy.hufflepuff.bankProject.accounting.exceptions.ExcessiveDepositException;
+import org.generation.italy.hufflepuff.bankProject.accounting.exceptions.InvalidAmountException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -169,6 +171,17 @@ public abstract class Account implements Comparable<Account> {  //extends object
     public Account withOwner(Client owner) {
         this.owner = owner;
         return this;
+    }
+
+    public void checkAmountForWithdraw(double amount) throws InvalidAmountException {//scrivo throws perchè descrive la funzione
+        if(amount > balance){
+            throw new InvalidAmountException();//scrivo throw perchè questo è un comando
+        }
+    }
+    public void checkAmountForDeposit(double amount) throws ExcessiveDepositException {
+        if(amount > 100_000){
+            throw new ExcessiveDepositException();
+        }
     }
 
     @Override

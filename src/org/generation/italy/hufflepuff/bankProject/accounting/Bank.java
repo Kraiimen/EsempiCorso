@@ -4,9 +4,10 @@ import org.generation.italy.hufflepuff.bankProject.accounting.accountType.Accoun
 import org.generation.italy.hufflepuff.bankProject.accounting.exceptions.NegativeBalanceException;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Bank {
-    private ArrayList<Account> accounts;
+    private Collection<Account> accounts;
     public void manageAccount(Account account){
         if(account.getBalance() < 10) {
             System.out.println("Sei un barbone, ma oggi sei fortunato");
@@ -49,7 +50,7 @@ public class Bank {
         }
 
     }
-    public void loadAccounts(AccountRepository repository){
+    public void loadAccounts(AccountRepository repository) throws DataException{
         accounts = repository.getAll();
     }
 }

@@ -1,9 +1,7 @@
 package org.generation.italy.hufflepuff.bankProject.startup;
 
 import org.generation.italy.hufflepuff.bankProject.DbAccountRepository;
-import org.generation.italy.hufflepuff.bankProject.accounting.Bank;
-import org.generation.italy.hufflepuff.bankProject.accounting.FileAccountRepository;
-import org.generation.italy.hufflepuff.bankProject.accounting.MovementType;
+import org.generation.italy.hufflepuff.bankProject.accounting.*;
 import org.generation.italy.hufflepuff.bankProject.accounting.accountType.*;
 import org.generation.italy.hufflepuff.bankProject.accounting.exceptions.ExcessiveDepositException;
 import org.generation.italy.hufflepuff.bankProject.accounting.exceptions.GuardiaDiFinanzaException;
@@ -23,7 +21,11 @@ public class Start {
         Bank b = new Bank();
         FileAccountRepository fr = new FileAccountRepository();
         DbAccountRepository dr = new DbAccountRepository();
-        b.loadAccounts(fr);
+        try {
+            b.loadAccounts(fr);
+        } catch (DataException e) {
+            System.out.println("Error: "+ e.getMessage());
+        }
 
         try{
             pl.deposit(100_000);
@@ -50,5 +52,18 @@ public class Start {
         } catch (InvalidAmountException | GuardiaDiFinanzaException e ){
             System.out.println("Error: " + e.getMessage());
         }
+
+        AccountRepository ac = new InMemoryAccountRepository();
+
+        try {
+            ac.saveAccount(pl);
+            ac.saveAccount(it1);
+            ac.saveAccount(ca);
+            System.out.println(ac.getAll());
+
+        } catch (DataException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+
     }
 }

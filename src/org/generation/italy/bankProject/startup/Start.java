@@ -2,6 +2,7 @@ package org.generation.italy.bankProject.startup;
 
 import org.generation.italy.bankProject.DbAccountRepository;
 import org.generation.italy.bankProject.accounting.Bank;
+import org.generation.italy.bankProject.accounting.DataException;
 import org.generation.italy.bankProject.accounting.FileAccountRepository;
 import org.generation.italy.bankProject.accounting.MovementType;
 import org.generation.italy.bankProject.accounting.accountType.*;
@@ -23,7 +24,11 @@ public class Start {
         Bank b = new Bank();
         FileAccountRepository fr = new FileAccountRepository();
         DbAccountRepository dr = new DbAccountRepository();
-        b.loadAccounts(fr);
+        try {
+            b.loadAccounts(fr);
+        } catch (DataException e) {
+            System.out.println("Error: "+ e.getMessage());
+        }
 
         try{
             pl.deposit(100_000);

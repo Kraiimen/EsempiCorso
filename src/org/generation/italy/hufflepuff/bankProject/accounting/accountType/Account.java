@@ -179,12 +179,12 @@ public abstract class Account extends Object{  //extends object è implicito
 
     @Override
     public String toString() {
-        return "Account{" +
-                "owner=" + owner +
-                ", balance=" + balance +
-                ", id=" + id +
-                ", creationDate=" + creationDate +
-                '}';
+        return "Account{\n" +
+                "       owner=" + owner +
+                ", \n       balance=" + balance +
+                ", \n       id=" + id +
+                ", \n       creationDate=" + creationDate +
+                "\n}";
     }
 }
 

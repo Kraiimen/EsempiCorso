@@ -31,7 +31,7 @@ public class InMemoryAccountRepository implements AccountRepository {
     }
 
     @Override
-    public Iterable<Account> getAll() throws DataException {
+    public Collection<Account> getAll() throws DataException {
         return new HashSet<>(accounts.values());
     }
 

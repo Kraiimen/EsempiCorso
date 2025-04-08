@@ -5,10 +5,7 @@ import org.generation.italy.hufflepuff.bankProject.accounting.DataException;
 import org.generation.italy.hufflepuff.bankProject.accounting.accountType.Account;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class InMemoryAccountRepository implements AccountRepository {
     private static int idCounter = 1;
@@ -25,7 +22,7 @@ public class InMemoryAccountRepository implements AccountRepository {
     }
 
     @Override
-    public Iterable<Account> getAll() throws DataException {
+    public Collection<Account> getAll() throws DataException {
         return new HashSet<>(accounts.values());
     }
 
