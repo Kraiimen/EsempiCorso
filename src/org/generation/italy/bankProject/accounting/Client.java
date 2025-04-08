@@ -24,40 +24,81 @@ public class Client {
         ownedAccounts = new ArrayList<>();
     }
 
-    public void createItalianAccount(double amount){
+    public void createItalianAccount(double amount) {
         ItalianAccount it = new ItalianAccount(amount);
         ownedAccounts.add(it);
     }
-    public void createGoldAccount(double amount){
+
+    public void createGoldAccount(double amount) {
         GoldAccount gd = new GoldAccount(amount);
         ownedAccounts.add(gd);
     }
 
-    public void createPlatinumAccount(double amount){
+    public void createPlatinumAccount(double amount) {
         PlatinumAccount gd = new PlatinumAccount(amount);
         ownedAccounts.add(gd);
     }
 
-    public void createCaymanAccount(double amount){
+    public void createCaymanAccount(double amount) {
         CaymanAccount gd = new CaymanAccount(amount);
         ownedAccounts.add(gd);
     }
 
     @Override
-    public boolean equals(Object obj){
-        if((obj == null) || obj.getClass() != this.getClass()){
+    public boolean equals(Object obj) {
+        if ((obj == null) || obj.getClass() != this.getClass()) {
             return false;
         }
-        Client other = (Client)obj;
+        Client other = (Client) obj;
         return this.clientCode.equals(other.clientCode);
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return clientCode.hashCode();
     }
 
     public ArrayList<Account> getOwnedAccounts() {
         return ownedAccounts;
     }
+
+
+    public String getClientCode() {
+        return clientCode;
+    }
+
+    public int getNumAccounts() {
+        return ownedAccounts.size();
+    }
+
+    public double getTotal() {
+        double total = 0;
+        for (Account a : ownedAccounts) {
+            total += a.getBalance();
+        }
+        return total;
+    }
+
+
+    public boolean isTaxEvader() {
+        for (Account account : ownedAccounts) {
+            if (account instanceof CaymanAccount) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString(){
+        return  " Client{ " +
+                "\n clientcode: " + clientCode +
+                "\n LastName: " + lastName +
+                "\n FirstName: " + firstName +
+                "\n BirthDate: " + birthDate +
+                "\n }";
+
+    }
 }
+
+

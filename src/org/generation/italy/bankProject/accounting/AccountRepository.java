@@ -1,14 +1,15 @@
 package org.generation.italy.bankProject.accounting;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 public interface AccountRepository {
 
      int saveAccount(Account a) throws DataException;
-     List<Account> getAll() throws DataException;//<> Questo ArrayList non lavora più con object, ma con oggetti di classe Account
-     void upDateAccount(Account a);
+     Collection<Account> getAll() throws DataException ;//<> Questo ArrayList non lavora più con object, ma con oggetti di classe Account
+     void upDateAccount(Account a)throws DataException;
 
 
      boolean deleteAccount(int id);

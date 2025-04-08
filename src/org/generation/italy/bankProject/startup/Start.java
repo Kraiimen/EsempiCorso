@@ -10,6 +10,7 @@ import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositEx
 import org.generation.italy.bankProject.accounting.exceptions.GuardiaDiFinanzaException;
 import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
 
+import javax.xml.crypto.Data;
 import java.time.LocalDate;
 
 //Introdurre una classe cliente, un cliente ha un nome, un cognome, una data di nascita, un codice banca(string)
@@ -58,12 +59,19 @@ public class Start {
 
 
         InMemoryAccountRepository accountRepository = new InMemoryAccountRepository();
-        accountRepository.saveAccount(it1);
-        accountRepository.saveAccount(gold);
-        accountRepository.saveAccount(pl);
-        accountRepository.saveAccount(ca);
-        System.out.println(accountRepository.deleteAccount(2));
-        System.out.println(accountRepository.accounts);
+        try{
+            accountRepository.saveAccount(it1);
+            accountRepository.saveAccount(gold);
+            accountRepository.saveAccount(pl);
+            accountRepository.deleteAccount(4);
+        } catch(DataException e){
+            System.out.print("Error: " + e.getMessage());
+        }
+        System.out.println(accountRepository.getAll());
+
+
+
+
     }
 
 }

@@ -1,27 +1,45 @@
 package org.generation.italy.bankProject.accounting;
 
-import java.util.Set;
+import java.util.*;
 
 public class InMemoryClientRepository implements ClientRepository {
+    private Map<String, Client> clients = new HashMap<>();
 
     @Override
     public Client getByClientCode(String clientCode) {
-
-        return null;
+        return clients.get(clientCode);
     }
 
     @Override
     public Set<Client> getByNumAccounts(int numAccounts) {
-        return Set.of();
+        Set<Client> sc = new HashSet<>();
+        for(Client c : clients.values()){
+            if(c.getNumAccounts() >= numAccounts){
+                sc.add(c);
+            }
+        }
+        return sc;
     }
 
     @Override
     public Set<Client> getByTotalBalance(double balance) {
-        return Set.of();
+        Set<Client> sc = new HashSet<>();
+        for(Client c : clients.values()){
+            if(c.getTotal() >= balance){
+                sc.add(c);
+            }
+        }
+        return sc;
     }
 
     @Override
     public Set<Client> getAllTaxEvaders() {
-        return Set.of();
+        Set<Client> sc = new HashSet<>();
+        for(Client c : clients.values()){
+            if(c.isTaxEvader()){
+                sc.add(c);
+            }
+        }
+        return sc;
     }
 }

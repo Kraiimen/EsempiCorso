@@ -20,6 +20,7 @@ public abstract class Account extends Object{  //extends object è implicito
     private int id;
     private LocalDate creationDate;
     protected ArrayList movements;
+    private Client owner;
     // Quando il compilatore vede il nome di una classe si chiede "Questa classe viene da Java.lang?" ovvero il package base del linguaggio java
     // se questo non è vero, si chiede "è dello stesso package di questa classe?" quindi se in un file si vuole usare una classe che sta nello stesso package del file, non c'è bisogno di importarla
     // se non la trova nemmeno li controllerà la lista degli import a inizio file
@@ -126,6 +127,18 @@ public abstract class Account extends Object{  //extends object è implicito
         }
     }
 
+    public int getNumMovement(){
+        return movements.size();
+    }
+
+    public String getOwnerClientCode(){
+        return owner.getClientCode();
+
+    }
+    public boolean getDataIsInTheRange(LocalDate start, LocalDate end){
+        return this.creationDate.isAfter(start.minusDays(1)) && this.creationDate.isBefore(end);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -138,27 +151,31 @@ public abstract class Account extends Object{  //extends object è implicito
         return other.id == this.id;
     }
 
-        @Override
-        public int hashCode(){
-            return Integer.hashCode(id);
-        }
-
-
-
-
-
+    @Override
+    public int hashCode(){
+        return Integer.hashCode(id);
+    }
 
     public void checkAmountForWithdraw(double amount) throws InvalidAmountException{//scrivo throws perchè descrive la funzione
-        if(amount > balance){
-            throw new InvalidAmountException();//scrivo throw perchè questo è un comando
-        }
+    if(amount > balance){
+        throw new InvalidAmountException();//scrivo throw perchè questo è un comando
+      }
     }
     public void checkAmountForDeposit(double amount) throws ExcessiveDepositException{
-        if(amount > 100_000){
-            throw new ExcessiveDepositException();
-        }
+    if(amount > 100_000){
+        throw new ExcessiveDepositException();
+       }
     }
+    @Override
+    public String toString(){
+        return  "\n Account{ " +
+                "\n owner: " + owner +
+                "\n balance: " + balance +
+                "\n id: " + id +
+                "\n creationDate: " + creationDate +
+                "\n }";
 
+    }
 }
 
 
