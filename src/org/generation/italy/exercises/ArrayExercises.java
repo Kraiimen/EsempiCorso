@@ -1,3 +1,5 @@
+package org.generation.italy.exercises;
+
 public class ArrayExercises {
     public static void main(String[] args){
         

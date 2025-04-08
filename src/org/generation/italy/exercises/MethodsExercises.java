@@ -1,3 +1,5 @@
+package org.generation.italy.exercises;
+
 public class MethodsExercises {
 // 1) creare una funzione che prende in input una stringa e mi ritorna il suo ultimo carattere in maiuscolo
     public static char upLastChar(String s){

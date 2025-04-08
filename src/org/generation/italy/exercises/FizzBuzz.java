@@ -1,3 +1,5 @@
+package org.generation.italy.exercises;
+
 // stampa i primi 100 numeri
 public class FizzBuzz{
     public static void main(String[] args) {

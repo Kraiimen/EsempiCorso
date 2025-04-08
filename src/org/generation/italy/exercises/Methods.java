@@ -1,3 +1,5 @@
+package org.generation.italy.exercises;
+
 import java.io.Console;
 public class Methods {
 

@@ -1,4 +1,4 @@
-//importa la libreria per l'utilizzo di Console
+package org.generation.italy.exercises;//importa la libreria per l'utilizzo di Console
 import java.io.Console;
 
 public class StopInput {

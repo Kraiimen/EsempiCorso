@@ -1,3 +1,5 @@
+package org.generation.italy.exercises;
+
 public class Intro {
 	public static void main(String[] args){
 		int num = 6;

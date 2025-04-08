@@ -1,3 +1,5 @@
+package org.generation.italy.exercises;
+
 public class ObjectArrays {
     public static void main(String[] args) {
         String[] as = new String[5];

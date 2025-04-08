@@ -1,3 +1,5 @@
+package org.generation.italy.exercises;
+
 //inserire in numbers i quadrati dei primi 5 numeri
 //calcola e stampa la somma di tutti i valori dell'array numbers
 //trovare il max nell'array

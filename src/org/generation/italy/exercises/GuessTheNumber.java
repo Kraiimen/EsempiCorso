@@ -1,4 +1,4 @@
-//importa le librerie
+package org.generation.italy.exercises;//importa le librerie
 import java.io.Console;
 import java.util.Random;
 

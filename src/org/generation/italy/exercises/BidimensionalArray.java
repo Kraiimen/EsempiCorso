@@ -1,3 +1,5 @@
+package org.generation.italy.exercises;
+
 public class BidimensionalArray {
     public static void main(String[] args) {
         int[][] matrix = new int[4][6];

@@ -1,3 +1,5 @@
+package org.generation.italy.exercises;
+
 import java.util.Random;
 import java.io.Console;
 
