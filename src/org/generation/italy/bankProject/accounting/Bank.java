@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 
 public class Bank {
-    private ArrayList<Account> accounts;
+    private Iterable<Account> accounts;
     public void manageAccount(Account account){
         if(account.getBalance() < 10) {
             System.out.println("Sei un barbone, ma oggi sei fortunato");
@@ -60,7 +60,7 @@ public class Bank {
         }
 
     }
-    public void loadAccounts(AccountRepository repository){
+    public void loadAccounts(AccountRepository repository) throws DataException {
         accounts = repository.getAll();
     }
 }
