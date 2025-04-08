@@ -4,42 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Developer implements Comparable<Developer> {
-    private String firstName;
-    private String lastName;
+public class Developer implements Comparable<Developer>{
+    private String firstname;
+    private String lastname;
     private List<String> languages;
 
-    public Developer(String firstName, String lastname, String firstLanguage) {
-        this.firstName = firstName;
-        this.lastName = lastname;
+    public Developer(String firstname, String lastname, String firstLanguage){
+        this.firstname = firstname;
+        this.lastname = lastname;
         languages = new ArrayList<>();
         languages.add(firstLanguage);
     }
 
-    public void addLanguage(String newLanguage) {
+    public void addLanguage(String newLanguage){
         languages.add(newLanguage);
     }
+
     public Optional<String> getFirstLanguage() {
-        if(languages.size() > 0) {
+        if(languages.size() > 0){
             return Optional.of(languages.get(0));
         }
         return Optional.empty();
     }
+
     public void hitYourHead() {
         languages.clear();
     }
-    public String getFirstName() {
-        return firstName;
+
+    @Override
+    public int compareTo(Developer o) {
+        return this.lastname.compareTo(o.lastname);
     }
-    public String getLastName() {
-        return lastName;
+
+    public String getFirstname() {
+        return firstname;
+    }
+    public String getLastname() {
+        return lastname;
     }
     public int getNumLanguages() {
         return languages.size();
     }
 
-    @Override
-    public int compareTo(Developer o) {
-        return this.lastName.compareTo(o.lastName);
-    }
 }
