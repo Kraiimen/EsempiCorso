@@ -65,4 +65,14 @@ public class DbAccountRepository implements AccountRepository {
     public Optional<Account> getAccountById(int id) throws DataException {
         return Optional.empty();
     }
+
+    @Override
+    public Iterable<Account> getAllOrderedByBalance() throws DataException {
+        return null;
+    }
+
+    @Override
+    public Iterable<Account> getAllByCreationDateDesc() throws DataException {
+        return null;
+    }
 }
