@@ -35,9 +35,13 @@ public class Examples {
         }
         Comparator<Developer> cd = new DeveloperComparatorByNumLanguages();
         Collections.sort(developers, cd);
+        Collections.sort(developers,(o1,o2) -> o1.getNumLanguages()-o2.getNumLanguages()); //Lambda expression
         for(Developer d : developers){
             System.out.println(d.getFirstname());
         }
-
+        Collections.sort(developers,(o1,o2 )->{
+          return  o2.getFirstname().length()-o1.getFirstname().length();
+        } );
+        Collections.sort(developers,Utilities::compareDevsByNameLengthDesc);
     }
 }
