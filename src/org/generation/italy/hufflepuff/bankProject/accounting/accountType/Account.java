@@ -10,7 +10,7 @@ import org.generation.italy.hufflepuff.bankProject.accounting.exceptions.Negativ
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public abstract class Account extends Object{  //extends object è implicito
+public abstract class Account implements Comparable<Account>{  //extends object è implicito
     //la visibilità di default vuol dire visibile all'interno del suo package
     //in un file java può essere presente solo una classe pubblica che deve essere chiamata come il file
     //private = visibile solo nella classe che lo definisce (utilizzato prettamente per le variabili) private != cybersecurity
@@ -185,6 +185,11 @@ public abstract class Account extends Object{  //extends object è implicito
                 ", \n       id=" + id +
                 ", \n       creationDate=" + creationDate +
                 "\n}";
+    }
+
+    @Override
+    public int compareTo(Account o) {
+        return Double.compare(this.balance, o.balance);
     }
 }
 
