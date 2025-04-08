@@ -24,7 +24,7 @@ public class Book {
     }
 
     // /-----------/ METODI /-----------/
-    @Override   //MAGIA (∩ ͡° ͜ʖ ͡°)⊃━☆ﾟ. *
+    @Override
     public String toString(){
         //non dovrebbe essere necessario fare release.toString() e cat.toString(), però just in case (poi controllerò)
         String s = "il titolo è: " + title + "\n" +

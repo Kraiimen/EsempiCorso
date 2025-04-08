@@ -1,19 +1,19 @@
 package org.generation.italy.gryffindor.mud.game;
 
 public class Player extends Entity{
-
+    // /-----------/ ATTRIBUTI (FIELDS) /-----------/
     private String playerName;
     private long currentExpPoint;
 
-
-    public Player(String playerName, String name, int maxHealthPoint){
-        super(name, maxHealthPoint);
+    // /-----------/ CONSTRUCTORS /-----------/
+    public Player(String name, int maxHealthPoint, int damage, String playerName){
+        super(name, maxHealthPoint, damage);
         this.playerName = playerName;
         currentExpPoint = 0;
     }
 
 
-
+    // /-----------/ METHODS /-----------/
     public void login(){
         System.out.println("sto facendo il login");
     }
@@ -22,27 +22,28 @@ public class Player extends Entity{
     }
 
     @Override
-    public void attack(Entity target){
-        Npc enemy;
-        boolean canBeAttacked = true;
-        long earnedExp = 0;
-        if(target.getClass() == Npc.class) {
-            enemy = (Npc)target;
-            canBeAttacked = enemy.getCanBeAttacked();
-            earnedExp = enemy.getEarnedXP();
+    protected boolean canNotAttack(Entity target){
+        boolean res = super.canNotAttack(target);
+        if ( !(res) && isNpc(target)){
+            Npc npc = (Npc)target;
+            res = !(npc.getCanBeAttacked());
         }
-        if(target != null && canBeAttacked){
-            target.setCurrentHealthPoint(target.getCurrentHealthPoint() - 10);
-            System.out.println(playerName +  " attacca " + target.getName());
-            if (target.getCurrentHealthPoint() <= 0) {
-                currentExpPoint += earnedExp;
-            }
+        return res;
+    }
+    @Override
+    protected void handleEnemyDeath(Entity target){
+        super.handleEnemyDeath(target);
+        if(isNpc(target)){
+            Npc npc = (Npc)target;
+            currentExpPoint += npc.getEarnedXP();
         }
     }
 
+    protected boolean isNpc(Entity target){
+        return target.getClass() == Npc.class;
+    }
 
-
-
+    // /-----------/ METHODS - GETTER & SETTER /-----------/
     public String getPlayerName(){
         return playerName;
     }
@@ -57,5 +58,4 @@ public class Player extends Entity{
             currentExpPoint = exp;
         }
     }
-
 }
