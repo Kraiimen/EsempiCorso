@@ -5,12 +5,10 @@ import java.util.*;
 
 public class InMemoryAccountRepository implements AccountRepository {
 
-    public Map<Integer,Account> accounts = new HashMap<>(); //Creazione List per tutti i tipi di Account
 
     @Override
     public int saveAccount(Account a) throws DataException {
-        accounts.put(a.getId(), a);
-        return a.getId();
+        return 0;
     }
 
     @Override
@@ -23,13 +21,8 @@ public class InMemoryAccountRepository implements AccountRepository {
 
     }
 
-
     @Override
     public boolean deleteAccount(int id) {
-        if(accounts.containsKey(id)){
-            accounts.remove(id);
-            return true;
-        }
         return false;
     }
 

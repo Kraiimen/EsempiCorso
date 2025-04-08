@@ -18,54 +18,12 @@ import java.time.LocalDate;
 public class Start {
 
     public static void main(String[] args) {
-        ItalianAccount it1 = new ItalianAccount(10000);
-        GoldAccount gold = new GoldAccount(10000);
-        PlatinumAccount pl = new PlatinumAccount(1000);
-        CaymanAccount ca = new CaymanAccount(10000);
-        double deposit = pl.deposit(10);
-        pl.printByType(MovementType.DEPOSIT);
-        System.out.println(deposit);
-        Bank b = new Bank();
-        FileAccountRepository fr = new FileAccountRepository();
-        DbAccountRepository dr = new DbAccountRepository();
-        b.loadAccounts(fr);
-
-//        try{
-//            pl.deposit(100_000);
-//        } catch (ExcessiveDepositException e ){
-//            System.out.println("Error: "+ e.getMessage());
-//        }
-//
-//        try{
-//            pl.withdraw(200_000);
-//        } catch (InvalidAmountException e){
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//
-//        try{
-//            for(int i = 0; i < 100; i ++){
-//                ca.deposit(100);
-//            }
-//        } catch (GuardiaDiFinanzaException e){
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//
-//        try{
-//            ca.withdraw(100_001);
-//        } catch (InvalidAmountException | GuardiaDiFinanzaException e ){
-//            System.out.println("Error: " + e.getMessage());
-//        }
-
-
-        InMemoryAccountRepository accountRepository = new InMemoryAccountRepository();
-        accountRepository.saveAccount(it1);
-        accountRepository.saveAccount(gold);
-        accountRepository.saveAccount(pl);
-        accountRepository.saveAccount(ca);
-        System.out.println(accountRepository.deleteAccount(2));
-        System.out.println(accountRepository.accounts);
+        Client c = new Client("crmn","Erario","Carmine","04/07/03");
+        InMemoryClientRepository clientRepository = new InMemoryClientRepository();
+        clientRepository.addToClientMap(c);
+        Client z = clientRepository.getByClientCode("crmn");
+        System.out.println(z);
     }
-
 }
 
 
