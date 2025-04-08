@@ -1,3 +1,5 @@
+package firstExercises;
+
 public class test{
     public static void main(String[] args){
         int n1 = 18;
