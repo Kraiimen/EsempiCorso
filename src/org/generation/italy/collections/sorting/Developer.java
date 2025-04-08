@@ -8,12 +8,20 @@ public class Developer implements Comparable<Developer>{
     private String firstname;
     private String lastname;
     private List<String> languages;
+    private boolean male;
+    private double salary;
 
     public Developer(String firstname, String lastname, String firstLanguage){
+        this(firstname,lastname,firstLanguage,false,100);
+
+    }
+    public Developer(String firstname, String lastname, String firstLanguage, boolean isMale, double salary){
         this.firstname = firstname;
         this.lastname = lastname;
         languages = new ArrayList<>();
         languages.add(firstLanguage);
+        this.male = isMale;
+        this.salary = salary;
     }
 
     public void addLanguage(String newLanguage){
@@ -35,7 +43,12 @@ public class Developer implements Comparable<Developer>{
     public int compareTo(Developer o) {
         return this.lastname.compareTo(o.lastname);
     }
-
+    public boolean knowsLanguage(String language){
+        return languages.contains(language);
+    }
+    public String getFullname(){
+        return firstname + " " + lastname;
+    }
     public String getFirstname() {
         return firstname;
     }
@@ -44,6 +57,12 @@ public class Developer implements Comparable<Developer>{
     }
     public int getNumLanguages() {
         return languages.size();
+    }
+    public boolean isMale(){
+        return male;
+    }
+    public double getSalary(){
+        return salary;
     }
 
 }
