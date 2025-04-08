@@ -1,4 +1,4 @@
-package org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions;
+package org.generation.italy.bankProject.accounting.exceptions;
 
 public class CarmineException extends Exception {
     public CarmineException() {

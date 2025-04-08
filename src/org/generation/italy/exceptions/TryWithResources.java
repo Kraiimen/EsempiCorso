@@ -1,9 +1,5 @@
 package org.generation.italy.exceptions;
 
-import org.generation.italy.bankProject.accounting.accountType.GoldAccount;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 

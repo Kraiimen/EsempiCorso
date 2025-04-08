@@ -1,7 +1,7 @@
-package org.generation.italy.bankProject.accounting.bankProject.accounting;
+package org.generation.italy.bankProject.accounting;
 
-import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.ExcessiveDepositException;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.InvalidAmountException;
+import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

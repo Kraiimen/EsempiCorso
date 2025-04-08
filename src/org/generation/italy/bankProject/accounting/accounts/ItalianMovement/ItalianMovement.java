@@ -1,7 +1,7 @@
-package org.generation.italy.bankProject.accounting.bankProject.accounting.accounts.ItalianMovement;
+package org.generation.italy.bankProject.accounting.accounts.ItalianMovement;
 
-import org.generation.italy.bankProject.accounting.bankProject.accounting.Movement;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.MovementType;
+import org.generation.italy.bankProject.accounting.Movement;
+import org.generation.italy.bankProject.accounting.MovementType;
 
 import java.time.LocalDateTime;
 

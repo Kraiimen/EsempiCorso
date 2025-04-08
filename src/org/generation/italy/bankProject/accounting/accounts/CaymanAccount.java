@@ -1,7 +1,7 @@
-package org.generation.italy.bankProject.accounting.bankProject.accounting.accounts;
+package org.generation.italy.bankProject.accounting.accounts;
 
-import org.generation.italy.bankProject.accounting.bankProject.accounting.Account;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.CarmineException;
+import org.generation.italy.bankProject.accounting.Account;
+import org.generation.italy.bankProject.accounting.exceptions.CarmineException;
 
 import java.util.Random;
 

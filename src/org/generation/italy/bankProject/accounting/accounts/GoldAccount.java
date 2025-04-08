@@ -1,10 +1,10 @@
-package org.generation.italy.bankProject.accounting.bankProject.accounting.accounts;
+package org.generation.italy.bankProject.accounting.accounts;
 
-import org.generation.italy.bankProject.accounting.bankProject.accounting.Account;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.Movement;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.MovementType;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.ExcessiveDepositException;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.InvalidAmountException;
+import org.generation.italy.bankProject.accounting.Account;
+import org.generation.italy.bankProject.accounting.Movement;
+import org.generation.italy.bankProject.accounting.MovementType;
+import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
 
 import java.time.LocalDateTime;
 
@@ -13,9 +13,8 @@ public class GoldAccount extends Account {
     private static final int GOLD_BONUS = 1;
     private int nDeposit = 0;
 
-
     public GoldAccount(double balance){
-        super(balance,ownerCode);
+        super(balance, getOwnerCode());
     }
 
     @Override

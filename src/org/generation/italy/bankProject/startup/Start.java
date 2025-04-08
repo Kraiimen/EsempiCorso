@@ -1,13 +1,13 @@
-package org.generation.italy.bankProject.accounting.bankProject.startup;
+package org.generation.italy.bankProject.startup;
 
-import org.generation.italy.bankProject.accounting.bankProject.accounting.Account;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.accounts.CaymanAccount;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.accounts.GoldAccount;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.accounts.ItalianAccount;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.accounts.PlatinumAccount;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.CarmineException;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.ExcessiveDepositException;
-import org.generation.italy.bankProject.accounting.bankProject.accounting.exceptions.InvalidAmountException;
+import org.generation.italy.bankProject.accounting.Account;
+import org.generation.italy.bankProject.accounting.accounts.CaymanAccount;
+import org.generation.italy.bankProject.accounting.accounts.GoldAccount;
+import org.generation.italy.bankProject.accounting.accounts.ItalianAccount;
+import org.generation.italy.bankProject.accounting.accounts.PlatinumAccount;
+import org.generation.italy.bankProject.accounting.exceptions.CarmineException;
+import org.generation.italy.bankProject.accounting.exceptions.ExcessiveDepositException;
+import org.generation.italy.bankProject.accounting.exceptions.InvalidAmountException;
 
 
 public class Start {

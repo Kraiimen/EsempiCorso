@@ -1,6 +1,6 @@
-package org.generation.italy.bankProject.accounting.bankProject.accounting;
+package org.generation.italy.bankProject.accounting;
 
-import org.generation.italy.bankProject.accounting.bankProject.accounting.accounts.CaymanAccount;
+import org.generation.italy.bankProject.accounting.accounts.CaymanAccount;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

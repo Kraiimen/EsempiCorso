@@ -1,4 +1,4 @@
-package org.generation.italy.bankProject.accounting.bankProject.accounting;
+package org.generation.italy.bankProject.accounting;
 
 import java.util.Set;
 
