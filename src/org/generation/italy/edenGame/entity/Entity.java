@@ -15,6 +15,7 @@ public abstract class Entity {
         this.exp = exp;
     }
 
+
     //METODI
     public abstract void attack(Entity target);
     public void addHealthPoints(int hp){
