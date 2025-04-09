@@ -41,9 +41,15 @@ public class HashExamples {
 
     }
 
-    public static List<String> getNameByAge(List<Person> personList, int age){
+//    public static List<String> getNameByAge(List<Person> personList, int age){
+//        return personList.stream()
+//                .filter(pe -> pe.getAge() == age)
+//                .map(Person::getName).toList();
+//    }
+
+    public static String getNameByAge(List<Person> personList, int age){
         return personList.stream()
                 .filter(pe -> pe.getAge() == age)
-                .map(Person::getName).toList();
+                .map(Person::getName).findFirst().orElse("Nome non trovato");
     }
 }
