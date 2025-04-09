@@ -20,10 +20,10 @@ public class Start {
 //            throw new RuntimeException(e);
 //        }
         try {
-            PlatinumAccount pa = new PlatinumAccount(1000);
-            CaymanAccount ca = new CaymanAccount(1000);
-            ItalianAccount ia = new ItalianAccount(1000);
-            GoldAccount ga = new GoldAccount(1000);
+            PlatinumAccount pa = new PlatinumAccount(1000, "1232");
+            CaymanAccount ca = new CaymanAccount(1000, "3212");
+            ItalianAccount ia = new ItalianAccount(1000, "2341");
+            GoldAccount ga = new GoldAccount(1000, "2342");
             ia.deposit(200_000);
             ga.withdraw(1200);
             pa.withdraw(1400);

@@ -17,6 +17,12 @@ public class StreamAndLambda {
     }
 
     public static void main(String[] args) {
-
+        System.out.println(sumEvenNum());
+    }
+    public static int sumEvenNum() {
+        return numeri.stream()
+                .filter(n -> (n % 2 == 0))
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }
