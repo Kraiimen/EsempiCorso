@@ -18,7 +18,15 @@ public class Entity {
     private Room currentroom;
     private ArrayList<Item> inventory;
     private String entityColor;
-    private String resetColor = "\033[0m";
+    public static String colorBlack = "\u001B[30m";
+    public static String colorR = "\u001B[31m";
+    public static String colorG = "\u001B[32m";
+    public static String colorY = "\u001B[33m";
+    public static String colorB = "\u001B[34m";
+    public static String colorP = "\u001B[35m";
+    public static String colorC = "\u001B[36m";
+    public static String colorW = "\u001B[37m";
+    public static String resetColor = "\033[0m";
 
     public Entity(String name, int maxHp, int attackDamage, Room currentroom) {
         this.name = name;
@@ -32,7 +40,7 @@ public class Entity {
 
     public Entity(String name, int maxHp, int attackDamage, Room currentroom, String entityColor){
         this( name, maxHp, attackDamage, currentroom);
-        this.entityColor = entityColor;
+        this.colorR = entityColor;
     }
 
     public Entity(String name, int maxHp, int attackDamage, Room currentroom, int xpOnDeath){
@@ -212,5 +220,13 @@ public class Entity {
 
     public void setXpOnDeath(int xpOnDeath) {
         this.xpOnDeath = xpOnDeath;
+    }
+
+    public String getEntityColor() {
+        return entityColor;
+    }
+
+    public void setEntityColor(String entityColor) {
+        this.entityColor = entityColor;
     }
 }

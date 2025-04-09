@@ -2,15 +2,11 @@ package sud.rooms;
 
 import sud.items.*;
 import sud.entity.*;
-
 import java.util.*;
 
 public class Room {
     private String name;
-    private Room nordPath;
-    private Room sudPath;
-    private Room westPath;
-    private Room eastPath;
+    private Room nordPath,sudPath,westPath,eastPath;
     private boolean hasItems, hasNPC, hasGuards, hasCritters, hasMOBS;
     private ArrayList<Item> itemsInRoom;
     private ArrayList<Entity> MOBSInRoom, guardsInRoom, crittersInRoom;
