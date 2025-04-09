@@ -1,4 +1,7 @@
 package org.generation.italy.sudProject.classes;
 
-public class Priest {
-}
+import org.generation.italy.sudProject.Player;
+
+public class Priest extends Player {
+    // /--ATTRIBUTES--/
+
