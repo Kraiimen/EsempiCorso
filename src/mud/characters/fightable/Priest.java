@@ -1,6 +1,6 @@
 package mud.characters.fightable;
 
-public class Priest extends Character {
+public class Priest extends PlayerCharacter {
     private static int minIntelligence = 10;
     private static int minStrenght = 5;
     private static int minAgility = 6;

@@ -1,6 +1,6 @@
 package mud.characters.fightable;
 
-public class Thief extends Character {
+public class Thief extends PlayerCharacter {
     private static int minIntelligence = 12;
     private static int minStrenght = 7;
     private static int minAgility = 13;

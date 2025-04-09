@@ -17,5 +17,12 @@ public class Game {
         rooms.getFirst().beInRoom(boh);
         System.out.println("Sei in " + rooms.getFirst().getName());
         boh.getActualRoom().changeRoomPlayer(CardinalPoints.NORTH, boh);
+        boh.changeRoom(CardinalPoints.SOUTH);
+        System.out.println(boh.getActualRoom().getName());
+        boh.changeRoom(CardinalPoints.EAST);
+        System.out.println(boh.getActualRoom().getName());
+
+        boh.changeRoom(CardinalPoints.EAST);
+
     }
 }

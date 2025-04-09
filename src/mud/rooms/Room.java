@@ -70,10 +70,10 @@ public abstract class Room {
         this.directions = directions;
     }
 
-    public List<Entity> getPresentCharacters() {
+    public List<Entity> getPresentEntities() {
         return presentEntities;
     }
-    public void setPresentCharacters(List<Entity> presentEntities) {
+    public void setPresentEntities(List<Entity> presentEntities) {
         this.presentEntities = presentEntities;
     }
 

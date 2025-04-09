@@ -54,7 +54,7 @@ public class MagicMap {
         rooms.add(woods);
     }
 
-    public List<Room> getRooms(){
+    public static List<Room> getRooms(){
         return rooms;
     }
 }

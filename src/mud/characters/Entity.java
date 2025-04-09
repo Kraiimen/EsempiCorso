@@ -1,5 +1,6 @@
 package mud.characters;
 
+import mud.CardinalPoints;
 import mud.items.Item;
 import mud.rooms.Room;
 
@@ -13,6 +14,8 @@ public abstract class Entity {
     public Entity(){
         inventory = new ArrayList<>();
     }
+
+    public abstract void changeRoom(CardinalPoints cardinal);
 
     public Room getActualRoom() {
         return actualRoom;

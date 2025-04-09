@@ -1,6 +1,8 @@
 package mud.characters.fightable;
 
-public class Paladin extends Character {
+import personal.mudGame.Player;
+
+public class Paladin extends PlayerCharacter {
     private static int minIntelligence = 5;
     private static int minStrenght = 8;
     private static int minAgility = 10;

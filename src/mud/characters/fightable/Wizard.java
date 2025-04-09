@@ -1,6 +1,8 @@
 package mud.characters.fightable;
 
-public class Wizard extends Character {
+import personal.mudGame.Player;
+
+public class Wizard extends PlayerCharacter {
     private static int minIntelligence = 15;
     private static int minStrenght = 8;
     private static int minAgility = 5;
