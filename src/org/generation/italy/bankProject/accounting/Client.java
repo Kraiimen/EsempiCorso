@@ -66,13 +66,13 @@ public class Client {
         return total;
     }
 
-    public boolean isTaxEvader() {
-        for (Account account : accounts) {
-            if (account instanceof CaymanAccount) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean isTaxEvader() {
+//        for (Account account : accounts) {
+//            if (account instanceof CaymanAccount) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
 }

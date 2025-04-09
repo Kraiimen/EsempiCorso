@@ -8,13 +8,11 @@ public class Start {
 
     public static void main(String[] args) {
         AccountRepository accountRepo = new InMemoryAccountRepository();
-        ClientRepository clientRepo = new InMemoryClientRepository();
         try {
             for ( var acc : accountRepo.getAll()) {
                 System.out.println(acc);
             }
 
-            System.out.println(clientRepo.getByClientCode("1234"));
 
 
         } catch (DataException e) {

@@ -11,14 +11,14 @@ public class InMemoryAccountRepository implements AccountRepository {
     private static int idCounter = 1;
     private static Map<Integer, Account> accounts = new HashMap<>();
     static {
-        InMemoryClientRepository clientRepository = new InMemoryClientRepository();
-        Client c1234 = clientRepository.getByClientCode("1234").get();
-        Client c5678 = clientRepository.getByClientCode("5678").get();
-        accounts.put(idCounter++, new CaymanAccount(1000).withId(idCounter).withOwner(c1234));
-        accounts.put(idCounter++, new GoldAccount(2000).withId(idCounter).withOwner(c1234));
-        accounts.put(idCounter++, new CaymanAccount(3000, LocalDate.of(2023, 1, 1), "1234").withId(idCounter).withOwner(c5678));
-        accounts.put(idCounter++, new GoldAccount(4000).withId(idCounter).withOwner(c5678));
-        accounts.put(idCounter++, new ItalianAccount(5000).withId(idCounter).withOwner(c5678));
+//        InMemoryClientRepository clientRepository = new InMemoryClientRepository();
+//        Client c1234 = clientRepository.getByClientCode("1234").get();
+//        Client c5678 = clientRepository.getByClientCode("5678").get();
+//        accounts.put(idCounter++, new CaymanAccount(1000).withId(idCounter).withOwner(c1234));
+//        accounts.put(idCounter++, new GoldAccount(2000).withId(idCounter).withOwner(c1234));
+//        accounts.put(idCounter++, new CaymanAccount(3000, LocalDate.of(2023, 1, 1), "1234").withId(idCounter).withOwner(c5678));
+//        accounts.put(idCounter++, new GoldAccount(4000).withId(idCounter).withOwner(c5678));
+//        accounts.put(idCounter++, new ItalianAccount(5000).withId(idCounter).withOwner(c5678));
     }
     @Override
     public int saveAccount(Account a) throws DataException {

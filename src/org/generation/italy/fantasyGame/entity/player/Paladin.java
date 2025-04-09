@@ -9,6 +9,7 @@ public class Paladin extends Player {
         super(name, maxHp, 10, namePlayer, exp);
         this.isVirgin = isVirgin;
     }
+    @Override
     public void attack(Entity target){
         if(isVirgin){
             damage = 20;
