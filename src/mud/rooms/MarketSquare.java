@@ -12,6 +12,8 @@ public class MarketSquare extends Room{
 
     @Override
     public void printEntrance() {
+        System.out.println("You are in Market Square");
+        getPresentEntities().forEach(e -> System.out.println(e.getName() + " the " + e.getClass()));
 
     }
 }

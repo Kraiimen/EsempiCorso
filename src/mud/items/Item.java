@@ -1,4 +1,4 @@
 package mud.items;
 
-public class Item {
+public abstract class Item {
 }

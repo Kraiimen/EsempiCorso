@@ -29,27 +29,30 @@ public abstract class Room {
     }
 
     //funzioni principali
-    public void beInRoom(Entity entity) {
-        presentEntities.add(entity);
+    public void enterInRoom(Entity entity) {
         entity.setActualRoom(this);
+    }
+    public void leaveRoom(Entity entity) {
+            presentEntities.remove(entity);
     }
 
     public void changeRoomNPC(CardinalPoints cardinal, Entity entity){
         if(directions.containsKey(cardinal)) {
-            presentEntities.remove(entity);
-            directions.get(cardinal).beInRoom(entity);
+            leaveRoom(entity);
+            directions.get(cardinal).enterInRoom(entity);
         }
     }
 
-    public void changeRoomPlayer(CardinalPoints cardinal, Entity entity){
-        if(directions.containsKey(cardinal)) {
-            presentEntities.remove(entity);
-            directions.get(cardinal).beInRoom(entity);
-            printEntrance();
-        } else {
-            System.out.println("The road is closed. You're still at " + name);
-        }
-    }
+    //funziona ma era meglio metterlo in player direttamente
+//    public void changeRoomPlayer(CardinalPoints cardinal, Entity entity){
+//        if(directions.containsKey(cardinal)) {
+//            leaveRoom(entity);
+//            directions.get(cardinal).enterInRoom(entity);
+//            this.printEntrance();
+//        } else {
+//            System.out.println("The road is closed. You're still at " + name);
+//        }
+//    }
 
     public abstract void addRandomNPC();
 

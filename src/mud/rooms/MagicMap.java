@@ -1,12 +1,16 @@
 package mud.rooms;
 
 import mud.CardinalPoints;
+import mud.characters.Entity;
+import mud.characters.npcs.Baker;
+import mud.characters.npcs.Civilian;
+import mud.characters.npcs.Merchant;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MagicMap {
-    static private ArrayList<Room> rooms = new ArrayList<>();
+    static private List<Room> rooms = new ArrayList<>();
     static{
         Room templeSquare = new TempleSquare();
         Room theTemple = new TheTemple();
@@ -52,6 +56,8 @@ public class MagicMap {
         rooms.add(secondGarden);
         rooms.add(cityDoor);
         rooms.add(woods);
+
+
     }
 
     public static List<Room> getRooms(){

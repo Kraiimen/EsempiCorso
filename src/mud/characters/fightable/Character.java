@@ -14,40 +14,31 @@ public abstract class Character extends Entity {
     public static Random dice = new Random();
     public static final int MIN = 0;
     public static final int MAX = 20;
-    private String name;
     private int intelligence;
-    private int strenght;
+    private int strength;
     private int agility;
     private int stamina;
     private int exp;
 
     public Character(String name){
-        this.name = name;
+        super(name);
     }
-    public Character(String name, int minIntelligence, int minStrenght, int minAgility, int minStamina){
-        this.name = name;
+    public Character(String name, int minIntelligence, int minStrength, int minAgility, int minStamina){
+        super(name);
         this.intelligence = dice.nextInt(minIntelligence, MAX);
-        this.strenght = dice.nextInt(minStrenght, MAX);
+        this.strength = dice.nextInt(minStrength, MAX);
         this.agility = dice.nextInt(minAgility, MAX);
         this.stamina = dice.nextInt(minStamina, MAX);
 
     }
 
-    @Override
     public void changeRoom(CardinalPoints cardinal){
         if(getActualRoom().getDirections().containsKey(cardinal)) {
             getActualRoom().getPresentEntities().remove(this);
-            getActualRoom().getDirections().get(cardinal).beInRoom(this);
+            getActualRoom().getDirections().get(cardinal).enterInRoom(this);
         }
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getIntelligence() {
         return intelligence;
@@ -57,12 +48,12 @@ public abstract class Character extends Entity {
         this.intelligence = intelligence;
     }
 
-    public int getStrenght() {
-        return strenght;
+    public int getStrength() {
+        return strength;
     }
 
-    public void setStrenght(int strenght) {
-        this.strenght = strenght;
+    public void setStrength(int strenght) {
+        this.strength = strenght;
     }
 
     public int getAgility() {

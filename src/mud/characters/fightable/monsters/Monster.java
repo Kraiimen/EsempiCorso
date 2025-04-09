@@ -1,4 +1,6 @@
-package mud.characters.fightable;
+package mud.characters.fightable.monsters;
+
+import mud.characters.fightable.Character;
 
 public abstract class Monster extends Character {
     private int minExpToFight;
@@ -7,7 +9,7 @@ public abstract class Monster extends Character {
         super(name);
     }
 //    per i mostri piu deboli o metto un massimo di forza o decido direttamente quanto sono forti
-//    public Monster(String name, int maxIntelligence, int maxStrenght, int maxAgility, int maxStamina) {
+//    public Monster(String name, int maxIntelligence, int maxStrength, int maxAgility, int maxStamina) {
 //        super(name);
 //            setIntelligence(dice.nextInt(MIN, MAX));
 //            setStrenght(dice.nextInt(MIN, MAX));
