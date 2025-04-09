@@ -2,55 +2,34 @@ package capstoneproject.entity;
 
 import capstoneproject.Room;
 
-public class Player extends Entity {
-    private int exp;
-    private Room currentRoom;
+import java.io.Console;
 
-    public Player(String name, Room startingRoom) {
-        super(name);
-        this.currentRoom = startingRoom;
-    }
 
-    public void moveNorth() {
-        if (currentRoom.getNorth() != null) {
-            currentRoom = currentRoom.getNorth();
-            currentRoom.describe();
-        } else {
-            System.out.println("There is no room to the north");
-        }
-    }
+public abstract class Player extends Entity {
+    private static final int MAX_INTELLIGENCE = 20;
+    private static final int MAX_STAMINA = 20;
+    private static final int MAX_AGILITY = 20;
+    private static final int MAX_STRENGHT = 20;
 
-    public void moveSouth() {
-        if (currentRoom.getSouth() != null) {
-            currentRoom = currentRoom.getSouth();
-            currentRoom.describe();
-        } else {
-            System.out.println("There is no room to the south");
-        }
-    }
+    protected String playerName;
+    protected int exp;
+    protected int intelligence;
+    protected int stamina;
+    protected int agility;
+    protected int strength;
+    Console console;
 
-    public void moveEast() {
-        if (currentRoom.getEast() != null) {
-            currentRoom = currentRoom.getEast();
-            currentRoom.describe();
-        } else {
-            System.out.println("There is no room to the east");
-        }
+
+    public Player(int maxHealt, int maxDamage, String playerName) {
+        super(maxHealt, maxDamage);
+        this.playerName = playerName;
+        this.exp = exp;
+        this.intelligence = intelligence;
+        this.stamina = stamina;
+        this.agility = agility;
+        this.strength = strength;
     }
 
-    public void moveWest() {
-        if (currentRoom.getWest() != null) {
-            currentRoom = currentRoom.getWest();
-            currentRoom.describe();
-        } else {
-            System.out.println("There is no room to the west");
-        }
-    }
-    @Override
-    public void printStats(){  // Override di print stat in charachter per stamapre tutte le statistiche
-        super.printStats();
-        System.out.println("You are in the room" + currentRoom.getName());
-    }
 
     public void HealInTemple(){ //Funzione per ricaricarsi nel temple
         System.out.println("Healing in Temple");
@@ -59,5 +38,10 @@ public class Player extends Entity {
 
     public void setExp(int exp) {
         this.exp = exp;
+    }
+
+    @Override
+    public void attack(Entity target) {
+
     }
 }

@@ -1,46 +1,58 @@
 package capstoneproject.entity;
 
-import java.util.Random;
-
 public abstract class Entity {
-    protected String name;
-    protected int health;
-    protected int maxHealth;
-    protected int strength;
-    protected int intelligence;
-    protected int agility;
-    protected int stamina;
+    private String name;
+    private int healthPoints;
+    private int maxHealth;
+    private int inventory;
+    private int damage;
+    private int maxDamage;
 
-
-    public Entity(String name) {
+    public Entity(int maxHealth, int maxDamage) {
         this.name = name;
-        this.health = maxHealth;
-        this.maxHealth = 20 + stamina;
-        this.strength = new Random().nextInt(21);
-        this.intelligence = new Random().nextInt(21);
-        this.agility = new Random().nextInt(21);
-        this.stamina = stamina;
+        this.healthPoints = healthPoints;
+        this.maxHealth = maxHealth;
+        this.inventory = inventory;
+        this.damage = damage;
+        this.maxDamage = maxDamage;
+
     }
 
-    public void printStats(){
-        System.out.println("Name: " + name);
-        System.out.println("Intelligence: " + intelligence);
-        System.out.println("Strength: " + strength);
-        System.out.println("Agility : " + agility);
-        System.out.println("Stamina: " + stamina);
-        System.out.println("Health: " + health + "/" + maxHealth);
-    }
+//    public void printStats(){
+//        System.out.println("Name: " + name);
+//        System.out.println("Intelligence: " + intelligence);
+//        System.out.println("Strength: " + strength);
+//        System.out.println("Agility : " + agility);
+//        System.out.println("Stamina: " + stamina);
+//        System.out.println("Health: " + healthpoint + "/" + maxHealth);
+//    }
      public void takeDamage(int damage){
-        health -= damage;
-        if(health < 0) health = 0;
+        healthPoints -= damage;
+        if(healthPoints < 0) healthPoints = 0;
      }
 
      public void heal(int amount){
-        health += amount;
-        if(health > maxHealth) health = maxHealth;
+        healthPoints += amount;
+        if(healthPoints > maxHealth) healthPoints = maxHealth;
      }
 
-     public boolean isAlive(){
-        return health > 0;
+     public boolean isDead(){
+        return healthPoints <= 0;
      }
+
+     public abstract void attack(Entity target);
+
+     public void addHealthPoints(int hp) {
+         healthPoints += hp;
+    }
+     public void subtractHealthPoints(int hp){
+        healthPoints -= hp;
+    }
+
+     public int getMissingHp(int missingHp){
+         missingHp = maxHealth - healthPoints;
+         return missingHp;
+     }
+
+
 }
