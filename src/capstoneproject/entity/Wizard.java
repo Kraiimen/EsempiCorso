@@ -14,6 +14,11 @@ public class Wizard extends Player {
         this.stamina = new Random().nextInt(21);
     }
 
+    @Override
+    public void attack(Entity target) {
+
+    }
+
 //    public Wizard(String name, Room startingRoom) {
 //        super(name, startingRoom);
 //        this.maxHealth = 20 + stamina;

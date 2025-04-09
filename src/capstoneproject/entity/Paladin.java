@@ -16,6 +16,11 @@ public class Paladin extends Player {
     }
 
     @Override
+    public void attack(Entity target) {
+
+    }
+
+    @Override
     public String toString() {
         return "Paladin{" +
                 "playerName='" + playerName + '\'' +

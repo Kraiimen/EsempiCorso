@@ -14,4 +14,9 @@ public class Thief extends Player {
         this.stamina = new Random().nextInt(21);
     }
 
+    @Override
+    public void attack(Entity target) {
+
+    }
+
 }

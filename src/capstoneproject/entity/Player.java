@@ -41,7 +41,5 @@ public abstract class Player extends Entity {
     }
 
     @Override
-    public void attack(Entity target) {
-
-    }
+    public abstract void attack(Entity target);
 }
