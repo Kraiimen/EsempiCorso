@@ -4,8 +4,7 @@ import java.util.LinkedList;
 
 public class WorldMap {
     // /--ATTRIBUTES--/
-    private LinkedList<Room> world;
-
+    public static LinkedList<Room> world;
     // /--CONSTRUCTORS--/
     public WorldMap(){
         world = new LinkedList<>();
@@ -19,9 +18,4 @@ public class WorldMap {
         world.offer(new Room("Garden_3",true, true,false, false));
         world.offer(new Room("Woods",true, false,false, false));
     }
-
-
-
-
-    // /--METHODS--/
 }

@@ -16,12 +16,4 @@ public class Room{
         this.estDoor = estDoor;
         this.ovestDoor = ovestDoor;
     }
-
-
-
-
-    // /--METHODS--/
-
-
-
 }

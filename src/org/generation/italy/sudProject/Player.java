@@ -1,9 +1,13 @@
 package org.generation.italy.sudProject;
 
+import org.generation.italy.sudProject.map.Room;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import static org.generation.italy.sudProject.map.WorldMap.world;
 
 public class Player extends Entity {
     // /--ATTRIBUTES--/
@@ -14,6 +18,7 @@ public class Player extends Entity {
     private LocalDate creationDate = LocalDate.now();
     protected int playerLevel;
     public static int numberOfPlayers;
+    public Room playerPosition = world.getFirst();
 
     // /--CONSTRUCTORS--/
     public Player(String firstName, String lastName, String email, String password, String playerName, int indexClassStat, int classStat){
@@ -43,6 +48,7 @@ public class Player extends Entity {
         }
         return stats;
     }
+
 
     // /--GETTER-&-SETTER--/
 
@@ -88,5 +94,13 @@ public class Player extends Entity {
 
     public void setPlayerLevel(int playerLevel) {
         this.playerLevel = playerLevel;
+    }
+
+    public static int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public Room getPlayerPosition() {
+        return playerPosition;
     }
 }
