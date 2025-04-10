@@ -1,12 +1,19 @@
 package capstoneproject.entity;
 
+import capstoneproject.rooms.Room;
+
 public class Wizard extends Player {
 
     private boolean isBeardLong;
 
-    public Wizard(int maxHealt, int maxDamage, String playerName) {
-        super(maxHealt, maxDamage, playerName);
-        this.playerName = playerName;
+    public Wizard(String name, int maxHealth, int maxDamage, Room currentRoom) {
+        super(name, maxHealth, maxDamage, currentRoom);
+
+
+    }
+
+    @Override
+    protected void initializeStats() {
         this.strength = this.random.nextInt(21);
         this.intelligence = 5 + this.random.nextInt(21);
         this.agility = this.random.nextInt(21);

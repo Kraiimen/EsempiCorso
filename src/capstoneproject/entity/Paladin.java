@@ -6,8 +6,8 @@ public class Paladin extends Player {
 
     private boolean isVirgin;
 
-    public Paladin(int maxHealt, int maxDamage, String playerName, Room currentRoom) {
-        super(maxHealt, maxDamage, playerName,currentRoom);
+    public Paladin(String name, int maxHealth, int maxDamage, Room currentRoom) {
+        super(name, maxHealth, maxDamage, currentRoom);
 
 
     }

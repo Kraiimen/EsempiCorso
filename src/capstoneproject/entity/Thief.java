@@ -1,10 +1,15 @@
 package capstoneproject.entity;
 
+import capstoneproject.rooms.Room;
+
 public class Thief extends Player {
     private boolean isInvisible;
-    public Thief(int maxHealt, int maxDamage, String playerName) {
-        super(maxHealt, maxDamage, playerName);
-        this.playerName = playerName;
+    public Thief(String name, int maxHealth, int maxDamage, Room currentRoom) {
+        super(name, maxHealth, maxDamage, currentRoom);
+    }
+
+    @Override
+    protected void initializeStats() {
         this.strength = this.random.nextInt(21);
         this.intelligence =  this.random.nextInt(21);
         this.agility = 5 + this.random.nextInt(21);

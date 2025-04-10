@@ -110,4 +110,16 @@ public abstract class Entity {
     public int getMaxDamage() {
         return maxDamage;
     }
+
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

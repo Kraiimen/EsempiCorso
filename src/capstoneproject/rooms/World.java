@@ -10,7 +10,7 @@ public class World {
 
      public World(){
          start = new Room("Temple Square" , "Una piazza ampia ed elegante, circondata con edifici costruiti in archittetura classica");
-         player = new Paladin(100,20,"Aladino Il Puro", start);
+         player = new Paladin("Aladino il puro",100,20, start);
      }
 
      public void create(){
@@ -24,5 +24,8 @@ public class World {
          ms.addExit(Directions.E, b);
          ms.addExit(Directions.W, a);
          ms.addExit(Directions.S , g);
+     }
+     public Player getPlayer() {
+         return player;
      }
 }
