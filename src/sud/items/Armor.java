@@ -8,11 +8,6 @@ public class Armor extends Item{
         this.damageReducer = damageReducer;
     }
 
-    static {
-        Armor leatherArmor = new Armor(50, "Leather armor",5);
-        Armor chainMail = new Armor(80, "Chain mail",8);
-        Armor fullplate = new Armor(120, "Full plate armor",10);
-    }
     public int getDamageReducer() {
         return damageReducer;
     }
