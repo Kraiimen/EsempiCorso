@@ -7,8 +7,8 @@ import static sud.entity.Entity.resetColor;
 public class ManaPotion extends Potion{
     private int manaPointsRestore;
 
-    public ManaPotion(int price, ItemType type, String name, int manaPointsRestore) {
-        super(price, type, name);
+    public ManaPotion(int price, String name, int manaPointsRestore) {
+        super(price, name);
         this.manaPointsRestore = manaPointsRestore;
     }
 

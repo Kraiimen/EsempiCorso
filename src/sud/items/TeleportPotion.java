@@ -7,8 +7,8 @@ import static sud.entity.Entity.resetColor;
 
 public class TeleportPotion extends Potion{
 
-    public TeleportPotion(int price, ItemType type, String name) {
-        super(price, type, name);
+    public TeleportPotion(int price, String name) {
+        super(price, name);
     }
 
     public void tepelortToSafety(Entity drinker){

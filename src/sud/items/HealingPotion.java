@@ -7,8 +7,8 @@ import static sud.entity.Entity.resetColor;
 public class HealingPotion extends Potion{
     private int healingFactor;
 
-    public HealingPotion(int price, ItemType type, String name, int healingFactor) {
-        super(price, type, name);
+    public HealingPotion(int price, String name, int healingFactor) {
+        super(price, name);
         this.healingFactor = healingFactor;
     }
 
