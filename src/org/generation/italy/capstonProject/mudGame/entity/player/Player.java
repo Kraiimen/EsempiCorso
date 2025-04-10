@@ -1,6 +1,7 @@
 package org.generation.italy.capstonProject.mudGame.entity.player;
 
 import org.generation.italy.capstonProject.mudGame.entity.Entity;
+import org.generation.italy.capstonProject.mudGame.entity.GameMenuUtils;
 import org.generation.italy.capstonProject.mudGame.entity.Inventory;
 import org.generation.italy.capstonProject.mudGame.entity.items.Item;
 import org.generation.italy.capstonProject.mudGame.entity.npc.Cat;
@@ -14,7 +15,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.generation.italy.capstonProject.mudGame.entity.Utilities.readIntInputOrExit;
+import static org.generation.italy.capstonProject.mudGame.entity.GameMenuUtils.displayMovementOptions;
+import static org.generation.italy.capstonProject.mudGame.entity.GameMenuUtils.readIntInputOrExit;
 
 public class Player extends Entity {
     private final int MAX_INTELLIGENCE = 20;
@@ -82,7 +84,7 @@ public class Player extends Entity {
             int n = 0;
             String answer;
             do {
-                answer = console.readLine("You can try running away(a) or use an item from your inventory(b)");
+                answer = console.readLine("You can try running away ina a random direction(a) or use an item from your inventory(b)");
                 if (answer.equals("a")) {
                     n = rand.nextInt(1, 6);
                     if ((n == 4)) {
@@ -90,7 +92,7 @@ public class Player extends Entity {
                         target.restoreHP();
                         runAway();
                     } else {
-                        System.out.println("run away failed");
+                        System.out.println("Run away failed");
                     }
                 } else if (answer.equals("b")) {
                     openInventory();
@@ -106,66 +108,7 @@ public class Player extends Entity {
     }
 
     public void openInventory(){
-        Map<Item, Integer> inventoryCopy = inventory.getAll();
-
-        AtomicInteger index = new AtomicInteger(1);
-        List<Item> inventoryItems = new ArrayList<>();
-
-        if(inventoryItems.isEmpty()){
-            System.out.println("Your inventory is empty.");
-        }
-
-        boolean running = true;
-
-        while(running) {
-            System.out.println("\n-------INVENTARIO-------");
-            inventoryCopy.forEach((item, quantity) -> {
-                System.out.println(index.get() + ") " + item.getName() + " x" + quantity);
-                inventoryItems.add(item);
-                index.getAndIncrement();
-            });
-
-            System.out.println("Choose an item by its index or press 'x' to esc:");
-
-            Integer answer = readIntInputOrExit(scanner, 1, inventoryItems.size(), "x");
-
-            if (answer == null) {
-                System.out.println("Closing inventory menu.");
-                running = false;
-            }
-            Item selectedItem = inventoryItems.get(answer);
-            boolean selecting = true;
-
-            while (selecting) {
-                System.out.println("\nYou selected: " + selectedItem.getName());
-                System.out.println("""
-                        1. Use Item
-                        2. Remove Item
-                        3. Go back to Inventory""");
-                System.out.print("Choose an option or press 'x' to exit: ");
-
-                Integer action = readIntInputOrExit(scanner, 1, 3, "x");
-
-                if (action == null) {
-                    System.out.println("Closing inventory menu.");
-                    running = false;
-                }
-
-                switch (action) {
-                    case 1:
-                        useItem(selectedItem);
-                        selecting = false;
-                        break;
-                    case 2:
-                        inventory.removeItem(selectedItem);
-                        selecting = false;
-                        break;
-                    case 3:
-                        selecting = false;
-                        break;
-                }
-            }
-        }
+        GameMenuUtils.handleInventoryMenu(this, scanner);
     }
 
     public void useItem(Item item){
@@ -173,6 +116,10 @@ public class Player extends Entity {
             item.applyEffect(this);
             inventory.removeItem(item);
         }
+    }
+
+    public void handleMovement(){
+        GameMenuUtils.displayMovementOptions(this, scanner);
     }
 
     public void move(Direction direction){
@@ -264,4 +211,6 @@ public class Player extends Entity {
     public boolean isHasKilledKitties() {
         return hasKilledKitties;
     }
+
+
 }

@@ -1,7 +1,9 @@
 package org.generation.italy.capstonProject.mudGame.entity;
 
+import org.generation.italy.capstonProject.mudGame.entity.items.Item;
 import org.generation.italy.capstonProject.mudGame.entity.rooms.Room;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
@@ -160,4 +162,9 @@ public abstract class Entity {
     public void setIsUnderAttack(boolean underAttack) {
         isUnderAttack = underAttack;
     }
+
+    public Inventory getInventory(){
+        return inventory;
+    }
+
 }
