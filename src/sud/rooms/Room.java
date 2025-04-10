@@ -45,42 +45,67 @@ public class Room {
 
         castle.setPaths(debugroom, templeSq, prison, debugroom);
         castle.setRoomProperties(false, true, true, false, false);
+        castle.getNPCInRoom().add(Npc.getNpcMap().get("King"));
+        castle.getNPCInRoom().add(Npc.getNpcMap().get("Kings Guard"));
 
         prison.setPaths(debugroom, debugroom, debugroom, castle);
         prison.setRoomProperties(false, true, true, false, false);
 
         templeSq.setPaths(debugroom, market, debugroom, temple);
         templeSq.setRoomProperties(false, true, true, false, false);
+        templeSq.getNPCInRoom().add(Npc.getNpcMap().get("TQ Guard"));
 
         tavern.setPaths(debugroom, debugroom, templeSq, debugroom);
         tavern.setRoomProperties(true, true, false, false, false);
+        tavern.getNPCInRoom().add(Npc.getNpcMap().get("TavernK"));
 
         temple.setPaths(debugroom, debugroom, templeSq, debugroom);
         temple.setRoomProperties(false, true, true, false, false);
+        temple.getNPCInRoom().add(Npc.getNpcMap().get("Cleric"));
 
         market.setPaths(templeSq, fieldsN, forge, bakery);
         market.setRoomProperties(true, true, true, false, false);
+        market.getNPCInRoom().add(Npc.getNpcMap().get("MQ Guard"));
 
         bakery.setPaths(debugroom, debugroom, market, debugroom);
         bakery.setRoomProperties(true, true, true, false, false);
+        bakery.getNPCInRoom().add(Npc.getNpcMap().get("Baker"));
 
         forge.setPaths(debugroom, alchemist, debugroom, market);
         forge.setRoomProperties(true, true, true, false, false);
+        forge.getNPCInRoom().add(Npc.getNpcMap().get("Assistant"));
 
         alchemist.setPaths(forge, debugroom, debugroom, debugroom);
         alchemist.setRoomProperties(true, true, true, false, false);
+        alchemist.getNPCInRoom().add(Npc.getNpcMap().get("Alchemist"));
 
         fieldsN.setPaths(market, fieldsS, debugroom, debugroom);
         fieldsN.setRoomProperties(true, false, false, true, false);
+        fieldsN.getMOBSInRoom().add(Mob.getMobMap().get("Critter"));
+        fieldsN.getMOBSInRoom().add(Mob.getMobMap().get("Critter"));
+        fieldsN.getMOBSInRoom().add(Mob.getMobMap().get("Critter"));
+        fieldsN.getMOBSInRoom().add(Mob.getMobMap().get("Critter"));
+        fieldsN.getMOBSInRoom().add(Mob.getMobMap().get("Critter"));
 
         fieldsS.setPaths(fieldsN, forest, debugroom, debugroom);
         fieldsS.setRoomProperties(true, false, false, false, true);
+        fieldsS.getMOBSInRoom().add(Mob.getMobMap().get("Goblin"));
+        fieldsS.getMOBSInRoom().add(Mob.getMobMap().get("Goblin"));
+        fieldsS.getMOBSInRoom().add(Mob.getMobMap().get("Goblin"));
+        fieldsS.getMOBSInRoom().add(Mob.getMobMap().get("Goblin"));
+        fieldsS.getMOBSInRoom().add(Mob.getMobMap().get("Goblin"));
 
         forest.setPaths(fieldsS, debugroom, debugroom, bossRoom);
         forest.setRoomProperties(true, false, false, false, true);
+        forest.getMOBSInRoom().add(Mob.getMobMap().get("Bugbear"));
+        forest.getMOBSInRoom().add(Mob.getMobMap().get("Bugbear"));
+        forest.getMOBSInRoom().add(Mob.getMobMap().get("Bugbear"));
+        forest.getMOBSInRoom().add(Mob.getMobMap().get("Ogre"));
+        forest.getMOBSInRoom().add(Mob.getMobMap().get("Ogre"));
 
         bossRoom.setPaths(debugroom, debugroom, forest, debugroom);
         bossRoom.setRoomProperties(true, false, false, false, true);
+        bossRoom.getMOBSInRoom().add(Mob.getMobMap().get("Boss"));
 
         castle.setDescription("Un enorme sala del trono si presenta davanti a te, muri in marmo bianco, un lungo tappeto rosso che dalla porta indica la via per il trono ," +
                 "4 guardie svettano fiere alla tua destra quando entri, e altr 4 sono appena arrivate dal cambio turno sulla tua sinistra " +
@@ -192,6 +217,7 @@ public class Room {
         this.hasCritters = hasCritters;
         this.hasMOBS = hasMOBS;
     }
+
 
     public String getName() {
         return name;

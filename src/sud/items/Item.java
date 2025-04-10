@@ -10,6 +10,9 @@ public class Item {
         this.type = type;
         this.name = name;
     }
+    static{
+        // Food pane= new Food(1, F)
+    }
 
     public int getPrice() {
         return price;
