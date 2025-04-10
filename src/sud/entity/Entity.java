@@ -18,8 +18,8 @@ public class Entity {
     private int xpOnDeath=0;
     private Room currentroom;
     private ArrayList<Item> inventory;
-    private Weapon equipedWeapon = new Weapon(0,ItemType.WEAPON,"pugni",0);
-    private Armor equipedArmor= new Armor(0,ItemType.ARMOR,"culo nudo", 0);
+    private Weapon equipedWeapon = new Weapon(0,"pugni",0);
+    private Armor equipedArmor= new Armor(0,"culo nudo", 0);
     private int ac;
     private String entityColor;
     public static String colorBlack = "\u001B[30m";
