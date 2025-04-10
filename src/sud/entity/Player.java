@@ -18,7 +18,7 @@ public class Player extends Entity{
     private int coins;
 
     public Player(String name, int maxHp, String entityColor, String chosenClass) {
-        super(name, maxHp, 0, Room.getRoomPointerFromName("templeSquare"), entityColor);
+        super(name, maxHp, 0, Room.getRoomPointerFromName("castle"), entityColor);
         switch (chosenClass){
             case "wizard" ->{
                 this.intelligence = isScoreOk(10+dices.rd10());
@@ -84,6 +84,7 @@ public class Player extends Entity{
 
 
         public void levelUp(){
+        // @todo implementare i threshold per i livelli
     }
 
     public int getIntMod() {

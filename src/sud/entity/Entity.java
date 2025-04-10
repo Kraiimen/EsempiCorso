@@ -44,7 +44,7 @@ public class Entity {
 
     public Entity(String name, int maxHp, int attackDamage, Room currentroom, String entityColor){
         this( name, maxHp, attackDamage, currentroom);
-        this.colorR = entityColor;
+        colorR = entityColor;
     }
 
     public Entity(String name, int maxHp, int attackDamage, Room currentroom, int xpOnDeath){
@@ -78,8 +78,9 @@ public class Entity {
             return;
         }else if(doesAttackRollHit(attacked,roll)){
             damage = equipedWeapon.rollDamage();
+        } else if (!doesAttackRollHit(attacked,roll )) {
+            System.out.printf(entityColor+"%s missed his attack"+resetColor, name);
         }
-
         System.out.printf(entityColor+"%s is attacking %s for %d damage\n "+resetColor, name, attacked.getName(),damage);
         attacked.hurt(damage);
         if(attacked.isDead){
@@ -125,7 +126,7 @@ public class Entity {
                         numOfItem.getAndIncrement();
                     }
                 });
-                if(wantToEquip){equipedArmor = (Armor) item;}
+                if(wantToEquip){equipedArmor = (Armor)item;}
                 if(numOfItem.get()<=2){inventory.add(item);}
 
 
@@ -137,7 +138,7 @@ public class Entity {
                         numOfItem.getAndIncrement();
                     }
                 });
-                if(wantToEquip){equipedWeapon = (Weapon) item;}
+                if(wantToEquip){equipedWeapon = (Weapon)item;}
                 if(numOfItem.get()<=3){inventory.add(item);}
 
             }

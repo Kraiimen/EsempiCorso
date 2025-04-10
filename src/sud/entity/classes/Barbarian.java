@@ -44,7 +44,7 @@ public class Barbarian extends Player {
             this.setDead(true);
             this.setHealthPoints(0);
         }else{
-            recivedDamage -=(this.getEquipedArmor().getDamageReducer()+getConMod());
+            recivedDamage -=(this.getEquipedArmor().getDamageReducer()+(getConMod()*2));
             this.setHealthPoints(recivedDamage);
         }
     }

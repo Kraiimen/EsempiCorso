@@ -13,7 +13,6 @@ public class Spell {
         for (int i = 0; i < level ; i++) {
             this.damage += dices.roll(damageDiceFaces);
         }
-
     }
 
     public String getName() {

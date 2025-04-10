@@ -34,11 +34,18 @@ public class Rogue extends Player {
 
         System.out.printf(this.getEntityColor() + "%s is attacking %s for %d damage\n " + resetColor, this.getName(), attacked.getName(), damage);
         attacked.hurt(damage + this.getDexMod());
-        if(dices.rd100()>=75){
-            System.out.printf(this.getEntityColor() + "%s manages to take %s by surprise and deal a second sneak attack for %d damage\n " + resetColor, this.getName(), attacked.getName(), damage);
-            attacked.hurt(this.getDexMod()*4);
+        if (this.getEquipedArmor().getName().equalsIgnoreCase("Leather armor")){
+            if(dices.rd100()>=75){
+                System.out.printf(this.getEntityColor() + "%s manages to take %s by surprise and deal a second sneak attack for %d damage\n " + resetColor, this.getName(), attacked.getName(), damage);
+                attacked.hurt(this.getDexMod()*4);
+            }
         }
-
+        if(this.getEquipedArmor().getName().equalsIgnoreCase("Chain mail")){
+            if(dices.rd100()>=90){
+                System.out.printf(this.getEntityColor() + "%s manages to take %s by surprise and deal a second sneak attack for %d damage\n " + resetColor, this.getName(), attacked.getName(), damage);
+                attacked.hurt(this.getDexMod()*4);
+            }
+        }
         if (attacked.isDead()) {
             System.out.println(this.getEntityColor() + attacked.getName() + " has died by that hit\n " + resetColor);
         }
