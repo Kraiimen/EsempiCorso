@@ -1,8 +1,11 @@
 package sud.rooms;
 
+import sud.dices;
 import sud.items.*;
 import sud.entity.*;
 import java.util.*;
+
+import static sud.items.Item.itemMap;
 
 public class Room {
     private String name;
@@ -55,6 +58,9 @@ public class Room {
         templeSq.setPaths(debugroom, market, debugroom, temple);
         templeSq.setRoomProperties(false, true, true, false, false);
         templeSq.getNPCInRoom().put(Npc.getNpcMap().get("TQ Guard").getName(), Npc.getNpcMap().get("TQ Guard"));
+//        if(dices.rd100()>50){
+//            roomMap.get("templeSq").setItemsInRoom("Bread", bread).add(itemMap.get("bread"));
+//        }
 
         tavern.setPaths(debugroom, debugroom, templeSq, debugroom);
         tavern.setRoomProperties(true, true, false, false, false);
@@ -221,7 +227,6 @@ public class Room {
         this.hasCritters = hasCritters;
         this.hasMOBS = hasMOBS;
     }
-
 
     public String getName() {
         return name;
