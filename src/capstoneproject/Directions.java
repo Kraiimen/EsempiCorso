@@ -1,5 +1,14 @@
 package capstoneproject;
 
 public enum Directions {
-    NORTH, SUD, WEST, EAST;
+    N, S, W, E;
+
+    public Directions getOpposite(){
+        return switch(this){
+            case E -> W;
+            case N -> S;
+            case W -> E;
+            case S -> N;
+        };
+    }
 }

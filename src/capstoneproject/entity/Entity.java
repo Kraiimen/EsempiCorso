@@ -1,23 +1,27 @@
 package capstoneproject.entity;
 
-import java.util.Random;
+import capstoneproject.Directions;
+import capstoneproject.rooms.Item;
+import capstoneproject.rooms.Room;
+
+import java.util.*;
 
 public abstract class Entity {
     private String name;
     private int healthPoints;
     private int maxHealth;
-    private int inventory;
-    private int damage;
     private int maxDamage;
     protected Random random;
+    protected Room currentRoom;
+    protected Inventory inventory;
 
-    public Entity(int maxHealth, int maxDamage) {
+    public Entity(String name,int maxHealth, int maxDamage,Room currentRoom) {
         this.name = name;
-        this.healthPoints = healthPoints;
+        this.healthPoints = maxHealth;
         this.maxHealth = maxHealth;
-        this.inventory = inventory;
-        this.damage = damage;
+        this.inventory = new Inventory();
         this.maxDamage = maxDamage;
+        this.currentRoom= currentRoom;
         this.random = new Random();
     }
 
@@ -67,10 +71,31 @@ public abstract class Entity {
         return getHealthPoints() == getMaxHealth();
     };
 
+    public void addToInventory(Item i){
+        inventory.addItem(i);
+    }
+    public Optional<Item> removeFromInventory (String itemName){
+        return inventory.removeItem(itemName);
+    }
 
-     public int getMissingHp(){
+    public String getInventoryDescription(){
+        return inventory.toString();
+    }
+
+    public boolean move(Directions dir){
+        Optional<Room> optRoom = currentRoom.getExitAt(dir);
+        if(optRoom.isPresent()){
+            Room destination = optRoom.get();
+            currentRoom = destination;
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    public int getMissingHp(){
          return maxHealth - healthPoints;
-     }
+    }
 
     public int getHealthPoints() {
         return healthPoints;
@@ -78,10 +103,6 @@ public abstract class Entity {
 
     public int getMaxHealth() {
         return maxHealth;
-    }
-
-    public int getDamage() {
-        return damage;
     }
 
     public int getMaxDamage() {

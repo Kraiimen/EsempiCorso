@@ -1,16 +1,24 @@
 package capstoneproject.entity;
 
+import capstoneproject.rooms.Room;
+
 public class Paladin extends Player {
 
     private boolean isVirgin;
 
-    public Paladin(int maxHealt, int maxDamage, String playerName) {
-        super(maxHealt, maxDamage, playerName);
-        this.playerName = playerName;
+    public Paladin(int maxHealt, int maxDamage, String playerName, Room currentRoom) {
+        super(maxHealt, maxDamage, playerName,currentRoom);
+
+
+    }
+
+    @Override
+    protected void initializeStats() {
         this.strength = 5 + this.random.nextInt(21);
         this.intelligence =  this.random.nextInt(21);
         this.agility = this.random.nextInt(21);
         this.stamina = this.random.nextInt(21);
+
     }
 
     @Override

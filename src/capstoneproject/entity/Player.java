@@ -1,5 +1,7 @@
 package capstoneproject.entity;
 
+import capstoneproject.rooms.Room;
+
 import java.io.Console;
 
 
@@ -18,15 +20,13 @@ public abstract class Player extends Entity {
     Console console;
 
 
-    public Player(int maxHealt, int maxDamage, String playerName) {
-        super(maxHealt, maxDamage);
+    public Player(int maxHealth, int maxDamage, String playerName, Room currentRoom) {
+        super(maxHealth, maxDamage, currentRoom);
         this.playerName = playerName;
-        this.exp = exp;
-        this.intelligence = intelligence;
-        this.stamina = stamina;
-        this.agility = agility;
-        this.strength = strength;
+        this.currentRoom= currentRoom;
+        initializeStats();
     }
+    protected abstract void initializeStats();
 
     public abstract void attack(Entity target);
 
