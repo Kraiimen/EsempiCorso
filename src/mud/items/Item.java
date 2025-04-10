@@ -1,7 +1,17 @@
 package mud.items;
 
 public abstract class Item {
-    public void combat(Character char1, Character char2){
+    private String name;
 
+    public Item(String name){
+        this.name = name;
+    }
+
+    //GETTER E SETTER
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 }

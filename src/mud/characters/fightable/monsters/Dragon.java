@@ -17,6 +17,15 @@ public class Dragon extends Monster {
         setExp(DRAGON_EXP);
         setExpGiven(DRAGON_EXP_GIVEN);
         setActualRoom(MagicMap.getRooms().get(DRAGON_POSSIBLE_ROOM));
+        setHp(MAX_HP);
+    }
+    @Override
+    public void respawn() {
+        if(!checkIfAlive()) {
+            setIsAlive();
+            setHp(MAX_HP);
+            setActualRoom(MagicMap.getRooms().get(DRAGON_POSSIBLE_ROOM));
+        }
     }
 
 }

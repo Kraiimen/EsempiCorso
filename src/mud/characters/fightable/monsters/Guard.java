@@ -2,14 +2,33 @@ package mud.characters.fightable.monsters;
 
 import mud.characters.fightable.Character;
 import mud.characters.fightable.PlayerCharacter;
+import mud.rooms.MagicMap;
 
 public class Guard extends Monster {
+    private static final int GUARD_EXP_GIVEN = 5;
+    public static final int GUARD_POSSIBLE_ROOM = 8;
+
     public Guard(String name) {
         super(name);
+        setStrength(dice.nextInt(MAX));
+        setAgility(dice.nextInt(MAX));
+        setStamina(dice.nextInt(MAX));
+        setActualRoom(MagicMap.getRooms().get(dice.nextInt(GUARD_POSSIBLE_ROOM)));
+        setExpGiven(GUARD_EXP_GIVEN);
+        setHp(MAX_HP);
     }
 
     public void killForTheCat(PlayerCharacter player){
         System.out.println(getName() + " the Guard says: HEY! WHAT ARE YOU DOING? I'LL SHOW YOU WHAT HAPPENS TO CRIMINALS LIKE YOU!");
         player.die();
+    }
+
+    @Override
+    public void respawn() {
+        if(!checkIfAlive()){
+            setIsAlive();
+            setHp(MAX_HP);
+            setActualRoom(MagicMap.getRooms().get(dice.nextInt(GUARD_POSSIBLE_ROOM)));
+        }
     }
 }

@@ -12,8 +12,6 @@ public class Armory extends Room{
 
     @Override
     public void printEntrance() {
-
-        getPresentEntities().forEach(e -> System.out.println(e.getName() + " the " + e.getClass().getSimpleName()));
-
+        printEntities();
     }
 }

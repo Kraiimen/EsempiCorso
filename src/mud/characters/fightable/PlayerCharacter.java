@@ -4,11 +4,12 @@ import mud.CardinalPoints;
 import mud.rooms.MagicMap;
 
 public abstract class PlayerCharacter extends Character {
-
+    public static final int MAX_RESPAWN = 5;
     private static final int STARTING_STAM = 5;
-    private static final int MAX_RESPAWN = 5;
+
     private int killsCounter;
     private int respawnCounter;
+    private int expCounter;
 
 
     public PlayerCharacter(String name, int minIntelligence, int minStrength, int minAgility, int minStamina){
@@ -38,13 +39,33 @@ public abstract class PlayerCharacter extends Character {
     }
 
     public void respawn(){
-        if(respawnCounter < MAX_RESPAWN){
+        if(!checkIfAlive() && respawnCounter < MAX_RESPAWN){
+            setHp(MAX_HP);
             setIsAlive();
             respawnCounter++;
             setActualRoom(MagicMap.getRooms().getFirst());
             System.out.printf("Welcome back! You are now in %s and you have %d respawn possibilities left!",
                     MagicMap.getRooms().getFirst().getName(),MAX_RESPAWN-respawnCounter);
         }
+    }
+
+    //ogni 5 punti esperienza gli do un punto stamina
+    public void addExp(int exp){
+        setExp(getExp() + exp);
+        if(getExp()/5>expCounter){
+            setStamina(getStamina() + 1);
+            expCounter++;
+        }
+    }
+
+    public void printStats(){
+        System.out.printf("Here are %s's statistics:%n", getName());
+        System.out.println("Exp: " + getExp());
+        System.out.println("HP: " + getHp());
+        System.out.println("Strength: " + getStrength());
+        System.out.println("Agility: " + getAgility());
+        System.out.println("Stamina: " + getStamina());
+        System.out.println("Respawns Left: " + (MAX_RESPAWN-respawnCounter));
     }
 
     //FUNZIONI DEL KILL'S COUNTER
@@ -59,4 +80,10 @@ public abstract class PlayerCharacter extends Character {
         return killsCounter;
     }
 
+    public int getRespawnCounter() {
+        return respawnCounter;
+    }
+    public void setRespawnCounter(int respawnCounter) {
+        this.respawnCounter = respawnCounter;
+    }
 }

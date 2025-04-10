@@ -10,6 +10,6 @@ public class TempleSquare extends Room{
     @Override
     public void printEntrance() {
         System.out.println("Welcome to the Temple Square");
-        getPresentEntities().forEach(e -> System.out.println(e.getName() + " the " + e.getClass().getSimpleName()));
+        printEntities();
     }
 }

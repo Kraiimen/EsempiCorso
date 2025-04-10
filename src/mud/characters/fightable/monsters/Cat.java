@@ -19,6 +19,15 @@ public class Cat extends Monster {
     }
 
     @Override
+    public void respawn() {
+        if(!checkIfAlive()) {
+            setIsAlive();
+            setHp(CAT_HP);
+            setActualRoom(MagicMap.getRooms().get(dice.nextInt(CAT_POSSIBLE_ROOM)));
+        }
+    }
+
+    @Override
     public void greet(){
         System.out.println("Meow!");
     }

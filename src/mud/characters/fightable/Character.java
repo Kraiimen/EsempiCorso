@@ -2,6 +2,8 @@ package mud.characters.fightable;
 
 import mud.CardinalPoints;
 import mud.characters.Entity;
+import mud.characters.fightable.monsters.Monster;
+import mud.items.Item;
 
 import java.util.Random;
 
@@ -40,6 +42,9 @@ public abstract class Character extends Entity {
             getActualRoom().getDirections().get(cardinal).enterInRoom(this);
         }
     }
+    public void pickItem(Item item){
+        getInventory().add(item);
+    }
 
     public void hurt(int damage){
         if((this.hp - damage) <= MIN){
@@ -68,8 +73,11 @@ public abstract class Character extends Entity {
     public void die(){
         setHp(MIN);
         isAlive = false;
+        getActualRoom().getPresentEntities().remove(this);
         System.out.println(getName() + " is dead.");
     }
+
+    public abstract void respawn();
 
 
     //GETTER E SETTER

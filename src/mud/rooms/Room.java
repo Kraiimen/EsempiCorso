@@ -56,6 +56,11 @@ public abstract class Room {
 
     public abstract void printEntrance();
 
+    public void printEntities(){
+        List<Entity> printable = presentEntities.stream().limit(presentEntities.size()-1).toList();
+        printable.forEach(e -> System.out.println(e.getName() + " the " + e.getClass().getSimpleName()));
+    }
+
     //getter e setter
     public String getName() {
         return name;

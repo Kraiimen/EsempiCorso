@@ -11,10 +11,10 @@ public class Wizard extends PlayerCharacter {
         super(name, MIN_INTEL, MIN_STRENGTH, MIN_AGIL, MIN);
     }
 
-    //l'attacco del mago dipenderà dalla stamina
+    //l'attacco del mago dipenderà dalla stamina e dall'intelligenza
     @Override
     public void attack(Character character) {
-        int damage = getStrength();
+        int damage = checkMagic(getStrength());
         System.out.printf("%s is attacking %s for %d points%n", getName(), character.getName(), damage);
         if(character.tryToDodge()){
             damage = 0;
@@ -26,4 +26,10 @@ public class Wizard extends PlayerCharacter {
         }
     }
 
+    public int checkMagic(int damage){
+        if(getStamina() > dice.nextInt(MAX - getIntelligence())){
+            return (int)(damage*1.5);
+        }
+        return damage;
+    }
 }
