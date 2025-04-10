@@ -11,6 +11,7 @@ public class Temple extends Room{
     @Override
     public void printDescription() {
         System.out.println("Qui il sacerdote potrà farti riposare. Puoi anche chiedergli una benedizione per la tua Esperienza ");
+        System.out.println(" ");
     }
 
     @Override

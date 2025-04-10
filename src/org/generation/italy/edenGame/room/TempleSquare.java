@@ -12,6 +12,7 @@ public class TempleSquare extends Room{
     @Override
     public void printDescription() {
         System.out.println("Una piazza sacra, al centro della cittadella, pieno di persone e di storie ");
+        System.out.println(" ");
     }
 
     @Override

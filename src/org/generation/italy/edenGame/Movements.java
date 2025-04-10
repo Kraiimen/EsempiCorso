@@ -49,13 +49,14 @@ public class Movements {
         roomFinder.put("Woods", woods);
         roomFinder.put("City Door", cityDoor);
 
-        //Temple:
-        templeDirections.put(Compass.WEST, templeSquare.getNameRoom());
-        templeDirections.put(Compass.SOUTH, bakery.getNameRoom());
 
         //TempleSquare
         templeSquareDirections.put(Compass.SOUTH, marketSquare.getNameRoom());
         templeSquareDirections.put(Compass.EAST, temple.getNameRoom());
+
+        //Temple:
+        templeDirections.put(Compass.WEST, templeSquare.getNameRoom());
+        templeDirections.put(Compass.SOUTH, bakery.getNameRoom());
 
         //MarketSquare
         marketSquareDirections.put(Compass.WEST, armory.getNameRoom());
@@ -82,9 +83,10 @@ public class Movements {
         woodsDirections.put(Compass.NORTH, cityDoor.getNameRoom());
     }
 
+    //todo controllare il Map<Compass, String> delle varie Directions perchè probabilmente non comunica con la Room, per questo i problemi in Start dove va tutto bene fino a questo metodo
+    //TODO potremmo rimettere l'oggetto Room e trovare un modo per leggerlo e trasformarlo in String così da avere ( le vie percorribili EAST=The BAKERY, ecc)
 
-
-    public void moveFromTempleSquare(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+    public void moveFromTempleSquare(Player player, Map<Compass, String> templeSquareDirections, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -136,7 +138,7 @@ public class Movements {
 
     }
 
-    public void moveFromTemple(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+    public void moveFromTemple(Player player, Map<Compass, String> templeDirections, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -189,7 +191,7 @@ public class Movements {
     }
 
 
-    public void moveFromMarketSquare(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+    public void moveFromMarketSquare(Player player, Map<Compass, String> marketSquareDirections, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -241,7 +243,7 @@ public class Movements {
 
     }
 
-    public void moveFromBakery(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+    public void moveFromBakery(Player player, Map<Compass, String> bakeryDirections, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -293,7 +295,7 @@ public class Movements {
 
     }
 
-    public void moveFromArmory(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+    public void moveFromArmory(Player player, Map<Compass, String> armoryDirections, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -346,7 +348,7 @@ public class Movements {
     }
 
 
-    public void moveFromGardens(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+    public void moveFromGardens(Player player, Map<Compass, String> gardensDirections, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -397,7 +399,7 @@ public class Movements {
         } while (!a.contains("NORTH") && !a.contains("SOUTH"));
     }
 
-    public void moveFromCityDoor(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+    public void moveFromCityDoor(Player player, Map<Compass, String> cityDoorDirections, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -448,7 +450,7 @@ public class Movements {
         } while (!a.contains("NORTH") && !a.contains("SOUTH"));
     }
 
-    public void moveFromWoods(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+    public void moveFromWoods(Player player, Map<Compass, String> woodsDirections, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;

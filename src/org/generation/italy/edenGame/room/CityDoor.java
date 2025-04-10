@@ -10,6 +10,7 @@ public class CityDoor extends Room{
     @Override
     public void printDescription() {
         System.out.println("Questa è la grande porta della città di Eden, da qui in poi regna l'oscuro... ");
+        System.out.println(" ");
     }
 
     @Override
