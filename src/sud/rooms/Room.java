@@ -8,9 +8,8 @@ public class Room {
     private String name;
     private Room nordPath, sudPath, westPath, eastPath;
     private boolean hasItems, hasNPC, hasGuards, hasCritters, hasMOBS;
-    private ArrayList<Item> itemsInRoom;
-    private ArrayList<Entity> MOBSInRoom, guardsInRoom, crittersInRoom;
-    private Set<Entity> NPCInRoom;
+    private Map<String,Item> itemsInRoom;
+    private Map<String,Entity> MOBSInRoom, crittersInRoom,NPCInRoom;
     private static Map<String, Room> roomMap = new HashMap();
     private String description;
 
@@ -43,70 +42,76 @@ public class Room {
         Room bossRoom = new Room("bossRoom");
         roomMap.put("bossRoom", bossRoom);
 
+        //@todo aggiunger gli item alle room
+
         castle.setPaths(debugroom, templeSq, prison, debugroom);
         castle.setRoomProperties(false, true, true, false, false);
-        castle.getNPCInRoom().add(Npc.getNpcMap().get("King"));
-        castle.getNPCInRoom().add(Npc.getNpcMap().get("Kings Guard"));
+        castle.getNPCInRoom().put(Npc.getNpcMap().get("King").getName(), Npc.getNpcMap().get("King"));
+        castle.getNPCInRoom().put(Npc.getNpcMap().get("Kings Guard").getName(), Npc.getNpcMap().get("Kings Guard"));
 
         prison.setPaths(debugroom, debugroom, debugroom, castle);
         prison.setRoomProperties(false, true, true, false, false);
 
         templeSq.setPaths(debugroom, market, debugroom, temple);
         templeSq.setRoomProperties(false, true, true, false, false);
-        templeSq.getNPCInRoom().add(Npc.getNpcMap().get("TQ Guard"));
+        templeSq.getNPCInRoom().put(Npc.getNpcMap().get("TQ Guard").getName(), Npc.getNpcMap().get("TQ Guard"));
 
         tavern.setPaths(debugroom, debugroom, templeSq, debugroom);
         tavern.setRoomProperties(true, true, false, false, false);
-        tavern.getNPCInRoom().add(Npc.getNpcMap().get("TavernK"));
+        tavern.getNPCInRoom().put(Npc.getNpcMap().get("Kings Guard").getName(), Npc.getNpcMap().get("Kings Guard"));
 
         temple.setPaths(debugroom, debugroom, templeSq, debugroom);
         temple.setRoomProperties(false, true, true, false, false);
-        temple.getNPCInRoom().add(Npc.getNpcMap().get("Cleric"));
+        temple.getNPCInRoom().put(Npc.getNpcMap().get("Cleric").getName(), Npc.getNpcMap().get("Cleric"));
 
         market.setPaths(templeSq, fieldsN, forge, bakery);
         market.setRoomProperties(true, true, true, false, false);
-        market.getNPCInRoom().add(Npc.getNpcMap().get("MQ Guard"));
+        market.getNPCInRoom().put(Npc.getNpcMap().get("MQ Guard").getName(), Npc.getNpcMap().get("MQ Guard"));
 
         bakery.setPaths(debugroom, debugroom, market, debugroom);
         bakery.setRoomProperties(true, true, true, false, false);
-        bakery.getNPCInRoom().add(Npc.getNpcMap().get("Baker"));
+        bakery.getNPCInRoom().put(Npc.getNpcMap().get("Baker").getName(), Npc.getNpcMap().get("Baker"));
 
         forge.setPaths(debugroom, alchemist, debugroom, market);
         forge.setRoomProperties(true, true, true, false, false);
-        forge.getNPCInRoom().add(Npc.getNpcMap().get("Assistant"));
+        forge.getNPCInRoom().put(Npc.getNpcMap().get("Assistant").getName(), Npc.getNpcMap().get("Assistant"));
+
 
         alchemist.setPaths(forge, debugroom, debugroom, debugroom);
         alchemist.setRoomProperties(true, true, true, false, false);
-        alchemist.getNPCInRoom().add(Npc.getNpcMap().get("Alchemist"));
+        alchemist.getNPCInRoom().put(Npc.getNpcMap().get("Alchemist").getName(), Npc.getNpcMap().get("Alchemist"));
+
 
         fieldsN.setPaths(market, fieldsS, debugroom, debugroom);
         fieldsN.setRoomProperties(true, false, false, true, false);
-        fieldsN.getMOBSInRoom().add(Mob.getMobMap().get("Critter"));
-        fieldsN.getMOBSInRoom().add(Mob.getMobMap().get("Critter"));
-        fieldsN.getMOBSInRoom().add(Mob.getMobMap().get("Critter"));
-        fieldsN.getMOBSInRoom().add(Mob.getMobMap().get("Critter"));
-        fieldsN.getMOBSInRoom().add(Mob.getMobMap().get("Critter"));
+        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("critter").getName(),Mob.getMobMap().get("critter"));
+        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("critter").getName(),Mob.getMobMap().get("Critter"));
+        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("critter").getName(),Mob.getMobMap().get("Critter"));
+        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("critter").getName(),Mob.getMobMap().get("Critter"));
+        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("critter").getName(),Mob.getMobMap().get("Critter"));
+
 
         fieldsS.setPaths(fieldsN, forest, debugroom, debugroom);
         fieldsS.setRoomProperties(true, false, false, false, true);
-        fieldsS.getMOBSInRoom().add(Mob.getMobMap().get("Goblin"));
-        fieldsS.getMOBSInRoom().add(Mob.getMobMap().get("Goblin"));
-        fieldsS.getMOBSInRoom().add(Mob.getMobMap().get("Goblin"));
-        fieldsS.getMOBSInRoom().add(Mob.getMobMap().get("Goblin"));
-        fieldsS.getMOBSInRoom().add(Mob.getMobMap().get("Goblin"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("goblin").getName(),Mob.getMobMap().get("goblin"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("goblin").getName(),Mob.getMobMap().get("goblin"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("goblin").getName(),Mob.getMobMap().get("goblin"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("goblin").getName(),Mob.getMobMap().get("goblin"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("goblin").getName(),Mob.getMobMap().get("goblin"));
 
         forest.setPaths(fieldsS, debugroom, debugroom, bossRoom);
         forest.setRoomProperties(true, false, false, false, true);
-        forest.getMOBSInRoom().add(Mob.getMobMap().get("Bugbear"));
-        forest.getMOBSInRoom().add(Mob.getMobMap().get("Bugbear"));
-        forest.getMOBSInRoom().add(Mob.getMobMap().get("Bugbear"));
-        forest.getMOBSInRoom().add(Mob.getMobMap().get("Ogre"));
-        forest.getMOBSInRoom().add(Mob.getMobMap().get("Ogre"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("bugbear").getName(),Mob.getMobMap().get("bugbear"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("bugbear").getName(),Mob.getMobMap().get("bugbear"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("bugbear").getName(),Mob.getMobMap().get("bugbear"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("ogre").getName(),Mob.getMobMap().get("ogre"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("ogre").getName(),Mob.getMobMap().get("ogre"));
 
         bossRoom.setPaths(debugroom, debugroom, forest, debugroom);
         bossRoom.setRoomProperties(true, false, false, false, true);
-        bossRoom.getMOBSInRoom().add(Mob.getMobMap().get("Boss"));
-
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("boss").getName(),Mob.getMobMap().get("boss"));
+        // descrizioni delle stanze
+        {
         castle.setDescription("Un enorme sala del trono si presenta davanti a te, muri in marmo bianco, un lungo tappeto rosso che dalla porta indica la via per il trono ," +
                 "4 guardie svettano fiere alla tua destra quando entri, e altr 4 sono appena arrivate dal cambio turno sulla tua sinistra " +
                 "le mura della stanza sono ricoperte di arazzi e quadri, riesci tranquillamente a vedere che l'arazzo più grande raffigura l'attuale re, " +
@@ -169,12 +174,13 @@ public class Room {
 
         bossRoom.setDescription(" arrivi in una radura, l'arie e secca e la foresta è silenziosa il rumore degli uccelli, e degli animali è completamente svanito il vento ulula forte passando tra le fronde degli alberi" +
                 "qualcosa non va, è calmo, troppo calmo");
+        }
     }
 
     public Room(String name, Room nordPath, Room sudPath, Room westPath, Room eastPath,
                 boolean hasItems, boolean hasNPC, boolean hasGuards, boolean hasCritters, boolean hasMOBS,
-                ArrayList<Item> itemsInRoom, ArrayList<Entity> MOBSInRoom, ArrayList<Entity> guardsInRoom,
-                ArrayList<Entity> crittersInRoom, Set<Entity> NPCInRoom, String description) {
+                Map<String,Item> itemsInRoom, Map<String,Entity> MOBSInRoom, Map<String,Entity> guardsInRoom,
+                Map<String,Entity> crittersInRoom, Map<String,Entity> NPCInRoom, String description) {
         this.name = name;
         this.nordPath = nordPath;
         this.sudPath = sudPath;
@@ -187,7 +193,6 @@ public class Room {
         this.hasMOBS = hasMOBS;
         this.itemsInRoom = itemsInRoom;
         this.MOBSInRoom = MOBSInRoom;
-        this.guardsInRoom = guardsInRoom;
         this.crittersInRoom = crittersInRoom;
         this.NPCInRoom = NPCInRoom;
         this.description = description;
@@ -195,11 +200,10 @@ public class Room {
 
     public Room(String name) {
         this.name = name;
-        this.itemsInRoom = new ArrayList<>();
-        this.MOBSInRoom = new ArrayList<>();
-        this.guardsInRoom = new ArrayList<>();
-        this.crittersInRoom = new ArrayList<>();
-        this.NPCInRoom = new HashSet<>();
+        this.itemsInRoom = new HashMap<>();
+        this.MOBSInRoom = new HashMap<>();
+        this.crittersInRoom = new HashMap<>();
+        this.NPCInRoom = new HashMap<>();
         this.description = "";
     }
 
@@ -289,38 +293,43 @@ public class Room {
         this.hasMOBS = hasMOBS;
     }
 
-    public ArrayList<Item> getItemsInRoom() {
+    public Map<String, Item> getItemsInRoom() {
         return itemsInRoom;
     }
-    public void setItemsInRoom(ArrayList<Item> itemsInRoom) {
+
+    public void setItemsInRoom(Map<String, Item> itemsInRoom) {
         this.itemsInRoom = itemsInRoom;
     }
 
-    public ArrayList<Entity> getMOBSInRoom() {
+    public Map<String, Entity> getMOBSInRoom() {
         return MOBSInRoom;
     }
-    public void setMOBSInRoom(ArrayList<Entity> MOBSInRoom) {
+
+    public void setMOBSInRoom(Map<String, Entity> MOBSInRoom) {
         this.MOBSInRoom = MOBSInRoom;
     }
 
-    public ArrayList<Entity> getGuardsInRoom() {
-        return guardsInRoom;
-    }
-    public void setGuardsInRoom(ArrayList<Entity> guardsInRoom) {
-        this.guardsInRoom = guardsInRoom;
-    }
-
-    public ArrayList<Entity> getCrittersInRoom() {
+    public Map<String, Entity> getCrittersInRoom() {
         return crittersInRoom;
     }
-    public void setCrittersInRoom(ArrayList<Entity> crittersInRoom) {
+
+    public void setCrittersInRoom(Map<String, Entity> crittersInRoom) {
         this.crittersInRoom = crittersInRoom;
     }
 
-    public Set<Entity> getNPCInRoom() {
+    public static Map<String, Room> getRoomMap() {
+        return roomMap;
+    }
+
+    public static void setRoomMap(Map<String, Room> roomMap) {
+        Room.roomMap = roomMap;
+    }
+
+    public Map<String, Entity> getNPCInRoom() {
         return NPCInRoom;
     }
-    public void setNPCInRoom(Set<Entity> NPCInRoom) {
+
+    public void setNPCInRoom(Map<String, Entity> NPCInRoom) {
         this.NPCInRoom = NPCInRoom;
     }
 

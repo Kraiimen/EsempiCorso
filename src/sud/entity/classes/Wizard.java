@@ -10,7 +10,7 @@ public class Wizard extends Player {
     private int hpDiceFaces;
     private int manaPoints;
     private int maxMana;
-    private int maxSpelllevel;
+
 
     public Wizard(String name, String playerName) {
         super(name, 6, Entity.colorC, "Wizard");
@@ -18,7 +18,6 @@ public class Wizard extends Player {
         this.hpDiceFaces = 6;
         this.maxMana = this.getIntMod()*2;
         this.manaPoints =maxMana;
-        maxSpelllevel =1;
     }
 
     public void increseHp(){
@@ -66,7 +65,7 @@ public class Wizard extends Player {
     public void cast(Entity attacked){
         int damage = 0;
         Spell spell = new Spell();
-        switch (maxSpelllevel){
+        switch (getLevel()){
             case 1 ->{ spell = new Spell("Firebolt",1,6); }
             case 2 ->{spell = new Spell("Ice sphere",2,8);}
             case 3 ->{spell = new Spell("Wind blast",3,6);}
@@ -92,7 +91,23 @@ public class Wizard extends Player {
 
     @Override
     public void levelUp(){
+        if (this.getXp() >= 50) {
+            if (this.getLevel() < 2) {
+                this.setLevel(2);
+            }
+        } else if (this.getXp() >= 100) {
+            if (this.getLevel() < 3) {
+                this.setLevel(3);
+            }
+        } else if (this.getXp() >= 200) {
+            if (this.getLevel() < 4) {
+                this.setLevel(4);
+            }
+        } else if (this.getXp() >= 400) {
+            if (this.getLevel() < 5) {
+                this.setLevel(5);
+            }
+        }
         increseHp();
-        this.maxSpelllevel++;
     }
 }

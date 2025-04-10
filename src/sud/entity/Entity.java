@@ -188,6 +188,11 @@ public class Entity {
         return false;
     }
 
+    public void moveIntoRoom(Room room){
+        System.out.printf("%s walks to %S", this.name, room.getName());
+        this.setCurrentroom(room);
+    }
+
     public String getName() {
         return name;
     }
@@ -264,5 +269,11 @@ public class Entity {
         this.ac = ac;
     }
 
+    public ArrayList<Item> getInventory() {
+        return inventory;
+    }
 
+    public void setInventory(ArrayList<Item> inventory) {
+        this.inventory = inventory;
+    }
 }

@@ -1,9 +1,14 @@
 package sud.entity;
 
+import sud.items.Armor;
+import sud.items.Item;
+import sud.items.ItemType;
+import sud.items.Weapon;
 import sud.rooms.Room;
 import sud.dices;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Player extends Entity{
     private int intelligence;
@@ -16,6 +21,7 @@ public class Player extends Entity{
     private int conMod;
     private int xp;
     private int coins;
+    private int level;
 
     public Player(String name, int maxHp, String entityColor, String chosenClass) {
         super(name, maxHp, 0, Room.getRoomPointerFromName("castle"), entityColor);
@@ -51,6 +57,7 @@ public class Player extends Entity{
         this.dexMod = (this.dexterity - 10)/2;
         this.setAttackDamage(1+strMod);
         this.setMaxHp(maxHp+conMod);
+        this.level =1;
 
     }
 
@@ -79,13 +86,103 @@ public class Player extends Entity{
         attacked.hurt(damage + this.strMod);
         if (attacked.isDead()) {
             System.out.println(this.getEntityColor() + attacked.getName() + " has died by that hit\n " + resetColor);
+            this.setXp(this.getXp()+attacked.getXpOnDeath());
         }
     }
 
 
-        public void levelUp(){
-        // @todo implementare i threshold per i livelli
-    }
+        public void levelUp() {
+            if (xp >= 50) {
+                if (level < 2) {
+                    level = 2;
+                }
+            } else if (xp >= 100) {
+                if (level < 3) {
+                    level = 3;
+                }
+            } else if (xp >= 200) {
+                if (level < 4) {
+                    level = 4;
+                }
+            } else if (xp >= 400) {
+                if (level < 5) {
+                    level = 5;
+                }
+            }
+        }
+
+        @Override
+        public void pickUpItem (Item item, Boolean wantToEquip){
+            switch (item.getType()){
+                case ARMOR -> {
+                    AtomicInteger numOfItem= new AtomicInteger();
+                    this.getInventory().forEach(item1 -> {
+                        if (item1.getType() == ItemType.ARMOR) {
+                            numOfItem.getAndIncrement();
+                        }
+                    });
+
+                    if(numOfItem.get()<=2)
+                    {
+                        if(wantToEquip){this.setEquipedArmor((Armor)item);}
+                        this.getInventory().add(item);
+                        Item.itemMap.remove(item.getName());
+                    }
+                }
+                case WEAPON -> {
+                    AtomicInteger numOfItem= new AtomicInteger();
+                    this.getInventory().forEach(item1 -> {
+                        if (item1.getType() == ItemType.WEAPON) {
+                            numOfItem.getAndIncrement();
+                        }
+                    });
+                    if(numOfItem.get()<=3){
+                        if(wantToEquip){this.setEquipedWeapon((Weapon)item);}
+                        this.getInventory().add(item);
+                        Item.itemMap.remove(item.getName());
+                    }
+
+                }
+                case FOOD -> {
+                    AtomicInteger numOfItem= new AtomicInteger();
+                    this.getInventory().forEach(item1 -> {
+                        if (item1.getType() == ItemType.FOOD) {
+                            numOfItem.getAndIncrement();
+                        }
+                    });
+                    if(numOfItem.get()<=5){this.getInventory().add(item);}
+                    Item.itemMap.remove(item.getName());
+                }
+
+                case POTION -> {
+                    AtomicInteger numOfItem= new AtomicInteger();
+                    this.getInventory().forEach(item1 -> {
+                        if (item1.getType() == ItemType.POTION) {
+                            numOfItem.getAndIncrement();
+                        }
+                    });
+                    if(numOfItem.get()<=5){this.getInventory().add(item);}
+                    Item.itemMap.remove(item.getName());
+                    }
+                case JUNK -> {
+                    AtomicInteger numOfItem= new AtomicInteger();
+                    this.getInventory().forEach(item1 -> {
+                        if (item1.getType() == ItemType.JUNK) {
+                            if(item1.getName().equalsIgnoreCase("coins")){
+                                this.coins += item1.getPrice();
+                            }
+                            numOfItem.getAndIncrement();
+                        }
+                    });
+                    if(numOfItem.get()<=10){
+                        this.getInventory().add(item);
+                        Item.itemMap.remove(item.getName());
+                    }
+
+                }
+            }
+
+        }
 
     public int getIntMod() {
         return intMod;
@@ -133,6 +230,14 @@ public class Player extends Entity{
 
     public void setCoins(int coins) {
         this.coins = coins;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }
 

@@ -9,7 +9,7 @@ public class Barbarian extends Player {
     private int hpDiceFaces;
 
     public Barbarian(String name, String playerName) {
-        super(name, 12, Entity.colorB, "Barbarian");
+        super(name, 12, Entity.colorR, "Barbarian");
         this.playerName = playerName;
         this.hpDiceFaces = 12;
     }
@@ -51,6 +51,23 @@ public class Barbarian extends Player {
 
     @Override
     public void levelUp(){
+        if (this.getXp() >= 50) {
+            if (this.getLevel() < 2) {
+                this.setLevel(2);
+            }
+        } else if (this.getXp() >= 100) {
+            if (this.getLevel() < 3) {
+                this.setLevel(3);
+            }
+        } else if (this.getXp() >= 200) {
+            if (this.getLevel() < 4) {
+                this.setLevel(4);
+            }
+        } else if (this.getXp() >= 400) {
+            if (this.getLevel() < 5) {
+                this.setLevel(5);
+            }
+        }
         increseHp();
     }
 }
