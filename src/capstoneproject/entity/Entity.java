@@ -1,5 +1,7 @@
 package capstoneproject.entity;
 
+import java.util.Random;
+
 public abstract class Entity {
     private String name;
     private int healthPoints;
@@ -7,6 +9,7 @@ public abstract class Entity {
     private int inventory;
     private int damage;
     private int maxDamage;
+    protected Random random;
 
     public Entity(int maxHealth, int maxDamage) {
         this.name = name;
@@ -15,7 +18,7 @@ public abstract class Entity {
         this.inventory = inventory;
         this.damage = damage;
         this.maxDamage = maxDamage;
-
+        this.random = new Random();
     }
 
 //    public void printStats(){
@@ -26,9 +29,10 @@ public abstract class Entity {
 //        System.out.println("Stamina: " + stamina);
 //        System.out.println("Health: " + healthpoint + "/" + maxHealth);
 //    }
-     public void takeDamage(int damage){
+     public int takeDamage(int damage){
         healthPoints -= damage;
         if(healthPoints < 0) healthPoints = 0;
+        return healthPoints;
      }
 
      public void heal(int amount){
@@ -42,6 +46,7 @@ public abstract class Entity {
 
      abstract void attack(Entity target);
 
+
      public void addHealthPoints(int hp) {
          healthPoints += hp;
     }
@@ -49,10 +54,37 @@ public abstract class Entity {
         healthPoints -= hp;
     }
 
+    public int healMissingPercent(double healPercent){
+        if(isFullyHealed()){
+            return getMaxHealth();
+        }
+        double heal = getMissingHp() * healPercent;
+        healthPoints += (int)heal;
+        return healthPoints;
+    }
+
+    public boolean isFullyHealed(){
+        return getHealthPoints() == getMaxHealth();
+    };
+
+
      public int getMissingHp(){
          return maxHealth - healthPoints;
-
      }
 
+    public int getHealthPoints() {
+        return healthPoints;
+    }
 
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public int getMaxDamage() {
+        return maxDamage;
+    }
 }

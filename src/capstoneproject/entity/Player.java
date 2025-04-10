@@ -32,9 +32,22 @@ public abstract class Player extends Entity {
 
     public abstract void attack(Entity target);
 
+    abstract void openInventory();
+
+    abstract void runAway();
+
     public void HealInTemple(){ //Funzione per ricaricarsi nel temple
         System.out.println("Healing in Temple");
         this.heal(5);
+    }
+    public void eat(){
+        healMissingPercent(0.3);
+        System.out.print("Ti sei ristorato" + getHealthPoints());
+    }
+
+    public void sleep(){
+        healMissingPercent(0.2);
+        System.out.print("Hai dormito" + getHealthPoints());
     }
 
     public void setExp(int exp) {
