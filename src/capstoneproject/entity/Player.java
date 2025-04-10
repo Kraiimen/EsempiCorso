@@ -1,7 +1,5 @@
 package capstoneproject.entity;
 
-import capstoneproject.Room;
-
 import java.io.Console;
 
 
@@ -34,7 +32,11 @@ public abstract class Player extends Entity {
 
     abstract void openInventory();
 
-    abstract void runAway();
+    public void runAway(){
+        if(getHealthPoints() < 0.2){
+            System.out.println("Lascia il combattimento");
+        }
+    };
 
     public void HealInTemple(){ //Funzione per ricaricarsi nel temple
         System.out.println("Healing in Temple");

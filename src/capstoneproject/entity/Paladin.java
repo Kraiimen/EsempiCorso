@@ -1,6 +1,7 @@
 package capstoneproject.entity;
 
 public class Paladin extends Player {
+
     private boolean isVirgin;
 
     public Paladin(int maxHealt, int maxDamage, String playerName) {
@@ -30,9 +31,5 @@ public class Paladin extends Player {
 
     }
 
-    @Override
-    void runAway() {
-
-    }
 
 }
