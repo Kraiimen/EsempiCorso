@@ -1,5 +1,6 @@
 package org.generation.italy.edenGame.room;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +8,10 @@ public abstract class Room {
     private String name;
     private Map<Compass, Room> directions;
     //Todo guardie nella stanza, oggetti, mostri, npc. guardie potrebbe essere boolean e dipende dal dado
+
+    //todo settare questi per le possibleDirections
+    private Room currentRoom;
+    private Room nextRoom;
 
     public Room(String name,Map<Compass, Room> directions) {
         this.name = name;
@@ -23,9 +28,15 @@ public abstract class Room {
         return directions.get(dir);
     }
 
-    public abstract void getPossibleDirections();
+    //todo serve una nextRoom
+    public void getPossibleDirections(Map<Compass, Room> directions) {
+        if(directions.get(nextRoom) != null) {
+            this.directions = directions;
+            System.out.println("Le strade da qui portano a: " + directions);
+        }
+    }
 
-    public String getName() {
+    public String getNameRoom() {
         return name;
     }
 }

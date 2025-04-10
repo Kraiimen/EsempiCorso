@@ -1,30 +1,40 @@
 package org.generation.italy.edenGame.entity;
 
+import org.generation.italy.edenGame.room.Room;
+
 public abstract class Entity {
     private String name;
     private int maxHp;
     private int healthPoints;
     private int damage;
     private int exp; //@Todo forse in player?
-    //@Todo CurrentRoom;
+    private Room currentRoom; //@Todo CurrentRoom;
 
-    public Entity(String name, int maxHp, int healthPoints, int damage, int exp) {
+
+    public Entity(String name, int maxHp, int healthPoints, int damage, int exp, Room currentRoom) {
         this.name = name;
         this.maxHp = maxHp;
         this.healthPoints = healthPoints;
         this.damage = damage;
         this.exp = exp;
+        this.currentRoom = currentRoom;
     }
 
-//@Todo forse metodo muori va in entity
+
+
+    //@Todo forse metodo muori va in entity
     //METODI
-    public abstract void attack(Entity target);
+    public void attack(Entity target) {
+
+    }
     public void addHealthPoints(int hp){
         healthPoints += hp;
     }
     public void subtractHealthPoints(int hp){
         healthPoints -= hp;
     }
+    public abstract void dead(int exp);
+
 
 
     //GETTER E SETTER
@@ -48,6 +58,12 @@ public abstract class Entity {
         return exp;
     }
 
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+
+
     public void setName(String name) {
         this.name = name;
     }
@@ -68,5 +84,7 @@ public abstract class Entity {
         this.exp = exp;
     }
 
-
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
 }

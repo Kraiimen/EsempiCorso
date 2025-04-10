@@ -1,6 +1,12 @@
 package org.generation.italy.edenGame.entity.player;
 
 import org.generation.italy.edenGame.entity.Entity;
+import org.generation.italy.edenGame.room.Room;
+import org.generation.italy.edenGame.room.Temple;
+import org.generation.italy.edenGame.room.Compass;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public abstract class Player extends Entity {
@@ -10,22 +16,25 @@ public abstract class Player extends Entity {
     private int strength;
     private int agility;
     private int stamina;
-    //@Todo aggiungere currentroom al costruttore
-    public Player(String name, int maxHp, int healthPoints, int damage, int exp, String playerName, int intelligence, int strength, int agility, int stamina) {
 
-        super(name, maxHp, healthPoints, damage, exp);
+    public Player(String name, int maxHp, int healthPoints, int damage, int exp, Room currentRoom, String playerName, int intelligence, int strength, int agility, int stamina) {
+
+        super(name, maxHp, healthPoints, damage, exp, currentRoom);
         this.playerName = playerName;
         this.intelligence = intelligence;
         this.strength = strength;
         this.agility = agility;
         this.stamina = stamina;
-
     }
 
+    @Override
     public void dead(int exp) {
         System.out.println("sei morto");
-        getExp();
-        //@Todo teletrasporto a Temple per rinascere (setCurrentRoom?)
+        setExp(getExp() - 1);
+        //@Todo controllare l'HashMap
+        Map<Compass, Room> directions = new HashMap<Compass, Room>();
+        Room temple = new Temple("Temple", directions);
+        setCurrentRoom(temple);
     }
 
 }
