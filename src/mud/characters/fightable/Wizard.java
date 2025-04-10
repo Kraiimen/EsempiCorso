@@ -11,6 +11,7 @@ public class Wizard extends PlayerCharacter {
         super(name, MIN_INTEL, MIN_STRENGTH, MIN_AGIL, MIN);
     }
 
+    //l'attacco del mago dipenderà dalla stamina
     @Override
     public void attack(Character character) {
         int damage = getStrength();
