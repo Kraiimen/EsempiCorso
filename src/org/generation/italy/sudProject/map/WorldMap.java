@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class WorldMap {
     // /--ATTRIBUTES--/
-    private static ArrayList<Room> world;
+    public static ArrayList<Room> world;
 
     public static final int TEMPLE_SQUARE_INDEX = 0;
     public static final int MARKET_SQUARE_INDEX = 1;
@@ -17,7 +17,6 @@ public class WorldMap {
     public static final int GARDEN_2_INDEX = 6;
     public static final int GARDEN_3_INDEX = 7;
     public static final int WOODS_INDEX = 8;
-
 
     // /--CONSTRUCTORS--/
     public WorldMap(){
@@ -41,7 +40,4 @@ public class WorldMap {
         world.get(GARDEN_3_INDEX).setRooms(world.get(GARDEN_2_INDEX), world.get(WOODS_INDEX), null, null);
         world.get(WOODS_INDEX).setRooms(world.get(GARDEN_3_INDEX), null, null, null);
     }
-
-    //--METHODS--/
-
 }

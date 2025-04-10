@@ -22,7 +22,24 @@ public class Room{
     }
 
     // /--GETTER-&-SETTER--/
+
     public String getRoomName() {
         return roomName;
+    }
+
+    public Room getNorthRoom() {
+        return northRoom;
+    }
+
+    public Room getSouthRoom() {
+        return southRoom;
+    }
+
+    public Room getEastRoom() {
+        return eastRoom;
+    }
+
+    public Room getWestRoom() {
+        return westRoom;
     }
 }

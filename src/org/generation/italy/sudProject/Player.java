@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.generation.italy.sudProject.map.WorldMap.world;
+
 public class Player extends Entity {
     // /--ATTRIBUTES--/
     private String firstName;
@@ -16,7 +18,7 @@ public class Player extends Entity {
     private LocalDate creationDate = LocalDate.now();
     protected int playerLevel;
     public static int numberOfPlayers;
-    public Room playerPosition;
+    public Room playerPosition = world.getFirst();
 
     // /--CONSTRUCTORS--/
     public Player(String firstName, String lastName, String email, String password, String playerName, int indexClassStat, int classStat){
@@ -47,21 +49,33 @@ public class Player extends Entity {
         }
         return stats;
     }
-    private void spawnPlayer(){
-
-    }
 
     //NORD 0, SUD 1, EST 2, OVEST 3
-    private void playerMove(String d){
+    private void playerMove(String d) {
         String direction = d.toUpperCase();
-        switch(direction){
-            case "NORD" :
-                if(se ci sta una stanza a nord){
-                    playerPosition = posizione_nuova_stanza;
+        switch (direction) {
+            case "NORD":
+                if (playerPosition.getNorthRoom() != null) {
+                    playerPosition = playerPosition.getNorthRoom();
                 }
-
-
-
+                break;
+            case "SOUTH":
+                if (playerPosition.getSouthRoom() != null) {
+                    playerPosition = playerPosition.getSouthRoom();
+                }
+                break;
+            case "EAST":
+                if (playerPosition.getEastRoom() != null) {
+                    playerPosition = playerPosition.getEastRoom();
+                }
+                break;
+            case "WEST":
+                if (playerPosition.getWestRoom() != null) {
+                    playerPosition = playerPosition.getWestRoom();
+                }
+                break;
+            default:
+                System.out.println("INSERISCI LA DIREZIONE!");
         }
     }
 
