@@ -12,8 +12,8 @@ public class Gardens extends Room{
 
     }
 
-    @Override
-    public void getPossibleDirections() {
-
-    }
+//    @Override
+//    public void getPossibleDirections() {
+//
+//    }
 }

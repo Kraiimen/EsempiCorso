@@ -29,12 +29,13 @@ public abstract class Room {
     }
 
     //todo serve una nextRoom
-    public void getPossibleDirections(Map<Compass, Room> directions) {
-        if(directions.get(nextRoom) != null) {
-            this.directions = directions;
-            System.out.println("Le strade da qui portano a: " + directions);
-        }
-    }
+//    public void getPossibleDirections(Map<Compass, Room> directions) {
+//        if(directions. != null) {
+//            this.directions = directions;
+//            System.out.println("Le strade da qui portano a: " + directions);
+//
+//
+//    }
 
     public String getNameRoom() {
         return name;

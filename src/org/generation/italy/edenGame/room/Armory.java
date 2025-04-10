@@ -12,8 +12,8 @@ public class Armory extends Room{
 
     }
 
-    @Override
-    public void getPossibleDirections() {
-
-    }
+//    @Override
+//    public void getPossibleDirections() {
+//
+//    }
 }

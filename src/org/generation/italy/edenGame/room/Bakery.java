@@ -12,8 +12,8 @@ public class Bakery extends Room{
 
     }
 
-    @Override
-    public void getPossibleDirections() {
-
-    }
+//    @Override
+//    public void getPossibleDirections() {
+//
+//    }
 }

@@ -148,7 +148,7 @@ public class Start {
         System.out.println("La tua storia inizia qui: " + templeSquare.getNameRoom());
         templeSquare.printDescription();
 
-        System.out.println();
+        System.out.println(templeSquare);
 
 
     }

@@ -12,8 +12,8 @@ public class Woods extends Room{
 
     }
 
-    @Override
-    public void getPossibleDirections() {
-
-    }
+//    @Override
+//    public void getPossibleDirections() {
+//
+//    }
 }
