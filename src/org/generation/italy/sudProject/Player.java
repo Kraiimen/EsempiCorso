@@ -3,10 +3,9 @@ package org.generation.italy.sudProject;
 import org.generation.italy.sudProject.map.Room;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
-
 import static org.generation.italy.sudProject.map.WorldMap.world;
 
 public class Player extends Entity {
@@ -18,7 +17,7 @@ public class Player extends Entity {
     private LocalDate creationDate = LocalDate.now();
     protected int playerLevel;
     public static int numberOfPlayers;
-    public Room playerPosition = world.getFirst();
+    public HashMap<Room , ArrayList<Room>> playerPosition;
 
     // /--CONSTRUCTORS--/
     public Player(String firstName, String lastName, String email, String password, String playerName, int indexClassStat, int classStat){
@@ -42,11 +41,29 @@ public class Player extends Entity {
     private boolean checkCredentials(String email, String password){
         return credentials.containsKey(email) && credentials.containsValue(password);
     }
+
     public static int[] getStats(int[] stats){
         for(int n : stats){
             n = dice.nextInt(MIN_ATTRIBUTE_P_VALUE, MAX_ATTRIBUTE_P_VALUE);
         }
         return stats;
+    }
+    private void spawnPlayer(){
+
+    }
+
+    //NORD 0, SUD 1, EST 2, OVEST 3
+    private void playerMove(String d){
+        String direction = d.toUpperCase();
+        switch(direction){
+            case "NORD" :
+                if(se ci sta una stanza a nord){
+                    playerPosition = posizione_nuova_stanza;
+                }
+
+
+
+        }
     }
 
 
