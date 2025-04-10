@@ -83,6 +83,7 @@ public class Movements {
         woodsDirections.put(Compass.NORTH, cityDoor.getNameRoom());
     }
 
+    // ho cambiato semplciemente nell'input del metodo move "direction" in "templeDirection" ecc
     //todo controllare il Map<Compass, String> delle varie Directions perchè probabilmente non comunica con la Room, per questo i problemi in Start dove va tutto bene fino a questo metodo
     //TODO potremmo rimettere l'oggetto Room e trovare un modo per leggerlo e trasformarlo in String così da avere ( le vie percorribili EAST=The BAKERY, ecc)
 
