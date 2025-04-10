@@ -22,6 +22,7 @@ public abstract class Entity {
     protected int wisdom;
     protected int charisma;
     public static Random dice = new Random();
+    public static int numberOfEntities;
 
     // /--CONSTRUCTORS--/
     public Entity(int[] stats, int indexClassStat, int classStat){
@@ -32,6 +33,7 @@ public abstract class Entity {
         intelligence = stats[INTELLIGENCE_INDEX];
         wisdom = stats[WISDOM_INDEX];
         charisma = stats[CHARISMA_INDEX];
+        numberOfEntities++;
     }
 
     //--METHODS--/

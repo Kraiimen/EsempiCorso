@@ -13,6 +13,7 @@ public class Player extends Entity {
     protected String playerName;
     private LocalDate creationDate = LocalDate.now();
     protected int playerLevel;
+    public static int numberOfPlayers;
 
     // /--CONSTRUCTORS--/
     public Player(String firstName, String lastName, String email, String password, String playerName, int indexClassStat, int classStat){
@@ -21,6 +22,7 @@ public class Player extends Entity {
         this.lastName = lastName;
         credentials.put(email, password);
         this.playerName = playerName;
+        numberOfPlayers++;
     }
     // /--METHODS--/
     public void login(boolean check){
