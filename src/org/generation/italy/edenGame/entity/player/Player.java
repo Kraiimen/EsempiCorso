@@ -27,6 +27,7 @@ public abstract class Player extends Entity {
         System.out.println("sei morto");
         getExp();
         //@Todo telestrasporto a Temple per rinascere
+
     }
 
 }
