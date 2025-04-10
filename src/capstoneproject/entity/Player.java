@@ -20,9 +20,8 @@ public abstract class Player extends Entity {
     Console console;
 
 
-    public Player(int maxHealth, int maxDamage, String playerName, Room currentRoom) {
-        super(maxHealth, maxDamage, currentRoom);
-        this.playerName = playerName;
+    public Player(String name, int maxHealth, int maxDamage, Room currentRoom) {
+        super(name, maxHealth, maxDamage, currentRoom);
         this.currentRoom= currentRoom;
         initializeStats();
     }

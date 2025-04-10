@@ -27,7 +27,12 @@ public class Room {
 
     public void addExit(Directions dir , Room exit){
         exits.put(dir, exit);
-        exit.addExit(dir.getOpposite(),this);
+
+        // Aggiungi l'uscita inversa solo se non è già presente
+        // Evita di aggiungere nuovamente l'uscita inversa
+        if (!exit.exits.containsValue(this)) {
+            exit.addExit(dir.getOpposite(), this);
+        }
     }
 
     public Optional<Room> getExitAt (Directions dir){
