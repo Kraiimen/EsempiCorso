@@ -15,8 +15,8 @@ public class Player extends Entity {
     protected int playerLevel;
 
     // /--CONSTRUCTORS--/
-    public Player(String firstName, String lastName, String email, String password, String playerName, indice, valore){
-        super(getStats(new int[6], indice, valore));
+    public Player(String firstName, String lastName, String email, String password, String playerName, int indexClassStat, int classStat){
+        super(getStats(new int[6]), indexClassStat, classStat);
         this.firstName = firstName;
         this.lastName = lastName;
         credentials.put(email, password);
