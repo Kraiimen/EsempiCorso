@@ -49,9 +49,9 @@ public abstract class Entity {
         healthPoints -= hp;
     }
 
-     public int getMissingHp(int missingHp){
-         missingHp = maxHealth - healthPoints;
-         return missingHp;
+     public int getMissingHp(){
+         return maxHealth - healthPoints;
+
      }
 
 
