@@ -1,13 +1,35 @@
 package mud.characters.fightable;
 
 public class Priest extends PlayerCharacter {
-    private static int minIntelligence = 10;
-    private static int minStrength = 5;
-    private static int minAgility = 6;
-    private static int minStamina = 10;
+    private static final int MIN_INTEL = 10;
+    private static final int MIN_STRENGHT = 5;
+    private static final int MIN_AGIL = 6;
 
     public Priest(String name){
-        super(name, minIntelligence, minStrength, minAgility, minStamina);
+        super(name, MIN_INTEL, MIN_STRENGHT, MIN_AGIL, MIN);
+    }
+
+    //Nel prete l'attacco è influenzato dall'intelligenza
+    @Override
+    public void attack(Character character) {
+        int damage = checkBrain(getStrength());
+        System.out.printf("%s is attacking %s for %d points%n", getName(), character.getName(), damage);
+        if(character.tryToDodge()){
+            damage = 0;
+            System.out.println(character.getName() + " dodged the attack!");
+        }
+        character.hurt(damage);
+        if(character.checkIfAlive()){
+            System.out.printf("%s has now %d lives%n", character.getName(), character.getHp());
+        }
+    }
+
+    public int checkBrain(int damage){
+        if(dice.nextInt(MAX - getIntelligence()) == 0){
+            System.out.println("%s's intelligence makes his attack stronger!");
+            return damage + 2;
+        }
+        return damage;
     }
 
 }

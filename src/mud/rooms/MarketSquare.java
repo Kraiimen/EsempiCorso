@@ -5,15 +5,11 @@ public class MarketSquare extends Room{
         super("Market Square");
     }
 
-    @Override
-    public void addRandomNPC() {
-
-    }
 
     @Override
     public void printEntrance() {
         System.out.println("You are in Market Square");
-        getPresentEntities().forEach(e -> System.out.println(e.getName() + " the " + e.getClass()));
+        getPresentEntities().forEach(e -> System.out.println(e.getName() + " the " + e.getClass().getSimpleName()));
 
     }
 }

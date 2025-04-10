@@ -54,8 +54,6 @@ public abstract class Room {
 //        }
 //    }
 
-    public abstract void addRandomNPC();
-
     public abstract void printEntrance();
 
     //getter e setter

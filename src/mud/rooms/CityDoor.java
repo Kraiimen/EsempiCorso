@@ -5,13 +5,11 @@ public class CityDoor extends Room{
         super("The City Door");
     }
 
-    @Override
-    public void addRandomNPC() {
-
-    }
 
     @Override
     public void printEntrance() {
+
+        getPresentEntities().forEach(e -> System.out.println(e.getName() + " the " + e.getClass().getSimpleName()));
 
     }
 }
