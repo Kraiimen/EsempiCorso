@@ -1,6 +1,5 @@
 package org.generation.italy.fantasyGame.startup;
 
-import org.generation.italy.fantasyGame.entity.Entity;
 import org.generation.italy.fantasyGame.entity.player.Berserker;
 import org.generation.italy.fantasyGame.entity.player.Paladin;
 import org.generation.italy.fantasyGame.entity.player.Wizard;

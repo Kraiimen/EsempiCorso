@@ -40,7 +40,7 @@ public abstract class Entity {
         return healthPoints <= 0;
      }
 
-     public abstract void attack(Entity target);
+     abstract void attack(Entity target);
 
      public void addHealthPoints(int hp) {
          healthPoints += hp;

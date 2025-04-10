@@ -30,6 +30,7 @@ public abstract class Player extends Entity {
         this.strength = strength;
     }
 
+    public abstract void attack(Entity target);
 
     public void HealInTemple(){ //Funzione per ricaricarsi nel temple
         System.out.println("Healing in Temple");
@@ -40,6 +41,4 @@ public abstract class Player extends Entity {
         this.exp = exp;
     }
 
-    @Override
-    public abstract void attack(Entity target);
 }

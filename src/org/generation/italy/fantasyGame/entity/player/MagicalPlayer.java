@@ -1,7 +1,5 @@
 package org.generation.italy.fantasyGame.entity.player;
 
-import org.generation.italy.fantasyGame.entity.Entity;
-
 public abstract class MagicalPlayer extends Player {
     protected int mana;
 

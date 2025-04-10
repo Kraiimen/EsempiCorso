@@ -1,8 +1,9 @@
 package org.generation.italy.fantasyGame.entity.player;
 
-import org.generation.italy.fantasyGame.entity.Entity;
 
-public abstract class Player extends Entity {
+import org.generation.italy.fantasyGame.entity.Entity1;
+
+public abstract class Player extends Entity1 {
     private long exp;
     private String playerName;
 

@@ -16,7 +16,7 @@ public class Paladin extends Player {
     }
 
     @Override
-    public void attack(Entity targett) {
+    public void attack(Entity target) {
 
     }
 

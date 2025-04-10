@@ -1,6 +1,6 @@
 package org.generation.italy.fantasyGame.entity;
 
-public abstract class Npc extends Entity{
+public abstract class Npc extends Entity1 {
     private int expGain;
     private boolean canBeAttacked;
     private String generalInstructions;
@@ -11,7 +11,7 @@ public abstract class Npc extends Entity{
         this.canBeAttacked = canBeAttacked;
         this.generalInstructions = generalInstructions;
     }
-    public void giveInstructions(Entity target){
+    public void giveInstructions(Entity1 target){
         if(canBeAttacked){
             System.out.println("Let's fight");
         } else if(target.isSeriouslyDamaged()){
