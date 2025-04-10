@@ -1,8 +1,6 @@
 package org.generation.italy.fantasyGame.entity.player;
 
-import org.generation.italy.fantasyGame.entity.Entity;
-
-import java.util.Random;
+import org.generation.italy.fantasyGame.entity.Entity1;
 
 public class Berserker extends Player {
     private boolean isRaging;
@@ -19,7 +17,7 @@ public class Berserker extends Player {
             System.out.println("Attacco incazzato a bestia");
         }
     }
-    public void attack(Entity target){
+    public void attack(Entity1 target){
         if(getHealthPoints() < 20){
             System.out.println("Attacco incazzato a bestia");
         } else {

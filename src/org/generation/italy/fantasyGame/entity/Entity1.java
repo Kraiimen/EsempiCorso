@@ -2,15 +2,15 @@ package org.generation.italy.fantasyGame.entity;
 
 import java.util.Random;
 
-public abstract class Entity{
+public abstract class Entity1 {
     //ATTRIBUTI DELL'ISTANZA
     private String name;
-    private int healthPoints;
+    protected int healthPoints;
     private int maxHp;
     protected int damage;
     protected Random rand = new Random();
 
-    public Entity(String name, int maxHp, int damage){
+    public Entity1(String name, int maxHp, int damage){
         this.name = name;
         this.maxHp = maxHp;
         healthPoints= this.maxHp;
@@ -34,7 +34,7 @@ public abstract class Entity{
         healMissingHpPercent(0.3);
         System.out.println("Hai mangiato e hai " + healthPoints);
     }
-    public abstract void attack(Entity target);
+    public abstract void attack(Entity1 target);
     public void addHealthPoints(int hp){
         healthPoints += hp;
     }

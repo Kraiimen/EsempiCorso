@@ -1,6 +1,6 @@
 package org.generation.italy.fantasyGame.entity.player;
 
-import org.generation.italy.fantasyGame.entity.Entity;
+import org.generation.italy.fantasyGame.entity.Entity1;
 
 public class Paladin extends Player {
     private boolean isVirgin;
@@ -9,7 +9,7 @@ public class Paladin extends Player {
         super(name, maxHp, 10, namePlayer, exp);
         this.isVirgin = isVirgin;
     }
-    public void attack(Entity target){
+    public void attack(Entity1 target){
         if(isVirgin){
             damage = 20;
             System.out.println("Attacca con lancia divina");

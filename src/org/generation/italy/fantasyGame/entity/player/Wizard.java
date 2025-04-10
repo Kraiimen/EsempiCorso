@@ -1,9 +1,7 @@
 package org.generation.italy.fantasyGame.entity.player;
 
-import org.generation.italy.fantasyGame.entity.Entity;
+import org.generation.italy.fantasyGame.entity.Entity1;
 import org.generation.italy.fantasyGame.entity.Npc;
-
-import java.util.ArrayList;
 
 public class Wizard extends MagicalPlayer{
     private int intelligence;
@@ -23,7 +21,7 @@ public class Wizard extends MagicalPlayer{
     }
 
     @Override
-    public void attack(Entity target){
+    public void attack(Entity1 target){
         if(getHealthPoints() < 20){
             runAway();
         } else {
