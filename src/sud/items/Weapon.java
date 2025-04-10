@@ -1,17 +1,14 @@
 package sud.items;
-
+import sud.dices;
 public class Weapon extends Item{
-    private int damageMod;
-    public Weapon(int price, ItemType type, String name, int damageMod) {
+    private int weaponeDamageDiceFaces;
+    public Weapon(int price, ItemType type, String name, int damageDiceFaces) {
         super(price, type, name);
-        this.damageMod = damageMod;
+        this.weaponeDamageDiceFaces = damageDiceFaces;
     }
 
-    public int getDamageMod() {
-        return damageMod;
+    public int rollDamage(){
+        return dices.roll(weaponeDamageDiceFaces);
     }
 
-    public void setDamageMod(int damageMod) {
-        this.damageMod = damageMod;
-    }
 }

@@ -1,5 +1,6 @@
 package sud.entity;
 
+import sud.dices;
 import sud.items.*;
 import sud.rooms.*;
 
@@ -12,11 +13,14 @@ public class Entity {
     private String name;
     private int healthPoints;
     private int maxHp;
-    private int attackDamage; //danno base della creatura
+    private int attackDamage;
     private boolean isDead;
     private int xpOnDeath=0;
     private Room currentroom;
     private ArrayList<Item> inventory;
+    private Weapon equipedWeapon = new Weapon(0,ItemType.WEAPON,"pugni",0);
+    private Armor equipedArmor= new Armor(0,ItemType.ARMOR,"culo nudo", 0);
+    private int ac;
     private String entityColor;
     public static String colorBlack = "\u001B[30m";
     public static String colorR = "\u001B[31m";
@@ -35,7 +39,7 @@ public class Entity {
         this.attackDamage = attackDamage;
         this.currentroom = currentroom;
         inventory = new ArrayList<>();
-
+        this.ac = 10;
     }
 
     public Entity(String name, int maxHp, int attackDamage, Room currentroom, String entityColor){
@@ -59,28 +63,27 @@ public class Entity {
             isDead=true;
             healthPoints =0;
         }else{
-            healthPoints -= recivedDamage;
-            //@todo implementare un modo di ridurre i danni in base al armatura
+            healthPoints -= recivedDamage-equipedArmor.getDamageReducer();
         }
     }
 
-    public void Attack (Entity attacked){
-        int damage;
-        Random dice = new Random();
-        int roll = dice.nextInt(20);
-        if( roll == 19){
-            damage = getAttackDamage()*2;
-        } else if (roll == 0) {
-            damage = 0;
-        }else{
-            damage = getAttackDamage();
+    public void attack (Entity attacked){
+        int damage=0;
+        int roll = dices.rd20();
+        if( roll == 20){
+            damage = equipedWeapon.rollDamage()*2;
+        } else if (roll == 1) {
+            System.out.printf(entityColor+"Your attack was soo weak %s uses the opportunity and attacks you"+resetColor,attacked.getName());
+            attacked.attack(this);
+            return;
+        }else if(doesAttackRollHit(attacked,roll)){
+            damage = equipedWeapon.rollDamage();
         }
 
-        System.out.printf(" %s is attacking %s for %d damage\n ", name, attacked.getName(),damage);
+        System.out.printf(entityColor+"%s is attacking %s for %d damage\n "+resetColor, name, attacked.getName(),damage);
         attacked.hurt(damage);
-
         if(attacked.isDead){
-            System.out.println(attacked.getName() + " has died by that hit\n ");
+            System.out.println(entityColor+attacked.getName() + " has died by that hit\n "+resetColor);
         }
 
     }
@@ -89,25 +92,30 @@ public class Entity {
     public void heal (int recivedHeal){
         if((maxHp - healthPoints)> recivedHeal){
             healthPoints += recivedHeal;
-            System.out.printf("%s healed %d",name,recivedHeal);
+            System.out.printf(entityColor+"%s healed %d"+resetColor,name,recivedHeal);
         }else {
             healthPoints = maxHp;
-            System.out.printf("%s has fully healed",name);
+            System.out.printf(entityColor+"%s has fully healed"+resetColor,name);
         }
     }
 
     public void sleep(){
         heal(10000000);
-        System.out.printf("%s sleeps",name);
+        System.out.printf(entityColor+"%s sleeps"+resetColor,name);
     }
 
     public void eat (Item item){
-        //@TODO implementare una cura in base a i parametri di cura del oggetto di cura
+        Food food = (Food)doesEntityHaveItem(ItemType.FOOD);
+        if(food == null){
+            System.out.println(entityColor+"You have no food"+resetColor);
+        }else{
+            heal(food.getHealingFacotr());
+        }
     }
 
     // METODI DI GESTIONE
 
-    public void pickUpItem (Item item){
+    public void pickUpItem (Item item, Boolean wantToEquip){
 
         switch (item.getType()){
             case ARMOR -> {
@@ -117,7 +125,20 @@ public class Entity {
                         numOfItem.getAndIncrement();
                     }
                 });
+                if(wantToEquip){equipedArmor = (Armor) item;}
                 if(numOfItem.get()<=2){inventory.add(item);}
+
+
+            }
+            case WEAPON -> {
+                AtomicInteger numOfItem= new AtomicInteger();
+                inventory.forEach(item1 -> {
+                    if (item1.getType() == ItemType.WEAPON) {
+                        numOfItem.getAndIncrement();
+                    }
+                });
+                if(wantToEquip){equipedWeapon = (Weapon) item;}
+                if(numOfItem.get()<=3){inventory.add(item);}
 
             }
             case FOOD -> {
@@ -130,16 +151,7 @@ public class Entity {
                 if(numOfItem.get()<=5){inventory.add(item);}
 
             }
-            case WEAPON -> {
-                AtomicInteger numOfItem= new AtomicInteger();
-                inventory.forEach(item1 -> {
-                    if (item1.getType() == ItemType.WEAPON) {
-                        numOfItem.getAndIncrement();
-                    }
-                });
-                if(numOfItem.get()<=3){inventory.add(item);}
 
-            }
             case POTION -> {
                 AtomicInteger numOfItem= new AtomicInteger();
                 inventory.forEach(item1 -> {
@@ -164,11 +176,20 @@ public class Entity {
 
     }
 
+    private Item doesEntityHaveItem(ItemType type){
+        return inventory.stream().filter(i-> i.getType() == type).findFirst().orElse(null);
+    }
+
+    public boolean doesAttackRollHit (Entity attacked, int roll){
+        if(roll >= attacked.getAc()){
+            return true;
+        }
+        return false;
+    }
 
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -176,7 +197,6 @@ public class Entity {
     public int getHealthPoints() {
         return healthPoints;
     }
-
     public void setHealthPoints(int healthPoints) {
         this.healthPoints = healthPoints;
     }
@@ -184,16 +204,13 @@ public class Entity {
     public int getMaxHp() {
         return maxHp;
     }
-
     public void setMaxHp(int maxHp) {
         this.maxHp = maxHp;
     }
 
     public int getAttackDamage() {
         return attackDamage;
-        //@todo implementare un modo di aggiungere danni in base al arma usata per attaccare
     }
-
     public void setAttackDamage(int attackDamage) {
         this.attackDamage = attackDamage;
     }
@@ -201,7 +218,6 @@ public class Entity {
     public boolean isDead() {
         return isDead;
     }
-
     public void setDead(boolean dead) {
         isDead = dead;
     }
@@ -209,7 +225,6 @@ public class Entity {
     public Room getCurrentroom() {
         return currentroom;
     }
-
     public void setCurrentroom(Room currentroom) {
         this.currentroom = currentroom;
     }
@@ -217,16 +232,36 @@ public class Entity {
     public int getXpOnDeath() {
         return xpOnDeath;
     }
-
     public void setXpOnDeath(int xpOnDeath) {
         this.xpOnDeath = xpOnDeath;
     }
 
-    public String getEntityColor() {
-        return entityColor;
+    public String getEntityColor() {return entityColor;}
+    public void setEntityColor(String entityColor) {this.entityColor = entityColor;}
+
+    public Weapon getEquipedWeapon() {
+        return equipedWeapon;
     }
 
-    public void setEntityColor(String entityColor) {
-        this.entityColor = entityColor;
+    public void setEquipedWeapon(Weapon equipedWeapon) {
+        this.equipedWeapon = equipedWeapon;
     }
+
+    public Armor getEquipedArmor() {
+        return equipedArmor;
+    }
+
+    public void setEquipedArmor(Armor equipedArmor) {
+        this.equipedArmor = equipedArmor;
+    }
+
+    public int getAc() {
+        return ac;
+    }
+
+    public void setAc(int ac) {
+        this.ac = ac;
+    }
+
+
 }

@@ -6,24 +6,26 @@ import java.util.*;
 
 public class Room {
     private String name;
-    private Room nordPath,sudPath,westPath,eastPath;
+    private Room nordPath, sudPath, westPath, eastPath;
     private boolean hasItems, hasNPC, hasGuards, hasCritters, hasMOBS;
     private ArrayList<Item> itemsInRoom;
     private ArrayList<Entity> MOBSInRoom, guardsInRoom, crittersInRoom;
     private Set<Entity> NPCInRoom;
-    private static Map<String,Room> roomMap = new HashMap();
+    private static Map<String, Room> roomMap = new HashMap();
+    private String description;
 
     static {
         Room debugroom = new Room("debroom");
 
         Room castle = new Room("castle");
-        roomMap.put("castle",castle);
+        roomMap.put("castle", castle);
         Room prison = new Room("prison");
-        roomMap.put("prison",prison);
+        roomMap.put("prison", prison);
         Room temple = new Room("temple");
         roomMap.put("temple", temple);
         Room templeSq = new Room("templeSquare");
-        roomMap.put("templeSquare", templeSq);
+        Room tavern = new Room("tavern");
+        roomMap.put("tavern", tavern);
         Room market = new Room("market");
         roomMap.put("market", market);
         Room forge = new Room("forge");
@@ -49,6 +51,9 @@ public class Room {
 
         templeSq.setPaths(debugroom, market, debugroom, temple);
         templeSq.setRoomProperties(false, true, true, false, false);
+
+        tavern.setPaths(debugroom, debugroom, templeSq, debugroom);
+        tavern.setRoomProperties(true, true, false, false, false);
 
         temple.setPaths(debugroom, debugroom, templeSq, debugroom);
         temple.setRoomProperties(false, true, true, false, false);
@@ -76,9 +81,25 @@ public class Room {
 
         bossRoom.setPaths(debugroom, debugroom, forest, debugroom);
         bossRoom.setRoomProperties(true, false, false, false, true);
+
+        castle.setDescription("Un enorme sala del trono si presenta davanti a te, muri in marmo bianco, un lungo tappeto rosso che dalla porta indica la via per il trono ," +
+                "4 guardie svettano fiere alla tua destra quando entri, e altr 4 sono appena arrivate dal cambio turno sulla tua sinistra " +
+                "le mura della stanza sono ricoperte di arazzi e quadri, riesci tranquillamente a vedere che l'arazzo più grande raffigura l'attuale re, " +
+                "alla fine della stanza puoi vedere una scalinata di circa 6-7 gradini, che alla sua sommità ha un lussuoso trono fatto d'oro e intarsiato in madre perla, " +
+                "sul trono svetta una figura umanoide, un uomo grasso, dalle spalle larghe e dalla barba ben curata, sulla sua testa svetta una corona, lui è il re");
+        prison.setDescription("Scendendo le scale ti ritrovi in un ambiente umido e illuminato da sole torce, l'aria e viziata e la polvere è molta, alla fine delle scale vedi una porta in legno" +
+                "una guardia è seduta ad un tavolo li vicino,quando passi segna il tuo nome sul registro, la porta della prigione è aperta, da su un corridoio, riesci già a vedere una fila di celle con sbarre di metallo larghe quanto il manico di una scopa" +
+                "le celle sono sporche, c'è puzza di urina e le facce al suo interno non sono amichevoli");
+        templeSq.setDescription("La piazza del tempio è colma di persone, vedi bambini che giocano a campana, guardie che fanno la ronda, vecchie signore che danno da mangiare a dei piccioni" +
+                "a nord il ponte levatoio che da sul entrata per il castello, dove 3 guardie fanno da sentinelle, riesci quasi a vedere la sala del trono in lontananza, " +
+                "verso sud il gran mercato cittadino, con le sue bancarelle e empori, senti già il chiasso dei venditori che ti propongono \" il grande affare della tua vita\" provenire da quella direction " +
+                "verso est invece sfoggia fiero il grande tempio degli dei, completamente fatto in marmo dei migliori al mondo, li potresti trovare l'aiuto dei sacerdoti, riconosciuti per le loro abilità curative e di potenziamento");
     }
 
-    public Room(String name, Room nordPath, Room sudPath, Room westPath, Room eastPath, boolean hasItems, boolean hasNPC, boolean hasGuards, boolean hasCritters, boolean hasMOBS, ArrayList<Item> itemsInRoom, ArrayList<Entity> MOBSInRoom, ArrayList<Entity> guardsInRoom, ArrayList<Entity> crittersInRoom, Set<Entity> NPCInRoom) {
+    public Room(String name, Room nordPath, Room sudPath, Room westPath, Room eastPath,
+                boolean hasItems, boolean hasNPC, boolean hasGuards, boolean hasCritters, boolean hasMOBS,
+                ArrayList<Item> itemsInRoom, ArrayList<Entity> MOBSInRoom, ArrayList<Entity> guardsInRoom,
+                ArrayList<Entity> crittersInRoom, Set<Entity> NPCInRoom, String description) {
         this.name = name;
         this.nordPath = nordPath;
         this.sudPath = sudPath;
@@ -94,6 +115,7 @@ public class Room {
         this.guardsInRoom = guardsInRoom;
         this.crittersInRoom = crittersInRoom;
         this.NPCInRoom = NPCInRoom;
+        this.description = description;
     }
 
     public Room(String name) {
@@ -103,6 +125,7 @@ public class Room {
         this.guardsInRoom = new ArrayList<>();
         this.crittersInRoom = new ArrayList<>();
         this.NPCInRoom = new HashSet<>();
+        this.description = "";
     }
 
     public void setPaths(Room nord, Room sud, Room west, Room east) {
@@ -225,7 +248,14 @@ public class Room {
         this.NPCInRoom = NPCInRoom;
     }
 
-    static public Room getRoomPointerFromName (String name){
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    static public Room getRoomPointerFromName(String name) {
         return roomMap.get(name);
     }
 }
