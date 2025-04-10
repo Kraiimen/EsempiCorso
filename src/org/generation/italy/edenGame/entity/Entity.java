@@ -5,7 +5,8 @@ public abstract class Entity {
     private int maxHp;
     private int healthPoints;
     private int damage;
-    private int exp;
+    private int exp; //@Todo forse in player?
+    //@Todo CurrentRoom;
 
     public Entity(String name, int maxHp, int healthPoints, int damage, int exp) {
         this.name = name;
@@ -15,7 +16,7 @@ public abstract class Entity {
         this.exp = exp;
     }
 
-
+//@Todo forse metodo muori va in entity
     //METODI
     public abstract void attack(Entity target);
     public void addHealthPoints(int hp){

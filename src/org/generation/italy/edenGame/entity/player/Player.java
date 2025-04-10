@@ -2,7 +2,6 @@ package org.generation.italy.edenGame.entity.player;
 
 import org.generation.italy.edenGame.entity.Entity;
 
-import javax.naming.directory.InvalidAttributesException;
 
 public abstract class Player extends Entity {
 
@@ -11,7 +10,7 @@ public abstract class Player extends Entity {
     private int strength;
     private int agility;
     private int stamina;
-
+    //@Todo aggiungere currentroom al costruttore
     public Player(String name, int maxHp, int healthPoints, int damage, int exp, String playerName, int intelligence, int strength, int agility, int stamina) {
 
         super(name, maxHp, healthPoints, damage, exp);
@@ -26,7 +25,7 @@ public abstract class Player extends Entity {
     public void dead(int exp) {
         System.out.println("sei morto");
         getExp();
-        //@Todo telestrasporto a Temple per rinascere
+        //@Todo teletrasporto a Temple per rinascere (setCurrentRoom?)
     }
 
 }

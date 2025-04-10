@@ -6,6 +6,7 @@ import java.util.Map;
 public abstract class Room {
     private String name;
     private Map<Compass, Room> directions;
+    //Todo guardie nella stanza, oggetti, mostri, npc. guardie potrebbe essere boolean e dipende dal dado
 
     public Room(String name,Map<Compass, Room> directions) {
         this.name = name;
@@ -18,13 +19,11 @@ public abstract class Room {
         directions.put(dir,nextRoom);
     }
 
-    public Room getDirections(Compass dir) {
+    public Room getDirection(Compass dir) {
         return directions.get(dir);
     }
 
     public abstract void getPossibleDirections();
-
-    //METTI FUNZIONE CHE TI TELETRASPORTA SE MUORI
 
     public String getName() {
         return name;
