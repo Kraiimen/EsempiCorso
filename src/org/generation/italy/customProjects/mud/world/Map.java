@@ -1,4 +1,6 @@
 package org.generation.italy.customProjects.mud.world;
 
-public class Room {
+public class Map {
+    private Place currentRoom;
+
 }

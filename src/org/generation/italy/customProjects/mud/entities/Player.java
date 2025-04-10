@@ -1,24 +1,33 @@
 package org.generation.italy.customProjects.mud.entities;
 
+import org.generation.italy.customProjects.mud.world.Place;
+
+import java.util.HashMap;
+
 public abstract class Player extends Entity {
     //   /-----/-VARIABLES-/-----/
     private String playerName;
-    private int xp;
-    private int strength;
-    private int agility;
-    private int stamina;
+    private HashMap<String, String> login;
+    private int exp;
+
 
     //   /-----/-CONSTRUCTORS-/-----/
-    public Player(String name, int health, String playerName, int xp, int strength, int agility, int stamina) {
-        super(name, health);
+    public Player(String name, int currentHealth, int maxHealthPoint, int attackDamage, int strength, int agility, int stamina, Place currentPosition, String playerName) {
+        super(name, currentHealth, maxHealthPoint, attackDamage, strength, agility, stamina, currentPosition);
         this.playerName = playerName;
-        this.xp = xp;
-        this.strength = strength;
-        this.agility = agility;
-        this.stamina = stamina;
+        this.exp = 0;
     }
 
+
     //   /-----/-METHODS-/-----/
+//    public int attack() {
+//    }
+//    public int eat() {
+//    }
+//    public int sleep(){
+//    }
+//    public void speak(){
+//    }
 
 
 
@@ -26,20 +35,14 @@ public abstract class Player extends Entity {
     public String getPlayerName() {
         return playerName;
     }
-    public int getXp() {
-        return xp;
+    public int getExp() {
+        return exp;
     }
-    public int getStrength() {
-        return strength;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
-    public int getAgility() {
-        return agility;
+    public void setExp(int exp) {
+        this.exp = exp;
     }
-    public int getStamina() {
-        return stamina;
-    }
-
-
-
 
 }

@@ -1,19 +1,33 @@
 package org.generation.italy.customProjects.mud.entities;
 
-import org.generation.italy.customProjects.mud.world.Room;
+import org.generation.italy.customProjects.mud.world.Place;
+
+import java.util.Random;
 
 public abstract class Entity {
     //   /-----/-VARIABLES-/-----/
     private String name;
     private int currentHealth;
     private int maxHealthPoint;
-    private Room currentPosition;
+    private int attackDamage;
+    private int strength;
+    private int agility;
+    private int stamina;
+    private Place currentPosition;
+    private Random abilitiesDice;
 
     //   /-----/-CONSTRUCTORS-/-----/
-    public Entity(String name, int health) {
+    public Entity(String name, int currentHealth, int maxHealthPoint, int attackDamage, int strength, int agility, int stamina, Place currentPosition) {
         this.name = name;
-        this.currentHealth = health;
+        this.currentHealth = currentHealth;
+        this.maxHealthPoint = maxHealthPoint;
+        this.attackDamage = attackDamage;
+        this.strength = strength;
+        this.agility = agility;
+        this.stamina = stamina;
+        this.currentPosition = currentPosition;
     }
+
 
     //   /-----/-METHODS-/-GETTER-&-SETTER-/-----/
     public String getName() {
@@ -25,10 +39,10 @@ public abstract class Entity {
     public void setCurrentHealth(int currentHealth) {
         this.currentHealth = currentHealth;
     }
-    public Room getCurrentPosition() {
+    public Place getCurrentPosition() {
         return currentPosition;
     }
-    public void setCurrentPosition(Room currentPosition) {
+    public void setCurrentPosition(Place currentPosition) {
         this.currentPosition = currentPosition;
     }
 
