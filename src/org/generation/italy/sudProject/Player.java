@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import static org.generation.italy.sudProject.map.WorldMap.world;
 
 public class Player extends Entity {
     // /--ATTRIBUTES--/
@@ -17,7 +16,7 @@ public class Player extends Entity {
     private LocalDate creationDate = LocalDate.now();
     protected int playerLevel;
     public static int numberOfPlayers;
-    public HashMap<Room , ArrayList<Room>> playerPosition;
+    public Room playerPosition;
 
     // /--CONSTRUCTORS--/
     public Player(String firstName, String lastName, String email, String password, String playerName, int indexClassStat, int classStat){
