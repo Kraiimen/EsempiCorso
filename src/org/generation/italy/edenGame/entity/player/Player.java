@@ -5,11 +5,12 @@ import org.generation.italy.edenGame.room.Room;
 import org.generation.italy.edenGame.room.Temple;
 import org.generation.italy.edenGame.room.Compass;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public abstract class Player extends Entity {
+public class Player extends Entity {
 
     private String playerName;
     private int intelligence;
@@ -41,8 +42,10 @@ public abstract class Player extends Entity {
     @Override
     public void attack(Entity target) {
     }
-
+    @Override
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
+        System.out.println(currentRoom.getNameRoom());
+        currentRoom.printDescription();
     }
 }

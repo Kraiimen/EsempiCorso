@@ -12,6 +12,11 @@ public class Temple extends Room{
     public void printDescription() {
     }
 
+    @Override
+    public void move() {
+
+    }
+
 //    @Override
 //    public void getPossibleDirections() {
 //    }

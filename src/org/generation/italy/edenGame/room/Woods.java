@@ -12,6 +12,11 @@ public class Woods extends Room{
 
     }
 
+    @Override
+    public void move() {
+
+    }
+
 //    @Override
 //    public void getPossibleDirections() {
 //

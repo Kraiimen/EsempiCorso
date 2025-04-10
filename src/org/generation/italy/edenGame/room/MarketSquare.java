@@ -12,6 +12,11 @@ public class MarketSquare extends Room{
         System.out.println("Un grande mercato, tanto chiasso e disordine, la gentre va e viene, si compra ma si lascia sempre qualcosa...");
     }
 
+    @Override
+    public void move() {
+
+    }
+
 //    @Override
 //    public void getPossibleDirections() {
 

@@ -12,6 +12,11 @@ public class Armory extends Room{
 
     }
 
+    @Override
+    public void move() {
+
+    }
+
 //    @Override
 //    public void getPossibleDirections() {
 //

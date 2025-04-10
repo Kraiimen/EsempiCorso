@@ -8,9 +8,7 @@ public abstract class Room {
     private Map<Compass, Room> directions;
     //Todo guardie nella stanza, oggetti, mostri, npc. guardie potrebbe essere boolean e dipende dal dado
 
-    //todo settare questi per le possibleDirections
     private Room currentRoom;
-    private Room nextRoom;
 
     public Room(String name, Map<Compass, String> directions) {
         this.name = name;
@@ -27,14 +25,7 @@ public abstract class Room {
         return directions.get(dir);
     }
 
-    //todo serve una nextRoom
-//    public void getPossibleDirections(Map<Compass, Room> directions) {
-//        if(directions. != null) {
-//            this.directions = directions;
-//            System.out.println("Le strade da qui portano a: " + directions);
-//
-//
-//    }
+    public abstract void move();
 
     public String getNameRoom() {
         return name;
