@@ -9,7 +9,7 @@ public class Gardens extends Room{
 
     @Override
     public void printDescription() {
-
+        System.out.println("I giardini, fioriti e colorati, il vanto della casata reale ");
     }
 
     @Override

@@ -101,9 +101,11 @@ public class Start {
                 && !answer.toLowerCase().equals("paladin")
                 && !answer.toLowerCase().equals("priest")
                 && !answer.toLowerCase().equals("thief"));
-
-        System.out.println("La tua storia inizia qui: --------/ " + templeSquare.getNameRoom() + "/--------");
+        System.out.println(" ");
+        System.out.println("La tua storia inizia qui: " + "\n" + "--------/ " +  templeSquare.getNameRoom() + " /--------");
         templeSquare.printDescription();
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println(" ");
 
         //INIZIALIZZAZIONE MOVIMENTI
         //Todo: Tutti i movimenti che può fare il Player, vanno attivati con un conditional
@@ -116,7 +118,6 @@ public class Start {
         movements.moveFromGardens(player, gardensDirections, roomFinder);
         movements.moveFromCityDoor(player, cityDoorDirections, roomFinder);
         movements.moveFromWoods(player, woodsDirections, roomFinder);
-
 
     }
 

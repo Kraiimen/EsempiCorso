@@ -9,7 +9,7 @@ public class Woods extends Room{
 
     @Override
     public void printDescription() {
-
+        System.out.println("Non sai cosa troverai, puoi solo sperare di poterlo raccontare ");
     }
 
     @Override
