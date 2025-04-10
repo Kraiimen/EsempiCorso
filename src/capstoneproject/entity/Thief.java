@@ -8,14 +8,24 @@ public class Thief extends Player {
     public Thief(int maxHealt, int maxDamage, String playerName) {
         super(maxHealt, maxDamage, playerName);
         this.playerName = playerName;
-        this.strength = new Random().nextInt(21);
-        this.intelligence =  new Random().nextInt(21);
-        this.agility = 5 + new Random().nextInt(21);
-        this.stamina = new Random().nextInt(21);
+        this.strength = this.random.nextInt(21);
+        this.intelligence =  this.random.nextInt(21);
+        this.agility = 5 + this.random.nextInt(21);
+        this.stamina = this.random.nextInt(21);
     }
 
     @Override
     public void attack(Entity target) {
+
+    }
+
+    @Override
+    void openInventory() {
+
+    }
+
+    @Override
+    void runAway() {
 
     }
 
