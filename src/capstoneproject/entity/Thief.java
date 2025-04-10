@@ -1,10 +1,7 @@
 package capstoneproject.entity;
 
-import capstoneproject.Room;
-
-import java.util.Random;
-
 public class Thief extends Player {
+    private boolean isInvisible;
     public Thief(int maxHealt, int maxDamage, String playerName) {
         super(maxHealt, maxDamage, playerName);
         this.playerName = playerName;
@@ -16,16 +13,19 @@ public class Thief extends Player {
 
     @Override
     public void attack(Entity target) {
-
+        int damage = strength + intelligence + agility + stamina;
+        isInvisible = this.random.nextInt(100) < 25;
+        if(isInvisible){
+            damage *= 2;
+            System.out.println(playerName + "Attacco critico al nemico. Danno: " + damage);
+        }else{
+            System.out.println(playerName +"Attacco il nemico. Danno: " + damage);
+        }
+        target.takeDamage(damage);
     }
 
     @Override
     void openInventory() {
-
-    }
-
-    @Override
-    void runAway() {
 
     }
 
