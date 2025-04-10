@@ -1,6 +1,5 @@
 package org.generation.italy.edenGame.room;
 
-import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +12,7 @@ public abstract class Room {
     private Room currentRoom;
     private Room nextRoom;
 
-    public Room(String name,Map<Compass, Room> directions) {
+    public Room(String name, Map<Compass, String> directions) {
         this.name = name;
         this.directions = new HashMap<>();
     }

@@ -3,7 +3,7 @@ package org.generation.italy.edenGame.room;
 import java.util.Map;
 
 public class Woods extends Room{
-    public Woods(String name, Map<Compass, Room> directions) {
+    public Woods(String name, Map<Compass, String> directions) {
         super(name, directions);
     }
 

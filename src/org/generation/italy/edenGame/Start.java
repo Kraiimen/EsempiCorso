@@ -22,80 +22,66 @@ public class Start {
         String answer;
 
         //ROOMs
-        Map<Compass, Room> templeDirections = new HashMap<Compass, Room>();
+        Map<Compass, String> templeDirections = new HashMap<Compass, String>();
         Room temple = new Temple("Temple", templeDirections);
 
-        Map<Compass, Room> templeSquareDirections = new HashMap<Compass, Room>();
+        Map<Compass, String> templeSquareDirections = new HashMap<Compass, String>();
         Room templeSquare = new TempleSquare("Temple Square", templeSquareDirections);
 
-        Map<Compass, Room> marketSquareDirections = new HashMap<Compass, Room>();
+        Map<Compass, String> marketSquareDirections = new HashMap<Compass, String>();
         Room marketSquare = new MarketSquare("Market Square", marketSquareDirections);
 
-        Map<Compass, Room> bakeryDirections = new HashMap<Compass, Room>();
+        Map<Compass, String> bakeryDirections = new HashMap<Compass, String>();
         Room bakery = new Bakery("The Bakery", bakeryDirections);
 
-        Map<Compass, Room> armoryDirections = new HashMap<Compass, Room>();
+        Map<Compass, String> armoryDirections = new HashMap<Compass, String>();
         Room armory = new Armory("The Armory", armoryDirections);
 
-        Map<Compass, Room> gardensDirections = new HashMap<Compass, Room>();
+        Map<Compass, String> gardensDirections = new HashMap<Compass, String>();
         Room gardens = new Gardens("The Gardens", gardensDirections);
 
-        Map<Compass, Room> woodsDirections = new HashMap<Compass, Room>();
+        Map<Compass, String> woodsDirections = new HashMap<Compass, String>();
         Room woods = new Woods("Woods", woodsDirections);
 
-        Map<Compass, Room> cityDoorDirections = new HashMap<Compass, Room>();
+        Map<Compass, String> cityDoorDirections = new HashMap<Compass, String>();
         Room cityDoor = new CityDoor("City Door", cityDoorDirections);
 
         //BLOCCO DIRECTIONS
 
         //Temple:
-        templeDirections.put(Compass.WEST, templeSquare);
-        templeDirections.put(Compass.SOUTH, bakery);
-        templeDirections.put(Compass.NORTH, null);
-        templeDirections.put(Compass.EAST, null);
+        templeDirections.put(Compass.WEST, templeSquare.getNameRoom());
+        templeDirections.put(Compass.SOUTH, bakery.getNameRoom());
 
         //TempleSquare
-        templeSquareDirections.put(Compass.WEST, null);
-        templeSquareDirections.put(Compass.SOUTH, marketSquare);
-        templeSquareDirections.put(Compass.NORTH, null);
-        templeSquareDirections.put(Compass.EAST, temple);
+        templeSquareDirections.put(Compass.SOUTH, marketSquare.getNameRoom());
+        templeSquareDirections.put(Compass.EAST, temple.getNameRoom());
 
         //MarketSquare
-        marketSquareDirections.put(Compass.WEST, armory);
-        marketSquareDirections.put(Compass.SOUTH, gardens);
-        marketSquareDirections.put(Compass.NORTH, templeSquare);
-        marketSquareDirections.put(Compass.EAST, bakery);
+        marketSquareDirections.put(Compass.WEST, armory.getNameRoom());
+        marketSquareDirections.put(Compass.SOUTH, gardens.getNameRoom());
+        marketSquareDirections.put(Compass.NORTH, templeSquare.getNameRoom());
+        marketSquareDirections.put(Compass.EAST, bakery.getNameRoom());
 
         //Bakery
-        bakeryDirections.put(Compass.WEST, marketSquare);
-        bakeryDirections.put(Compass.SOUTH, null);
-        bakeryDirections.put(Compass.NORTH, temple);
-        bakeryDirections.put(Compass.EAST, null);
+        bakeryDirections.put(Compass.WEST, marketSquare.getNameRoom());
+        bakeryDirections.put(Compass.NORTH, temple.getNameRoom());
+
 
         //Armory
-        armoryDirections.put(Compass.WEST, null);
-        armoryDirections.put(Compass.SOUTH, null);
-        armoryDirections.put(Compass.NORTH, null);
-        armoryDirections.put(Compass.EAST, marketSquare);
+        armoryDirections.put(Compass.EAST, marketSquare.getNameRoom());
 
         //Gardens
-        gardensDirections.put(Compass.WEST, null);
-        gardensDirections.put(Compass.SOUTH, cityDoor);
-        gardensDirections.put(Compass.NORTH, marketSquare);
-        gardensDirections.put(Compass.EAST, null);
+        gardensDirections.put(Compass.SOUTH, cityDoor.getNameRoom());
+        gardensDirections.put(Compass.NORTH, marketSquare.getNameRoom());
+
 
         //CityDoor
-        cityDoorDirections.put(Compass.WEST, null);
-        cityDoorDirections.put(Compass.SOUTH, woods);
-        cityDoorDirections.put(Compass.NORTH, gardens);
-        cityDoorDirections.put(Compass.EAST, null);
+        cityDoorDirections.put(Compass.SOUTH, woods.getNameRoom());
+        cityDoorDirections.put(Compass.NORTH, gardens.getNameRoom());
+
 
         //Woods
-        woodsDirections.put(Compass.WEST, null);
-        woodsDirections.put(Compass.SOUTH, null);
-        woodsDirections.put(Compass.NORTH, cityDoor);
-        woodsDirections.put(Compass.EAST, null);
-
+        woodsDirections.put(Compass.NORTH, cityDoor.getNameRoom());
 
 
         //INIZIALIZZAZIONE GIOCATORE
@@ -109,7 +95,7 @@ public class Start {
                 int agility = dice.nextInt(10);
                 int stamina = dice.nextInt(10);
                 Player player = new Wizard(name, 10, 10, 1, 0, templeSquare, playerName, intelligence, strength, agility, stamina);
-                System.out.println("Ottimo, il tuo giocatore si chiama " + name + " ed è un Wizard" );
+                System.out.println("Ottimo, il tuo giocatore si chiama " + name + " ed è un Wizard");
                 System.out.printf(" intelligence: %d%n strength: %d%n agility: %d%n stamina %d%n", intelligence, strength, agility, stamina);
 
             } else if (answer.toLowerCase().equals("paladin")) {
@@ -145,11 +131,53 @@ public class Start {
                 && !answer.toLowerCase().equals("priest")
                 && !answer.toLowerCase().equals("thief"));
 
-        System.out.println("La tua storia inizia qui: " + templeSquare.getNameRoom());
+        System.out.println("La tua storia inizia qui: --------/ " + templeSquare.getNameRoom() + "/--------");
         templeSquare.printDescription();
+        System.out.println("Queste sono le direzione dove andare:  " + templeSquareDirections);
+        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
+        String a;
+        Compass newDirection = null;
 
-        System.out.println(templeSquare);
+        //DIREZIONI DI TEMPLESQUARE
+        do {
+            System.out.println("Segli solo una delle direzioni alla volta");
+            a = console.readLine().toUpperCase();
+            if (a.contains("NORTH")) {
+                newDirection = Compass.NORTH;
+                if (templeSquareDirections.get(newDirection) == null) {
+                    System.out.println("Questa via non la puoi percorrere");
+                } else {
+                    System.out.println("Ti sei spostato a Nord: " + templeSquareDirections.get(newDirection));
+                }
+            } else if (a.contains("SOUTH")) {
+                newDirection = Compass.SOUTH;
+                if (templeSquareDirections.get(newDirection) == null) {
+                    System.out.println("Questa via non la puoi percorrere");
+                } else {
+                    System.out.println("Ti sei spostato a Sud: " + templeSquareDirections.get(newDirection));
+//                    player.setCurrentRoom(templeSquareDirections.get(newDirection));
+                }
+            } else if (a.contains("WEST")) {
+                newDirection = Compass.WEST;
+                if (templeSquareDirections.get(newDirection) == null) {
+                    System.out.println("Questa via non la puoi percorrere");
+                } else {
+                    System.out.println("Ti sei spostato a Ovest: " + templeSquareDirections.get(newDirection));
+                }
+            } else if (a.contains("EAST")) {
+                newDirection = Compass.EAST;
+                if (templeSquareDirections.get(newDirection) == null) {
+                    System.out.println("Questa via non la puoi percorrere");
+                } else {
+                    System.out.println("Ti sei spostato a Est: " + templeSquareDirections.get(newDirection));
+                }
+            }
+        } while (!a.contains("SOUTH") && !a.contains("EAST"));
+
+
+
 
 
     }
+
 }

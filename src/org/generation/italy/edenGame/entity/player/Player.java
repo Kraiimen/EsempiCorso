@@ -16,6 +16,7 @@ public abstract class Player extends Entity {
     private int strength;
     private int agility;
     private int stamina;
+    private Room currentRoom;
 
     public Player(String name, int maxHp, int healthPoints, int damage, int exp, Room currentRoom, String playerName, int intelligence, int strength, int agility, int stamina) {
 
@@ -25,6 +26,7 @@ public abstract class Player extends Entity {
         this.strength = strength;
         this.agility = agility;
         this.stamina = stamina;
+
     }
 
     @Override
@@ -32,9 +34,15 @@ public abstract class Player extends Entity {
         System.out.println("sei morto");
         setExp(getExp() - 1);
         //@Todo controllare l'HashMap
-        Map<Compass, Room> directions = new HashMap<Compass, Room>();
+        Map<Compass, String> directions = new HashMap<Compass, String>();
         Room temple = new Temple("Temple", directions);
         setCurrentRoom(temple);
     }
+    @Override
+    public void attack(Entity target) {
+    }
 
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
+    }
 }

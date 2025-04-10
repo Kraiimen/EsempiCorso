@@ -5,7 +5,7 @@ import java.util.Map;
 public class TempleSquare extends Room{
 
 
-    public TempleSquare(String name, Map<Compass, Room> directions) {
+    public TempleSquare(String name, Map<Compass, String> directions) {
         super(name, directions);
     }
 
