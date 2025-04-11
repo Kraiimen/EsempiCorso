@@ -5,10 +5,7 @@ import org.generation.italy.capstonProject.mudGame.entity.player.Player;
 import org.generation.italy.capstonProject.mudGame.entity.rooms.Direction;
 import org.generation.italy.capstonProject.mudGame.entity.rooms.Room;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameMenuUtils {
@@ -188,22 +185,35 @@ public class GameMenuUtils {
 
             System.out.println("\nChoose what you want to do:");
 
-            List<String> options = new ArrayList<>();
-            options.add("Show what's in this room again");
-            options.add("Open inventory");
-            options.add("Move to another room");
+//            List<String> options = new ArrayList<>();
+//            options.add("Show what's in this room again");
+//            options.add("Open inventory");
+//            options.add("Move to another room");
+//
+//            if (currentRoom.isHasItems()) {
+//                options.add("Pick up item");
+//            }
+//            if (currentRoom.isHasEntities()) {
+//                options.add("Interact with NPC");
+//            }
+
+            Map<String, Runnable> actions = new LinkedHashMap<>();
+
+            actions.put("Show what's in this room again", currentRoom::printRoomContents);
+            actions.put("Open inventory", player::openInventory);
+            actions.put("Move to another room", player::handleMovement);
 
             if (currentRoom.isHasItems()) {
-                options.add("Pick up item");
+                actions.put("Pick up item", () -> pickUpItemMenu(player, scanner));
             }
             if (currentRoom.isHasEntities()) {
-                options.add("Interact with NPC");
+                actions.put("Interact with NPC", () -> interactWithNpcMenu(player, scanner));
             }
+            List<String> options = new ArrayList<>(actions.keySet());
 
+            Integer choice = showAndChooseMenu(options, scanner, "x");
 
-            Integer action = showAndChooseMenu(options, scanner, "x");
-
-            if (action == null) {
+            if (choice == null) {
                 System.out.println("Do you want to leave the game? (y to exit / n to return to room menu)");
                 String input = scanner.nextLine().trim();
 
@@ -216,33 +226,40 @@ public class GameMenuUtils {
                     System.out.println("Invalid input. Returning to room menu.");
                     continue;
                 }
+            } else {
+                Runnable selectedAction = actions.get(options.get(choice - 1));
+                if (selectedAction != null) {
+                    selectedAction.run();
+                } else {
+                    System.out.println("Invalid option selected.");
+                }
             }
 
-            switch(action){
-                case 1:
-                    currentRoom.printRoomContents();
-                    break;
-                case 2:
-                    player.openInventory();
-                    break;
-                case 3:
-                    player.handleMovement();
-                    break;
-                case 4:
-                    if(currentRoom.isHasItems()){
-                        pickUpItemMenu(player, scanner);
-                    }
-                    break;
-                case 5:
-                    if(currentRoom.isHasEntities()){
-                        interactWithNpcMenu(player, scanner);
-                    }
-                    break;
-                default:
-                    System.out.println("Leaving the Room Action Menu");
-                    running = false;
-                    break;
-            }
+//            switch(choice){
+//                case 1:
+//                    currentRoom.printRoomContents();
+//                    break;
+//                case 2:
+//                    player.openInventory();
+//                    break;
+//                case 3:
+//                    player.handleMovement();
+//                    break;
+//                case 4:
+//                    if(currentRoom.isHasItems()){
+//                        pickUpItemMenu(player, scanner);
+//                    }
+//                    break;
+//                case 5:
+//                    if(currentRoom.isHasEntities()){
+//                        interactWithNpcMenu(player, scanner);
+//                    }
+//                    break;
+//                default:
+//                    System.out.println("Leaving the Room Action Menu");
+//                    running = false;
+//                    break;
+//            }
         }
     }
 

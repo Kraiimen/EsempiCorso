@@ -27,25 +27,25 @@ public class Room {
     private static Map<String, Room> gameMap = new HashMap();
 
     static{
-        Room templeSquare = new Room("templeSquare");
+        Room templeSquare = new Room("Temple Square");
         gameMap.put(templeSquare.getName(), templeSquare);
-        Room temple = new Room("temple");
+        Room temple = new Room("Temple");
         gameMap.put(temple.getName(), temple);
-        Room marketSquare = new Room("marketSquare");
+        Room marketSquare = new Room("Market Square");
         gameMap.put(marketSquare.getName(), marketSquare);
-        Room bakery = new Room("bakery");
+        Room bakery = new Room("Bakery");
         gameMap.put(bakery.getName(), bakery);
-        Room armory = new Room("armory");
+        Room armory = new Room("Armory");
         gameMap.put(armory.getName(), armory);
-        Room gardenA = new Room("gardenA");
+        Room gardenA = new Room("Garden A");
         gameMap.put(gardenA.getName(), gardenA);
-        Room gardenB = new Room("gardenB");
+        Room gardenB = new Room("Garden B");
         gameMap.put(gardenB.getName(), gardenB);
-        Room gardenC = new Room("gardenC");
+        Room gardenC = new Room("Garden C");
         gameMap.put(gardenC.getName(), gardenC);
-        Room cityDoors = new Room("cityDoors");
+        Room cityDoors = new Room("City Doors");
         gameMap.put(cityDoors.getName(), cityDoors);
-        Room woods1 = new Room("woods1");
+        Room woods1 = new Room("Woods 1");
         gameMap.put(woods1.getName(), woods1);
 
 //        templeSquare.setOneDirection(temple, Direction.EAST);
@@ -184,7 +184,7 @@ public class Room {
     }
 
     public void removeEntityFromRoom(Entity entity){
-        entities.remove(entities);
+        entities.remove(entity);
         if(entities.isEmpty()){
             hasEntities = false;
         }
@@ -214,28 +214,28 @@ public class Room {
         StringBuilder message = new StringBuilder("You are in the " + this.getName() + "!\n");
 
         if(hasEntities){
-            message.append("In this room you can find " + entities.size() + " to interact with.\n").append(getEntities());
+            message.append("\nIn this room you can find " + entities.size() + " entities to interact with.\n").append(getEntities());
         }else{
-            message.append("There is no one to interact with in here.\n");
+            message.append("\nThere is no one to interact with in here.\n");
         }
 
         if(hasItems){
-            message.append("There is something on the ground, " + items.size() + " items free for you to pick.\n").append(getItems());
+            message.append("\nThere is something on the ground, " + items.size() + " items free for you to pick.\n").append(getItems());
         }else{
-            message.append("You can't find any items to pick in here.\n");
+            message.append("\nYou can't find any items to pick in here.\n");
         }
 
-        message.append("From this room you can go in " + allowedDirections.size() + " directions.");
+        message.append("\nFrom this room you can go in " + allowedDirections.size() + " directions.");
 
         for(Direction d : allowedDirections){
             if(d == Direction.NORTH) {
-                message.append("You can go ").append(d).append(", into the ").append(northRoom.getName());
+                message.append("\nYou can go ").append(d).append(", into the ").append(northRoom.getName());
             } else if(d == Direction.EAST) {
-                message.append("You can go ").append(d).append(", into the ").append(eastRoom.getName());
+                message.append("\nYou can go ").append(d).append(", into the ").append(eastRoom.getName());
             } else if(d == Direction.SOUTH) {
-                message.append("You can go ").append(d).append(", into the ").append(southRoom.getName());
+                message.append("\nYou can go ").append(d).append(", into the ").append(southRoom.getName());
             } else if(d == Direction.WEST) {
-                message.append("You can go ").append(d).append(", into the ").append(westRoom.getName());
+                message.append("\nYou can go ").append(d).append(", into the ").append(westRoom.getName());
             }
         }
 
@@ -260,6 +260,10 @@ public class Room {
         if (!player.isDead() && !hostileInteraction) {
             GameMenuUtils.displayRoomActions(player, scanner);
         }
+    }
+
+    public static Room getRoomByName(String name){
+        return gameMap.get(name);
     }
 
     public String getName() {

@@ -30,7 +30,10 @@ public class Npc extends Entity {
 
     @Override
     public void attack(Entity target) {
-        target.hasTakenDamage(this.getDamage());
+        int damage = this.calculateDamage();
+        System.out.println(this.getCharName() + " is attacking.");
+        System.out.println(this.getCharName() + " inflicts " + getDamage() + "/" + getMaxDamage() + " damage.");
+        target.hasTakenDamage(damage);
         if(target instanceof Player player) {
             player.managePlayerInteraction(this, new Scanner(System.in));
         }
@@ -38,6 +41,8 @@ public class Npc extends Entity {
 
     @Override
     public void manageInteraction(Entity target){
+        if (isDead()) return;
+
         if(isHostile || getIsUnderAttack()){
             while(!target.isDead()){
                 attack(target);
@@ -73,13 +78,13 @@ public class Npc extends Entity {
 
     @Override
     public String toString() {
-        return "Npc{" +
-                "charName: '" + getCharName() + '\'' +
-                ", role: '" + role +
-                ", healthPoints: " + getHealthPoints() + "/" + getMaxHP() +
-                ", maxDamage: " + getMaxDamage() +
-                ", isHostile: " + isHostile +
-                ", inventory: " + inventory + '\'' +
-                '}';
+        return "\nNpc{" +
+                "\ncharName: '" + getCharName() + '\'' +
+                ", \nrole: '" + role +
+                ", \nhealthPoints: " + getHealthPoints() + "/" + getMaxHP() +
+                ", \nmaxDamage: " + getMaxDamage() +
+                ", \nisHostile: " + isHostile +
+                ", \ninventory: " + inventory + '\'' +
+                "\n}";
     }
 }

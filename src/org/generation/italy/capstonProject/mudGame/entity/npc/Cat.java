@@ -5,7 +5,7 @@ import org.generation.italy.capstonProject.mudGame.entity.rooms.Room;
 public class Cat extends Npc{
 
     public Cat(String charName, int maxHP, Room currentRoom) {
-        super(charName, maxHP, 3, currentRoom, false, NpcRole.CAT);
+        super(charName, maxHP, 5, currentRoom, false, NpcRole.CAT);
         getMessages().add("Please spare me");
     }
 

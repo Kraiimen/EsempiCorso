@@ -28,11 +28,6 @@ public abstract class Entity {
         this.inventory = new Inventory(10);
     }
 
-    public int calculateDamage() {
-        damage = rand.nextInt(getMaxDamage() + 1);
-        return damage;
-    }
-
     public int healMissingHP(double healPercentage){
         if(healthPoints == maxHP){
             System.out.println("Health is " + healthPoints + "/" + maxHP);
@@ -64,8 +59,15 @@ public abstract class Entity {
     public abstract void attack(Entity target);
     public abstract  void manageInteraction(Entity target);
 
+    public int calculateDamage() {
+        damage = rand.nextInt(getMaxDamage() + 1);
+        return damage;
+    }
+
     public int hasTakenDamage(int inflictedDamage){
         isUnderAttack = true;
+        healthPoints = subtractHealthPoints(inflictedDamage);
+
         if(isDead()){
             healthPoints = 0;
             if(getCurrentRoom().getEntities().contains(this)) {
@@ -74,8 +76,8 @@ public abstract class Entity {
             isUnderAttack = false;
             System.out.println(this.charName + " is dead.");
         } else {
-            healthPoints = subtractHealthPoints(inflictedDamage);
-            System.out.println(this.charName + " has taken damage. Its health is now " + healthPoints + "/" + maxHP);
+
+            System.out.println(this.charName + " has taken " + inflictedDamage + " points of damage. Its health is now " + healthPoints + "/" + maxHP);
         }
         return healthPoints;
     }

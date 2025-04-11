@@ -49,7 +49,6 @@ public abstract class Player extends Entity {
         System.out.println(this.getCharName() + " attacks " + target.getCharName());
         target.hasTakenDamage(damage);
         target.manageInteraction(this);
-        experience++;
     }
 
     public void gainExperience(int amount){
@@ -57,16 +56,19 @@ public abstract class Player extends Entity {
         if(experience >= maxExperience){
             levelUp();
         }
+        System.out.println("You gained experience! Your experience is now" + experience + "/" + maxExperience);
     }
 
     @Override
     public void manageInteraction(Entity target){}
 
     public void managePlayerInteraction(Entity target, Scanner scanner) {
+        if (isDead()) {
+            System.out.println("You died. Thanks for playing!");
+            System.exit(0);
+        }
         if (target instanceof Npc) {
             if (getIsUnderAttack()) {
-                System.out.println(target.getCharName() + " is attacking you!");
-
                 boolean resolved = false;
                 while(!resolved){
                     System.out.println("What do you want to do?");
@@ -92,7 +94,6 @@ public abstract class Player extends Entity {
                             break;
                     }
                 }
-                manageAttack(target);
             } else {
                 boolean resolved = false;
                 while(!resolved) {
@@ -176,16 +177,25 @@ public abstract class Player extends Entity {
                 if (answer.equals("a")) {
                     n = rand.nextInt(50);
                     if (n < getAgility()){
+                        System.out.println("You successfully ran away!");
                         this.setIsUnderAttack(false);
                         target.setIsUnderAttack(false);
                         target.restoreHP();
                         runAway();
-                        System.out.println("You successfully ran away!");
                     } else {
                         System.out.println("Run away failed");
+                        int inflictedDamage = target.calculateDamage();
+                        this.subtractHealthPoints(inflictedDamage);
+                        System.out.println("You lost " + inflictedDamage + " HP.");
+                        if (isDead()) {
+                            System.out.println("You died. Thanks for playing!");
+                            System.exit(0);
+                        }
+                        wrgAnswer = false;
                     }
                 } else if (answer.equals("b")) {
                     openInventory();
+                    wrgAnswer = false;
                 } else {
                     wrgAnswer = true;
                 }
@@ -247,31 +257,34 @@ public abstract class Player extends Entity {
     }
 
     public void petCat(Cat cat){
+        System.out.println("You are petting " + cat.getCharName());
         cat.showGratitude();
     }
 
     @Override
     public String toString() {
         return "Player{" +
-                "charName: '" + getCharName() + '\'' +
-                ", playerName='" + playerName +
-                ", healthPoints: " + getHealthPoints() + "/" + getMaxHP() +
-                ", maxDamage: " + getMaxDamage() +
-                ", level=" + level +
-                ", experience=" + experience + "/" + maxExperience +
-                ", intelligence=" + intelligence +
-                ", strength=" + strength +
-                ", agility=" + agility +
-                ", stamina=" + stamina +
-                ", hasKilledKitties=" + hasKilledKitties +
-                ", inventory: " + inventory + '\'' +
-                '}';
+                "\ncharName: '" + getCharName() + '\'' +
+                ", \nplayerName='" + playerName +
+                ", \nhealthPoints: " + getHealthPoints() + "/" + getMaxHP() +
+                ", \nmaxDamage: " + getMaxDamage() +
+                ", \nlevel=" + level +
+                ", \nexperience=" + experience + "/" + maxExperience +
+                ", \nintelligence=" + intelligence +
+                ", \nstrength=" + strength +
+                ", \nagility=" + agility +
+                ", \nstamina=" + stamina +
+                ", \nhasKilledKitties=" + hasKilledKitties +
+                ", \ninventory: " + inventory + '\'' +
+                "\n}";
     }
-
-
 
     public int getMaxExperience() {
         return maxExperience;
+    }
+
+    public PlayerRole getRole() {
+        return role;
     }
 
     public String getPlayerName() {
