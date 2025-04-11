@@ -115,10 +115,12 @@ public class Player extends Entity {
         System.out.println(" ");
     }
     public void useSpadaDiEden(){
+        System.out.println(" ");
+        System.out.println(" ");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println(" ");
-        System.out.println("🔥⚔️🔥 TROVI LA ✨LEGGENDARIA✨ SPADA DI EDEN LA IMPUGNI E TI SENTI INVINCIBILE 🔥⚔️🔥");
+        System.out.println("🔥⚔️🔥⚔️🔥⚔️🔥⚔️ TROVI LA ✨LEGGENDARIA✨ SPADA DI EDEN LA IMPUGNI E TI SENTI INVINCIBILE 🔥⚔️🔥⚔️🔥⚔️🔥");
         System.out.println(" ");
         setDamage(300);
         setMaxHp(300);
@@ -127,5 +129,7 @@ public class Player extends Entity {
         System.out.println(" ");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(" ");
+        System.out.println(" ");
     }
 }

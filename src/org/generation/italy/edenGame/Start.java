@@ -14,7 +14,8 @@ public class Start {
 
         //INTRO DEL GIOCO
         Console console = System.console();
-        //TODO SCRIVI INTRO DEL GIOCO
+        System.out.println(" ");
+        System.out.println(" ");
         System.out.println("⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔");
         System.out.println(" ");
         System.out.println("✨✨✨✨✨ BENVENUTO IN EDEN GAME, UN MONDO MAGICO ✨✨✨✨✨");
@@ -216,16 +217,15 @@ public class Start {
                     int chanceOfItem = dice.nextInt(1000);
                     if (chanceOfItem < 500){
                         System.out.println("Non hai trovato nulla");
-                    }else if (chanceOfItem >= 500 && chanceOfItem <= 900){
+                    }else if (chanceOfItem >= 500 && chanceOfItem <= 850){
                         player.useErbaGatta();
-                    }else if (chanceOfItem > 900 && chanceOfItem <= 999){
+                    }else if (chanceOfItem > 850 && chanceOfItem <= 950){
                         player.useChiavePrigioni();
                     }else {
                         player.useSpadaDiEden();
                     }
                 }
             }
-
 
         } while(!a2.equals("quit"));
         System.out.println(" ");

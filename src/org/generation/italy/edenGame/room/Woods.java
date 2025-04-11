@@ -13,9 +13,7 @@ public class Woods extends Room {
     Enemies enemy4 = new Monster("Marta 🦡", 50, 50, 15, 50);
     Enemies enemy5 = new Monster("Rossella 👩🏻‍💼", 50, 50, 15, 50);
 
-    Enemies riccorcrux = new FinalBoss("RICCORCRUX", 100, 100, 50, 100);
-
-
+    Enemies riccorcrux = new FinalBoss("👺😈👺😈👺😈RICCORCRUX👺😈👺😈👺😈", 100, 100, 50, 100);
 
     public Woods(String name, Map<Compass, String> directions) {
         super(name, directions);
