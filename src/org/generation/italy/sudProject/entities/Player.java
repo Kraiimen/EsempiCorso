@@ -17,7 +17,7 @@ public class Player extends Entity {
     private String playerName;
     private LocalDate creationDate = LocalDate.now();
     public static int numberOfPlayers;
-    public Room playerPosition = world.getFirst();
+    private Room playerPosition = world.getFirst();
     private int playerLevel;
     private static final int HP_FIRST_SPAWN = 3;
     private static final int HP_MAX_FIRST_SPAWN = 10;
@@ -52,28 +52,34 @@ public class Player extends Entity {
             case "NORD":
                 if (playerPosition.getNorthRoom() != null) {
                     playerPosition = playerPosition.getNorthRoom();
+                    playerPosition.resetGuardsInRoom();
                 }
                 break;
             case "SOUTH":
                 if (playerPosition.getSouthRoom() != null) {
                     playerPosition = playerPosition.getSouthRoom();
+                    playerPosition.resetGuardsInRoom();
                 }
                 break;
             case "EAST":
                 if (playerPosition.getEastRoom() != null) {
                     playerPosition = playerPosition.getEastRoom();
+                    playerPosition.resetGuardsInRoom();
                 }
                 break;
             case "WEST":
                 if (playerPosition.getWestRoom() != null) {
                     playerPosition = playerPosition.getWestRoom();
+                    playerPosition.resetGuardsInRoom();
                 }
                 break;
             default:
                 System.out.println("INSERISCI LA DIREZIONE!");
+                break;
         }
         System.out.println("Luogo attuale: "+playerPosition);
         System.out.println(playerPosition.getRoomDescription());
+        playerPosition.showEntitiesInRoom();
     }
     // /--GETTER-&-SETTER--/
 

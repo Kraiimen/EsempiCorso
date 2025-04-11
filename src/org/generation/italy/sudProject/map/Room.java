@@ -1,5 +1,14 @@
 package org.generation.italy.sudProject.map;
 
+import org.generation.italy.sudProject.Entity;
+import org.generation.italy.sudProject.entities.mobs.Cat;
+import org.generation.italy.sudProject.entities.npcTypes.Guard;
+
+import java.util.ArrayList;
+
+import static org.generation.italy.sudProject.Entity.dice;
+import static org.generation.italy.sudProject.entities.npcTypes.Guard.deleteGuards;
+
 public class Room{
     // /--ATTRIBUTES--/
     private String roomName;
@@ -10,16 +19,59 @@ public class Room{
     private Room eastRoom;
     private Room westRoom;
 
+    private static final int CAT_INDEX = 0;
+    private static final int GUARD_INDEX = 1;
+
+    private ArrayList<ArrayList> roomEntities;
+
     // /--CONSTRUCTORS--/
     public Room(String roomName){
         this.roomName = roomName;
+        addEntityType(2);
     }
-    //--METHODS--/
+    // /--METHODS--/
     public void setRooms(Room northRoom, Room southRoom, Room eastRoom, Room westRoom){
         this.northRoom = northRoom;
         this.southRoom = southRoom;
         this.eastRoom = eastRoom;
         this.westRoom = westRoom;
+    }
+
+    public void generateRoomEntities(int numOfCats, int numOfGuards){
+        for(int i=0; i<numOfCats; i++){
+            roomEntities.get(CAT_INDEX).add(new Cat("Cat"));
+        }
+        for(int i=0; i<numOfGuards; i++){
+            roomEntities.get(GUARD_INDEX).add(new Guard("Guard"));
+        }
+    }
+    private void addEntityType(int numOfGameEntities){
+        for(int i=0; i<numOfGameEntities; i++){
+            roomEntities.add(new ArrayList<Entity>());
+        }
+    }
+    public void showEntitiesInRoom(){
+        System.out.println("Entità del luogo: ");
+        for(ArrayList a : roomEntities){
+            if(a!=null){
+                for(Object object : a){
+                    Entity entity = (Entity) object;
+                    System.out.print((entity.getName())+" ");
+                }
+                System.out.println();
+            }
+        }
+    }
+    public void resetGuardsInRoom(){
+        if(roomEntities.get(GUARD_INDEX) != null){
+            int numGuards = (roomEntities.get(GUARD_INDEX).size());
+            int randomNumber = dice.nextInt(numGuards+1);
+            roomEntities.get(GUARD_INDEX).clear();
+            deleteGuards(numGuards);
+            for(int i=0; i<randomNumber; i++){
+                roomEntities.get(GUARD_INDEX).add(new Guard("Guard"));
+            }
+        }
     }
 
     // /--GETTER-&-SETTER--/
@@ -55,5 +107,9 @@ public class Room{
 
     public void setRoomName(String roomName) {
         this.roomName = roomName;
+    }
+
+    public ArrayList<ArrayList> getRoomEntities() {
+        return roomEntities;
     }
 }

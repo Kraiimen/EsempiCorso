@@ -15,7 +15,9 @@ public class Guard extends Npc {
     }
 
     // /--METHODS--/
-
+    public static void deleteGuards(int num){
+        numberOfGuards -= num;
+    }
     // /--GETTER-&-SETTER--/
 
     public static int getNumberOfGuards() {

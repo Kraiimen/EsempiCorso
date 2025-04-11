@@ -43,6 +43,8 @@ public abstract class Entity {
         charisma = stats[CHARISMA_INDEX];
         this.name = name;
         numberOfEntities++;
+        this.hp = hp;
+        this.maxHp = maxHp;
     }
 
     //--METHODS--/

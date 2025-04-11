@@ -50,5 +50,15 @@ public class WorldMap {
         world.get(GARDEN_2_INDEX).setRoomDescription("Il centro dei Giardini presenta un pozzo, dove in parecchi sono rimasti vittime di caduta. Nessuno sa quanto sia profondo");
         world.get(GARDEN_3_INDEX).setRoomDescription("La fine dei Giardini, ma anche l'inizio per chi entra per la prima volta in città");
         world.get(WOODS_INDEX).setRoomDescription("Un bosco illuminato dalla luna, la tua unica fonte di luce. Il fuoco è inutilizzabile per via di una maledizione");
+        //aggiunge entità in ciascuna stanza
+        world.get(TEMPLE_SQUARE_INDEX).generateRoomEntities(0,2);
+        world.get(MARKET_SQUARE_INDEX).generateRoomEntities(5,4);
+        world.get(TEMPLE_INDEX).generateRoomEntities(0,0);
+        world.get(BAKERY_INDEX).generateRoomEntities(0,1);
+        world.get(ARMORY_INDEX).generateRoomEntities(0,0);
+        world.get(GARDEN_1_INDEX).generateRoomEntities(3,2);
+        world.get(GARDEN_2_INDEX).generateRoomEntities(2,2);
+        world.get(GARDEN_3_INDEX).generateRoomEntities(1,2);
+        world.get(WOODS_INDEX).generateRoomEntities(0,0);
     }
 }
