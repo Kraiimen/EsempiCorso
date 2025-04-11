@@ -1,17 +1,21 @@
 package capstoneproject.main;
 
 import capstoneproject.Directions;
+import capstoneproject.entity.Npc;
 import capstoneproject.rooms.World;
 import capstoneproject.entity.Player;
 import capstoneproject.rooms.Room;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class Play {
+public class Play{
     private static Room currentRoom;
     private static Player player;
-    public static void main(String[] args) {
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args){
         World world = new World();
         world.chooseCharacter();
         world.create();
@@ -21,7 +25,9 @@ public class Play {
 
         System.out.println("Benvenuto " + player.getName() +"!");
         printCurrentRoomDescription(currentRoom);
-        printDirectionsForUser();
+
+        fightLoop();
+//        printDirectionsForUser();
     }
 
     private static void printCurrentRoomDescription(Room room) {
@@ -29,8 +35,8 @@ public class Play {
         System.out.println(room.getDescription());
         room.printNpcInCurrentRoom();
     }
+
     private static void printDirectionsForUser(){
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("Dove vuoi andare? (n/s/e/w, q per uscire): ");
             String input = scanner.nextLine().trim().toLowerCase();
@@ -68,4 +74,18 @@ public class Play {
         scanner.close();
     }
 
+    private static void fightLoop(){
+        System.out.print("Vuoi combattere? (Numero del target o 0 per uscire): ");
+        int choice = scanner.nextInt();
+        if(choice < 0 || choice > currentRoom.getNpcList().size() ){
+            System.out.println("Inserisci un valore valido");
+        } else if(choice == 0){
+            return;
+        } else {
+            List<Npc> npcList = currentRoom.getNpcList();
+            Npc target = npcList.get(choice-1);
+            player.attack(target);
+        }
+
+    }
 }

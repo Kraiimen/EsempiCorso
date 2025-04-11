@@ -33,24 +33,25 @@ public abstract class Entity {
 //        System.out.println("Stamina: " + stamina);
 //        System.out.println("Health: " + healthpoint + "/" + maxHealth);
 //    }
-     public int takeDamage(int damage){
+    public int takeDamage(int damage){
         healthPoints -= damage;
         if(healthPoints < 0) {
             healthPoints = 0;
             System.out.println(getName() + " è morto");
         }
         return healthPoints;
-     }
+    }
 
-     public void heal(int amount){
+    public void heal(int amount){
         healthPoints += amount;
         if(healthPoints > maxHealth) healthPoints = maxHealth;
-     }
+    }
 
-     public boolean isDead(){
+    public boolean isDead(){
         return healthPoints <= 0;
-     }
-     public abstract void attack(Entity target);
+    }
+
+    public abstract void attack(Entity target);
 
     public void addHealthPoints(int hp) {
          healthPoints += hp;

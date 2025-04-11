@@ -49,8 +49,8 @@ public class World {
          ms.addExit(Directions.E, b);
          ms.addExit(Directions.W, a);
          ms.addExit(Directions.S , g);
-         Cat cat1 = new Cat("Fuffy", ms);
-         Guards guard1 = new Guards("Carmine", 5, 10, ms);
+         Cat cat1 = new Cat("Fuffy", start);
+         Guards guard1 = new Guards("Carmine", 5, 10, start);
     }
 
     public Player getPlayer(){
