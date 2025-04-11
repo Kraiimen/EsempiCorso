@@ -1,6 +1,7 @@
 package org.generation.italy.sudProject.entities.npcTypes;
 
 import org.generation.italy.sudProject.entities.Npc;
+import org.generation.italy.sudProject.map.Room;
 
 public class Guard extends Npc {
     // /--ATTRIBUTES--/
@@ -9,8 +10,8 @@ public class Guard extends Npc {
     private static final int HP_MAX_FIRST_SPAWN = 100;
 
     // /--CONSTRUCTORS--/
-    public Guard(String npcName) {
-        super(npcName, CLASS_STARTING_P_VALUE, MAX_ATTRIBUTE_P_VALUE, STRENGTH_INDEX, 20, HP_FIRST_SPAWN, HP_MAX_FIRST_SPAWN);
+    public Guard(String npcName, Room position) {
+        super(npcName, CLASS_STARTING_P_VALUE, MAX_ATTRIBUTE_P_VALUE, STRENGTH_INDEX, 20, HP_FIRST_SPAWN, HP_MAX_FIRST_SPAWN, 20, position);
         numberOfGuards++;
     }
 

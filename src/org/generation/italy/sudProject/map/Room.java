@@ -39,10 +39,10 @@ public class Room{
 
     public void generateRoomEntities(int numOfCats, int numOfGuards){
         for(int i=0; i<numOfCats; i++){
-            roomEntities.get(CAT_INDEX).add(new Cat("Cat"));
+            roomEntities.get(CAT_INDEX).add(new Cat("Cat", this));
         }
         for(int i=0; i<numOfGuards; i++){
-            roomEntities.get(GUARD_INDEX).add(new Guard("Guard"));
+            roomEntities.get(GUARD_INDEX).add(new Guard("Guard", this));
         }
     }
     private void addEntityType(int numOfGameEntities){
@@ -69,7 +69,7 @@ public class Room{
             roomEntities.get(GUARD_INDEX).clear();
             deleteGuards(numGuards);
             for(int i=0; i<randomNumber; i++){
-                roomEntities.get(GUARD_INDEX).add(new Guard("Guard"));
+                roomEntities.get(GUARD_INDEX).add(new Guard("Guard", this));
             }
         }
     }

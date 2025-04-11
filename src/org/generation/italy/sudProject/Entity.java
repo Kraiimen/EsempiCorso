@@ -1,6 +1,10 @@
 package org.generation.italy.sudProject;
 
+import org.generation.italy.sudProject.entities.npcTypes.Guard;
+import org.generation.italy.sudProject.map.Room;
+
 import java.util.Random;
+
 
 public abstract class Entity {
     // /--ATTRIBUTES--/
@@ -23,14 +27,17 @@ public abstract class Entity {
     private int charisma;
     public static Random dice = new Random();
     public static int numberOfEntities;
+    private Room entityPosition;
 
     private String name;
     private int hp;
     private int maxHp;
+    private int atk;
+
 
 
     // /--CONSTRUCTORS--/
-    public Entity(String name, int minStatValue, int maxStatValue, int indexClassStat, int classStat, int hp, int maxHp){
+    public Entity(String name, int minStatValue, int maxStatValue, int indexClassStat, int classStat, int hp, int maxHp, int BaseAtk, Room entityPosition){
         int[] stats = getRandomStats(new int[6], minStatValue, maxStatValue);
         if(indexClassStat >= 0){
             stats[indexClassStat] = classStat;
@@ -45,6 +52,8 @@ public abstract class Entity {
         numberOfEntities++;
         this.hp = hp;
         this.maxHp = maxHp;
+        this.atk = BaseAtk;
+        this.entityPosition = entityPosition;
     }
 
     //--METHODS--/
@@ -54,6 +63,15 @@ public abstract class Entity {
         }
         return stats;
     }
+    private void attack(Entity target){
+        target.hp -= atk;
+    }
+    private void die(){
+        numberOfEntities --;
+
+
+    }
+
 
     // /--GETTER-&-SETTER--/
 
