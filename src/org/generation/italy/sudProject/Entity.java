@@ -1,8 +1,8 @@
 package org.generation.italy.sudProject;
 
 import org.generation.italy.sudProject.entities.Npc;
-import org.generation.italy.sudProject.entities.mobs.Cat;
-import org.generation.italy.sudProject.entities.mobs.PeacefulMob;
+import org.generation.italy.sudProject.entities.mobTypes.mobs.Cat;
+import org.generation.italy.sudProject.entities.mobTypes.PeacefulMob;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.Guard;
 import org.generation.italy.sudProject.map.Room;
 
@@ -35,17 +35,17 @@ public abstract class Entity {
     public static int numberOfEntities;
     private Room entityPosition;
     private int indexEntityPosition;
-
     private String name;
     private int hp;
     private int maxHp;
     private int atk;
+    private boolean canBeAttacked;
 
 
 
     // /--CONSTRUCTORS--/
     public Entity(String name, int minStatValue, int maxStatValue, int indexClassStat, int classStat, int hp, int maxHp,
-                  int BaseAtk, Room entityPosition, int indexEntityPosition){
+                  int BaseAtk, Room entityPosition, int indexEntityPosition, boolean canBeAttacked){
         int[] stats = getRandomStats(new int[6], minStatValue, maxStatValue);
         if(indexClassStat >= 0){
             stats[indexClassStat] = classStat;
@@ -63,6 +63,7 @@ public abstract class Entity {
         this.atk = BaseAtk;
         this.entityPosition = entityPosition;
         this.indexEntityPosition = indexEntityPosition;
+        this.canBeAttacked = canBeAttacked;
     }
 
     //--METHODS--/
@@ -73,7 +74,10 @@ public abstract class Entity {
         return stats;
     }
     private void attack(Entity target){
-        target.hp -= atk;
+        if(target.canBeAttacked){
+            target.hp -= atk;
+        }
+        System.out.println("Non puoi attaccare quest'entità");
     }
     private void die(){
         numberOfEntities --;

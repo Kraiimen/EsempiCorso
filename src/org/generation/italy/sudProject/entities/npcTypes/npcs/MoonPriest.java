@@ -1,7 +1,7 @@
 package org.generation.italy.sudProject.entities.npcTypes.npcs;
 
-import org.generation.italy.sudProject.entities.npcTypes.CanNotDieNpc;
+import org.generation.italy.sudProject.entities.npcTypes.CanNotBeAttackedNpc;
 
-public class MoonPriest extends CanNotDieNpc {
+public class MoonPriest extends CanNotBeAttackedNpc {
 
 }

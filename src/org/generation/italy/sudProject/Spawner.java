@@ -1,6 +1,6 @@
 package org.generation.italy.sudProject;
 
-import org.generation.italy.sudProject.entities.mobs.Cat;
+import org.generation.italy.sudProject.entities.mobTypes.mobs.Cat;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.Guard;
 import org.generation.italy.sudProject.map.Room;
 

@@ -1,8 +1,9 @@
-package org.generation.italy.sudProject.entities.mobs;
+package org.generation.italy.sudProject.entities.mobTypes.mobs;
 
+import org.generation.italy.sudProject.entities.mobTypes.PeacefulMob;
 import org.generation.italy.sudProject.map.Room;
 
-public class Cat extends PeacefulMob{
+public class Cat extends PeacefulMob {
     public static int numberOfCats;
     private static final int HP_FIRST_SPAWN = 2;
     private static final int HP_MAX_FIRST_SPAWN = 2;

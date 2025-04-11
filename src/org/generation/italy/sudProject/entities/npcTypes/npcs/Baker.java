@@ -1,6 +1,6 @@
 package org.generation.italy.sudProject.entities.npcTypes.npcs;
 
-import org.generation.italy.sudProject.entities.npcTypes.CanNotDieNpc;
+import org.generation.italy.sudProject.entities.npcTypes.CanNotBeAttackedNpc;
 
-public class Baker extends CanNotDieNpc {
+public class Baker extends CanNotBeAttackedNpc {
 }

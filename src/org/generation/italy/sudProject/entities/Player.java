@@ -26,7 +26,7 @@ public class Player extends Entity {
     // /--CONSTRUCTORS--/
     public Player(String firstName, String lastName, String email, String password, String playerName, int indexClassStat, int classStat){
         super(playerName, MIN_ATTRIBUTE_P_VALUE, MAX_ATTRIBUTE_P_VALUE, indexClassStat, classStat, HP_FIRST_SPAWN, HP_MAX_FIRST_SPAWN,
-                2, playerPosition, -1);
+                2, playerPosition, -1, true);
         this.firstName = firstName;
         this.lastName = lastName;
         credentials.put(email, password);

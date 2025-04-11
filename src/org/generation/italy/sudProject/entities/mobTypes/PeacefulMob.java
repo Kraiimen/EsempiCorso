@@ -1,4 +1,4 @@
-package org.generation.italy.sudProject.entities.mobs;
+package org.generation.italy.sudProject.entities.mobTypes;
 
 import org.generation.italy.sudProject.Entity;
 import org.generation.italy.sudProject.map.Room;
