@@ -25,6 +25,10 @@ public class Item {
         itemMap.put("cupcake",cupcake);
         Food chickenLeg = new Food(2, "Chicken Leg", 5);
         itemMap.put("chicken",chickenLeg);
+        Item fineWine = new Item(dices.rd20(), ItemType.FOOD, "Fine wine");
+        itemMap.put("wine",fineWine);
+        Item Cheapwine = new Item(dices.rd20(), ItemType.FOOD, "Cheap wine");
+        itemMap.put("cheapwine",Cheapwine);
         Armor leatherArmor = new Armor(50, "Leather armor",5);
         itemMap.put("leatherarmor",leatherArmor);
         Armor chainMail = new Armor(80, "Chain mail",8);
@@ -39,6 +43,12 @@ public class Item {
         itemMap.put("gratesword",grateSword);
         Weapon grateaxe = new Weapon(60,"Grate axe",12);
         itemMap.put("grateaxe",grateaxe);
+        Potion healingP = new HealingPotion(10,"Healing potion",15);
+        itemMap.put("healingp",healingP);
+        Potion manaP = new ManaPotion(10,"Mana potion",dices.rd6());
+        itemMap.put("manap",manaP);
+        Potion tpP = new TeleportPotion(25,"Teleport potion");
+        itemMap.put("tpp",tpP);
         Item coins = new Item(dices.rd6(), ItemType.JUNK, "Gold Coins");
         itemMap.put("coins",coins);
         Item crittersSkin = new Item(4, ItemType.JUNK, "Critter's Skin");

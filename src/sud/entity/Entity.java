@@ -73,18 +73,18 @@ public class Entity {
         if( roll == 20){
             damage = equipedWeapon.rollDamage()*2;
         } else if (roll == 1) {
-            System.out.printf(entityColor+"Your attack was soo weak %s uses the opportunity and attacks you"+resetColor,attacked.getName());
+            System.out.printf(getWithColor("Your attack was soo weak %s uses the opportunity and attacks you"),attacked.getName());
             attacked.attack(this);
             return;
         }else if(doesAttackRollHit(attacked,roll)){
             damage = equipedWeapon.rollDamage();
         } else if (!doesAttackRollHit(attacked,roll )) {
-            System.out.printf(entityColor+"%s missed his attack"+resetColor, name);
+            System.out.printf(getWithColor("%s missed his attack"), name);
         }
-        System.out.printf(entityColor+"%s is attacking %s for %d damage\n "+resetColor, name, attacked.getName(),damage);
+        System.out.printf(getWithColor("%s is attacking %s for %d damage\n "), name, attacked.getName(),damage);
         attacked.hurt(damage);
         if(attacked.isDead){
-            System.out.println(entityColor+attacked.getName() + " has died by that hit\n "+resetColor);
+            System.out.printf(getWithColor("%s has died by that hit"),attacked.getName());
         }
 
     }
@@ -93,22 +93,22 @@ public class Entity {
     public void heal (int recivedHeal){
         if((maxHp - healthPoints)> recivedHeal){
             healthPoints += recivedHeal;
-            System.out.printf(entityColor+"%s healed %d"+resetColor,name,recivedHeal);
+            System.out.printf(getWithColor("%s healed %d"),name,recivedHeal);
         }else {
             healthPoints = maxHp;
-            System.out.printf(entityColor+"%s has fully healed"+resetColor,name);
+            System.out.printf(getWithColor("%s has fully healed"),name);
         }
     }
 
     public void sleep(){
         heal(10000000);
-        System.out.printf(entityColor+"%s sleeps"+resetColor,name);
+        System.out.printf(getWithColor("%s sleeps"),name);
     }
 
     public void eat (Item item){
         Food food = (Food)doesEntityHaveItem(ItemType.FOOD);
         if(food == null){
-            System.out.println(entityColor+"You have no food"+resetColor);
+            System.out.println(getWithColor("You have no food"));
         }else{
             heal(food.getHealingFacotr());
         }
@@ -188,9 +188,8 @@ public class Entity {
         return false;
     }
 
-    public void moveIntoRoom(Room room){
-        System.out.printf("%s walks to %S", this.name, room.getName());
-        this.setCurrentroom(room);
+    public String getWithColor(String message) {
+        return entityColor + message + resetColor;
     }
 
     public String getName() {

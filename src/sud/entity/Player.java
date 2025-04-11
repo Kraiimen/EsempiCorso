@@ -58,6 +58,7 @@ public class Player extends Entity{
         this.setAttackDamage(1+strMod);
         this.setMaxHp(maxHp+conMod);
         this.level =1;
+        this.coins = dices.rd10();
 
     }
 
@@ -76,16 +77,16 @@ public class Player extends Entity{
         if (roll == 20) {
             damage = this.getEquipedWeapon().rollDamage() * 2;
         } else if (roll == 1) {
-            System.out.printf(this.getEntityColor() + "Your attack was soo weak %s uses the opportunity and attacks you" + resetColor, attacked.getName());
+            System.out.printf(getWithColor("Your attack was soo weak %s uses the opportunity and attacks you"), attacked.getName());
             attacked.attack(this);
         } else if (doesAttackRollHit(attacked, roll)) {
             damage = this.getEquipedWeapon().rollDamage();
         }
 
-        System.out.printf(this.getEntityColor() + "%s is attacking %s for %d damage\n " + resetColor, this.getName(), attacked.getName(), damage);
+        System.out.printf(getWithColor("%s is attacking %s for %d damage\n "), this.getName(), attacked.getName(), damage);
         attacked.hurt(damage + this.strMod);
         if (attacked.isDead()) {
-            System.out.println(this.getEntityColor() + attacked.getName() + " has died by that hit\n " + resetColor);
+            System.out.printf(getWithColor("\n%s has died by that hit"),attacked.getName());
             this.setXp(this.getXp()+attacked.getXpOnDeath());
         }
     }
@@ -238,6 +239,38 @@ public class Player extends Entity{
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public int getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getDexterity() {
+        return dexterity;
+    }
+
+    public void setDexterity(int dexterity) {
+        this.dexterity = dexterity;
+    }
+
+    public int getConstitution() {
+        return constitution;
+    }
+
+    public void setConstitution(int constitution) {
+        this.constitution = constitution;
     }
 }
 

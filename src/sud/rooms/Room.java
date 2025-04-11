@@ -5,6 +5,7 @@ import sud.items.*;
 import sud.entity.*;
 import java.util.*;
 
+
 import static sud.items.Item.itemMap;
 
 public class Room {
@@ -45,47 +46,127 @@ public class Room {
         Room bossRoom = new Room("bossRoom");
         roomMap.put("bossRoom", bossRoom);
 
-        //@todo aggiunger gli item alle room
-
         castle.setPaths(debugroom, templeSq, prison, debugroom);
         castle.setRoomProperties(false, true, true, false, false);
         castle.getNPCInRoom().put(Npc.getNpcMap().get("King").getName(), Npc.getNpcMap().get("King"));
         castle.getNPCInRoom().put(Npc.getNpcMap().get("Kings Guard").getName(), Npc.getNpcMap().get("Kings Guard"));
+        if(dices.rd100()>75){
+            castle.getItemsInRoom().put(Item.itemMap.get("coins").getName(),Item.itemMap.get("coins"));
+            castle.hasItems = true;
+            if(dices.rd100()>75){
+                castle.getItemsInRoom().put(Item.itemMap.get("coins").getName(),Item.itemMap.get("coins"));
+            }
+        }
+        if(dices.rd100()>90){
+            castle.getItemsInRoom().put(Item.itemMap.get("wine").getName(),Item.itemMap.get("wine"));
+            castle.hasItems = true;
+        }
 
         prison.setPaths(debugroom, debugroom, debugroom, castle);
         prison.setRoomProperties(false, true, true, false, false);
 
+
         templeSq.setPaths(debugroom, market, debugroom, temple);
         templeSq.setRoomProperties(false, true, true, false, false);
         templeSq.getNPCInRoom().put(Npc.getNpcMap().get("TQ Guard").getName(), Npc.getNpcMap().get("TQ Guard"));
-//        if(dices.rd100()>50){
-//            roomMap.get("templeSq").setItemsInRoom("Bread", bread).add(itemMap.get("bread"));
-//        }
+        if(dices.rd100()>25){
+            templeSq.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+            templeSq.hasItems = true;
+            if(dices.rd100()>50){
+                templeSq.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+            }
+        }
+        if(dices.rd100()>25){
+            templeSq.getItemsInRoom().put(Item.itemMap.get("apple").getName(),Item.itemMap.get("apple"));
+            templeSq.hasItems = true;
+        }
+        if(dices.rd100()>75){
+            templeSq.getItemsInRoom().put(Item.itemMap.get("coins").getName(),Item.itemMap.get("coins"));
+            templeSq.hasItems = true;
+        }
 
         tavern.setPaths(debugroom, debugroom, templeSq, debugroom);
-        tavern.setRoomProperties(true, true, false, false, false);
-        tavern.getNPCInRoom().put(Npc.getNpcMap().get("Kings Guard").getName(), Npc.getNpcMap().get("Kings Guard"));
+        tavern.setRoomProperties(false, true, false, false, false);
+        tavern.getNPCInRoom().put(Npc.getNpcMap().get("TavernK").getName(), Npc.getNpcMap().get("TavernK"));
+        if(dices.rd100()>95){
+            tavern.getItemsInRoom().put(Item.itemMap.get("dagger").getName(),Item.itemMap.get("dagger"));
+            tavern.hasItems = true;
+        }
 
         temple.setPaths(debugroom, debugroom, templeSq, debugroom);
         temple.setRoomProperties(false, true, true, false, false);
         temple.getNPCInRoom().put(Npc.getNpcMap().get("Cleric").getName(), Npc.getNpcMap().get("Cleric"));
+        if(dices.rd100()>50){
+            temple.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+            temple.hasItems = true;
+            if(dices.rd100()>75){
+                temple.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+            }
+        }if(dices.rd100()>75){
+            temple.getItemsInRoom().put(Item.itemMap.get("coins").getName(),Item.itemMap.get("coins"));
+            temple.hasItems = true;
+        }
+        if(dices.rd100()>90){
+            temple.getItemsInRoom().put(Item.itemMap.get("cheapwine").getName(),Item.itemMap.get("cheapwine"));
+            temple.hasItems = true;
+        }
+
 
         market.setPaths(templeSq, fieldsN, forge, bakery);
-        market.setRoomProperties(true, true, true, false, false);
+        market.setRoomProperties(false, true, true, false, false);
         market.getNPCInRoom().put(Npc.getNpcMap().get("MQ Guard").getName(), Npc.getNpcMap().get("MQ Guard"));
+        if(dices.rd100()>25){
+            market.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+            market.hasItems = true;
+            if(dices.rd100()>50){
+                market.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+                if(dices.rd100()>75){
+                    market.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+                }
+            }
+        }
+        if(dices.rd100()>75){
+            market.getItemsInRoom().put(Item.itemMap.get("coins").getName(),Item.itemMap.get("coins"));
+            market.hasItems = true;
+            if(dices.rd100()>75){
+                market.getItemsInRoom().put(Item.itemMap.get("coins").getName(),Item.itemMap.get("coins"));
+            }
+        }
 
         bakery.setPaths(debugroom, debugroom, market, debugroom);
-        bakery.setRoomProperties(true, true, true, false, false);
+        bakery.setRoomProperties(false, true, true, false, false);
         bakery.getNPCInRoom().put(Npc.getNpcMap().get("Baker").getName(), Npc.getNpcMap().get("Baker"));
+        if(dices.rd100()>75){
+            bakery.getItemsInRoom().put(Item.itemMap.get("cupcake").getName(),Item.itemMap.get("cupcake"));
+            bakery.hasItems = true;
+            if(dices.rd100()>75){
+                bakery.getItemsInRoom().put(Item.itemMap.get("cupcake").getName(),Item.itemMap.get("cupcake"));
+                if(dices.rd100()>75){
+                    bakery.getItemsInRoom().put(Item.itemMap.get("cupcake").getName(),Item.itemMap.get("cupcake"));
+                }
+            }
+        }
 
         forge.setPaths(debugroom, alchemist, debugroom, market);
-        forge.setRoomProperties(true, true, true, false, false);
+        forge.setRoomProperties(false, true, true, false, false);
         forge.getNPCInRoom().put(Npc.getNpcMap().get("Assistant").getName(), Npc.getNpcMap().get("Assistant"));
+        if(dices.rd100()>95){
+            forge.getItemsInRoom().put(Item.itemMap.get("chainmail").getName(),Item.itemMap.get("chainmail"));
+            forge.hasItems = true;
+        }
 
 
         alchemist.setPaths(forge, debugroom, debugroom, debugroom);
-        alchemist.setRoomProperties(true, true, true, false, false);
+        alchemist.setRoomProperties(false, true, true, false, false);
         alchemist.getNPCInRoom().put(Npc.getNpcMap().get("Alchemist").getName(), Npc.getNpcMap().get("Alchemist"));
+        if(dices.rd100()>50){
+            alchemist.getItemsInRoom().put(Item.itemMap.get("healingp").getName(),Item.itemMap.get("healingp"));
+            alchemist.hasItems = true;
+        }
+        if(dices.rd100()>90){
+            alchemist.getItemsInRoom().put(Item.itemMap.get("tpp").getName(),Item.itemMap.get("tpp"));
+            alchemist.hasItems = true;
+        }
 
 
         fieldsN.setPaths(market, fieldsS, debugroom, debugroom);
@@ -118,68 +199,92 @@ public class Room {
         fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("boss").getName(),Mob.getMobMap().get("boss"));
         // descrizioni delle stanze
         {
-        castle.setDescription("Un enorme sala del trono si presenta davanti a te, muri in marmo bianco, un lungo tappeto rosso che dalla porta indica la via per il trono ," +
-                "4 guardie svettano fiere alla tua destra quando entri, e altr 4 sono appena arrivate dal cambio turno sulla tua sinistra " +
-                "le mura della stanza sono ricoperte di arazzi e quadri, riesci tranquillamente a vedere che l'arazzo più grande raffigura l'attuale re, " +
-                "alla fine della stanza puoi vedere una scalinata di circa 6-7 gradini, che alla sua sommità ha un lussuoso trono fatto d'oro e intarsiato in madre perla, " +
-                "sul trono svetta una figura umanoide, un uomo grasso, dalle spalle larghe e dalla barba ben curata, sulla sua testa svetta una corona, lui è il re");
+            castle.setDescription("""
+                An enormous throne room opens up before you: white marble walls, a long red carpet stretching from the door all the way to the throne.
+                Four proud guards stand tall to your right as you enter, and another four have just arrived from a shift change to your left.
+                The walls are covered in tapestries and paintings—you can easily see that the largest tapestry depicts the current king.
+                At the far end of the room, a staircase with about 6-7 steps leads up to a luxurious throne made of gold and inlaid with mother-of-pearl.
+                On the throne sits a humanoid figure—a fat man with broad shoulders and a well-groomed beard. A crown rests on his head. He is the king.""");
 
-        prison.setDescription("Scendendo le scale ti ritrovi in un ambiente umido e illuminato da sole torce, l'aria e viziata e la polvere è molta, alla fine delle scale vedi una porta in legno" +
-                "una guardia è seduta ad un tavolo li vicino,quando passi segna il tuo nome sul registro, la porta della prigione è aperta, da su un corridoio, " +
-                "riesci già a vedere una fila di celle con sbarre di metallo larghe quanto il manico di una scopa" +
-                "le celle sono sporche, c'è puzza di urina e le facce al suo interno non sono amichevoli");
+            prison.setDescription("""
+                As you descend the stairs, you find yourself in a damp space lit only by torches. The air is stale and thick with dust.
+                At the bottom of the stairs, you see a wooden door. A guard is sitting at a nearby table.
+                As you pass, he writes your name in the logbook. The prison door is open and leads into a hallway.
+                You can already see a row of cells with iron bars as thick as broom handles.
+                The cells are filthy, the stench of urine hangs in the air, and the faces inside are far from friendly.""");
 
-        templeSq.setDescription("La piazza del tempio è colma di persone, vedi bambini che giocano a campana, guardie che fanno la ronda, vecchie signore che danno da mangiare a dei piccioni" +
-                "a nord il ponte levatoio che da sul entrata per il castello, dove 3 guardie fanno da sentinelle, riesci quasi a vedere la sala del trono in lontananza, " +
-                "verso sud il gran mercato cittadino, con le sue bancarelle e empori, senti già il chiasso dei venditori che ti propongono \" il grande affare della tua vita\" provenire da quella direction " +
-                "verso est invece sfoggia fiero il grande tempio degli dei, completamente fatto in marmo dei migliori al mondo, li potresti trovare l'aiuto dei sacerdoti, riconosciuti per le loro abilità curative e di potenziamento");
+            templeSq.setDescription("""
+                The temple square is full of people. You see children playing hopscotch, guards patrolling, and old ladies feeding pigeons.
+                To the north, the drawbridge leads to the castle entrance, where three guards stand watch. You can almost glimpse the throne room in the distance.
+                To the south is the grand city market, with its stalls and emporiums. You can already hear the clamor of merchants shouting about "the deal of a lifetime" from that direction.
+                To the east stands the great temple of the gods, proudly made of the world’s finest marble. There you might find help from the priests, known for their healing and empowering abilities.""");
 
-        tavern.setDescription("Entrando nella taverna vieni stordito da un odore di alcol pungente, ci sono varie persone al suo interno, la stanza principale è colma di brio e di risate" +
-                " davanti al bancone ci sono un paio di tavoli rotondi, alcuni pieni alcuni vuoti, i muri della taverna sono ricoperti di graffi, trofei di caccia e poster" +
-                "sul muro alla destra del entrata si può trovare una bacheca con affisse delle missioni scritte su dei fogli di carta" +
-                "la taverniera si gira al rumore del campanello fissato al di spora della porta, ti guarda per un attimo prima di tornare a discutere con un cliente, " +
-                "vedi un gruppetto di persone che si è raggruppata nel guardare quello che sembrerebbe uno scontro mortale tra 2 scarafaggi,");
+            tavern.setDescription("""
+                Upon entering the tavern, you're overwhelmed by the sharp scent of alcohol. The main room is bustling with life and laughter.
+                In front of the counter are several round tables, some full, some empty. The walls are covered with scratches, hunting trophies, and posters.
+                On the wall to the right of the entrance is a notice board pinned with paper sheets listing various quests.
+                The tavern keeper turns at the sound of the bell fixed above the door, glances at you briefly, then resumes chatting with a customer.
+                You spot a small crowd gathered, watching what appears to be a deadly duel between two cockroaches.""");
 
-        temple.setDescription("L'enorme arcata del portone del tempio da su una stanza di marmo, con file di panche fatte in legno di mogano al altro capo della stanza rispetto al entrata si vede una statua di una divinità" +
-                "una serena melodia sfocia da una serie di tubi di avorio che sbucano in vari punti della stanza, e si può sentire un forte odore di incenso" +
-                "i monaci e i chierici sono sparsi per le varie stanze, nella sala principale si vede solamente un uomo vestito in una tunica nera, che sta pregando in ginocchio");
+            temple.setDescription("""
+                The massive archway of the temple door opens into a marble hall, with rows of mahogany benches.
+                At the far end of the room, opposite the entrance, stands a statue of a deity.
+                A serene melody flows from a series of ivory pipes placed around the hall, and the air is filled with the strong scent of incense.
+                Monks and clerics are scattered across the rooms, but in the main hall, only one man in a black robe can be seen praying on his knees.""");
 
-        bakery.setDescription("Varcando la porta della pasticceria, il profumo di vaniglia e burro ti avvolge dandoti un dolce benvenuto. " +
-                "Esposti su degli scaffali in legno chiaro ci sono vari dolci e focacce. " +
-                "l'angolo alla destra del entrata è adibito come salotto, puoi vedere un divanetto e delle sedie attorno a un tavolino da caffè, l'idea di sederti un attimo e berti un bel tè è alquanto invitante. " +
-                "Sul bancone di fronte a tè noti subito esposti dei pasticcini adorabili, decorati con crema e frutta di stagione. " +
-                "Dietro al bancone, un uomo grande e virile, barba curata e braccia forti, maneggia con sorprendente delicatezza una sac à poche, disegnando orecchie da gatto su un cupcake alla vaniglia.");
+            bakery.setDescription("""
+                As you step through the bakery door, you're wrapped in the warm scent of vanilla and butter.
+                On light wooden shelves, various pastries and flatbreads are displayed.
+                In the corner to the right of the entrance, there's a lounge area with a couch and chairs around a coffee table—the idea of sitting down for a nice cup of tea is quite tempting.
+                On the counter in front of you, a selection of adorable pastries decorated with cream and seasonal fruit immediately catches your eye.
+                Behind the counter, a large, masculine man with a well-groomed beard and strong arms delicately handles a piping bag, drawing cat ears on a vanilla cupcake.""");
 
-        market.setDescription("Avvicinandoti al mercato, le voci e le urla dei mercanti si fanno sempre più forti,I negozi fanno da recinto alla piazza in cui si erige il mercato cittadino," +
-                "le bancarelle sono come al solito affisse in una forma a doppio cerchio, con le bancarelle si cibo nel centro e le altre tutte intorno, i vari venditori provano a invitarti, con promesse di affaroni e modi eccessivamente intrusivi" +
-                "a sud vedi gli enormi camellia delle mura che proteggono la città da i pericoli della foresta, a est e a ovest invece ci sono vari negozi come l' alchimista e la forgia");
+            market.setDescription("""
+                As you approach the market, the merchants' voices and shouts grow louder.
+                Shops surround the plaza where the city market stands. Stalls are arranged in the usual double-circle layout, with food vendors in the center and others around them.
+                Sellers try to lure you in with promises of great bargains, often with excessive enthusiasm.
+                To the south, you see the massive battlements that protect the city from the dangers of the forest.
+                To the east and west, various shops such as the alchemist and the forge await.""");
 
-        forge.setDescription("La forgia è divisa in 2 ambienti, una stanza chiusa, dove comprare o vendere, e una parte aperta sulla piazza dove forgiare armi," +
-                "nella zona aperta della forgia puoi vedere una donna, vestita con una canottiera e un grembiule che sta attualmente modellando a colpi di martello una spada sulla sua incudine," +
-                "come entri nel negozio noti che la parete alla tua destra e la parete in fondo alla stanza sono rio coperte da armi e scudi in mostra per la vendita, leggendo i prezzi capisci che la maggior parte di queste, non p minimamente alla tua portata" +
-                "dietro il bancone in legno scuro che si trova sulla sinistra del entrata, un uomo magrolino dai capelli lunghi sta lucidando una spada, ");
+            forge.setDescription("""
+                The forge is divided into two areas: an enclosed room for buying and selling, and an open area facing the square for forging weapons.
+                In the open-air section, you see a woman in a tank top and apron hammering a sword on her anvil.
+                Inside the shop, you notice that the wall to your right and the one at the back are densely covered with weapons and shields for sale.
+                Reading the prices, you quickly realize that most of them are far beyond your means.
+                Behind a dark wooden counter to the left of the entrance, a thin man with long hair is polishing a sword.""");
 
-        alchemist.setDescription("Entrando nel emporio del alchimista sei subito accecato da una forte luce, un uomo abbastanza giovane ha appena fatto espodere una sacchetta di qualche ingrediente alchemico ed adesso è ricoperto di polvere viola" +
-                "dietro di lui il muro in fondo alla stanza è riempito fino al orlo di scaffali colmi di pergamene, ampolle, strumenti alchemici e cianfrusaglie varie," +
-                "la stanza è un labirinto di tavoli e vetrine pieni di merci alchemiche e intrugli vari");
+            alchemist.setDescription("""
+                Entering the alchemist's emporium, you're immediately blinded by a flash of light.
+                A fairly young man has just caused a pouch of alchemical ingredients to explode and is now covered in purple dust.
+                Behind him, the back wall is packed to the brim with shelves filled with scrolls, vials, alchemical tools, and all sorts of knickknacks.
+                The room is a labyrinth of tables and display cases filled with alchemical goods and strange brews.""");
 
-        fieldsN.setDescription("Appena oltrepassi i cancelli delle mura, lasciandoti alle spalle il trambusto del borgo, ti accoglie la quiete distesa delle campagne. " +
-                "Piccole fattorie di legno e mattoni  chiari immerse nel verde punteggiano i campi coltivati. I contadini lavorano con calma, " +
-                "guidando i buoi lungo i solchi della terra fertile. L’aria profuma di sole e terra smossa, e più a sud, un fiume tranquillo scorre tra le due sponde coltivate," +
-                " unite da un ponte di pietra che sembra lì da sempre, in lontananza si vede la fitta foresta.");
+            fieldsN.setDescription("""
+                Just beyond the city gates, leaving behind the hustle of the town, you're welcomed by the calm expanse of the countryside.
+                Small farms of light wood and brick are dotted across the cultivated fields, immersed in greenery.
+                Farmers work at a steady pace, guiding oxen along the furrows of fertile soil.
+                The air smells of sun and freshly turned earth. Further south, a quiet river winds between two cultivated banks,
+                joined by a stone bridge that looks centuries old. In the distance, you can see the thick forest.""");
 
-        fieldsS.setDescription("Nel momento in cui attraversi il ponte di pietra, i campi cambiano volto. L'erba cresce più alta, i sentieri si fanno incerti, e il paesaggio inizia a perdere l'ordine delle mani umane." +
-                " Il fiume si divide in piccoli ruscelli che scorrono lenti, come se volessero accompagnarti via dalla sicurezza delle mura. " +
-                "Più a sud, il bosco si avvicina, fitto e silenzioso, noto per essere ostile: non è un posto per chi viaggia incautamente.");
+            fieldsS.setDescription("""
+                As you cross the stone bridge, the fields begin to change.
+                The grass grows taller, the paths become uncertain, and the landscape loses its human order.
+                The river splits into gentle streams, as if inviting you away from the safety of the walls.
+                Further south, the forest grows closer—thick, silent, and known for its hostility.
+                It’s no place for careless travelers.""");
 
-        forest.setDescription("Ti addentri nella foresta, la luce e la sicurezza dei campi ormai svaniscono velocemente con ogni passo che fai. " +
-                "senti sguardi ostili puntare su di te da dietro i rami degli alberi accompagnati da sibili e fruscii di creature sconosciute e da dentro i cespugli di felce. " +
-                "Creature ostili, diverse da quelle già incontrate, più forti e più primitive si aggirano per questi boschi. " +
-                "L'orientamento svanisce tra le fronde e tra i cespugli rovi che rendono i sentieri più difficili da navigare e identificare. " +
-                "è tutto confuso, tranne una certezza: la via per tornare a casa riesci ancora a vedere i mulini e le fattorie in lontananza, ma addentrandoti di più questa ancora di salvezza potrebbe andare perduta.");
+            forest.setDescription("""
+                You venture into the forest. The light and safety of the fields quickly vanish with every step.
+                You feel hostile gazes from behind tree branches, and hear hisses and rustles from unknown creatures among the ferns.
+                Hostile beings—stronger and more primal than any you've faced before—roam these woods.
+                Your sense of direction fades among the brambles and dense bushes that make the paths hard to navigate.
+                Everything is disorienting, except for one certainty: the way back home. You can still see the windmills and farms in the distance,
+                but go any deeper, and even that lifeline may vanish.""");
 
-        bossRoom.setDescription(" arrivi in una radura, l'arie e secca e la foresta è silenziosa il rumore degli uccelli, e degli animali è completamente svanito il vento ulula forte passando tra le fronde degli alberi" +
-                "qualcosa non va, è calmo, troppo calmo");
+            bossRoom.setDescription("""
+                You arrive in a clearing. The air is dry and the forest is eerily silent.
+                The sounds of birds and animals have vanished completely. The wind howls through the trees.
+                Something is wrong. It's calm—too calm.""");
         }
     }
 
