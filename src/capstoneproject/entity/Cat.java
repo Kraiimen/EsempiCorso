@@ -6,6 +6,7 @@ public class Cat extends Npc{
     private static final int MAX_HEALTH = 20;
     private static final int MAX_DAMAGE = 10;
 
+
     public Cat(String name, Room currentRoom) {
         super(name, MAX_HEALTH, MAX_DAMAGE, currentRoom);
 
@@ -21,13 +22,12 @@ public class Cat extends Npc{
 
     @Override
     public void attack(Entity target) {
-        int damage = strength + intelligence + agility + stamina;
+        int damage = strength;
         if(isRage){
                 System.out.println(getName() +"Attacca il player. Danno: " + damage);
         }
         target.takeDamage(damage);
     }
-
 }
 
 

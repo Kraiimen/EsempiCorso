@@ -15,7 +15,7 @@ public class Wizard extends Player {
     @Override
     public void initializeStats() {
         this.strength = this.random.nextInt(21);
-        this.intelligence = 5 + this.random.nextInt(21);
+        this.intelligence = this.random.nextInt(5,21);
         this.agility = this.random.nextInt(21);
         this.stamina = this.random.nextInt(21);
         System.out.println("Statistiche iniziali generate:");
@@ -28,7 +28,7 @@ public class Wizard extends Player {
     @Override
     public void attack(Entity target) {
         int damage = strength + intelligence + agility + stamina;
-        isBeardLong = this.random.nextInt(100) < 25;
+        isBeardLong = this.random.nextInt(100) <= 25;
         if(isBeardLong){
             damage *= 2;
             System.out.println(getName() + "Attacco critico al nemico. Danno: " + damage);

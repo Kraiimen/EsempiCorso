@@ -4,8 +4,12 @@ import capstoneproject.rooms.Room;
 
 public class Monster extends Npc{
     private boolean hasRing;
-    public Monster(String name, int maxHealth, int maxDamage, Room currentRoom) {
-        super(name, maxHealth, maxDamage, currentRoom);
+
+    private static final int MAX_HEALTH = 80;
+    private static final int MAX_DAMAGE = 40;
+
+    public Monster(String name, Room currentRoom) {
+        super(name,MAX_HEALTH, MAX_DAMAGE, currentRoom);
     }
 
     @Override
@@ -18,7 +22,7 @@ public class Monster extends Npc{
 
     @Override
     public void attack(Entity target) {
-        int damage = strength + intelligence + agility + stamina;
+        int damage = strength;
         System.out.println(getName() +"Attacca il player. Danno: " + damage);
         target.takeDamage(damage);
     }

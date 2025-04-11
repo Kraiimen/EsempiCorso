@@ -4,6 +4,7 @@ import capstoneproject.rooms.Room;
 
 public class Thief extends Player {
     private boolean isInvisible;
+
     public Thief(String name, int maxHealth, int maxDamage, Room currentRoom) {
         super(name, maxHealth, maxDamage, currentRoom);
     }
@@ -12,7 +13,7 @@ public class Thief extends Player {
     public void initializeStats() {
         this.strength = this.random.nextInt(21);
         this.intelligence =  this.random.nextInt(21);
-        this.agility = 5 + this.random.nextInt(21);
+        this.agility =this.random.nextInt(5,21);
         this.stamina = this.random.nextInt(21);
         System.out.println("Statistiche iniziali generate:");
         System.out.println("Forza: " + strength);

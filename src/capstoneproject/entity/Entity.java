@@ -35,7 +35,10 @@ public abstract class Entity {
 //    }
      public int takeDamage(int damage){
         healthPoints -= damage;
-        if(healthPoints < 0) healthPoints = 0;
+        if(healthPoints < 0) {
+            healthPoints = 0;
+            System.out.println(getName() + " è morto");
+        }
         return healthPoints;
      }
 
@@ -47,14 +50,13 @@ public abstract class Entity {
      public boolean isDead(){
         return healthPoints <= 0;
      }
-
      public abstract void attack(Entity target);
 
-     public void addHealthPoints(int hp) {
+    public void addHealthPoints(int hp) {
          healthPoints += hp;
     }
 
-     public void subtractHealthPoints(int hp){
+    public void subtractHealthPoints(int hp){
         healthPoints -= hp;
     }
 

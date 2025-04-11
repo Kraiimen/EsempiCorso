@@ -14,7 +14,7 @@ public class Paladin extends Player {
 
     @Override
     public void initializeStats() {
-        this.strength = 5 + this.random.nextInt(21);
+        this.strength = this.random.nextInt(5,21);
         this.intelligence =  this.random.nextInt(21);
         this.agility = this.random.nextInt(21);
         this.stamina = this.random.nextInt(21);

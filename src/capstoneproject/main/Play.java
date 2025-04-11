@@ -15,11 +15,11 @@ public class Play {
         world.chooseCharacter();
         world.create();
 
-        Player player = world.getPlayer(); // serve aggiungere getPlayer() nel World
+        Player player = world.getPlayer();// getPlayer ritorna il giocatore creato nella classe World
         Room currentRoom = player.getCurrentRoom();
 
         System.out.println("Benvenuto " + player.getName() +"!");
-        stampaStanza(currentRoom);
+        printCurrentRoomDescription(currentRoom);
 
         while (true) {
             System.out.print("Dove vuoi andare? (n/s/e/w, q per uscire): ");
@@ -50,7 +50,7 @@ public class Play {
             if (nextRoom.isPresent()) {
                 currentRoom = nextRoom.get();
                 player.setCurrentRoom(currentRoom);
-                stampaStanza(currentRoom);
+                printCurrentRoomDescription(currentRoom);
             } else {
                 System.out.println("Non puoi andare in quella direzione.");
             }
@@ -59,7 +59,7 @@ public class Play {
         scanner.close();
     }
 
-    private static void stampaStanza(Room room) {
+    private static void printCurrentRoomDescription(Room room) {
         System.out.println(">> Ti trovi in: " + room.getName());
         System.out.println(room.getDescription());
         System.out.println(room.getNpcList());
