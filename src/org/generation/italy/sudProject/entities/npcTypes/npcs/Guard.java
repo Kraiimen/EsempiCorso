@@ -1,4 +1,4 @@
-package org.generation.italy.sudProject.entities.npcTypes;
+package org.generation.italy.sudProject.entities.npcTypes.npcs;
 
 import org.generation.italy.sudProject.entities.Npc;
 import org.generation.italy.sudProject.map.Room;

@@ -1,11 +1,11 @@
 package org.generation.italy.sudProject;
 
 import org.generation.italy.sudProject.entities.mobs.Cat;
-import org.generation.italy.sudProject.entities.npcTypes.Guard;
+import org.generation.italy.sudProject.entities.npcTypes.npcs.Guard;
 import org.generation.italy.sudProject.map.Room;
 
 import static org.generation.italy.sudProject.Entity.dice;
-import static org.generation.italy.sudProject.entities.npcTypes.Guard.deleteGuards;
+import static org.generation.italy.sudProject.entities.npcTypes.npcs.Guard.deleteGuards;
 import static org.generation.italy.sudProject.map.Room.CAT_INDEX;
 import static org.generation.italy.sudProject.map.Room.GUARD_INDEX;
 

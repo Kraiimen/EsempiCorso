@@ -3,7 +3,7 @@ package org.generation.italy.sudProject;
 import org.generation.italy.sudProject.entities.Npc;
 import org.generation.italy.sudProject.entities.mobs.Cat;
 import org.generation.italy.sudProject.entities.mobs.PeacefulMob;
-import org.generation.italy.sudProject.entities.npcTypes.Guard;
+import org.generation.italy.sudProject.entities.npcTypes.npcs.Guard;
 import org.generation.italy.sudProject.map.Room;
 
 import java.util.Random;
