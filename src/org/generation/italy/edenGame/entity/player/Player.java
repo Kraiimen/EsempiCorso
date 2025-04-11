@@ -96,15 +96,15 @@ public class Player extends Entity {
 
     public void useErbaGatta (){
         System.out.println(" ");
-        System.out.println("Mangi della deliziosa erba gatta e recuperi 20 hp");
+        System.out.println("Mangi della deliziosa erba gatta🪴 e recuperi 20 hp");
         setHealthPoints(getMaxHp());
         System.out.println(" ");
     }
     public void useChiavePrigioni(){
         System.out.println(" ");
         System.out.println(" ");
-        System.out.println("Ricatti il sommo sacerdote minacciando di aprire le prigioni con la tua chiave se non ti conferisce la più sacra delle benedizioni " +
-                "(aumentano tutte le tue statistiche di molto)");
+        System.out.println("Ricatti il sommo sacerdote minacciando di aprire le prigioni con la tua chiave🔐 se non ti conferisce la più sacra delle benedizioni " +
+                "(aumentano tutte le tue statistiche di molto🔧)");
         setDamage(getDamage() + 10);
         setIntelligence(getIntelligence() + 20);
         setStrength(getStrength() + 20);
@@ -115,17 +115,17 @@ public class Player extends Entity {
         System.out.println(" ");
     }
     public void useSpadaDiEden(){
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println(" ");
-        System.out.println("TROVI LA LEGGENDARIA SPADA DI EDEN LA IMPUGNI E TI SENTI INVINCIBILE");
+        System.out.println("🔥⚔️🔥 TROVI LA ✨LEGGENDARIA✨ SPADA DI EDEN LA IMPUGNI E TI SENTI INVINCIBILE 🔥⚔️🔥");
         System.out.println(" ");
         setDamage(300);
         setMaxHp(300);
         setHealthPoints(300);
         System.out.println("Questi sono i danni che infliggerai: " + getDamage() + "Questa è la grandezza della tua vita: "+ getMaxHp());
         System.out.println(" ");
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
 }

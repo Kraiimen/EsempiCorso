@@ -7,15 +7,15 @@ import java.util.Random;
 
 public class Gardens extends Room {
 
-    Enemies enemy = new Cat("micio", 10, 10, 1, 4);
-    Enemies enemy2 = new Cat("micia", 10, 10, 1, 1);
+    Enemies enemy = new Cat("micio 🐈‍⬛", 10, 10, 1, 4);
+    Enemies enemy2 = new Cat("micia 🐈", 10, 10, 1, 1);
 
-    Enemies enemy3 = new Goblin("Camilla", 20, 20, 15, 20);
-    Enemies enemy4 = new Goblin("Elvis", 20, 20, 15, 20);
-    Enemies enemy5 = new Goblin("Filippo", 20, 20, 15, 20);
-    Enemies enemy6 = new Goblin("Lorenzo", 20, 20, 15, 20);
-    Enemies enemy7 = new Goblin("Nicolò", 20, 20, 15, 20);
-    Enemies enemy8 = new Goblin("Edoardo", 20, 20, 15, 20);
+    Enemies enemy3 = new Goblin("Camilla 🧟‍♀️", 20, 20, 15, 20);
+    Enemies enemy4 = new Goblin("Elvis 🧟‍♀️", 20, 20, 15, 20);
+    Enemies enemy5 = new Goblin("Filippo 🧟‍♀️", 20, 20, 15, 20);
+    Enemies enemy6 = new Goblin("Lorenzo 🧟‍♀️", 20, 20, 15, 20);
+    Enemies enemy7 = new Goblin("Nicolò 🧟‍♀️", 20, 20, 15, 20);
+    Enemies enemy8 = new Goblin("Edoardo 🧟‍♀️", 20, 20, 15, 20);
 
 
     public Gardens(String name, Map<Compass, String> directions) {
@@ -24,8 +24,8 @@ public class Gardens extends Room {
 
     @Override
     public void printDescription() {
-        System.out.println("I giardini, fioriti e colorati, il vanto della casata reale ");
-        System.out.println("------------------------------------------------------------");
+        System.out.println("🌸I giardini, fioriti e colorati, il vanto della casata reale🌸");
+        System.out.println("---------------------------------------------------------------");
         System.out.println(" ");
     }
 

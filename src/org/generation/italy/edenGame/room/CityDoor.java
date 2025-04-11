@@ -9,8 +9,8 @@ import java.util.Random;
 
 public class CityDoor extends Room{
 
-    Enemies enemy = new Guards("Sempro", 30, 30, 10, 10);
-    Enemies enemy2 = new Monster("ASHULA", 50, 50, 20, 50);
+    Enemies enemy = new Guards("Sempro 👮🏻‍♂️", 30, 30, 10, 10);
+    Enemies enemy2 = new Monster("ASHULA 👹", 50, 50, 20, 50);
 
     public CityDoor(String name, Map<Compass, String> directions) {
         super(name, directions);
@@ -18,8 +18,8 @@ public class CityDoor extends Room{
 
     @Override
     public void printDescription() {
-        System.out.println("Questa è la grande porta della città di Eden, da qui in poi regna l'oscuro... ");
-        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("🗝️Questa è la grande porta della città di Eden, da qui in poi regna l'oscuro...🗝️");
+        System.out.println("---------------------------------------------------------------------------------");
         System.out.println(" ");
     }
 

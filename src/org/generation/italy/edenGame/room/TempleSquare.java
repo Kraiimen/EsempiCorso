@@ -11,11 +11,10 @@ import java.util.Set;
 
 public class TempleSquare extends Room{
 
-    Enemies enemy = new Cat("giacomino", 10, 10, 1, 1);
-    Enemies enemy2 = new Cat("felicia", 10, 10, 1, 3);
-    Enemies enemy3 = new Cat("palladepelo", 10, 10, 1, 4);
-    Enemies enemy4 = new Cat("bucaneve", 10, 10, 1, 2);
-
+    Enemies enemy = new Cat("giacomino 😸", 10, 10, 1, 1);
+    Enemies enemy2 = new Cat("felicia 🐱", 10, 10, 1, 3);
+    Enemies enemy3 = new Cat("palladepelo 😻", 10, 10, 1, 4);
+    Enemies enemy4 = new Cat("bucaneve 😺", 10, 10, 1, 2);
 
     public TempleSquare(String name, Map<Compass, String> directions) {
         super(name, directions);
@@ -23,8 +22,8 @@ public class TempleSquare extends Room{
 
     @Override
     public void printDescription() {
-        System.out.println("Una piazza sacra, al centro della cittadella, pieno di persone e di storie ");
-        System.out.println("---------------------------------------------------------------------------");
+        System.out.println("🗽Una piazza sacra, al centro della cittadella, pieno di persone e di storie🗽");
+        System.out.println("-------------------------------------------------------------------------------");
         System.out.println(" ");
     }
 

@@ -13,7 +13,9 @@ public class Cat extends Enemies {
 
     @Override
     public void dead() {
-        System.out.println("Hai ucciso un povero gattino e hai guadagnato alcuni punti exp" );
+        System.out.println("Hai ucciso un povero gattino 😭 e hai guadagnato alcuni punti exp ☠️" );
+        System.out.println(" ");
+        System.out.println(" ");
     }
 
     public void attack(Entity target) {

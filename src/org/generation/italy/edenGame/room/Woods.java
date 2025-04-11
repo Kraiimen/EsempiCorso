@@ -7,11 +7,11 @@ import java.util.Random;
 
 public class Woods extends Room {
 
-    Enemies enemy = new Monster("Carmine", 50, 50, 15, 50);
-    Enemies enemy2 = new Monster("Filippo", 50, 50, 15, 50);
-    Enemies enemy3 = new Monster("Federico", 50, 50, 15, 50);
-    Enemies enemy4 = new Monster("Marta", 50, 50, 15, 50);
-    Enemies enemy5 = new Monster("Rossella", 50, 50, 15, 50);
+    Enemies enemy = new Monster("Carmine 🐍", 50, 50, 15, 50);
+    Enemies enemy2 = new Monster("Filippo 🐦‍⬛", 50, 50, 15, 50);
+    Enemies enemy3 = new Monster("Federico 🦅", 50, 50, 15, 50);
+    Enemies enemy4 = new Monster("Marta 🦡", 50, 50, 15, 50);
+    Enemies enemy5 = new Monster("Rossella 👩🏻‍💼", 50, 50, 15, 50);
 
     Enemies riccorcrux = new FinalBoss("RICCORCRUX", 100, 100, 50, 100);
 
@@ -23,8 +23,8 @@ public class Woods extends Room {
 
     @Override
     public void printDescription() {
-        System.out.println("Non sai cosa troverai, puoi solo sperare di poterlo raccontare ");
-        System.out.println("---------------------------------------------------------------");
+        System.out.println("🪵Non sai cosa troverai, puoi solo sperare di poterlo raccontare🪵");
+        System.out.println("------------------------------------------------------------------");
         System.out.println(" ");
     }
 

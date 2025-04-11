@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class MarketSquare extends Room{
 
-    Enemies enemy = new Guards("Tito", 50, 50, 10, 10);
+    Enemies enemy = new Guards("Tito 👮🏻‍♂️️ ", 50, 50, 10, 10);
 
     public MarketSquare(String name, Map<Compass, String> directions) {
         super(name, directions);
@@ -16,8 +16,8 @@ public class MarketSquare extends Room{
 
     @Override
     public void printDescription() {
-        System.out.println("Un grande mercato, tanto chiasso e disordine, la gentre va e viene, si compra ma si lascia sempre qualcosa...");
-        System.out.println("-------------------------------------------------------------------------------------------------------------");
+        System.out.println("🥡Un grande mercato, tanto chiasso e disordine, la gentre va e viene, si compra ma si lascia sempre qualcosa...🥡");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------");
         System.out.println(" ");
     }
     public Enemies getEnemy() {

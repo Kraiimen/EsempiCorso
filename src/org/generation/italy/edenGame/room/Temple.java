@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class Temple extends Room{
 
-    Npc highPriest = new HighPriest("Sacerdote", 1, 1, 0, 0);
-    Enemies enemy = new Cat("fufù", 10, 10, 1, 1);
+    Npc highPriest = new HighPriest("Sacerdote ✝✝", 1, 1, 0, 0);
+    Enemies enemy = new Cat("fufù 🐱", 10, 10, 1, 1);
 
     public Temple(String name, Map<Compass, String> directions) {
         super(name, directions);
@@ -18,8 +18,8 @@ public class Temple extends Room{
 
     @Override
     public void printDescription() {
-        System.out.println("Qui il sacerdote potrà farti riposare. Puoi anche chiedergli una benedizione per la tua Esperienza ");
-        System.out.println("---------------------------------------------------------------------------------------------------");
+        System.out.println("🕯️Qui il sacerdote potrà farti riposare 😴💤 Puoi anche chiedergli una benedizione per la tua Esperienza🕯️");
+        System.out.println("-----------------------------------------------------------------------------------------------------------");
         System.out.println(" ");
     }
     @Override

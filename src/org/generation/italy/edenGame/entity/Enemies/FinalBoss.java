@@ -8,21 +8,21 @@ public class FinalBoss extends Enemies{
     }
     @Override
     public void dead() {
-        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''");
-        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''");
-        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''");
-        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''");
+        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+        System.out.println("🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆");
         System.out.println(" ");
         System.out.println(" ");
-        System.out.println("CONGRATULAZIONI, HAI SALVATO EDEN CITY DA RICCORCRUX!");
+        System.out.println("✨✨✨CONGRATULAZIONI, HAI SALVATO EDEN CITY DA RICCORCRUX!✨✨✨");
         System.out.println(" ");
-        System.out.println("ORA HAI L'ANELLO SACRO DI EDEN");
+        System.out.println("✨✨✨✨✨✨✨ORA HAI L'ANELLO SACRO💍 DI EDEN✨✨✨✨✨✨✨✨");
         System.out.println(" ");
         System.out.println(" ");
-        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''");
-        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''");
-        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''");
-        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''");
+        System.out.println("🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆🏆");
+        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+        System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
     }
 
     public void attack(Entity target) {
