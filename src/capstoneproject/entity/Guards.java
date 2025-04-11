@@ -38,4 +38,8 @@ public class Guards extends Npc{
             }
         }
     }
+    @Override
+    public String toString(){
+        return getName() + " la guardia";
+    }
 }

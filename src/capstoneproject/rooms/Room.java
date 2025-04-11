@@ -11,19 +11,19 @@ public class Room {
     protected String name;
     private String description;
     protected Map<Directions, Room> exits;
-    protected List<Npc> npcList;
+    protected ArrayList<Npc> npcList;
 
     public Room(String name, String description){
         this.name=name;
         this.description = description;
         this.exits = new HashMap<>();
         this.npcList = new ArrayList<>();
-
-
     }
+
     public String getName(){
         return name;
     }
+
     public String getDescription(){
         return description;
     }
@@ -50,6 +50,16 @@ public class Room {
         npcList.add(npc);
     }
 
+    public void printNpcInCurrentRoom() {
+        if (!npcList.isEmpty()) {
+            System.out.println("Gli npc in questa stanza sono: ");
+            for (int i = 0; i < npcList.size(); i++) {
+                System.out.println((i + 1) + " " + npcList.get(i));
+            }
+        } else{
+            System.out.println("La stanza è vuota");
+        }
+    }
     public List<Npc> getNpcList(){
         return npcList;
     }

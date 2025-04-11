@@ -28,6 +28,10 @@ public class Cat extends Npc{
         }
         target.takeDamage(damage);
     }
+    @Override
+    public String toString(){
+        return getName() + " il gatto";
+    }
 }
 
 
