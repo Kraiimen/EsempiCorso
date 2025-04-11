@@ -166,12 +166,12 @@ public class Start {
                 System.out.println("Ti sei riposato e ora hai il massimo della vita");
             } else if (a2.equals("c")) {
                 Random dice2 = new Random();
-                int chanceOfItem = dice.nextInt(100);
-                if (chanceOfItem < 20){
+                int chanceOfItem = dice.nextInt(1000);
+                if (chanceOfItem < 500){
                     System.out.println("Non hai trovato nulla");
-                }else if (chanceOfItem >= 20 && chanceOfItem < 70){
+                }else if (chanceOfItem >= 500 && chanceOfItem <= 900){
                     player.useErbaGatta();
-                }else if (chanceOfItem > 70 && chanceOfItem < 95){
+                }else if (chanceOfItem > 900 && chanceOfItem <= 999){
                     player.useChiavePrigioni();
                 }else {
                     player.useSpadaDiEden();

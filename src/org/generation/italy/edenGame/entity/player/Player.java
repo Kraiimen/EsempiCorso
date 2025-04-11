@@ -96,7 +96,7 @@ public class Player extends Entity {
 
     public void useErbaGatta (){
         System.out.println("Mangi della deliziosa erba gatta e recuperi 20 hp");
-        setHealthPoints(getHealthPoints() + 5);
+        setHealthPoints(getMaxHp());
     }
     public void useChiavePrigioni(){
         System.out.println("Ricatti il sommo sacerdote minacciando di aprire le prigioni con la tua chiave se non ti conferisce la più sacra delle benedizioni " +
@@ -109,7 +109,7 @@ public class Player extends Entity {
         setMaxHp(getMaxHp() + 10);
     }
     public void useSpadaDiEden(){
-        System.out.println("Trovi miracolosamente la leggendaria spada di eden. La impugni e ti senti invincibile");
+        System.out.println("TROVI LA LEGGENDARIA SPADA DI EDEN LA IMPUGNI E TI SENTI INVINCIBILE");
         setDamage(300);
         setMaxHp(300);
         setHealthPoints(300);
