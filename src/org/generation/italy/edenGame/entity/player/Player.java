@@ -113,6 +113,6 @@ public class Player extends Entity {
         setDamage(300);
         setMaxHp(300);
         setHealthPoints(300);
-        System.out.println(getDamage() + " Questi sono i danni che infliggerai, " + getMaxHp() + " Questa è la grandezza della tua vita.");
+        System.out.println("Questi sono i danni che infliggerai: " + getDamage() + "Questa è la grandezza della tua vita: "+ getMaxHp());
     }
 }

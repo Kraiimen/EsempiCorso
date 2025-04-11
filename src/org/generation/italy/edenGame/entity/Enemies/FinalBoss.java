@@ -8,7 +8,7 @@ public class FinalBoss extends Enemies{
     }
     @Override
     public void dead() {
-        System.out.println("COMGRATULAZIONI, HAI SALVATO EDEN CITY DA RICCORCRUX!");
+        System.out.println("CONGRATULAZIONI, HAI SALVATO EDEN CITY DA RICCORCRUX!");
         System.out.println(" ");
         System.out.println("ORA HAI L'ANELLO SACRO DI EDEN");
     }
@@ -19,6 +19,7 @@ public class FinalBoss extends Enemies{
         System.out.println("Il GRANDE MOSTRO " + getName() + " ti ha fatto " + attackDamage + " danni");
         if(target.getHealthPoints() <= 0) {
             target.dead();
+            System.exit(0);
         }
     }
 }

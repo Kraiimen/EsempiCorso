@@ -17,7 +17,9 @@ public class Start {
 
         //INTRO DEL GIOCO
         Console console = System.console();
-        System.out.println("Benvenuto in EdenGame, qual'è il tuo nome?");
+        //TODO SCRIVI INTRO DEL GIOCO
+        System.out.println("Benvenuto in EdenGame, un mondo fantastico ");
+        System.out.println("Per cominciare, qual'è il tuo nome?");
         String playerName = console.readLine();
         System.out.println("Ciao " + playerName + ", scegli il nome del tuo personaggio");
         String name = console.readLine();
@@ -104,12 +106,12 @@ public class Start {
                 && !answer.toLowerCase().equals("priest")
                 && !answer.toLowerCase().equals("thief"));
 
+
         System.out.println("La tua storia inizia qui: " + "\n");
         player.setCurrentRoom(templeSquare);
         System.out.println(" ");
 
 
-        //MOVIMENTO A PIACERE
         String a2;
 
         do {
@@ -167,9 +169,9 @@ public class Start {
                 int chanceOfItem = dice.nextInt(100);
                 if (chanceOfItem < 20){
                     System.out.println("Non hai trovato nulla");
-                }else if (chanceOfItem >= 20 && chanceOfItem <= 60){
+                }else if (chanceOfItem >= 20 && chanceOfItem < 70){
                     player.useErbaGatta();
-                }else if (chanceOfItem > 60 &&chanceOfItem < 90){
+                }else if (chanceOfItem > 70 && chanceOfItem < 95){
                     player.useChiavePrigioni();
                 }else {
                     player.useSpadaDiEden();
