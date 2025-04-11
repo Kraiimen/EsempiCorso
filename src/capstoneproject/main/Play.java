@@ -12,6 +12,7 @@ public class Play {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         World world = new World();
+        world.chooseCharacter();
         world.create();
 
         Player player = world.getPlayer(); // serve aggiungere getPlayer() nel World

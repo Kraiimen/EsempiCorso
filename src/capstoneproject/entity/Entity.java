@@ -54,6 +54,7 @@ public abstract class Entity {
      public void addHealthPoints(int hp) {
          healthPoints += hp;
     }
+
      public void subtractHealthPoints(int hp){
         healthPoints -= hp;
     }
@@ -74,6 +75,7 @@ public abstract class Entity {
     public void addToInventory(Item i){
         inventory.addItem(i);
     }
+
     public Optional<Item> removeFromInventory (String itemName){
         return inventory.removeItem(itemName);
     }

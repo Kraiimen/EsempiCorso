@@ -3,14 +3,19 @@ package capstoneproject.rooms;
 import capstoneproject.Directions;
 import capstoneproject.entity.Paladin;
 import capstoneproject.entity.Player;
+import capstoneproject.entity.Thief;
+import capstoneproject.entity.Wizard;
+
+import java.util.Scanner;
 
 public class World {
     private Room start;
     private Player player;
+    Scanner scanner;
 
      public World(){
          start = new Room("Temple Square" , "Una piazza ampia ed elegante, circondata con edifici costruiti in archittetura classica");
-         player = new Paladin("Aladino il puro",100,20, start);
+
      }
 
      public void create(){
@@ -25,6 +30,30 @@ public class World {
          ms.addExit(Directions.W, a);
          ms.addExit(Directions.S , g);
      }
+
+
+    public void chooseCharacter() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Scegli il tuo personaggio:");
+        System.out.println("1. Paladino");
+        System.out.println("2. Guerriero");
+        System.out.println("3. Mago");
+        System.out.print("Scelta: ");
+        String choice = scanner.nextLine();
+
+        switch (choice) {
+            case "1" -> player = new Paladin("Aladin", 20, 100, start);
+            case "2" -> player = new Wizard("Magone", 15, 100, start);
+            case "3" -> player = new Thief("Ladrone", 30, 100, start);
+            default -> {
+                System.out.println("Scelta non valida. Verrà assegnato un Paladino di default.");
+                player = new Paladin("Aladino", 20, 100, start);
+            }
+        }
+    }
+
+
+
      public Player getPlayer() {
          return player;
      }
