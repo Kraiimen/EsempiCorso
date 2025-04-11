@@ -26,11 +26,11 @@ public class MonsterMap {
 
         //FANTASMI
 
-        monsters.add(new Ghost("Filippo", "Mi pare un po' eccessivo provare a uccidermi visto che sono già morto..."));
-        monsters.add(new Ghost("Elvis", "Non ricordo molto della mia morte, ma stavo scrivendo codice da circa 70 ore..."));
-        monsters.add(new Ghost("Edoardo", "Qualcuno ha visto i miei dadi per giocare a D&D?"));
+        monsters.add(new Ghost("Filippo", "Isn't it a bit excessive to try killing a ghost?"));
+        monsters.add(new Ghost("Elvis", "I don't remember much of how I died, but I'd been writing code for 70 hours..."));
+        monsters.add(new Ghost("Edoardo", "Has anybody seen my D&D dices?"));
         monsters.add(new Ghost("Lorenzo", "AO"));
-        monsters.add(new Ghost("Nico", "Devastante, posso passare attraverso i muri!"));
+        monsters.add(new Ghost("Nico", "Devastating, I can walk through walls!"));
 
         //DRAGHI
         monsters.add(new Dragon("Niv-Mizzet"));
