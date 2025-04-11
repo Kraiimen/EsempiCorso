@@ -10,6 +10,9 @@ import sud.dices;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static sud.Game.console;
+import static sud.Game.player;
+
 public class Player extends Entity{
     private int intelligence;
     private int strength;
@@ -22,6 +25,7 @@ public class Player extends Entity{
     private int xp;
     private int coins;
     private int level;
+    private String className;
 
     public Player(String name, int maxHp, String entityColor, String chosenClass) {
         super(name, maxHp, 0, Room.getRoomMap().get("CASTLE"), entityColor);
@@ -31,24 +35,28 @@ public class Player extends Entity{
                 this.strength = isScoreOk(dices.rd6()+dices.rd6()+dices.rd6());
                 this.dexterity = isScoreOk(dices.rd6()+dices.rd6()+dices.rd6());
                 this.constitution = isScoreOk(dices.rd6()+dices.rd6()+dices.rd6());
+                className = "WIZARD";
             }
             case "fighter" ->{
                 this.strength = isScoreOk(10+dices.rd10());
                 this.intelligence = isScoreOk(dices.rd6()+dices.rd6()+dices.rd6());
                 this.dexterity = isScoreOk(dices.rd6()+dices.rd6()+dices.rd6());
                 this.constitution = isScoreOk(dices.rd6()+dices.rd6()+dices.rd6());
+                className = "FIGHTER";
             }
             case "rogue" ->{
                 this.dexterity = isScoreOk(10+dices.rd10());
                 this.intelligence = isScoreOk(dices.rd6()+dices.rd6()+dices.rd6());
                 this.strength = isScoreOk(dices.rd6()+dices.rd6()+dices.rd6());
                 this.constitution = isScoreOk(dices.rd6()+dices.rd6()+dices.rd6());
+                className = "ROGUE";
             }
             case "barbarian" ->{
                 this.constitution = isScoreOk(10+dices.rd10());
                 this.intelligence = isScoreOk(dices.rd6()+dices.rd6()+dices.rd6());
                 this.dexterity = isScoreOk(dices.rd6()+dices.rd6()+dices.rd6());
                 this.strength = isScoreOk(dices.rd6()+dices.rd6()+dices.rd6());
+                className = "BARBARIAN";
             }
         }
         this.conMod = (this.constitution - 10)/2;
@@ -93,24 +101,54 @@ public class Player extends Entity{
     }
 
 
-        public void levelUp() {
-            if (xp >= 50) {
+        public boolean levelUp() {
+            if(xp <50){
+                System.out.println("<You don't have enough xp to level up>");
+                return false;
+            }else if (xp >= 50) {
                 if (level < 2) {
                     level = 2;
+                    this.sleep();
+                    return true;
+                }else {
+                    System.out.println("<You don't have enough xp to level up>");
+
                 }
+                return false;
             } else if (xp >= 100) {
                 if (level < 3) {
                     level = 3;
+                    this.sleep();
+                    return true;
+
+                }else {
+                    System.out.println("<You don't have enough xp to level up>");
+
                 }
+                return false;
             } else if (xp >= 200) {
                 if (level < 4) {
                     level = 4;
+                    this.sleep();
+                    return true;
+
+                }else {
+                    System.out.println("<You don't have enough xp to level up>");
+
                 }
+                return false;
             } else if (xp >= 400) {
                 if (level < 5) {
                     level = 5;
+                    this.sleep();
+                    return true;
+
+                }else {
+                    System.out.println("<You don't have enough xp to level up>");
                 }
+                return false;
             }
+            return false;
         }
 
         @Override
@@ -194,6 +232,30 @@ public class Player extends Entity{
             }
             return false;
         }
+
+        public void printCoins (){
+            System.out.println("<You have: " + this.getCoins() + " gold coins>");
+        }
+
+        public String askPlayerInput(){
+            System.out.print(this.getWithColor("-->"));
+            return console.readLine();
+        }
+    public int askPlayerIntInput(int max) {
+        while (true) {
+            try {
+                System.out.print(this.getWithColor("--> "));
+                int choice = Integer.parseInt(console.readLine());
+                if (choice < 0 || choice > max) {
+                    System.out.println("Invalid choice. Enter a number between 0 and " + (max));
+                    continue;
+                }
+                return choice;
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+            }
+        }
+    }
 
     public int getIntMod() {
         return intMod;
@@ -281,6 +343,14 @@ public class Player extends Entity{
 
     public void setConstitution(int constitution) {
         this.constitution = constitution;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 }
 

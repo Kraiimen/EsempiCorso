@@ -199,6 +199,7 @@ public class Entity {
         return entityColor + message + resetColor;
     }
 
+
     public String getName() {
         return name;
     }

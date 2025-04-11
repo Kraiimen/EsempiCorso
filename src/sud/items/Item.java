@@ -17,7 +17,7 @@ public class Item {
         this.name = name;
     }
     static{
-        Food bread= new Food(1, "Bread", 5);
+        Food bread= new Food(2, "Bread", 5);
         itemMap.put("bread",bread);
         Food apple= new Food(1, "Apple", 1);
         itemMap.put("apple",apple);
@@ -25,6 +25,8 @@ public class Item {
         itemMap.put("cupcake",cupcake);
         Food chickenLeg = new Food(2, "Chicken Leg", 5);
         itemMap.put("chicken",chickenLeg);
+        Food tea = new Food(2, "tea", 2);
+        itemMap.put("tea",tea);
         Item fineWine = new Item(dices.rd20(), ItemType.FOOD, "Fine wine");
         itemMap.put("wine",fineWine);
         Item Cheapwine = new Item(dices.rd20(), ItemType.FOOD, "Cheap wine");

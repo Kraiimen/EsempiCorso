@@ -55,10 +55,10 @@ public class Npc extends Entity{
         Npc baker = new Npc("The Baker", 10000000,0, Room.getRoomPointerFromName("bakery"), 0, NpcState.PASSIVE, true);
         npcMap.put("BAKER", baker);
         for (int i = 0; i < dices.rd6(); i++) {
-            tavernKeeper.getInventory().add(Item.itemMap.get("cupcake"));
+            baker.getInventory().add(Item.itemMap.get("cupcake"));
         }
         for (int i = 0; i < dices.rd8(); i++) {
-            tavernKeeper.getInventory().add(Item.itemMap.get("bread"));
+            baker.getInventory().add(Item.itemMap.get("bread"));
         }
 
         king.setDescription("The King is a fat man with broad shoulders and a well-groomed beard. His eyes are tired and his face looks pale A crown rests on his head and a purple coat on his shoulders");
@@ -94,7 +94,7 @@ public class Npc extends Entity{
         tavernKeeper.setDescription("The tavern keeper is a strongly built orc, her black hairs are put up in a bun, she is dressed in a white shirt, long sleeves rolled up to the elbow, black leather pants covering her lower body She occasionally looks at the patrons in the room to check what they are up to");
         tavernKeeper.lines.add(tavernKeeper.getWithColor("Hello sweetie!") );
         tavernKeeper.lines.add(tavernKeeper.getWithColor("Today's meal is the Chicken leg sweetie!") );
-        tavernKeeper.lines.add("<looking at the other patrons>" + tavernKeeper.getWithColor("HEY SHITHEAD DON'T YOU DARE DO THAT!"));
+        tavernKeeper.lines.add("<looking at the other patrons> " + tavernKeeper.getWithColor("HEY SHITHEAD DON'T YOU DARE DO THAT!"));
         tavernKeeper.lines.add("<She seem to be focused on cleaning a Mug>"+ tavernKeeper.getWithColor(" Do tell sweetie!") );
 
         blackSmithAssistant.setDescription("The BlackSmith assistant is a thin tall man, probably around 20 years old, he has a long ponytail dripping behind his head, his ears long and pointy are covered in little julery pieces");
@@ -126,6 +126,11 @@ public class Npc extends Entity{
 
     public void asignColor (){
         if(state == NpcState.PASSIVE){this.setEntityColor(colorG);}if(state == NpcState.NEUTRAL){this.setEntityColor(colorY);}}
+
+
+    public void speak(String line){
+        System.out.println(this.getWithColor(this.getName() + ": " + line));
+    }
 
     public NpcState getState() {
         return state;

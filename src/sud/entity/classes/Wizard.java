@@ -12,6 +12,8 @@ public class Wizard extends Player {
     private int maxMana;
 
 
+
+
     public Wizard(String name, String color,String playerName) {
         super(name, 6, color, "Wizard");
         this.playerName = playerName;
@@ -88,26 +90,58 @@ public class Wizard extends Player {
             System.out.println(this.getEntityColor() + attacked.getName() + " has died by that spell\n " + resetColor);
         }
     }
-
     @Override
-    public void levelUp(){
-        if (this.getXp() >= 50) {
+    public boolean levelUp(){
+
+        if(this.getXp() <50){
+            System.out.println("<You don't have enough xp to level up>");
+            return false;
+        }else if (this.getXp() >= 50) {
             if (this.getLevel() < 2) {
                 this.setLevel(2);
+                this.sleep();
+                return true;
+            }else {
+                System.out.println("<You don't have enough xp to level up>");
+
             }
+            return false;
         } else if (this.getXp() >= 100) {
             if (this.getLevel() < 3) {
                 this.setLevel(3);
+                this.sleep();
+                return true;
+
+            }else {
+                System.out.println("<You don't have enough xp to level up>");
+
             }
+            return false;
         } else if (this.getXp() >= 200) {
             if (this.getLevel() < 4) {
                 this.setLevel(4);
+                this.sleep();
+                return true;
+
+            }else {
+                System.out.println("<You don't have enough xp to level up>");
+
             }
+            return false;
         } else if (this.getXp() >= 400) {
             if (this.getLevel() < 5) {
                 this.setLevel(5);
+                this.sleep();
+                return true;
+
+            }else {
+                System.out.println("<You don't have enough xp to level up>");
             }
+            return false;
         }
         increseHp();
+        return false;
+
     }
+
 }

@@ -67,9 +67,12 @@ public class Room {
         prison.setRoomProperties(false, true, true, false, false);
 
 
-        templeSq.setPaths(debugroom, market, tavern, temple);
+        templeSq.setPaths(castle, market, tavern, temple);
         templeSq.setRoomProperties(false, true, true, false, false);
         templeSq.getNPCInRoom().put(Npc.getNpcMap().get("TQGUARD").getName().toUpperCase(), Npc.getNpcMap().get("TQGUARD"));
+        templeSq.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(),Item.itemMap.get("bread"));
+        templeSq.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(),Item.itemMap.get("bread"));
+
         if(dices.rd100()>25){
             templeSq.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(),Item.itemMap.get("bread"));
             templeSq.hasItems = true;
@@ -95,7 +98,7 @@ public class Room {
         }
 
         temple.setPaths(debugroom, debugroom, templeSq, debugroom);
-        temple.setRoomProperties(false, true, true, false, false);
+        temple.setRoomProperties(false, true, false, false, false);
         temple.getNPCInRoom().put(Npc.getNpcMap().get("CLERIC").getName().toUpperCase(), Npc.getNpcMap().get("CLERIC"));
         if(dices.rd100()>50){
             temple.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(),Item.itemMap.get("bread"));
