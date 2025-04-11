@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Bakery extends Room{
 
-    Enemies enemy = new Cat("pioppino", 10, 10, 1, 1);
+    Enemies enemy = new Cat("pioppino", 10, 10, 1, 3);
 
     public Bakery(String name, Map<Compass, String> directions) {
         super(name, directions);

@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Gardens extends Room {
 
-    Enemies enemy = new Cat("micio", 10, 10, 1, 1);
+    Enemies enemy = new Cat("micio", 10, 10, 1, 4);
     Enemies enemy2 = new Cat("micia", 10, 10, 1, 1);
 
     Enemies enemy3 = new Goblin("Camilla", 20, 20, 15, 20);

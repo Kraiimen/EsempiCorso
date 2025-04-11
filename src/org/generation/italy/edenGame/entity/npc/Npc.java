@@ -13,7 +13,6 @@ public class Npc extends Entity {
     }
 
     public void speak(Player player) {
-
     }
 
 }

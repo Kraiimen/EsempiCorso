@@ -17,7 +17,6 @@ public class HighPriest extends Npc{
         player.setStamina(player.getStamina() + 10);
         player.setMaxHp(player.getMaxHp() + 5);
         player.setHealthPoints(player.getMaxHp());
-
     }
 
 }

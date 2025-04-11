@@ -1,11 +1,10 @@
 package org.generation.italy.edenGame;
 
-import org.generation.italy.bankProject.accounting.Movement;
-import org.generation.italy.edenGame.entity.Enemies.Cat;
+
 import org.generation.italy.edenGame.entity.Enemies.Enemies;
-import org.generation.italy.edenGame.entity.Enemies.Guards;
-import org.generation.italy.edenGame.entity.Entity;
+
 import org.generation.italy.edenGame.entity.npc.HighPriest;
+import org.generation.italy.edenGame.entity.npc.Npc;
 import org.generation.italy.edenGame.entity.player.*;
 import org.generation.italy.edenGame.room.*;
 
@@ -124,6 +123,7 @@ public class Start {
             Enemies currentEnemy = player.getCurrentRoom().getEnemy();
             if(checkEnemies) {
                 System.out.println("In questo luogo è presente: " + currentEnemy.getClass().getSimpleName() + " di nome: ''" + currentEnemy.getName() + "'' ");
+                System.out.println(" ");
             }
             System.out.println("Scegli la tua prossima mossa o scrivi ''Quit'' per uscire: ");
             player.getCurrentRoom().getPossibleActions();
@@ -142,14 +142,16 @@ public class Start {
                 }
 
             } else if (a2.equals("p")) {
-                if(player.getExp() <= 10) {
+                if(player.getExp() < 10) {
                     System.out.println("Hai troppa poca exp, non sei ancora degno");
-                } else {
-                    player.getCurrentRoom().getNpc();
+                } else if(player.getExp() >= 10){
+                    Npc highPriest = new HighPriest("Sacerdote", 1, 1, 1, 1);
+                    player.getCurrentRoom().getNpc(); //Todo non dobbiamo mettere getNPC ma HIGHPRIEST, perchè ci serve il suo metodo speak
                 }
 
             } else if (a2.equals("i")) {
                 System.out.println("Le tue statistiche sono :");
+                System.out.println(" ");
                 System.out.println("Intelligence: " + player.getIntelligence());
                 System.out.println("Strength: " + player.getStrength());
                 System.out.println("Agility: " + player.getAgility());
@@ -157,6 +159,7 @@ public class Start {
                 System.out.println("Health Points: " + player.getHealthPoints() + " / " + player.getMaxHp());
                 System.out.println("Damage Ability: " + player.getDamage());
                 System.out.println("Experience: " + player.getExp());
+                System.out.println(" ");
 
             } else if (a2.equals("r")) {
                 player.setHealthPoints(player.getMaxHp());

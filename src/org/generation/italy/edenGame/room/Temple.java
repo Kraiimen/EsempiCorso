@@ -39,4 +39,6 @@ public class Temple extends Room{
     public Npc getHighPriest() {
         return highPriest;
     }
+
+
 }
