@@ -1,6 +1,9 @@
 package org.generation.italy.edenGame;
 
 import org.generation.italy.bankProject.accounting.Movement;
+import org.generation.italy.edenGame.entity.Enemies.Cat;
+import org.generation.italy.edenGame.entity.Enemies.Enemies;
+import org.generation.italy.edenGame.entity.Enemies.Guards;
 import org.generation.italy.edenGame.entity.Entity;
 import org.generation.italy.edenGame.entity.player.*;
 import org.generation.italy.edenGame.room.*;
@@ -107,19 +110,32 @@ public class Start {
 
 //TODO Attacca, Cerca, Compra, Ruba, Prega, Riposa
 
+
         //MOVIMENTO A PIACERE
         String a2;
+
         do {
-            System.out.println("Scegli la tua prossima mossa: ");
+            Enemies currentEnemy = player.getCurrentRoom().getEnemy();
+            System.out.println("In questo luogo è presente: " + currentEnemy.getClass().getSimpleName() + " di nome: ''" + currentEnemy.getName() + "'' ");
+            System.out.println("Scegli la tua prossima mossa o scrivi ''Quit'' per uscire: ");
             player.getCurrentRoom().getPossibleActions();
+            player.getCurrentRoom();
+            boolean checkEnemies = player.getCurrentRoom().isCheckEnemies();
             a2 = console.readLine().toLowerCase();
+
             if(a2.equals("e")) {
                 movements.moveFromRoom(player);
+
+            } else if (a2.equals("a")) {
+
+                if(checkEnemies){
+                    player.doCombat(player, currentEnemy);
+                    player.getCurrentRoom().setCheckEnemies(false);
+                } else {
+                    System.out.println("Non ci sono più nemici in questo luogo");
+                }
             }
-
-
         } while(!a2.equals("quit"));
-
 
     }
 

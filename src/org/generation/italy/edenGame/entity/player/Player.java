@@ -1,12 +1,11 @@
 package org.generation.italy.edenGame.entity.player;
 
+import org.generation.italy.edenGame.entity.Enemies.Enemies;
 import org.generation.italy.edenGame.entity.Entity;
 import org.generation.italy.edenGame.room.Room;
 import org.generation.italy.edenGame.room.Temple;
 import org.generation.italy.edenGame.room.Compass;
-import org.generation.italy.edenGame.room.TempleSquare;
 
-import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,20 +21,20 @@ public class Player extends Entity {
 
     public Player(String name, int maxHp, int healthPoints, int damage, int exp, Room currentRoom, String playerName, int intelligence, int strength, int agility, int stamina) {
 
-        super(name, maxHp, healthPoints, damage, exp, currentRoom);
+        super(name, maxHp, healthPoints, damage, exp);
         this.playerName = playerName;
         this.intelligence = intelligence;
         this.strength = strength;
         this.agility = agility;
         this.stamina = stamina;
-
+        this.currentRoom = currentRoom;
     }
 
     @Override
-    public void dead(int exp) {
-        System.out.println("sei morto");
+    public void dead() {
+        System.out.println("Sei morto");
         setExp(getExp() - 1);
-        //@Todo controllare l'HashMap
+        //TODO da controllare
         Map<Compass, String> directions = new HashMap<Compass, String>();
         Room temple = new Temple("Temple", directions);
         setCurrentRoom(temple);
@@ -45,7 +44,6 @@ public class Player extends Entity {
     public void attack(Entity target) {
     }
 
-    @Override
     public Room getCurrentRoom() {
         return currentRoom;
     }
@@ -70,7 +68,7 @@ public class Player extends Entity {
         return stamina;
     }
 
-    @Override
+
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
         System.out.println("--------/ " + currentRoom.getNameRoom()  + " /--------");

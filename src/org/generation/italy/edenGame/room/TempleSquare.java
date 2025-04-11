@@ -1,9 +1,14 @@
 package org.generation.italy.edenGame.room;
 
+import org.generation.italy.edenGame.entity.Enemies.Cat;
+import org.generation.italy.edenGame.entity.Enemies.Enemies;
+import org.generation.italy.edenGame.entity.Enemies.Guards;
+
 import java.util.Map;
 
 public class TempleSquare extends Room{
 
+    Enemies enemy = new Cat("giacomino", 10, 10, 1, 1);
 
     public TempleSquare(String name, Map<Compass, String> directions) {
         super(name, directions);
@@ -19,7 +24,11 @@ public class TempleSquare extends Room{
 
     @Override
     public void getPossibleActions() {
-        System.out.println("Cerca (C), Esci da qua (E)");
+        System.out.println("Attacca (A), Cerca (C), Esci da qua (E)");
     }
 
+    public Enemies getEnemy() {
+        return enemy;
+
+    }
 }

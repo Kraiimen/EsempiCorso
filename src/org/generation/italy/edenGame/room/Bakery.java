@@ -1,8 +1,14 @@
 package org.generation.italy.edenGame.room;
 
+import org.generation.italy.edenGame.entity.Enemies.Cat;
+import org.generation.italy.edenGame.entity.Enemies.Enemies;
+
 import java.util.Map;
 
 public class Bakery extends Room{
+
+    Enemies enemy = new Cat("pioppino", 10, 10, 1, 1);
+
     public Bakery(String name, Map<Compass, String> directions) {
         super(name, directions);
     }
@@ -13,7 +19,9 @@ public class Bakery extends Room{
         System.out.println("--------------------------------------------------------------------------------------------------------------");
         System.out.println(" ");
     }
-
+    public Enemies getEnemy() {
+        return enemy;
+    }
     @Override
     public void getPossibleActions() {
         System.out.println("Attacca (A), Ruba (St), Compra (B), Esci di qui (E)");

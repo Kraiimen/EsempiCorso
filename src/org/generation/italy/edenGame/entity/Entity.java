@@ -1,6 +1,10 @@
 package org.generation.italy.edenGame.entity;
 
+import org.generation.italy.edenGame.entity.Enemies.Enemies;
+import org.generation.italy.edenGame.entity.player.Player;
 import org.generation.italy.edenGame.room.Room;
+
+import java.util.Random;
 
 public abstract class Entity {
     private String name;
@@ -8,32 +12,40 @@ public abstract class Entity {
     private int healthPoints;
     private int damage;
     private int exp; //@Todo forse in player?
-    private Room currentRoom; //@Todo CurrentRoom;
 
 
-    public Entity(String name, int maxHp, int healthPoints, int damage, int exp, Room currentRoom) {
+    public Entity(String name, int maxHp, int healthPoints, int damage, int exp) {
         this.name = name;
         this.maxHp = maxHp;
         this.healthPoints = healthPoints;
         this.damage = damage;
         this.exp = exp;
-        this.currentRoom = currentRoom;
+//        this.currentRoom = currentRoom;
     }
 
-
-
-    //@Todo forse metodo muori va in entity
     //METODI
     public void attack(Entity target) {
 
     }
+
     public void addHealthPoints(int hp){
         healthPoints += hp;
     }
+
     public void subtractHealthPoints(int hp){
         healthPoints -= hp;
     }
-    public abstract void dead(int exp);
+
+    public abstract void dead();
+
+    public void doCombat(Entity e1, Entity e2){
+        do {
+            e1.attack(e2);
+            if(e2.getHealthPoints() > 0) {
+                e2.attack(e1);
+            }
+        } while(e1.getHealthPoints() > 0 && e2.getHealthPoints() > 0);
+    }
 
 
 
@@ -58,9 +70,9 @@ public abstract class Entity {
         return exp;
     }
 
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
+//    public Room getCurrentRoom() {
+//        return currentRoom;
+//    }
 
 
 
@@ -84,7 +96,7 @@ public abstract class Entity {
         this.exp = exp;
     }
 
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
-    }
+//    public void setCurrentRoom(Room currentRoom) {
+//        this.currentRoom = currentRoom;
+//    }
 }
