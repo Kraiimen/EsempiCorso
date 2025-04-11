@@ -15,29 +15,43 @@ public abstract class Entity {
     protected static final int WISDOM_INDEX = 4;
     protected static final int CHARISMA_INDEX = 5;
 
-    protected int strength;
-    protected int dexterity;
-    protected int constitution;
-    protected int intelligence;
-    protected int wisdom;
-    protected int charisma;
+    private int strength;
+    private int dexterity;
+    private int constitution;
+    private int intelligence;
+    private int wisdom;
+    private int charisma;
     public static Random dice = new Random();
     public static int numberOfEntities;
 
+    private String name;
+    private int hp;
+    private int maxHp;
+
+
     // /--CONSTRUCTORS--/
-    public Entity(int[] stats, int indexClassStat, int classStat){
-        stats[indexClassStat] = classStat;
+    public Entity(String name, int minStatValue, int maxStatValue, int indexClassStat, int classStat, int hp, int maxHp){
+        int[] stats = getRandomStats(new int[6], minStatValue, maxStatValue);
+        if(indexClassStat >= 0){
+            stats[indexClassStat] = classStat;
+        }
         strength = stats[STRENGTH_INDEX];
         dexterity = stats[DEXTERITY_INDEX];
         constitution = stats[CONSTITUTION_INDEX];
         intelligence = stats[INTELLIGENCE_INDEX];
         wisdom = stats[WISDOM_INDEX];
         charisma = stats[CHARISMA_INDEX];
+        this.name = name;
         numberOfEntities++;
     }
 
     //--METHODS--/
-
+    private static int[] getRandomStats(int[] stats, int minValue, int maxValue){
+        for(int n : stats){
+            n = dice.nextInt(minValue, maxValue);
+        }
+        return stats;
+    }
 
     // /--GETTER-&-SETTER--/
 
@@ -63,5 +77,29 @@ public abstract class Entity {
 
     public int getCharisma() {
         return charisma;
+    }
+
+    public static int getNumberOfEntities() {
+        return numberOfEntities;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
     }
 }

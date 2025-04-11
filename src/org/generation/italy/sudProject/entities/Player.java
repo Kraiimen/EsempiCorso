@@ -1,9 +1,9 @@
-package org.generation.italy.sudProject;
+package org.generation.italy.sudProject.entities;
 
+import org.generation.italy.sudProject.Entity;
 import org.generation.italy.sudProject.map.Room;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,15 +14,17 @@ public class Player extends Entity {
     private String firstName;
     private String lastName;
     private Map<String, String> credentials = new HashMap<>();
-    protected String playerName;
+    private String playerName;
     private LocalDate creationDate = LocalDate.now();
-    protected int playerLevel;
     public static int numberOfPlayers;
     public Room playerPosition = world.getFirst();
+    private int playerLevel;
+    private static final int HP_FIRST_SPAWN = 3;
+    private static final int HP_MAX_FIRST_SPAWN = 10;
 
     // /--CONSTRUCTORS--/
     public Player(String firstName, String lastName, String email, String password, String playerName, int indexClassStat, int classStat){
-        super(getStats(new int[6]), indexClassStat, classStat);
+        super(playerName, MIN_ATTRIBUTE_P_VALUE, MAX_ATTRIBUTE_P_VALUE, indexClassStat, classStat, HP_FIRST_SPAWN, HP_MAX_FIRST_SPAWN );
         this.firstName = firstName;
         this.lastName = lastName;
         credentials.put(email, password);
@@ -32,7 +34,7 @@ public class Player extends Entity {
     // /--METHODS--/
     public void login(boolean check){
         if(check){
-            System.out.println("Welcome " +playerName+ " to GAMENAME");
+            System.out.println("Welcome " +playerName+ " to MOON RISES AGAIN");
         }
     }
     public void logout(){
@@ -41,13 +43,6 @@ public class Player extends Entity {
     //controlla che le credenziali siano giuste
     private boolean checkCredentials(String email, String password){
         return credentials.containsKey(email) && credentials.containsValue(password);
-    }
-
-    public static int[] getStats(int[] stats){
-        for(int n : stats){
-            n = dice.nextInt(MIN_ATTRIBUTE_P_VALUE, MAX_ATTRIBUTE_P_VALUE);
-        }
-        return stats;
     }
 
     //NORD 0, SUD 1, EST 2, OVEST 3
@@ -77,9 +72,9 @@ public class Player extends Entity {
             default:
                 System.out.println("INSERISCI LA DIREZIONE!");
         }
+        System.out.println("Luogo attuale: "+playerPosition);
+        System.out.println(playerPosition.getRoomDescription());
     }
-
-
     // /--GETTER-&-SETTER--/
 
     public String getFirstName() {

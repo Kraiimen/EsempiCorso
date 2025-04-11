@@ -3,6 +3,7 @@ package org.generation.italy.sudProject.map;
 public class Room{
     // /--ATTRIBUTES--/
     private String roomName;
+    private String roomDescription;
 
     private Room northRoom;
     private Room southRoom;
@@ -23,8 +24,13 @@ public class Room{
 
     // /--GETTER-&-SETTER--/
 
+
     public String getRoomName() {
         return roomName;
+    }
+
+    public String getRoomDescription() {
+        return roomDescription;
     }
 
     public Room getNorthRoom() {
@@ -41,5 +47,13 @@ public class Room{
 
     public Room getWestRoom() {
         return westRoom;
+    }
+
+    public void setRoomDescription(String roomDescription) {
+        this.roomDescription = roomDescription;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 }
