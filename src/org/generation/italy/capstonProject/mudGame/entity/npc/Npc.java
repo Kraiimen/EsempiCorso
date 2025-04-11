@@ -1,17 +1,19 @@
 package org.generation.italy.capstonProject.mudGame.entity.npc;
 
 import org.generation.italy.capstonProject.mudGame.entity.Entity;
+import org.generation.italy.capstonProject.mudGame.entity.player.Player;
 import org.generation.italy.capstonProject.mudGame.entity.rooms.Room;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Npc extends Entity {
     private boolean isHostile;
     private List<String> messages;
-    private String role;
+    private NpcRole role;
 
-    public Npc(String charName, int maxHP, int maxDamage, Room currentRoom, boolean isHostile, String role) {
+    public Npc(String charName, int maxHP, int maxDamage, Room currentRoom, boolean isHostile, NpcRole role) {
         super(charName, maxHP, maxDamage, currentRoom);
         this.isHostile = isHostile;
         this.role = role;
@@ -29,20 +31,14 @@ public class Npc extends Entity {
     @Override
     public void attack(Entity target) {
         target.hasTakenDamage(this.getDamage());
+        if(target instanceof Player player) {
+            player.managePlayerInteraction(this, new Scanner(System.in));
+        }
     }
 
     @Override
     public void manageInteraction(Entity target){
-        if(isHostile){
-            while(!target.isDead()){
-                attack(target);
-                if(target.isDead()){
-                    setIsUnderAttack(false);
-                    break;
-                }
-            }
-            attack(target);
-        } else if (getIsUnderAttack()){
+        if(isHostile || getIsUnderAttack()){
             while(!target.isDead()){
                 attack(target);
                 if(target.isDead()){

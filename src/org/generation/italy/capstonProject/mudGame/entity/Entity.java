@@ -1,9 +1,7 @@
 package org.generation.italy.capstonProject.mudGame.entity;
 
-import org.generation.italy.capstonProject.mudGame.entity.items.Item;
 import org.generation.italy.capstonProject.mudGame.entity.rooms.Room;
 
-import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
@@ -24,10 +22,15 @@ public abstract class Entity {
     public Entity(String charName, int maxHP, int maxDamage, Room currentRoom){
         this.charName = charName;
         this.maxHP = maxHP;
-        healthPoints = maxHP;
+        this.healthPoints = maxHP;
         this.maxDamage = maxDamage;
-        damage = rand.nextInt(maxDamage);
         this.currentRoom = currentRoom;
+        this.inventory = new Inventory(10);
+    }
+
+    public int calculateDamage() {
+        damage = rand.nextInt(getMaxDamage() + 1);
+        return damage;
     }
 
     public int healMissingHP(double healPercentage){
@@ -69,10 +72,10 @@ public abstract class Entity {
                 getCurrentRoom().removeEntityFromRoom(this);
             }
             isUnderAttack = false;
-            System.out.println(charName + " is dead.");
+            System.out.println(this.charName + " is dead.");
         } else {
             healthPoints = subtractHealthPoints(inflictedDamage);
-            System.out.println(charName + " has taken damage. Its health is now " + healthPoints + "/" + maxHP);
+            System.out.println(this.charName + " has taken damage. Its health is now " + healthPoints + "/" + maxHP);
         }
         return healthPoints;
     }
@@ -112,6 +115,9 @@ public abstract class Entity {
     }
 
     public void setMaxHP(int maxHP) {
+        if(maxHP >= MAX_HP_POSSIBLE){
+            maxHP = MAX_HP_POSSIBLE;
+        }
         this.maxHP = maxHP;
     }
 

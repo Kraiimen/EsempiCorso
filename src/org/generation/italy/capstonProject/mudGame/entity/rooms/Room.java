@@ -1,7 +1,9 @@
 package org.generation.italy.capstonProject.mudGame.entity.rooms;
 
 import org.generation.italy.capstonProject.mudGame.entity.Entity;
+import org.generation.italy.capstonProject.mudGame.entity.GameMenuUtils;
 import org.generation.italy.capstonProject.mudGame.entity.items.Item;
+import org.generation.italy.capstonProject.mudGame.entity.npc.Npc;
 import org.generation.italy.capstonProject.mudGame.entity.player.Player;
 
 import java.util.*;
@@ -19,6 +21,7 @@ public class Room {
     private String description;
     private List<Direction> allowedDirections;
     private Map<Direction, Room> nextRooms;
+    protected Scanner scanner = new Scanner(System.in);
 //    private Map<Direction, Room> adjacentRooms = new EnumMap<>(Direction.class);
 
     private static Map<String, Room> gameMap = new HashMap();
@@ -181,7 +184,7 @@ public class Room {
     }
 
     public void removeEntityFromRoom(Entity entity){
-        entities.remove(entity);
+        entities.remove(entities);
         if(entities.isEmpty()){
             hasEntities = false;
         }
@@ -207,7 +210,7 @@ public class Room {
         }
     }
 
-    public void printDescription(){
+    public void printRoomContents(){
         StringBuilder message = new StringBuilder("You are in the " + this.getName() + "!\n");
 
         if(hasEntities){
@@ -240,11 +243,22 @@ public class Room {
     }
 
     public void playerHasEntered(Player player){
-        printDescription();
+        printRoomContents();
+
+        boolean hostileInteraction = false;
+
         if(hasEntities){
             for(Entity entity : entities){
-                entity.manageInteraction(player);
+                if(entity instanceof Npc npc && npc.isHostile()){
+                    hostileInteraction = true;
+                    entity.manageInteraction(player);
+                    if(player.isDead()) return;
+                }
+
             }
+        }
+        if (!player.isDead() && !hostileInteraction) {
+            GameMenuUtils.displayRoomActions(player, scanner);
         }
     }
 
