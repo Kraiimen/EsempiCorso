@@ -2,6 +2,7 @@ package org.generation.italy.edenGame.entity.player;
 
 import org.generation.italy.edenGame.entity.Enemies.Enemies;
 import org.generation.italy.edenGame.entity.Entity;
+import org.generation.italy.edenGame.item.Item;
 import org.generation.italy.edenGame.room.Room;
 import org.generation.italy.edenGame.room.Temple;
 import org.generation.italy.edenGame.room.Compass;
@@ -91,5 +92,27 @@ public class Player extends Entity {
 
     public void setStamina(int stamina) {
         this.stamina = stamina;
+    }
+
+    public void useErbaGatta (){
+        System.out.println("Mangi della deliziosa erba gatta e recuperi 20 hp");
+        setHealthPoints(getHealthPoints() + 5);
+    }
+    public void useChiavePrigioni(){
+        System.out.println("Ricatti il sommo sacerdote minacciando di aprire le prigioni con la tua chiave se non ti conferisce la più sacra delle benedizioni " +
+                "(aumentano tutte le tue statistiche di molto)");
+        setDamage(getDamage() + 10);
+        setIntelligence(getIntelligence() + 20);
+        setStrength(getStrength() + 20);
+        setAgility(getAgility() + 20);
+        setStamina(getStamina() + 20);
+        setMaxHp(getMaxHp() + 10);
+    }
+    public void useSpadaDiEden(){
+        System.out.println("Trovi miracolosamente la leggendaria spada di eden. La impugni e ti senti invincibile");
+        setDamage(300);
+        setMaxHp(300);
+        setHealthPoints(300);
+        System.out.println(getDamage() + " Questi sono i danni che infliggerai, " + getMaxHp() + " Questa è la grandezza della tua vita.");
     }
 }

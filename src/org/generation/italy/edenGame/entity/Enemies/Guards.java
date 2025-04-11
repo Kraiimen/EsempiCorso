@@ -3,6 +3,8 @@ package org.generation.italy.edenGame.entity.Enemies;
 import org.generation.italy.edenGame.entity.Entity;
 import org.generation.italy.edenGame.room.Room;
 
+import java.util.Random;
+
 public class Guards extends Enemies{
     public Guards(String name, int maxHp, int healthPoints, int damage, int exp) {
         super(name, maxHp, healthPoints, damage, exp);
@@ -10,7 +12,13 @@ public class Guards extends Enemies{
 
     @Override
     public void dead() {
+        Random dice = new Random();
         System.out.println("Hai ucciso una guardia reale e hai guadagnato: +10 exp");
+        int chanceOfItem = dice.nextInt(100);
+        if (chanceOfItem > 80) {
+
+        }
+
     }
 
     public void attack(Entity target) {

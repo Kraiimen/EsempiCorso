@@ -108,8 +108,6 @@ public class Start {
         player.setCurrentRoom(templeSquare);
         System.out.println(" ");
 
-//TODO Attacca, Cerca, Compra, Ruba, Prega, Riposa
-
 
         //MOVIMENTO A PIACERE
         String a2;
@@ -146,7 +144,7 @@ public class Start {
                     System.out.println("Hai troppa poca exp, non sei ancora degno");
                 } else if(player.getExp() >= 10){
                     Npc highPriest = new HighPriest("Sacerdote", 1, 1, 1, 1);
-                    player.getCurrentRoom().getNpc(); //Todo non dobbiamo mettere getNPC ma HIGHPRIEST, perchè ci serve il suo metodo speak
+                    player.getCurrentRoom().getNpc().speak(player);
                 }
 
             } else if (a2.equals("i")) {
@@ -164,6 +162,18 @@ public class Start {
             } else if (a2.equals("r")) {
                 player.setHealthPoints(player.getMaxHp());
                 System.out.println("Ti sei riposato e ora hai il massimo della vita");
+            } else if (a2.equals("c")) {
+                Random dice2 = new Random();
+                int chanceOfItem = dice.nextInt(100);
+                if (chanceOfItem < 20){
+                    System.out.println("Non hai trovato nulla");
+                }else if (chanceOfItem >= 20 && chanceOfItem <= 60){
+                    player.useErbaGatta();
+                }else if (chanceOfItem > 60 &&chanceOfItem < 90){
+                    player.useChiavePrigioni();
+                }else {
+                    player.useSpadaDiEden();
+                }
             }
 
         } while(!a2.equals("quit"));

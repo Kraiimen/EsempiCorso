@@ -28,7 +28,7 @@ public class Temple extends Room{
     }
     @Override
     public void getPossibleActions() {
-        System.out.println("Riposa (R), Prega (P), Info Abilità (I), Esci da qua (E)");
+        System.out.println("Attacca (A), Riposa (R), Prega (P), Info Abilità (I), Esci da qua (E)");
     }
 
     @Override

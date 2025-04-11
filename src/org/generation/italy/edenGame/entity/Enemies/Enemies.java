@@ -1,6 +1,7 @@
 package org.generation.italy.edenGame.entity.Enemies;
 
 import org.generation.italy.edenGame.entity.Entity;
+import org.generation.italy.edenGame.entity.player.Player;
 
 public class Enemies extends Entity {
 
@@ -11,7 +12,6 @@ public class Enemies extends Entity {
     @Override
     public void dead() {
     }
-
 
 
 }
