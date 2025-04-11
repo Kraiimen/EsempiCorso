@@ -38,7 +38,7 @@ public class Game {
         playerCurretnRoom = player.getCurrentroom();
         System.out.println();
         {
-            System.out.printf(player.getEntityColor()+
+            System.out.printf(/*player.getEntityColor()*/
                     """
                             <Name: %s>\
                             Class: %s\
@@ -54,7 +54,7 @@ public class Game {
                             Level: %d\
                             Coins: %d\
                             """
-                    + Entity.resetColor
+                    //+ Entity.resetColor
                     ,player.getName(),
                     player.getClass(),
                     player.getIntelligence(), player.getIntMod(),
