@@ -10,12 +10,15 @@ public class Armory extends Room{
     @Override
     public void printDescription() {
         System.out.println("Un luogo dove le armi vengono forgiate, vendute e comprate... ma anche trovate ");
+        System.out.println("-------------------------------------------------------------------------------");
         System.out.println(" ");
     }
 
-    @Override
-    public void move() {
 
+
+    @Override
+    public void getPossibleActions() {
+        System.out.println("Attacca (A), Ruba (St), Compra (B), Esci di qui (E)");
     }
 
 //    @Override

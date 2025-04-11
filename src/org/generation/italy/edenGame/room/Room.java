@@ -15,19 +15,24 @@ public abstract class Room {
         this.directions = new HashMap<>();
     }
 
+
+
     public abstract void printDescription();
 
-    public void setDirections(Compass dir, Room nextRoom){
-        directions.put(dir,nextRoom);
-    }
+    public abstract void getPossibleActions();
+
+
 
     public Room getDirection(Compass dir) {
         return directions.get(dir);
     }
 
-    public abstract void move();
-
     public String getNameRoom() {
         return name;
     }
+
+    public void setDirections(Compass dir, Room nextRoom){
+        directions.put(dir,nextRoom);
+    }
+
 }

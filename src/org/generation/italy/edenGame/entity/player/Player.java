@@ -4,6 +4,7 @@ import org.generation.italy.edenGame.entity.Entity;
 import org.generation.italy.edenGame.room.Room;
 import org.generation.italy.edenGame.room.Temple;
 import org.generation.italy.edenGame.room.Compass;
+import org.generation.italy.edenGame.room.TempleSquare;
 
 import java.sql.SQLOutput;
 import java.util.HashMap;
@@ -39,13 +40,42 @@ public class Player extends Entity {
         Room temple = new Temple("Temple", directions);
         setCurrentRoom(temple);
     }
+
     @Override
     public void attack(Entity target) {
     }
+
+    @Override
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public int getIntelligence() {
+        return intelligence;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public int getAgility() {
+        return agility;
+    }
+
+    public int getStamina() {
+        return stamina;
+    }
+
     @Override
     public void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
-        System.out.println(currentRoom.getNameRoom());
+        System.out.println("--------/ " + currentRoom.getNameRoom()  + " /--------");
         currentRoom.printDescription();
     }
+
+
 }

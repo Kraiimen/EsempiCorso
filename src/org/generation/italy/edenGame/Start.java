@@ -1,11 +1,11 @@
 package org.generation.italy.edenGame;
 
+import org.generation.italy.bankProject.accounting.Movement;
 import org.generation.italy.edenGame.entity.Entity;
 import org.generation.italy.edenGame.entity.player.*;
 import org.generation.italy.edenGame.room.*;
 
 import java.io.Console;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -25,7 +25,6 @@ public class Start {
 
         Movements movements = new Movements();
         Map<String, Room> roomFinder = movements.getRoomFinder();
-
 
         Map<Compass, String> templeSquareDirections = movements.getTempleSquareDirections();
         Room templeSquare = movements.getTempleSquare();
@@ -101,23 +100,26 @@ public class Start {
                 && !answer.toLowerCase().equals("paladin")
                 && !answer.toLowerCase().equals("priest")
                 && !answer.toLowerCase().equals("thief"));
-        System.out.println(" ");
-        System.out.println("La tua storia inizia qui: " + "\n" + "--------/ " +  templeSquare.getNameRoom() + " /--------");
-        templeSquare.printDescription();
-        System.out.println("--------------------------------------------------------------------------");
+
+        System.out.println("La tua storia inizia qui: " + "\n");
+        player.setCurrentRoom(templeSquare);
         System.out.println(" ");
 
-        //INIZIALIZZAZIONE MOVIMENTI
-        //Todo: Tutti i movimenti che può fare il Player, vanno attivati con un conditional
+//TODO Attacca, Cerca, Compra, Ruba, Prega, Riposa
 
-        movements.moveFromTempleSquare(player, templeSquareDirections, roomFinder);
-        movements.moveFromTemple(player,templeDirections, roomFinder);
-        movements.moveFromMarketSquare(player, marketSquareDirections, roomFinder);
-        movements.moveFromBakery(player, bakeryDirections, roomFinder);
-        movements.moveFromArmory(player, armoryDirections, roomFinder);
-        movements.moveFromGardens(player, gardensDirections, roomFinder);
-        movements.moveFromCityDoor(player, cityDoorDirections, roomFinder);
-        movements.moveFromWoods(player, woodsDirections, roomFinder);
+        //MOVIMENTO A PIACERE
+        String a2;
+        do {
+            System.out.println("Scegli la tua prossima mossa: ");
+            player.getCurrentRoom().getPossibleActions();
+            a2 = console.readLine().toLowerCase();
+            if(a2.equals("e")) {
+                movements.moveFromRoom(player);
+            }
+
+
+        } while(!a2.equals("quit"));
+
 
     }
 

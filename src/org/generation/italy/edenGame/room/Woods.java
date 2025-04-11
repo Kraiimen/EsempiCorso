@@ -10,12 +10,14 @@ public class Woods extends Room{
     @Override
     public void printDescription() {
         System.out.println("Non sai cosa troverai, puoi solo sperare di poterlo raccontare ");
+        System.out.println("---------------------------------------------------------------");
         System.out.println(" ");
     }
 
-    @Override
-    public void move() {
 
+    @Override
+    public void getPossibleActions() {
+        System.out.println("Attacca (A), Cerca (C), Esci da qui (E)");
     }
 
 //    @Override

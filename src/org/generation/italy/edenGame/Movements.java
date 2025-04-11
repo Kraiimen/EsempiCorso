@@ -84,10 +84,10 @@ public class Movements {
     }
 
     // ho cambiato semplciemente nell'input del metodo move "direction" in "templeDirection" ecc
-    //todo controllare il Map<Compass, String> delle varie Directions perchè probabilmente non comunica con la Room, per questo i problemi in Start dove va tutto bene fino a questo metodo
-    //TODO potremmo rimettere l'oggetto Room e trovare un modo per leggerlo e trasformarlo in String così da avere ( le vie percorribili EAST=The BAKERY, ecc)
+    //controllare il Map<Compass, String> delle varie Directions perchè probabilmente non comunica con la Room, per questo i problemi in Start dove va tutto bene fino a questo metodo
+    //potremmo rimettere l'oggetto Room e trovare un modo per leggerlo e trasformarlo in String così da avere ( le vie percorribili EAST=The BAKERY, ecc)
 
-    public void moveFromTempleSquare(Player player, Map<Compass, String> templeSquareDirections, Map<String, Room> roomFinder){
+    public void moveFromTempleSquare(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -139,7 +139,7 @@ public class Movements {
 
     }
 
-    public void moveFromTemple(Player player, Map<Compass, String> templeDirections, Map<String, Room> roomFinder){
+    public void moveFromTemple(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -192,7 +192,7 @@ public class Movements {
     }
 
 
-    public void moveFromMarketSquare(Player player, Map<Compass, String> marketSquareDirections, Map<String, Room> roomFinder){
+    public void moveFromMarketSquare(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -244,7 +244,7 @@ public class Movements {
 
     }
 
-    public void moveFromBakery(Player player, Map<Compass, String> bakeryDirections, Map<String, Room> roomFinder){
+    public void moveFromBakery(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -296,7 +296,7 @@ public class Movements {
 
     }
 
-    public void moveFromArmory(Player player, Map<Compass, String> armoryDirections, Map<String, Room> roomFinder){
+    public void moveFromArmory(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -349,7 +349,7 @@ public class Movements {
     }
 
 
-    public void moveFromGardens(Player player, Map<Compass, String> gardensDirections, Map<String, Room> roomFinder){
+    public void moveFromGardens(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -400,7 +400,7 @@ public class Movements {
         } while (!a.contains("NORTH") && !a.contains("SOUTH"));
     }
 
-    public void moveFromCityDoor(Player player, Map<Compass, String> cityDoorDirections, Map<String, Room> roomFinder){
+    public void moveFromCityDoor(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -451,7 +451,7 @@ public class Movements {
         } while (!a.contains("NORTH") && !a.contains("SOUTH"));
     }
 
-    public void moveFromWoods(Player player, Map<Compass, String> woodsDirections, Map<String, Room> roomFinder){
+    public void moveFromWoods(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
         Console console = System.console();
         String a;
         Compass newDirection = null;
@@ -500,6 +500,37 @@ public class Movements {
                 }
             }
         } while (!a.contains("NORTH"));
+    }
+
+    //TODO nuovo metodo public void moveFromRoom, if(player.getCurrentRoom().equals(templeSquare)) {moveFromTempleSquare()}
+
+    public void moveFromRoom(Player player) {
+
+        if(player.getCurrentRoom().equals(templeSquare)) {
+            moveFromTempleSquare(player, templeSquareDirections, roomFinder);
+
+        } else if(player.getCurrentRoom().equals(temple)) {
+            moveFromTemple(player, templeDirections, roomFinder);
+
+        } else if(player.getCurrentRoom().equals(marketSquare)) {
+            moveFromMarketSquare(player, marketSquareDirections, roomFinder);
+
+        } else if(player.getCurrentRoom().equals(bakery)) {
+            moveFromBakery(player, bakeryDirections, roomFinder);
+
+        } else if(player.getCurrentRoom().equals(armory)) {
+            moveFromArmory(player, armoryDirections, roomFinder);
+
+        } else if(player.getCurrentRoom().equals(gardens)) {
+            moveFromGardens(player, gardensDirections, roomFinder);
+
+        } else if(player.getCurrentRoom().equals(cityDoor)) {
+            moveFromCityDoor(player, cityDoorDirections, roomFinder);
+
+        } else if(player.getCurrentRoom().equals(woods)) {
+            moveFromWoods(player, woodsDirections, roomFinder);
+
+        }
     }
 
     //GETTER E SETTER

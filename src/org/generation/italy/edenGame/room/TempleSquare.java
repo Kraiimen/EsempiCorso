@@ -12,20 +12,14 @@ public class TempleSquare extends Room{
     @Override
     public void printDescription() {
         System.out.println("Una piazza sacra, al centro della cittadella, pieno di persone e di storie ");
+        System.out.println("---------------------------------------------------------------------------");
         System.out.println(" ");
     }
 
-    @Override
-    public void move() {
 
+    @Override
+    public void getPossibleActions() {
+        System.out.println("Cerca (C), Esci da qua (E)");
     }
 
-//    @Override
-//    public void getPossibleDirections(Map<Compass, Room> directions) {
-//        if(directions.get(nextRoom) != null) {
-//            this.directions = directions;
-//            System.out.println("Le strade da qui portano a: " + directions);
-//        }
-
-//    }
 }
