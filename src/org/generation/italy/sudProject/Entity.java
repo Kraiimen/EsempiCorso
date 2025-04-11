@@ -1,9 +1,15 @@
 package org.generation.italy.sudProject;
 
+import org.generation.italy.sudProject.entities.Npc;
+import org.generation.italy.sudProject.entities.mobs.Cat;
+import org.generation.italy.sudProject.entities.mobs.PeacefulMob;
 import org.generation.italy.sudProject.entities.npcTypes.Guard;
 import org.generation.italy.sudProject.map.Room;
 
 import java.util.Random;
+
+import static org.generation.italy.sudProject.map.Room.CAT_INDEX;
+import static org.generation.italy.sudProject.map.Room.GUARD_INDEX;
 
 
 public abstract class Entity {
@@ -28,6 +34,7 @@ public abstract class Entity {
     public static Random dice = new Random();
     public static int numberOfEntities;
     private Room entityPosition;
+    private int indexEntityPosition;
 
     private String name;
     private int hp;
@@ -37,7 +44,8 @@ public abstract class Entity {
 
 
     // /--CONSTRUCTORS--/
-    public Entity(String name, int minStatValue, int maxStatValue, int indexClassStat, int classStat, int hp, int maxHp, int BaseAtk, Room entityPosition){
+    public Entity(String name, int minStatValue, int maxStatValue, int indexClassStat, int classStat, int hp, int maxHp,
+                  int BaseAtk, Room entityPosition, int indexEntityPosition){
         int[] stats = getRandomStats(new int[6], minStatValue, maxStatValue);
         if(indexClassStat >= 0){
             stats[indexClassStat] = classStat;
@@ -54,6 +62,7 @@ public abstract class Entity {
         this.maxHp = maxHp;
         this.atk = BaseAtk;
         this.entityPosition = entityPosition;
+        this.indexEntityPosition = indexEntityPosition;
     }
 
     //--METHODS--/
@@ -68,8 +77,20 @@ public abstract class Entity {
     }
     private void die(){
         numberOfEntities --;
-
-
+        entityPosition.getRoomEntities().get(indexEntityPosition).removeLast();
+        switch (indexEntityPosition){
+            case CAT_INDEX:
+                Cat.numberOfCats--;
+                PeacefulMob.numberOfPeacefulMobs--;
+                break;
+            case GUARD_INDEX:
+                Guard.numberOfGuards--;
+                Npc.numberOfNpcs--;
+                break;
+            default:
+                System.out.println("Sei Morto");
+                break;
+        }
     }
 
 

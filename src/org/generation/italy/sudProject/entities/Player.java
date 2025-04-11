@@ -1,6 +1,7 @@
 package org.generation.italy.sudProject.entities;
 
 import org.generation.italy.sudProject.Entity;
+import org.generation.italy.sudProject.Spawner;
 import org.generation.italy.sudProject.map.Room;
 
 import java.time.LocalDate;
@@ -24,7 +25,8 @@ public class Player extends Entity {
 
     // /--CONSTRUCTORS--/
     public Player(String firstName, String lastName, String email, String password, String playerName, int indexClassStat, int classStat){
-        super(playerName, MIN_ATTRIBUTE_P_VALUE, MAX_ATTRIBUTE_P_VALUE, indexClassStat, classStat, HP_FIRST_SPAWN, HP_MAX_FIRST_SPAWN, 2, playerPosition);
+        super(playerName, MIN_ATTRIBUTE_P_VALUE, MAX_ATTRIBUTE_P_VALUE, indexClassStat, classStat, HP_FIRST_SPAWN, HP_MAX_FIRST_SPAWN,
+                2, playerPosition, -1);
         this.firstName = firstName;
         this.lastName = lastName;
         credentials.put(email, password);
@@ -52,25 +54,25 @@ public class Player extends Entity {
             case "NORD":
                 if (playerPosition.getNorthRoom() != null) {
                     playerPosition = playerPosition.getNorthRoom();
-                    playerPosition.resetGuardsInRoom();
+                    Spawner.resetGuardsInRoom(playerPosition);
                 }
                 break;
             case "SOUTH":
                 if (playerPosition.getSouthRoom() != null) {
                     playerPosition = playerPosition.getSouthRoom();
-                    playerPosition.resetGuardsInRoom();
+                    Spawner.resetGuardsInRoom(playerPosition);
                 }
                 break;
             case "EAST":
                 if (playerPosition.getEastRoom() != null) {
                     playerPosition = playerPosition.getEastRoom();
-                    playerPosition.resetGuardsInRoom();
+                    Spawner.resetGuardsInRoom(playerPosition);
                 }
                 break;
             case "WEST":
                 if (playerPosition.getWestRoom() != null) {
                     playerPosition = playerPosition.getWestRoom();
-                    playerPosition.resetGuardsInRoom();
+                    Spawner.resetGuardsInRoom(playerPosition);
                 }
                 break;
             default:

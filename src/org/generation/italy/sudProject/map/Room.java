@@ -1,13 +1,8 @@
 package org.generation.italy.sudProject.map;
 
 import org.generation.italy.sudProject.Entity;
-import org.generation.italy.sudProject.entities.mobs.Cat;
-import org.generation.italy.sudProject.entities.npcTypes.Guard;
 
 import java.util.ArrayList;
-
-import static org.generation.italy.sudProject.Entity.dice;
-import static org.generation.italy.sudProject.entities.npcTypes.Guard.deleteGuards;
 
 public class Room{
     // /--ATTRIBUTES--/
@@ -19,8 +14,8 @@ public class Room{
     private Room eastRoom;
     private Room westRoom;
 
-    private static final int CAT_INDEX = 0;
-    private static final int GUARD_INDEX = 1;
+    public static final int CAT_INDEX = 0;
+    public static final int GUARD_INDEX = 1;
 
     private ArrayList<ArrayList> roomEntities;
 
@@ -37,19 +32,13 @@ public class Room{
         this.westRoom = westRoom;
     }
 
-    public void generateRoomEntities(int numOfCats, int numOfGuards){
-        for(int i=0; i<numOfCats; i++){
-            roomEntities.get(CAT_INDEX).add(new Cat("Cat", this));
-        }
-        for(int i=0; i<numOfGuards; i++){
-            roomEntities.get(GUARD_INDEX).add(new Guard("Guard", this));
-        }
-    }
+
     private void addEntityType(int numOfGameEntities){
         for(int i=0; i<numOfGameEntities; i++){
             roomEntities.add(new ArrayList<Entity>());
         }
     }
+
     public void showEntitiesInRoom(){
         System.out.println("Entità del luogo: ");
         for(ArrayList a : roomEntities){
@@ -59,17 +48,6 @@ public class Room{
                     System.out.print((entity.getName())+" ");
                 }
                 System.out.println();
-            }
-        }
-    }
-    public void resetGuardsInRoom(){
-        if(roomEntities.get(GUARD_INDEX) != null){
-            int numGuards = (roomEntities.get(GUARD_INDEX).size());
-            int randomNumber = dice.nextInt(numGuards+1);
-            roomEntities.get(GUARD_INDEX).clear();
-            deleteGuards(numGuards);
-            for(int i=0; i<randomNumber; i++){
-                roomEntities.get(GUARD_INDEX).add(new Guard("Guard", this));
             }
         }
     }

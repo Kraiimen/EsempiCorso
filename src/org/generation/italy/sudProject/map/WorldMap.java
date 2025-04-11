@@ -1,7 +1,8 @@
 package org.generation.italy.sudProject.map;
 
+import org.generation.italy.sudProject.Spawner;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class WorldMap {
@@ -51,14 +52,14 @@ public class WorldMap {
         world.get(GARDEN_3_INDEX).setRoomDescription("La fine dei Giardini, ma anche l'inizio per chi entra per la prima volta in città");
         world.get(WOODS_INDEX).setRoomDescription("Un bosco illuminato dalla luna, la tua unica fonte di luce. Il fuoco è inutilizzabile per via di una maledizione");
         //aggiunge entità in ciascuna stanza
-        world.get(TEMPLE_SQUARE_INDEX).generateRoomEntities(0,2);
-        world.get(MARKET_SQUARE_INDEX).generateRoomEntities(5,4);
-        world.get(TEMPLE_INDEX).generateRoomEntities(0,0);
-        world.get(BAKERY_INDEX).generateRoomEntities(0,1);
-        world.get(ARMORY_INDEX).generateRoomEntities(0,0);
-        world.get(GARDEN_1_INDEX).generateRoomEntities(3,2);
-        world.get(GARDEN_2_INDEX).generateRoomEntities(2,2);
-        world.get(GARDEN_3_INDEX).generateRoomEntities(1,2);
-        world.get(WOODS_INDEX).generateRoomEntities(0,0);
+        Spawner.generateRoomEntities(world.get(TEMPLE_SQUARE_INDEX), 3, 3);
+        Spawner.generateRoomEntities(world.get(MARKET_SQUARE_INDEX), 3, 4);
+        Spawner.generateRoomEntities(world.get(TEMPLE_INDEX), 0, 0);
+        Spawner.generateRoomEntities(world.get(BAKERY_INDEX), 0, 2);
+        Spawner.generateRoomEntities(world.get(ARMORY_INDEX), 0, 2);
+        Spawner.generateRoomEntities(world.get(GARDEN_1_INDEX), 3, 2);
+        Spawner.generateRoomEntities(world.get(GARDEN_2_INDEX), 3, 1);
+        Spawner.generateRoomEntities(world.get(GARDEN_3_INDEX), 3, 2);
+        Spawner.generateRoomEntities(world.get(WOODS_INDEX), 0, 0);
     }
 }
