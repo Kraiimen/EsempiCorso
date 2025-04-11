@@ -44,6 +44,7 @@ public class World {
         String namePlayer = scanner.nextLine();
 
 
+
         switch (choice) {
             case "1" -> player = new Paladin(namePlayer, 20, 100, start);
             case "2" -> player = new Wizard(namePlayer, 15, 100, start);
