@@ -6,7 +6,7 @@ public abstract class NPC {
     protected int str;
     protected boolean isHostile;
 
-    // COSTRUTTORE
+    // COSTRUTTORI
     public NPC(String nome, int hp, int str, boolean isHostile) {
         this.nome = nome;
         this.hp = hp;

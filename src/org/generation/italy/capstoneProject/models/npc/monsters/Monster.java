@@ -8,7 +8,7 @@ public abstract class Monster extends NPC {
     }
 
     @Override
-    public void takeAction() {
+    public void talk() {
         System.out.println(" ");
     }
 }

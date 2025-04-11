@@ -1,7 +1,9 @@
 package org.generation.italy.capstoneProject.models.npc.monsters.normal;
 
-public class Slime {
+import org.generation.italy.capstoneProject.models.npc.monsters.Monster;
+
+public class Slime extends Monster {
     public Slime() {
-        super();
+        super("Slime", 20, 4);
     }
 }
