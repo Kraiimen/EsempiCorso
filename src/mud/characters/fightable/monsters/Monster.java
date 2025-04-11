@@ -2,6 +2,7 @@ package mud.characters.fightable.monsters;
 
 import mud.characters.fightable.Character;
 import mud.characters.fightable.PlayerCharacter;
+import mud.rooms.Room;
 
 public abstract class Monster extends Character {
     private int expGiven;
@@ -25,6 +26,7 @@ public abstract class Monster extends Character {
             System.out.printf("%s has now %d lives%n", character.getName(), character.getHp());
         }
     }
+
 
     public int getExpGiven() {
         return expGiven;

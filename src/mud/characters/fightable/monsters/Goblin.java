@@ -19,11 +19,13 @@ public class Goblin extends Monster {
         setActualRoom(MagicMap.getRooms().get(dice.nextInt(GOB_POSSIBLE_ROOM_START,GOB_POSSIBLE_ROOM_END)));
         setExp(GOB_EXP_GIVEN);
         setHp(GOB_HP);
+//        getActualRoom().getPresentMonsters().add(this);
+//        getActualRoom().getPresentMonstersClasses().add("Goblin");
     }
     @Override
     public void respawn() {
         if(!checkIfAlive()) {
-            setIsAlive();
+            setIsAlive(true);
             setHp(GOB_HP);
             setActualRoom(MagicMap.getRooms().get(dice.nextInt(GOB_POSSIBLE_ROOM_START, GOB_POSSIBLE_ROOM_END)));
         }

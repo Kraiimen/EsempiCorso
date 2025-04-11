@@ -6,7 +6,6 @@ import mud.characters.npcs.Merchant;
 public class Armory extends Room{
     public Armory() {
         super("The Armory");
-        getPresentEntities().add(new Merchant("Isildur"));
     }
 
 

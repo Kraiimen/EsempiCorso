@@ -2,25 +2,31 @@ package mud.rooms;
 
 import mud.CardinalPoints;
 import mud.characters.Entity;
+import mud.characters.fightable.monsters.Monster;
 import mud.items.Item;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static mud.GameUtil.player;
 
 public abstract class Room {
     //field
     private String name;
     private HashMap<CardinalPoints, Room> directions;
-    private List<Entity> presentEntities;
+    private HashMap<String, Entity> presentEntities;
+    private List<Monster> presentMonsters;
+    private List<String> presentMonstersClasses;
     private List<Item> presentItems;
 
     //costruttore
     public Room(String name){
         this.name = name;
         directions = new HashMap<>();
-        presentEntities = new ArrayList<>();
+        presentEntities = new HashMap<>();
         presentItems = new ArrayList<>();
+        presentMonsters = new ArrayList<>();
+        presentMonstersClasses = new ArrayList<>();
     }
     //costruttore per l'ultimo garden
     public Room(String name, Room lastRoom) {
@@ -33,7 +39,7 @@ public abstract class Room {
         entity.setActualRoom(this);
     }
     public void leaveRoom(Entity entity) {
-            presentEntities.remove(entity);
+            presentEntities.remove(name);
     }
 
     public void changeRoomNPC(CardinalPoints cardinal, Entity entity){
@@ -57,8 +63,14 @@ public abstract class Room {
     public abstract void printEntrance();
 
     public void printEntities(){
-        List<Entity> printable = presentEntities.stream().limit(presentEntities.size()-1).toList();
-        printable.forEach(e -> System.out.println(e.getName() + " the " + e.getClass().getSimpleName()));
+        Set<String> printable = new HashSet<>(presentEntities.keySet());
+        printable.remove(player.getName());
+        if(printable.isEmpty()){
+            System.out.println("Looks like you're the only one around here right now");
+        } else{
+            System.out.println("In here there are some other creatures: ");
+            printable.forEach(e -> System.out.println(e + " the " + presentEntities.get(e).getClass().getSimpleName()));
+        }
     }
 
     //getter e setter
@@ -76,10 +88,10 @@ public abstract class Room {
         this.directions = directions;
     }
 
-    public List<Entity> getPresentEntities() {
+    public HashMap<String, Entity> getPresentEntities() {
         return presentEntities;
     }
-    public void setPresentEntities(List<Entity> presentEntities) {
+    public void setPresentEntities(HashMap<String, Entity> presentEntities) {
         this.presentEntities = presentEntities;
     }
 
@@ -90,4 +102,17 @@ public abstract class Room {
         this.presentItems = presentItems;
     }
 
+    public List<Monster> getPresentMonsters() {
+        return presentMonsters;
+    }
+    public void setPresentMonsters(List<Monster> presentMonsters) {
+        this.presentMonsters = presentMonsters;
+    }
+
+    public List<String> getPresentMonstersClasses() {
+        return presentMonstersClasses;
+    }
+    public void setPresentMonstersClasses(List<String> presentMonstersClasses) {
+        this.presentMonstersClasses = presentMonstersClasses;
+    }
 }

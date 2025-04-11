@@ -12,6 +12,7 @@ public class Ghost extends Monster {
     private static final int GHOST_POSSIBLE_ROOM_START = 6;
     private static final int GHOST_POSSIBLE_ROOM_END = 8;
     private static final int GHOST_HP = 20;
+    private String greetmessage;
 
     public Ghost(String name) {
         super(name);
@@ -22,12 +23,21 @@ public class Ghost extends Monster {
         setExpGiven(GHOST_EXP_GIVEN);
         setHp(GHOST_HP);
     }
+    public Ghost(String name, String greetmessage) {
+        this(name);
+        this.greetmessage = greetmessage;
+    }
+
     @Override
     public void respawn() {
         if(!checkIfAlive()) {
-            setIsAlive();
+            setIsAlive(true);
             setHp(GHOST_HP);
             setActualRoom(MagicMap.getRooms().get(dice.nextInt(GHOST_POSSIBLE_ROOM_START, GHOST_POSSIBLE_ROOM_END)));
         }
+    }
+    @Override
+    public void greet(){
+        System.out.println(getName() + " says : " + greetmessage);
     }
 }

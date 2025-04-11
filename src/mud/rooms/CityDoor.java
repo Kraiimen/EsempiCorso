@@ -8,7 +8,7 @@ public class CityDoor extends Room{
 
     @Override
     public void printEntrance() {
-
+        System.out.println("This is the entrance to the city! Check beyond these walls and be prepared, adventurer!");
         printEntities();
     }
 }

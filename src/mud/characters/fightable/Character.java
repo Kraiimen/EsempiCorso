@@ -42,9 +42,6 @@ public abstract class Character extends Entity {
             getActualRoom().getDirections().get(cardinal).enterInRoom(this);
         }
     }
-    public void pickItem(Item item){
-        getInventory().add(item);
-    }
 
     public void hurt(int damage){
         if((this.hp - damage) <= MIN){
@@ -58,6 +55,7 @@ public abstract class Character extends Entity {
                 setHp(hp + heal);
             }
             setHp(MAX_HP);
+            System.out.println("You're at full health.");
         }
     }
 
@@ -94,8 +92,8 @@ public abstract class Character extends Entity {
     public boolean checkIfAlive() {
         return isAlive;
     }
-    public void setIsAlive(){
-        isAlive = true;
+    public void setIsAlive(boolean isAlive){
+        this.isAlive = isAlive;
     }
 
     public int getIntelligence() {

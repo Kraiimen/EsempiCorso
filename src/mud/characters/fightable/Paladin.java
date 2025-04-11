@@ -1,8 +1,6 @@
 package mud.characters.fightable;
 
 import mud.characters.Entity;
-import mud.characters.npcs.Civilian;
-import personal.mudGame.Player;
 
 public class Paladin extends PlayerCharacter {
     private static final int MIN_INTEL = 3;
@@ -40,5 +38,22 @@ public class Paladin extends PlayerCharacter {
     public void loseVirginity(Entity entity){
         isVirgin = false;
         System.out.println(getName() + " lost his virginity with " + entity.getName());
+    }
+
+    @Override
+    public void printStats(){
+        System.out.printf("Here are %s's statistics:%n", getName());
+        System.out.println("Exp: " + getExp());
+        System.out.println("HP: " + getHp());
+        System.out.println("Intelligence: " + getIntelligence());
+        System.out.println("Strength: " + getStrength());
+        System.out.println("Agility: " + getAgility());
+        System.out.println("Stamina: " + getStamina());
+        System.out.println("Respawns Left: " + (MAX_RESPAWN-getRespawnCounter()));
+        if(isVirgin){
+            System.out.println("You are still pure");
+        } else{
+            System.out.println("Your heart has already been corrupted...");
+        }
     }
 }

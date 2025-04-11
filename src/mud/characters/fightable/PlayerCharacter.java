@@ -1,7 +1,11 @@
 package mud.characters.fightable;
 
 import mud.CardinalPoints;
+import mud.items.Food;
+import mud.items.Item;
+import mud.items.Weapon;
 import mud.rooms.MagicMap;
+import mud.rooms.Room;
 
 public abstract class PlayerCharacter extends Character {
     public static final int MAX_RESPAWN = 5;
@@ -31,6 +35,7 @@ public abstract class PlayerCharacter extends Character {
             getActualRoom().printEntrance();
             //per ora lascio qui la guarigione del tempio, ma forse sta meglio nel tempio? dopo vedo
             if(getActualRoom().equals(MagicMap.getRooms().get(1))){
+                System.out.println("The Temple's magical air heals you. +2 hp points.");
                 heal(2);
             }
         } else {
@@ -38,13 +43,22 @@ public abstract class PlayerCharacter extends Character {
         }
     }
 
+    public void eat(Item item){
+        if(item instanceof Food food){
+            setHp(getHp()+food.getHpGiven());
+            System.out.printf("You ate %s and you got +%d hp.%n", food.getName(), food.getHpGiven());
+        } else {
+            System.out.println("You can't eat this!");
+        }
+    }
+
     public void respawn(){
         if(!checkIfAlive() && respawnCounter < MAX_RESPAWN){
             setHp(MAX_HP);
-            setIsAlive();
+            setIsAlive(true);
             respawnCounter++;
             setActualRoom(MagicMap.getRooms().getFirst());
-            System.out.printf("Welcome back! You are now in %s and you have %d respawn possibilities left!",
+            System.out.printf("Welcome back! You are now in %s and you have %d respawn possibilities left!%n",
                     MagicMap.getRooms().getFirst().getName(),MAX_RESPAWN-respawnCounter);
         }
     }
@@ -62,10 +76,16 @@ public abstract class PlayerCharacter extends Character {
         System.out.printf("Here are %s's statistics:%n", getName());
         System.out.println("Exp: " + getExp());
         System.out.println("HP: " + getHp());
+        System.out.println("Intelligence: " + getIntelligence());
         System.out.println("Strength: " + getStrength());
         System.out.println("Agility: " + getAgility());
         System.out.println("Stamina: " + getStamina());
         System.out.println("Respawns Left: " + (MAX_RESPAWN-respawnCounter));
+    }
+    @Override
+    public void pickItem(Item item){
+            getInventory().put(item.getName(), item);
+            System.out.println("You have picked " + item.getName());
     }
 
     //FUNZIONI DEL KILL'S COUNTER
@@ -86,4 +106,5 @@ public abstract class PlayerCharacter extends Character {
     public void setRespawnCounter(int respawnCounter) {
         this.respawnCounter = respawnCounter;
     }
+
 }

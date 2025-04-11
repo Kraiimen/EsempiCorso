@@ -1,10 +1,6 @@
 package mud.rooms;
 
 import mud.CardinalPoints;
-import mud.characters.Entity;
-import mud.characters.npcs.Baker;
-import mud.characters.npcs.Civilian;
-import mud.characters.npcs.Merchant;
 
 import java.util.ArrayList;
 import java.util.List;

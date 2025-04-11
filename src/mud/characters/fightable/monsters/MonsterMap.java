@@ -26,11 +26,11 @@ public class MonsterMap {
 
         //FANTASMI
 
-        monsters.add(new Ghost("Filippo"));
-        monsters.add(new Ghost("Elvis"));
-        monsters.add(new Ghost("Edoardo"));
-        monsters.add(new Ghost("Lorenzo"));
-        monsters.add(new Ghost("Nicolò"));
+        monsters.add(new Ghost("Filippo", "Mi pare un po' eccessivo provare a uccidermi visto che sono già morto..."));
+        monsters.add(new Ghost("Elvis", "Non ricordo molto della mia morte, ma stavo scrivendo codice da circa 70 ore..."));
+        monsters.add(new Ghost("Edoardo", "Qualcuno ha visto i miei dadi per giocare a D&D?"));
+        monsters.add(new Ghost("Lorenzo", "AO"));
+        monsters.add(new Ghost("Nico", "Devastante, posso passare attraverso i muri!"));
 
         //DRAGHI
         monsters.add(new Dragon("Niv-Mizzet"));
@@ -40,7 +40,7 @@ public class MonsterMap {
 
         //DRAGO CON L'UNICO ANELLO
         Monster smaug = new Dragon("Smaug");
-        smaug.getInventory().add(new Ring("The One Ring"));
+        smaug.pickItem(new Ring("The One Ring"));
         monsters.add(smaug);
 
         //GUARDIE

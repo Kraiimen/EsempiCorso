@@ -4,6 +4,8 @@ import mud.characters.fightable.Character;
 import mud.characters.fightable.PlayerCharacter;
 import mud.rooms.MagicMap;
 
+import static mud.GameUtil.player;
+
 public class Guard extends Monster {
     private static final int GUARD_EXP_GIVEN = 5;
     public static final int GUARD_POSSIBLE_ROOM = 8;
@@ -18,7 +20,7 @@ public class Guard extends Monster {
         setHp(MAX_HP);
     }
 
-    public void killForTheCat(PlayerCharacter player){
+    public void killForTheCat(){
         System.out.println(getName() + " the Guard says: HEY! WHAT ARE YOU DOING? I'LL SHOW YOU WHAT HAPPENS TO CRIMINALS LIKE YOU!");
         player.die();
     }
@@ -26,7 +28,7 @@ public class Guard extends Monster {
     @Override
     public void respawn() {
         if(!checkIfAlive()){
-            setIsAlive();
+            setIsAlive(true);
             setHp(MAX_HP);
             setActualRoom(MagicMap.getRooms().get(dice.nextInt(GUARD_POSSIBLE_ROOM)));
         }
