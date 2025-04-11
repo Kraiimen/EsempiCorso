@@ -15,6 +15,8 @@ public class Woods extends Room {
 
     Enemies riccorcrux = new FinalBoss("RICCORCRUX", 100, 100, 50, 100);
 
+
+
     public Woods(String name, Map<Compass, String> directions) {
         super(name, directions);
     }

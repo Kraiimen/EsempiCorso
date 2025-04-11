@@ -4,8 +4,10 @@ import org.generation.italy.edenGame.entity.Enemies.Cat;
 import org.generation.italy.edenGame.entity.Enemies.Enemies;
 import org.generation.italy.edenGame.entity.Enemies.Guards;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 public class TempleSquare extends Room{
 
@@ -13,6 +15,7 @@ public class TempleSquare extends Room{
     Enemies enemy2 = new Cat("felicia", 10, 10, 1, 3);
     Enemies enemy3 = new Cat("palladepelo", 10, 10, 1, 4);
     Enemies enemy4 = new Cat("bucaneve", 10, 10, 1, 2);
+
 
     public TempleSquare(String name, Map<Compass, String> directions) {
         super(name, directions);

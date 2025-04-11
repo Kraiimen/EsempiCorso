@@ -4,7 +4,9 @@ import org.generation.italy.edenGame.entity.Enemies.Enemies;
 import org.generation.italy.edenGame.entity.npc.Npc;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public abstract class Room {
     private String name;
@@ -12,6 +14,7 @@ public abstract class Room {
     private Map<Compass, Room> directions;
     private Enemies enemy;
     private Npc npc;
+    private Set<String> possibleActions = new HashSet<>();
 
     private Room currentRoom;
 
@@ -20,11 +23,17 @@ public abstract class Room {
         this.directions = new HashMap<>();
     }
 
-
-
+    public void addAction(String action) {
+        possibleActions.add(action);
+    }
+    public void getPossibleActions() {
+    }
+    public Set<String> returnPossibleActions() {
+        return possibleActions;
+    }
     public abstract void printDescription();
 
-    public abstract void getPossibleActions();
+//    public abstract void getPossibleActions();
 
     public Enemies getEnemy() {
         return enemy;

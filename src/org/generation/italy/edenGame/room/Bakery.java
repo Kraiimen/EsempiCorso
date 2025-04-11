@@ -24,6 +24,6 @@ public class Bakery extends Room{
     }
     @Override
     public void getPossibleActions() {
-        System.out.println("Attacca (A), Ruba (St), Compra (B), Info Abilità (I), Esci di qui (E)");
+        System.out.println("Attacca (A), Info Abilità (I), Esci di qui (E)");
     }
 }
