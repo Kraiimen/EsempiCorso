@@ -24,7 +24,7 @@ public class Player extends Entity{
     private int level;
 
     public Player(String name, int maxHp, String entityColor, String chosenClass) {
-        super(name, maxHp, 0, Room.getRoomPointerFromName("castle"), entityColor);
+        super(name, maxHp, 0, Room.getRoomMap().get("CASTLE"), entityColor);
         switch (chosenClass){
             case "wizard" ->{
                 this.intelligence = isScoreOk(10+dices.rd10());
@@ -59,6 +59,7 @@ public class Player extends Entity{
         this.setMaxHp(maxHp+conMod);
         this.level =1;
         this.coins = dices.rd10();
+        this.setAc(10+dexMod);
 
     }
 
@@ -183,6 +184,15 @@ public class Player extends Entity{
                 }
             }
 
+        }
+
+        public boolean pay (Item item){
+            if(coins >= item.getPrice()){
+                coins -= item.getPrice();
+                this.getInventory().add(item);
+                return true;
+            }
+            return false;
         }
 
     public int getIntMod() {

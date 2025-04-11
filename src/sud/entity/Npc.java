@@ -18,17 +18,17 @@ public class Npc extends Entity{
         Npc debugNPC = new Npc("deb",100000,0,Room.getRoomPointerFromName("debugroom"),0,NpcState.PASSIVE,false);
         npcMap.put("deb", debugNPC);
         Npc king = new Npc("The King", 100000000,0, Room.getRoomPointerFromName("castle"), 0, NpcState.PASSIVE, true);
-        npcMap.put("King", king);
-        Npc kingsGuard = new Npc("Kind's Guard", 50,15, Room.getRoomPointerFromName("castle"), 0, NpcState.NEUTRAL, false);
-        npcMap.put("Kings Guard", kingsGuard);
+        npcMap.put("KING", king);
+        Npc kingsGuard = new Npc("King's Guard", 50,15, Room.getRoomPointerFromName("castle"), 0, NpcState.NEUTRAL, false);
+        npcMap.put("KINGSGUARD", kingsGuard);
         Npc tQGuard = new Npc("The Guard", 50,15, Room.getRoomPointerFromName("templeSquare"), 0, NpcState.NEUTRAL, false);
-        npcMap.put("TQ Guard", tQGuard);
+        npcMap.put("TQGUARD", tQGuard);
         Npc mQGuard = new Npc("The Guard", 50,15, Room.getRoomPointerFromName("market"), 0, NpcState.NEUTRAL, false);
-        npcMap.put("MQ Guard", mQGuard);
+        npcMap.put("MQGUARD", mQGuard);
         Npc cleric = new Npc("The Cleric", 50,15, Room.getRoomPointerFromName("temple"), 0, NpcState.PASSIVE, true);
-        npcMap.put("Cleric", cleric);
+        npcMap.put("CLERIC", cleric);
         Npc blackSmithAssistant = new Npc("The Assistant", 10000000,0, Room.getRoomPointerFromName("forge"), 0, NpcState.PASSIVE, true);
-        npcMap.put("Assistant", blackSmithAssistant);
+        npcMap.put("ASSISTANT", blackSmithAssistant);
         blackSmithAssistant.getInventory().add(Item.itemMap.get("dagger"));
         blackSmithAssistant.getInventory().add(Item.itemMap.get("sword"));
         blackSmithAssistant.getInventory().add(Item.itemMap.get("gratesword"));
@@ -37,7 +37,7 @@ public class Npc extends Entity{
         blackSmithAssistant.getInventory().add(Item.itemMap.get("chainmail"));
         blackSmithAssistant.getInventory().add(Item.itemMap.get("fullplate"));
         Npc alchemist = new Npc("The Alchemist", 10000000,0, Room.getRoomPointerFromName("alchemist"), 0, NpcState.PASSIVE, true);
-        npcMap.put("Alchemist", alchemist);
+        npcMap.put("ALCHEMIST", alchemist);
         for (int i = 0; i < dices.rd6(); i++) {
             alchemist.getInventory().add(Item.itemMap.get("manap"));
         }
@@ -48,12 +48,12 @@ public class Npc extends Entity{
             alchemist.getInventory().add(Item.itemMap.get("tpp"));
         }
         Npc tavernKeeper = new Npc("The Tavern Keeper", 10000000,0, Room.getRoomPointerFromName("tavern"), 0, NpcState.PASSIVE, true);
-        npcMap.put("TavernK", tavernKeeper);
+        npcMap.put("TAVERNKEEPER", tavernKeeper);
         for (int i = 0; i < dices.rd6(); i++) {
             tavernKeeper.getInventory().add(Item.itemMap.get("chicken"));
         }
         Npc baker = new Npc("The Baker", 10000000,0, Room.getRoomPointerFromName("bakery"), 0, NpcState.PASSIVE, true);
-        npcMap.put("Baker", baker);
+        npcMap.put("BAKER", baker);
         for (int i = 0; i < dices.rd6(); i++) {
             tavernKeeper.getInventory().add(Item.itemMap.get("cupcake"));
         }

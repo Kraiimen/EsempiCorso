@@ -5,7 +5,6 @@ import sud.items.*;
 import sud.rooms.*;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -16,7 +15,7 @@ public class Entity {
     private int attackDamage;
     private boolean isDead;
     private int xpOnDeath=0;
-    private Room currentroom;
+    private Room currentRoom;
     private ArrayList<Item> inventory;
     private Weapon equipedWeapon = new Weapon(0,"pugni",0);
     private Armor equipedArmor= new Armor(0,"culo nudo", 0);
@@ -37,14 +36,14 @@ public class Entity {
         this.healthPoints = maxHp;
         this.maxHp = maxHp;
         this.attackDamage = attackDamage;
-        this.currentroom = currentroom;
+        this.currentRoom = currentroom;
         inventory = new ArrayList<>();
         this.ac = 10;
     }
 
     public Entity(String name, int maxHp, int attackDamage, Room currentroom, String entityColor){
         this( name, maxHp, attackDamage, currentroom);
-        colorR = entityColor;
+        this.entityColor = entityColor;
     }
 
     public Entity(String name, int maxHp, int attackDamage, Room currentroom, int xpOnDeath){
@@ -177,8 +176,16 @@ public class Entity {
 
     }
 
-    private Item doesEntityHaveItem(ItemType type){
+    public Item doesEntityHaveItem(ItemType type){
         return inventory.stream().filter(i-> i.getType() == type).findFirst().orElse(null);
+    }
+    public boolean doesEntityhaveitemInInventoryOfType(ItemType type){
+        for (Item i : inventory){
+            if(i.getType() == type){
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean doesAttackRollHit (Entity attacked, int roll){
@@ -227,11 +234,11 @@ public class Entity {
         isDead = dead;
     }
 
-    public Room getCurrentroom() {
-        return currentroom;
+    public Room getCurrentRoom() {
+        return currentRoom;
     }
-    public void setCurrentroom(Room currentroom) {
-        this.currentroom = currentroom;
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
     }
 
     public int getXpOnDeath() {

@@ -8,8 +8,8 @@ public class Rogue extends Player {
     private String playerName;
     private int hpDiceFaces;
 
-    public Rogue(String name, String playerName) {
-        super(name, 8, Entity.colorP, "rogue");
+    public Rogue(String name, String color,String playerName) {
+        super(name, 8, color, "rogue");
         this.playerName = playerName;
         this.hpDiceFaces = 8;
     }

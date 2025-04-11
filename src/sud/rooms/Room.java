@@ -19,46 +19,47 @@ public class Room {
 
     static {
         Room debugroom = new Room("debroom");
-
+        roomMap.put("DEBROOM", debugroom);
         Room castle = new Room("castle");
-        roomMap.put("castle", castle);
+        roomMap.put("CASTLE", castle);
         Room prison = new Room("prison");
-        roomMap.put("prison", prison);
+        roomMap.put("PRISON", prison);
         Room temple = new Room("temple");
-        roomMap.put("temple", temple);
+        roomMap.put("TEMPLE", temple);
         Room templeSq = new Room("templeSquare");
+        roomMap.put("TEMPLESQ", templeSq);
         Room tavern = new Room("tavern");
-        roomMap.put("tavern", tavern);
+        roomMap.put("TAVERN", tavern);
         Room market = new Room("market");
-        roomMap.put("market", market);
+        roomMap.put("MARKET", market);
         Room forge = new Room("forge");
-        roomMap.put("forge", forge);
+        roomMap.put("FORGE", forge);
         Room bakery = new Room("bakery");
-        roomMap.put("bakery", bakery);
+        roomMap.put("BAKERY", bakery);
         Room alchemist = new Room("alchemist");
-        roomMap.put("alchemist", alchemist);
+        roomMap.put("ALCHEMIST", alchemist);
         Room fieldsN = new Room("fieldsN");
-        roomMap.put("fieldsN", fieldsN);
+        roomMap.put("FIELDSN", fieldsN);
         Room fieldsS = new Room("fieldsS");
-        roomMap.put("fieldsS", fieldsS);
+        roomMap.put("FIELDSS", fieldsS);
         Room forest = new Room("forest");
-        roomMap.put("forest", forest);
+        roomMap.put("FOREST", forest);
         Room bossRoom = new Room("bossRoom");
-        roomMap.put("bossRoom", bossRoom);
+        roomMap.put("BOSSROOM", bossRoom);
 
         castle.setPaths(debugroom, templeSq, prison, debugroom);
         castle.setRoomProperties(false, true, true, false, false);
-        castle.getNPCInRoom().put(Npc.getNpcMap().get("King").getName(), Npc.getNpcMap().get("King"));
-        castle.getNPCInRoom().put(Npc.getNpcMap().get("Kings Guard").getName(), Npc.getNpcMap().get("Kings Guard"));
+        castle.getNPCInRoom().put(Npc.getNpcMap().get("KING").getName().toUpperCase(), Npc.getNpcMap().get("KING"));
+        castle.getNPCInRoom().put(Npc.getNpcMap().get("KINGSGUARD").getName().toUpperCase(), Npc.getNpcMap().get("KINGSGUARD"));
         if(dices.rd100()>75){
-            castle.getItemsInRoom().put(Item.itemMap.get("coins").getName(),Item.itemMap.get("coins"));
+            castle.getItemsInRoom().put(Item.itemMap.get("coins").getName().toUpperCase(),Item.itemMap.get("coins"));
             castle.hasItems = true;
             if(dices.rd100()>75){
-                castle.getItemsInRoom().put(Item.itemMap.get("coins").getName(),Item.itemMap.get("coins"));
+                castle.getItemsInRoom().put(Item.itemMap.get("coins").getName().toUpperCase(),Item.itemMap.get("coins"));
             }
         }
         if(dices.rd100()>90){
-            castle.getItemsInRoom().put(Item.itemMap.get("wine").getName(),Item.itemMap.get("wine"));
+            castle.getItemsInRoom().put(Item.itemMap.get("wine").getName().toUpperCase(),Item.itemMap.get("wine"));
             castle.hasItems = true;
         }
 
@@ -66,137 +67,137 @@ public class Room {
         prison.setRoomProperties(false, true, true, false, false);
 
 
-        templeSq.setPaths(debugroom, market, debugroom, temple);
+        templeSq.setPaths(debugroom, market, tavern, temple);
         templeSq.setRoomProperties(false, true, true, false, false);
-        templeSq.getNPCInRoom().put(Npc.getNpcMap().get("TQ Guard").getName(), Npc.getNpcMap().get("TQ Guard"));
+        templeSq.getNPCInRoom().put(Npc.getNpcMap().get("TQGUARD").getName().toUpperCase(), Npc.getNpcMap().get("TQGUARD"));
         if(dices.rd100()>25){
-            templeSq.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+            templeSq.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(),Item.itemMap.get("bread"));
             templeSq.hasItems = true;
             if(dices.rd100()>50){
-                templeSq.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+                templeSq.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(),Item.itemMap.get("bread"));
             }
         }
         if(dices.rd100()>25){
-            templeSq.getItemsInRoom().put(Item.itemMap.get("apple").getName(),Item.itemMap.get("apple"));
+            templeSq.getItemsInRoom().put(Item.itemMap.get("apple").getName().toUpperCase(),Item.itemMap.get("apple"));
             templeSq.hasItems = true;
         }
         if(dices.rd100()>75){
-            templeSq.getItemsInRoom().put(Item.itemMap.get("coins").getName(),Item.itemMap.get("coins"));
+            templeSq.getItemsInRoom().put(Item.itemMap.get("coins").getName().toUpperCase(),Item.itemMap.get("coins"));
             templeSq.hasItems = true;
         }
 
         tavern.setPaths(debugroom, debugroom, templeSq, debugroom);
         tavern.setRoomProperties(false, true, false, false, false);
-        tavern.getNPCInRoom().put(Npc.getNpcMap().get("TavernK").getName(), Npc.getNpcMap().get("TavernK"));
+        tavern.getNPCInRoom().put(Npc.getNpcMap().get("TAVERNKEEPER").getName().toUpperCase(), Npc.getNpcMap().get("TAVERNKEEPER"));
         if(dices.rd100()>95){
-            tavern.getItemsInRoom().put(Item.itemMap.get("dagger").getName(),Item.itemMap.get("dagger"));
+            tavern.getItemsInRoom().put(Item.itemMap.get("dagger").getName().toUpperCase(),Item.itemMap.get("dagger"));
             tavern.hasItems = true;
         }
 
         temple.setPaths(debugroom, debugroom, templeSq, debugroom);
         temple.setRoomProperties(false, true, true, false, false);
-        temple.getNPCInRoom().put(Npc.getNpcMap().get("Cleric").getName(), Npc.getNpcMap().get("Cleric"));
+        temple.getNPCInRoom().put(Npc.getNpcMap().get("CLERIC").getName().toUpperCase(), Npc.getNpcMap().get("CLERIC"));
         if(dices.rd100()>50){
-            temple.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+            temple.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(),Item.itemMap.get("bread"));
             temple.hasItems = true;
             if(dices.rd100()>75){
-                temple.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+                temple.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(),Item.itemMap.get("bread"));
             }
         }if(dices.rd100()>75){
-            temple.getItemsInRoom().put(Item.itemMap.get("coins").getName(),Item.itemMap.get("coins"));
+            temple.getItemsInRoom().put(Item.itemMap.get("coins").getName().toUpperCase(),Item.itemMap.get("coins"));
             temple.hasItems = true;
         }
         if(dices.rd100()>90){
-            temple.getItemsInRoom().put(Item.itemMap.get("cheapwine").getName(),Item.itemMap.get("cheapwine"));
+            temple.getItemsInRoom().put(Item.itemMap.get("cheapwine").getName().toUpperCase(),Item.itemMap.get("cheapwine"));
             temple.hasItems = true;
         }
 
 
         market.setPaths(templeSq, fieldsN, forge, bakery);
         market.setRoomProperties(false, true, true, false, false);
-        market.getNPCInRoom().put(Npc.getNpcMap().get("MQ Guard").getName(), Npc.getNpcMap().get("MQ Guard"));
+        market.getNPCInRoom().put(Npc.getNpcMap().get("MQGUARD").getName().toUpperCase(), Npc.getNpcMap().get("MQGUARD"));
         if(dices.rd100()>25){
-            market.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+            market.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(),Item.itemMap.get("bread"));
             market.hasItems = true;
             if(dices.rd100()>50){
-                market.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+                market.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(),Item.itemMap.get("bread"));
                 if(dices.rd100()>75){
-                    market.getItemsInRoom().put(Item.itemMap.get("bread").getName(),Item.itemMap.get("bread"));
+                    market.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(),Item.itemMap.get("bread"));
                 }
             }
         }
         if(dices.rd100()>75){
-            market.getItemsInRoom().put(Item.itemMap.get("coins").getName(),Item.itemMap.get("coins"));
+            market.getItemsInRoom().put(Item.itemMap.get("coins").getName().toUpperCase(),Item.itemMap.get("coins"));
             market.hasItems = true;
             if(dices.rd100()>75){
-                market.getItemsInRoom().put(Item.itemMap.get("coins").getName(),Item.itemMap.get("coins"));
+                market.getItemsInRoom().put(Item.itemMap.get("coins").getName().toUpperCase(),Item.itemMap.get("coins"));
             }
         }
 
         bakery.setPaths(debugroom, debugroom, market, debugroom);
         bakery.setRoomProperties(false, true, true, false, false);
-        bakery.getNPCInRoom().put(Npc.getNpcMap().get("Baker").getName(), Npc.getNpcMap().get("Baker"));
+        bakery.getNPCInRoom().put(Npc.getNpcMap().get("BAKER").getName().toUpperCase(), Npc.getNpcMap().get("BAKER"));
         if(dices.rd100()>75){
-            bakery.getItemsInRoom().put(Item.itemMap.get("cupcake").getName(),Item.itemMap.get("cupcake"));
+            bakery.getItemsInRoom().put(Item.itemMap.get("cupcake").getName().toUpperCase(),Item.itemMap.get("cupcake"));
             bakery.hasItems = true;
             if(dices.rd100()>75){
-                bakery.getItemsInRoom().put(Item.itemMap.get("cupcake").getName(),Item.itemMap.get("cupcake"));
+                bakery.getItemsInRoom().put(Item.itemMap.get("cupcake").getName().toUpperCase(),Item.itemMap.get("cupcake"));
                 if(dices.rd100()>75){
-                    bakery.getItemsInRoom().put(Item.itemMap.get("cupcake").getName(),Item.itemMap.get("cupcake"));
+                    bakery.getItemsInRoom().put(Item.itemMap.get("cupcake").getName().toUpperCase(),Item.itemMap.get("cupcake"));
                 }
             }
         }
 
         forge.setPaths(debugroom, alchemist, debugroom, market);
         forge.setRoomProperties(false, true, true, false, false);
-        forge.getNPCInRoom().put(Npc.getNpcMap().get("Assistant").getName(), Npc.getNpcMap().get("Assistant"));
+        forge.getNPCInRoom().put(Npc.getNpcMap().get("ASSISTANT").getName().toUpperCase(), Npc.getNpcMap().get("ASSISTANT"));
         if(dices.rd100()>95){
-            forge.getItemsInRoom().put(Item.itemMap.get("chainmail").getName(),Item.itemMap.get("chainmail"));
+            forge.getItemsInRoom().put(Item.itemMap.get("chainmail").getName().toUpperCase(),Item.itemMap.get("chainmail"));
             forge.hasItems = true;
         }
 
 
         alchemist.setPaths(forge, debugroom, debugroom, debugroom);
         alchemist.setRoomProperties(false, true, true, false, false);
-        alchemist.getNPCInRoom().put(Npc.getNpcMap().get("Alchemist").getName(), Npc.getNpcMap().get("Alchemist"));
+        alchemist.getNPCInRoom().put(Npc.getNpcMap().get("ALCHEMIST").getName().toUpperCase(), Npc.getNpcMap().get("ALCHEMIST"));
         if(dices.rd100()>50){
-            alchemist.getItemsInRoom().put(Item.itemMap.get("healingp").getName(),Item.itemMap.get("healingp"));
+            alchemist.getItemsInRoom().put(Item.itemMap.get("healingp").getName().toUpperCase(),Item.itemMap.get("healingp"));
             alchemist.hasItems = true;
         }
         if(dices.rd100()>90){
-            alchemist.getItemsInRoom().put(Item.itemMap.get("tpp").getName(),Item.itemMap.get("tpp"));
+            alchemist.getItemsInRoom().put(Item.itemMap.get("tpp").getName().toUpperCase(),Item.itemMap.get("tpp"));
             alchemist.hasItems = true;
         }
 
 
         fieldsN.setPaths(market, fieldsS, debugroom, debugroom);
         fieldsN.setRoomProperties(true, false, false, true, false);
-        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("critter").getName(),Mob.getMobMap().get("critter"));
-        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("critter").getName(),Mob.getMobMap().get("Critter"));
-        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("critter").getName(),Mob.getMobMap().get("Critter"));
-        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("critter").getName(),Mob.getMobMap().get("Critter"));
-        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("critter").getName(),Mob.getMobMap().get("Critter"));
+        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("CRITTER").getName().toUpperCase(),Mob.getMobMap().get("CRITTER"));
+        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("CRITTER").getName().toUpperCase(),Mob.getMobMap().get("CRITTER"));
+        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("CRITTER").getName().toUpperCase(),Mob.getMobMap().get("CRITTER"));
+        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("CRITTER").getName().toUpperCase(),Mob.getMobMap().get("CRITTER"));
+        fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("CRITTER").getName().toUpperCase(),Mob.getMobMap().get("CRITTER"));
 
 
         fieldsS.setPaths(fieldsN, forest, debugroom, debugroom);
         fieldsS.setRoomProperties(true, false, false, false, true);
-        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("goblin").getName(),Mob.getMobMap().get("goblin"));
-        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("goblin").getName(),Mob.getMobMap().get("goblin"));
-        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("goblin").getName(),Mob.getMobMap().get("goblin"));
-        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("goblin").getName(),Mob.getMobMap().get("goblin"));
-        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("goblin").getName(),Mob.getMobMap().get("goblin"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("GOBLIN").getName().toUpperCase(),Mob.getMobMap().get("GOBLIN"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("GOBLIN").getName().toUpperCase(),Mob.getMobMap().get("GOBLIN"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("GOBLIN").getName().toUpperCase(),Mob.getMobMap().get("GOBLIN"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("GOBLIN").getName().toUpperCase(),Mob.getMobMap().get("GOBLIN"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("GOBLIN").getName().toUpperCase(),Mob.getMobMap().get("GOBLIN"));
+
 
         forest.setPaths(fieldsS, debugroom, debugroom, bossRoom);
         forest.setRoomProperties(true, false, false, false, true);
-        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("bugbear").getName(),Mob.getMobMap().get("bugbear"));
-        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("bugbear").getName(),Mob.getMobMap().get("bugbear"));
-        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("bugbear").getName(),Mob.getMobMap().get("bugbear"));
-        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("ogre").getName(),Mob.getMobMap().get("ogre"));
-        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("ogre").getName(),Mob.getMobMap().get("ogre"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("BUGBEAR").getName().toUpperCase(),Mob.getMobMap().get("BUGBEAR"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("BUGBEAR").getName().toUpperCase(),Mob.getMobMap().get("BUGBEAR"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("OGRE").getName().toUpperCase(),Mob.getMobMap().get("OGRE"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("OGRE").getName().toUpperCase(),Mob.getMobMap().get("OGRE"));
 
         bossRoom.setPaths(debugroom, debugroom, forest, debugroom);
         bossRoom.setRoomProperties(true, false, false, false, true);
-        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("boss").getName(),Mob.getMobMap().get("boss"));
+        fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("BOSS").getName().toUpperCase(),Mob.getMobMap().get("BOSS"));
         // descrizioni delle stanze
         {
             castle.setDescription("""

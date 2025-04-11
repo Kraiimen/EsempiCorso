@@ -12,7 +12,7 @@ public class TeleportPotion extends Potion{
     }
 
     public void tepelortToSafety(Entity drinker){
-        drinker.setCurrentroom(Room.getRoomPointerFromName("temple"));
+        drinker.setCurrentRoom(Room.getRoomPointerFromName("temple"));
         System.out.printf(drinker.getEntityColor()+"%s drinks the %s, and he in a burst of light find's himself in the temple, away from danger"+ resetColor, drinker.getName(),this.getName());
 
 

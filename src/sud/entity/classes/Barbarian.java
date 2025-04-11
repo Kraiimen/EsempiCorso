@@ -8,8 +8,8 @@ public class Barbarian extends Player {
     private String playerName;
     private int hpDiceFaces;
 
-    public Barbarian(String name, String playerName) {
-        super(name, 12, Entity.colorR, "Barbarian");
+    public Barbarian(String name,String color ,String playerName) {
+        super(name, 12, color, "Barbarian");
         this.playerName = playerName;
         this.hpDiceFaces = 12;
     }

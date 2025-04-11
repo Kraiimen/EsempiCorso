@@ -32,32 +32,32 @@ public class Mob extends Entity{
     static{
         ArrayList<Item> vuoto = new ArrayList<>();
         Mob critter = new Mob("Critter", 10, 5, 10, 0, vuoto, 0);
-        mobMap.put("critter", critter);
-        mobMap.get("critter").carriedItems.add(Item.itemMap.get("crittersskin"));
+        mobMap.put("CRITTER", critter);
+        mobMap.get("CRITTER").carriedItems.add(Item.itemMap.get("crittersskin"));
         Mob goblin = new Mob("Goblin", 15, 10, 20, 0, vuoto, 1);
-        mobMap.put("goblin", goblin);
+        mobMap.put("GOBLIN", goblin);
         if(dices.rd100() >50){
-            mobMap.get("goblin").carriedItems.add(Item.itemMap.get("goblinteeth"));
+            mobMap.get("GOBLIN").carriedItems.add(Item.itemMap.get("goblinteeth"));
             if(dices.rd100()>50){
-                mobMap.get("goblin").carriedItems.add(Item.itemMap.get("goblinweapon"));
+                mobMap.get("GOBLIN").carriedItems.add(Item.itemMap.get("goblinweapon"));
                 if(dices.rd100()>50){
-                    mobMap.get("goblin").carriedItems.add(Item.itemMap.get("goblindoll"));
+                    mobMap.get("GOBLIN").carriedItems.add(Item.itemMap.get("goblindoll"));
                 }
             }
         }
         Mob bugBear = new Mob("Bugbear", 30, 15, 40, 3, vuoto, 2);
-        mobMap.put("bugbear", bugBear);
+        mobMap.put("BUGBEAR", bugBear);
         if(dices.rd100()>50){
-            mobMap.get("bugbear").carriedItems.add(Item.itemMap.get("bugbearbrokenarmor"));
+            mobMap.get("BUGBEAR").carriedItems.add(Item.itemMap.get("bugbearbrokenarmor"));
         }
         Mob ogre = new Mob("Ogre", 50, 15, 100, 5, vuoto, 3);
-        mobMap.put("ogre", ogre);
+        mobMap.put("OGRE", ogre);
         if(dices.rd100()>50){
-            mobMap.get("ogre").carriedItems.add(Item.itemMap.get("ogrefang"));
+            mobMap.get("OGRE").carriedItems.add(Item.itemMap.get("ogrefang"));
         }
         Mob boss = new Mob("Landrodol The Warlord", 100, 20, 200, 5, vuoto, 4);
-        mobMap.put("boss", boss);
-        mobMap.get("boss").carriedItems.add(Item.itemMap.get("ring"));
+        mobMap.put("BOSS", boss);
+        mobMap.get("BOSS").carriedItems.add(Item.itemMap.get("ring"));
     }
 
     public int getDamagereduction() {

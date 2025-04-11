@@ -9,8 +9,8 @@ public class Fighter extends Player {
     private String playerName;
     private int hpDiceFaces;
 
-    public Fighter(String name, String playerName) {
-        super(name, 10, Entity.colorW, "fighter");
+    public Fighter(String name,String color, String playerName) {
+        super(name, 10, color, "fighter");
         this.playerName = playerName;
         this.hpDiceFaces = 10;
     }

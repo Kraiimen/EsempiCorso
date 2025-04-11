@@ -12,8 +12,8 @@ public class Wizard extends Player {
     private int maxMana;
 
 
-    public Wizard(String name, String playerName) {
-        super(name, 6, Entity.colorC, "Wizard");
+    public Wizard(String name, String color,String playerName) {
+        super(name, 6, color, "Wizard");
         this.playerName = playerName;
         this.hpDiceFaces = 6;
         this.maxMana = this.getIntMod()*2;
