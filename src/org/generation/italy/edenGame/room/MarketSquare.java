@@ -25,7 +25,7 @@ public class MarketSquare extends Room{
     }
     @Override
     public void getPossibleActions() {
-        System.out.println("Attacca (A), Cerca (C), Compra (B), Esci di qui (E)");
+        System.out.println("Attacca (A), Cerca (C), Compra (B), Info Abilità (I), Esci di qui (E)");
     }
 
 

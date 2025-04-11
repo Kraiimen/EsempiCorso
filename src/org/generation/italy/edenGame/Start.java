@@ -5,6 +5,7 @@ import org.generation.italy.edenGame.entity.Enemies.Cat;
 import org.generation.italy.edenGame.entity.Enemies.Enemies;
 import org.generation.italy.edenGame.entity.Enemies.Guards;
 import org.generation.italy.edenGame.entity.Entity;
+import org.generation.italy.edenGame.entity.npc.HighPriest;
 import org.generation.italy.edenGame.entity.player.*;
 import org.generation.italy.edenGame.room.*;
 
@@ -115,12 +116,17 @@ public class Start {
         String a2;
 
         do {
+            if(player.getHealthPoints() <= 0) {
+                player.setCurrentRoom(temple);
+                player.setHealthPoints(player.getMaxHp());
+            }
+            boolean checkEnemies = player.getCurrentRoom().isCheckEnemies();
             Enemies currentEnemy = player.getCurrentRoom().getEnemy();
-            System.out.println("In questo luogo è presente: " + currentEnemy.getClass().getSimpleName() + " di nome: ''" + currentEnemy.getName() + "'' ");
+            if(checkEnemies) {
+                System.out.println("In questo luogo è presente: " + currentEnemy.getClass().getSimpleName() + " di nome: ''" + currentEnemy.getName() + "'' ");
+            }
             System.out.println("Scegli la tua prossima mossa o scrivi ''Quit'' per uscire: ");
             player.getCurrentRoom().getPossibleActions();
-            player.getCurrentRoom();
-            boolean checkEnemies = player.getCurrentRoom().isCheckEnemies();
             a2 = console.readLine().toLowerCase();
 
             if(a2.equals("e")) {
@@ -134,7 +140,29 @@ public class Start {
                 } else {
                     System.out.println("Non ci sono più nemici in questo luogo");
                 }
+
+            } else if (a2.equals("p")) {
+                if(player.getExp() <= 10) {
+                    System.out.println("Hai troppa poca exp, non sei ancora degno");
+                } else {
+                    player.getCurrentRoom().getNpc();
+                }
+
+            } else if (a2.equals("i")) {
+                System.out.println("Le tue statistiche sono :");
+                System.out.println("Intelligence: " + player.getIntelligence());
+                System.out.println("Strength: " + player.getStrength());
+                System.out.println("Agility: " + player.getAgility());
+                System.out.println("Stamina: " + player.getStamina());
+                System.out.println("Health Points: " + player.getHealthPoints() + " / " + player.getMaxHp());
+                System.out.println("Damage Ability: " + player.getDamage());
+                System.out.println("Experience: " + player.getExp());
+
+            } else if (a2.equals("r")) {
+                player.setHealthPoints(player.getMaxHp());
+                System.out.println("Ti sei riposato e ora hai il massimo della vita");
             }
+
         } while(!a2.equals("quit"));
 
     }

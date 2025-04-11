@@ -15,7 +15,7 @@ public class Priest extends Player{
         Random dice = new Random();
         int attackDamage = getDamage() + getIntelligence() + dice.nextInt(getStamina() + 1);
         target.setHealthPoints(target.getHealthPoints() - attackDamage);
-        System.out.println("Hai fatto " + attackDamage + "danni");
+        System.out.println("Hai fatto " + attackDamage + " danni");
         if (target.getHealthPoints() <= 0) {
             target.dead();
             setExp(getExp() + target.getExp());

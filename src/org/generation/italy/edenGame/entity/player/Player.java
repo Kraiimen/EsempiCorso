@@ -34,10 +34,7 @@ public class Player extends Entity {
     public void dead() {
         System.out.println("Sei morto");
         setExp(getExp() - 1);
-        //TODO da controllare
-        Map<Compass, String> directions = new HashMap<Compass, String>();
-        Room temple = new Temple("Temple", directions);
-        setCurrentRoom(temple);
+
     }
 
     @Override
@@ -73,7 +70,26 @@ public class Player extends Entity {
         this.currentRoom = currentRoom;
         System.out.println("--------/ " + currentRoom.getNameRoom()  + " /--------");
         currentRoom.printDescription();
+        currentRoom.setCheckEnemies(true);
     }
 
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
 
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public void setAgility(int agility) {
+        this.agility = agility;
+    }
+
+    public void setStamina(int stamina) {
+        this.stamina = stamina;
+    }
 }

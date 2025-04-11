@@ -24,11 +24,6 @@ public class Armory extends Room{
     }
     @Override
     public void getPossibleActions() {
-        System.out.println("Attacca (A), Ruba (St), Compra (B), Esci di qui (E)");
+        System.out.println("Attacca (A), Ruba (St), Compra (B), Info Abilità (I), Esci di qui (E)");
     }
-
-//    @Override
-//    public void getPossibleDirections() {
-//
-//    }
 }

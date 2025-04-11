@@ -9,8 +9,8 @@ import java.util.Random;
 
 public class CityDoor extends Room{
 
-    Enemies enemy = new Guards("Sempro", 50, 50, 20, 10);
-    Enemies enemy2 = new Monster("ASHULA", 50, 50, 15, 50);
+    Enemies enemy = new Guards("Sempro", 30, 30, 10, 10);
+    Enemies enemy2 = new Monster("ASHULA", 50, 50, 20, 50);
 
     public CityDoor(String name, Map<Compass, String> directions) {
         super(name, directions);
@@ -26,7 +26,7 @@ public class CityDoor extends Room{
 
     @Override
     public void getPossibleActions() {
-        System.out.println("Attacca (A), Esci di qui (E)");
+        System.out.println("Attacca (A), Info Abilità (I), Esci di qui (E)");
     }
 
     public Enemies getEnemy() {

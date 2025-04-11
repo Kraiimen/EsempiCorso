@@ -1,9 +1,7 @@
 package org.generation.italy.edenGame.room;
 
 import org.generation.italy.edenGame.entity.Enemies.Enemies;
-import org.generation.italy.edenGame.entity.Enemies.Guards;
-import org.generation.italy.edenGame.entity.Entity;
-import org.generation.italy.edenGame.entity.player.Player;
+import org.generation.italy.edenGame.entity.npc.Npc;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +11,7 @@ public abstract class Room {
     private boolean checkEnemies = true;
     private Map<Compass, Room> directions;
     private Enemies enemy;
-    //Todo guardie nella stanza, oggetti, mostri, npc. guardie potrebbe essere boolean e dipende dal dado
+    private Npc npc;
 
     private Room currentRoom;
 
@@ -30,6 +28,10 @@ public abstract class Room {
 
     public Enemies getEnemy() {
         return enemy;
+    }
+
+    public Npc getNpc() {
+        return npc;
     }
 
     public Room getDirection(Compass dir) {
@@ -51,6 +53,12 @@ public abstract class Room {
     public void setCheckEnemies(boolean checkEnemies) {
         this.checkEnemies = checkEnemies;
     }
+
+    public void setEnemy(Enemies enemy) {
+        this.enemy = enemy;
+        this.checkEnemies = true;
+    }
+
 
 
 }
