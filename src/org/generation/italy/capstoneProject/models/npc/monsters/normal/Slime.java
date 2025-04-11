@@ -6,4 +6,9 @@ public class Slime extends Monster {
     public Slime() {
         super("Slime", 20, 4);
     }
+
+    @Override
+    public void takeAction() {
+        System.out.println();
+    }
 }

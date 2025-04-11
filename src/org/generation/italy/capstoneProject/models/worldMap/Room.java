@@ -5,36 +5,36 @@ public class Room {
     private String name;
     private Room north, south, east, west;
 
-    public Room(String n) {
-        this.name = n;
+    public Room(String name) {
+        this.name = name;
     }
 
     // SET
-    public void setNorth(Room nor) {
-        this.north = nor;
+    public void setNorth(Room north) {
+        this.north = north;
     }
-    public void setSouth(Room sou) {
-        this.south = sou;
+    public void setSouth(Room south) {
+        this.south = south;
     }
-    public void setEast(Room eas) {
-        this.east = eas;
+    public void setEast(Room east) {
+        this.east = east;
     }
-    public void setWest(Room wes) {
-        this.west = wes;
+    public void setWest(Room west) {
+        this.west = west;
     }
 
     // GET
-    public Room getNorth(Room nor) {
-        return nor;
+    public Room getNorth() {
+        return north;
     }
-    public Room getSouth(Room sou) {
-        return sou;
+    public Room getSouth() {
+        return south;
     }
-    public Room getEast(Room eas) {
-        return eas;
+    public Room getEast() {
+        return east;
     }
-    public Room getWest(Room wes) {
-        return wes;
+    public Room getWest() {
+        return west;
     }
 
     public String getName() {

@@ -36,6 +36,8 @@ public class Map {
         marketSquare.setWest(armory);
         marketSquare.setSouth(gardens);
 
+        bakery.setWest(marketSquare);
+
         gardens.setNorth(marketSquare);
         gardens.setSouth(cityGate);
 
