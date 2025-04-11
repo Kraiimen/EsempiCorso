@@ -1,10 +1,7 @@
 package capstoneproject.rooms;
 
 import capstoneproject.Directions;
-import capstoneproject.entity.Paladin;
-import capstoneproject.entity.Player;
-import capstoneproject.entity.Thief;
-import capstoneproject.entity.Wizard;
+import capstoneproject.entity.*;
 
 import java.util.Scanner;
 
@@ -23,12 +20,15 @@ public class World {
          Room t = new Room("The Temple" , "Un tempio magico in cui curarsi");
          Room b = new Room ("The Bakery", "Un panetteria");
          Room a = new Room("The Armory" , "Un' Armeria");
-         Room g = new Room("The Gardens" , "Un'giardino pieno di lucentezza");
+         Room g = new Room("The Gardens" , "Un giardino pieno di lucentezza");
          start.addExit(Directions.S , ms);
          start.addExit(Directions.E , t);
          ms.addExit(Directions.E, b);
          ms.addExit(Directions.W, a);
          ms.addExit(Directions.S , g);
+         Cat cat1 = new Cat("Fuffy", ms);
+         Guards guard1 = new Guards("Carmine", 5, 10, ms);
+
      }
 
 
@@ -36,15 +36,18 @@ public class World {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Scegli il tuo personaggio:");
         System.out.println("1. Paladino");
-        System.out.println("2. Guerriero");
-        System.out.println("3. Mago");
+        System.out.println("2. Mago");
+        System.out.println("3. Ladro");
         System.out.print("Scelta: ");
         String choice = scanner.nextLine();
+        System.out.println("Scegli il nome del personaggio");
+        String namePlayer = scanner.nextLine();
+
 
         switch (choice) {
-            case "1" -> player = new Paladin("Aladin", 20, 100, start);
-            case "2" -> player = new Wizard("Magone", 15, 100, start);
-            case "3" -> player = new Thief("Ladrone", 30, 100, start);
+            case "1" -> player = new Paladin(namePlayer, 20, 100, start);
+            case "2" -> player = new Wizard(namePlayer, 15, 100, start);
+            case "3" -> player = new Thief(namePlayer, 30, 100, start);
             default -> {
                 System.out.println("Scelta non valida. Verrà assegnato un Paladino di default.");
                 player = new Paladin("Aladino", 20, 100, start);

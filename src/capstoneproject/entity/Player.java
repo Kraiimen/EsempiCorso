@@ -11,7 +11,6 @@ public abstract class Player extends Entity {
     private static final int MAX_AGILITY = 20;
     private static final int MAX_STRENGHT = 20;
 
-    protected String playerName;
     protected int exp;
     protected int intelligence;
     protected int stamina;
@@ -25,7 +24,7 @@ public abstract class Player extends Entity {
         this.currentRoom= currentRoom;
         initializeStats();
     }
-    protected abstract void initializeStats();
+    public abstract void initializeStats();
 
     public abstract void attack(Entity target);
 
@@ -54,5 +53,6 @@ public abstract class Player extends Entity {
     public void setExp(int exp) {
         this.exp = exp;
     }
+
 
 }

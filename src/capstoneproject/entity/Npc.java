@@ -6,21 +6,21 @@ import java.util.Map;
 
 public abstract class Npc extends Entity{
 
-    protected String npcName;
+    protected Map<String,String> npcWord;
+    protected int intelligence;
+    protected int stamina;
+    protected int agility;
+    protected int strength;
     protected boolean isRage;
-    Map<String,String> npcWord;
 
     public Npc(String name, int maxHealth, int maxDamage, Room currentRoom) {
         super(name, maxHealth, maxDamage, currentRoom);
-        this.currentRoom = currentRoom;
-        inizialateStats();
-    }
-    protected abstract void inizialateStats();
+        inizialateStatsNpc();
+        currentRoom.addToNpcList(this);
 
-    abstract void attack(Entity target);
-
-    public void heal(int amount){
-        healthPoints += amount;
-        if(healthPoints > maxHealth) healthPoints = maxHealth;
     }
+    protected abstract void inizialateStatsNpc();
+
+    public abstract void attack(Entity target);
+
 }

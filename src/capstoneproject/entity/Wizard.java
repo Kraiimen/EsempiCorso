@@ -13,11 +13,16 @@ public class Wizard extends Player {
     }
 
     @Override
-    protected void initializeStats() {
+    public void initializeStats() {
         this.strength = this.random.nextInt(21);
         this.intelligence = 5 + this.random.nextInt(21);
         this.agility = this.random.nextInt(21);
         this.stamina = this.random.nextInt(21);
+        System.out.println("Statistiche iniziali generate:");
+        System.out.println("Forza: " + strength);
+        System.out.println("Intelligenza: " + intelligence);
+        System.out.println("Agilità: " + agility);
+        System.out.println("Resistenza: " + stamina);
     }
 
     @Override
@@ -26,9 +31,9 @@ public class Wizard extends Player {
         isBeardLong = this.random.nextInt(100) < 25;
         if(isBeardLong){
             damage *= 2;
-            System.out.println(playerName + "Attacco critico al nemico. Danno: " + damage);
+            System.out.println(getName() + "Attacco critico al nemico. Danno: " + damage);
         }else{
-            System.out.println(playerName +"Attacco il nemico. Danno: " + damage);
+            System.out.println(getName() +"Attacco il nemico. Danno: " + damage);
         }
         target.takeDamage(damage);
     }

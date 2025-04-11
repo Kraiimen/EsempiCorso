@@ -2,20 +2,23 @@ package capstoneproject.rooms;
 
 
 import capstoneproject.Directions;
+import capstoneproject.entity.Cat;
+import capstoneproject.entity.Npc;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class Room {
     protected String name;
     private String description;
     protected Map<Directions, Room> exits;
+    protected List<Npc> npcList;
 
     public Room(String name, String description){
         this.name=name;
         this.description = description;
         this.exits = new HashMap<>();
+        this.npcList = new ArrayList<>();
+
 
     }
     public String getName(){
@@ -43,5 +46,12 @@ public class Room {
         return Optional.of(destination);
     }
 
+    public void addToNpcList(Npc npc){
+        npcList.add(npc);
+    }
+
+    public List<Npc> getNpcList(){
+        return npcList;
+    }
 
 }

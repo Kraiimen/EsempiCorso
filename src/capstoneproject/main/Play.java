@@ -18,7 +18,7 @@ public class Play {
         Player player = world.getPlayer(); // serve aggiungere getPlayer() nel World
         Room currentRoom = player.getCurrentRoom();
 
-        System.out.println("Benvenuto " + player.getName() + "!");
+        System.out.println("Benvenuto " + player.getName() +"!");
         stampaStanza(currentRoom);
 
         while (true) {
@@ -62,5 +62,6 @@ public class Play {
     private static void stampaStanza(Room room) {
         System.out.println(">> Ti trovi in: " + room.getName());
         System.out.println(room.getDescription());
+        System.out.println(room.getNpcList());
     }
 }

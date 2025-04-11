@@ -48,8 +48,7 @@ public abstract class Entity {
         return healthPoints <= 0;
      }
 
-     abstract void attack(Entity target);
-
+     public abstract void attack(Entity target);
 
      public void addHealthPoints(int hp) {
          healthPoints += hp;
@@ -120,6 +119,10 @@ public abstract class Entity {
     }
 
     public String getName() {
+        return name;
+    }
+    @Override
+    public String toString() {
         return name;
     }
 }
