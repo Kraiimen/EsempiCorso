@@ -23,6 +23,13 @@ public class FinalBoss extends Enemies{
         System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
         System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
         System.out.println("'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+        System.out.println(" ");
+        System.out.println("THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣");
+        System.out.println(" ");
+        System.out.println(" ");
+        System.out.println(" ");
+        System.out.println("da Lorenzo🫡 & Nicolò🎸 ");
+        System.exit(0);
     }
 
     public void attack(Entity target) {
@@ -31,7 +38,6 @@ public class FinalBoss extends Enemies{
         System.out.println("Il GRANDE MOSTRO " + getName() + " ti ha fatto " + attackDamage + " danni");
         if(target.getHealthPoints() <= 0) {
             target.dead();
-            System.exit(0);
         }
     }
 }
