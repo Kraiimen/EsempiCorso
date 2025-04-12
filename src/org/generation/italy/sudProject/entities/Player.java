@@ -89,10 +89,16 @@ public class Player extends Entity{
     public void attack(Entity target) {
         switch(target.getIndexEntityPosition()){
             case CAT_INDEX:
-
-
+                if(playerPosition.getRoomEntities().get(GUARD_INDEX) != null){
+                    target.setHp(target.getHp() - this.getAtk());
+                }else{
+                    System.out.println("Ci sono guardie nei dintorni, non puoi attaccare");
+                }
+            default:
+                if(target.isCanBeAttacked()){
+                    target.setHp(target.getHp() - this.getAtk());
+                }
         }
-
         if(target.getHp() <= 0){
             target.die();
         }
