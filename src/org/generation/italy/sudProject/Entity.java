@@ -73,13 +73,7 @@ public abstract class Entity {
         }
         return stats;
     }
-    private void attack(Entity target){
-        if(target.canBeAttacked){
-            target.hp -= atk;
-        }
-        System.out.println("Non puoi attaccare quest'entità");
-    }
-    private void die(){
+    public void die(){
         numberOfEntities --;
         entityPosition.getRoomEntities().get(indexEntityPosition).removeLast();
         switch (indexEntityPosition){
@@ -99,6 +93,7 @@ public abstract class Entity {
                 break;
         }
     }
+    public abstract void attack(Entity target);
 
 
     // /--GETTER-&-SETTER--/
@@ -149,5 +144,21 @@ public abstract class Entity {
 
     public void setMaxHp(int maxHp) {
         this.maxHp = maxHp;
+    }
+
+    public Room getEntityPosition() {
+        return entityPosition;
+    }
+
+    public int getIndexEntityPosition() {
+        return indexEntityPosition;
+    }
+
+    public int getAtk() {
+        return atk;
+    }
+
+    public boolean isCanBeAttacked() {
+        return canBeAttacked;
     }
 }

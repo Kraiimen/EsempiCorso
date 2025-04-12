@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static org.generation.italy.sudProject.map.WorldMap.world;
 
-public class Player extends Entity {
+public class Player extends Entity{
     // /--ATTRIBUTES--/
     private String firstName;
     private String lastName;
@@ -79,9 +79,18 @@ public class Player extends Entity {
                 System.out.println("INSERISCI LA DIREZIONE!");
                 break;
         }
-        System.out.println("Luogo attuale: "+playerPosition);
+        System.out.println("Luogo attuale: "+playerPosition.getRoomName());
         System.out.println(playerPosition.getRoomDescription());
         playerPosition.showEntitiesInRoom();
+    }
+    @Override
+    public void attack(Entity target) {
+        if(target.isCanBeAttacked()){
+            target.setHp(target.getHp() - this.getAtk());
+        }
+        if(target.getHp() <= 0){
+            target.die();
+        }
     }
 
     // /--GETTER-&-SETTER--/
