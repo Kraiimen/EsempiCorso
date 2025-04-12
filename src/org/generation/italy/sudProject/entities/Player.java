@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.generation.italy.sudProject.map.Room.CAT_INDEX;
+import static org.generation.italy.sudProject.map.Room.GUARD_INDEX;
 import static org.generation.italy.sudProject.map.WorldMap.world;
 
 public class Player extends Entity{
@@ -85,9 +87,12 @@ public class Player extends Entity{
     }
     @Override
     public void attack(Entity target) {
-        if(target.isCanBeAttacked()){
-            target.setHp(target.getHp() - this.getAtk());
+        switch(target.getIndexEntityPosition()){
+            case CAT_INDEX:
+
+
         }
+
         if(target.getHp() <= 0){
             target.die();
         }
