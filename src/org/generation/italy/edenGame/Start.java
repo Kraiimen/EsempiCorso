@@ -14,7 +14,6 @@ public class Start {
 
         //INTRO DEL GIOCO
         Console console = System.console();
-        //TODO SCRIVI INTRO DEL GIOCO
         System.out.println("⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔");
         System.out.println(" ");
         System.out.println("✨✨✨✨✨ BENVENUTO IN EDEN GAME, UN MONDO MAGICO ✨✨✨✨✨");
@@ -211,22 +210,21 @@ public class Start {
                 } else if (a2.equals("r")) {
                     player.setHealthPoints(player.getMaxHp());
                     System.out.println("Ti sei riposato e ora hai il massimo della vita 💪");
+
                 } else if (a2.equals("c")) {
                     Random dice2 = new Random();
                     int chanceOfItem = dice.nextInt(1000);
                     if (chanceOfItem < 500){
                         System.out.println("Non hai trovato nulla");
-                    }else if (chanceOfItem >= 500 && chanceOfItem <= 900){
+                    }else if (chanceOfItem >= 500 && chanceOfItem <= 850){
                         player.useErbaGatta();
-                    }else if (chanceOfItem > 900 && chanceOfItem <= 999){
+                    }else if (chanceOfItem > 8500 && chanceOfItem <= 950){
                         player.useChiavePrigioni();
                     }else {
                         player.useSpadaDiEden();
                     }
                 }
             }
-
-
         } while(!a2.equals("quit"));
         System.out.println(" ");
         System.out.println("THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣");
