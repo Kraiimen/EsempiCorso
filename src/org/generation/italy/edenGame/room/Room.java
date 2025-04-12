@@ -11,6 +11,7 @@ import java.util.Set;
 public abstract class Room {
     private String name;
     private boolean checkEnemies = true;
+    private boolean checkSearch = true;
     private Map<Compass, Room> directions;
     private Enemies enemy;
     private Npc npc;
@@ -33,8 +34,6 @@ public abstract class Room {
     }
     public abstract void printDescription();
 
-//    public abstract void getPossibleActions();
-
     public Enemies getEnemy() {
         return enemy;
     }
@@ -51,8 +50,12 @@ public abstract class Room {
         return name;
     }
 
-    public boolean isCheckEnemies() {
+    public boolean getCheckEnemies() {
         return checkEnemies;
+    }
+
+    public boolean getCheckSearch() {
+        return checkSearch;
     }
 
     public void setDirections(Compass dir, Room nextRoom){
@@ -61,6 +64,10 @@ public abstract class Room {
 
     public void setCheckEnemies(boolean checkEnemies) {
         this.checkEnemies = checkEnemies;
+    }
+
+    public void setCheckSearch(boolean checkSearch) {
+        this.checkSearch = checkSearch;
     }
 
     public void setEnemy(Enemies enemy) {

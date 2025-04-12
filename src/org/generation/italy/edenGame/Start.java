@@ -14,8 +14,6 @@ public class Start {
 
         //INTRO DEL GIOCO
         Console console = System.console();
-        System.out.println(" ");
-        System.out.println(" ");
         System.out.println("⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔");
         System.out.println(" ");
         System.out.println("✨✨✨✨✨ BENVENUTO IN EDEN GAME, UN MONDO MAGICO ✨✨✨✨✨");
@@ -161,8 +159,9 @@ public class Start {
                 player.setCurrentRoom(temple);
                 player.setHealthPoints(player.getMaxHp());
             }
-            boolean checkEnemies = player.getCurrentRoom().isCheckEnemies();
+            boolean checkEnemies = player.getCurrentRoom().getCheckEnemies();
             Enemies currentEnemy = player.getCurrentRoom().getEnemy();
+            boolean checkSearch = player.getCurrentRoom().getCheckSearch();
 
             if(checkEnemies) {
                 System.out.println("In questo luogo è presente: " + currentEnemy.getClass().getSimpleName() + " di nome: ''" + currentEnemy.getName() + "'' ");
@@ -178,6 +177,7 @@ public class Start {
                 System.out.println(" ");
             } else {
                 if(a2.equals("e")) {
+                    player.getCurrentRoom().setCheckSearch(true);
                     movements.moveFromRoom(player);
 
                 } else if (a2.equals("a")) {
@@ -212,21 +212,26 @@ public class Start {
                 } else if (a2.equals("r")) {
                     player.setHealthPoints(player.getMaxHp());
                     System.out.println("Ti sei riposato e ora hai il massimo della vita 💪");
+
                 } else if (a2.equals("c")) {
-                    Random dice2 = new Random();
-                    int chanceOfItem = dice.nextInt(1000);
-                    if (chanceOfItem < 500){
-                        System.out.println("Non hai trovato nulla");
-                    }else if (chanceOfItem >= 500 && chanceOfItem <= 850){
-                        player.useErbaGatta();
-                    }else if (chanceOfItem > 850 && chanceOfItem <= 950){
-                        player.useChiavePrigioni();
-                    }else {
-                        player.useSpadaDiEden();
+                    if(checkSearch){
+                        Random dice2 = new Random();
+                        int chanceOfItem = dice.nextInt(100);
+                        if (chanceOfItem < 50){
+                            System.out.println("Non hai trovato nulla");
+                        }else if (chanceOfItem >= 50 && chanceOfItem <= 85){
+                            player.useErbaGatta();
+                        }else if (chanceOfItem > 85 && chanceOfItem <= 95){
+                            player.useChiavePrigioni();
+                        }else {
+                            player.useSpadaDiEden();
+                        }
+                        player.getCurrentRoom().setCheckSearch(false);
+                    } else {
+                        System.out.println("Hai già cercato qui :(");
                     }
                 }
             }
-
         } while(!a2.equals("quit"));
         System.out.println(" ");
         System.out.println("THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣");

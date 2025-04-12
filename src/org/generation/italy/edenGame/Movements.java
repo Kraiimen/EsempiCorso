@@ -502,7 +502,6 @@ public class Movements {
         } while (!a.contains("NORTH"));
     }
 
-    //TODO nuovo metodo public void moveFromRoom, if(player.getCurrentRoom().equals(templeSquare)) {moveFromTempleSquare()}
 
     public void moveFromRoom(Player player) {
 
