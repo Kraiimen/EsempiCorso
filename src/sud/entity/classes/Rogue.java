@@ -15,6 +15,9 @@ public class Rogue extends Player {
         this.playerName = playerName;
         this.hpDiceFaces = 8;
     }
+    public Rogue() {
+        super();
+    }
 
     public void increseHp(){
         this.setHealthPoints(this.getConMod()+ dices.roll(hpDiceFaces));
@@ -34,7 +37,7 @@ public class Rogue extends Player {
             damage = this.getEquipedWeapon().rollDamage();
         }
 
-        System.out.printf(this.getEntityColor() + "%s is attacking %s for %d damage\n " + resetColor, this.getName(), attacked.getName(), damage);
+        System.out.printf(this.getEntityColor() + "%s is attacking %s with %s for %d damage\n " + resetColor, this.getName(),this.getEquipedWeapon().getName(), attacked.getName(), damage);
         attacked.hurt(damage + this.getDexMod());
         if (this.getEquipedArmor().getName().equalsIgnoreCase("Leather armor")){
             if(dices.rd100()>=75){

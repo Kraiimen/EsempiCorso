@@ -17,8 +17,10 @@ public class Entity {
     private int xpOnDeath=0;
     private Room currentRoom;
     private ArrayList<Item> inventory;
-    private Weapon equipedWeapon = new Weapon(0,"pugni",0);
-    private Armor equipedArmor= new Armor(0,"culo nudo", 0);
+    public static Weapon baseWeapon = new Weapon(0,"Nothing",0);
+    private Weapon equipedWeapon = baseWeapon;
+    public static Armor baseArmor = new Armor(0,"Nothing", 0);
+    private Armor equipedArmor= baseArmor;
     private int ac;
     private String entityColor;
     public static String colorBlack = "\u001B[30m";
@@ -104,10 +106,9 @@ public class Entity {
         System.out.printf(getWithColor("%s sleeps"),name);
     }
 
-    public void eat (Item item){
-        Food food = (Food)doesEntityHaveItem(ItemType.FOOD);
+    public void eat (Food food){
         if(food == null){
-            System.out.println(getWithColor("You have no food"));
+            System.out.println(getWithColor("This is not edible"));
         }else{
             heal(food.getHealingFacotr());
         }

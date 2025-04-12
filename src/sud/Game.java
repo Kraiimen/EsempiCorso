@@ -10,41 +10,48 @@ import java.util.ArrayList;
 public class Game {
     public static Player player;
     public static Console console = System.console();
-    public static Room playerCurrentRoom;
 
     public static void createPlayerCharacter (){
         String name;
         String chosenClass;
         int count=0;
-        System.out.println("Hello traveler, what is your name?");
+        System.out.println(Entity.colorG+"Hello traveler, what is your name?"+Entity.resetColor);
         name = console.readLine("--> ");
-        do {
-            if(count != 0){
-                System.out.println("Sorry I couldn't understand, what are you?");
-            }else{
-                System.out.println("And what you may be?");
+        if(name.equalsIgnoreCase("d")||name.equalsIgnoreCase("deb")|| name.equalsIgnoreCase("debug")){
+            player = new Rogue();
+        }else{
+            do {
+                if(count != 0){
+                    System.out.println(Entity.colorG+"Sorry I couldn't understand, what are you?"+Entity.resetColor);
+                }else{
+                    System.out.println(Entity.colorG+"And what you may be?"+Entity.resetColor);
+                }
+                chosenClass = console.readLine("<Answer with of the following: Wizard, Fighter, Barbarian, Rogue> --> ");
+                count++;
+            }while (!chosenClass.equalsIgnoreCase("rogue")
+                    &&!chosenClass.equalsIgnoreCase("wizard")
+                    &&!chosenClass.equalsIgnoreCase("barbarian")
+                    &&!chosenClass.equalsIgnoreCase("fighter"));
+            chosenClass = chosenClass.toUpperCase();
+            switch (chosenClass){
+                case "WIZARD" ->{player = new Wizard(name,Entity.colorC,"player");}
+                case "ROGUE" ->{player = new Rogue(name,Entity.colorP,"player");}
+                case "FIGHTER" ->{player = new Fighter(name,Entity.colorW,"player");}
+                case "BARBARIAN" ->{player = new Barbarian(name,Entity.colorR,"player");}
             }
-            chosenClass = console.readLine("<Answer with of the following: Wizard, Fighter, Barbarian, Rogue> --> ");
-            count++;
-        }while (!chosenClass.equalsIgnoreCase("rogue")
-                &&!chosenClass.equalsIgnoreCase("wizard")
-                &&!chosenClass.equalsIgnoreCase("barbarian")
-                &&!chosenClass.equalsIgnoreCase("fighter"));
-        chosenClass = chosenClass.toUpperCase();
-        switch (chosenClass){
-            case "WIZARD" ->{player = new Wizard(name,Entity.colorC,"player");}
-            case "ROGUE" ->{player = new Rogue(name,Entity.colorP,"player");}
-            case "FIGHTER" ->{player = new Fighter(name,Entity.colorW,"player");}
-            case "BARBARIAN" ->{player = new Barbarian(name,Entity.colorR,"player");}
+            printSheet();
+            System.out.print(player.getWithColor("|-->"));
+            console.readLine();
         }
-        printSheet();
+
+
     }
 
-    public static void start(){
+    public static void start() throws GameClosingExeption {
         //@todo intro
-        moveIntoRoom(Room.getRoomPointerFromName("TEMPLESQ"));
+        createPlayerCharacter();
+        moveIntoRoom(Room.getRoomPointerFromName("CASTLE"),true);
         interactMenu();
-
     }
 
     private static void printAvailablePaths(){
@@ -60,6 +67,7 @@ public class Game {
         System.out.println("(WEST)-> " + west.getName());
         if(east.getName().equalsIgnoreCase("debroom")){east.setName("");}
         System.out.println("(EAST)-> " + east.getName());
+        System.out.println("(STAY)-> NEVERMIND" );
     }
     private static void printAvailableNPC(){
         int counter =1;
@@ -79,51 +87,97 @@ public class Game {
     }
     private static void printInventory(){
         int counter =1;
+        System.out.println("\n--------------------------------");
         for (Item i : player.getInventory()){
-            System.out.printf(player.getWithColor("(%d) %s\n"), counter, i.getName());
+            System.out.printf(player.getWithColor("\n(%d) %s"), counter, i.getName());
             counter++;
         }
+        System.out.printf(player.getWithColor("\n(%d)[Equipped Armor] %s\n"), counter, player.getEquipedArmor().getName());
+        counter++;
+        System.out.printf(player.getWithColor("(%d)[Equipped Weapon] %s\n"), counter, player.getEquipedWeapon().getName());
+        counter++;
         System.out.printf(player.getWithColor("(%d)-> Nevermind\n"),counter);
-    }
-    private static void printSheet(){
-        System.out.println();
-        {
-            System.out.printf(/*player.getEntityColor()*/
-                    """
-                            Name: %s \
-                            Class: %s \
-                            
-                            ------------------------------------------------\
-                            
-                            Intelligence: %d (%d) \
-                            Strenght: %d (%d) \
-                            Dexterity: %d (%d) \
-                            Constitution: %d (%d) \
-                            HP: %d \
-                            CA: %d \
-                            Level: %d \
-                            Coins: %d \
-                            """
-                    //+ Entity.resetColor
-                    ,player.getName(),
-                    player.getClassName(),
-                    player.getIntelligence(), player.getIntMod(),
-                    player.getStrength(), player.getStrMod(),
-                    player.getDexterity(), player.getDexMod(),
-                    player.getConstitution(), player.getConMod(),
-                    player.getHealthPoints(),
-                    player.getAc(),
-                    player.getLevel(),
-                    player.getCoins());
-        }
+        System.out.println("-------------------------------");
     }
 
-    public static void moveIntoRoom(Room room){
+    private static void printSheet(){
+        System.out.printf(player.getEntityColor()+
+                        "----------------------------------------\n" +
+                        "Name: %s\n" +
+                        "Class: %s\n" +
+                        "----------------------------------------\n" +
+                        "Intelligence: %d (%d)\n" +
+                        "Strength: %d (%d)\n" +
+                        "Dexterity: %d (%d)\n" +
+                        "Constitution: %d (%d)\n" +
+                        "HP: %d\n" +
+                        "CA: %d\n" +
+                        "Level: %d\n" +
+                        "Coins: %d\n"+
+                        "----------------------------------------\n" +
+                        Entity.resetColor
+                ,player.getName(),
+                player.getClassName(),
+                player.getIntelligence(), player.getIntMod(),
+                player.getStrength(), player.getStrMod(),
+                player.getDexterity(), player.getDexMod(),
+                player.getConstitution(), player.getConMod(),
+                player.getHealthPoints(),
+                player.getAc(),
+                player.getLevel(),
+                player.getCoins());
+    }
+    private static void trade(Entity npcInput, String escapeChoice, String successfullTrade, String failedTrade){
+        int counter =1;
+        Npc npc = (Npc)npcInput;
+        System.out.println("<You have: " + player.getCoins() + " gold coins>");
+        for(Item item : npc.getInventory()){
+            System.out.printf(npc.getWithColor("(%d)-> %s (%d gold coins)\n"), counter, item.getName(), item.getPrice());
+            counter++;
+        }
+        System.out.printf(npc.getWithColor("(%d)-> \"Nevermind\"\n"), counter);
+        String choice=console.readLine("-->");
+        int choiceI = Integer.parseInt(choice);
+        if(choiceI==counter){
+            npc.speak(escapeChoice);
+        }else if(player.pay(npc.getInventory().get(choiceI))){
+            npc.speak(successfullTrade);
+        }else{
+            npc.speak(failedTrade);
+        }
+    }
+    private static void sell (Npc npc, ItemType sellableType,String escapeLine){
+        int counter =1;
+        for(Item item : player.getInventory()){
+            if(item.getType() == sellableType){
+                System.out.printf(player.getWithColor("(%d)-> %s (%d gold coins)\n"), counter, item.getName(), item.getPrice());
+                counter++;
+            }
+        }
+        System.out.printf(player.getWithColor("(%d)-> \"Nevermind\"\n"), counter);
+        String choice=player.askPlayerInput();
+        int choiceI = Integer.parseInt(choice);
+        if(choiceI==counter){
+            npc.speak(escapeLine);
+        }else{
+            Item itemSold= player.getInventory().get(choiceI);
+            if(player.getCoins()-(int)(itemSold.getPrice()*0.8)==0){
+                System.out.println("The item has now resell value");
+            }else{
+                player.setCoins(player.getCoins()-(int)(itemSold.getPrice()*0.8));
+                npc.getInventory().add(itemSold);
+                player.getInventory().remove(choiceI);
+            }
+        }
+    }
+    public static void moveIntoRoom(Room room,Boolean printDesc)throws GameClosingExeption{
         player.setCurrentRoom(room);
         System.out.printf(player.getWithColor("%s walks to %S\n"), player.getName(), room.getName());
-        System.out.println(room.getDescription());
-        if(player.getCurrentRoom().getName()== "PRISON"){
-            System.out.printf("<And like this, the quest %s got from the king was given to another adventurer, since %s is now in a cell in the prison>");
+        if(printDesc){
+            System.out.println(room.getDescription());
+        }
+        if(player.getCurrentRoom().getName().equalsIgnoreCase("PRISON")){
+            System.out.printf("<And like this, the quest %s got from the king was given to another adventurer, since %s is now in a cell in the prison>\n",player.getName(),player.getName());
         }
     }
 
@@ -255,7 +309,7 @@ public class Game {
                                     {
                                         player.setCoins(player.getCoins() - 5);
                                         baker.speak("Sit down in the sofà, i'll bring it to you in a moment");
-                                        player.eat(Item.itemMap.get("tea"));
+                                        player.eat((Food)Item.itemMap.get("tea"));
                                     }else {
                                         baker.speak("You don't have enough coins sugar, i'd give it to you, but i need the funds to make more");
                                     }
@@ -345,11 +399,15 @@ public class Game {
         }
     }
 
-    public static void interactMenu(){
+    public static void interactMenu() throws GameClosingExeption {
         String decision;
+        int choice; //decision ma int
         String whoPlayerWantToSpeackTo;
         String wherePlayerWantToMove;
         Item itemPlayerWantToSteal;
+        boolean escape =false;
+        System.out.print(player.getWithColor("|-->"));
+        console.readLine();
         do {
             System.out.println("-------------------------------------");
             System.out.println("\n<What would you like to do in the " + player.getCurrentRoom().getName() +"?>");
@@ -375,32 +433,45 @@ public class Game {
                                 if(player.getCurrentRoom().getNordPath().getName().equalsIgnoreCase("")){
                                     System.out.println("<You have no interest in going that way, so you decide to stay where you are>");
                                 }else {
-                                    moveIntoRoom(player.getCurrentRoom().getNordPath());
+                                    moveIntoRoom(player.getCurrentRoom().getNordPath(),true);
                                 }
                             }
                             case "SOUTH","S" ->{
                                 if(player.getCurrentRoom().getSudPath().getName().equalsIgnoreCase("")){
                                     System.out.println("<You have no interest in going that way, so you decide to stay where you are>");
                                 }else {
-                                    moveIntoRoom(player.getCurrentRoom().getSudPath());
+                                    moveIntoRoom(player.getCurrentRoom().getSudPath(),true);
                                 }
                             }
                             case "WEST","W" ->{
                                 if(player.getCurrentRoom().getWestPath().getName().equalsIgnoreCase("")){
                                     System.out.println("<You have no interest in going that way, so you decide to stay where you are>");
                                 }else {
-                                    moveIntoRoom(player.getCurrentRoom().getWestPath());
+                                    moveIntoRoom(player.getCurrentRoom().getWestPath(),true);
                                 }
                             }
                             case "EAST","E" ->{
                                 if(player.getCurrentRoom().getEastPath().getName().equalsIgnoreCase("")){
                                     System.out.println("<You have no interest in going that way, so you decide to stay where you are>");
                                 }else {
-                                    moveIntoRoom(player.getCurrentRoom().getEastPath());
+                                    moveIntoRoom(player.getCurrentRoom().getEastPath(),true);
                                 }
+                            }case "STAY","ST","STA" ->{
+
                             }
                         }
-                    }while (!wherePlayerWantToMove.equalsIgnoreCase("NORTH") && !wherePlayerWantToMove.equalsIgnoreCase("SOUTH") && !wherePlayerWantToMove.equalsIgnoreCase("WEST") && !wherePlayerWantToMove.equalsIgnoreCase("EAST") );
+                    }while (
+                            !wherePlayerWantToMove.equalsIgnoreCase("NORTH") &&
+                            !wherePlayerWantToMove.equalsIgnoreCase("N") &&
+                            !wherePlayerWantToMove.equalsIgnoreCase("SOUTH") &&
+                            !wherePlayerWantToMove.equalsIgnoreCase("S") &&
+                            !wherePlayerWantToMove.equalsIgnoreCase("WEST") &&
+                            !wherePlayerWantToMove.equalsIgnoreCase("W") &&
+                            !wherePlayerWantToMove.equalsIgnoreCase("EAST")&&
+                            !wherePlayerWantToMove.equalsIgnoreCase("E")&&
+                            !wherePlayerWantToMove.equalsIgnoreCase("STAY") &&
+                            !wherePlayerWantToMove.equalsIgnoreCase("ST") &&
+                            !wherePlayerWantToMove.equalsIgnoreCase("STA") );
 
                 }
                 case "TALK","T" ->{
@@ -412,109 +483,286 @@ public class Game {
                     }
                 }
                 case "STEAL","S" ->{
-                    System.out.println("Guardie?: "+player.getCurrentRoom().isHasGuards());
+
                     if(player.getCurrentRoom().isHasItems()){
-                        printAvailableItems();
-                        int choice = player.askPlayerIntInput(player.getCurrentRoom().getItemsInRoom().size())-1;
-                        ArrayList<Item> itemsInRoom = new ArrayList<>(player.getCurrentRoom().getItemsInRoom().values());
-                        itemPlayerWantToSteal = (Item)itemsInRoom.get(choice);
-                        if(player.getCurrentRoom().isHasGuards()){
-                            Npc guard = (Npc) player.getCurrentRoom().getNPCInRoom().get("THE GUARD");
-                            if(dices.rd20()+player.getDexMod()>= 15){
-                                if(itemPlayerWantToSteal.getType() == ItemType.ARMOR ||itemPlayerWantToSteal.getType() == ItemType.WEAPON ){
-                                    System.out.printf("<Do you want to equip %S>\n",itemPlayerWantToSteal.getName());
-                                    System.out.println(player.getWithColor(
-                                            "(1) --> \" YES\""+
-                                                    "\n(2) --> \" NO\"")
-                                    );
-                                    switch (player.askPlayerIntInput(2)){
-                                        case 1 ->{
-                                            player.pickUpItem(itemPlayerWantToSteal,true);
+                        if (player.getCurrentRoom().isHasGuards()){
+                            System.out.println("<Stealing is illegal... and there are guards nearby, are you sure you are sneaky enough>");
+                        }else {
+                            System.out.println("<Stealing is illegal... but if nobody sees you>");
+
+                        }
+                        while (!escape)
+                        {
+                            printAvailableItems();
+                            ArrayList<Item> itemsInRoom = new ArrayList<>(player.getCurrentRoom().getItemsInRoom().values());
+                            choice = player.askPlayerIntInput(itemsInRoom.size() + 1);
+                            if (!(choice == (itemsInRoom.size() + 1))) {
+                                itemPlayerWantToSteal = (Item) itemsInRoom.get(choice - 1);
+                                int stealDc = 0;
+                                if (itemPlayerWantToSteal.getPrice() < 10) {
+                                    stealDc = 5;
+                                } else if (itemPlayerWantToSteal.getPrice() >= 10 && itemPlayerWantToSteal.getPrice() < 50) {
+                                    stealDc = 10;
+                                } else if (itemPlayerWantToSteal.getPrice() >= 50 && itemPlayerWantToSteal.getPrice() < 100) {
+                                    stealDc = 15;
+                                } else if (itemPlayerWantToSteal.getPrice() >= 100 && itemPlayerWantToSteal.getPrice() < 10000) {
+                                    stealDc = 20;
+                                }
+                                int roll = dices.rd20() + player.getDexMod();
+                                if (player.getCurrentRoom().isHasGuards()) {
+
+                                    if ( roll >= stealDc) {
+                                        if (itemPlayerWantToSteal.getType() == ItemType.ARMOR || itemPlayerWantToSteal.getType() == ItemType.WEAPON) {
+                                            System.out.printf("<Do you want to equip %S>\n", itemPlayerWantToSteal.getName());
+                                            System.out.println(player.getWithColor(
+                                                    "(1) --> \" YES\"" +
+                                                            "\n(2) --> \" NO\"")
+                                            );
+                                            switch (player.askPlayerIntInput(2)) {
+                                                case 1 -> {
+                                                    player.pickUpItem(itemPlayerWantToSteal, true);
+                                                    player.getCurrentRoom().getItemsInRoom().remove(itemPlayerWantToSteal.getName().toUpperCase());
+                                                    if (player.getCurrentRoom().getItemsInRoom().isEmpty()) {
+                                                        player.getCurrentRoom().setHasItems(false);
+                                                    }
+                                                }
+                                                case 2 -> {
+                                                    player.pickUpItem(itemPlayerWantToSteal, false);
+                                                    player.getCurrentRoom().getItemsInRoom().remove(itemPlayerWantToSteal.getName().toUpperCase());
+                                                    if (player.getCurrentRoom().getItemsInRoom().isEmpty()) {
+                                                        player.getCurrentRoom().setHasItems(false);
+                                                    }
+                                                    ;
+                                                }
+                                            }
+                                        }
+                                        else if(itemPlayerWantToSteal.getName().equalsIgnoreCase("Gold Coins")){
+                                            player.setCoins(player.getCoins()+itemPlayerWantToSteal.getPrice());
                                             player.getCurrentRoom().getItemsInRoom().remove(itemPlayerWantToSteal.getName().toUpperCase());
-                                            if(player.getCurrentRoom().getItemsInRoom().isEmpty()){
+                                        }else {
+                                            player.pickUpItem(itemPlayerWantToSteal, false);
+                                            player.getCurrentRoom().getItemsInRoom().remove(itemPlayerWantToSteal.getName().toUpperCase());
+                                            if (player.getCurrentRoom().getItemsInRoom().isEmpty()) {
                                                 player.getCurrentRoom().setHasItems(false);
                                             }
                                         }
-                                        case 2 ->{
-                                            player.pickUpItem(itemPlayerWantToSteal,false);
-                                            player.getCurrentRoom().getItemsInRoom().remove(itemPlayerWantToSteal.getName().toUpperCase());
-                                            if(player.getCurrentRoom().getItemsInRoom().isEmpty()){
-                                                player.getCurrentRoom().setHasItems(false);
-                                            };
+                                    } else {
+                                        if (player.getCurrentRoom().getName().equalsIgnoreCase("castle")){
+
+                                            Npc guard = (Npc) player.getCurrentRoom().getNPCInRoom().get("KING'S GUARD");
+                                            System.out.println("\n");
+                                            guard.speak("...Scum...");
+                                            moveIntoRoom(Room.getRoomPointerFromName("PRISON"), false);
+                                            escape = true;
+                                            throw new GameClosingExeption();
+                                        }else {
+                                            Npc guard = (Npc) player.getCurrentRoom().getNPCInRoom().get("THE GUARD");
+                                            guard.speak("\n\nHey, i saw you, now you and I are going to prison");
+                                            moveIntoRoom(Room.getRoomPointerFromName("PRISON"), false);
+                                            escape = true;
+                                            throw new GameClosingExeption();
                                         }
                                     }
-                                }
-                                else{
-                                    player.pickUpItem(itemPlayerWantToSteal,false);
-                                    player.getCurrentRoom().getItemsInRoom().remove(itemPlayerWantToSteal.getName().toUpperCase());
-                                    if(player.getCurrentRoom().getItemsInRoom().isEmpty()){
-                                        player.getCurrentRoom().setHasItems(false);
-                                    }
-                                }
-                            }else{
-                                guard.speak("Hey, i saw you, now you and I are going to prison");
-                                moveIntoRoom(Room.getRoomPointerFromName("PRISON"));
-                            }
-                        }else {
-                            if(itemPlayerWantToSteal.getType() == ItemType.ARMOR ||itemPlayerWantToSteal.getType() == ItemType.WEAPON ){
-                                System.out.printf("<Do you want to equip %S>\n",itemPlayerWantToSteal.getName());
-                                System.out.println(player.getWithColor(
-                                        "(1) --> \" YES\""+
-                                                "\n(2) --> \" NO\"")
-                                );
-                                switch (player.askPlayerIntInput(2)){
-                                    case 1 ->{
-                                        player.pickUpItem(itemPlayerWantToSteal,true);
+                                } else {
+                                    if (itemPlayerWantToSteal.getType() == ItemType.ARMOR || itemPlayerWantToSteal.getType() == ItemType.WEAPON) {
+                                        System.out.printf("<Do you want to equip %S>\n", itemPlayerWantToSteal.getName());
+                                        System.out.println(player.getWithColor(
+                                                "(1) --> \" YES\"" +
+                                                        "\n(2) --> \" NO\"")
+                                        );
+                                        switch (player.askPlayerIntInput(2)) {
+                                            case 1 -> {
+                                                player.pickUpItem(itemPlayerWantToSteal, true);
+                                                player.getCurrentRoom().getItemsInRoom().remove(itemPlayerWantToSteal.getName().toUpperCase());
+                                                if (player.getCurrentRoom().getItemsInRoom().isEmpty()) {
+                                                    player.getCurrentRoom().setHasItems(false);
+                                                }
+                                            }
+                                            case 2 -> {
+                                                player.pickUpItem(itemPlayerWantToSteal, false);
+                                                player.getCurrentRoom().getItemsInRoom().remove(itemPlayerWantToSteal.getName().toUpperCase());
+                                                if (player.getCurrentRoom().getItemsInRoom().isEmpty()) {
+                                                    player.getCurrentRoom().setHasItems(false);
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        player.pickUpItem(itemPlayerWantToSteal, false);
                                         player.getCurrentRoom().getItemsInRoom().remove(itemPlayerWantToSteal.getName().toUpperCase());
-                                        if(player.getCurrentRoom().getItemsInRoom().isEmpty()){
+                                        if (player.getCurrentRoom().getItemsInRoom().isEmpty()) {
                                             player.getCurrentRoom().setHasItems(false);
                                         }
                                     }
-                                    case 2 ->{
-                                        player.pickUpItem(itemPlayerWantToSteal,false);
-                                        player.getCurrentRoom().getItemsInRoom().remove(itemPlayerWantToSteal.getName().toUpperCase());
-                                        if(player.getCurrentRoom().getItemsInRoom().isEmpty()){
-                                            player.getCurrentRoom().setHasItems(false);
-                                        }
-                                    }
                                 }
                             }
-                            else{
-                                player.pickUpItem(itemPlayerWantToSteal,false);
-                                player.getCurrentRoom().getItemsInRoom().remove(itemPlayerWantToSteal.getName().toUpperCase());
-                                if(player.getCurrentRoom().getItemsInRoom().isEmpty()){
-                                    player.getCurrentRoom().setHasItems(false);
-                                }
+                            else {
+                                escape =true;
                             }
                         }
+
                     }
                     else{
                         System.out.println("<There's nothing to steal>");
-                    }
 
+                    }
                 }
                 case "FIGHT","F" ->{}
-                case "CHARACTER MENU","CH" ->{
-                    System.out.println(player.getWithColor(
-                            "(1) --> \" VIEW INVENTORY\""+
-                            "\n(2) --> \" VIEW CHARACTER SHEET\""+
-                            "\n(3) --> \" Nevermind\"")
-                    );
-                    switch(player.askPlayerIntInput(3)){
-                        case 1->{
-                            printInventory();
-                            player.askPlayerInput();
+                case "CHARACTER MENU","CM","C" ->{
+
+                    boolean escapeInv =false;
+                    while (!escape){
+                        System.out.println(player.getWithColor(
+                                """
+                                        (1) --> " VIEW INVENTORY"\
+                                        
+                                        (2) --> " VIEW CHARACTER SHEET"\
+                                        
+                                        (3) --> " Nevermind\"""")
+                        );
+                        int choice2 = player.askPlayerIntInput(3);
+                        switch(choice2){
+                            case 1->{
+                                while (!escapeInv){
+                                    printInventory();
+                                    choice = player.askPlayerIntInput(player.getInventory().size()+3);
+
+                                    if(choice == player.getInventory().size()+3){
+                                        escapeInv =true;
+                                    }else{
+                                        if(!player.getInventory().isEmpty()){
+                                            Item itemPlayerWantToUse = (player.getInventory().get(choice-1));
+                                            if(choice == player.getInventory().size()+1){
+                                                System.out.printf("<What Do you want to unequip: %S>",itemPlayerWantToUse.getName());
+                                                System.out.println("(1)-> YES" +
+                                                        "(2)-> NO");
+                                                if(player.askPlayerIntInput(2)==1) {
+                                                    if(player.getEquipedWeapon().getName().equalsIgnoreCase("Nothing")){
+                                                        System.out.println("<You can't do that>");
+                                                    }else {
+                                                        player.setEquipedArmor(Entity.baseArmor);
+                                                    }
+                                                }
+                                            }else
+                                            if(choice == player.getInventory().size()+2){
+                                                System.out.printf("<What Do you want to unequip: %S>",itemPlayerWantToUse.getName());
+                                                System.out.println("(1)-> YES" +
+                                                        "(2)-> NO");
+                                                if(player.askPlayerIntInput(2)==1) {
+                                                    if(player.getEquipedWeapon().getName().equalsIgnoreCase("Nothing")){
+                                                        System.out.println("<You can't do that>");
+                                                    }else {
+                                                        player.setEquipedWeapon(Entity.baseWeapon);
+                                                    }
+                                                }
+                                            }else{
+                                                switch (itemPlayerWantToUse.getType()){
+                                                    case FOOD->{
+                                                        System.out.printf("<Do you want to eat the %S>\n",itemPlayerWantToUse.getName());
+                                                        System.out.println("(1)-> YES\n" +
+                                                                "(2)-> NO");
+
+                                                        if(player.askPlayerIntInput(2)==1){
+                                                            player.eat((Food)itemPlayerWantToUse);
+                                                            player.getInventory().remove(choice-1);
+                                                        }
+                                                    }
+                                                    case POTION -> {
+                                                        Potion potion = (Potion) itemPlayerWantToUse;
+                                                        System.out.printf("<Do you want to drink the %S>\n",itemPlayerWantToUse.getName());
+                                                        System.out.println("(1)-> YES\n" +
+                                                                "(2)-> NO");
+
+                                                        if(player.askPlayerIntInput(2)==1){
+                                                            if(potion instanceof HealingPotion healingP){
+                                                                healingP.use(player);
+                                                            }else if(potion instanceof ManaPotion manaP){
+                                                                manaP.use(player);
+                                                            }else if(potion instanceof TeleportPotion tpP){
+                                                                tpP.tepelortToSafety(player);
+                                                            }
+                                                        }
+                                                        player.getInventory().remove(choice-1);
+                                                    }
+                                                    case ARMOR,WEAPON -> {
+                                                        System.out.printf("<What Do you want to do with the %S>",itemPlayerWantToUse.getName());
+                                                        System.out.println("(1)-> Equip" +
+                                                                "(2)-> Nvermind");
+                                                        if(player.askPlayerIntInput(2)==1){
+                                                            player.equipItem(itemPlayerWantToUse);
+                                                        }
+
+                                                    }
+                                                    case JUNK -> {
+                                                        System.out.println("<You can't do anything with this>");
+                                                    }
+                                                }
+
+                                            }
+                                        }else {
+
+                                            if(choice == player.getInventory().size()+1){
+                                                System.out.printf("<Do you want to unequip: %S>",player.getEquipedArmor().getName());
+                                                System.out.println("\n(1)-> YES" +
+                                                        "\n(2)-> NO");
+                                                if(player.askPlayerIntInput(2)==1) {
+                                                    if(player.getEquipedWeapon().getName().equalsIgnoreCase("Nothing")){
+                                                        System.out.println("<You can't do that>");
+
+                                                    }else {
+                                                        player.setEquipedArmor(Entity.baseArmor);
+                                                    }
+                                                }
+                                            }else
+                                            if(choice == player.getInventory().size()+2){
+                                                System.out.printf("<What Do you want to unequip: %S>",player.getEquipedWeapon().getName());
+                                                System.out.printf("\n(1)-> YES\n" +
+                                                        "(2)-> NO");
+                                                if(player.askPlayerIntInput(2)==1) {
+                                                    if(player.getEquipedWeapon().getName().equalsIgnoreCase("Nothing")){
+                                                        System.out.println("<You can't do that>");
+                                                    }else {
+                                                        player.setEquipedWeapon(Entity.baseWeapon);
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+                                }
+
+                            }
+                            case 2->{
+                                printSheet();
+
+                            }
+                            case 3->{
+                                escape = true;
+                            }
                         }
-                        case 2->{
-                            printSheet();
-                        }
-                        case 3->{}
+
                     }
+
                 }
-                case "QUIT" ->{}
+                case "QUIT","Q" ->{
+                    throw new GameClosingExeption();
+                }
 
             }
-        }while (!decision.equalsIgnoreCase("MOVE")&&!decision.equalsIgnoreCase("TALK")&&!decision.equalsIgnoreCase("STEAL")&&!decision.equalsIgnoreCase("FIGHT")&&!decision.equalsIgnoreCase("QUIT")&&!decision.equalsIgnoreCase("CHARACTER MENU"));
+        }while (
+                !decision.equalsIgnoreCase("MOVE")&&
+                !decision.equalsIgnoreCase("M")&&
+                        !decision.equalsIgnoreCase("TALK")&&
+                        !decision.equalsIgnoreCase("T")&&
+                        !decision.equalsIgnoreCase("STEAL")&&
+                        !decision.equalsIgnoreCase("S")&&
+                        !decision.equalsIgnoreCase("FIGHT")&&
+                        !decision.equalsIgnoreCase("F")&&
+                        !decision.equalsIgnoreCase("QUIT")&&
+                        !decision.equalsIgnoreCase("Q")&&
+                        !decision.equalsIgnoreCase("CHARACTER MENU")&&
+                        !decision.equalsIgnoreCase("C")&&
+                        !decision.equalsIgnoreCase("CM"));
     }
 
     private static String getNameOfNpcFromNumberInTalkList(String choice){
@@ -529,50 +777,6 @@ public class Game {
 
     }
 
-    private static void trade(Entity npcInput, String escapeChoice, String successfullTrade, String failedTrade){
-        int counter =1;
-        Npc npc = (Npc)npcInput;
-        System.out.println("<You have: " + player.getCoins() + " gold coins>");
-        for(Item item : npc.getInventory()){
-            System.out.printf(npc.getWithColor("(%d)-> %s (%d gold coins)\n"), counter, item.getName(), item.getPrice());
-            counter++;
-        }
-        System.out.printf(npc.getWithColor("(%d)-> \"Nevermind\"\n"), counter);
-        String choice=console.readLine("-->");
-        int choiceI = Integer.parseInt(choice);
-        if(choiceI==counter){
-            npc.speak(escapeChoice);
-        }else if(player.pay(npc.getInventory().get(choiceI))){
-            npc.speak(successfullTrade);
-        }else{
-            npc.speak(failedTrade);
-        }
-    }
-
-    private static void sell (Npc npc, ItemType sellableType,String escapeLine){
-        int counter =1;
-        for(Item item : player.getInventory()){
-            if(item.getType() == sellableType){
-                System.out.printf(player.getWithColor("(%d)-> %s (%d gold coins)\n"), counter, item.getName(), item.getPrice());
-                counter++;
-            }
-        }
-        System.out.printf(player.getWithColor("(%d)-> \"Nevermind\"\n"), counter);
-        String choice=player.askPlayerInput();
-        int choiceI = Integer.parseInt(choice);
-        if(choiceI==counter){
-            npc.speak(escapeLine);
-        }else{
-            Item itemSold= player.getInventory().get(choiceI);
-            if(player.getCoins()-(int)(itemSold.getPrice()*0.8)==0){
-                System.out.println("The item has now resell value");
-            }else{
-                player.setCoins(player.getCoins()-(int)(itemSold.getPrice()*0.8));
-                npc.getInventory().add(itemSold);
-                player.getInventory().remove(choiceI);
-            }
-        }
-    }
 
 }
 

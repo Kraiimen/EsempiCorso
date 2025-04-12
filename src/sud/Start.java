@@ -1,12 +1,22 @@
 package sud;
 
-public class Start {
-    public static void main(String[] args) {
+import sud.entity.Entity;
 
-        Game.createPlayerCharacter();
-        Game.start();
-        while (true){
-            Game.interactMenu();
+import java.io.Console;
+
+
+public class Start {
+    public static void main(String[] args){
+
+        try{
+            Game.start();
+            while (true){
+
+                Game.interactMenu();
+            }
+        }catch (GameClosingExeption e){
+            System.out.println(Entity.colorR+"THE GAME IS NOW CLOSING");
+
         }
     }
 }

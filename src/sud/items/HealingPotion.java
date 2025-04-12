@@ -13,8 +13,9 @@ public class HealingPotion extends Potion{
     }
 
     public void use(Entity drinker){
+
+        System.out.printf(drinker.getEntityColor()+"%s drinks the %s, and regains %d health points\n"+ resetColor, drinker.getName(),this.getName(),healingFactor);
         drinker.heal(healingFactor);
-        System.out.printf(drinker.getEntityColor()+"%s drinks the %s, and regains %d health points"+ resetColor, drinker.getName(),this.getName(),healingFactor);
     }
 
     public int getHealingFactor() {

@@ -34,7 +34,7 @@ public class Fighter extends Player {
             damage = this.getEquipedWeapon().rollDamage();
         }
 
-        System.out.printf(this.getEntityColor() + "%s is attacking %s for %d damage\n " + resetColor, this.getName(), attacked.getName(), damage);
+        System.out.printf(this.getEntityColor() + "%s is attacking %s with the %s for %d damage\n " + resetColor, this.getName(),this.getEquipedWeapon().getName(), attacked.getName(), damage);
         attacked.hurt(damage + (this.getStrMod()*2));
         if (attacked.isDead()) {
             System.out.println(this.getEntityColor() + attacked.getName() + " has died by that hit\n " + resetColor);

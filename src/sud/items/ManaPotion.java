@@ -15,8 +15,9 @@ public class ManaPotion extends Potion{
     public void use(Entity drinker){
         try{
             Wizard wiz = (Wizard)drinker;
+
+            System.out.printf(drinker.getEntityColor()+"%s drinks the %s, and regains %d mana points\n"+ resetColor, drinker.getName(),this.getName(),manaPointsRestore);
             wiz.restoreMana(manaPointsRestore);
-            System.out.printf(drinker.getEntityColor()+"%s drinks the %s, and regains %d mana points"+ resetColor, drinker.getName(),this.getName(),manaPointsRestore);
         }catch(ClassCastException e){
             System.out.printf(drinker.getEntityColor()+"%s drinks the %s, but nothing happens"+ resetColor, drinker.getName(),this.getName());
         }

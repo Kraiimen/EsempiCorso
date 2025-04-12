@@ -28,7 +28,7 @@ public class Player extends Entity{
     private String className;
 
     public Player(String name, int maxHp, String entityColor, String chosenClass) {
-        super(name, maxHp, 0, Room.getRoomMap().get("CASTLE"), entityColor);
+        super(name, maxHp, 0, null, entityColor);
         switch (chosenClass){
             case "wizard" ->{
                 this.intelligence = isScoreOk(10+dices.rd10());
@@ -67,6 +67,22 @@ public class Player extends Entity{
         this.setMaxHp(maxHp+conMod);
         this.level =1;
         this.coins = dices.rd10();
+        this.setAc(10+dexMod);
+
+    }
+    public Player() {
+        super("debuggerPg", 400, 50, null, colorW);
+                this.dexterity = isScoreOk(10);
+                this.intelligence = isScoreOk(10);
+                this.strength = isScoreOk(10);
+                this.constitution = isScoreOk(10);
+                className = "ROGUE";
+        this.conMod = (this.constitution - 10)/2;
+        this.intMod = (this.intelligence - 10)/2;
+        this.strMod = (this.strength - 10)/2;
+        this.dexMod = (this.dexterity - 10)/2;
+        this.level =1;
+        this.coins = 1000;
         this.setAc(10+dexMod);
 
     }
@@ -151,6 +167,17 @@ public class Player extends Entity{
             return false;
         }
 
+        public void equipItem(Item item){
+            switch (item.getType()){
+                case ARMOR -> {
+                    this.setEquipedArmor((Armor)item);
+                }
+                case WEAPON -> {
+                    this.setEquipedWeapon((Weapon)item);
+                }
+            }
+        }
+
         @Override
         public void pickUpItem (Item item, Boolean wantToEquip){
             switch (item.getType()){
@@ -164,7 +191,7 @@ public class Player extends Entity{
 
                     if(numOfItem.get()<=2)
                     {
-                        if(wantToEquip){this.setEquipedArmor((Armor)item);}
+                        if(wantToEquip){this.equipItem(item);}
                         this.getInventory().add(item);
                         Item.itemMap.remove(item.getName());
                     }
@@ -177,7 +204,7 @@ public class Player extends Entity{
                         }
                     });
                     if(numOfItem.get()<=3){
-                        if(wantToEquip){this.setEquipedWeapon((Weapon)item);}
+                        if(wantToEquip){this.equipItem(item);}
                         this.getInventory().add(item);
                         Item.itemMap.remove(item.getName());
                     }
