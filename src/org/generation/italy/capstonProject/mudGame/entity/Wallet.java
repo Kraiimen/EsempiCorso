@@ -3,7 +3,11 @@ package org.generation.italy.capstonProject.mudGame.entity;
 public class Wallet {
     private int balance;
 
-    public int addCoin(int coins){
+    public Wallet(int balance) {
+        this.balance = balance;
+    }
+
+    public int addCoins(int coins){
         return balance += coins;
     }
 
@@ -16,5 +20,9 @@ public class Wallet {
 
     public int getBalance() {
         return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 }

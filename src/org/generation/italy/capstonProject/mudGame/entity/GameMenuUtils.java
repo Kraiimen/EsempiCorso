@@ -1,6 +1,7 @@
 package org.generation.italy.capstonProject.mudGame.entity;
 
 import org.generation.italy.capstonProject.mudGame.entity.items.Item;
+import org.generation.italy.capstonProject.mudGame.entity.npc.Vendor;
 import org.generation.italy.capstonProject.mudGame.entity.player.Player;
 import org.generation.italy.capstonProject.mudGame.entity.rooms.Direction;
 import org.generation.italy.capstonProject.mudGame.entity.rooms.Room;
@@ -99,6 +100,7 @@ public class GameMenuUtils {
                 System.out.println(index.get() + ". " + item.getName() + " x" + quantity);
                 inventoryItems.add(item);
                 index.getAndIncrement();
+                System.out.println();
             });
 
             System.out.println("Choose an item by its index or press 'x' to esc:");
@@ -115,7 +117,7 @@ public class GameMenuUtils {
             while (selecting) {
                 System.out.println("\nYou selected: " + selectedItem.getName());
 
-                List<String> options = List.of("Use Item", "Remove item from your inventory", "Go back to inventory to choose a different item");
+                List<String> options = List.of("Inspect item", "Use Item", "Remove item from your inventory", "Go back to inventory to choose a different item");
                 Integer action = showAndChooseMenu(options, scanner, "x");
 
                 if (action == null) {
@@ -126,14 +128,18 @@ public class GameMenuUtils {
 
                 switch (action) {
                     case 1:
+                        selectedItem.inspect();
+                        break;
+                    case 2:
                         player.useItem(selectedItem);
                         selecting = false;
                         break;
-                    case 2:
+                    case 3:
                         player.getInventory().removeItem(selectedItem);
+                        System.out.println("One " + selectedItem.getName() + " was removed from your inventory.");
                         selecting = false;
                         break;
-                    case 3:
+                    case 4:
                         selecting = false;
                         break;
                     default:
@@ -158,6 +164,7 @@ public class GameMenuUtils {
                     System.out.println(index.get() + ". " + direction + " -> " + room.getName());
                     options.add(direction);
                     index.getAndIncrement();
+                    System.out.println();
                 }
             });
 
@@ -202,6 +209,7 @@ public class GameMenuUtils {
             actions.put("Show what's in this room again", currentRoom::printRoomContents);
             actions.put("Open inventory", player::openInventory);
             actions.put("Move to another room", player::handleMovement);
+            actions.put("Rest", player::sleep);
 
             if (currentRoom.isHasItems()) {
                 actions.put("Pick up item", () -> pickUpItemMenu(player, scanner));
@@ -283,6 +291,7 @@ public class GameMenuUtils {
             roomItems.forEach((item) -> {
                 System.out.println(index.get() + ". " + item.getName());
                 index.getAndIncrement();
+                System.out.println();
             });
 
             System.out.println("Choose an item by its index or press 'x' to esc:");
@@ -299,7 +308,7 @@ public class GameMenuUtils {
             while (selecting) {
                 System.out.println("\nYou selected: " + selectedItem.getName());
 
-                List<String> options = List.of("Use Item", "Add item to your inventory", "Go back to room items menu to choose a different item");
+                List<String> options = List.of("Inspect item", "Use Item", "Add item to your inventory", "Go back to room items menu to choose a different item");
                 Integer action = showAndChooseMenu(options, scanner, "x");
 
                 if (action == null) {
@@ -310,14 +319,17 @@ public class GameMenuUtils {
 
                 switch (action) {
                     case 1:
+                        selectedItem.inspect();
+                        break;
+                    case 2:
                         player.useItem(selectedItem);
                         selecting = false;
                         break;
-                    case 2:
-                        player.getInventory().addItem(selectedItem);
+                    case 3:
+                        player.pickUpItem(selectedItem);
                         selecting = false;
                         break;
-                    case 3:
+                    case 4:
                         selecting = false;
                         break;
                     default:
@@ -347,6 +359,7 @@ public class GameMenuUtils {
             roomEntities.forEach((entity) -> {
                 System.out.println(index.get() + ". " + entity.getCharName());
                 index.getAndIncrement();
+                System.out.println();
             });
 
             System.out.println("Choose an entity by its index or press 'x' to esc:");
@@ -387,6 +400,88 @@ public class GameMenuUtils {
                         break;
                     default:
                         System.out.println("Invalid option");
+                }
+            }
+        }
+    }
+
+    public static void displayShopMenu(Vendor vendor, Player player, Scanner scanner){
+        Map<Item, Integer> shopInventoryCopy;
+        Map<Item, Integer> prices = vendor.getPrices();
+
+        AtomicInteger index = new AtomicInteger(1);
+        List<Item> shopItems = new ArrayList<>();
+        boolean running = true;
+        while(running) {
+            System.out.println("\n---------SHOP MENU---------");
+            index.set(1);
+            shopItems.clear();
+            shopInventoryCopy = vendor.getInventory().getAll();
+
+            if (shopInventoryCopy.isEmpty()) {
+                System.out.println("Sorry, the shop is currently empty.");
+                break;
+            }
+
+            shopInventoryCopy.forEach((item, quantity) -> {
+                int price = prices.getOrDefault(item, -1);
+                String priceInfo = price >= 0 ? price + " coins" : "Price not available";
+                System.out.println(index.get() + ". " + item.getName() + " x" + quantity + " - " + priceInfo);
+                shopItems.add(item);
+                index.getAndIncrement();
+                System.out.println();
+            });
+
+            System.out.println("Your wallet: " + player.getWallet().getBalance() + " coins");
+            System.out.println("Select the number of the item to buy or press 'x' to exit:");
+
+            Integer answer = readIntInputOrExit(scanner, 1, shopItems.size(), "x");
+
+            if (answer == null) {
+                System.out.println("Leaving the shop.");
+                running = false;
+                break;
+            }
+
+            Item selectedItem = shopItems.get(answer - 1);
+            boolean selecting = true;
+
+            while (selecting) {
+                System.out.println("\nYou selected: " + selectedItem.getName());
+
+                List<String> options = List.of(
+                        "Inspect item",
+                        "Buy item",
+                        "Go back to the shop list"
+                );
+                Integer action = showAndChooseMenu(options, scanner, "x");
+
+                if (action == null || action == 3) {
+                    selecting = false;
+                    break;
+                }
+
+                switch (action) {
+                    case 1:
+                        selectedItem.inspect();
+                        break;
+                    case 2:
+                        if (!player.getInventory().isFull()) {
+                            int itemPrice = prices.getOrDefault(selectedItem, -1);
+                            if (itemPrice < 0) {
+                                System.out.println("This item is not for sale.");
+                            } else if (player.getWallet().getBalance() >= itemPrice) {
+                                vendor.sell(player, selectedItem);
+                                selecting = false;
+                            } else {
+                                System.out.println("You don't have enough coins to buy that item.");
+                            }
+                        } else {
+                            System.out.println("Your inventory is full!");
+                        }
+                        break;
+                    default:
+                        System.out.println("Invalid option.");
                 }
             }
         }

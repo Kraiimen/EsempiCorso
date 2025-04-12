@@ -4,25 +4,23 @@ import org.generation.italy.capstonProject.mudGame.entity.player.Player;
 
 import java.util.Objects;
 
-public class Item {
+public abstract class Item {
     private String name;
-    private boolean reusable;
 
-    public Item(String name, boolean isReusable){
+    public Item(String name){
         this.name = name;
-        this.reusable = isReusable;
     }
 
     public void applyEffect(Player player){
-        player.healMissingHP(0.5);
+        player.heal(0.5);
+    }
+
+    public void inspect(){
+        System.out.println(this);
     }
 
     public String getName() {
         return name;
-    }
-
-    public boolean isReusable() {
-        return reusable;
     }
 
     @Override
@@ -40,8 +38,7 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "name: '" + name + '\'' +
-                ", reusable: " + reusable +
-                '}';
+                "\nname: '" + name + '\'' +
+                "\n}";
     }
 }

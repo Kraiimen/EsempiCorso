@@ -2,7 +2,8 @@ package org.generation.italy.capstonProject.mudGame.entity.player;
 
 import org.generation.italy.capstonProject.mudGame.entity.Entity;
 import org.generation.italy.capstonProject.mudGame.entity.GameMenuUtils;
-import org.generation.italy.capstonProject.mudGame.entity.items.Item;
+import org.generation.italy.capstonProject.mudGame.entity.Wallet;
+import org.generation.italy.capstonProject.mudGame.entity.items.*;
 import org.generation.italy.capstonProject.mudGame.entity.npc.Cat;
 import org.generation.italy.capstonProject.mudGame.entity.npc.Guard;
 import org.generation.italy.capstonProject.mudGame.entity.npc.Vendor;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public abstract class Player extends Entity {
+
     private static final int MAX_INTELLIGENCE = 20;
     private static final int MAX_STRENGTH = 20;
     private static final int MAX_AGILITY = 20;
@@ -28,8 +30,11 @@ public abstract class Player extends Entity {
     private int stamina;
     private int level;
     private PlayerRole role;
-    protected Console console = System.console();
+    private Weapon equippedWeapon;
+    private Armor equippedArmor;
     private boolean hasKilledKitties;
+    private Wallet wallet;
+    protected Console console = System.console();
     protected Scanner scanner = new Scanner(System.in);
 
     public Player(String charName, Room currentRoom, String playerName, PlayerRole role) {
@@ -39,8 +44,9 @@ public abstract class Player extends Entity {
         maxExperience = 20;
         level = 1;
         this.role = role;
-        this.setMaxHP(getMaxHP() + getStamina());
-        this.setMaxDamage(getMaxDamage() + (getStrength() / 5));
+        this.setMaxHP(getMaxHP() + stamina);
+        this.setMaxDamage(getMaxDamage() + (strength / 5));
+        this.wallet = new Wallet(20);
     }
 
     @Override
@@ -52,11 +58,31 @@ public abstract class Player extends Entity {
     }
 
     public void gainExperience(int amount){
-        experience += (int)(amount + Math.ceil(getIntelligence() * 0.2));
+        experience += (int)(amount + Math.ceil(getTotalIntelligence() * 0.2));
         if(experience >= maxExperience){
             levelUp();
         }
         System.out.println("You gained experience! Your experience is now" + experience + "/" + maxExperience);
+    }
+
+    @Override
+    public int calculateDamage() {
+        int weaponBonusDamage = (equippedWeapon !=null) ? equippedWeapon.getBonusDamage() : 0;
+        int baseDamage = rand.nextInt(getMaxDamage() + 1);
+        damage = baseDamage + weaponBonusDamage;
+        return damage;
+    }
+
+    public int getTotalAgility() {
+        return agility + (equippedArmor != null ? equippedArmor.getBonusAgility() : 0);
+    }
+
+    public int getTotalStamina() {
+        return stamina + (equippedArmor != null ? equippedArmor.getBonusStamina() : 0);
+    }
+
+    public int getTotalIntelligence() {
+        return intelligence + (equippedArmor != null ? equippedArmor.getBonusIntelligence() : 0);
     }
 
     @Override
@@ -82,9 +108,13 @@ public abstract class Player extends Entity {
                             resolved = true;
                             break;
                         case 2:
-                            this.setIsUnderAttack(false);
-                            runAway();
-                            resolved = true;
+                            if (canRunFast()) {
+                                this.setIsUnderAttack(false);
+                                runAway();
+                                resolved = true;
+                            } else {
+                                System.out.println("Run away failed! Try again or choose another option");
+                            }
                             break;
                         case 3:
                             openInventory();
@@ -128,7 +158,7 @@ public abstract class Player extends Entity {
             petCat(cat);
         } else if (entity instanceof Vendor vendor){
             vendor.manageInteraction(this);
-            vendor.seeShop();
+            vendor.seeShop( this, scanner);
         } else if (entity instanceof Npc npc){
             System.out.println("Say something: ");
             String input = scanner.nextLine();
@@ -157,6 +187,9 @@ public abstract class Player extends Entity {
                 if(target instanceof Cat){
                     hasKilledKitties = true;
                 }
+                if(target instanceof Npc npc){
+                    npc.dropCoins(this);
+                }
                 setIsUnderAttack(false);
                 getCurrentRoom().removeEntityFromRoom(target);
                 gainExperience(3);
@@ -166,7 +199,6 @@ public abstract class Player extends Entity {
         }
         if(getHealthPoints() < (getMaxHP()*0.1)){
             System.out.println("Health is too low to attack");
-            int n = 0;
             String answer;
             boolean wrgAnswer = false;
             do {
@@ -175,8 +207,7 @@ public abstract class Player extends Entity {
                 }
                 answer = console.readLine("You can try running away in a random direction [a] or use an item from your inventory [b]");
                 if (answer.equals("a")) {
-                    n = rand.nextInt(50);
-                    if (n < getAgility()){
+                    if (canRunFast()){
                         System.out.println("You successfully ran away!");
                         this.setIsUnderAttack(false);
                         target.setIsUnderAttack(false);
@@ -190,6 +221,8 @@ public abstract class Player extends Entity {
                         if (isDead()) {
                             System.out.println("You died. Thanks for playing!");
                             System.exit(0);
+                        } else {
+                            System.out.println("You can try again or choose another option");
                         }
                         wrgAnswer = false;
                     }
@@ -199,13 +232,19 @@ public abstract class Player extends Entity {
                 } else {
                     wrgAnswer = true;
                 }
-            } while (n != 4 || !answer.equals("b"));
+            } while (!canRunFast() || !answer.equals("b"));
         }
+    }
+
+    public boolean canRunFast(){
+        int n = rand.nextInt(50);
+        return n < getTotalAgility();
     }
 
     public void runAway(){
         int n = rand.nextInt(getCurrentRoom().getAllowedDirections().size());
         Direction randomDir = getCurrentRoom().getAllowedDirections().get(n);
+        System.out.println("You runa in a random available direction.");
         move(randomDir);
     }
 
@@ -214,10 +253,22 @@ public abstract class Player extends Entity {
     }
 
     public void useItem(Item item){
-        if(inventory.hasItem(item)){
-            item.applyEffect(this);
+        if(inventory.hasItem(item)) {
             inventory.removeItem(item);
+        } else {
+            getCurrentRoom().removeItemFromRoom(item);
         }
+        if(item instanceof Consumable consumable){
+            consumable.consume(this);
+        }
+        if(item instanceof Equipable equipment){
+            this.equip(equipment);
+        }
+    }
+
+    public void sleep(){
+        this.heal(0.2);
+        System.out.println("Rest is important for your health! You slept and now have " + getHealthPoints() + "/" + getMaxHP());
     }
 
     public void handleMovement(){
@@ -253,12 +304,107 @@ public abstract class Player extends Entity {
 
     public void pickUpItem(Item item){
         inventory.addItem(item);
+        System.out.println(item.getName() + " has been added to your inventory.");
         getCurrentRoom().removeItemFromRoom(item);
+        if(item.getName().equals("The One Ring")){
+            System.out.println("That's it. You defeated the last monster and restored peace. Congratulation, you won the game!");
+            System.out.println("Thanks for playing!");
+            System.exit(0);
+        }
     }
 
     public void petCat(Cat cat){
         System.out.println("You are petting " + cat.getCharName());
         cat.showGratitude();
+    }
+
+    public void setEquippedWeapon(Weapon weapon){
+        this.equippedWeapon = weapon;
+        System.out.println("You equipped " + equippedWeapon.getName());
+        System.out.println("+ " + equippedWeapon.getBonusDamage() + "damage points.");
+    }
+
+    public void removeEquippedWeapon(){
+        if(equippedWeapon != null){
+            if(inventory.getMaxQuantity() < inventory.currentInventoryTotal()){
+                System.out.println("This weapon will be moved to your inventory.");
+                inventory.addItem(equippedWeapon);
+            } else {
+                System.out.println("Your inventory is full. This Weapon will be dropped.");
+                getCurrentRoom().addItemToRoom(equippedWeapon);
+            }
+            System.out.println("You unequipped " + equippedWeapon.getName());
+            equippedWeapon = null;
+        } else {
+            System.out.println("You don't have a weapon equipped.");
+        }
+    }
+
+    public void unequipWeapon() {
+        removeEquippedWeapon();
+    }
+
+    public void setEquippedArmor(Armor armor){
+        this.equippedArmor = armor;
+        System.out.println("You equipped " + equippedArmor.getName());
+//        System.out.println("+ " + equippedArmor.getBonusDefence() + "damage points.");
+    }
+
+    public void removeEquippedArmor(){
+        if(equippedArmor != null){
+            if(!inventory.isFull()){
+                System.out.println("This armor will be moved to your inventory.");
+                inventory.addItem(equippedArmor);
+            } else {
+                System.out.println("Your inventory is full. This armor will be dropped.");
+                getCurrentRoom().addItemToRoom(equippedArmor);
+            }
+            System.out.println("You unequipped " + equippedArmor.getName());
+            equippedArmor = null;
+        } else {
+            System.out.println("You don't have a armor equipped.");
+        }
+    }
+
+    public void unequipArmor() {
+        removeEquippedArmor();
+    }
+
+    public void equip(Equipable equipment){
+        if(equipment instanceof Weapon weapon){
+            if(equippedWeapon != null && !inventory.isFull()){
+                inventory.addItem(equippedWeapon);
+            } else if (equippedWeapon != null && inventory.isFull()){
+                System.out.println("Your inventory is full. Your old weapon will be dropped.");
+                getCurrentRoom().addItemToRoom(equippedWeapon);
+            }
+            setEquippedWeapon(weapon);
+        } else if (equipment instanceof Armor armor) {
+            if(equippedArmor != null && !inventory.isFull()){
+                inventory.addItem(equippedArmor);
+            } else if (equippedArmor != null && inventory.isFull()){
+                System.out.println("Your inventory is full. Your old armor will be dropped.");
+                getCurrentRoom().addItemToRoom(equippedArmor);
+            }
+            setEquippedArmor(armor);
+        }
+    }
+
+    public Weapon getEquippedWeapon() {
+        return equippedWeapon;
+    }
+
+    public Armor getEquippedArmor() {
+        return equippedArmor;
+    }
+
+    public void pay(int amount){
+        try {
+            wallet.takeCoins(amount);
+            System.out.println("-" + amount + " coins. You now have " + wallet.getBalance() + " coins left." );
+        } catch (ArithmeticException e){
+            System.out.println("Balance is too low." + e.getMessage());
+        }
     }
 
     @Override
@@ -268,13 +414,16 @@ public abstract class Player extends Entity {
                 ", \nplayerName='" + playerName +
                 ", \nhealthPoints: " + getHealthPoints() + "/" + getMaxHP() +
                 ", \nmaxDamage: " + getMaxDamage() +
-                ", \nlevel=" + level +
-                ", \nexperience=" + experience + "/" + maxExperience +
-                ", \nintelligence=" + intelligence +
-                ", \nstrength=" + strength +
-                ", \nagility=" + agility +
-                ", \nstamina=" + stamina +
-                ", \nhasKilledKitties=" + hasKilledKitties +
+                ", \nlevel: " + level +
+                ", \nexperience: " + experience + "/" + maxExperience +
+                ", \nintelligence: " + intelligence +
+                ", \nstrength: " + strength +
+                ", \nagility: " + agility +
+                ", \nstamina: " + stamina +
+                ", \nhasKilledKitties: " + hasKilledKitties +
+                (equippedWeapon != null ? ", \nequipped Weapon: " + equippedWeapon : "") +
+                (equippedArmor != null ? ", \nequipped Armor: " + equippedArmor : "") +
+                ", \nwallet: " + wallet.getBalance() + " coins" +
                 ", \ninventory: " + inventory + '\'' +
                 "\n}";
     }
@@ -309,6 +458,10 @@ public abstract class Player extends Entity {
 
     public int getStamina() {
         return stamina;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
     }
 
     public void setIntelligence(int intelligence) {
@@ -349,5 +502,9 @@ public abstract class Player extends Entity {
 
     public int getMAX_STAMINA() {
         return MAX_STAMINA;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
     }
 }

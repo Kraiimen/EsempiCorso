@@ -1,5 +1,6 @@
 package org.generation.italy.capstonProject.mudGame.entity;
 
+import org.generation.italy.capstonProject.mudGame.entity.npc.Npc;
 import org.generation.italy.capstonProject.mudGame.entity.rooms.Room;
 
 import java.util.Objects;
@@ -28,7 +29,7 @@ public abstract class Entity {
         this.inventory = new Inventory(10);
     }
 
-    public int healMissingHP(double healPercentage){
+    public int heal(double healPercentage){
         if(healthPoints == maxHP){
             System.out.println("Health is " + healthPoints + "/" + maxHP);
             return healthPoints;
@@ -70,6 +71,9 @@ public abstract class Entity {
 
         if(isDead()){
             healthPoints = 0;
+            if(this instanceof Npc npc){
+                npc.dropAllItems(currentRoom);
+            }
             if(getCurrentRoom().getEntities().contains(this)) {
                 getCurrentRoom().removeEntityFromRoom(this);
             }

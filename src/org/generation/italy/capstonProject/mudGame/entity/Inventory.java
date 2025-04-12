@@ -1,23 +1,31 @@
 package org.generation.italy.capstonProject.mudGame.entity;
 
 import org.generation.italy.capstonProject.mudGame.entity.items.Item;
+import org.generation.italy.capstonProject.mudGame.entity.rooms.Room;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Inventory {
 
     private Map<Item, Integer> itemsList = new LinkedHashMap<>();
     private int maxQuantity;
-    private final int MAX_ITEM_QUANTITY = 5;
+    private final int MAX_ITEM_QUANTITY = 7;
 
     public Inventory(int maxQuantity){
     this.maxQuantity = maxQuantity;
     }
 
-    public void addItem(Item item) {
-        int currentTotal = itemsList.values().stream().mapToInt(Integer::intValue).sum();
+    public int currentInventoryTotal(){
+        return itemsList.values().stream().mapToInt(Integer::intValue).sum();
+    }
 
-        if (currentTotal >= maxQuantity) {
+    public boolean isFull(){
+        return currentInventoryTotal() >= maxQuantity;
+    }
+
+    public void addItem(Item item) {
+        if (isFull()) {
             System.out.println("Your inventory is full. Drop an item to collect new things.");
             return;
         }
@@ -32,7 +40,6 @@ public class Inventory {
             }
         } else {
             itemsList.put(item, 1);
-            System.out.println(item.getName() + " has been added to your inventory.");
         }
     }
 
@@ -41,11 +48,8 @@ public class Inventory {
             int currentCount = itemsList.get(item);
             if (currentCount > 1) {
                 itemsList.put(item, currentCount - 1);
-                System.out.println("One " + item.getName() + " was removed from your inventory.");
             }else if (currentCount == 1) {
                 itemsList.remove(item);
-                System.out.println("All " + item.getName() + " have been removed from your inventory.");
-
             } else {
                 itemsList.remove(item);
                 System.out.println("There are no " + item.getName() + " left to remove.");
@@ -62,14 +66,16 @@ public class Inventory {
         itemsList.remove(item);
     }
 
-    public void printAllItems(){
+    public void printAllItems(Map<Item, Integer> itemsList){
 //        for (Map.Entry<Item, Integer> entry : itemsList.entrySet()) {
 //            Item item = entry.getKey();
 //            int quantity = entry.getValue();
 //            System.out.println(item.getName() + " x" + quantity);
 //        }
+        AtomicInteger index = new AtomicInteger(1);
         itemsList.forEach((item, quantity) -> {
-            System.out.println(item.getName() + " x" + quantity);
+            System.out.println(index.get() + ". " +item.getName() + " x" + quantity);
+            index.getAndIncrement();
         });
     }
 
@@ -83,8 +89,17 @@ public class Inventory {
 
     @Override
     public String toString() {
-        return "Inventory{" +
-                "itemsList: " + itemsList +
-                '}';
+        return "\nInventory{" +
+                "\nitemsList: " + itemsList +
+                "\n}";
     }
+
+    public int getMaxQuantity() {
+        return maxQuantity;
+    }
+
+    public void setMaxQuantity(int maxQuantity) {
+        this.maxQuantity = maxQuantity;
+    }
+
 }
