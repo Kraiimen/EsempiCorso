@@ -226,6 +226,7 @@ public class Start {
                         }else {
                             player.useSpadaDiEden();
                         }
+                        //PER ATTIVARE I CHEAT COMMENTA LA LINEA SOTTO::
                         //player.getCurrentRoom().setCheckSearch(false);
                     } else {
                         System.out.println("Hai già cercato qui :(");
