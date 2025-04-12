@@ -1,11 +1,5 @@
 package org.generation.italy.edenGame.entity;
 
-import org.generation.italy.edenGame.entity.Enemies.Enemies;
-import org.generation.italy.edenGame.entity.player.Player;
-import org.generation.italy.edenGame.room.Room;
-
-import java.util.Random;
-
 public abstract class Entity {
     private String name;
     private int maxHp;
@@ -20,7 +14,6 @@ public abstract class Entity {
         this.healthPoints = healthPoints;
         this.damage = damage;
         this.exp = exp;
-//        this.currentRoom = currentRoom;
     }
 
     //METODI
@@ -47,8 +40,6 @@ public abstract class Entity {
         } while(e1.getHealthPoints() > 0 && e2.getHealthPoints() > 0);
     }
 
-
-
     //GETTER E SETTER
     public String getName() {
         return name;
@@ -70,12 +61,6 @@ public abstract class Entity {
         return exp;
     }
 
-//    public Room getCurrentRoom() {
-//        return currentRoom;
-//    }
-
-
-
     public void setName(String name) {
         this.name = name;
     }
@@ -95,8 +80,4 @@ public abstract class Entity {
     public void setExp(int exp) {
         this.exp = exp;
     }
-
-//    public void setCurrentRoom(Room currentRoom) {
-//        this.currentRoom = currentRoom;
-//    }
 }
