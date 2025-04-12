@@ -14,12 +14,24 @@ public class Start {
 
         //INTRO DEL GIOCO
         Console console = System.console();
+        System.out.println(" ");
+        System.out.println(" ");
         System.out.println("⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔");
         System.out.println(" ");
         System.out.println("✨✨✨✨✨ BENVENUTO IN EDEN GAME, UN MONDO MAGICO ✨✨✨✨✨");
         System.out.println(" ");
         System.out.println("⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔⚔");
         System.out.println(" ");
+        System.out.println("Ti trovi nella città di Eden, in cui sono presenti molte entità sempre più forti: ");
+        System.out.println("Gattini (deboli 👎🏻), Guardie Reali (media forza 👍🏻) e Goblin (forti 💪🏻)");
+        System.out.println(" ");
+        System.out.println("❌ ATTENZIONE ❌ ");
+        System.out.println("Fuori dalla città ci sono gli Woods, dove sarà presente il grande mostro RICCORCRUX e i suoi Mostri Leggendari (forza leggendaria 🔥)");
+        System.out.println("Ricorda anche di stare attento ad attaccare le Guardie Reali, perchè inizialmente sei debole, ma nel Temple potrai trovare aiuto");
+        System.out.println("Infine... nei meandri della città, sono sparsi oggetti che possono cambiare completamente le tue sorti");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println(" ");
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Per cominciare, qual'è il tuo nome? 🤨🤨" );
         String playerName = console.readLine();
         System.out.println("Ciao " + playerName + ", scegli il nome del tuo personaggio 🗡️");
@@ -229,7 +241,7 @@ public class Start {
                         //PER ATTIVARE I CHEAT COMMENTA LA LINEA SOTTO::
                         //player.getCurrentRoom().setCheckSearch(false);
                     } else {
-                        System.out.println("Hai già cercato qui :(");
+                        System.out.println("Hai già cercato qui 📍");
                     }
                 }
             }

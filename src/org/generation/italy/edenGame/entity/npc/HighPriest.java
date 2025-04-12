@@ -9,6 +9,9 @@ public class HighPriest extends Npc{
     @Override
     public void speak(Player player) {
         System.out.println("Ricevi la benedizione del Sacerdote per aumentare le tue abilità");
+        System.out.println("''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''");
+        System.out.println("Premi (I) per vedere quali sono i tuoi nuovi valori");
+        System.out.println(" ");
         player.setExp(player.getExp() - 10);
         player.setDamage(player.getDamage() + 5);
         player.setIntelligence(player.getIntelligence() + 10);
