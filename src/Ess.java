@@ -1,10 +1,60 @@
 import java.io.Console;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Ess {
     public static void main(String[] args) {
+
+        //Calcolare la somma dei numeri da 1 a 100 utilizzando un ciclo "for":
+        //Contare il numero di occorrenze di un elemento in un array di stringhe:
+        //Stampare i caratteri di una stringa uno alla volta utilizzando un ciclo "for":
+        //Stampare i numeri pari da 1 a 20 utilizzando un ciclo "for":
+        //Scrivi un programma Java che verifichi se un numero è compreso tra 10 e 20 (estremi inclusi)
+        //Stampare i quadrati dei numeri da 1 a 10 utilizzando un ciclo "for"
+        //Creare un metodo statico che converte una temperatura da Celsius a Fahrenheit. (modificato)
+        //Invertire gli elementi di un array
+
+//        int num = 15;
+//        if(num >= 10 && num <=20 ){
+//            System.out.println("è presente");
+//        }else{
+//            System.out.println("non è presente");
+//        }
+
+
+
+
+//        String nome = "Elvis";
+//        for(int i=0;i<nome.length();i++){
+//            System.out.println(nome.charAt(i));
+//        }
+
+//        int sum =0;
+//        for(int i = 1; i<= 100;i++){
+//            sum+= i;
+//        }
+//        System.out.println(sum);
+
+//        String[] names = {"pippo", "pino", "giacomino", "pino"};
+//        int counter = 0;
+//        for(int i = 0; i<names.length; i++){
+//            for(int j = 0; j<names.length; j++){
+//                if(names[i] == names[j]){
+//                    counter++;
+//                }
+//            }
+//            System.out.println("La parola: "+names[i]+" è presente nell'array: "+counter+" volte");
+//            counter = 0;
+//        }
+
+
+//        for(int i =0; i<=20;i++){
+//            if(i % 2 == 0){
+//                System.out.println(i);
+//            }
+//        }
         //Esercizio 1
         // String colore = "Verde";
         // //finchè si lavora con i primitivi utilizzi == , altrimenti si utilizza equals
@@ -722,5 +772,246 @@ public class Ess {
 //        factorial *= i;
 //    }
 //    return factorial;
+
+
+
+    // Esercizio 1.1 – Somma di due numeri
+    // Scrivi un programma che:
+    // - Dichiari due variabili int, le inizializzi con valori a tua scelta.
+    // - Calcoli la loro somma.
+    // - Stampi il risultato con un messaggio tipo: "La somma di 5 e 7 è 12"
+//        int a =1;
+//        int b =2;
+//        int c=a+b;
+//        System.out.println("the sum between " +a+" "+"and"+" "+b+" is " +c);
+
+        // Exercise 1.2 – Area and Perimeter of a Rectangle
+// Write a program that:
+// - Declares two `double` variables: `length` and `width`
+// - Calculates the area (length * width) and the perimeter (2 * (length + width))
+// - Prints both results in a clear sentence like:
+//   "The area is 20.0 and the perimeter is 18.0"
+//        double lenght = 10.5;
+//        double width = 5.5;
+//        double area = lenght*width;
+//        double perimeter = ((lenght+width)*2);
+//        System.out.println("The area is:" + area + " The perimeter is: " + perimeter);
+
+        // Exercise 1.3 – Temperature Converter
+// Write a program that:
+// - Asks the user to input a temperature in Celsius.
+// - Converts it to Fahrenheit using the formula: Fahrenheit = (Celsius * 9/5) + 32
+// - Prints the result in a clear format like: "25.0 Celsius is 77.0 Fahrenheit"
+//        Scanner input = new Scanner(System.in);
+//        System.out.println("Celsius to Fahrenheit converter : please give me a temperature");
+//        double celsius = input.nextDouble();
+//        double fahrenheit = ((celsius * 9)/5) + 32;
+//        System.out.println("The temperature is: "+ fahrenheit);
+
+        // Exercise 2.1 – Even or Odd
+// Write a program that:
+// - Asks the user to input an integer.
+// - Checks whether the number is even or odd using an `if-else` statement.
+// - Prints the result: "The number 4 is even" or "The number 7 is odd".
+//        Scanner input = new Scanner(System.in);
+//        System.out.println("Give me a number");
+//        int num= input.nextInt();
+//        if(num % 2 == 0){
+//            System.out.println("it's even");
+//        }else{
+//            System.out.println("it's odd");
+//        }
+
+        // Write a program that:
+// - Asks the user to input a number (representing a grade between 0 and 100).
+// - Uses `if-else` statements to check the grade and print a corresponding message:
+//   - If the grade is 90 or above, print: "Excellent"
+//   - If the grade is between 80 and 89, print: "Good"
+//   - If the grade is between 70 and 79, print: "Average"
+//   - If the grade is below 70, print: "Fail"
+//        Scanner input = new Scanner(System.in);
+//        System.out.println("Give me the grade of the x student");
+//        int grade = input.nextInt();
+//        if(grade>100){
+//            System.out.println("Give me a proper grade");
+//        }else if(grade >= 90 && grade <= 100){
+//            System.out.println("Eggcellent");
+//        }else if(grade >= 80 && grade <= 89){
+//            System.out.println("Good");
+//        }else if(grade >= 70 && grade <= 79){
+//            System.out.println("Avarage");
+//        }else{
+//            System.out.println("Fail");
+//        }
+
+        // Exercise 2.3 – Number Comparison
+// Write a program that:
+// - Asks the user to input two integers.
+// - Compares the two integers and prints the larger one, or if they are equal, print: "The numbers are equal."
+//        Scanner input = new Scanner(System.in);
+//        System.out.println("give me 2 numbers");
+//        int a = input.nextInt();
+//        int b = input.nextInt();
+//        if(a>b){
+//            System.out.println(a);
+//        }else if(b>a){
+//            System.out.println(b);
+//        }else{
+//            System.out.println("equals");
+//        }
+
+        // Exercise 3.1 – Print Numbers 1 to 10
+// Write a program that:
+// - Uses a `for` loop to print the numbers from 1 to 10, each on a new line.
+//        for(int i = 1; i<=10; i++){
+//            System.out.println(i);
+//        }
+
+        // Exercise 3.2 – Sum of Numbers
+// Write a program that:
+// - Uses a `for` loop to calculate the sum of the numbers from 1 to 100.
+// - Prints the result: "The sum of numbers from 1 to 100 is: 5050"
+//        int sum = 0;
+//        for(int i = 1;i<=100;i++){
+//            sum += i;
+//        }
+//        System.out.println(sum);
+
+        // Exercise 3.3 – Reverse Countdown
+// Write a program that:
+// - Asks the user to enter a positive number (e.g. 5)
+// - Uses a `while` loop to count down from that number to 0
+// - Prints each number on a new line
+//        Scanner input=new Scanner(System.in);
+//        int a = input.nextInt();
+//        while(a>=0){
+//            System.out.println(a);
+//            a--;
+//        }
+
+        // Exercise 3.4 – Password Retry
+// Write a program that:
+// - Has a predefined password, e.g., "bootcamp".
+// - Asks the user to enter the password.
+// - If the password is incorrect, it asks again (loop).
+// - Once the correct password is entered, print: "Access granted!"
+//        Scanner input = new Scanner(System.in);
+//        String password = "password";
+//        System.out.println("Insert password");
+//        String userpsw = input.nextLine();
+//        while(!userpsw.equals(password)){
+//            System.out.println("Retry");
+//            userpsw = input.nextLine();
+//        }
+//        System.out.println("Access Granted");
+
+        // Exercise 3.5 – Guess the Number (do-while)
+// Write a program that:
+// - Has a secret number (e.g., 7)
+// - Uses a `do-while` loop to keep asking the user to guess the number
+// - If the guess is wrong, print "Try again"
+// - If the guess is correct, print "Correct!" and exit the loop
+//        Scanner input = new Scanner(System.in);
+//        Random random = new Random();
+//        int secret = random.nextInt(11);
+//        System.out.println("Guess the number within 10");
+//        int guess = input.nextInt();
+//        do{guess = input.nextInt();
+//            System.out.println("Try again");
+//        }while(secret != guess);
+//        System.out.println("Well done");
+
+        // Exercise 3.6 – Print Shopping List (for-each loop)
+// Write a program that:
+// - Has an array of Strings with items like: {"Milk", "Bread", "Eggs", "Cheese"}
+// - Uses a `for-each` loop to print each item in the shopping list, one per line
+//        String[] shoppinglist = {"Milk","Bread","Eggs","Cheese"};
+//        for(String item : shoppinglist){
+//            System.out.println(item);
+//        }
+
+        // Exercise 4.1 – Array Initialization and Print
+// Write a program that:
+// - Creates an array of 5 integers: {1, 2, 3, 4, 5}
+// - Prints each element in the array using a `for` loop
+//        int[] nums = {1,2,3,4,5};
+//        for(int i = 0 ; i< nums.length; i++){
+//            System.out.println(nums[i]);
+//        }
+
+        // Exercise 4.2 – Find the Maximum in an Array
+// Write a program that:
+// - Creates an array of integers: {10, 20, 35, 50, 5}
+// - Finds and prints the maximum value in the array
+//        int[] nums = {10,20,35,50,5};
+//        int max = nums[0];
+//        for(int i = 0 ; i< nums.length; i++){
+//            if(max < nums[i]){
+//                max = nums[i];
+//            }
+//        }
+//        System.out.println(max);
+
+        // Exercise 4.3 – Reverse an Array
+// Write a program that:
+// - Asks the user to input 5 integers.
+// - Store these integers in an array.
+// - Reverse the array and print the reversed version.
+//        Scanner input = new Scanner(System.in);
+//        System.out.println("give me 5 numbers");
+//        int[] nums = new int[5];
+//        for(int i = nums.length-1;i >= 0;i--){
+//            nums[i] = input.nextInt();
+//        }
+//        for(int i = 0; i< nums.length; i++){
+//            System.out.println(nums[i]);
+//        }
+
+        // Exercise 4.4 – Sum of All Elements in an Array
+// Write a program that:
+// - Creates an array of integers: {1, 2, 3, 4, 5, 6}
+// - Calculates and prints the sum of all the elements in the array
+//        int[] nums = {1,2,3,4,5,6};
+//        int sum = 0;
+//        for(int i = 0 ; i< nums.length; i++){
+//            sum+= nums[i];
+//        }
+//        System.out.println(sum);
+
+        // Exercise 5.1 – Concatenate Two Strings
+// Write a program that:
+// - Takes two strings as input from the user.
+// - Concatenates them and prints the result.
+//        Scanner input = new Scanner(System.in);
+//        String first = input.nextLine();
+//        String second = input.nextLine();
+//        String cFinal = first.concat(second);
+//        System.out.println(cFinal);
+
+        // Exercise 5.2 – String Length and Character at Specific Index
+// Write a program that:
+// - Takes a string input from the user.
+// - Prints the length of the string.
+// - Prints the character at the 3rd index (remember, indexing starts at 0).
+//        Scanner input = new Scanner(System.in);
+//        String userString = input.nextLine();
+//        System.out.println(userString.length());
+//        System.out.println(userString.charAt(2));
+
+        // Exercise 5.3 – Substring and String Comparison
+// Write a program that:
+// - Takes a string input from the user.
+// - Extracts and prints the substring starting from index 2 to index 5 (inclusive).
+// - Compares the input string with a hardcoded string "hello" and prints if they are equal or not.
+        Scanner input = new Scanner(System.in);
+        String toCompare = "Hello";
+        String userString = input.nextLine();
+        String extract = userString.substring(0, 5);  // Adjusted to include index 5
+        if (extract.toLowerCase().equals(toCompare.toLowerCase())){
+            System.out.println("Equals indeed");
+        }else{
+            System.out.println("Nope");
+        }
+
     }
 }
