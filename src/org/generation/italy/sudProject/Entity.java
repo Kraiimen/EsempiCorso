@@ -3,13 +3,13 @@ package org.generation.italy.sudProject;
 import org.generation.italy.sudProject.entities.Npc;
 import org.generation.italy.sudProject.entities.mobTypes.mobs.Cat;
 import org.generation.italy.sudProject.entities.mobTypes.PeacefulMob;
+import org.generation.italy.sudProject.entities.mobTypes.mobs.Cultist;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.Guard;
 import org.generation.italy.sudProject.map.Room;
 
 import java.util.Random;
 
-import static org.generation.italy.sudProject.map.Room.CAT_INDEX;
-import static org.generation.italy.sudProject.map.Room.GUARD_INDEX;
+import static org.generation.italy.sudProject.map.Room.*;
 
 
 public abstract class Entity {
@@ -90,6 +90,9 @@ public abstract class Entity {
             case GUARD_INDEX:
                 Guard.numberOfGuards--;
                 Npc.numberOfNpcs--;
+                break;
+            case CULTIST_INDEX:
+                Cultist.numberOfCultists--;
                 break;
             default:
                 System.out.println("Sei Morto");

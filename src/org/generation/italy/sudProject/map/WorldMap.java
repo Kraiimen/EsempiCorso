@@ -1,8 +1,15 @@
 package org.generation.italy.sudProject.map;
 
+import org.generation.italy.sudProject.Entity;
 import org.generation.italy.sudProject.Spawner;
+import org.generation.italy.sudProject.entities.npcTypes.npcs.Baker;
+import org.generation.italy.sudProject.entities.npcTypes.npcs.Blacksmith;
+import org.generation.italy.sudProject.entities.npcTypes.npcs.MoonPriest;
 
 import java.util.ArrayList;
+
+import static org.generation.italy.sudProject.Spawner.addNewEntityType;
+import static org.generation.italy.sudProject.map.Room.ROOM_MAIN_NPC_INDEX;
 
 
 public class WorldMap {
@@ -22,15 +29,15 @@ public class WorldMap {
     // /--CONSTRUCTORS--/
     public WorldMap(){
         //crea le stanze
-        world.add(new Room("Temple_Square"));
-        world.add(new Room("Market_Square"));
-        world.add(new Room("Temple"));
-        world.add(new Room("Bakery"));
-        world.add(new Room("Armory"));
-        world.add(new Room("Garden_1"));
-        world.add(new Room("Garden_2"));
-        world.add(new Room("Garden_3"));
-        world.add(new Room("Woods"));
+        world.add(new Room("Temple_Square", 3));
+        world.add(new Room("Market_Square", 4));
+        world.add(new Room("Temple", 0));
+        world.add(new Room("Bakery", 2));
+        world.add(new Room("Armory", 2));
+        world.add(new Room("Garden_1", 2));
+        world.add(new Room("Garden_2", 1));
+        world.add(new Room("Garden_3", 2));
+        world.add(new Room("Woods", 0));
         //aggiunge le stanze adiacenti
         world.get(TEMPLE_SQUARE_INDEX).setRooms(null, world.get(MARKET_SQUARE_INDEX), world.get(TEMPLE_INDEX), null);
         world.get(MARKET_SQUARE_INDEX).setRooms(world.get(TEMPLE_SQUARE_INDEX), world.get(GARDEN_1_INDEX), world.get(BAKERY_INDEX), world.get(ARMORY_INDEX));
@@ -51,15 +58,24 @@ public class WorldMap {
         world.get(GARDEN_2_INDEX).setRoomDescription("Il centro dei Giardini presenta un pozzo, dove in parecchi sono rimasti vittime di caduta. Nessuno sa quanto sia profondo");
         world.get(GARDEN_3_INDEX).setRoomDescription("La fine dei Giardini, ma anche l'inizio per chi entra per la prima volta in città");
         world.get(WOODS_INDEX).setRoomDescription("Un bosco illuminato dalla luna, la tua unica fonte di luce. Il fuoco è inutilizzabile per via di una maledizione");
-        //aggiunge entità in ciascuna stanza
-        Spawner.generateRoomEntities(world.get(TEMPLE_SQUARE_INDEX), 3, 3);
-        Spawner.generateRoomEntities(world.get(MARKET_SQUARE_INDEX), 3, 4);
-        Spawner.generateRoomEntities(world.get(TEMPLE_INDEX), 0, 0);
-        Spawner.generateRoomEntities(world.get(BAKERY_INDEX), 0, 2);
-        Spawner.generateRoomEntities(world.get(ARMORY_INDEX), 0, 2);
-        Spawner.generateRoomEntities(world.get(GARDEN_1_INDEX), 3, 2);
-        Spawner.generateRoomEntities(world.get(GARDEN_2_INDEX), 3, 1);
-        Spawner.generateRoomEntities(world.get(GARDEN_3_INDEX), 3, 2);
-        Spawner.generateRoomEntities(world.get(WOODS_INDEX), 0, 0);
+        //aggiunge entità generiche in ciascuna stanza
+        Spawner.generateRoomEntities(world.get(TEMPLE_SQUARE_INDEX), 3, 0);
+        Spawner.generateRoomEntities(world.get(MARKET_SQUARE_INDEX), 3, 0);
+        Spawner.generateRoomEntities(world.get(TEMPLE_INDEX), 0,0);
+        Spawner.generateRoomEntities(world.get(BAKERY_INDEX), 0,0);
+        Spawner.generateRoomEntities(world.get(ARMORY_INDEX), 0,0);
+        Spawner.generateRoomEntities(world.get(GARDEN_1_INDEX), 3,0);
+        Spawner.generateRoomEntities(world.get(GARDEN_2_INDEX), 3,0);
+        Spawner.generateRoomEntities(world.get(GARDEN_3_INDEX), 3,0);
+        Spawner.generateRoomEntities(world.get(WOODS_INDEX), 0,3);
+        //aggiunge entità uniche alle stanze
+        addNewEntityType(world.get(TEMPLE_INDEX));
+        world.get(TEMPLE_INDEX).getRoomEntities().get(ROOM_MAIN_NPC_INDEX).add(new MoonPriest("Moon_Priest", world.get(TEMPLE_INDEX), ROOM_MAIN_NPC_INDEX));
+
+        addNewEntityType(world.get(ARMORY_INDEX));
+        world.get(ARMORY_INDEX).getRoomEntities().get(ROOM_MAIN_NPC_INDEX).add(new Blacksmith("Blacksmith", world.get(ARMORY_INDEX), ROOM_MAIN_NPC_INDEX));
+
+        addNewEntityType(world.get(BAKERY_INDEX));
+        world.get(BAKERY_INDEX).getRoomEntities().get(ROOM_MAIN_NPC_INDEX).add(new Baker("Baker", world.get(BAKERY_INDEX), ROOM_MAIN_NPC_INDEX));
     }
 }

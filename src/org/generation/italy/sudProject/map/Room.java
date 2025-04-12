@@ -16,13 +16,18 @@ public class Room{
 
     public static final int CAT_INDEX = 0;
     public static final int GUARD_INDEX = 1;
+    public static final int CULTIST_INDEX = 2;
+    public static final int ROOM_MAIN_NPC_INDEX = 3;
+
+    private int maxGuardsInRoom;
 
     private ArrayList<ArrayList> roomEntities;
 
     // /--CONSTRUCTORS--/
-    public Room(String roomName){
+    public Room(String roomName, int maxGuardsInRoom){
         this.roomName = roomName;
-        addEntityType(2);
+        addEntityType(3);
+        this.maxGuardsInRoom = maxGuardsInRoom;
     }
     // /--METHODS--/
     public void setRooms(Room northRoom, Room southRoom, Room eastRoom, Room westRoom){
@@ -89,5 +94,9 @@ public class Room{
 
     public ArrayList<ArrayList> getRoomEntities() {
         return roomEntities;
+    }
+
+    public int getMaxGuardsInRoom() {
+        return maxGuardsInRoom;
     }
 }
