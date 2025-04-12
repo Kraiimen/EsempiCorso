@@ -4,12 +4,11 @@ import mud.characters.Entity;
 
 public class Paladin extends PlayerCharacter {
     private static final int MIN_INTEL = 3;
-    private static final int MIN_STRENGTH = 8;
     private static final int MIN_AGIL = 10;
     private boolean isVirgin = true;
 
     public Paladin(String name) {
-        super(name, MIN_INTEL, MIN_STRENGTH, MIN_AGIL,MIN);
+        super(name, MIN_INTEL, MIN_AGIL,MIN);
     }
 
     //Nel paladino, l'attacco è influenzato dal suo essere vergine o meno e dalla sua intelligenza

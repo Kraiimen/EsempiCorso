@@ -22,8 +22,8 @@ public class Baker extends Entity {
         pickItem(new Food("Candy", 1));
         pickItem(new Food("Bread", 2));
         pickItem(new Food("Sandwich", 3));
-        pickItem(new Food("Apple Pie", 4));
-        pickItem(new Food("Elf Bread", 5));
+        pickItem(new Food("Apple pie", 4));
+        pickItem(new Food("Elf bread", 5));
     }
 
     @Override

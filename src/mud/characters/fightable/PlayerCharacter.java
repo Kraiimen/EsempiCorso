@@ -10,16 +10,17 @@ import mud.rooms.Room;
 public abstract class PlayerCharacter extends Character {
     public static final int MAX_RESPAWN = 5;
     private static final int STARTING_STAM = 5;
+    private static final int STARTING_STRENGTH = 3;
 
     private int killsCounter;
     private int respawnCounter;
     private int expCounter;
 
 
-    public PlayerCharacter(String name, int minIntelligence, int minStrength, int minAgility, int minStamina){
+    public PlayerCharacter(String name, int minIntelligence, int minAgility, int minStamina){
         super(name);
         setIntelligence(dice.nextInt(minIntelligence, MAX));
-        setStrength(dice.nextInt(minStrength, MAX));
+        setStrength(STARTING_STRENGTH);
         setAgility(dice.nextInt(minAgility, MAX));
         setStamina(dice.nextInt(minStamina, STARTING_STAM));
         setActualRoom(MagicMap.getRooms().getFirst());
@@ -45,8 +46,13 @@ public abstract class PlayerCharacter extends Character {
 
     public void eat(Item item){
         if(item instanceof Food food){
-            setHp(getHp()+food.getHpGiven());
-            System.out.printf("You ate %s and you got +%d hp.%n", food.getName(), food.getHpGiven());
+            if (food.getHpGiven()<0){
+                hurt(-food.getHpGiven());
+                System.out.printf("This %s is poisoned! You lose %d hp!%n", food.getName(), -food.getHpGiven());
+            } else {
+                System.out.printf("You ate %s and you got +%d hp.%n", food.getName(), food.getHpGiven());
+                heal(food.getHpGiven());
+            }
         } else {
             System.out.println("You can't eat this!");
         }
@@ -75,17 +81,27 @@ public abstract class PlayerCharacter extends Character {
     public void printStats(){
         System.out.printf("Here are %s's statistics:%n", getName());
         System.out.println("Exp: " + getExp());
-        System.out.println("HP: " + getHp());
-        System.out.println("Intelligence: " + getIntelligence());
-        System.out.println("Strength: " + getStrength());
-        System.out.println("Agility: " + getAgility());
-        System.out.println("Stamina: " + getStamina());
+        System.out.println("HP: " + getHp() + "/" + MAX_HP);
+        System.out.println("Intelligence: " + getIntelligence() + "/" + MAX);
+        System.out.println("Strength: " + getStrength() + "/" + MAX);
+        System.out.println("Agility: " + getAgility() + "/" + MAX);
+        System.out.println("Stamina: " + getStamina() + "/" + MAX);
         System.out.println("Respawns Left: " + (MAX_RESPAWN-respawnCounter));
     }
     @Override
     public void pickItem(Item item){
             getInventory().put(item.getName(), item);
             System.out.println("You have picked " + item.getName());
+    }
+
+    public void addStrength(int addedStrength){
+        if((getStrength() + addedStrength) <= MAX && addedStrength > 0){
+            setStrength(getStrength() + addedStrength);
+            System.out.printf("You have %d strength points now.", getStrength());
+        } else if ((getStrength() + addedStrength) > MAX){
+            setStrength(MAX);;
+            System.out.println("You are at MAX strength.");
+        }
     }
 
     //FUNZIONI DEL KILL'S COUNTER

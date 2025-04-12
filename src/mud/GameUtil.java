@@ -26,6 +26,8 @@ public class GameUtil {
         choices.add("MOVE");
         choices.add("PICK");
         choices.add("TALK");
+        choices.add("STATS");
+        choices.add("INVENTORY");
         choices.add("Q");
         directions.add("NORTH");
         directions.add("WEST");
@@ -33,7 +35,7 @@ public class GameUtil {
         directions.add("EAST");
     }
 
-    public static void createNewPlayer(){
+    public static void createNewPlayer() throws EndOfGameException {
         String answer = null;
         do{System.out.println("Hello! What kind of creature do you want to be?");
             System.out.println("Choose between: Wizard, Thief, Paladin or Priest: ");
@@ -53,6 +55,7 @@ public class GameUtil {
         }
         player.printStats();
         System.out.printf("Welcome %s! ********Messaggio di inizio**********%n", player.getName());
+        askWhatToDo();
         //nel messaggio di inizio devo dire di andare al tempio a parlare con Elrond, che gli dirà di trovare l'anello,
         //elrond gli dirà di non uccidere gatti se ci sono guardie presenti.
     }
@@ -63,10 +66,13 @@ public class GameUtil {
         String ans;
         System.out.println("What do you want to do now?");
         do{
+            //TODO OPZIONE CHECK DELLE STATISTICHE
             System.out.println("Write 'FIGHT' if you want to fight some monsters.");
             System.out.println("Write 'MOVE' if you want to start moving.");
             System.out.println("Write 'PICK' if you want to pick an item.");
             System.out.println("Write 'TALK' if you want to talk to someone.");
+            System.out.println("Write 'STATS' to see you statistics");
+            System.out.println("Write 'INVENTORY' to see your inventory");
             System.out.println("Write 'Q' if you want to end the game.");
             ans = console.readLine().toUpperCase().trim();
         }while(!choices.contains(ans));
@@ -76,12 +82,45 @@ public class GameUtil {
             askForDirections();
         } else if (ans.equals("PICK")){
             //mancano i metodi per gli oggetti e gli oggetti nelle stanze!
+            player.getActualRoom().printItems();
         } else if (ans.equals("TALK")){
             askWhoToTalk();
+        } else if (ans.equals("STATS")){
+            player.printStats();
+        } else if (ans.equals("INVENTORY")){
+            player.printInventory();
         } else {
             System.out.println("Thanks for playing. Goodbye!");
             throw new EndOfGameException("");
         }
+    }
+
+    public static void askWhatToDoWithoutMenu() throws EndOfGameException {
+        String ans;
+        System.out.println("What do you want to do now?");
+        do{
+            System.out.println("Write what you want to do or write MENU to see the menu again.");
+            ans = console.readLine().toUpperCase().trim();
+        }while(!choices.contains(ans) && !ans.equals("MENU"));
+        if(ans.equals("FIGHT")){
+            checkForMonsters();
+        } else if (ans.equals("MOVE")){
+            askForDirections();
+        } else if (ans.equals("PICK")){
+            player.getActualRoom().printItems();
+        } else if (ans.equals("TALK")){
+            askWhoToTalk();
+        } else if (ans.equals("STATS")){
+            player.printStats();
+        } else if (ans.equals("INVENTORY")){
+            player.printInventory();
+        } else if (ans.equals("Q")){
+            System.out.println("Thanks for playing. Goodbye!");
+            throw new EndOfGameException("");
+        } else {
+            askWhatToDo();
+        }
+
     }
 
     //METODI PER COMBATTERE
@@ -278,10 +317,12 @@ public class GameUtil {
         return firstUpper + subString;
     }
 
+
     //TODO IMPLEMENTARE METODI PER GLI ITEM (magari direttamente in entity?)
     //TODO AGGIUNGERE ELROND CHE TI DA LA MISSIONE
     //TODO FAR FINIRE IL GIOCO APPENA HAI L'ANELLO
     //TODO AGGIUNGERE I SOLDI PER COMPRARE LE COSE
+    //TODO SCRIVERE LE DESCRIZIONI BENE
 
 
 }

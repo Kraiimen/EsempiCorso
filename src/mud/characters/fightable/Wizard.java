@@ -4,11 +4,10 @@ import personal.mudGame.Player;
 
 public class Wizard extends PlayerCharacter {
     private static final int MIN_INTEL = 15;
-    private static final int MIN_STRENGTH = 8;
     private static final int MIN_AGIL = 5;
 
     public Wizard(String name){
-        super(name, MIN_INTEL, MIN_STRENGTH, MIN_AGIL, MIN);
+        super(name, MIN_INTEL, MIN_AGIL, MIN);
     }
 
     //l'attacco del mago dipenderà dalla stamina e dall'intelligenza

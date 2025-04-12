@@ -2,13 +2,12 @@ package mud.characters.fightable;
 
 public class Priest extends PlayerCharacter {
     private static final int MIN_INTEL = 10;
-    private static final int MIN_STRENGHT = 5;
     private static final int MIN_AGIL = 6;
     private static final int MAX_FAITH = 10;
     private int faith;
 
     public Priest(String name){
-        super(name, MIN_INTEL, MIN_STRENGHT, MIN_AGIL, MIN);
+        super(name, MIN_INTEL,MIN_AGIL, MIN);
         this.faith = dice.nextInt(MAX_FAITH);
     }
 

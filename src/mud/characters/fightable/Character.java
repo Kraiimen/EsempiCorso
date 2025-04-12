@@ -5,6 +5,7 @@ import mud.characters.Entity;
 import mud.characters.fightable.monsters.Monster;
 import mud.items.Item;
 
+import java.sql.SQLOutput;
 import java.util.Random;
 
 public abstract class Character extends Entity {
@@ -74,6 +75,7 @@ public abstract class Character extends Entity {
         getActualRoom().getPresentEntities().remove(this);
         System.out.println(getName() + " is dead.");
     }
+
 
     public abstract void respawn();
 

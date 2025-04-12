@@ -1,6 +1,12 @@
 package mud.rooms;
 
+import mud.items.Tree;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Garden extends Room{
+
     public Garden(String name) {
         super(name);
     }

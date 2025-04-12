@@ -17,14 +17,14 @@ public abstract class Room {
     private HashMap<String, Entity> presentEntities;
     private List<Monster> presentMonsters;
     private List<String> presentMonstersClasses;
-    private List<Item> presentItems;
+    private HashMap<String, Item> presentItems;
 
     //costruttore
     public Room(String name){
         this.name = name;
         directions = new HashMap<>();
         presentEntities = new HashMap<>();
-        presentItems = new ArrayList<>();
+        presentItems = new HashMap<>();
         presentMonsters = new ArrayList<>();
         presentMonstersClasses = new ArrayList<>();
     }
@@ -73,6 +73,17 @@ public abstract class Room {
         }
     }
 
+    public void printItems(){
+        Set<String> printable = new HashSet<>(presentItems.keySet());
+        if(printable.isEmpty()){
+            System.out.println("Looks like there's nothing laying around here.");
+        } else{
+            System.out.println("You look around and you see: ");
+            printable.forEach(System.out::println);
+        }
+    }
+
+
     //getter e setter
     public String getName() {
         return name;
@@ -95,10 +106,10 @@ public abstract class Room {
         this.presentEntities = presentEntities;
     }
 
-    public List<Item> getPresentItems() {
+    public HashMap<String,Item> getPresentItems() {
         return presentItems;
     }
-    public void setPresentItems(List<Item> presentItems) {
+    public void setPresentItems(HashMap<String,Item> presentItems) {
         this.presentItems = presentItems;
     }
 

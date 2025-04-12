@@ -20,7 +20,7 @@ public class Merchant extends Entity {
         super(name);
         setActualRoom(MagicMap.getRooms().get(MERCHANT_POSSIBLE_ROOM));
         pickItem(new Food("Bread", 4));
-        pickItem(new Weapon("Long Sword"));
+        pickItem(new Weapon("Long sword"));
         pickItem(new Weapon("Shield"));
         pickItem(new Weapon("Dagger"));
         pickItem(new Weapon("Hammer"));
