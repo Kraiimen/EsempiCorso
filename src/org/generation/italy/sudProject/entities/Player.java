@@ -99,7 +99,7 @@ public class Player extends Entity{
                     target.setHp(target.getHp() - this.getAtk());
                 }
         }
-        if(target.getHp() <= 0){
+        if(isDead(target)){
             target.die();
         }
     }

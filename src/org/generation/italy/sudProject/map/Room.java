@@ -14,6 +14,7 @@ public class Room{
     private Room eastRoom;
     private Room westRoom;
 
+    public static final int PLAYER_INDEX = -1;
     public static final int CAT_INDEX = 0;
     public static final int GUARD_INDEX = 1;
     public static final int CULTIST_INDEX = 2;

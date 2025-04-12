@@ -1,7 +1,10 @@
 package org.generation.italy.sudProject.entities.npcTypes.npcs;
 
+import org.generation.italy.sudProject.Entity;
 import org.generation.italy.sudProject.entities.Npc;
 import org.generation.italy.sudProject.map.Room;
+
+import static org.generation.italy.sudProject.map.Room.PLAYER_INDEX;
 
 public class Guard extends Npc {
     // /--ATTRIBUTES--/
@@ -19,6 +22,16 @@ public class Guard extends Npc {
     // /--METHODS--/
     public static void deleteGuards(int num){
         numberOfGuards -= num;
+    }
+    @Override
+    public void attack(Entity target) {
+        if(target.isCanBeAttacked()){
+            target.setHp(target.getHp() - this.getAtk());
+        }
+        if(isDead(target) || target.getIndexEntityPosition()==PLAYER_INDEX){
+            target.setHp(0);
+            target.die();
+        }
     }
     // /--GETTER-&-SETTER--/
 

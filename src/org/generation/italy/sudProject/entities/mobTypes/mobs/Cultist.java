@@ -12,4 +12,14 @@ public class Cultist extends Entity {
         super(name, 10, 16, DEXTERITY_INDEX, 14, 20, 20, 5, entityPosition, indexEntityPosition, true);
         numberOfCultists++;
     }
+    // /--METHODS--/
+    @Override
+    public void attack(Entity target) {
+        if(target.isCanBeAttacked()){
+            target.setHp(target.getHp() - this.getAtk());
+        }
+        if(isDead(target)){
+            target.die();
+        }
+    }
 }

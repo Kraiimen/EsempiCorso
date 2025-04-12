@@ -93,7 +93,11 @@ public abstract class Entity {
                 break;
         }
     }
+    public boolean isDead(Entity e){
+        return (e.getHp() <= 0);
+    }
     public abstract void attack(Entity target);
+
 
 
     // /--GETTER-&-SETTER--/

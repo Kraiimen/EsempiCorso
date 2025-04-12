@@ -1,5 +1,6 @@
 package org.generation.italy.sudProject.entities.npcTypes;
 
+import org.generation.italy.sudProject.Entity;
 import org.generation.italy.sudProject.entities.Npc;
 import org.generation.italy.sudProject.map.Room;
 

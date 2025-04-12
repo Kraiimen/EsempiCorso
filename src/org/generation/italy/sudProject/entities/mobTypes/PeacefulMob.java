@@ -13,6 +13,14 @@ public abstract class PeacefulMob extends Entity {
     }
 
     // /--METHODS--/
-
+    @Override
+    public void attack(Entity target) {
+        if(target.isCanBeAttacked()){
+            target.setHp(target.getHp() - this.getAtk());
+        }
+        if(isDead(target)){
+            target.die();
+        }
+    }
     // /--GETTER-&-SETTER--/
 }
