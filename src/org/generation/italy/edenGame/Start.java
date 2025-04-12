@@ -226,7 +226,7 @@ public class Start {
                         }else {
                             player.useSpadaDiEden();
                         }
-                        player.getCurrentRoom().setCheckSearch(false);
+                        //player.getCurrentRoom().setCheckSearch(false);
                     } else {
                         System.out.println("Hai già cercato qui :(");
                     }
