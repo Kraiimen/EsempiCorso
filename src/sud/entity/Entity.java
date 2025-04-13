@@ -103,7 +103,7 @@ public class Entity {
 
     public void sleep(){
         heal(10000000);
-        System.out.printf(getWithColor("%s sleeps"),name);
+        System.out.printf(getWithColor("\n%s sleeps\n"),name);
     }
 
     public void eat (Food food){

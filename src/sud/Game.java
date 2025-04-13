@@ -141,7 +141,7 @@ public class Game {
             counter++;
         }
         System.out.printf(npc.getWithColor("(%d)-> \"Nevermind\"\n"), counter);
-        int choiceI=player.askPlayerIntInput(player.getInventory().size()+1);
+        int choiceI=player.askPlayerIntInput(npc.getInventory().size()+1);
         if(choiceI==counter){
             npc.speak(escapeChoice);
         }else if(player.pay(npc.getInventory().get(choiceI-1))){
@@ -170,7 +170,7 @@ public class Game {
                 player.setCoins(player.getCoins()+(int)(itemSold.getPrice()*0.8));
                 npc.getInventory().add(itemSold);
                 player.getInventory().remove(choiceI-1);
-                System.out.printf("<You sold the %s for %d >",itemSold.getName(), player.getCoins()-(int)(itemSold.getPrice()*0.8));
+                System.out.printf("<You sold the %s for %d \n>",itemSold.getName(), player.getCoins()-(int)(itemSold.getPrice()*0.8));
             }
         }
     }
@@ -260,8 +260,9 @@ public class Game {
 
                                     if(player.getCoins()>= 5){
                                         player.setCoins(player.getCoins()-5);
-                                        tavernKeeper.speak("nighty night sweetie pie");
+                                        tavernKeeper.speak("nighty night sweetie \n");
                                         player.sleep();
+
                                         tavernKeeper.speak("\nGood morning");
                                     }else {
                                         tavernKeeper.speak("<She leans closer to you> "+ tavernKeeper.getWithColor("\nthe tavern Keeper: You don't have enough coins sweetie, i would suggest you sleep in my room, but my bed is too small for the both of us "));
@@ -622,7 +623,7 @@ public class Game {
                 }
                 case "FIGHT","F" ->{
                     if(player.getCurrentRoom().isHasMOBS()){
-
+                        player.getCurrentRoom();
                     }else{
                         System.out.println("<There are no enemies to fight>");
                     }
