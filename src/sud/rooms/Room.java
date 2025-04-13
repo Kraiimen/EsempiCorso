@@ -13,7 +13,8 @@ public class Room {
     private Room nordPath, sudPath, westPath, eastPath;
     private boolean hasItems, hasNPC, hasGuards, hasCritters, hasMOBS;
     private Map<String,Item> itemsInRoom;
-    private Map<String,Entity> MOBSInRoom, crittersInRoom,NPCInRoom;
+    private Map<String,Entity>NPCInRoom;
+    private Map<String,Mob> MOBSInRoom;
     private static Map<String, Room> roomMap = new HashMap();
     private String description;
 
@@ -188,11 +189,11 @@ public class Room {
         {
             fieldsN.setPaths(market, fieldsS, debugroom, debugroom);
             fieldsN.setRoomProperties(true, false, false, true, false);
-            fieldsN.getCrittersInRoom().put("CRITTER1", Mob.getMobMap().get("CRITTER"));
-            fieldsN.getCrittersInRoom().put("CRITTER2", Mob.getMobMap().get("CRITTER"));
-            fieldsN.getCrittersInRoom().put("CRITTER3", Mob.getMobMap().get("CRITTER"));
-            fieldsN.getCrittersInRoom().put("CRITTER4", Mob.getMobMap().get("CRITTER"));
-            fieldsN.getCrittersInRoom().put("CRITTER5", Mob.getMobMap().get("CRITTER"));
+            fieldsN.getMOBSInRoom().put("CRITTER1", Mob.getMobMap().get("CRITTER"));
+            fieldsN.getMOBSInRoom().put("CRITTER2", Mob.getMobMap().get("CRITTER"));
+            fieldsN.getMOBSInRoom().put("CRITTER3", Mob.getMobMap().get("CRITTER"));
+            fieldsN.getMOBSInRoom().put("CRITTER4", Mob.getMobMap().get("CRITTER"));
+            fieldsN.getMOBSInRoom().put("CRITTER5", Mob.getMobMap().get("CRITTER"));
         }
         //fields S
         {
@@ -312,8 +313,7 @@ public class Room {
 
     public Room(String name, Room nordPath, Room sudPath, Room westPath, Room eastPath,
                 boolean hasItems, boolean hasNPC, boolean hasGuards, boolean hasCritters, boolean hasMOBS,
-                Map<String,Item> itemsInRoom, Map<String,Entity> MOBSInRoom, Map<String,Entity> guardsInRoom,
-                Map<String,Entity> crittersInRoom, Map<String,Entity> NPCInRoom, String description) {
+                Map<String,Item> itemsInRoom, Map<String,Mob> MOBSInRoom, Map<String,Entity> NPCInRoom, String description) {
         this.name = name;
         this.nordPath = nordPath;
         this.sudPath = sudPath;
@@ -326,7 +326,6 @@ public class Room {
         this.hasMOBS = hasMOBS;
         this.itemsInRoom = itemsInRoom;
         this.MOBSInRoom = MOBSInRoom;
-        this.crittersInRoom = crittersInRoom;
         this.NPCInRoom = NPCInRoom;
         this.description = description;
     }
@@ -335,7 +334,6 @@ public class Room {
         this.name = name;
         this.itemsInRoom = new HashMap<>();
         this.MOBSInRoom = new HashMap<>();
-        this.crittersInRoom = new HashMap<>();
         this.NPCInRoom = new HashMap<>();
         this.description = "";
     }
@@ -455,21 +453,15 @@ public class Room {
         this.itemsInRoom = itemsInRoom;
     }
 
-    public Map<String, Entity> getMOBSInRoom() {
+    public Map<String, Mob> getMOBSInRoom() {
         return MOBSInRoom;
     }
 
-    public void setMOBSInRoom(Map<String, Entity> MOBSInRoom) {
+    public void setMOBSInRoom(Map<String, Mob> MOBSInRoom) {
         this.MOBSInRoom = MOBSInRoom;
     }
 
-    public Map<String, Entity> getCrittersInRoom() {
-        return crittersInRoom;
-    }
 
-    public void setCrittersInRoom(Map<String, Entity> crittersInRoom) {
-        this.crittersInRoom = crittersInRoom;
-    }
 
     public static Map<String, Room> getRoomMap() {
         return roomMap;

@@ -6,6 +6,8 @@ import sud.items.*;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.FileHandler;
 
 public class Game {
@@ -16,7 +18,7 @@ public class Game {
         String name = "";
         String chosenClass;
         int count=0;
-        System.out.println(Entity.colorG+"Hello traveler, what is your name?"+Entity.resetColor);
+        System.out.println(Entity.colorG+"The King: Hello traveler, what is your name?"+Entity.resetColor);
         do{
             name = console.readLine("--> ");
         } while (name.length()>20);
@@ -28,9 +30,9 @@ public class Game {
         }else{
             do {
                 if(count != 0){
-                    System.out.println(Entity.colorG+"Sorry I couldn't understand, what are you?"+Entity.resetColor);
+                    System.out.println(Entity.colorG+"The King: Sorry I couldn't understand, what are you?"+Entity.resetColor);
                 }else{
-                    System.out.println(Entity.colorG+"And what you may be?"+Entity.resetColor);
+                    System.out.println(Entity.colorG+"The King: And what you may be?"+Entity.resetColor);
                 }
                 chosenClass = console.readLine("<Answer with of the following: Wizard, Fighter, Barbarian, Rogue> --> ");
                 count++;
@@ -53,18 +55,82 @@ public class Game {
 
     }
 
-    public static void start() throws GameClosingExeption {
-        //@todo intro
+    public static void start() throws GameClosingExeption, InterruptedException {
+        {
+            System.out.println("""
+                    ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+                    ██████████████████████████████████████████████████████████████████████████░████████████████████████████████████████
+                    ████░░░░░░░░░░░░█████████████░░██████████████████████████████████████████░░████████████████████████████████████████
+                    ███░░░░░░░░░░░░░░████████████░░█████████████████████████████████████████░░░████████████████████████████████████████
+                    ███░░░░░░███░░░░░░░█████░░░██░░██░░░░██░░░░██████░░░████░░░░███░░░███░░░░░░░░░██░░░███░░░░█░░░░███░░░███████░░█████
+                    ███░░░░░████░░░░░░░██░░░█░░░░░░███░░░██░░░░████░░░░░░░███░░░█░░░░░░░████░░░█████░░░████░░░██░░░░░░░░░░███░░░░░░░███
+                    ███░░░░░████░░░░░░░█░░░████░░░░███░░░████░░██░░░███░░░░██░░░░████░░░████░░░█████░░░████░░░██░░░░███░░██░░░░██░░░░██
+                    ███░░░░░░░░░░░░░░░░█░░░██████░░███░░░████░░██░░░███░░░███░░░█████░░░████░░░█████░░░████░░░██░░░░███████░░░░███░░███
+                    ███░░░░░░░░░░░░░░░░█░░░██████░░███░░░████░░██░░░░░░██████░░░█████░░░████░░░█████░░░████░░░██░░░░███████░░░░░░░█████
+                    ███░░░░░█████░░░░░░█░░░██████░░███░░░████░░██░░░█████████░░░█████░░░████░░░█████░░░████░░░██░░░░███████░░░░████████
+                    ███░░░░░█████░░░░░░██░░░█████░░███░░░░░█░░███░░░░░███████░░░█████░░░████░░░█████░░░░█░░░░░██░░░░████████░░░░███████
+                    ███░░░░░█████░░░░░░████░░░░░░░░░░░███░░░░███████░░░░░░░██░░░░░████░░░░░██░░░░░░███░░░░░█░░░░░░░░░░████████░░░░░░░██
+                    █░░░░░░░█████░░░░░░░███████████████████████████████████████████████████████████████████████████████████████████████
+                    ██████████████████████████████████████████████░░░░░░███████████████████████████████████████████████████████████████
+                    █████████████████████████████████████████████░░░███░███████████████████████████████████████████████████████████████
+                    ████████████████████████████████████████████░░░░░░░░███░░░░███░░░░██░░░████████████████████████████████████████████
+                    █████████████████████████████████████████████░░░█████░░░░░░░░███░░░░░░░░███████████████████████████████████████████
+                    █████████████████████████████████████████████░░░█████░░░███░░░██░░░████████████████████████████████████████████████
+                    █████████████████████████████████████████████░░░█████░░░███░░░██░░█████████████████████████████████████████████████
+                    █████████████████████████████████████████████░░░█████░░░███░░░██░░█████████████████████████████████████████████████
+                    █████████████████████████████████████████████░░░░█████░░░░░░███░░░░████████████████████████████████████████████████
+                    █████████████████████░░░░░░░░████░░░░░██░░░████████████████████████████████████████████████████████████████████████
+                    ████████████████████████░░░░███████░████░░░████████████████████████████████████████████████████████████████████████
+                    ████████████████████████░░░░██████░░███████████████████████████████████████████████████████████████████████████████
+                    █████████████████████████░░░██████░███░░░░░░█████░░░░░░░░░░░█████░░░░░░░░███░░░░░█░░░░░░███████████████████████████
+                    █████████████████████████░░░░████░░██████░░░████░░░████░░░░░████░░░████░░░░███░░░░░██░░░░██████████████████████████
+                    ██████████████████████████░░░████░███████░░████░░░██████░░░████░░░██████░░░░██░░░██████████████████████████████████
+                    ██████████████████████████░░░░██░░███████░░████░░░██████░░░████░░░██████░░░░██░░░██████████████████████████████████
+                    ███████████████████████████░░░░█░████████░░████░░░██████░░░████░░░██████░░░░██░░░██████████████████████████████████
+                    ███████████████████████████░░░░░░████████░░████░░░░█████░░░████░░░░█████░░░░██░░░██████████████████████████████████
+                    ████████████████████████████░░░░█████████░░██████░░░░░░░░░░█████░░░░░█░░░░████░░░██████████████████████████████████
+                    ████████████████████████████░░░░██████░░░░░░░█████░░░░██░░░███████░░░░░░████░░░░░░█████████████████████████████████
+                    ██████████████████████████████████████████████████░░████░░░████████████████████████████████████████████████████████
+                    ████████████████████████████████████████████████░░░░███░░██████████████████████████████████████████████████████████
+                    ██████████████████████████████████████████████████░░░░░████████████████████████████████████████████████████████████
+                    ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████""");
+        }
+        System.out.println("\n\n==========================================================");
+        System.out.println("© 2025 Sabrina Salerno e Filippo Aresu. All Rights Reserved.");
+        System.out.println("==============================================================");
+
         System.out.println("<Hi, this is the Narrator speaking, i'll be your guide, for now, i just want you to know>");
         System.out.println("<My presence will be marked by the \"<>\">");
         System.out.println("<When you see this symbol \"|-->\" it means to just give any input to the game, it's just there to give you time to read>");
         System.out.println("<When you see this symbol \"-->\" it means that you, the player will say/do the thing next to it >");
         System.out.println("<When you see this symbol \"( TEXT )->)\" you can write the full name of the action, like NORTH or just the initial like N  >");
-        createPlayerCharacter();
-        moveIntoRoom(Room.getRoomPointerFromName("FIELDSN"),true);
-        interactMenu();
-    }
 
+        createPlayerCharacter();
+        moveIntoRoom(Room.getRoomPointerFromName("CASTLE"),true);
+        intro();
+        interactMenu();
+
+    }
+    private static void intro() throws InterruptedException {
+        Npc king = Npc.getNpcMap().get("KING");
+        System.out.println("<You find yourself in the castle, his majesty himself before you, dying, his gasps of pain might suggest that his last day of life is approaching with every breath he takes.>\n");
+        Thread.sleep(1000);
+        king.speak("Young "+player.getName()+" I have been told you are willing to take charge of my request... see- COUGH COUGH ... I am very ill... and I need your help to get the Magic Ring Of everlasting Vigour back. ..\n");
+        Thread.sleep(1000);
+        System.out.println("<The decrepit old man lets out a laboured sigh. >");
+        Thread.sleep(1000);
+        king.speak("Those goblin bastards managed to steal it from me in my sleep. From now on, any attempted robbery will be severely punished!\n");
+        Thread.sleep(1000);
+        System.out.println("<the king seems to stare at you, as if he wanted to be sure he would choose the right hero.>");
+        Thread.sleep(1000);
+        king.speak(""+player.getName()+"The goblins live in the dark woods, beyond the walls... I'm sure their leader is using my treasure! Be careful, " +
+                "\nequip yourself properly, our tavern will offer you warm food and a place to sleep, in the temple they will help you temper your soul by making you stronger... " +
+                "\nour marketplace will be able to offer you the most suitable equipment to KILL THOSE-\n");
+        Thread.sleep(500);
+        System.out.println("<the sentence is interrupted by a burst of coughing... you almost feel sorry for him. >");
+        Thread.sleep(1000);
+        king.speak("Now go! don't waste time!!!\n");
+    }
     private static void printAvailablePaths(){
         Room north = player.getCurrentRoom().getNordPath();
         Room south = player.getCurrentRoom().getSudPath();
@@ -99,14 +165,6 @@ public class Game {
     private static void printAvailableMOBS(){
         int counter =1;
         for (Entity m : player.getCurrentRoom().getMOBSInRoom().values()){
-            System.out.printf("(%d)-> %s\n" ,counter,m.getName());
-            counter++;
-        }
-        System.out.printf("(%d)-> Nevermind\n",counter);
-    }
-    private static void printAvailableCritters(){
-        int counter =1;
-        for (Entity m : player.getCurrentRoom().getCrittersInRoom().values()){
             System.out.printf("(%d)-> %s\n" ,counter,m.getName());
             counter++;
         }
@@ -277,12 +335,12 @@ public class Game {
                                         "(2)-> NO");
 
                                 if(player.askPlayerIntInput(2)==1){
-                                    if(potion instanceof HealingPotion healingP){
-                                        healingP.use(player);
-                                    }else if(potion instanceof ManaPotion manaP){
-                                        manaP.use(player);
-                                    }else if(potion instanceof TeleportPotion tpP){
-                                        tpP.tepelortToSafety(player);
+                                    switch (potion) {
+                                        case HealingPotion healingP -> healingP.use(player);
+                                        case ManaPotion manaP -> manaP.use(player);
+                                        case TeleportPotion tpP -> tpP.tepelortToSafety(player);
+                                        default -> {
+                                        }
                                     }
                                 }
                                 player.getInventory().remove(choice-1);
@@ -297,7 +355,7 @@ public class Game {
 
                             }
                             case JUNK -> {
-                                System.out.println("<You can't do anything with this>");
+                                System.out.println("<You can't do anything with this, you could try selling this to the Alchemist>");
                             }
                         }
 
@@ -336,6 +394,116 @@ public class Game {
         }
 
     }
+    private static boolean fightMob(Mob mob) throws InterruptedException {
+        while (!player.isDead() && !mob.isDead()) {
+            System.out.println("-----------------------------------");
+            player.printHpBar();
+            mob.printHpBar();
+            System.out.println("-----------------------------------");
+
+            fightMenu();
+
+            int choice;
+            switch (player.getClassName()) {
+                case "WIZARD" -> {
+                    Wizard wizard = (Wizard) player;
+                    choice = player.askPlayerIntInput(3);
+                    switch (choice) {
+                        case 1 -> openInventory();
+                        case 2 -> wizard.attack(mob);
+                        case 3 -> wizard.cast(mob);
+                    }
+                }
+                case "FIGHTER" -> {
+                    Fighter fighter = (Fighter) player;
+                    choice = player.askPlayerIntInput(2);
+                    switch (choice) {
+                        case 1 -> openInventory();
+                        case 2 -> fighter.attack(mob);
+                    }
+                }
+                case "BARBARIAN" -> {
+                    Barbarian barbarian = (Barbarian) player;
+                    choice = player.askPlayerIntInput(2);
+                    switch (choice) {
+                        case 1 -> openInventory();
+                        case 2 -> barbarian.attack(mob);
+                    }
+                }
+                case "ROGUE" -> {
+                    Rogue rogue = (Rogue) player;
+                    choice = player.askPlayerIntInput(2);
+                    switch (choice) {
+                        case 1 -> openInventory();
+                        case 2 -> rogue.attack(mob);
+                    }
+                }
+            }
+
+            if (!mob.isDead()) {
+                mob.attack(player);
+            }
+
+            if (mob.isDead()) {
+                if (!mob.getCarriedItems().isEmpty()) {
+                    System.out.printf("<You retrieve something from the %S lifeless body>%n", mob.getName());
+                    player.getInventory().addAll(mob.getCarriedItems());
+                    if (mob.getCarriedItems().contains(Item.itemMap.get("ring"))) {
+                        triggerEndGameCutscene();
+                    }
+                }
+                return true;
+            }
+        }
+
+        return false;
+    }
+    private static void handleRoomEncounters() throws InterruptedException {
+        Map<String, Mob> mobsInRoom = player.getCurrentRoom().getMOBSInRoom();
+
+        if (mobsInRoom.isEmpty()) {
+            System.out.println("<There is nothing to fighte here>");
+            return;
+        };
+
+        printAvailableMOBS();
+        List<Mob> mobList = new ArrayList<>(mobsInRoom.values());
+
+        int choice = player.askPlayerIntInput(mobList.size() + 1);
+        if (choice != mobList.size() + 1) {
+            Mob selectedMob = mobList.get(choice - 1);
+            boolean mobDefeated = fightMob(selectedMob);
+            if (mobDefeated) {
+                mobsInRoom.remove(selectedMob.getName().toUpperCase() + (choice - 1));
+            }
+        }
+    }
+    private static void triggerEndGameCutscene() throws InterruptedException {
+        Npc king = Npc.getNpcMap().get("KING");
+
+        System.out.println("\n\n===============================");
+        System.out.println("<You feel the weight of destiny in your pocket. The ring... it’s finally yours.>");
+        Thread.sleep(1500);
+        System.out.println("<A warm breeze brushes your face. Time slows down.>");
+        Thread.sleep(1500);
+        System.out.println("<Back at the castle, the old king waits — barely alive.>");
+        Thread.sleep(1500);
+        System.out.println("<You enter the throne room. His eyes, dim with age, sparkle for a moment.>");
+        Thread.sleep(1500);
+
+        king.speak("You did it... you truly did it. The ring... my kingdom... is saved...");
+        Thread.sleep(2000);
+        System.out.println("<He smiles. His breathing slows. And then... peace.>");
+        Thread.sleep(1500);
+
+        System.out.println("\n===============================");
+        System.out.println("    QUEST COMPLETE – THE END   ");
+        System.out.println("===============================");
+
+        System.exit(0);
+    }
+
+
 
     private static void talkTo(String npc){
         switch (npc){
@@ -555,7 +723,7 @@ public class Game {
     }
 
 
-    public static void interactMenu() throws GameClosingExeption {
+    public static void interactMenu() throws GameClosingExeption, InterruptedException {
         String decision;
         int choice; //decision ma int
         String whoPlayerWantToSpeackTo;
@@ -777,142 +945,8 @@ public class Game {
                     }
                 }
                 case "FIGHT","F" ->{
-                    if(player.getCurrentRoom().isHasMOBS()||player.getCurrentRoom().isHasCritters()) {
-                        if (player.getCurrentRoom().isHasMOBS()) {
-                            printAvailableMOBS();
-                            ArrayList<Entity> mobs = new ArrayList<>();
-                            mobs.addAll(player.getCurrentRoom().getMOBSInRoom().values()) ;
-                            int numberOfMobs = player.getCurrentRoom().getMOBSInRoom().size();
-                            choice = player.askPlayerIntInput(numberOfMobs+1);
-                            if(choice == numberOfMobs+1){
-                                Mob mob = (Mob)mobs.get(choice-1);
-                                boolean canCloseFight = false;
-                                while (!player.isDead() && !mob.isDead() && !canCloseFight ) {
-                                    System.out.println("-----------------------------------");
-                                    player.printHpBar();
-                                    mob.printHpBar();
-                                    System.out.println("-----------------------------------");
-                                    fightMenu();
-                                    switch (player.getClassName()){
-                                        case "WIZARD"   ->{
-                                            Wizard playerWizard = (Wizard)player;
-                                            System.out.println(choice = player.askPlayerIntInput(3));
-                                            switch (choice) {
-                                                case 1 -> openInventory();
-                                                case 2 -> player.attack(mob);
-                                                case 3 -> playerWizard.cast(mob);
-                                            }
-                                        }
-                                        case "FIGHTER"  ->{
-                                            Fighter playerFighter = (Fighter)player;
-                                            choice = player.askPlayerIntInput(2);
-                                            switch (choice) {
-                                                case 1 -> openInventory();
-                                                case 2 -> playerFighter.attack(mob);
-                                            }
-                                        }
-                                        case "BARBARIAN"->{
-                                            Barbarian playerBarbarian = (Barbarian) player;
-                                            choice = player.askPlayerIntInput(2);
-                                            switch (choice) {
-                                                case 1 -> openInventory();
-                                                case 2 -> playerBarbarian.attack(mob);
-                                            }
-                                        }
-                                        case "ROGUE"    ->{
-                                            Rogue playerRogue = (Rogue) player;
-                                            choice = player.askPlayerIntInput(2);
-                                            switch (choice) {
-                                                case 1 -> openInventory();
-                                                case 2 -> playerRogue.attack(mob);
-                                            }
-                                        }
-                                    }
-                                    if (!mob.isDead()) {
-                                        mob.attack(player);
-                                    }
-                                    if(mob.isDead()){
-                                        if(!mob.getInventory().isEmpty()){
-                                            System.out.printf("<You retrive something from the %S lifeless body>",mob.getName());
-                                            player.getInventory().addAll(mob.getInventory());
-                                        }
-                                        player.getCurrentRoom().getMOBSInRoom().remove(mob.getName().toUpperCase() + (choice - 1));
-                                        canCloseFight = true;
-                                    }
-                                }
-                            }else {
+                    handleRoomEncounters();
 
-                            }
-                        }
-                        if (player.getCurrentRoom().isHasCritters()) {
-                            printAvailableCritters();
-                            ArrayList<Entity> critters = new ArrayList<>();
-                            critters.addAll(player.getCurrentRoom().getCrittersInRoom().values()) ;
-                            int numberOfCrit = player.getCurrentRoom().getCrittersInRoom().size();
-                            choice = player.askPlayerIntInput(numberOfCrit+1);
-                            if(choice != numberOfCrit+1){
-                                Mob mob = (Mob)critters.get(choice-1);
-                                boolean canCloseFight = false;
-                                while (!player.isDead() && !mob.isDead() && !canCloseFight ) {
-                                    System.out.println("-----------------------------------");
-                                    player.printHpBar();
-                                    mob.printHpBar();
-                                    System.out.println("-----------------------------------");
-                                    fightMenu();
-                                    switch (player.getClassName()){
-                                        case "WIZARD"   ->{
-                                            Wizard playerWizard = (Wizard)player;
-                                            System.out.println(choice = player.askPlayerIntInput(3));
-                                            switch (choice) {
-                                                case 1 -> openInventory();
-                                                case 2 -> player.attack(mob);
-                                                case 3 -> playerWizard.cast(mob);
-                                            }
-                                        }
-                                        case "FIGHTER"  ->{
-                                            Fighter playerFighter = (Fighter)player;
-                                            choice = player.askPlayerIntInput(2);
-                                            switch (choice) {
-                                                case 1 -> openInventory();
-                                                case 2 -> playerFighter.attack(mob);
-                                            }
-                                        }
-                                        case "BARBARIAN"->{
-                                            Barbarian playerBarbarian = (Barbarian) player;
-                                            choice = player.askPlayerIntInput(2);
-                                            switch (choice) {
-                                                case 1 -> openInventory();
-                                                case 2 -> playerBarbarian.attack(mob);
-                                            }
-                                        }
-                                        case "ROGUE"    ->{
-                                            Rogue playerRogue = (Rogue) player;
-                                            choice = player.askPlayerIntInput(2);
-                                            switch (choice) {
-                                                case 1 -> openInventory();
-                                                case 2 -> playerRogue.attack(mob);
-                                            }
-                                        }
-                                    }
-                                    if (!mob.isDead()) {
-                                        mob.attack(player);
-                                    }
-                                    if(mob.isDead()){
-                                        if(!mob.getInventory().isEmpty()){
-                                            System.out.printf("<You retrive something from the %S lifeless body>",mob.getName());
-                                            player.getInventory().addAll(mob.getInventory());
-                                        }
-                                        player.getCurrentRoom().getMOBSInRoom().remove(mob.getName().toUpperCase() + (choice - 1));
-                                        canCloseFight = true;
-                                    }
-                                }
-                            }
-
-                        }
-
-                    }else{
-                        System.out.println("<There are no enemies to fight>");
-                    }
                 }
                 case "CHARACTER MENU","CM","C" ->{
 

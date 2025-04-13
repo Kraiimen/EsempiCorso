@@ -17,6 +17,8 @@ public class Start {
         }catch (GameClosingExeption e){
             System.out.println(Entity.colorR+"THE GAME IS NOW CLOSING");
 
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }

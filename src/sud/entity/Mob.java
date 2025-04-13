@@ -30,11 +30,10 @@ public class Mob extends Entity{
     }
 
     static{
-        ArrayList<Item> vuoto = new ArrayList<>();
-        Mob critter = new Mob("Critter", 10, 5, 10, 0, vuoto, 0);
+        Mob critter = new Mob("Critter", 10, 5, 10, 0, new ArrayList<>(), 0);
         mobMap.put("CRITTER", critter);
         mobMap.get("CRITTER").carriedItems.add(Item.itemMap.get("crittersskin"));
-        Mob goblin = new Mob("Goblin", 15, 10, 20, 0, vuoto, 1);
+        Mob goblin = new Mob("Goblin", 15, 10, 20, 0, new ArrayList<>(), 1);
         mobMap.put("GOBLIN", goblin);
         if(dices.rd100() >50){
             mobMap.get("GOBLIN").carriedItems.add(Item.itemMap.get("goblinteeth"));
@@ -45,17 +44,17 @@ public class Mob extends Entity{
                 }
             }
         }
-        Mob bugBear = new Mob("Bugbear", 30, 15, 40, 3, vuoto, 2);
+        Mob bugBear = new Mob("Bugbear", 30, 15, 40, 3, new ArrayList<>(), 2);
         mobMap.put("BUGBEAR", bugBear);
         if(dices.rd100()>50){
             mobMap.get("BUGBEAR").carriedItems.add(Item.itemMap.get("bugbearbrokenarmor"));
         }
-        Mob ogre = new Mob("Ogre", 50, 15, 100, 5, vuoto, 3);
+        Mob ogre = new Mob("Ogre", 50, 15, 100, 5, new ArrayList<>(), 3);
         mobMap.put("OGRE", ogre);
         if(dices.rd100()>50){
             mobMap.get("OGRE").carriedItems.add(Item.itemMap.get("ogrefang"));
         }
-        Mob boss = new Mob("Landrodol The Warlord", 100, 20, 200, 5, vuoto, 4);
+        Mob boss = new Mob("Landrodol The Warlord", 100, 20, 200, 5, new ArrayList<>(), 4);
         mobMap.put("BOSS", boss);
         mobMap.get("BOSS").carriedItems.add(Item.itemMap.get("ring"));
     }
