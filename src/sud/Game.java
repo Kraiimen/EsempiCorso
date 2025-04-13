@@ -165,7 +165,7 @@ public class Game {
         if(choiceI==counter){
             npc.speak(escapeLine);
         }else{
-            Item itemSold= player.getInventory().get(choiceI);
+            Item itemSold= player.getInventory().get(choiceI-1);
             if(player.getCoins()-(int)(itemSold.getPrice()*0.8)==0){
                 System.out.println("The item has now resell value");
             }else{
