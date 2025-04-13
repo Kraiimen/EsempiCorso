@@ -21,25 +21,28 @@ public class Zone {
         this.description = description;
     }
 
+
+
+
+
     public void setAggroMobSpawnChanceType(Mob type, int numMaxMobs, int spawnChance){
         Random random = new Random();
         for(int i = 1; i < numMaxMobs; i++){
             int hundredpercent = random.nextInt(1, 101);
             if(spawnChance >= hundredpercent){
                 if(aggressiveMobs.size() < 4) {
-                    Mob newMob = new Mob(type.getCharacterName(), type.getAgility(), type.getStamina(), type.getStrength(), type.getIntelligence(),type.getXp());
+                    Mob newMob = new Mob(type.getCharacterName(), type.getAgility(), type.getStamina(), type.getStrength(), type.getIntelligence(),type.getXp(),false);
                     aggressiveMobs.add(newMob);
                 }
             }
         }
     }
-
     public void setPassiveMobSpawnChanceType(Mob type, int numMaxMobs, int spawnChance){
         Random random = new Random();
         for(int i = 1; i < numMaxMobs; i++){
             int hundredpercent = random.nextInt(1, 101);
             if(spawnChance >= hundredpercent){
-                Mob newMob = new Mob(type.getCharacterName(),type.getAgility(), type.getStamina(),type.getStrength(),type.getIntelligence(),type.getXp());
+                Mob newMob = new Mob(type.getCharacterName(),type.getAgility(), type.getStamina(),type.getStrength(),type.getIntelligence(),type.getXp(), false);
                 if(passiveMobs.size() < 4) {
                     passiveMobs.add(newMob);
                 }
@@ -52,7 +55,7 @@ public class Zone {
         boolean exist = passiveMobs.stream().anyMatch
                 (mob -> getName().equalsIgnoreCase("PointerGuard"));
         if(!exist){
-            setPassiveMobSpawnChanceType(new Mob("PointerGuard",10,10,10,10,15),2,30);
+            setPassiveMobSpawnChanceType(new Mob("PointerGuard",10,10,10,10,15,false),2,30);
         }
         if(exist && dice.nextInt(1,101) <= 60){
 

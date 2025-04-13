@@ -19,7 +19,25 @@ public abstract class Entity {
 
 
 
+    public String printHpBar(){
+        int barLenght = 20;
+        if(currentHealth > 100){
+            barLenght = 50;
+        }
+        int filledLenght = (int)((double) currentHealth / maxHp * barLenght);
 
+        String bar = "HP [";
+
+        for(int i = 0; i < barLenght; i++){
+            if(i < filledLenght) {
+                bar += "█";
+            } else {
+                bar += "░";
+            }
+        }
+        bar += "] ";
+        return getCharacterName() + ": "  + "\u001B[32m" + bar + "\u001B[0m" + currentHealth + "/"+ maxHp ;
+    }
     public int getCurrentHealth() {
         return currentHealth;
     }

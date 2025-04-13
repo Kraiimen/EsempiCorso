@@ -49,6 +49,7 @@ public abstract class InteractiveEntity extends Entity {
             double damage = (int)(this.attack * (100.0 / (100.0 + target.defend)));
             target.suffer((int)damage);
             System.out.println(target.getCharacterName() + " ha subito " + damage + " danni" );
+            System.out.println(target.printHpBar());
             target.checkAlive();
         }
     }
@@ -91,10 +92,10 @@ public abstract class InteractiveEntity extends Entity {
         System.out.println(attacker.getCharacterName() + " Ha attaccato " + getCharacterName() + " furtivamente.");
         int dodge = random.nextInt(agility);
         Thread.sleep(500);
-        System.out.println(getCharacterName() + "ha rollato " + dodge + " su " +attacker.agility+ " in base alla sua agilità.");
+        System.out.println(getCharacterName() + " ha rollato " + dodge + " su " +attacker.agility+ " in base alla sua agilità.");
         Thread.sleep(500);
         int hit = random.nextInt(attacker.agility);
-        System.out.println(attacker.getCharacterName() + " ha rollato " + hit + " su " + attacker.agility +".");
+        System.out.println(attacker.getCharacterName() + " ha rollato " + hit + " su " + attacker.agility +" in base alla sua agilità.");
         Thread.sleep(500);
 
         if(hit > dodge){
@@ -129,7 +130,7 @@ public abstract class InteractiveEntity extends Entity {
             System.out.println(getCharacterName() + " Ha attaccato " + target.getCharacterName() + " furtivamente.");
             int dodge = random.nextInt(target.agility);
             Thread.sleep(500);
-            System.out.println("Hai rollato " + dodge + " su " +agility+ " in base alla tua agilità.");
+            System.out.println("Hai rollato " + dodge + " su " + agility + " in base alla tua agilità.");
             Thread.sleep(500);
             int hit = random.nextInt(target.agility);
             System.out.println(target.getCharacterName() + " ha rollato " + hit + " su " + target.agility +".");
@@ -159,6 +160,7 @@ public abstract class InteractiveEntity extends Entity {
             System.out.println("Qualcosa è andato storto durante il combattimento");
         }
     }
+
 
     public int getAttack(){
         return attack;
