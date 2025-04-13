@@ -64,7 +64,8 @@ public class Player extends Entity{
         this.strMod = (this.strength - 10)/2;
         this.dexMod = (this.dexterity - 10)/2;
         this.setAttackDamage(1+strMod);
-        this.setMaxHp(maxHp+conMod);
+        this.setMaxHp(this.getMaxHp()+conMod);
+        this.setHealthPoints(this.getMaxHp());
         this.level =1;
         this.coins = dices.rd10();
         this.setAc(10+dexMod);

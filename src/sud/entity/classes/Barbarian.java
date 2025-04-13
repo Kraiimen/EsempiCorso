@@ -18,6 +18,7 @@ public class Barbarian extends Player {
     public void increseHp(){
         this.setHealthPoints(this.getConMod()+ dices.roll(hpDiceFaces));
     }
+
     @Override
     public void attack (Entity attacked) {
         int damage = 0;
@@ -25,17 +26,19 @@ public class Barbarian extends Player {
         if (roll == 20) {
             damage = this.getEquipedWeapon().rollDamage() * 2;
         } else if (roll == 1) {
-            System.out.printf(this.getEntityColor() + "Your attack was soo weak %s uses the opportunity and attacks you" + resetColor, attacked.getName());
+            System.out.printf(this.getEntityColor() + "<Your attack was soo weak %s uses the opportunity and attacks you>" + resetColor, attacked.getName());
             attacked.attack(this);
             return;
         } else if (doesAttackRollHit(attacked, roll)) {
-            damage = this.getEquipedWeapon().rollDamage();
+            damage = this.getEquipedWeapon().rollDamage()+getStrMod();
+            System.out.printf(this.getEntityColor() + "<%s is attacking %s with the the %s for %d damage>\n " + resetColor, this.getName(), attacked.getName(),this.getEquipedWeapon().getName(), damage);
+            attacked.hurt(damage);
         }
+        if (attacked.getHealthPoints()<1) {
 
-        System.out.printf(this.getEntityColor() + "%s is attacking %s with the %s for %d damage\n " + resetColor, this.getName(),this.getEquipedWeapon().getName(), attacked.getName(), damage);
-        attacked.hurt(damage +this.getStrMod());
-        if (attacked.isDead()) {
-            System.out.println(this.getEntityColor() + attacked.getName() + " has died by that hit\n " + resetColor);
+            System.out.println(this.getEntityColor() + attacked.getName() + " <has died by that hit>\n " + resetColor);
+            System.out.printf("<You gain %d Xp>",attacked.getXpOnDeath());
+            this.setXp(this.getXp()+attacked.getXpOnDeath());
         }
     }
 

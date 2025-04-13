@@ -17,7 +17,7 @@ public class Entity {
     private int xpOnDeath=0;
     private Room currentRoom;
     private ArrayList<Item> inventory;
-    public static Weapon baseWeapon = new Weapon(0,"Nothing",0);
+    public static Weapon baseWeapon = new Weapon(0,"Nothing",2);
     private Weapon equipedWeapon = baseWeapon;
     public static Armor baseArmor = new Armor(0,"Nothing", 0,0);
     private Armor equipedArmor= baseArmor;
@@ -68,24 +68,45 @@ public class Entity {
         }
     }
 
+    public void printHpBar(){
+        int barLenght = 20;
+        if(this.healthPoints > 100){
+            barLenght = 50;
+        }
+        int filledLenght = (int)((double) this.healthPoints / maxHp * barLenght);
+
+        String bar = " [";
+
+        for(int i = 0; i < barLenght; i++){
+            if(i < filledLenght) {
+                bar += "█";
+            } else {
+                bar += "░";
+            }
+        }
+        bar += "] ";
+        System.out.printf("%-20s: %s%s%s%d/%d\n", this.getName(),this.entityColor,bar,Entity.resetColor,healthPoints,maxHp);
+    }
+
     public void attack (Entity attacked){
         int damage=0;
         int roll = dices.rd20();
         if( roll == 20){
             damage = equipedWeapon.rollDamage()*2;
         } else if (roll == 1) {
-            System.out.printf(getWithColor("Your attack was soo weak %s uses the opportunity and attacks you"),attacked.getName());
+            System.out.printf(getWithColor("<Your attack was soo weak %s uses the opportunity and attacks you>\n"),attacked.getName());
             attacked.attack(this);
             return;
         }else if(doesAttackRollHit(attacked,roll)){
             damage = equipedWeapon.rollDamage();
+            System.out.printf(getWithColor("<%s is attacking %s for %d damage>\n"), name, attacked.getName(),damage);
+            attacked.hurt(damage);
         } else if (!doesAttackRollHit(attacked,roll )) {
-            System.out.printf(getWithColor("%s missed his attack"), name);
+            System.out.printf(getWithColor("<%s missed his attack>\n"), name);
         }
-        System.out.printf(getWithColor("%s is attacking %s for %d damage\n "), name, attacked.getName(),damage);
-        attacked.hurt(damage);
         if(attacked.isDead){
-            System.out.printf(getWithColor("%s has died by that hit"),attacked.getName());
+            System.out.printf(getWithColor("<%s has died by that hit>\n"),attacked.getName());
+
         }
 
     }

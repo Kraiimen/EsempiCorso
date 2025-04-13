@@ -37,7 +37,7 @@ public class Rogue extends Player {
             damage = this.getEquipedWeapon().rollDamage();
         }
 
-        System.out.printf(this.getEntityColor() + "%s is attacking %s with %s for %d damage\n " + resetColor, this.getName(),this.getEquipedWeapon().getName(), attacked.getName(), damage);
+        System.out.printf(this.getEntityColor() + "%s is attacking %s with %s for %d damage\n " + resetColor, this.getName(), attacked.getName(),this.getEquipedWeapon().getName(), damage);
         attacked.hurt(damage + this.getDexMod());
         if (this.getEquipedArmor().getName().equalsIgnoreCase("Leather armor")){
             if(dices.rd100()>=75){
@@ -49,10 +49,14 @@ public class Rogue extends Player {
             if(dices.rd100()>=90){
                 System.out.printf(this.getEntityColor() + "%s manages to take %s by surprise and deal a second sneak attack for %d damage\n " + resetColor, this.getName(), attacked.getName(), damage);
                 attacked.hurt(this.getDexMod()*4);
+                System.out.printf(this.getEntityColor() + "<%s is attacking %s with the the %s for %d damage>\n " + resetColor, this.getName(), attacked.getName(),this.getEquipedWeapon().getName(), damage);
+                attacked.hurt(damage);
             }
-        }
-        if (attacked.isDead()) {
-            System.out.println(this.getEntityColor() + attacked.getName() + " has died by that hit\n " + resetColor);
+            if (attacked.getHealthPoints()<1) {
+
+                System.out.println(this.getEntityColor() + attacked.getName() + " <has died by that hit\n> " + resetColor);
+                System.out.printf("<You gain %d Xp>",attacked.getXpOnDeath());
+                this.setXp(this.getXp()+attacked.getXpOnDeath());            }
         }
     }
 

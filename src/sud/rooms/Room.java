@@ -188,30 +188,30 @@ public class Room {
         {
             fieldsN.setPaths(market, fieldsS, debugroom, debugroom);
             fieldsN.setRoomProperties(true, false, false, true, false);
-            fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("CRITTER").getName().toUpperCase(), Mob.getMobMap().get("CRITTER"));
-            fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("CRITTER").getName().toUpperCase(), Mob.getMobMap().get("CRITTER"));
-            fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("CRITTER").getName().toUpperCase(), Mob.getMobMap().get("CRITTER"));
-            fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("CRITTER").getName().toUpperCase(), Mob.getMobMap().get("CRITTER"));
-            fieldsN.getCrittersInRoom().put(Mob.getMobMap().get("CRITTER").getName().toUpperCase(), Mob.getMobMap().get("CRITTER"));
+            fieldsN.getCrittersInRoom().put("CRITTER1", Mob.getMobMap().get("CRITTER"));
+            fieldsN.getCrittersInRoom().put("CRITTER2", Mob.getMobMap().get("CRITTER"));
+            fieldsN.getCrittersInRoom().put("CRITTER3", Mob.getMobMap().get("CRITTER"));
+            fieldsN.getCrittersInRoom().put("CRITTER4", Mob.getMobMap().get("CRITTER"));
+            fieldsN.getCrittersInRoom().put("CRITTER5", Mob.getMobMap().get("CRITTER"));
         }
         //fields S
         {
             fieldsS.setPaths(fieldsN, forest, debugroom, debugroom);
             fieldsS.setRoomProperties(true, false, false, false, true);
-            fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("GOBLIN").getName().toUpperCase(), Mob.getMobMap().get("GOBLIN"));
-            fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("GOBLIN").getName().toUpperCase(), Mob.getMobMap().get("GOBLIN"));
-            fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("GOBLIN").getName().toUpperCase(), Mob.getMobMap().get("GOBLIN"));
-            fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("GOBLIN").getName().toUpperCase(), Mob.getMobMap().get("GOBLIN"));
-            fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("GOBLIN").getName().toUpperCase(), Mob.getMobMap().get("GOBLIN"));
+            fieldsS.getMOBSInRoom().put("GOBLIN1", Mob.getMobMap().get("GOBLIN"));
+            fieldsS.getMOBSInRoom().put("GOBLIN2", Mob.getMobMap().get("GOBLIN"));
+            fieldsS.getMOBSInRoom().put("GOBLIN3", Mob.getMobMap().get("GOBLIN"));
+            fieldsS.getMOBSInRoom().put("GOBLIN4", Mob.getMobMap().get("GOBLIN"));
+            fieldsS.getMOBSInRoom().put("GOBLIN5", Mob.getMobMap().get("GOBLIN"));
         }
         //forest
         {
             forest.setPaths(fieldsS, debugroom, debugroom, bossRoom);
             forest.setRoomProperties(true, false, false, false, true);
-            fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("BUGBEAR").getName().toUpperCase(), Mob.getMobMap().get("BUGBEAR"));
-            fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("BUGBEAR").getName().toUpperCase(), Mob.getMobMap().get("BUGBEAR"));
-            fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("OGRE").getName().toUpperCase(), Mob.getMobMap().get("OGRE"));
-            fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("OGRE").getName().toUpperCase(), Mob.getMobMap().get("OGRE"));
+            forest.getMOBSInRoom().put("BUGBEAR1", Mob.getMobMap().get("BUGBEAR"));
+            forest.getMOBSInRoom().put("BUGBEAR2", Mob.getMobMap().get("BUGBEAR"));
+            forest.getMOBSInRoom().put("ORGRE3", Mob.getMobMap().get("OGRE"));
+            forest.getMOBSInRoom().put("ORGRE4", Mob.getMobMap().get("OGRE"));
         }
         //boss Room
         {
