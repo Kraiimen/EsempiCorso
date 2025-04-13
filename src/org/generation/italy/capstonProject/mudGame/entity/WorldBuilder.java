@@ -37,13 +37,18 @@ public class WorldBuilder {
         Npc enemy4 = Enemy.generateEnemy("josh", 25, bakery);
         Npc enemy5 = Enemy.generateEnemy("monster", 30, gardenC);
 
-        Npc bigCato = new Enemy("Big Cato", 100, 30, woods1, 0.5);
-        bigCato.getInventory().addItem(new Armor("The One Ring", 10, 10, 10));
+        Npc bigCato = new EnemyBoss("Big Cato", 100, 30, woods1, 0.5);
+        Item ring = new Armor("The One Ring", 10, 10, 10);
+        bigCato.getInventory().addItem(ring);
 
-        guard1.getInventory().addItem(new Potion("Healing Potion", 5, 0));
+        guard1.getInventory().addItem(new Potion("Healing Potion", 0.5, 0));
+        guard1.getInventory().addItem(new Weapon("Super sword", 6));
+        guard1.getInventory().addItem(new Armor("Fancy boots", 1, 0, 3));
+        guard1.getInventory().addItem(new Food("Avocado toast", 0.2));
+
         cat2.getInventory().addItem(new Weapon("Rusty Dagger", 3));
 
-        Npc enemy1 = new Enemy("Very Mean Monster", 40, 7, marketSquare, 0.3);
+        Npc enemy1 = new Enemy("Very Mean Monster", 40, 7, gardenA, 0.3);
         Npc guard3 = new Guard("Guard 145", 60, marketSquare);
         enemy1.getInventory().addItem(new Armor("Wooden Shield", 3, 0, 0));
         enemy1.getInventory().addItem(new Food("Apple", 0.3));

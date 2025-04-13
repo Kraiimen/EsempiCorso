@@ -2,6 +2,7 @@ package org.generation.italy.capstonProject.mudGame.entity.npc;
 
 import org.generation.italy.capstonProject.mudGame.entity.items.Armor;
 import org.generation.italy.capstonProject.mudGame.entity.items.Item;
+import org.generation.italy.capstonProject.mudGame.entity.items.Potion;
 import org.generation.italy.capstonProject.mudGame.entity.items.Weapon;
 import org.generation.italy.capstonProject.mudGame.entity.rooms.Room;
 
@@ -26,6 +27,12 @@ public class Guard extends Npc{
         if (chanceToHaveArmor == 0) {
             Item armor = new Armor("Shield", (int)(Math.random() * 4), (int)(Math.random() * 2), 0);
             guard.getInventory().addItem(armor);
+        }
+
+        int chanceToHavePotion = (int)(Math.random() * 5);
+        if (chanceToHavePotion == 0) {
+            Item potion = new Potion("Experience Potion", 0, (int)(Math.random() * 3));
+            guard.getInventory().addItem(potion);
         }
 
         return guard;

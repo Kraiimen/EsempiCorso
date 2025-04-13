@@ -51,6 +51,8 @@ public class Game {
 
         System.out.println("Character created! Welcome " + newPlayer.getCharName() + " the " + newPlayer.getRole() + "!");
         System.out.println();
+        newPlayer.printStats();
+        System.out.println();
         return newPlayer;
     }
 }

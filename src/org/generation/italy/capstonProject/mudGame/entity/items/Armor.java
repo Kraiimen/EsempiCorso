@@ -50,11 +50,11 @@ public class Armor extends Item implements Equipable{
 
     @Override
     public String toString() {
-        return "  Armor{" +
-                "   \nname: " + getName() +
-                (bonusAgility > 0 ? ",      \nagility points: " + bonusAgility : "") +
-                (bonusIntelligence > 0 ? ",     \nintelligence points: " + bonusIntelligence : "") +
-                (bonusStamina > 0 ? ",      \nstamina points: " + bonusStamina : "") +
-                "\n}";
+        return "\n     Armor{" +
+                "\n          name: " + getName() +
+                (bonusAgility > 0 ? ",      \n          agility points: " + bonusAgility : "") +
+                (bonusIntelligence > 0 ? ",     \n          intelligence points: " + bonusIntelligence : "") +
+                (bonusStamina > 0 ? ",      \n          stamina points: " + bonusStamina : "") +
+                "\n     }";
     }
 }

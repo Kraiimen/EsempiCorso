@@ -89,9 +89,7 @@ public class Inventory {
 
     @Override
     public String toString() {
-        return "\nInventory{" +
-                "\nitemsList: " + itemsList +
-                "\n}";
+        return "\n   Inventory" + itemsList + "\n";
     }
 
     public int getMaxQuantity() {

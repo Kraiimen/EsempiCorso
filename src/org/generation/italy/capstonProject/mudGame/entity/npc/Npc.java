@@ -36,11 +36,11 @@ public class Npc extends Entity {
     public void attack(Entity target) {
         damage = this.calculateDamage();
         if(target instanceof Player) {
-            System.out.println(this.getCharName() + " is attacking you");
+            System.out.println("\u001B[31m"  + this.getCharName() + " is attacking you"  + "\033[0m");
         } else {
-            System.out.println(this.getCharName() + " is attacking " + target.getCharName());
+            System.out.println("\u001B[31m"  +  this.getCharName() + " is attacking " + target.getCharName()  + "\033[0m");
         }
-        System.out.println(this.getCharName() + " inflicts " + getDamage() + "/" + getMaxDamage() + " damage.");
+        System.out.println("\u001B[31m"  +  this.getCharName() + " inflicts " + getDamage() + "/" + getMaxDamage() + " damage."  + "\033[0m");
         target.hasTakenDamage(damage);
         if(target instanceof Player player) {
             player.managePlayerInteraction(this, new Scanner(System.in));
@@ -60,7 +60,7 @@ public class Npc extends Entity {
                 }
             }
         } else {
-            System.out.println(this.getCharName() + " says: " + (messages.isEmpty() ? "Hi " + target.getCharName() + "!" : messages.getFirst()));
+            System.out.println("\033[0;33m" + this.getCharName() + " says: " + (messages.isEmpty() ? "Hi " + target.getCharName() + "!" : messages.getFirst())  + "\033[0m");
         }
     }
 
@@ -75,16 +75,15 @@ public class Npc extends Entity {
                 room.addItemToRoom(item);
             }
         }
-        System.out.println(this.getCharName() + " dropped " + inventory.currentInventoryTotal() + " items");
+        System.out.println("\033[0;33m" + this.getCharName() + " dropped " + inventory.currentInventoryTotal() + " items"  + "\033[0m");
         inventory.getAll().clear();
-
     }
 
     public void dropCoins(Player player){
         int money = wallet.getBalance();
         if (money > 0) {
             player.getWallet().addCoins(money);
-            System.out.println("You looted " + money + " coins from " + getCharName() + "'s body.");
+            System.out.println("\033[0;32m" + "You looted " + money + " coins from " + getCharName() + "'s body." + "\033[0m");
             wallet.takeCoins(money);
         }
     }
@@ -108,12 +107,11 @@ public class Npc extends Entity {
     @Override
     public String toString() {
         return "\nNpc{" +
-                "\ncharName: '" + getCharName() + '\'' +
-                ", \nrole: '" + role +
-                ", \nhealthPoints: " + getHealthPoints() + "/" + getMaxHP() +
-                ", \nmaxDamage: " + getMaxDamage() +
-                ", \nisHostile: " + isHostile +
-                ", \ninventory: " + inventory + '\'' +
+                "\n   charName: '" + getCharName() + '\'' +
+                ", \n   role: '" + role +
+                ", \n   healthPoints: " + getHealthPoints() + "/" + getMaxHP() +
+                ", \n   maxDamage: " + getMaxDamage() +
+                ", \n   isHostile: " + isHostile + inventory + '\'' +
                 "\n}";
     }
 

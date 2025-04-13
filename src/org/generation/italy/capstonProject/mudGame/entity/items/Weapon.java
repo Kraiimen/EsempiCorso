@@ -30,9 +30,9 @@ public class Weapon extends Item implements Equipable{
 
     @Override
     public String toString() {
-        return "  Weapon{" +
-                "   \nname: " + getName() +
-                ",      \ndamage points: " + bonusDamage +
-                "\n}";
+        return "\n     Weapon{" +
+                "\n          name: " + getName() +
+                ",\n          damage points: " + bonusDamage +
+                "\n     }";
     }
 }

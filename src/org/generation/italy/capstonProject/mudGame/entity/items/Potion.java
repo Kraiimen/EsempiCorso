@@ -47,10 +47,10 @@ public class Potion extends Item implements Consumable{
 
     @Override
     public String toString() {
-        return " Potion{" +
-                "   \nname: " + getName() +
-                (healAmount > 0 ? ",    \n health points: " + healAmount : "") +
-                (expAmount > 0 ? ",     \n experience points: " + expAmount : "") +
-                "\n}";
+        return " \n     Potion{" +
+                "\n          name: " + getName() +
+                (healAmount > 0 ? ",    \n          health points: " + healAmount : "") +
+                (expAmount > 0 ? ",     \n          experience points: " + expAmount : "") +
+                "\n     }";
     }
 }

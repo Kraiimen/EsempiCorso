@@ -68,6 +68,38 @@ public class Room {
         cityDoors.setRoomContents();
         woods1.setOneDirection(cityDoors, Direction.NORTH);
         woods1.setRoomContents();
+
+        templeSquare.setDescription("""
+                A peaceful square paved with worn stone tiles. Old statues line the edges, their faces eroded by time. Pilgrims sometimes pause here in quiet reflection.
+                """);
+        temple.setDescription("""
+                Tall pillars rise toward a vaulted ceiling lost in shadow. The scent of incense lingers in the still air. A sense of calm—and something deeper—pervades the space.
+                """);
+        marketSquare.setDescription("""
+                Lively chatter echoes between colorful stalls. You smell spices, roasted nuts, and hear a bard playing somewhere nearby. It feels like the city’s heart beats here.
+                """);
+        armory.setDescription("""
+                Cold metal glints in the torchlight. Racks of weapons and armor line the walls, each piece well-kept and battle-ready. The silence is heavy, like before a storm.
+                """);
+        bakery.setDescription("""
+                Warmth radiates from the stone ovens. The air is rich with the scent of fresh bread and sweet rolls. A quiet hum of life buzzes from the backroom.
+                """);
+        gardenA.setDescription("""
+                Stone paths cut through trimmed hedges and flower beds. A small fountain bubbles at the center. Every leaf seems perfectly placed.
+                """);
+        gardenB.setDescription("""
+                Nature has taken over. Vines twist along crumbling walls and moss carpets the ground. It's peaceful, but you feel watched.
+                """);
+        gardenC.setDescription("""
+                Tucked behind ivy-covered gates, this small garden feels untouched. Wild herbs and soft grass grow freely. It’s easy to forget the world beyond.
+                """);
+        cityDoors.setDescription("""
+                Massive wooden gates reinforced with iron. Guards stand watch, eyes sharp. Beyond them, the road stretches into the unknown.
+                """);
+        woods1.setDescription("""
+                Tall trees sway above, filtering the light into shifting patterns. Every twig snap echoes. You’re not sure if you’re alone.
+                """);
+
     }
 
     public Room (String name){
@@ -212,6 +244,7 @@ public class Room {
 
     public void printRoomContents(){
         StringBuilder message = new StringBuilder("You are in the " + this.getName() + "!\n");
+        System.out.println(this.description);
 
         if(hasEntities){
             message.append("\nIn this room you can find " + entities.size() + " entities to interact with.\n").append(getEntities());
@@ -344,5 +377,9 @@ public class Room {
 
     public Map<Direction, Room> getNextRooms() {
         return nextRooms;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

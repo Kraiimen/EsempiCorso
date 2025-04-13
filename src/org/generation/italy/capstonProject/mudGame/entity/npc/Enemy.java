@@ -24,14 +24,15 @@ public class Enemy extends Npc{
         int finalDamage = damage;
 
         if(target instanceof Player) {
-            System.out.println(this.getCharName() + " is attacking you!");
+            System.out.println("\u001B[31m" + this.getCharName() + " is attacking you!" + "\033[0m");
         }
 
         if(Math.random() < criticalChance){
+            System.out.println("\u001B[31m" + this.getCharName() + "strike a critical attack!" + "\033[0m");
             finalDamage *= 2;
         }
 
-        System.out.println(this.getCharName() + " inflicts " + getDamage() + "/" + getMaxDamage() + " damage.");
+        System.out.println("\u001B[31m" + this.getCharName() + " inflicts " + finalDamage + "/" + getMaxDamage() + " damage." + "\033[0m");
         target.hasTakenDamage(finalDamage);
 
         if(target instanceof Player player) {
@@ -66,4 +67,11 @@ public class Enemy extends Npc{
         return enemy;
     }
 
+    public double getCriticalChance() {
+        return criticalChance;
+    }
+
+    public void setCriticalChance(double criticalChance) {
+        this.criticalChance = criticalChance;
+    }
 }

@@ -14,14 +14,14 @@ public class Vendor extends Npc{
 
     public Vendor(String charName, int maxHP, Room currentRoom) {
         super(charName, maxHP, 7, currentRoom, false, NpcRole.VENDOR);
-        getMessages().add("Ehi compare. Vuoi comprare una meridiana?");
+        getMessages().add("\033[0;33m" +  "Ehi compare. Vuoi comprare una meridiana?" + "\033[0m");
         this.prices = new HashMap<>();
     }
 
     public void seeShop(Player player, Scanner scanner) {
-        System.out.println("Welcome to my shop! Take a look around:");
+        System.out.println("\033[0;33m" +  "Welcome to my shop! Take a look around:" + "\033[0m");
         if (inventory.getAll().isEmpty()) {
-            System.out.println("Sorry, looks like I need to do a restock. Shop is closed for the day.");
+            System.out.println("\033[0;33m" + "Sorry, looks like I need to do a restock. Shop is closed for the day." + "\033[0m");
         } else {
             GameMenuUtils.displayShopMenu(this, player, scanner);
         }

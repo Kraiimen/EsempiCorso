@@ -52,7 +52,7 @@ public abstract class Player extends Entity {
     @Override
     public void attack(Entity target){
         int damage = this.calculateDamage();
-        System.out.println(this.getCharName() + " attacks " + target.getCharName());
+        System.out.println("\033[0;32m" + this.getCharName() + " attacks " + target.getCharName() + "\033[0m");
         target.hasTakenDamage(damage);
         target.manageInteraction(this);
     }
@@ -62,7 +62,7 @@ public abstract class Player extends Entity {
         if(experience >= maxExperience){
             levelUp();
         }
-        System.out.println("You gained experience! Your experience is now" + experience + "/" + maxExperience);
+        System.out.println("You gained experience! Your experience is now " + experience + "/" + maxExperience);
     }
 
     @Override
@@ -114,6 +114,9 @@ public abstract class Player extends Entity {
                                 resolved = true;
                             } else {
                                 System.out.println("Run away failed! Try again or choose another option");
+                                int inflictedDamage = target.calculateDamage();
+                                this.subtractHealthPoints(inflictedDamage);
+                                System.out.println("You lost " + inflictedDamage + " HP.");
                             }
                             break;
                         case 3:
@@ -160,7 +163,7 @@ public abstract class Player extends Entity {
             vendor.manageInteraction(this);
             vendor.seeShop( this, scanner);
         } else if (entity instanceof Npc npc){
-            System.out.println("Say something: ");
+            System.out.println("\033[0;32m" + "Say something: " + "\033[0m");
             String input = scanner.nextLine();
             npc.manageInteraction(this);
         } else {
@@ -176,7 +179,7 @@ public abstract class Player extends Entity {
                 for(Entity entity : getCurrentRoom().getEntities()){
                     if(entity instanceof Guard guard){
                         System.out.println("A guard saw you attacking a cat!");
-                        System.out.println(guard.getCharName() + " says: Revenge for the cat!");
+                        System.out.println("\u001B[31m" + guard.getCharName() + " says: Revenge for the cat!" + "\033[0m");
                         guard.attack(this);
                         guard.setIsUnderAttack(true);
                         guard.manageInteraction(this);
@@ -186,13 +189,16 @@ public abstract class Player extends Entity {
             if(target.isDead()){
                 if(target instanceof Cat){
                     hasKilledKitties = true;
+                    gainExperience(1);
+                }else{
+                    gainExperience(3);
                 }
                 if(target instanceof Npc npc){
                     npc.dropCoins(this);
                 }
                 setIsUnderAttack(false);
                 getCurrentRoom().removeEntityFromRoom(target);
-                gainExperience(3);
+
                 GameMenuUtils.displayRoomActions(this, scanner);
                 break;
             }
@@ -208,7 +214,7 @@ public abstract class Player extends Entity {
                 answer = console.readLine("You can try running away in a random direction [a] or use an item from your inventory [b]");
                 if (answer.equals("a")) {
                     if (canRunFast()){
-                        System.out.println("You successfully ran away!");
+                        System.out.println("\033[0;32m" + "You successfully ran away!");
                         this.setIsUnderAttack(false);
                         target.setIsUnderAttack(false);
                         target.restoreHP();
@@ -217,9 +223,9 @@ public abstract class Player extends Entity {
                         System.out.println("Run away failed");
                         int inflictedDamage = target.calculateDamage();
                         this.subtractHealthPoints(inflictedDamage);
-                        System.out.println("You lost " + inflictedDamage + " HP.");
+                        System.out.println("\033[0;32m" + "You lost " + inflictedDamage + " HP." + "\033[0m");
                         if (isDead()) {
-                            System.out.println("You died. Thanks for playing!");
+                            System.out.println("\033[0;32m" + "You died. Thanks for playing!" + "\033[0m");
                             System.exit(0);
                         } else {
                             System.out.println("You can try again or choose another option");
@@ -298,8 +304,34 @@ public abstract class Player extends Entity {
         if(experience >= maxExperience){
             level++;
             maxExperience += 20;
+            setMaxDamage(getMaxDamage() + 5);
+            if(getIntelligence() < getMAX_INTELLIGENCE()) {
+                setIntelligence(getIntelligence() + 2);
+                if(getIntelligence() > getMAX_INTELLIGENCE()) {
+                    setIntelligence(getMAX_INTELLIGENCE());
+                }
+            }
+            if(getAgility() < getMAX_AGILITY()) {
+                setAgility(getAgility() + 2);
+                if(getAgility() > getMAX_AGILITY()) {
+                    setAgility(getMAX_AGILITY());
+                }
+            }
+            if(getStamina() < getMAX_STAMINA()) {
+                setStamina(getStamina() + 2);
+                if(getStamina() > getMAX_STAMINA()) {
+                    setStamina(getMAX_STAMINA());
+                }
+            }
+            if(getStrength() < getMAX_STRENGTH()) {
+                setStrength(getStrength() + 2);
+                if(getStrength() > getMAX_STRENGTH()) {
+                    setStrength(getMAX_STRENGTH());
+                }
+            }
             System.out.println("Level up! You are now level " + level);
         }
+        this.printStats();
     }
 
     public void pickUpItem(Item item){
@@ -307,7 +339,7 @@ public abstract class Player extends Entity {
         System.out.println(item.getName() + " has been added to your inventory.");
         getCurrentRoom().removeItemFromRoom(item);
         if(item.getName().equals("The One Ring")){
-            System.out.println("That's it. You defeated the last monster and restored peace. Congratulation, you won the game!");
+            System.out.println("That's it. You found the One Ring and now peace can be restored. Congratulation, you won the game!");
             System.out.println("Thanks for playing!");
             System.exit(0);
         }
@@ -407,24 +439,27 @@ public abstract class Player extends Entity {
         }
     }
 
+    public void printStats(){
+        System.out.println(this);
+    }
+
     @Override
     public String toString() {
         return "Player{" +
-                "\ncharName: '" + getCharName() + '\'' +
-                ", \nplayerName='" + playerName +
-                ", \nhealthPoints: " + getHealthPoints() + "/" + getMaxHP() +
-                ", \nmaxDamage: " + getMaxDamage() +
-                ", \nlevel: " + level +
-                ", \nexperience: " + experience + "/" + maxExperience +
-                ", \nintelligence: " + intelligence +
-                ", \nstrength: " + strength +
-                ", \nagility: " + agility +
-                ", \nstamina: " + stamina +
-                ", \nhasKilledKitties: " + hasKilledKitties +
-                (equippedWeapon != null ? ", \nequipped Weapon: " + equippedWeapon : "") +
-                (equippedArmor != null ? ", \nequipped Armor: " + equippedArmor : "") +
-                ", \nwallet: " + wallet.getBalance() + " coins" +
-                ", \ninventory: " + inventory + '\'' +
+                "\n   charName: '" + getCharName() + '\'' +
+                ", \n   playerName: '" + playerName +
+                ", \n   healthPoints: " + getHealthPoints() + "/" + getMaxHP() +
+                ", \n   maxDamage: " + getMaxDamage() +
+                ", \n   level: " + level +
+                ", \n   experience: " + experience + "/" + maxExperience +
+                ", \n   intelligence: " + intelligence +
+                ", \n   strength: " + strength +
+                ", \n   agility: " + agility +
+                ", \n   stamina: " + stamina +
+                ", \n   hasKilledKitties: " + hasKilledKitties +
+                (equippedWeapon != null ? ", \n     equipped Weapon: " + equippedWeapon : "") +
+                (equippedArmor != null ? ", \n      equipped Armor: " + equippedArmor : "") +
+                ", \n   wallet: " + wallet.getBalance() + " coins" + inventory + '\'' +
                 "\n}";
     }
 

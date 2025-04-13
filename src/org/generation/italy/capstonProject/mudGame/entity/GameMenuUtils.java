@@ -115,7 +115,7 @@ public class GameMenuUtils {
             boolean selecting = true;
 
             while (selecting) {
-                System.out.println("\nYou selected: " + selectedItem.getName());
+                System.out.println("\033[0;32m" + "\nYou selected: " + selectedItem.getName() + "\033[0m");
 
                 List<String> options = List.of("Inspect item", "Use Item", "Remove item from your inventory", "Go back to inventory to choose a different item");
                 Integer action = showAndChooseMenu(options, scanner, "x");
@@ -136,7 +136,7 @@ public class GameMenuUtils {
                         break;
                     case 3:
                         player.getInventory().removeItem(selectedItem);
-                        System.out.println("One " + selectedItem.getName() + " was removed from your inventory.");
+                        System.out.println("\033[0;32m" + "One " + selectedItem.getName() + " was removed from your inventory." + "\033[0m");
                         selecting = false;
                         break;
                     case 4:
@@ -172,7 +172,7 @@ public class GameMenuUtils {
             Integer choice = readIntInputOrExit(scanner, 1, options.size(), "x");
 
             if (choice == null) {
-                System.out.println("You stayed in the current room.");
+                System.out.println("\033[0;32m" + "You stayed in the current room." + "\033[0m");
                 running = false;
             } else {
                 Direction chosenDirection = options.get(choice - 1);
@@ -210,6 +210,7 @@ public class GameMenuUtils {
             actions.put("Open inventory", player::openInventory);
             actions.put("Move to another room", player::handleMovement);
             actions.put("Rest", player::sleep);
+            actions.put("See you stats", player::printStats);
 
             if (currentRoom.isHasItems()) {
                 actions.put("Pick up item", () -> pickUpItemMenu(player, scanner));
@@ -306,7 +307,7 @@ public class GameMenuUtils {
             boolean selecting = true;
 
             while (selecting) {
-                System.out.println("\nYou selected: " + selectedItem.getName());
+                System.out.println("\033[0;32m" + "\nYou selected: " + selectedItem.getName() + "\033[0m");
 
                 List<String> options = List.of("Inspect item", "Use Item", "Add item to your inventory", "Go back to room items menu to choose a different item");
                 Integer action = showAndChooseMenu(options, scanner, "x");
@@ -374,7 +375,7 @@ public class GameMenuUtils {
             boolean selecting = true;
 
             while (selecting) {
-                System.out.println("\nYou selected: " + selectedEntity.getCharName());
+                System.out.println("\033[0;32m" + "\nYou selected: " + selectedEntity.getCharName() + "\033[0m");
 
                 List<String> options = List.of("Attack NPC", "Interact with NPC", "Go back to room entities menu to choose a different entity");
 
@@ -447,7 +448,7 @@ public class GameMenuUtils {
             boolean selecting = true;
 
             while (selecting) {
-                System.out.println("\nYou selected: " + selectedItem.getName());
+                System.out.println("\033[0;32m" + "\nYou selected: " + selectedItem.getName() + "\033[0m");
 
                 List<String> options = List.of(
                         "Inspect item",

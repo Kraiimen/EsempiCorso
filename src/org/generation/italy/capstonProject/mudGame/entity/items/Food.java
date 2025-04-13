@@ -27,9 +27,9 @@ public class Food extends Item implements Consumable{
 
     @Override
     public String toString() {
-        return "  Food{" +
-                "   \nname: " + getName() +
-                ",      \nhealth points: " + healAmount +
-                "\n}";
+        return "\n     Food{" +
+                "\n          name: " + getName() +
+                ",\n          health points: " + healAmount +
+                "\n     }";
     }
 }
