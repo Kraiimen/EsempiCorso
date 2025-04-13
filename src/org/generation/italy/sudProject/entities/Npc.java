@@ -9,8 +9,9 @@ public abstract class Npc extends Entity {
 
     // /--CONSTRUCTORS--/
     public Npc(String npcName, int minStatValue, int maxStatValue, int indexClassStat, int classStat, int hp, int maxHp, int baseAtk,
-               Room npcPosition, int indexNpcPosition, boolean canBeAttacked) {
-        super(npcName, minStatValue, maxStatValue, indexClassStat, classStat, hp, maxHp, baseAtk, npcPosition, indexNpcPosition, canBeAttacked );
+               Room npcPosition, int indexNpcPosition, boolean canBeAttacked, int inventoryCap) {
+        super(npcName, minStatValue, maxStatValue, indexClassStat, classStat, hp, maxHp,
+                baseAtk, npcPosition, indexNpcPosition, canBeAttacked, inventoryCap );
         numberOfNpcs++;
     }
 

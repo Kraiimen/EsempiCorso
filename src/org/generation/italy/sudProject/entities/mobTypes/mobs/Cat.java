@@ -10,7 +10,7 @@ public class Cat extends PeacefulMob {
 
     // /--CONSTRUCTORS--/
     public Cat(String catName, Room position, int indexCatPosition) {
-        super(catName, HP_FIRST_SPAWN, HP_MAX_FIRST_SPAWN, position, indexCatPosition);
+        super(catName, HP_FIRST_SPAWN, HP_MAX_FIRST_SPAWN, position, indexCatPosition, 1);
         numberOfCats++;
     }
 

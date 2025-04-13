@@ -15,7 +15,7 @@ public class Guard extends Npc {
     // /--CONSTRUCTORS--/
     public Guard(String npcName, Room position, int indexGuardPosition) {
         super(npcName, CLASS_STARTING_P_VALUE, MAX_ATTRIBUTE_P_VALUE, STRENGTH_INDEX, 20, HP_FIRST_SPAWN, HP_MAX_FIRST_SPAWN, 20, position,
-                indexGuardPosition, false);
+                indexGuardPosition, false, 2);
         numberOfGuards++;
     }
 
