@@ -229,62 +229,6 @@ public class Start {
                         }
                     }
                 }
-                //}
-//                if(a2.equals("e")) {
-//                    player.getCurrentRoom().setCheckSearch(true);
-//                    movements.moveFromRoom(player);
-//
-//                } else if (a2.equals("a")) {
-//
-//                    if(checkEnemies){
-//                        player.doCombat(player, currentEnemy);
-//                        player.getCurrentRoom().setCheckEnemies(false);
-//                    } else {
-//                        System.out.println("Non ci sono più nemici in questo luogo 💀💀");
-//                    }
-//
-//                } else if (a2.equals("p")) {
-//                    if(player.getExp() < 10) {
-//                        System.out.println("Hai troppa poca exp, non sei ancora degno 😒😒");
-//                    } else if(player.getExp() >= 10){
-//                        player.getCurrentRoom().getNpc().speak(player);
-//                    }
-//
-//                } else if (a2.equals("i")) {
-//                    System.out.println("Le tue statistiche sono :");
-//                    System.out.println(" ");
-//                    System.out.println("Intelligence: " + player.getIntelligence());
-//                    System.out.println("Strength: " + player.getStrength());
-//                    System.out.println("Agility: " + player.getAgility());
-//                    System.out.println("Stamina: " + player.getStamina());
-//                    System.out.println("Health Points: " + player.getHealthPoints() + " / " + player.getMaxHp());
-//                    System.out.println("Damage Ability: " + player.getDamage());
-//                    System.out.println("Experience: " + player.getExp());
-//                    System.out.println(" ");
-//
-//                } else if (a2.equals("r")) {
-//                    player.setHealthPoints(player.getMaxHp());
-//                    System.out.println("Ti sei riposato e ora hai il massimo della vita 💪");
-//
-//                } else if (a2.equals("c")) {
-//                    if(checkSearch){
-//                        Random dice2 = new Random();
-//                        int chanceOfItem = dice.nextInt(100);
-//                        if (chanceOfItem < 50){
-//                            System.out.println("Non hai trovato nulla");
-//                        }else if (chanceOfItem >= 50 && chanceOfItem <= 85){
-//                            player.useErbaGatta();
-//                        }else if (chanceOfItem > 85 && chanceOfItem <= 95){
-//                            player.useChiavePrigioni();
-//                        }else {
-//                            player.useSpadaDiEden();
-//                        }
-//                        //PER ATTIVARE I CHEAT COMMENTA LA LINEA SOTTO::
-//                        //player.getCurrentRoom().setCheckSearch(false);
-//                    } else {
-//                        System.out.println("Hai già cercato qui :(");
-//                    }
-//                }
             }
         }
         while (!a2.equals("quit")) ;
