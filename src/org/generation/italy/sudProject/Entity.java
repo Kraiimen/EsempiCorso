@@ -41,7 +41,7 @@ public abstract class Entity {
     private int maxHp;
     private int atk;
     private boolean canBeAttacked;
-    private Inventory entityInventory;
+    protected Inventory entityInventory;
 
 
 

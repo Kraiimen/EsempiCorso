@@ -1,6 +1,6 @@
 package org.generation.italy.sudProject.items;
 
-public class Item {
+public abstract class Item {
     private String itemName;
     private int value;
     private boolean dropped;

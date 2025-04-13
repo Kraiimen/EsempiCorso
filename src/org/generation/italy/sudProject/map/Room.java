@@ -1,6 +1,7 @@
 package org.generation.italy.sudProject.map;
 
 import org.generation.italy.sudProject.Entity;
+import org.generation.italy.sudProject.itemManagement.Inventory;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class Room{
     public static final int ROOM_MAIN_NPC_INDEX = 3;
 
     private int maxGuardsInRoom;
+    private Inventory roomObjects = new Inventory(20);
 
     private ArrayList<ArrayList> roomEntities;
 
