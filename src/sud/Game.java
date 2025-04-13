@@ -247,24 +247,22 @@ public class Game {
                         }
                         case "2" -> {
                             tavernKeeper.speak("Sure, a room for a night is 5 gold coins sweetie");
+                            player.printCoins();
                             System.out.println(player.getWithColor(
                                     "(1) --> \" sure, i'll take it\"" +
                                             "\n(2) --> \" nah, i'm fine\""));
                             switch (player.askPlayerInput()){
                                 case "1" ->{
-                                    if(player.pay(tavernKeeper.doesEntityHaveItem(ItemType.FOOD))){
-                                        player.printCoins();
-                                        if(player.getCoins()>= 5){
-                                            player.setCoins(player.getCoins()-5);
-                                            tavernKeeper.speak("nighty night sweetie pie");
-                                            player.sleep();
-                                            tavernKeeper.speak("Good morning");
-                                        }else {
-                                            tavernKeeper.speak("<She leans closer to you> "+ tavernKeeper.getWithColor("\nthe tavern Keeper: You don't have enough coins sweetie, i would suggest you sleep in my room, but my bed is too small for the both of us "));
-                                        }
+
+                                    if(player.getCoins()>= 5){
+                                        player.setCoins(player.getCoins()-5);
+                                        tavernKeeper.speak("nighty night sweetie pie");
+                                        player.sleep();
+                                        tavernKeeper.speak("\nGood morning");
                                     }else {
-                                        tavernKeeper.speak("You don't have enough coins sweetie");
+                                        tavernKeeper.speak("<She leans closer to you> "+ tavernKeeper.getWithColor("\nthe tavern Keeper: You don't have enough coins sweetie, i would suggest you sleep in my room, but my bed is too small for the both of us "));
                                     }
+
                                 }
                                 case "2" ->{
                                     tavernKeeper.speak("Ok, come back another time then sweetie");
