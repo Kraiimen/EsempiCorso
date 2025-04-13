@@ -23,7 +23,6 @@ public class CityDoor extends Room{
         System.out.println(" ");
     }
 
-
     @Override
     public void getPossibleActions() {
         System.out.println("Attacca (A), Info Abilità (I), Esci di qui (E)");

@@ -23,6 +23,7 @@ public class MarketSquare extends Room{
     public Enemies getEnemy() {
         return enemy;
     }
+
     @Override
     public void getPossibleActions() {
         System.out.println("Attacca (A), Cerca (C), Info Abilità (I), Esci di qui (E)");

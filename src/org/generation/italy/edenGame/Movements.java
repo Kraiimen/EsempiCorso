@@ -2,14 +2,13 @@ package org.generation.italy.edenGame;
 
 import org.generation.italy.edenGame.entity.player.Player;
 import org.generation.italy.edenGame.room.*;
-
 import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Movements {
 
-    //ROOMs
+    //CREAZIONE OGGETTI ROOMs E HASHMAPS DIRECTIONS
     Map<Compass, String> templeSquareDirections = new HashMap<Compass, String>();
     Room templeSquare = new TempleSquare("Temple Square", templeSquareDirections);
 
@@ -34,11 +33,12 @@ public class Movements {
     Map<Compass, String> cityDoorDirections = new HashMap<Compass, String>();
     Room cityDoor = new CityDoor("City Door", cityDoorDirections);
 
-    //ROOM FINDER
+    //CREAZIONE HASHMAP ROOM FINDER
     Map<String, Room> roomFinder = new HashMap<>();
 
-    //BLOCCO DIRECTIONS
     public Movements() {
+
+        //RIEMPIMENTO DEL ROOM FINDER
 
         roomFinder.put("Temple", temple);
         roomFinder.put("Temple Square", templeSquare);
@@ -49,6 +49,7 @@ public class Movements {
         roomFinder.put("Woods", woods);
         roomFinder.put("City Door", cityDoor);
 
+        //RIEMPIMENTO DELLE DIRECTIONS
 
         //TempleSquare
         templeSquareDirections.put(Compass.SOUTH, marketSquare.getNameRoom());
@@ -83,9 +84,7 @@ public class Movements {
         woodsDirections.put(Compass.NORTH, cityDoor.getNameRoom());
     }
 
-    // ho cambiato semplciemente nell'input del metodo move "direction" in "templeDirection" ecc
-    //controllare il Map<Compass, String> delle varie Directions perchè probabilmente non comunica con la Room, per questo i problemi in Start dove va tutto bene fino a questo metodo
-    //potremmo rimettere l'oggetto Room e trovare un modo per leggerlo e trasformarlo in String così da avere ( le vie percorribili EAST=The BAKERY, ecc)
+    //METODI DI MOVIMENTO DA UNA SPECIFICA STANZA
 
     public void moveFromTempleSquare(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
         Console console = System.console();
@@ -502,6 +501,7 @@ public class Movements {
         } while (!a.contains("NORTH"));
     }
 
+    //METODO DI MOVIMENTO GENERALE
 
     public void moveFromRoom(Player player) {
 

@@ -22,10 +22,12 @@ public class Temple extends Room{
         System.out.println("-----------------------------------------------------------------------------------------------------------");
         System.out.println(" ");
     }
+
     @Override
     public Npc getNpc() {
         return highPriest;
     }
+
     @Override
     public void getPossibleActions() {
         System.out.println("Attacca (A), Riposa (R), Prega (P), Info Abilità (I), Esci da qua (E)");
@@ -36,9 +38,6 @@ public class Temple extends Room{
         return enemy;
     }
 
-    public Npc getHighPriest() {
-        return highPriest;
-    }
 
 
 }

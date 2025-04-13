@@ -1,11 +1,8 @@
 package org.generation.italy.edenGame;
 import org.generation.italy.edenGame.entity.Enemies.Enemies;
-import org.generation.italy.edenGame.entity.npc.HighPriest;
-import org.generation.italy.edenGame.entity.npc.Npc;
 import org.generation.italy.edenGame.entity.player.*;
 import org.generation.italy.edenGame.room.*;
 import java.io.Console;
-import java.util.Map;
 import java.util.Random;
 
 
@@ -32,18 +29,16 @@ public class Start {
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println(" ");
         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("Per cominciare, qual'è il tuo nome? 🤨🤨" );
+        System.out.println("Per cominciare, qual'è il tuo nome? 🤨🤨");
         String playerName = console.readLine();
         System.out.println("Ciao " + playerName + ", scegli il nome del tuo personaggio 🗡️");
         String name = console.readLine();
         System.out.println("Ora scegli la categoria tra: WIZARD 🤓, PALADIN 🤪, PRIEST ✝️, THIEF 🥷");
         String answer;
+
         //inizializzazione Movimenti e Rooms
-
         Movements movements = new Movements();
-        Map<String, Room> roomFinder = movements.getRoomFinder();
 
-        Map<Compass, String> templeSquareDirections = movements.getTempleSquareDirections();
         Room templeSquare = movements.getTempleSquare();
         templeSquare.addAction("a");
         templeSquare.addAction("i");
@@ -51,7 +46,6 @@ public class Start {
         templeSquare.addAction("c");
         templeSquare.addAction("quit");
 
-        Map<Compass, String> templeDirections = movements.getTempleDirections();
         Room temple = movements.getTemple();
         temple.addAction("a");
         temple.addAction("i");
@@ -60,7 +54,6 @@ public class Start {
         temple.addAction("r");
         temple.addAction("quit");
 
-        Map<Compass, String> marketSquareDirections = movements.getMarketSquareDirections();
         Room marketSquare = movements.getMarketSquare();
         marketSquare.addAction("a");
         marketSquare.addAction("i");
@@ -68,15 +61,12 @@ public class Start {
         marketSquare.addAction("c");
         marketSquare.addAction("quit");
 
-        Map<Compass, String> bakeryDirections = movements.getBakeryDirections();
         Room bakery = movements.getBakery();
         bakery.addAction("a");
         bakery.addAction("i");
         bakery.addAction("e");
         bakery.addAction("quit");
 
-
-        Map<Compass, String> armoryDirections = movements.getArmoryDirections();
         Room armory = movements.getArmory();
         armory.addAction("a");
         armory.addAction("i");
@@ -84,7 +74,6 @@ public class Start {
         armory.addAction("c");
         armory.addAction("quit");
 
-        Map<Compass, String> gardensDirections = movements.getGardensDirections();
         Room gardens = movements.getGardens();
         gardens.addAction("a");
         gardens.addAction("i");
@@ -93,14 +82,12 @@ public class Start {
         gardens.addAction("r");
         gardens.addAction("quit");
 
-        Map<Compass, String> cityDoorDirections = movements.getCityDoorDirections();
         Room cityDoor = movements.getCityDoor();
         cityDoor.addAction("a");
         cityDoor.addAction("i");
         cityDoor.addAction("e");
         cityDoor.addAction("quit");
 
-        Map<Compass, String> woodsDirections = movements.getWoodsDirections();
         Room woods = movements.getWoods();
         woods.addAction("a");
         woods.addAction("i");
@@ -165,8 +152,7 @@ public class Start {
         String a2;
 
         do {
-
-            if(player.getHealthPoints() <= 0) {
+            if (player.getHealthPoints() <= 0) {
                 player.setCurrentRoom(temple);
                 player.setHealthPoints(player.getMaxHp());
             }
@@ -174,7 +160,7 @@ public class Start {
             Enemies currentEnemy = player.getCurrentRoom().getEnemy();
             boolean checkSearch = player.getCurrentRoom().getCheckSearch();
 
-            if(checkEnemies) {
+            if (checkEnemies) {
                 System.out.println("In questo luogo è presente: " + currentEnemy.getClass().getSimpleName() + " di nome: ''" + currentEnemy.getName() + "'' ");
                 System.out.println(" ");
             }
@@ -182,69 +168,127 @@ public class Start {
             player.getCurrentRoom().getPossibleActions();
             a2 = console.readLine().toLowerCase();
 
-            if(!player.getCurrentRoom().returnPossibleActions().contains(a2)) {
+            if (!player.getCurrentRoom().returnPossibleActions().contains(a2)) {
                 System.out.println(" ");
                 System.out.println("Non puoi compiere questa azione, scegline solo una tra quelle indicate");
                 System.out.println(" ");
             } else {
-                if(a2.equals("e")) {
-                    player.getCurrentRoom().setCheckSearch(true);
-                    movements.moveFromRoom(player);
-
-                } else if (a2.equals("a")) {
-
-                    if(checkEnemies){
-                        player.doCombat(player, currentEnemy);
-                        player.getCurrentRoom().setCheckEnemies(false);
-                    } else {
-                        System.out.println("Non ci sono più nemici in questo luogo 💀💀");
+                switch (a2) {
+                    case "e" -> {
+                        player.getCurrentRoom().setCheckSearch(true);
+                        movements.moveFromRoom(player);
                     }
-
-                } else if (a2.equals("p")) {
-                    if(player.getExp() < 10) {
-                        System.out.println("Hai troppa poca exp, non sei ancora degno 😒😒");
-                    } else if(player.getExp() >= 10){
-                        Npc highPriest = new HighPriest("Sacerdote", 1, 1, 1, 1);
-                        player.getCurrentRoom().getNpc().speak(player);
-                    }
-
-                } else if (a2.equals("i")) {
-                    System.out.println("Le tue statistiche sono :");
-                    System.out.println(" ");
-                    System.out.println("Intelligence: " + player.getIntelligence());
-                    System.out.println("Strength: " + player.getStrength());
-                    System.out.println("Agility: " + player.getAgility());
-                    System.out.println("Stamina: " + player.getStamina());
-                    System.out.println("Health Points: " + player.getHealthPoints() + " / " + player.getMaxHp());
-                    System.out.println("Damage Ability: " + player.getDamage());
-                    System.out.println("Experience: " + player.getExp());
-                    System.out.println(" ");
-
-                } else if (a2.equals("r")) {
-                    player.setHealthPoints(player.getMaxHp());
-                    System.out.println("Ti sei riposato e ora hai il massimo della vita 💪");
-
-                } else if (a2.equals("c")) {
-                    if(checkSearch){
-                        Random dice2 = new Random();
-                        int chanceOfItem = dice.nextInt(100);
-                        if (chanceOfItem < 50){
-                            System.out.println("Non hai trovato nulla");
-                        }else if (chanceOfItem >= 50 && chanceOfItem <= 85){
-                            player.useErbaGatta();
-                        }else if (chanceOfItem > 85 && chanceOfItem <= 95){
-                            player.useChiavePrigioni();
-                        }else {
-                            player.useSpadaDiEden();
+                    case "a" -> {
+                        if (checkEnemies) {
+                            player.doCombat(player, currentEnemy);
+                            player.getCurrentRoom().setCheckEnemies(false);
+                        } else {
+                            System.out.println("Non ci sono più nemici in questo luogo 💀💀");
                         }
-                        //PER ATTIVARE I CHEAT COMMENTA LA LINEA SOTTO::
-                        //player.getCurrentRoom().setCheckSearch(false);
-                    } else {
-                        System.out.println("Hai già cercato qui :(");
+                    }
+                    case "p" -> {
+                        if (player.getExp() < 10) {
+                            System.out.println("Hai troppa poca exp, non sei ancora degno 😒😒");
+                        } else if (player.getExp() >= 10) {
+                            player.getCurrentRoom().getNpc().speak(player);
+                        }
+                    }
+                    case "i" -> {
+                        System.out.println("Le tue statistiche sono :");
+                        System.out.println(" ");
+                        System.out.println("Intelligence: " + player.getIntelligence());
+                        System.out.println("Strength: " + player.getStrength());
+                        System.out.println("Agility: " + player.getAgility());
+                        System.out.println("Stamina: " + player.getStamina());
+                        System.out.println("Health Points: " + player.getHealthPoints() + " / " + player.getMaxHp());
+                        System.out.println("Damage Ability: " + player.getDamage());
+                        System.out.println("Experience: " + player.getExp());
+                        System.out.println(" ");
+                    }
+                    case "r" -> {
+                        player.setHealthPoints(player.getMaxHp());
+                        System.out.println("Ti sei riposato e ora hai il massimo della vita 💪");
+                    }
+                    case "c" -> {
+                        if (checkSearch) {
+                            Random dice2 = new Random();
+                            int chanceOfItem = dice.nextInt(100);
+                            if (chanceOfItem < 50) {
+                                System.out.println("Non hai trovato nulla");
+                            } else if (chanceOfItem <= 85) {
+                                player.useErbaGatta();
+                            } else if (chanceOfItem <= 95) {
+                                player.useChiavePrigioni();
+                            } else {
+                                player.useSpadaDiEden();
+                            }
+                            //PER ATTIVARE I CHEAT DELLA RICERCA OGGETTI COMMENTA LA LINEA SOTTO:
+                            //player.getCurrentRoom().setCheckSearch(false);
+                        } else {
+                            System.out.println("Hai già cercato qui :(");
+                        }
                     }
                 }
+                //}
+//                if(a2.equals("e")) {
+//                    player.getCurrentRoom().setCheckSearch(true);
+//                    movements.moveFromRoom(player);
+//
+//                } else if (a2.equals("a")) {
+//
+//                    if(checkEnemies){
+//                        player.doCombat(player, currentEnemy);
+//                        player.getCurrentRoom().setCheckEnemies(false);
+//                    } else {
+//                        System.out.println("Non ci sono più nemici in questo luogo 💀💀");
+//                    }
+//
+//                } else if (a2.equals("p")) {
+//                    if(player.getExp() < 10) {
+//                        System.out.println("Hai troppa poca exp, non sei ancora degno 😒😒");
+//                    } else if(player.getExp() >= 10){
+//                        player.getCurrentRoom().getNpc().speak(player);
+//                    }
+//
+//                } else if (a2.equals("i")) {
+//                    System.out.println("Le tue statistiche sono :");
+//                    System.out.println(" ");
+//                    System.out.println("Intelligence: " + player.getIntelligence());
+//                    System.out.println("Strength: " + player.getStrength());
+//                    System.out.println("Agility: " + player.getAgility());
+//                    System.out.println("Stamina: " + player.getStamina());
+//                    System.out.println("Health Points: " + player.getHealthPoints() + " / " + player.getMaxHp());
+//                    System.out.println("Damage Ability: " + player.getDamage());
+//                    System.out.println("Experience: " + player.getExp());
+//                    System.out.println(" ");
+//
+//                } else if (a2.equals("r")) {
+//                    player.setHealthPoints(player.getMaxHp());
+//                    System.out.println("Ti sei riposato e ora hai il massimo della vita 💪");
+//
+//                } else if (a2.equals("c")) {
+//                    if(checkSearch){
+//                        Random dice2 = new Random();
+//                        int chanceOfItem = dice.nextInt(100);
+//                        if (chanceOfItem < 50){
+//                            System.out.println("Non hai trovato nulla");
+//                        }else if (chanceOfItem >= 50 && chanceOfItem <= 85){
+//                            player.useErbaGatta();
+//                        }else if (chanceOfItem > 85 && chanceOfItem <= 95){
+//                            player.useChiavePrigioni();
+//                        }else {
+//                            player.useSpadaDiEden();
+//                        }
+//                        //PER ATTIVARE I CHEAT COMMENTA LA LINEA SOTTO::
+//                        //player.getCurrentRoom().setCheckSearch(false);
+//                    } else {
+//                        System.out.println("Hai già cercato qui :(");
+//                    }
+//                }
             }
-        } while(!a2.equals("quit"));
+        }
+        while (!a2.equals("quit")) ;
+
         System.out.println(" ");
         System.out.println("THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣THE END 🐣");
         System.out.println(" ");
@@ -252,5 +296,4 @@ public class Start {
         System.out.println(" ");
         System.out.println("da Lorenzo🫡 & Nicolò🎸 ");
     }
-
 }

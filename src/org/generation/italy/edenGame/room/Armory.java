@@ -22,6 +22,7 @@ public class Armory extends Room{
     public Enemies getEnemy() {
         return enemy;
     }
+
     @Override
     public void getPossibleActions() {
         System.out.println("Attacca (A), Info Abilità (I), Cerca (C), Esci di qui (E)");
