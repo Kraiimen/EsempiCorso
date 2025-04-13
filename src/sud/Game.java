@@ -136,6 +136,7 @@ public class Game {
         int counter =1;
         Npc npc = (Npc)npcInput;
         System.out.println("<You have: " + player.getCoins() + " gold coins>");
+
         for(Item item : npc.getInventory()){
             System.out.printf(npc.getWithColor("(%d)-> %s (%d gold coins)\n"), counter, item.getName(), item.getPrice());
             counter++;
@@ -152,26 +153,30 @@ public class Game {
     }
     private static void sell (Npc npc, ItemType sellableType,String escapeLine){
         int counter =1;
-        for(Item item : player.getInventory()){
-            if(item.getType() == sellableType){
-                System.out.printf(player.getWithColor("(%d)-> %s (%d gold coins)\n"), counter, item.getName(), item.getPrice());
-                counter++;
+        if(!player.getInventory().isEmpty()){
+            for (Item item : player.getInventory()) {
+                if (item.getType() == sellableType) {
+                    System.out.printf(player.getWithColor("(%d)-> %s (%d gold coins)\n"), counter, item.getName(), item.getPrice());
+                    counter++;
+                }
             }
-        }
-        System.out.printf(player.getWithColor("(%d)-> \"Nevermind\"\n"), counter);
-        int choiceI=player.askPlayerIntInput(player.getInventory().size()+1);
-        if(choiceI==counter){
-            npc.speak(escapeLine);
+            System.out.printf(player.getWithColor("(%d)-> \"Nevermind\"\n"), counter);
+            int choiceI = player.askPlayerIntInput(player.getInventory().size() + 1);
+            if (choiceI == counter) {
+                npc.speak(escapeLine);
+            } else {
+                Item itemSold = player.getInventory().get(choiceI - 1);
+                if ((itemSold.getPrice() * 0.8) < 1) {
+                    System.out.println("The item has no resell value\n");
+                } else {
+                    player.setCoins(player.getCoins() + (int) (itemSold.getPrice() * 0.8));
+                    npc.getInventory().add(itemSold);
+                    player.getInventory().remove(choiceI - 1);
+                    System.out.printf("<You sold the %s for %d \n>", itemSold.getName(), player.getCoins() - (int) (itemSold.getPrice() * 0.8));
+                }
+            }
         }else{
-            Item itemSold= player.getInventory().get(choiceI-1);
-            if((itemSold.getPrice()*0.8)<1){
-                System.out.println("The item has no resell value\n");
-            }else{
-                player.setCoins(player.getCoins()+(int)(itemSold.getPrice()*0.8));
-                npc.getInventory().add(itemSold);
-                player.getInventory().remove(choiceI-1);
-                System.out.printf("<You sold the %s for %d \n>",itemSold.getName(), player.getCoins()-(int)(itemSold.getPrice()*0.8));
-            }
+            System.out.println("<You got nothing to sell>");
         }
     }
     public static void moveIntoRoom(Room room,Boolean printDesc)throws GameClosingExeption{
