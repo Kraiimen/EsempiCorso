@@ -160,18 +160,17 @@ public class Game {
             }
         }
         System.out.printf(player.getWithColor("(%d)-> \"Nevermind\"\n"), counter);
-        String choice=player.askPlayerInput();
-        int choiceI = Integer.parseInt(choice)-1;
+        int choiceI=player.askPlayerIntInput(player.getInventory().size()+1);
         if(choiceI==counter){
             npc.speak(escapeLine);
         }else{
-            Item itemSold= player.getInventory().get(choiceI);
+            Item itemSold= player.getInventory().get(choiceI-1);
             if(player.getCoins()-(int)(itemSold.getPrice()*0.8)==0){
                 System.out.println("The item has now resell value");
             }else{
                 player.setCoins(player.getCoins()-(int)(itemSold.getPrice()*0.8));
                 npc.getInventory().add(itemSold);
-                player.getInventory().remove(choiceI);
+                player.getInventory().remove(choiceI-1);
                 System.out.printf("<You sold the %s for %d >",itemSold.getName(), player.getCoins()-(int)(itemSold.getPrice()*0.8));
             }
         }
