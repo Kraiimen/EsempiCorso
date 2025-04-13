@@ -14,17 +14,7 @@ public class EnemyBoss extends Enemy{
 
     @Override
     public void attack(Entity target) {
-        if(target instanceof Player player && !player.isHasKilledKitties()){
-            System.out.println("You showed mercy to my kind, for this reason you will be spared. I know what your heart desire the most and I will just give it to you. Happy birthday!");
-            for(Item item : inventory.getAll().keySet()){
-                int quantity = inventory.getAll().get(item);
-                for(int i = 0; i < quantity; i++){
-                    this.getCurrentRoom().addItemToRoom(item);
-                }
-            }
-            System.out.println(this.getCharName() + " dropped the one ring");
-            return;
-        }
+
         damage = this.calculateDamage();
         int finalDamage = damage;
 
@@ -44,4 +34,35 @@ public class EnemyBoss extends Enemy{
             player.managePlayerInteraction(this, new Scanner(System.in));
         }
     }
+
+    @Override
+    public void manageInteraction(Entity target){
+        if (isDead()) return;
+
+        if(target instanceof Player player && !player.isHasKilledKitties()){
+            System.out.println("You showed mercy to my kind, for this reason you will be spared. I know what your heart desire the most and I will just give it to you. Happy birthday!");
+            for(Item item : inventory.getAll().keySet()){
+                int quantity = inventory.getAll().get(item);
+                for(int i = 0; i < quantity; i++){
+                    this.getCurrentRoom().addItemToRoom(item);
+                }
+            }
+            System.out.println(this.getCharName() + " dropped the one ring");
+            return;
+        }
+
+        if(isHostile() || getIsUnderAttack()){
+            while(!target.isDead()){
+                attack(target);
+                if(target.isDead()){
+                    setIsUnderAttack(false);
+                    break;
+                }
+            }
+        } else {
+            System.out.println("\033[0;33m" + this.getCharName() + " says: " + (getMessages().isEmpty() ? "Hi " + target.getCharName() + "!" : getMessages().getFirst())  + "\033[0m");
+        }
+    }
 }
+
+
