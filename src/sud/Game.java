@@ -51,8 +51,9 @@ public class Game {
         //@todo intro
         System.out.println("<Hi, this is the Narrator speaking, i'll be your guide, for now, i just want you to know>");
         System.out.println("<My presence will be marked by the \"<>\">");
-        System.out.println("<When you see this symbol \" |-->\" it means to just give any input to the gema, it's just there to give you time to read>");
+        System.out.println("<When you see this symbol \"|-->\" it means to just give any input to the game, it's just there to give you time to read>");
         System.out.println("<When you see this symbol \"-->\" it means that you, the player will say/do the thing next to it >");
+        System.out.println("<When you see this symbol \"( TEXT )->)\" you can write the full name of the action, like NORTH or just the initial like N  >");
         createPlayerCharacter();
         moveIntoRoom(Room.getRoomPointerFromName("CASTLE"),true);
         interactMenu();
@@ -115,7 +116,7 @@ public class Game {
                         "Dexterity: %d (%d)\n" +
                         "Constitution: %d (%d)\n" +
                         "HP: %d\n" +
-                        "CA: %d\n" +
+                        "AC: %d\n" +
                         "Level: %d\n" +
                         "Coins: %d\n"+
                         "----------------------------------------\n" +
@@ -430,7 +431,7 @@ public class Game {
                     do {
                         System.out.println("<Where do you want to go?>");
                         printAvailablePaths();
-                        wherePlayerWantToMove = console.readLine().toUpperCase();
+                        wherePlayerWantToMove = player.askPlayerInput().toUpperCase();
                         switch (wherePlayerWantToMove){
                             case "NORTH","N" ->{
                                 if(player.getCurrentRoom().getNordPath().getName().equalsIgnoreCase("")){
@@ -490,6 +491,9 @@ public class Game {
                             talkTo(whoPlayerWantToSpeackTo.toUpperCase());
                         }else{}
 
+                    }
+                    else {
+                        System.out.println("<There is nobody to talk to>");
                     }
                 }
                 case "STEAL","S" ->{
@@ -647,7 +651,7 @@ public class Game {
                                         escapeInv =true;
                                     }else{
                                         if(!player.getInventory().isEmpty()){
-                                            Item itemPlayerWantToUse = (player.getInventory().get(choice-4));
+                                            Item itemPlayerWantToUse = (player.getInventory().get(choice-1));
                                             if(choice == player.getInventory().size()+1){
                                                 System.out.printf("<What Do you want to unequip: %S>",itemPlayerWantToUse.getName());
                                                 System.out.println("(1)-> YES" +
