@@ -41,6 +41,8 @@ public class WorldBuilder {
         Item ring = new Armor("The One Ring", 10, 10, 10);
         bigCato.getInventory().addItem(ring);
 
+        Npc monk1 = new Monk("Don Ezio", temple);
+
         guard1.getInventory().addItem(new Potion("Healing Potion", 0.5, 0));
         guard1.getInventory().addItem(new Weapon("Super sword", 6));
         guard1.getInventory().addItem(new Armor("Fancy boots", 1, 0, 3));

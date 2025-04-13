@@ -12,4 +12,6 @@ public class Wizard extends Player{
         this.setAgility(rand.nextInt(getMAX_AGILITY() + 1));
         this.setStamina(rand.nextInt(getMAX_STAMINA() + 1));
     }
+
+
 }

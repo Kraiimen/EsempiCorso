@@ -7,6 +7,7 @@ import org.generation.italy.capstonProject.mudGame.entity.npc.Npc;
 import org.generation.italy.capstonProject.mudGame.entity.player.Player;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Room {
     private String name;

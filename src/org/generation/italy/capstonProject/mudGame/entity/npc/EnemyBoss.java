@@ -19,15 +19,15 @@ public class EnemyBoss extends Enemy{
         int finalDamage = damage;
 
         if(target instanceof Player) {
-            System.out.println(this.getCharName() + " is attacking you!");
+            System.out.println("\033[0;31m" + this.getCharName() + " is attacking you!" + "\033[0m");
         }
 
         if(Math.random() < getCriticalChance()){
-            System.out.println(this.getCharName() + "strike a critical attack!");
+            System.out.println("\033[0;31m" + this.getCharName() + "strike a critical attack!" + "\033[0m");
             finalDamage *= 2;
         }
 
-        System.out.println(this.getCharName() + " inflicts " + finalDamage + "/" + getMaxDamage() + " damage.");
+        System.out.println("\033[0;31m" + this.getCharName() + " inflicts " + finalDamage + "/" + getMaxDamage() + " damage." + "\033[0m");
         target.hasTakenDamage(finalDamage);
 
         if(target instanceof Player player) {
@@ -40,14 +40,15 @@ public class EnemyBoss extends Enemy{
         if (isDead()) return;
 
         if(target instanceof Player player && !player.isHasKilledKitties()){
-            System.out.println("You showed mercy to my kind, for this reason you will be spared. I know what your heart desire the most and I will just give it to you. Happy birthday!");
+            System.out.println("\033[0;33m" + "You showed mercy to my kind, for this reason you will be spared. I know what your heart desire the most and I will just give it to you. Happy birthday!" + "\033[0m");
             for(Item item : inventory.getAll().keySet()){
                 int quantity = inventory.getAll().get(item);
                 for(int i = 0; i < quantity; i++){
                     this.getCurrentRoom().addItemToRoom(item);
                 }
             }
-            System.out.println(this.getCharName() + " dropped the one ring");
+            System.out.println("\033[0;33m" + this.getCharName() + " dropped the One Ring"  + "\033[0m");
+            inventory.getAll().clear();
             return;
         }
 

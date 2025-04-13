@@ -4,12 +4,9 @@ import org.generation.italy.capstonProject.mudGame.entity.Entity;
 import org.generation.italy.capstonProject.mudGame.entity.GameMenuUtils;
 import org.generation.italy.capstonProject.mudGame.entity.Wallet;
 import org.generation.italy.capstonProject.mudGame.entity.items.*;
-import org.generation.italy.capstonProject.mudGame.entity.npc.Cat;
-import org.generation.italy.capstonProject.mudGame.entity.npc.Guard;
-import org.generation.italy.capstonProject.mudGame.entity.npc.Vendor;
+import org.generation.italy.capstonProject.mudGame.entity.npc.*;
 import org.generation.italy.capstonProject.mudGame.entity.rooms.Direction;
 import org.generation.italy.capstonProject.mudGame.entity.rooms.Room;
-import org.generation.italy.capstonProject.mudGame.entity.npc.Npc;
 
 import java.io.Console;
 import java.util.List;
@@ -53,16 +50,17 @@ public abstract class Player extends Entity {
     public void attack(Entity target){
         int damage = this.calculateDamage();
         System.out.println("\033[0;32m" + this.getCharName() + " attacks " + target.getCharName() + "\033[0m");
+        System.out.println("\033[0;32m"  +  this.getCharName() + " inflicts " + getDamage() + "/" + getMaxDamage() + " damage."  + "\033[0m");
         target.hasTakenDamage(damage);
         target.manageInteraction(this);
     }
 
     public void gainExperience(int amount){
         experience += (int)(amount + Math.ceil(getTotalIntelligence() * 0.2));
+        System.out.println("\033[0;32m" + "You gained experience! Your experience is now " + experience + "/" + maxExperience  + "\033[0m");
         if(experience >= maxExperience){
-            levelUp();
+            System.out.println("Looks like you're ready for a level up! Go find the Monk, he will know what to do.");
         }
-        System.out.println("You gained experience! Your experience is now " + experience + "/" + maxExperience);
     }
 
     @Override
@@ -90,7 +88,7 @@ public abstract class Player extends Entity {
 
     public void managePlayerInteraction(Entity target, Scanner scanner) {
         if (isDead()) {
-            System.out.println("You died. Thanks for playing!");
+            System.out.println("\033[0;32m" + "You died. Thanks for playing!" + "\033[0m");
             System.exit(0);
         }
         if (target instanceof Npc) {
@@ -116,7 +114,7 @@ public abstract class Player extends Entity {
                                 System.out.println("Run away failed! Try again or choose another option");
                                 int inflictedDamage = target.calculateDamage();
                                 this.subtractHealthPoints(inflictedDamage);
-                                System.out.println("You lost " + inflictedDamage + " HP.");
+                                System.out.println("\033[0;32m" + "You lost " + inflictedDamage + " HP." + "\033[0m");
                             }
                             break;
                         case 3:
@@ -162,7 +160,11 @@ public abstract class Player extends Entity {
         } else if (entity instanceof Vendor vendor){
             vendor.manageInteraction(this);
             vendor.seeShop( this, scanner);
-        } else if (entity instanceof Npc npc){
+        }  else if (entity instanceof Monk monk){
+            monk.manageInteraction(this);
+            this.meditate();
+            this.gainExperience(1);
+        }else if (entity instanceof Npc npc){
             System.out.println("\033[0;32m" + "Say something: " + "\033[0m");
             String input = scanner.nextLine();
             npc.manageInteraction(this);
@@ -214,7 +216,7 @@ public abstract class Player extends Entity {
                 answer = console.readLine("You can try running away in a random direction [a] or use an item from your inventory [b]");
                 if (answer.equals("a")) {
                     if (canRunFast()){
-                        System.out.println("\033[0;32m" + "You successfully ran away!");
+                        System.out.println("\033[0;32m" + "You successfully ran away!"  + "\033[0m");
                         this.setIsUnderAttack(false);
                         target.setIsUnderAttack(false);
                         target.restoreHP();
@@ -269,12 +271,17 @@ public abstract class Player extends Entity {
         }
         if(item instanceof Equipable equipment){
             this.equip(equipment);
+            if(item.getName().equals("The One Ring")){
+                System.out.println("\033[0;32m" + "You are now king of the world! Long Live King" + this.getCharName() + "! Congratulation, you won the game!"  + "\033[0m");
+                System.out.println("Thanks for playing!");
+                System.exit(0);
+            }
         }
     }
 
-    public void sleep(){
+    public void meditate(){
         this.heal(0.2);
-        System.out.println("Rest is important for your health! You slept and now have " + getHealthPoints() + "/" + getMaxHP());
+        System.out.println("\033[0;32m" + "Rest is important for your health! You slept and now have " + getHealthPoints() + "/" + getMaxHP() + "\033[0m");
     }
 
     public void handleMovement(){
@@ -329,24 +336,22 @@ public abstract class Player extends Entity {
                     setStrength(getMAX_STRENGTH());
                 }
             }
-            System.out.println("Level up! You are now level " + level);
+            System.out.println("\033[0;32m" + "Level up! You are now level " + level + "\033[0m");
         }
         this.printStats();
     }
 
     public void pickUpItem(Item item){
         inventory.addItem(item);
-        System.out.println(item.getName() + " has been added to your inventory.");
+        System.out.println("\033[0;32m" + item.getName() + " has been added to your inventory." + "\033[0m");
         getCurrentRoom().removeItemFromRoom(item);
         if(item.getName().equals("The One Ring")){
-            System.out.println("That's it. You found the One Ring and now peace can be restored. Congratulation, you won the game!");
-            System.out.println("Thanks for playing!");
-            System.exit(0);
+            System.out.println("That's it. You found the One Ring and now peace can be restored. Equip this Ring to win the game!");
         }
     }
 
     public void petCat(Cat cat){
-        System.out.println("You are petting " + cat.getCharName());
+        System.out.println("\033[0;32m" + "You are petting " + cat.getCharName() + "\033[0m");
         cat.showGratitude();
     }
 
@@ -391,7 +396,7 @@ public abstract class Player extends Entity {
                 System.out.println("Your inventory is full. This armor will be dropped.");
                 getCurrentRoom().addItemToRoom(equippedArmor);
             }
-            System.out.println("You unequipped " + equippedArmor.getName());
+            System.out.println("\033[0;32m" + "You unequipped " + equippedArmor.getName() + "\033[0m");
             equippedArmor = null;
         } else {
             System.out.println("You don't have a armor equipped.");
@@ -433,14 +438,14 @@ public abstract class Player extends Entity {
     public void pay(int amount){
         try {
             wallet.takeCoins(amount);
-            System.out.println("-" + amount + " coins. You now have " + wallet.getBalance() + " coins left." );
+            System.out.println("\033[0;32m" + "-" + amount + " coins. You now have " + wallet.getBalance() + " coins left." + "\033[0m");
         } catch (ArithmeticException e){
             System.out.println("Balance is too low." + e.getMessage());
         }
     }
 
     public void printStats(){
-        System.out.println(this);
+        System.out.println("\033[0;36m" + this + "\033[0m");
     }
 
     @Override

@@ -209,7 +209,6 @@ public class GameMenuUtils {
             actions.put("Show what's in this room again", currentRoom::printRoomContents);
             actions.put("Open inventory", player::openInventory);
             actions.put("Move to another room", player::handleMovement);
-            actions.put("Rest", player::sleep);
             actions.put("See you stats", player::printStats);
 
             if (currentRoom.isHasItems()) {

@@ -13,8 +13,8 @@ public class Food extends Item implements Consumable{
     @Override
     public void consume(Player player) {
         player.heal(healAmount);
-        System.out.println("You eat the " + getName());
-        System.out.println("Food is important for your health! You ate and now have " + player.getHealthPoints() + "/" + player.getMaxHP() + " HP.");
+        System.out.println("\033[0;32m" + "You eat the " + getName() + "\033[0m");
+        System.out.println("\033[0;32m" + "Food is important for your health! You ate and now have " + player.getHealthPoints() + "/" + player.getMaxHP() + " HP." + "\033[0m");
     }
 
     public double getHealAmount() {

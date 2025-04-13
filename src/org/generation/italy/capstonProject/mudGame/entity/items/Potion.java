@@ -14,17 +14,17 @@ public class Potion extends Item implements Consumable{
 
     @Override
     public void consume(Player player) {
-        System.out.println("You used the " + getName());
+        System.out.println("\033[0;32m" + "You used the " + getName() + "\033[0m");
         if(this.healAmount > 0){
             player.heal(healAmount);
-            System.out.println("This is magic for your health! You drank this magic potion and now have " + player.getHealthPoints() + "/" + player.getMaxHP() + " HP.");
+            System.out.println("\033[0;32m" + "This is magic for your health! You drank this magic potion and now have " + player.getHealthPoints() + "/" + player.getMaxHP() + " HP." + "\033[0m");
         }
         if(this.expAmount > 0){
             player.setExperience(player.getExperience() + expAmount);
             if(player.getExperience() >= player.getMaxExperience()){
                 player.levelUp();
             }
-            System.out.println("You gained experience! You drank this magic potion and now have " + player.getExperience() + "/" + player.getMaxExperience() + " experience.");
+            System.out.println("\033[0;32m" + "You gained experience! You drank this magic potion and now have " + player.getExperience() + "/" + player.getMaxExperience() + " experience." + "\033[0m");
         }
 
     }

@@ -21,13 +21,13 @@ public class Cat extends Npc{
 
         int chanceToHaveWeapon = (int)(Math.random() * 5);
         if (chanceToHaveWeapon == 0) {
-            Item weapon = new Weapon("Sword", (int)(Math.random() * 5));
+            Item weapon = new Weapon("Sword", (int)(Math.random() * 5) + 1);
             cat.getInventory().addItem(weapon);
         }
 
         int chanceToHavePotion = (int)(Math.random() * 4);
         if (chanceToHavePotion == 0) {
-            Item potion = new Potion("Heath Potion", (Math.random() * 1), 0);
+            Item potion = new Potion("Heath Potion", (Math.random() * 0.9 + 0.1), 0);
             cat.getInventory().addItem(potion);
         }
 

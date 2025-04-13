@@ -32,7 +32,7 @@ public class Vendor extends Npc{
             inventory.removeItem(item);
             player.pay(prices.get(item));
             player.getInventory().addItem(item);
-            System.out.println("You bought: " + item.getName() + ". You can find it in your inventory.");
+            System.out.println("\033[0;32m" + "You bought: " + item.getName() + ". You can find it in your inventory." + "\033[0m");
         } else {
             System.out.println("Sorry, item out of stock.");
         }

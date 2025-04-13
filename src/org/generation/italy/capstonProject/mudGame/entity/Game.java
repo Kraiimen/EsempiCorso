@@ -40,10 +40,11 @@ public class Game {
                 newPlayer = new Thief(name, startRoom, player);
                 break;
             case 3:
-                newPlayer = new Paladin(name, startRoom, player);
+                newPlayer = new Paladin(name, startRoom, player, true);
                 break;
             case 4:
                 newPlayer = new Priest(name, startRoom, player);
+                break;
             default:
                 System.out.println("Invalid choice, please try again");
                 return createCharacter(scanner, startRoom);

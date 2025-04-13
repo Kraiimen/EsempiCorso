@@ -43,18 +43,18 @@ public class Enemy extends Npc{
     public static Enemy generateEnemy(String charName, int maxHP, Room currentRoom) {
         Enemy enemy = new Enemy(charName, maxHP, (int)(Math.random() * 10), currentRoom, (int)(Math.random() * 1) );
 
-        Item weapon = new Weapon("Sword1", (int)(Math.random() * 5));
+        Item weapon = new Weapon("Sword1", (int)(Math.random() * 4) + 1);
         enemy.getInventory().addItem(weapon);
 
         int chanceToHaveWeapon = (int)(Math.random() * 3);
         if (chanceToHaveWeapon == 0) {
-            Item weapon2 = new Weapon("Sword2", (int)(Math.random() * 7));
+            Item weapon2 = new Weapon("Sword2", (int)(Math.random() * 6) + 1);
             enemy.getInventory().addItem(weapon2);
         }
 
         int chanceToHaveArmor = (int)(Math.random() * 3);
         if (chanceToHaveArmor == 0) {
-            Item armor = new Armor("Shield", (int)(Math.random() * 4), (int)(Math.random() * 2), 0);
+            Item armor = new Armor("Shield", (int)(Math.random() * 3) + 1, (int)(Math.random() * 2) + 1, 0);
             enemy.getInventory().addItem(armor);
         }
 
