@@ -10,7 +10,7 @@ public class Barbarian extends Player {
 
 
     public Barbarian(String name,String color ,String playerName) {
-        super(name, 12, color, "Barbarian");
+        super(name, 12, color, "barbarian");
         this.playerName = playerName;
         this.hpDiceFaces = 12;
     }

@@ -176,9 +176,7 @@ public class Game {
         if(printDesc){
             System.out.println(room.getDescription());
         }
-        System.out.println("la stanza ha guardie?" + room.isHasGuards());
         room.RandomizeGuards(room);
-        System.out.println("la stanza ha guardie?"+room.isHasGuards());
         if(player.getCurrentRoom().getName().equalsIgnoreCase("PRISON")){
             System.out.printf("<And like this, the quest %s got from the king was given to another adventurer, since %s is now in a cell in the prison>\n",player.getName(),player.getName());
         }
@@ -549,6 +547,7 @@ public class Game {
                                                 player.getCurrentRoom().setHasItems(false);
                                             }
                                         }
+                                        System.out.printf("<You swiftly grab the %s>",itemPlayerWantToSteal.getName());
                                     } else {
                                         if (player.getCurrentRoom().getName().equalsIgnoreCase("castle")){
 
