@@ -171,6 +171,7 @@ public class Player extends Entity{
             switch (item.getType()){
                 case ARMOR -> {
                     this.setEquipedArmor((Armor)item);
+                    this.setAc(10+dexMod+((Armor) item).getcAMod());
                 }
                 case WEAPON -> {
                     this.setEquipedWeapon((Weapon)item);

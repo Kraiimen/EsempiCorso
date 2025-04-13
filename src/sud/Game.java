@@ -127,7 +127,7 @@ public class Game {
                 player.getLevel(),
                 player.getCoins());
     }
-    private static void trade(Entity npcInput, String escapeChoice, String successfullTrade, String failedTrade){
+    private static void trade(Entity npcInput, String escapeChoice, String successfulTrade, String failedTrade){
         int counter =1;
         Npc npc = (Npc)npcInput;
         System.out.println("<You have: " + player.getCoins() + " gold coins>");
@@ -141,7 +141,7 @@ public class Game {
         if(choiceI==counter){
             npc.speak(escapeChoice);
         }else if(player.pay(npc.getInventory().get(choiceI))){
-            npc.speak(successfullTrade);
+            npc.speak(successfulTrade);
         }else{
             npc.speak(failedTrade);
         }
@@ -176,6 +176,9 @@ public class Game {
         if(printDesc){
             System.out.println(room.getDescription());
         }
+        System.out.println("la stanza ha guardie?" + room.isHasGuards());
+        room.RandomizeGuards(room);
+        System.out.println("la stanza ha guardie?"+room.isHasGuards());
         if(player.getCurrentRoom().getName().equalsIgnoreCase("PRISON")){
             System.out.printf("<And like this, the quest %s got from the king was given to another adventurer, since %s is now in a cell in the prison>\n",player.getName(),player.getName());
         }
@@ -606,7 +609,13 @@ public class Game {
 
                     }
                 }
-                case "FIGHT","F" ->{}
+                case "FIGHT","F" ->{
+                    if(player.getCurrentRoom().isHasMOBS()){
+
+                    }else{
+                        System.out.println("<There are no enemies to fight>");
+                    }
+                }
                 case "CHARACTER MENU","CM","C" ->{
 
                     boolean escapeInv =false;

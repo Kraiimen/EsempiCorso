@@ -68,16 +68,12 @@ public class Room {
         //prison
         {
             prison.setPaths(debugroom, debugroom, debugroom, castle);
-            prison.setRoomProperties(false, true, true, false, false);
+            prison.setRoomProperties(false, true, false, false, false);
         }
         //temple square
         {
             templeSq.setPaths(castle, market, tavern, temple);
-            templeSq.setRoomProperties(false, true, true, false, false);
-            templeSq.getNPCInRoom().put(Npc.getNpcMap().get("TQGUARD").getName().toUpperCase(), Npc.getNpcMap().get("TQGUARD"));
-            templeSq.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(), Item.itemMap.get("bread"));
-            templeSq.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(), Item.itemMap.get("bread"));
-
+            templeSq.setRoomProperties(false, false, false, false, false);
             if (dices.rd100() > 25) {
                 templeSq.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(), Item.itemMap.get("bread"));
                 templeSq.hasItems = true;
@@ -96,7 +92,7 @@ public class Room {
         }
         //tavern
         {
-            tavern.setPaths(debugroom, debugroom, templeSq, debugroom);
+            tavern.setPaths(debugroom, debugroom, debugroom,templeSq);
             tavern.setRoomProperties(false, true, false, false, false);
             tavern.getNPCInRoom().put(Npc.getNpcMap().get("TAVERNKEEPER").getName().toUpperCase(), Npc.getNpcMap().get("TAVERNKEEPER"));
             if (dices.rd100() > 95) {
@@ -128,8 +124,8 @@ public class Room {
         //market
         {
             market.setPaths(templeSq, fieldsN, forge, bakery);
-            market.setRoomProperties(false, true, true, false, false);
-            market.getNPCInRoom().put(Npc.getNpcMap().get("MQGUARD").getName().toUpperCase(), Npc.getNpcMap().get("MQGUARD"));
+            market.setRoomProperties(false, true, false, false, false);
+
             if (dices.rd100() > 25) {
                 market.getItemsInRoom().put(Item.itemMap.get("bread").getName().toUpperCase(), Item.itemMap.get("bread"));
                 market.hasItems = true;
@@ -221,7 +217,7 @@ public class Room {
         {
             bossRoom.setPaths(debugroom, debugroom, forest, debugroom);
             bossRoom.setRoomProperties(true, false, false, false, true);
-            fieldsN.getMOBSInRoom().put(Mob.getMobMap().get("BOSS").getName().toUpperCase(), Mob.getMobMap().get("BOSS"));
+            bossRoom.getMOBSInRoom().put(Mob.getMobMap().get("BOSS").getName().toUpperCase(), Mob.getMobMap().get("BOSS"));
         }
         // descrizioni delle stanze
         {
@@ -359,6 +355,46 @@ public class Room {
         this.hasMOBS = hasMOBS;
     }
 
+    public void RandomizeGuards(Room room){
+        int roll =dices.rd100();
+        switch (room.getName().toUpperCase()){
+
+            case "TEMPLESQUARE","MARKET"->{
+                if(!room.isHasGuards()){
+                    if(roll>25){
+                        room.getNPCInRoom().put(Npc.getNpcMap().get("GUARD").getName().toUpperCase(), Npc.getNpcMap().get("GUARD"));
+                        room.setHasGuards(true);
+                        room.setHasNPC(true);
+                    }
+                }else{
+                    if(roll>75){
+                        room.getNPCInRoom().remove("THE GUARD");
+                        if(room.getNPCInRoom().isEmpty()){
+                            room.setHasNPC(false);
+                            room.setHasGuards(false);
+                        }
+                    }
+
+                }
+
+            }
+            case "TEMPLE"->{
+                if(!room.isHasGuards()){
+                    if(dices.rd100()>90){
+                        room.getNPCInRoom().put(Npc.getNpcMap().get("GUARD").getName().toUpperCase(), Npc.getNpcMap().get("GUARD"));
+                        room.setHasGuards(true);
+                    }
+                }else{
+                    if(dices.rd100()>50){
+                        room.getNPCInRoom().remove("GUARD");
+                    }
+
+                }
+
+            }
+        }
+    }
+
     public String getName() {
         return name;
     }
@@ -460,5 +496,9 @@ public class Room {
 
     static public Room getRoomPointerFromName(String name) {
         return roomMap.get(name);
+    }
+
+    public void setHasNPC(boolean hasNPC) {
+        this.hasNPC = hasNPC;
     }
 }

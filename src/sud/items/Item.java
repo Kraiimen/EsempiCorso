@@ -31,11 +31,11 @@ public class Item {
         itemMap.put("wine",fineWine);
         Item Cheapwine = new Item(dices.rd20(), ItemType.FOOD, "Cheap wine");
         itemMap.put("cheapwine",Cheapwine);
-        Armor leatherArmor = new Armor(50, "Leather armor",5);
+        Armor leatherArmor = new Armor(50, "Leather armor",5,1);
         itemMap.put("leatherarmor",leatherArmor);
-        Armor chainMail = new Armor(80, "Chain mail",8);
+        Armor chainMail = new Armor(80, "Chain mail",8,2);
         itemMap.put("chainmail",chainMail);
-        Armor fullplate = new Armor(120, "Full plate armor",10);
+        Armor fullplate = new Armor(120, "Full plate armor",10,4);
         itemMap.put("fullplate",fullplate);
         Weapon dagger = new Weapon(20,"Dagger",4);
         itemMap.put("dagger",dagger);

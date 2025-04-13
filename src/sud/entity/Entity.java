@@ -19,7 +19,7 @@ public class Entity {
     private ArrayList<Item> inventory;
     public static Weapon baseWeapon = new Weapon(0,"Nothing",0);
     private Weapon equipedWeapon = baseWeapon;
-    public static Armor baseArmor = new Armor(0,"Nothing", 0);
+    public static Armor baseArmor = new Armor(0,"Nothing", 0,0);
     private Armor equipedArmor= baseArmor;
     private int ac;
     private String entityColor;

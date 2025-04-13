@@ -21,10 +21,8 @@ public class Npc extends Entity{
         npcMap.put("KING", king);
         Npc kingsGuard = new Npc("King's Guard", 50,15, Room.getRoomPointerFromName("castle"), 0, NpcState.NEUTRAL, false);
         npcMap.put("KINGSGUARD", kingsGuard);
-        Npc tQGuard = new Npc("The Guard", 50,15, Room.getRoomPointerFromName("templeSquare"), 0, NpcState.NEUTRAL, false);
-        npcMap.put("TQGUARD", tQGuard);
-        Npc mQGuard = new Npc("The Guard", 50,15, Room.getRoomPointerFromName("market"), 0, NpcState.NEUTRAL, false);
-        npcMap.put("MQGUARD", mQGuard);
+        Npc Guard = new Npc("The Guard", 50,15, Room.getRoomPointerFromName("templeSquare"), 0, NpcState.NEUTRAL, false);
+        npcMap.put("GUARD", Guard);
         Npc cleric = new Npc("The Cleric", 50,15, Room.getRoomPointerFromName("temple"), 0, NpcState.PASSIVE, true);
         npcMap.put("CLERIC", cleric);
         Npc blackSmithAssistant = new Npc("The Assistant", 10000000,0, Room.getRoomPointerFromName("forge"), 0, NpcState.PASSIVE, true);
@@ -71,19 +69,14 @@ public class Npc extends Entity{
         kingsGuard.lines.add(kingsGuard.getWithColor("..."));
         kingsGuard.lines.add(kingsGuard.getWithColor("<He looks at you silently, you feel unconformable>"));
 
-        mQGuard.setDescription("The guard stand as still as statues in his shining armor and sharp weapons at his sides. His fixed, stern gazes command respect, provokes in you a feeling of safety... or perhaps a slight sense of oppression? Every gesture is measured, every detail of his equipment cared for with discipline. You know that nothing escapes unnoticed under his watchful gaze.");
-        mQGuard.lines.add(mQGuard.getWithColor("Be safe citizen") );
-        mQGuard.lines.add(mQGuard.getWithColor("Hello!"));
-        mQGuard.lines.add(mQGuard.getWithColor("Hi"));
-        mQGuard.lines.add(mQGuard.getWithColor("You better not try anything funny"));
-        mQGuard.lines.add(mQGuard.getWithColor("Do you need something citizen?"));
+        Guard.setDescription("The guard stand as still as statues in his shining armor and sharp weapons at his sides. His fixed, stern gazes command respect, provokes in you a feeling of safety... or perhaps a slight sense of oppression? Every gesture is measured, every detail of his equipment cared for with discipline. You know that nothing escapes unnoticed under his watchful gaze.");
+        Guard.lines.add(Guard.getWithColor("Be safe citizen") );
+        Guard.lines.add(Guard.getWithColor("Hello!"));
+        Guard.lines.add(Guard.getWithColor("Hi"));
+        Guard.lines.add(Guard.getWithColor("You better not try anything funny"));
+        Guard.lines.add(Guard.getWithColor("Do you need something citizen?"));
 
-        tQGuard.setDescription("The guard stand as still as statues in his shining armor and sharp weapons at his sides. His fixed, stern gazes command respect, provokes in you a feeling of safety... or perhaps a slight sense of oppression? Every gesture is measured, every detail of his equipment cared for with discipline. You know that nothing escapes unnoticed under his watchful gaze.");
-        tQGuard.lines.add(tQGuard.getWithColor("Be safe citizen") );
-        tQGuard.lines.add(tQGuard.getWithColor("Hello!"));
-        tQGuard.lines.add(tQGuard.getWithColor("Hi"));
-        tQGuard.lines.add(tQGuard.getWithColor("You better not try anything funny"));
-        tQGuard.lines.add(tQGuard.getWithColor("Do you need something citizen?"));
+
 
         cleric.setDescription("The temple cleric is a wise-looking man with a light, untidy beard, now almost entirely gray. Grayish hair falls softly over his shoulders. He wears a black robe, different from the other disciples, decorated on his chest by the sacred symbol of the gods. He is kneeling in front of the statue, praying under his breath.");
         cleric.lines.add("<in a soft voice>"+cleric.getWithColor("greetings"));
