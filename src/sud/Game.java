@@ -49,6 +49,10 @@ public class Game {
 
     public static void start() throws GameClosingExeption {
         //@todo intro
+        System.out.println("<Hi, this is the Narrator speaking, i'll be your guide, for now, i just want you to know>");
+        System.out.println("<My presence will be marked by the \"<>\">");
+        System.out.println("<When you see this symbol \" |-->\" it means to just give any input to the gema, it's just there to give you time to read>");
+        System.out.println("<When you see this symbol \"-->\" it means that you, the player will say/do the thing next to it >");
         createPlayerCharacter();
         moveIntoRoom(Room.getRoomPointerFromName("CASTLE"),true);
         interactMenu();
@@ -477,8 +481,15 @@ public class Game {
                     if(player.getCurrentRoom().isHasNPC()){
                         System.out.println("<Who would you like to talk to?>");
                         printAvailableNPC();
-                        whoPlayerWantToSpeackTo = console.readLine("--> ");
-                        talkTo(getNameOfNpcFromNumberInTalkList(whoPlayerWantToSpeackTo));
+                        choice = player.askPlayerIntInput(player.getCurrentRoom().getNPCInRoom().size()+1);
+                        if(choice !=player.getCurrentRoom().getNPCInRoom().size()+1){
+                            ArrayList npcinroom = new ArrayList();
+                            npcinroom.addAll(player.getCurrentRoom().getNPCInRoom().values());
+                            Npc npc = (Npc) npcinroom.get(choice-1);
+                            whoPlayerWantToSpeackTo = npc.getName() ;
+                            talkTo(whoPlayerWantToSpeackTo.toUpperCase());
+                        }else{}
+
                     }
                 }
                 case "STEAL","S" ->{
@@ -545,7 +556,7 @@ public class Game {
                                                 player.getCurrentRoom().setHasItems(false);
                                             }
                                         }
-                                        System.out.printf("<You swiftly grab the %s>",itemPlayerWantToSteal.getName());
+                                        System.out.printf("<You swiftly grab the %s>\n",itemPlayerWantToSteal.getName());
                                     } else {
                                         if (player.getCurrentRoom().getName().equalsIgnoreCase("castle")){
 
@@ -636,7 +647,7 @@ public class Game {
                                         escapeInv =true;
                                     }else{
                                         if(!player.getInventory().isEmpty()){
-                                            Item itemPlayerWantToUse = (player.getInventory().get(choice-1));
+                                            Item itemPlayerWantToUse = (player.getInventory().get(choice-4));
                                             if(choice == player.getInventory().size()+1){
                                                 System.out.printf("<What Do you want to unequip: %S>",itemPlayerWantToUse.getName());
                                                 System.out.println("(1)-> YES" +
