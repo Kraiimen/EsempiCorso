@@ -6,11 +6,15 @@ import mud.characters.fightable.Character;
 import mud.characters.fightable.monsters.Guard;
 import mud.characters.fightable.monsters.Monster;
 import mud.characters.fightable.monsters.MonsterMap;
+import mud.items.Tree;
 import mud.items.Weapon;
 import mud.rooms.MagicMap;
 
+import java.io.Console;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static mud.GameMap.console;
 import static mud.characters.fightable.Character.dice;
@@ -18,6 +22,8 @@ import static mud.characters.fightable.PlayerCharacter.MAX_RESPAWN;
 import static mud.characters.fightable.monsters.Guard.GUARD_POSSIBLE_ROOM;
 
 public class GameUtil {
+    public static final String RESET = "\u001B[0m";
+    public static final String BLUE = "\u001B[34m";
     public static PlayerCharacter player;
     public static List<String> choices = new ArrayList<>();
     public static List<String> directions = new ArrayList<>();
@@ -53,20 +59,32 @@ public class GameUtil {
         } else {
             player = new Thief(answerName);
         }
+        delay(800);
+        System.out.printf("Initializing %s the %s...%n", player.getName(), player.getClass().getSimpleName());
+        delay(1000);
         player.printStats();
-        System.out.printf("Welcome %s! ********Messaggio di inizio**********%n", player.getName());
+        delay(1500);
+        System.out.println("PRESS ENTER TO CONTINUE READING.");
+        delay(800);
+        System.out.printf(BLUE + "Welcome %s!%n", player.getName());
+        continueTheMessage();
+        System.out.println("This city has been waiting for and adventurer like you to come to the rescue.");
+        continueTheMessage();
+        System.out.println("Strange monsters and ghosts coming from the dark woods have been creeping around the city entrance in the last days and the civilians are well preoccupied." );
+        continueTheMessage();
+        System.out.printf("Will a hero like you be the answer to stop this menace?%n" +
+                "If you think so, find the sacred Temple and talk to the wise Elf Elrond, he will show you the way to braveness%n" + RESET);
+        continueTheMessage();
+        System.out.println("Follow the MENU instructions to interact with this magic world, good luck!");
+        delay(1000);
         askWhatToDo();
-        //nel messaggio di inizio devo dire di andare al tempio a parlare con Elrond, che gli dirà di trovare l'anello,
-        //elrond gli dirà di non uccidere gatti se ci sono guardie presenti.
     }
 
     //METODO PER CHIEDERE AL GIOCATORE CHE FARE APPENA ENTRA IN UNA STANZA
-    //SCEGLI TRA: combattere, parlare con qualcuno e poi scegli chi, cambiare ancora stanza, cerca item, esci dal gioco
     public static void askWhatToDo() throws EndOfGameException {
         String ans;
         System.out.println("What do you want to do now?");
         do{
-            //TODO OPZIONE CHECK DELLE STATISTICHE
             System.out.println("Write 'FIGHT' if you want to fight some monsters.");
             System.out.println("Write 'MOVE' if you want to start moving.");
             System.out.println("Write 'PICK' if you want to pick an item.");
@@ -81,8 +99,8 @@ public class GameUtil {
         } else if (ans.equals("MOVE")){
             askForDirections();
         } else if (ans.equals("PICK")){
-            //mancano i metodi per gli oggetti e gli oggetti nelle stanze!
             player.getActualRoom().printItems();
+            pickChosenItem();
         } else if (ans.equals("TALK")){
             askWhoToTalk();
         } else if (ans.equals("STATS")){
@@ -108,6 +126,7 @@ public class GameUtil {
             askForDirections();
         } else if (ans.equals("PICK")){
             player.getActualRoom().printItems();
+            pickChosenItem();
         } else if (ans.equals("TALK")){
             askWhoToTalk();
         } else if (ans.equals("STATS")){
@@ -148,9 +167,7 @@ public class GameUtil {
 
     public static void checkForMonsters() throws EndOfGameException {
         String ans;
-        List<Entity> monsters = player.getActualRoom().getPresentEntities().values()
-                .stream().filter(entity -> entity instanceof Monster).toList();
-        if (!monsters.isEmpty()) {
+        if (!player.getActualRoom().getPresentMonsters().isEmpty()) {
             do {
                 System.out.println("Looks like there are some Monsters here! Are you ready to fight? Answer with Y or N: ");
                 ans = console.readLine().toUpperCase();
@@ -275,10 +292,46 @@ public class GameUtil {
 
     }
 
+    //metodi item
+
+    public static boolean doesWantPick() {
+        String ans = null;
+        if (!player.getActualRoom().getPresentItems().isEmpty()) {
+            do {
+                System.out.println("Answer Y or N: ");
+                ans = console.readLine().toUpperCase();
+            } while (!ans.equals(Answer.N.toString()) && !ans.equals(Answer.Y.toString()));
+            if (ans.equals(Answer.Y.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void pickChosenItem(){
+        Set<String> items = new HashSet<>(player.getActualRoom().getPresentItems().keySet());
+        String ans;
+        System.out.println("Do you want to pick anything?");
+        if(doesWantPick()){
+            do{
+                System.out.println("What do you want to pick? You can choose a tree to pick its fruits if they have any left.");
+                ans = toTitleCase(console.readLine());
+            } while (!items.contains(ans));
+            if(player.getActualRoom().getPresentItems().get(ans) instanceof Tree tree){
+                tree.pickFruit();
+            } else{
+                player.pickItem((player.getActualRoom().getPresentItems().get(ans)));
+                player.getActualRoom().getPresentItems().remove(ans);
+            }
+        }
+    }
+
+
+
     //METODO PER FAR SPOSTARE LE GUARDIE ALLA FINE DI OGNI CICLO
     public static void randomizeTheGuards(){
         List<Monster> guards = MonsterMap.getGuards();
-        guards.forEach(g -> g.getActualRoom().getPresentEntities().remove(g));
+        guards.forEach(g -> g.getActualRoom().getPresentEntities().remove(g.getName()));
         guards.forEach(g -> g.getActualRoom().getPresentMonsters().remove(g));
         guards.forEach(g -> g.setActualRoom(MagicMap.getRooms().get(dice.nextInt(GUARD_POSSIBLE_ROOM))));
     }
@@ -306,6 +359,8 @@ public class GameUtil {
         String ans = toTitleCase(console.readLine());
         if(names.contains(ans)){
             player.getActualRoom().getPresentEntities().get(ans).greet();
+        } else {
+            System.out.println("They're not here right now.");
         }
     }
 
@@ -316,12 +371,23 @@ public class GameUtil {
         String subString = s.substring(1);
         return firstUpper + subString;
     }
+    public static void delay(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+        }
+    }
+    public static void continueTheMessage(){
+        Console console = System.console();
+        console.readLine();
+    }
 
 
     //TODO IMPLEMENTARE METODI PER GLI ITEM (magari direttamente in entity?)
-    //TODO AGGIUNGERE ELROND CHE TI DA LA MISSIONE
+    //metodi item: mangiare le cose del mio stesso inventario
+
     //TODO FAR FINIRE IL GIOCO APPENA HAI L'ANELLO
-    //TODO AGGIUNGERE I SOLDI PER COMPRARE LE COSE
+    //TODO AGGIUNGERE I SOLDI PER COMPRARE LE COSE???
     //TODO SCRIVERE LE DESCRIZIONI BENE
 
 

@@ -10,8 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static mud.GameMap.console;
-import static mud.GameUtil.player;
-import static mud.GameUtil.toTitleCase;
+import static mud.GameUtil.*;
 
 public class Merchant extends Entity {
     private static final int MERCHANT_POSSIBLE_ROOM = 4;
@@ -28,8 +27,8 @@ public class Merchant extends Entity {
     }
 
     public void greet(){
-        System.out.println(getName() + " says : Oy there! Looking a bit lost! I think I got what you need...");
-        System.out.println("The best equipment in the whole realm... Wanna take a look?");
+        System.out.println(getName() + " says :" + BLUE + " Oy there! Looking a bit lost! I think I got what you need...");
+        System.out.println("The best equipment in the whole realm... Wanna take a look?" + RESET);
         Set<String> equip = new HashSet<>(getInventory().keySet());
         String ans;
         if(doesWantEquip()){
@@ -51,7 +50,8 @@ public class Merchant extends Entity {
         if(ans.equals(Answer.Y.toString())){
             return true;
         } else if(ans.equals(Answer.N.toString())){
-            System.out.println("Oh well, be careful out there then...");
+            System.out.println(BLUE + "Oh well, be careful out there then..." + RESET);
+            delay(800);
         }
         return false;
     }

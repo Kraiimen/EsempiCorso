@@ -3,9 +3,12 @@ package mud.characters.fightable;
 import mud.CardinalPoints;
 import mud.items.Food;
 import mud.items.Item;
+import mud.items.Tree;
 import mud.items.Weapon;
 import mud.rooms.MagicMap;
 import mud.rooms.Room;
+
+import static mud.GameUtil.delay;
 
 public abstract class PlayerCharacter extends Character {
     public static final int MAX_RESPAWN = 5;
@@ -37,10 +40,12 @@ public abstract class PlayerCharacter extends Character {
             //per ora lascio qui la guarigione del tempio, ma forse sta meglio nel tempio? dopo vedo
             if(getActualRoom().equals(MagicMap.getRooms().get(1))){
                 System.out.println("The Temple's magical air heals you. +2 hp points.");
+                delay(500);
                 heal(2);
             }
         } else {
             System.out.println("The road is closed. You're still at " + getActualRoom().getName());
+            delay(500);
         }
     }
 
@@ -49,12 +54,15 @@ public abstract class PlayerCharacter extends Character {
             if (food.getHpGiven()<0){
                 hurt(-food.getHpGiven());
                 System.out.printf("This %s is poisoned! You lose %d hp!%n", food.getName(), -food.getHpGiven());
+                delay(500);
             } else {
                 System.out.printf("You ate %s and you got +%d hp.%n", food.getName(), food.getHpGiven());
                 heal(food.getHpGiven());
+                delay(500);
             }
         } else {
             System.out.println("You can't eat this!");
+            delay(500);
         }
     }
 
@@ -66,6 +74,7 @@ public abstract class PlayerCharacter extends Character {
             setActualRoom(MagicMap.getRooms().getFirst());
             System.out.printf("Welcome back! You are now in %s and you have %d respawn possibilities left!%n",
                     MagicMap.getRooms().getFirst().getName(),MAX_RESPAWN-respawnCounter);
+            delay(500);
         }
     }
 
@@ -80,27 +89,39 @@ public abstract class PlayerCharacter extends Character {
 
     public void printStats(){
         System.out.printf("Here are %s's statistics:%n", getName());
+        delay(1000);
         System.out.println("Exp: " + getExp());
+        delay(400);
         System.out.println("HP: " + getHp() + "/" + MAX_HP);
+        delay(400);
         System.out.println("Intelligence: " + getIntelligence() + "/" + MAX);
+        delay(400);
         System.out.println("Strength: " + getStrength() + "/" + MAX);
+        delay(400);
         System.out.println("Agility: " + getAgility() + "/" + MAX);
+        delay(400);
         System.out.println("Stamina: " + getStamina() + "/" + MAX);
+        delay(400);
         System.out.println("Respawns Left: " + (MAX_RESPAWN-respawnCounter));
     }
     @Override
     public void pickItem(Item item){
             getInventory().put(item.getName(), item);
-            System.out.println("You have picked " + item.getName());
+            if(!(item instanceof Tree)) {
+                System.out.println("You have picked " + item.getName());
+                delay(800);
+            }
     }
 
     public void addStrength(int addedStrength){
         if((getStrength() + addedStrength) <= MAX && addedStrength > 0){
             setStrength(getStrength() + addedStrength);
             System.out.printf("You have %d strength points now.", getStrength());
+            delay(800);
         } else if ((getStrength() + addedStrength) > MAX){
             setStrength(MAX);;
             System.out.println("You are at MAX strength.");
+            delay(800);
         }
     }
 

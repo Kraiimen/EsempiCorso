@@ -3,6 +3,10 @@ package mud.characters.fightable.monsters;
 import mud.characters.fightable.Character;
 import mud.rooms.MagicMap;
 
+import javax.print.DocFlavor;
+
+import static mud.GameUtil.*;
+
 public class Cat extends Monster {
     private static final int MAX_CAT = 2;
     private static final int CAT_EXP_GIVEN = 2;
@@ -31,7 +35,8 @@ public class Cat extends Monster {
 
     @Override
     public void greet(){
-        System.out.println("Meow!");
+        System.out.println(getName() + " says :" + BLUE + " Meow!" + RESET);
+        delay(800);
     }
 }
 

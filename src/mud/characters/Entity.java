@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static mud.GameUtil.*;
+
 public abstract class Entity {
     private static int lastId = 0;
     private int characterId;
@@ -26,7 +28,8 @@ public abstract class Entity {
     }
 
     public void greet(){
-        System.out.println(name + " says : Hello!");
+        System.out.println(name + " says :" + BLUE + " Hello!" + RESET);
+        delay(800);
     }
     public void printInventory(){
         inventory.keySet().forEach(System.out::println);

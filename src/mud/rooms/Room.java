@@ -16,7 +16,6 @@ public abstract class Room {
     private HashMap<CardinalPoints, Room> directions;
     private HashMap<String, Entity> presentEntities;
     private List<Monster> presentMonsters;
-    private List<String> presentMonstersClasses;
     private HashMap<String, Item> presentItems;
 
     //costruttore
@@ -26,7 +25,6 @@ public abstract class Room {
         presentEntities = new HashMap<>();
         presentItems = new HashMap<>();
         presentMonsters = new ArrayList<>();
-        presentMonstersClasses = new ArrayList<>();
     }
     //costruttore per l'ultimo garden
     public Room(String name, Room lastRoom) {
@@ -118,12 +116,5 @@ public abstract class Room {
     }
     public void setPresentMonsters(List<Monster> presentMonsters) {
         this.presentMonsters = presentMonsters;
-    }
-
-    public List<String> getPresentMonstersClasses() {
-        return presentMonstersClasses;
-    }
-    public void setPresentMonstersClasses(List<String> presentMonstersClasses) {
-        this.presentMonstersClasses = presentMonstersClasses;
     }
 }

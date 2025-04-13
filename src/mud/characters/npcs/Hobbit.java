@@ -6,6 +6,7 @@ import mud.rooms.MagicMap;
 import java.util.ArrayList;
 import java.util.List;
 
+import static mud.GameUtil.*;
 import static mud.characters.fightable.Character.dice;
 
 public class Hobbit extends Entity {
@@ -36,7 +37,8 @@ public class Hobbit extends Entity {
             //IF(ACCETTA)
             //System.out.println("QUEST QUEST QUEST BLABLABLA");
     //    } else{
-            System.out.println(greetings.get(dice.nextInt(greetings.size())));
+            System.out.println(BLUE + greetings.get(dice.nextInt(greetings.size())) + RESET);
+            delay(800);
     //    }
 
     }

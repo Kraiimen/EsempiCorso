@@ -10,8 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static mud.GameMap.console;
-import static mud.GameUtil.player;
-import static mud.GameUtil.toTitleCase;
+import static mud.GameUtil.*;
 
 public class Baker extends Entity {
     private static final int BAKER_POSSIBLE_ROOM = 3;
@@ -28,8 +27,8 @@ public class Baker extends Entity {
 
     @Override
     public void greet(){
-        System.out.println(getName() + " says : We have the best bread in the whole wide realm!");
-        System.out.println("Would you like something to eat? Food is great for you health and for your heart!");
+        System.out.println(getName() + " says : " + BLUE + "We have the best bread in the whole wide realm!");
+        System.out.println("Would you like something to eat? Food is great for you health and for your heart!" + RESET);
         Set<String> food = new HashSet<>(getInventory().keySet());
         String ans;
         if(doesWantFood()){
@@ -51,7 +50,8 @@ public class Baker extends Entity {
         if(ans.equals(Answer.Y.toString())){
             return true;
         } else if(ans.equals(Answer.N.toString())){
-            System.out.println("Alright! You know where to find me when you get hungry!");
+            System.out.println(BLUE + "Alright! You know where to find me when you get hungry!" + RESET);
+            delay(800);
         }
         return false;
     }

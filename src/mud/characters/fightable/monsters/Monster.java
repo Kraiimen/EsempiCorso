@@ -2,7 +2,10 @@ package mud.characters.fightable.monsters;
 
 import mud.characters.fightable.Character;
 import mud.characters.fightable.PlayerCharacter;
+import mud.items.Item;
 import mud.rooms.Room;
+
+import java.util.List;
 
 public abstract class Monster extends Character {
     private int expGiven;
@@ -33,6 +36,21 @@ public abstract class Monster extends Character {
     }
     public void setExpGiven(int expGiven) {
         this.expGiven = expGiven;
+    }
+
+    @Override
+    public void die(){
+        setHp(MIN);
+        setIsAlive(false);
+        getActualRoom().getPresentEntities().remove(this.getName());
+        getActualRoom().getPresentMonsters().remove(this);
+        System.out.println(getName() + " is dead.");
+        if(!getInventory().isEmpty()){
+            List<Item> inventory = getInventory().values().stream().toList();
+            inventory.forEach(i -> getActualRoom().getPresentItems().put(i.getName(), i));
+            getInventory().clear();
+            System.out.println(getName() + " lost all his belongings dying.");
+        }
     }
 
 }

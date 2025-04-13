@@ -1,7 +1,9 @@
 package mud.characters.fightable.monsters;
 
 
+import mud.items.Food;
 import mud.items.Ring;
+import mud.items.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +13,16 @@ public class MonsterMap {
     static private List<Monster> guards = new ArrayList<>();
     static {
         //GATTI
-        monsters.add(new Cat("Fluffy"));
+        Monster fluffy = new Cat("Fluffy");
+        monsters.add(fluffy);
         monsters.add(new Cat("Kitty"));
         monsters.add(new Cat("Peach"));
         monsters.add(new Cat("Lily"));
         monsters.add(new Cat("Minnie"));
 
         //GOBLIN
-        monsters.add(new Goblin("Krenko"));
+        Monster krenko = new Goblin("Krenko");
+        monsters.add(krenko);
         monsters.add(new Goblin("Ardoz"));
         monsters.add(new Goblin("Goro-Goro"));
         monsters.add(new Goblin("Squee"));
@@ -26,7 +30,7 @@ public class MonsterMap {
 
         //FANTASMI
 
-        monsters.add(new Ghost("Filippo", "Isn't it a bit excessive to try killing a ghost?"));
+        monsters.add(new Ghost("Filippo", "Isn't it a bit excessive trying to kill a ghost?"));
         monsters.add(new Ghost("Elvis", "I don't remember much of how I died, but I'd been writing code for 70 hours..."));
         monsters.add(new Ghost("Edoardo", "Has anybody seen my D&D dices?"));
         monsters.add(new Ghost("Lorenzo", "AO"));
@@ -49,6 +53,10 @@ public class MonsterMap {
         guards.add(new Guard("Banana"));
         guards.add(new Guard("Cheesecake"));
         guards.add(new Guard("Blueberry"));
+
+        //do gli oggetti a qualche mostro
+        fluffy.pickItem(new Food("Dead mouse", 2));
+        krenko.pickItem(new Weapon("Rusty sword"));
 
     }
 
