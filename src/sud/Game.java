@@ -141,11 +141,10 @@ public class Game {
             counter++;
         }
         System.out.printf(npc.getWithColor("(%d)-> \"Nevermind\"\n"), counter);
-        String choice=console.readLine("-->");
-        int choiceI = Integer.parseInt(choice);
+        int choiceI=player.askPlayerIntInput(player.getInventory().size()+1);
         if(choiceI==counter){
             npc.speak(escapeChoice);
-        }else if(player.pay(npc.getInventory().get(choiceI))){
+        }else if(player.pay(npc.getInventory().get(choiceI-1))){
             npc.speak(successfulTrade);
         }else{
             npc.speak(failedTrade);
