@@ -167,7 +167,7 @@ public class Game {
             if((itemSold.getPrice()*0.8)<1){
                 System.out.println("The item has no resell value\n");
             }else{
-                player.setCoins(player.getCoins()-(int)(itemSold.getPrice()*0.8));
+                player.setCoins(player.getCoins()+(int)(itemSold.getPrice()*0.8));
                 npc.getInventory().add(itemSold);
                 player.getInventory().remove(choiceI-1);
                 System.out.printf("<You sold the %s for %d >",itemSold.getName(), player.getCoins()-(int)(itemSold.getPrice()*0.8));
