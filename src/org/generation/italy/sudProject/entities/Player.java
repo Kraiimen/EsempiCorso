@@ -2,6 +2,7 @@ package org.generation.italy.sudProject.entities;
 
 import org.generation.italy.sudProject.Entity;
 import org.generation.italy.sudProject.Spawner;
+import org.generation.italy.sudProject.items.itemTypes.Food;
 import org.generation.italy.sudProject.map.Room;
 
 import java.time.LocalDate;
@@ -102,6 +103,9 @@ public class Player extends Entity{
         if(isDead(target)){
             target.die();
         }
+    }
+    private void eat(Food food){
+        regenerateHp(food.getHpValue());
     }
 
     // /--GETTER-&-SETTER--/

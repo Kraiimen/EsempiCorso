@@ -96,6 +96,14 @@ public abstract class Entity {
                 break;
         }
     }
+    protected void regenerateHp(int amount){
+        hp += amount;
+        if(hp > maxHp){
+            hp = maxHp;
+        }
+    }
+
+
     public boolean isDead(Entity e){
         return (e.getHp() <= 0);
     }
