@@ -172,6 +172,7 @@ public class Game {
                 player.setCoins(player.getCoins()-(int)(itemSold.getPrice()*0.8));
                 npc.getInventory().add(itemSold);
                 player.getInventory().remove(choiceI);
+                System.out.printf("<You sold the %s for %d >",itemSold.getName(), player.getCoins()-(int)(itemSold.getPrice()*0.8));
             }
         }
     }
