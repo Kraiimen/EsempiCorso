@@ -28,8 +28,8 @@ public class Game {
                     break;
                 case "N":
                     checkIntroChoice = true;
-                    System.out.println("\u001B[36mPuoi muoverti con i numeri o digitando la direzione cardinale in cui vuoi andare\n" +
-                            "Premi 1 per iniziare a muoverti!\u001B[0m");
+//                    System.out.println("\u001B[36mPuoi muoverti con i numeri o digitando la direzione cardinale in cui vuoi andare\n" +
+//                            "Premi 1 per iniziare a muoverti!\u001B[0m");
                     break;
                 default:
                     System.out.println("Seleziona una scelta disponibile");
@@ -91,9 +91,6 @@ public class Game {
             System.out.println("Ti guardi attorno, ma questo luogo non ti è familiare..");
             Thread.sleep(2600);
             System.out.println("Davanti a te si estende una strada lunga e luminosa sospesa nel vuoto");
-            System.out.println("\u001B[36mPuoi muoverti con i numeri o digitando la direzione cardinale in cui vuoi andare\n" +
-                    "Premi 1 per iniziare a muoverti!\u001B[0m");
-
 
         } catch (InterruptedException e){
             System.out.println( "qualcosa è andato storto con il timer."  );
