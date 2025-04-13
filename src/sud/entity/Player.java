@@ -84,6 +84,7 @@ public class Player extends Entity{
         this.level =1;
         this.coins = 1000;
         this.setAc(10+dexMod);
+        this.xp =51;
 
     }
 

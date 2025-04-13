@@ -104,7 +104,7 @@ public class Npc extends Entity{
 
         alchemist.setDescription("The alchemist is a small, skinny man with spiky red hair shooting upward. He wears round glasses with lenses as thick as a finger, and his eyebrows are nearly nonexistent, burned away by numerous explosions. He’s dressed in a black work suit and thick gloves.");
         alchemist.lines.add("<His voice squeaks and cracks>"+alchemist.getWithColor("HElLo TheRe") );
-        alchemist.lines.add("<His voice squeaks and cracks>"+alchemist.getWithColor("ARE YoU HerE To BUY or To AdMirE MY BeAuTyFulL FaCe")  +"<He then moves his eyebrows up and down>");
+        alchemist.lines.add("<His voice squeaks and cracks>"+alchemist.getWithColor("ARE YoU HerE To BUY or To AdMirE MY BeAuTyFulL FaCe"+"<He then moves his eyebrows up and down>"));
         alchemist.lines.add("<His voice squeaks and cracks>"+alchemist.getWithColor("hI TheRE RaTBraIN") );
         alchemist.lines.add("<His voice squeaks and cracks>"+alchemist.getWithColor("HHMMm Do yOU ThINk ThaT If A GOblIn WEre tO ExpLodE, WoLD HE Go Up OR WiDe") );
 
