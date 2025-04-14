@@ -19,12 +19,12 @@ public abstract class Entity {
     protected static final int MIN_ATTRIBUTE_P_VALUE = 8;
     protected static final int CLASS_STARTING_P_VALUE = 13;
 
-    protected static final int STRENGTH_INDEX = 0;
-    protected static final int DEXTERITY_INDEX = 1;
-    protected static final int CONSTITUTION_INDEX = 2;
-    protected static final int INTELLIGENCE_INDEX = 3;
-    protected static final int WISDOM_INDEX = 4;
-    protected static final int CHARISMA_INDEX = 5;
+    public static final int STRENGTH_INDEX = 0;
+    public static final int DEXTERITY_INDEX = 1;
+    public static final int CONSTITUTION_INDEX = 2;
+    public static final int INTELLIGENCE_INDEX = 3;
+    public static final int WISDOM_INDEX = 4;
+    public static final int CHARISMA_INDEX = 5;
 
     private int strength;
     private int dexterity;

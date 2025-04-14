@@ -1,11 +1,10 @@
 package org.generation.italy.sudProject.entities.npcTypes.npcs;
 
 import org.generation.italy.sudProject.entities.npcTypes.CanNotBeAttackedNpc;
-import org.generation.italy.sudProject.items.itemTypes.Food;
+import org.generation.italy.sudProject.items.itemTypes.foods.Bread;
 import org.generation.italy.sudProject.map.Room;
 
 public class Baker extends CanNotBeAttackedNpc {
-    private String breadDescription = "Del semplice pane, appena sfornato";
 
     // /--CONSTRUCTORS--/
     public Baker(String npcName, Room npcPosition, int indexNpcPosition) {
@@ -16,6 +15,6 @@ public class Baker extends CanNotBeAttackedNpc {
 
     // /--METHODS--/
     private void doBread(){
-        this.entityInventory.addItemToInventory(new Food("Pane", 3, false, breadDescription, 10));
+        this.entityInventory.addItemToInventory(new Bread(10,false));
     }
 }
