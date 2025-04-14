@@ -80,6 +80,10 @@ public class Room {
         var v = isAdjacent(this);
     }
 
+    public void setResidents(List<Actor> residents) {
+        this.residents = residents;
+    }
+
     public boolean isAdjacent(Room r) {
         return directions.contains(r);
     }

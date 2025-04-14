@@ -7,6 +7,7 @@ import sud.actors.characters.Paladin;
 import sud.actors.characters.Warrior;
 import sud.engine.GUI.GUI;
 import sud.engine.mechanics.MovementHandler;
+import sud.engine.mechanics.SpawnHandler;
 import sud.environment.CardinalDirection;
 import sud.environment.WorldMap;
 import sud.environment.rooms.Room;
@@ -199,6 +200,7 @@ public class Game {
         //un (vero)nemico normale può essere nella stessa stanza di una guardia? se si voglio che combattano in background?
         for(Room r : WorldMap.getWorldMap()){//Prendo TUTTI i movable invece della singola stanza? (ma solo i non mid fight.. i nemici possono fuggire?)
             MovementHandler.moveCharacters(r.getMovables());
+            SpawnHandler.updatePopulation();
         }
     }
 

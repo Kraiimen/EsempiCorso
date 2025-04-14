@@ -1,5 +1,6 @@
 package sud.environment;
 
+import sud.engine.mechanics.SpawnHandler;
 import sud.environment.rooms.Market;
 import sud.environment.rooms.Room;
 import sud.environment.rooms.Temple;
@@ -40,6 +41,10 @@ public class WorldMap {
         gardenSouth.setDirections(gardenNorth, null, cityGates, null);
         cityGates.setDirections(gardenSouth, null, woods, null);
         woods.setDirections(cityGates, null, null, null);
+
+        temple.setResidents(SpawnHandler.defaultTempleResidents());
+        bakery.setResidents(SpawnHandler.defaultBakeryResidents());
+        armory.setResidents(SpawnHandler.defaultArmoryResidents());
 
         spawnPosition = templeSquare;
     }
