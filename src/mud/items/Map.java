@@ -1,9 +1,12 @@
 package mud.items;
 
+import mud.Answer;
 import mud.rooms.MagicMap;
 import mud.rooms.Room;
 
 import java.util.List;
+
+import static mud.GameMap.console;
 
 public class Map extends Item {
     private String outputFormat = "%20s%20s%20s%n";
@@ -22,4 +25,16 @@ public class Map extends Item {
         System.out.printf(outputFormat,"",roomsNames.get(7),"");
         System.out.printf(outputFormat,"",roomsNames.get(8),"");
     }
+    public void checkMap(){
+        String ans = null;
+        System.out.println("Do you want to check the map?");
+        do {
+            System.out.println("Answer Y or N: ");
+            ans = console.readLine().toUpperCase();
+        } while (!ans.equals(Answer.N.toString()) && !ans.equals(Answer.Y.toString()));
+        if (ans.equals(Answer.Y.toString())) {
+            printMap();
+        }
+    }
+
 }

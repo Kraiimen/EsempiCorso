@@ -7,9 +7,11 @@ import mud.items.*;
 import mud.rooms.MagicMap;
 import mud.rooms.Room;
 
+import java.sql.SQLOutput;
+import java.util.HashMap;
+
 import static mud.GameMap.console;
-import static mud.GameUtil.askIfWantToRest;
-import static mud.GameUtil.delay;
+import static mud.GameUtil.*;
 
 public abstract class PlayerCharacter extends Character {
     public static final int MAX_RESPAWN = 5;
@@ -20,6 +22,7 @@ public abstract class PlayerCharacter extends Character {
     private int respawnCounter;
     private int expCounter;
     private int stamina;
+    private HashMap<String, Item> equipped;
 
 
     public PlayerCharacter(String name, int minIntelligence, int minAgility, int minStamina){
@@ -31,6 +34,7 @@ public abstract class PlayerCharacter extends Character {
         setActualRoom(MagicMap.getRooms().getFirst());
         killsCounter = 0;
         setHp(MAX_HP);
+        equipped = new HashMap<>();
     }
 
     @Override
@@ -56,6 +60,7 @@ public abstract class PlayerCharacter extends Character {
 
     public void eat(Item item){
         if(item instanceof Food food){
+            getInventory().remove(food.getName());
             if (food.getHpGiven()<0){
                 hurt(-food.getHpGiven());
                 System.out.printf("This %s is poisoned! You lose %d hp!%n", food.getName(), -food.getHpGiven());
@@ -116,7 +121,7 @@ public abstract class PlayerCharacter extends Character {
     public void printStats(){
         System.out.printf("Here are %s's statistics:%n", getName());
         delay(800);
-        System.out.println("Exp: " + getExp());
+        System.out.printf(YELLOW + "Exp: %d%n", getExp());
         delay(300);
         System.out.println("HP: " + getHp() + "/" + MAX_HP);
         delay(300);
@@ -128,7 +133,8 @@ public abstract class PlayerCharacter extends Character {
         delay(300);
         System.out.println("Stamina: " + stamina + "/" + MAX);
         delay(300);
-        System.out.println("Respawns Left: " + (MAX_RESPAWN-respawnCounter));
+        System.out.printf("Respawns Left: %d%n", (MAX_RESPAWN-respawnCounter));
+        System.out.printf(RESET);
     }
     @Override
     public void pickItem(Item item){
@@ -137,19 +143,43 @@ public abstract class PlayerCharacter extends Character {
                 System.out.println("You have picked " + item.getName());
                 delay(800);
             }
-            if (item instanceof Weapon weapon){
-                addStrength(weapon.getStrengthGiven());
-            } else if(item instanceof IntelligenceItem ii){
-                addIntelligence(ii.getIntelligenceGiven());
-            } else if(item instanceof AgilityItem){
-
-            }
     }
+
+    public void useItemInInventory(){
+        System.out.println("Select an item or press enter to exit the inventory:");
+        String ans = null;
+        ans = console.readLine();
+        if(!(ans.isEmpty())){
+            ans = toTitleCase(ans);
+        }
+        if(getInventory().containsKey(ans)){
+            if(getInventory().get(ans) instanceof Food food){
+                if(food.checkFood().equals("Y")){
+                    eat(food);
+                }
+            } else if(getInventory().get(ans) instanceof Weapon weapon){
+                if(weapon.checkWeapon().equals("Y")){
+                    getInventory().remove(weapon.getName());
+                    equipped.put(weapon.getName(), weapon);
+                    System.out.printf("You have equipped this %s.%n", weapon.getName());
+                    addStrength(weapon.getStrengthGiven());
+                }
+            } else if(getInventory().get(ans) instanceof IntelligenceItem intelligenceItem){
+
+            } else if(getInventory().get(ans) instanceof AgilityItem agilityItem){
+
+            } else if(getInventory().get(ans) instanceof Map map){
+                map.checkMap();
+            }
+        }
+    }
+
 
     public void addStrength(int addedStrength){
         if((getStrength() + addedStrength) <= MAX && addedStrength > 0){
             setStrength(getStrength() + addedStrength);
-            System.out.printf("You have %d strength points now.", getStrength());
+            System.out.printf(YELLOW + "You have gained %d strength points%n", addedStrength);
+            System.out.printf(RESET);
             delay(800);
         } else if ((getStrength() + addedStrength) > MAX){
             setStrength(MAX);;
@@ -160,7 +190,8 @@ public abstract class PlayerCharacter extends Character {
     public void addIntelligence(int addedIntel){
         if((getIntelligence() + addedIntel) <= MAX && addedIntel > 0){
             setIntelligence(getIntelligence() + addedIntel);
-            System.out.printf("You have %d intelligence points now.", getIntelligence());
+            System.out.printf(YELLOW + "You have gained %d intelligence points%n", addedIntel);
+            System.out.printf(RESET);
             delay(800);
         } else if ((getIntelligence() + addedIntel) > MAX){
             setIntelligence(MAX);;
@@ -171,7 +202,8 @@ public abstract class PlayerCharacter extends Character {
     public void addAgility(int addedAgil){
         if((getAgility() + addedAgil) <= MAX && addedAgil > 0){
             setAgility(getAgility() + addedAgil);
-            System.out.printf("You have %d agility points now.", getAgility());
+            System.out.printf(YELLOW + "You have gained %d agility points%n", addedAgil);
+            System.out.printf(RESET);
             delay(800);
         } else if ((getAgility() + addedAgil) > MAX){
             setAgility(MAX);;
@@ -186,7 +218,7 @@ public abstract class PlayerCharacter extends Character {
                 setStamina(stamina + addStam);
             }
             setStamina(MAX_HP);
-            System.out.println("You're at full stamina.");
+            System.out.printf(YELLOW + "You're at full stamina.%n" + RESET);
         }
     }
 

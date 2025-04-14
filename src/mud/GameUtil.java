@@ -19,6 +19,7 @@ import static mud.characters.fightable.monsters.Guard.GUARD_POSSIBLE_ROOM;
 public class GameUtil {
     public static final String RESET = "\u001B[0m";
     public static final String BLUE = "\u001B[34m";
+    public static final String YELLOW = "\033[0;33m";
     public static PlayerCharacter player;
     public static List<String> choices = new ArrayList<>();
     public static List<String> directions = new ArrayList<>();
@@ -121,9 +122,7 @@ public class GameUtil {
             player.printStats();
         } else if (ans.equals("INVENTORY") || ans.equals("I")){
             player.printInventory();
-            if(player.getInventory().containsKey("Map")){
-                checkMap();
-            }
+            player.useItemInInventory();
         } else if (ans.equals("Q")){
             System.out.println("Thanks for playing. Goodbye!");
             throw new EndOfGameException("");
@@ -257,7 +256,7 @@ public class GameUtil {
             delay(1000);
             System.out.println("You woke up.");
             delay(1000);
-            System.out.println("Resting gives + 2 stamina points");
+            System.out.printf(YELLOW + "Resting gives + 2 stamina points%n" + RESET);
             player.sleep(2);
         }
     }
@@ -278,18 +277,6 @@ public class GameUtil {
         }while(!ans.equals("STOP"));
     }
 
-    public static void checkMap(){
-        String ans = null;
-        System.out.println("Do you want to check the map?");
-        do {
-            System.out.println("Answer Y or N: ");
-            ans = console.readLine().toUpperCase();
-        } while (!ans.equals(Answer.N.toString()) && !ans.equals(Answer.Y.toString()));
-        if (ans.equals(Answer.Y.toString())) {
-            Map map = (Map)player.getInventory().get("Map");
-            map.printMap();
-        }
-    }
 
     //metodi item
 

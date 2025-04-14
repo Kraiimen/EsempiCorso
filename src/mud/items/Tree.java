@@ -19,10 +19,10 @@ public class Tree extends Item {
 
     public void pickFruit(){
         if(fruits.isEmpty()){
-            System.out.println("You've already eaten all the fruits from this tree.");
+            System.out.println("You've already picked all the fruits from this tree.");
         } else{
             System.out.println("You are picking a fruit from " + getName());
-            player.eat(fruits.getLast());
+            player.pickItem(fruits.getLast());
             fruits.removeLast();
         }
     }

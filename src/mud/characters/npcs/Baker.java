@@ -37,7 +37,7 @@ public class Baker extends Entity {
                 printInventory();
                 ans = toTitleCase(console.readLine());
             } while (!food.contains(ans));
-            player.eat(getInventory().get(ans));
+            player.pickItem(getInventory().get(ans));
         }
     }
 
