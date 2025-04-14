@@ -31,7 +31,7 @@ public class Spawner {
     }
 
     public static void resetGuardsInRoom(Room room){
-        if(room.getRoomEntities().get(GUARD_INDEX) != null){
+        if(!(room.getRoomEntities().get(GUARD_INDEX).isEmpty())){
             int numGuards = (room.getRoomEntities().get(GUARD_INDEX).size());
             int randomNumber = dice.nextInt(room.getMaxGuardsInRoom()+1);
             room.getRoomEntities().get(GUARD_INDEX).clear();
