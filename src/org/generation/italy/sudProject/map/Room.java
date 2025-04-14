@@ -50,7 +50,7 @@ public class Room{
     public void showEntitiesInRoom(){
         System.out.println("Entità del luogo: ");
         for(ArrayList a : roomEntities){
-            if(a!=null){
+            if(!a.isEmpty()){
                 for(Object object : a){
                     Entity entity = (Entity) object;
                     System.out.print((entity.getName())+" ");
