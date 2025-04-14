@@ -102,4 +102,7 @@ public class Room{
     public int getMaxGuardsInRoom() {
         return maxGuardsInRoom;
     }
+    public Inventory getRoomObjects(){
+        return roomObjects;
+    }
 }

@@ -5,6 +5,7 @@ import org.generation.italy.sudProject.Spawner;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.Baker;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.Blacksmith;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.MoonPriest;
+import org.generation.italy.sudProject.items.itemTypes.UniqueItem;
 
 import java.util.ArrayList;
 
@@ -77,5 +78,8 @@ public class WorldMap {
 
         addNewEntityType(world.get(BAKERY_INDEX));
         world.get(BAKERY_INDEX).getRoomEntities().get(ROOM_MAIN_NPC_INDEX).add(new Baker("Baker", world.get(BAKERY_INDEX), ROOM_MAIN_NPC_INDEX));
+        //aggiunge oggetti nelle stanze
+        world.get(TEMPLE_INDEX).getRoomObjects().addItemToInventory(new UniqueItem("Avviso ai cittadini di Moonveil!",
+                0, true, "La città è invasa da membri di uno strano culto! rimanete in allerta e preferibilmente lontani dai vicoli!"));
     }
 }

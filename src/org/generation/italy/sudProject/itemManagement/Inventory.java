@@ -46,6 +46,15 @@ public class Inventory {
         }
         return item;
     }
+    private void showItemsInInventory(){
+        System.out.println("Oggetti:");
+        for(Item i : itemsStored){
+            if(i!=null){
+                System.out.print(i.getItemName()+" ");
+            }
+        }
+        System.out.println();
+    }
 
     // /--GETTER-&-SETTER--/
 
