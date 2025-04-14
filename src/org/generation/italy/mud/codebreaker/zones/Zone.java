@@ -55,14 +55,10 @@ public class Zone {
         boolean exist = passiveMobs.stream().anyMatch
                 (mob -> getName().equalsIgnoreCase("PointerGuard"));
         if(!exist){
-            setPassiveMobSpawnChanceType(new Mob("PointerGuard",10,10,10,10,15,false),2,30);
+            setPassiveMobSpawnChanceType(new Mob("PointerGuard",10,10,10,10,35,false),2,25);
         }
-        if(exist && dice.nextInt(1,101) <= 60){
-
-            Optional<Mob> mobToRemove = passiveMobs.stream()
-                    .filter(mob -> mob.getCharacterName().equalsIgnoreCase("PointerGuard")).findFirst();
-
-            mobToRemove.ifPresent(mob -> passiveMobs.remove(mob));
+        if(exist && dice.nextInt(1,101) <= 65){
+            passiveMobs.removeIf(mob -> mob.getCharacterName().equalsIgnoreCase("PointerGuard"));
         }
 
 

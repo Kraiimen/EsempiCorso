@@ -24,7 +24,7 @@ public abstract class Entity {
         if(currentHealth > 100){
             barLenght = 50;
         }
-        int filledLenght = (int)((double) currentHealth / maxHp * barLenght);
+        int filledLenght = (int)(((double) currentHealth) / maxHp * barLenght);
 
         String bar = "HP [";
 
@@ -36,7 +36,7 @@ public abstract class Entity {
             }
         }
         bar += "] ";
-        return getCharacterName() + ": "  + "\u001B[32m" + bar + "\u001B[0m" + currentHealth + "/"+ maxHp ;
+        return String.format("%-18s: \u001B[32m%s\u001B[0m %d/%d", getCharacterName(), bar, getCurrentHealth(), getMaxHp());
     }
     public int getCurrentHealth() {
         return currentHealth;

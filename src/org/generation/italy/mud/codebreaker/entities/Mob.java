@@ -12,7 +12,6 @@ public class Mob extends InteractiveEntity {
         setDefend(stamina);
         setMaxHp(stamina * 10);
         setCurrentHealth(getMaxHp());
-        setAlive(true);
     }
 
     public int getXp(){
@@ -37,7 +36,7 @@ public class Mob extends InteractiveEntity {
             }
         }
         bar += "] ";
-        return getCharacterName() + ": " + "\u001B[31m" + bar + "\u001B[0m" + getCurrentHealth() + "/" + getMaxHp();
+        return String.format("%-18s: \u001B[31m%s\u001B[0m %d/%d", getCharacterName(), bar, getCurrentHealth(), getMaxHp());
     }
 
 

@@ -9,11 +9,10 @@ public abstract class InteractiveEntity extends Entity {
     private int intelligence;
     private int attack;
     private int defend;
-    private boolean isAlive;
 
     private Random random = new Random();
 
-    public InteractiveEntity(int agility,int stamina, int strength, int intelligence, boolean isAlive){
+    public InteractiveEntity(int agility,int stamina, int strength, int intelligence){
         this.stamina = stamina;
         this.strength = strength;
         this.agility = agility;
@@ -22,7 +21,6 @@ public abstract class InteractiveEntity extends Entity {
         this.attack = strength;
         this.defend = stamina;
         setMaxHp(stamina * 4);
-        this.isAlive = isAlive;
     }
 
     public InteractiveEntity(String characterName,  int agility,int stamina, int strength, int intelligence){
@@ -36,7 +34,6 @@ public abstract class InteractiveEntity extends Entity {
         this.attack = strength;
         this.defend = stamina;
         setMaxHp(stamina * 3);
-        isAlive = true;
     }
 
 
@@ -44,11 +41,13 @@ public abstract class InteractiveEntity extends Entity {
 
     public void attack(InteractiveEntity target){
         if(isDodging(this)){
-            System.out.println(target.getCharacterName() + " ha schivato l'attacco!");
+            System.out.println(target.getCharacterName() + " \u001B[32mha schivato l'attacco!\u001B[0m");
+
         } else {
-            double damage = (int)(this.attack * (100.0 / (100.0 + target.defend)));
-            target.suffer((int)damage);
-            System.out.println(target.getCharacterName() + " ha subito " + damage + " danni" );
+            int damage = (int)(this.attack * (100.0 / (100.0 + target.defend)));
+            target.suffer(damage);
+            System.out.println(target.getCharacterName() + " ha subito \u001B[31m" + damage + " danni\u001B[0m");
+
             System.out.println(target.printHpBar());
             target.checkAlive();
         }
@@ -89,37 +88,37 @@ public abstract class InteractiveEntity extends Entity {
     }
     public void engageFight(InteractiveEntity attacker){
         try {
-        System.out.println(attacker.getCharacterName() + " Ha attaccato " + getCharacterName() + " furtivamente.");
-        int dodge = random.nextInt(agility);
-        Thread.sleep(500);
-        System.out.println(getCharacterName() + " ha rollato " + dodge + " su " +attacker.agility+ " in base alla sua agilità.");
-        Thread.sleep(500);
-        int hit = random.nextInt(attacker.agility);
-        System.out.println(attacker.getCharacterName() + " ha rollato " + hit + " su " + attacker.agility +" in base alla sua agilità.");
-        Thread.sleep(500);
+            System.out.println(attacker.getCharacterName() + " Ha attaccato " + getCharacterName() + " furtivamente.");
+            int dodge = random.nextInt(agility);
+            Thread.sleep(500);
+            System.out.println(getCharacterName() + " ha rollato " + dodge + " su " +attacker.agility+ " in base alla sua agilità.");
+            Thread.sleep(500);
+            int hit = random.nextInt(attacker.agility);
+            System.out.println(attacker.getCharacterName() + " ha rollato " + hit + " su " + attacker.agility +" in base alla sua agilità.");
+            Thread.sleep(500);
 
-        if(hit > dodge){
-            attacker.attack(this);
-            Thread.sleep(500);
-        }
-        while(isAlive && attacker.isAlive){
-            attacker.attack(this);
-            isAlive = checkAlive();
-            Thread.sleep(500);
-            if(!attacker.isAlive){
-                break;
+            if(hit > dodge){
+                attacker.attack(this);
+                Thread.sleep(500);
             }
-            attack(attacker);
-            attacker.isAlive = attacker.checkAlive();
-            Thread.sleep(500);
-        }
-        if(!attacker.isAlive){
-            System.out.println("Il Garbage collector è passato ed ha spazzato via la tua anima.");
-        }
-        if(!isAlive)
-            System.out.println("Hai rimosso un file.class da CodeTopia");
+            while(this.checkAlive() && attacker.checkAlive()){
+                attacker.attack(this);
+                Thread.sleep(500);
+                if(!this.checkAlive()){
+                    break;
+                }
+                attack(attacker);
+                Thread.sleep(500);
+            }
+            if(!attacker.checkAlive()){
+                System.out.println("Il Garbage collector è passato ed ha spazzato via la tua anima.");
+            }
+            if(!this.checkAlive())
+                System.out.println("Hai rimosso un file.class da CodeTopia");
+                System.out.println("--------------------------------------");
         }catch (InterruptedException e){
             System.out.println("Qualcosa è andato storto durante il combattimento");
+            System.out.println("-------------------------------------------------");
         }
     }
 
@@ -130,7 +129,7 @@ public abstract class InteractiveEntity extends Entity {
             System.out.println(getCharacterName() + " Ha attaccato " + target.getCharacterName() + " furtivamente.");
             int dodge = random.nextInt(target.agility);
             Thread.sleep(500);
-            System.out.println("Hai rollato " + dodge + " su " + agility + " in base alla tua agilità.");
+            System.out.println(getCharacterName() + "Ha rollato " + dodge + " su " + agility + " in base alla sua agilità.");
             Thread.sleep(500);
             int hit = random.nextInt(target.agility);
             System.out.println(target.getCharacterName() + " ha rollato " + hit + " su " + target.agility +".");
@@ -140,21 +139,19 @@ public abstract class InteractiveEntity extends Entity {
                 attack(target);
                 Thread.sleep(500);
             }
-            while(isAlive && target.isAlive){
+            while(this.checkAlive() && target.checkAlive()){
                 attack(target);
-                target.isAlive = target.checkAlive();
                 Thread.sleep(500);
-                if(!target.isAlive){
+                if(!target.checkAlive()){
                     break;
                 }
                 target.attack(this);
-                isAlive = checkAlive();
                 Thread.sleep(500);
             }
-            if(!target.isAlive){
+            if(!target.checkAlive()){
                 System.out.println("Il Garbage collector è passato ed ha spazzato via la tua anima.");
             }
-            if(!isAlive)
+            if(!this.checkAlive())
                 System.out.println("Hai rimosso un file.class da CodeTopia");
         }catch (InterruptedException e){
             System.out.println("Qualcosa è andato storto durante il combattimento");
@@ -189,8 +186,14 @@ public abstract class InteractiveEntity extends Entity {
     public int getIntelligence(){
         return intelligence;
     }
-    public void setAlive(boolean isAlive){
-        this.isAlive = isAlive;
+    public void setStamina(int stamina){
+        this.stamina = stamina;
+    }
+    public void setStrength(int strength){
+        this.strength = strength;
+    }
+    public void setIntelligence(int intelligence){
+        this.intelligence = intelligence;
     }
 
     }

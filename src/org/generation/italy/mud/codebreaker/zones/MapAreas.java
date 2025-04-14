@@ -4,10 +4,7 @@ import org.generation.italy.mud.codebreaker.entities.Bitborne;
 import org.generation.italy.mud.codebreaker.entities.InteractiveEntity;
 import org.generation.italy.mud.codebreaker.entities.Mob;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class MapAreas {
     Zone currentZone;
@@ -17,8 +14,9 @@ public class MapAreas {
 
     public MapAreas() {
 //        introBuildWorld();
+        Random random = new Random();
         buildWorld();
-        Bitborne bitborne = new Bitborne("BitBorne",4,3,4,4, true);
+        Bitborne bitborne = new Bitborne("BitBorne",4,3,4,4);
         System.out.println("\u001B[36mCome ti chiami?(Scegli un nome per il tuo personaggio!)\u001B[0m");
         bitborne.setCharacterName(scanner.nextLine());
         System.out.println("Il tuo personaggio si chiamerà " + bitborne.getCharacterName());
@@ -31,72 +29,107 @@ public class MapAreas {
             if(currentZone.getEvent() && currentZone.getName().equalsIgnoreCase("Temple Square")){ //Metodo per quests, non ancora utilizzato
             }
             if(!currentZone.getAggressiveMobs().isEmpty()){ //CHECK FIGHT CON AGGRESSIVE MOB PRESENTI
-//                mobDialogue();
+                mobDialogue();
                 Mob fight = currentZone.getAggressiveMobs().getFirst();
                 System.out.println(currentZone.getAggressiveMob());
                 fight.getAttacked(bitborne);
-                bitborne.setAlive(bitborne.checkAlive());
                 if(!fight.checkAlive()){
                     System.out.println("Hai ottenuto " + fight.getXp() + " punti esperienza!");
                     bitborne.checkLevelUp(fight);
                     System.out.println("Punti esperienza mancanti per il prossimo livello: " + bitborne.getXpMissingToLevelUp() );
                 }
-                currentZone.getAggressiveMobs().removeIf(mob -> mob.getCharacterName().equalsIgnoreCase("PointerGuard"));
-                if(!bitborne.checkAlive()){ //PENITENZE IN CASO DI MORTE
-                    bitborne.losingXp();
-                    System.out.println("Sei morto, sarai teletrasportato a " + startingZone.getName() + " E perderai X xp"); //ANCORA DA SETTARE
-                    currentZone = startingZone;
-                    bitborne.setCurrentHealth(bitborne.getMaxHp());
-                    bitborne.setAlive(true);
-                    printZoneInfos();
-                }
-            }
-            int passiveMobsArraySizeCycleStart = currentZone.getPassiveMobs().size(); //CHECK PRIMA DEI FIGHT PER AGGRESSIVITA GUARDIE
-            if(!currentZone.getPassiveMobs().isEmpty()) { //MENU A 2 SCELTE SE CI SONO MOB IN ZONA
-                System.out.println(bitborne.printHpBar());
-                System.out.println("Luogo: " + currentZone.getName());
-                printPassiveMobsInZone();
-                System.out.println(
-                    "Scegli una delle seguenti opzioni: \n" +
-                    "1)Muoviti in un altra zona");
+                checkAndResetBitborneIfDead(bitborne);
 
-                System.out.println("2)I log sussurrano di presenze ostili, visualizza i nemici nella zona.");
-                String choiceMenu = "";
-                boolean choiceMenuBoolean = false;
-                do {
-                   choiceMenu = scanner.nextLine();
-                    switch (choiceMenu) {
-                        case "1":
-                            printZoneInfos(); //PRINT INFO ZONA
-                            moveInDirections();
-                            choiceMenuBoolean = true;
-                            break;
-                        case "2":
-                            if(!currentZone.getPassiveMobs().isEmpty()) {
-                                getPassiveMobAvailableMenu(bitborne);
+            }
+
+                if(random.nextInt(1,101) > 55) {
+                    currentZone.getPassiveMobs().removeIf(mob -> mob.getCharacterName().equalsIgnoreCase("PointerGuard"));
+                }
+            int passiveMobsArraySizeCycleStart = currentZone.getPassiveMobs().size(); //CHECK PRIMA DEI FIGHT PER AGGRESSIVITA GUARDIE
+            if (!currentZone.getPassiveMobs().isEmpty()) { //MENU MULTISCELTA SE CI SONO MOB IN ZONA
+                try {
+                    System.out.println(bitborne.printHpBar());
+                    System.out.println("Luogo: " + currentZone.getName());
+                    System.out.println(currentZone.getDescription());
+                    printPassiveMobsInZone();
+                    Thread.sleep(1000);
+                    System.out.println(
+                            "----------MENU DI SCELTA---------- \n" +
+                                    "1)visualizza i nemici nella zona attuale\n" +
+                                    "2)Muoviti in un altra zona");
+
+                    System.out.println("3)Mostra statistiche del tuo personaggio.");
+                    System.out.println("4)Riposa per recuperare il 20% degli hp massimi");
+                    String choiceMenu = "";
+                    boolean choiceMenuBoolean = false;
+
+                    do {
+                        choiceMenu = scanner.nextLine();
+                        switch (choiceMenu) {
+                            case "1":
+                                if (!currentZone.getPassiveMobs().isEmpty()) {
+                                    getPassiveMobAvailableMenu(bitborne);
+                                    choiceMenuBoolean = true;
+                                    break;
+                                }
+                                break;
+                            case "2":
+                                showDirections();
+                                moveInDirections();
                                 choiceMenuBoolean = true;
                                 break;
-                            }
-                        default: System.out.println("Digita una scelta disponibile");
-                        break;
-                    }
+                            case "3":
+                                bitborne.showStats();
+                                System.out.println("--------------------------------");
+                                System.out.println("2)Muoviti in un altra zona.\n" +
+                                        "3)Visualizza i nemici nella zona attuale." +
+                                        "4)Riposa di nuovo");
+                                break;
+                            case "4":
+                                bitborne.rest();
+                                choiceMenuBoolean = true;
+                                break;
+                            default:
+                                System.out.println("Digita una scelta disponibile");
+                                break;
+                        }
 
-                } while (!choiceMenuBoolean);
+                    } while (!choiceMenuBoolean);
+                } catch (InterruptedException e) {
+                    System.out.println("Questo è il catch di un errore, ora son stanco è tardi");
+                }
             }
             if(currentZone.getPassiveMobs().size() < passiveMobsArraySizeCycleStart) {//Versione funzionante del codice sotto
-                int aggroCounter = 0;
-                List<Mob> toBeMoved = new ArrayList<>();
+                List<Mob> fight = new ArrayList<>();
                 for (Mob mob : currentZone.getPassiveMobs()) {
-                    if (mob.getCharacterName().equalsIgnoreCase("2")) {
-                        toBeMoved.add(mob);
+                    if (mob.getCharacterName().equalsIgnoreCase("PointerGuard")) {
+                        System.out.println("\u001B[31mPointerGuard\u001B[0m ti ha visto commettere atti atroci su un povero file \u001B[33mCat.class\u001B[0m ed è diventato ostile");
+                        fight.add(mob);
                     }
                 }
-                for (Mob mob : toBeMoved) {
-                    currentZone.getAggressiveMobs().add(mob);
-                    currentZone.getPassiveMobs().remove(mob);
-                    System.out.println(aggroCounter + "PointerGuard ti ha visto commettere atti atroci su un povero file Cat.class ed è diventata ostile");
+                for (Mob mob : fight) {
+                    mob.getAttacked(bitborne);
+                    if (!bitborne.checkAlive()) {
+                        System.out.println();
+                        bitborne.losingXp();
+                        System.out.println("Sei morto, sarai teletrasportato a " + startingZone.getName() + " E perderai X xp"); //ANCORA DA SETTARE
+                        currentZone = startingZone;
+                        bitborne.setCurrentHealth(bitborne.getMaxHp());
+                        System.out.println();
+                        System.out.println("----------------------------------");
+                        printZoneInfos();
+                        break;
+                    }
+                    if(!mob.checkAlive()) {
+                        System.out.println("Hai ottenuto " + mob.getXp() + " punti esperienza!");
+                        bitborne.checkLevelUp(mob);
+                        System.out.println("Punti esperienza mancanti per il prossimo livello: " + bitborne.getXpMissingToLevelUp());
+                    }
                 }
+
             }
+
+            currentZone.getAggressiveMobs().removeIf(mob -> mob.getCharacterName().equalsIgnoreCase("PointerGuard"));
             //Iterazione del ciclo for che fa ciò che fa la stessa iterazione su ma non funziona per ConcurrentModificationException
 //                if(currentZone.getPassiveMobs().size() < passiveMobsArraySizeCycleStart){ //PointerGuard diventano aggressivi se uccidi qualcuno(gattini)
 //                    for(Mob mob: currentZone.getPassiveMobs()){
@@ -127,78 +160,41 @@ public class MapAreas {
 
     }
 
-//    public void introBuildWorld(){
-//        Zone unknownHallway1 = new Zone("Unknown Hallway", "Davanti a te si estende una strada lunga e luminosa, sospesa nel vuoto.");
-//        Zone unknownHallway2 = new Zone("Unknown Hallway", "I bordi in questo luogo sembrano composti da stringhe di codice che scorrono senza fine.");
-//        Zone unknownHallway3 = new Zone("Unknown Hallway", "Un piccolo segnaposto brilla sul terreno: \"Runtime Path - Inizio Esecuzione\".");
-//        Zone unknownHallway4 = new Zone("Unknown Hallway", "Mentre prosegui lungo il Runtime Path, noti un bagliore debole all'orizzonte. Una figura vaga si staglia nel codice pulsante.");
-//        Zone unknownHallway5 = new Zone("Unknown Hallway", "Avvicinandoti, la figura diventa più nitida. È umanoide... ma sembra instabile. Fatto di frammenti di stringhe e byte disordinati.");
-//        Zone helloWorldRoom = new Zone("Echo Chamber", "La figura si volta. Ha un volto fatto di caratteri ASCII. Sorride. Sul petto lampeggia un messaggio: \"Hello, World!\"");
-//        helloWorldRoom.setMob(new Mob("HelloWorld.class",8,8,8,1));
-//        Zone postHelloWorldRoom = new Zone("Interpreter Core","????");
-//        Zone teleport = new Zone("Interpreted and compiled", "????");
-//
-//        unknownHallway1.setNearZones(Navigate.NORTH,unknownHallway2);
-//        unknownHallway2.setNearZones(Navigate.NORTH,unknownHallway3);
-//        unknownHallway3.setNearZones(Navigate.NORTH,unknownHallway4);
-//        unknownHallway4.setNearZones(Navigate.NORTH,unknownHallway5);
-//        unknownHallway5.setNearZones(Navigate.NORTH,helloWorldRoom);
-//        helloWorldRoom.setNearZones(Navigate.NORTH,postHelloWorldRoom);
-//        postHelloWorldRoom.setNearZones(Navigate.NORTH,teleport);
-//        currentZone = unknownHallway1;
-//    }
 
     private void buildWorld() { //Set mobs, zone, ZoneLinks
         //Zone tutorial
-        Zone unknownHallway1 = new Zone("Unknown Hallway", "Davanti a te si estende una strada lunga e luminosa, sospesa nel vuoto.");
-        Zone unknownHallway2 = new Zone("Unknown Hallway", "I bordi in questo luogo sembrano composti da stringhe di codice che scorrono senza fine.");
-        Zone unknownHallway3 = new Zone("Unknown Hallway", "Un piccolo segnaposto brilla sul terreno: \"Runtime Path - Inizio Esecuzione\".");
-        Zone unknownHallway4 = new Zone("Unknown Hallway", "Mentre prosegui lungo il Runtime Path, noti un bagliore debole all'orizzonte. Una figura vaga si staglia nel codice pulsante.");
-        Zone unknownHallway5 = new Zone("Unknown Hallway", "Avvicinandoti, la figura diventa più nitida. È umanoide... ma sembra instabile. Fatto di frammenti di stringhe e byte disordinati.");
+        Zone unknownHallway1 = new Zone("Unknown Hallway", "\u001B[34mDavanti a te si estende una strada lunga e luminosa, sospesa nel vuoto.\u001B[0m");
+        Zone unknownHallway2 = new Zone("Unknown Hallway", "\u001B[34mI bordi in questo luogo sembrano composti da stringhe di codice che scorrono senza fine.\u001B[0m");
+        Zone unknownHallway3 = new Zone("Unknown Hallway", "\u001B[34mUn piccolo segnaposto brilla sul terreno: \"Runtime Path - Inizio Esecuzione\".\u001B[0m");
+        Zone unknownHallway4 = new Zone("Unknown Hallway", "\u001B[34mMentre prosegui lungo il Runtime Path, noti un bagliore debole all'orizzonte. Una figura vaga si staglia nel codice pulsante.\u001B[0m");
+        Zone unknownHallway5 = new Zone("Unknown Hallway", "\u001B[34mAvvicinandoti, la figura diventa più nitida. È umanoide... ma sembra instabile. Fatto di frammenti di stringhe e byte disordinati.\u001B[0m");
         Zone helloWorldRoom = new Zone("Echo Chamber", "");
-        helloWorldRoom.setAggressiveMob(new Mob("HelloWorld.class",8,4,2,1,2,true));
-        Zone postHelloWorldRoom = new Zone("Interpreter Core","????");
-        Zone teleport = new Zone("Interpreted and compiled", "????");
+        helloWorldRoom.setAggressiveMob(new Mob("HelloWorld.class",4,4,3,1,20,false));
+        Zone postHelloWorldRoom = new Zone("Interpreter Core", "\u001B[34m????\u001B[0m");
+        Zone teleport = new Zone("Interpreted and compiled", "\u001B[34m????\u001B[0m");
 
+        Zone templesquare = new Zone("Temple Square", "\u001B[34mIl primo luogo che hai visto dopo essere uscito dal Runtime Path. Una piazza sacra, fluttuante tra linee di codice statiche e librerie importate da dimensioni sconosciute.\nuna leggenda narra che il tempio sussurri metodi dimenticati a chi sa ascoltare.\u001B[0m");
 
-        //Zone CodeTopia
-        Zone templesquare = new Zone("Temple Square", "Il primo luogo che hai visto dopo essere uscito dal Runtime Path. Una piazza sacra, fluttuante tra linee di codice statiche e librerie importate da dimensioni sconosciute.\n" +
-                "una leggenda narra che il tempio sussurri metodi dimenticati a chi sa ascoltare");
-        templesquare.setPassiveMobSpawnChanceType(new Mob("Cat.class",2,2,2,2,2,false),2,35);
-        templesquare.setPassiveMob(new Mob("Cat.class",2,2,2,2,2,false));
-        templesquare.setPassiveMob(new Mob("Cat.class",2,2,2,2,2,false));
-        templesquare.setGuardsMechanics();
+        Zone marketSquare = new Zone("Market Square", "\u001B[34mUn luogo in cui commercianti barattano variabili, frammenti di classi ed API, i suoni sembrano glitchare di tanto in tanto, come se il sistema non riuscisse a reggere tutte interazioni.\u001B[0m");
 
-        Zone marketSquare = new Zone("Market Square", "Un luogo in cui commercianti barattano variabili, frammenti di classi ed API, i suoni sembrano glitchare di tanto in tanto, come se il sistema non riuscisse a reggere tutte interazioni.");
-        marketSquare.setPassiveMobSpawnChanceType(new Mob("Cat.class",2,2,2,2,2,false),2,35);
-        marketSquare.setGuardsMechanics();
+        Zone theTemple = new Zone("TheTemple", "\u001B[34mQuesto è il vero cuore spirituale del sistema. Si dice che qui viva il Main thread, un entità sospesa nel ciclo eterno dell'esecuzione.\u001B[0m");
 
-        Zone theTemple = new Zone("TheTemple", "Questo è il vero cuore spirituale del sistema. Si dice che qui viva il Main thread, un entità sospesa nel ciclo eterno dell'esecuzione.");
-        theTemple.setPassiveMobSpawnChanceType(new Mob("Cat.class",2,2,2,2,2,false),1,40);
-        theTemple.setGuardsMechanics();
+        Zone bakery = new Zone("Bakery", "\u001B[34mUn luogo che profuma di pane.. e byte, si dice che il cibo prodotto qui curi le NullPointerException dell'anima.\u001B[0m");
 
-        Zone bakery = new Zone("Bakery", "Un luogo che profuma di pane.. e byte, si dice che il cibo prodotto qui curi le NullPointerException dell'anima.");
-        Zone armory = new Zone("Armory", "Qui ogni arma è compilata a mano, Troverai spade PUBLIC STATIC FINAL e ARMATURE che proteggono il tuo sistema da attacchi di tipo DDos");
+        Zone armory = new Zone("Armory", "\u001B[34mQui ogni arma è compilata a mano, Troverai spade PUBLIC STATIC FINAL e ARMATURE che proteggono il tuo sistema da attacchi di tipo DDos\u001B[0m");
 
-        Zone gardens1 = new Zone("gardens1", "Un oasi di pace tra parentesi graffe e lunghe arraylist di fiori");
-        gardens1.setPassiveMobSpawnChanceType(new Mob("Cat.class",2,2,2,2,2,false),2,40);
-        gardens1.setGuardsMechanics();
+        Zone gardens1 = new Zone("gardens1", "\u001B[34mUn oasi di pace tra parentesi graffe e lunghe arraylist di fiori\u001B[0m");
 
-        Zone gardens2 = new Zone("gardens2", "Questa parte del giardino sembra compilata con un framework instabile");
-        gardens2.setPassiveMobSpawnChanceType(new Mob("Cat.class",2,2,2,2,2,false),1,50);
-        gardens2.setGuardsMechanics();
+        Zone gardens2 = new Zone("gardens2", "\u001B[34mQuesta parte del giardino sembra compilata con un framework instabile\u001B[0m");
 
-        Zone gardens3 = new Zone("gardens3", "Un luogo dimenticato dal garbage collector. Le piante sono cresciute senza più uno sviluppatore a mantenerle, e si nutrono dei frammenti di memoria lasciati da chi è crashato qui.");
-        gardens3.setPassiveMobSpawnChanceType(new Mob("Cat.class",2,2,2,2,2,false),1,25);
-        gardens3.setGuardsMechanics();
+        Zone gardens3 = new Zone("gardens3", "\u001B[34mUn luogo dimenticato dal garbage collector. Le piante sono cresciute senza più uno sviluppatore a mantenerle, e si nutrono dei frammenti di memoria lasciati da chi è crashato qui.\u001B[0m");
 
-        Zone cityDoors = new Zone("City gates", "Le porte della città di CODETOPIA, enormi muraglie firewall si stagliano davanti ai tuoi occhi, le entrate sono vigilate da un discreto numero di PointerGuards, al passaggio la tua classe viene controllata e se estendi ciò che può essere un problema.. ti negano l'accesso o peggio ancora di mandano in stackOverflow il cervello");
-        cityDoors.setGuardsMechanics();
-        cityDoors.setPassiveMobSpawnChanceType(new Mob("Cat.class",2,2,2,2,2,false),1,10);
+        Zone cityDoors = new Zone("City gates", "\u001B[34mLe porte della città di CODETOPIA, enormi muraglie firewall si stagliano davanti ai tuoi occhi, le entrate sono vigilate da un discreto numero di PointerGuards, al passaggio la tua classe viene controllata e se estendi ciò che può essere un problema.. ti negano l'accesso o peggio ancora di mandano in stackOverflow il cervello\u001B[0m");
 
-        Zone southernRoad = new Zone("Southern Road", "Strada logora con scarsa documentazione a riguardo");
+        Zone southernRoad = new Zone("Southern Road", "\u001B[34mStrada logora con scarsa documentazione a riguardo\u001B[0m");
 
-        Zone thewoods = new Zone("The Woods", "I tronchi accatastati attorno a te son stati scritti in vecchie versioni di java ormai obsolete, le creature che vivono qui son mutazioni di classi ormai deprecate.");
+        Zone thewoods = new Zone("The Woods", "\u001B[34mI tronchi accatastati attorno a te son stati scritti in vecchie versioni di java ormai obsolete, le creature che vivono qui son mutazioni di classi ormai deprecate.\u001B[0m");
+
 
         unknownHallway1.setNearZones(Navigate.NORTH,unknownHallway2);
         unknownHallway2.setNearZones(Navigate.NORTH,unknownHallway3);
@@ -255,17 +251,36 @@ public class MapAreas {
                 currentZone.getName().equalsIgnoreCase("gardens2")||
                 currentZone.getName().equalsIgnoreCase("gardens3")||
                 currentZone.getName().equalsIgnoreCase("City Gates")){
-            currentZone.setPassiveMobSpawnChanceType(new Mob("Cat.class",2,2,2,2,2,false),2,35);
+            currentZone.setPassiveMobSpawnChanceType(new Mob("Cat.class",2,2,2,2,45,false),2,25);
             currentZone.setGuardsMechanics();
+        }
+        if (currentZone.getName().equalsIgnoreCase("TheWoods")) {
+            currentZone.setAggroMobSpawnChanceType(new Mob("DeprecatedClass",6,12,16,6,120,false),2,25);
+        }
+        if(currentZone.getName().equalsIgnoreCase("Southern Road")){
+            currentZone.setPassiveMobSpawnChanceType(new Mob("BadSyntax",5,15,9,5,70,false),2,10);
+            currentZone.setAggroMobSpawnChanceType(new Mob("CorruptedLibrary",2,36,3,1,55,false),2,15);
         }
     }
 
     public Zone getStartingZone() {
         return startingZone;
     }
+    public void checkAndResetBitborneIfDead(Bitborne bitborne){
+        if (!bitborne.checkAlive()) {
+            System.out.println();
+            bitborne.losingXp();
+            System.out.println("Sei morto, sarai teletrasportato a " + startingZone.getName() + " E perderai X xp"); //ANCORA DA SETTARE
+            currentZone = startingZone;
+            bitborne.setCurrentHealth(bitborne.getMaxHp());
+            System.out.println();
+            System.out.println("----------------------------------");
+            printZoneInfos();
+        }
 
+    }
     public void printZoneInfos() {
-        System.out.println("Luogo: " + currentZone.getName());
+        System.out.println("Luogo: " + "\u001B[34m" + currentZone.getName() + "\u001B[0m");
         System.out.println(currentZone.getDescription());
         if(currentZone.getNpcs() != null && !currentZone.getNpcs().isEmpty()){
             System.out.println(currentZone.getNpcs());
@@ -285,7 +300,9 @@ public class MapAreas {
             displayCounter++;
             Zone tempZone = currentZone.getNearZone(direction);
             if (tempZone != null) {
-                System.out.println(displayCounter + ")" + direction + ":" + tempZone.getName());
+                System.out.println("\u001B[36m" + displayCounter + "\u001B[0m) \u001B[33m" + direction + "\u001B[0m: \u001B[34m" + tempZone.getName() + "\u001B[0m");
+
+
             }
         }
     }
@@ -294,7 +311,7 @@ public class MapAreas {
         if (currentZone.getPassiveMobs() != null && !currentZone.getPassiveMobs().isEmpty()) {
             System.out.print("In zona si aggirano dei nemici: ");
             for (int i = 0; i < currentZone.getPassiveMobs().size(); i++) {
-                System.out.print(currentZone.getPassiveMobs().get(i).getCharacterName());
+                System.out.print("\u001B[93m" + currentZone.getPassiveMobs().get(i).getCharacterName() + "\u001B[0m");
                 if (i < currentZone.getPassiveMobs().size() - 1) {
                     System.out.print(", ");
                 }
@@ -403,7 +420,6 @@ public class MapAreas {
                                     System.out.println("Sei morto, sarai teletrasportato a " + startingZone.getName() + " E perderai una parte dei tuoi xp"); //ANCORA DA SETTARE
                                     currentZone = startingZone;
                                     attacker.setCurrentHealth(attacker.getMaxHp());
-                                    attacker.setAlive(true);
                                     printZoneInfos();
                                 }
                             }
@@ -423,7 +439,6 @@ public class MapAreas {
                                     System.out.println("Sei morto, sarai teletrasportato a " + startingZone.getName() + " E perderai una parte dei tuoi xp"); //ANCORA DA SETTARE
                                     currentZone = startingZone;
                                     attacker.setCurrentHealth(attacker.getMaxHp());
-                                    attacker.setAlive(true);
                                     printZoneInfos();
                                 }
                             }
@@ -443,7 +458,6 @@ public class MapAreas {
                                     System.out.println("Sei morto, sarai teletrasportato a " + startingZone.getName() + " E perderai una parte dei tuoi xp"); //ANCORA DA SETTARE
                                     currentZone = startingZone;
                                     attacker.setCurrentHealth(attacker.getMaxHp());
-                                    attacker.setAlive(true);
                                     printZoneInfos();
                                 }
 
@@ -464,7 +478,6 @@ public class MapAreas {
                                     System.out.println("Sei morto, sarai teletrasportato a " + startingZone.getName() + " E perderai una parte dei tuoi xp"); //ANCORA DA SETTARE
                                     currentZone = startingZone;
                                     attacker.setCurrentHealth(attacker.getMaxHp());
-                                    attacker.setAlive(true);
                                     printZoneInfos();
                                 }
                             }
@@ -509,6 +522,21 @@ public class MapAreas {
                     Thread.sleep(5000);
 //                System.out.println("\033[31m\"Se non sai combattere un Hello World... non sei pronto per il main()!\"\033[0m");
 //                Thread.sleep(5000);
+
+                }
+                if(currentZone.getPassiveMobs() != null &&currentZone.getName().equalsIgnoreCase("Temple Square") &&currentZone.getPassiveMob().getCharacterName().equalsIgnoreCase("Cat.class")){
+                    System.out.print("Meow");
+                }
+
+                if (currentZone.getName().equalsIgnoreCase("Southern Road") && currentZone.getPassiveMobs() != null && !currentZone.getPassiveMobs().isEmpty() && currentZone.getPassiveMobs().get(0).getCharacterName().equalsIgnoreCase("BadSyntax")) {
+                    System.out.println("\u001B[31mAssicurarsi che tutte le parentesi siano indentate scorrettamente e che le variabili siano dichiarate nel modo più confuso possibile.\u001B[0m");
+                }
+
+                if(!currentZone.getAggressiveMobs().isEmpty() && currentZone.getAggressiveMobs().getFirst().getCharacterName().equalsIgnoreCase("CorruptedLibrary") && !currentZone.getAggressiveMobs().isEmpty()){
+                    System.out.println("\u001B[31mVerificare l'integrità dei file di sistema o reinstallare la libreria.\u001B[0m");
+                }
+                if(currentZone.getAggressiveMobs() != null && currentZone.getAggressiveMobs().getFirst().getCharacterName().equalsIgnoreCase("DeprecatedClass") && !currentZone.getAggressiveMobs().isEmpty()){
+                    System.out.println("\u001B[35mQuesta classe era destinata a morire nel dimenticatoio, ma qualcosa ha fatto in modo che non fosse mai del tutto cancellata... e ora ti osserve.\u001B[0m");
                 }
 
             } catch (InterruptedException e) {
