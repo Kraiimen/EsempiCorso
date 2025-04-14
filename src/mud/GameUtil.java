@@ -14,7 +14,6 @@ import java.util.*;
 
 import static mud.GameMap.console;
 import static mud.characters.fightable.Character.dice;
-import static mud.characters.fightable.PlayerCharacter.MAX_RESPAWN;
 import static mud.characters.fightable.monsters.Guard.GUARD_POSSIBLE_ROOM;
 
 public class GameUtil {
@@ -30,6 +29,12 @@ public class GameUtil {
         choices.add("TALK");
         choices.add("STATS");
         choices.add("INVENTORY");
+        choices.add("F");
+        choices.add("M");
+        choices.add("P");
+        choices.add("T");
+        choices.add("S");
+        choices.add("I");
         choices.add("Q");
         directions.add("NORTH");
         directions.add("WEST");
@@ -80,12 +85,12 @@ public class GameUtil {
         String ans;
         System.out.println("What do you want to do now?");
         do{
-            System.out.println("Write 'FIGHT' if you want to fight some monsters.");
-            System.out.println("Write 'MOVE' if you want to start moving.");
-            System.out.println("Write 'PICK' if you want to pick an item.");
-            System.out.println("Write 'TALK' if you want to talk to someone.");
-            System.out.println("Write 'STATS' to see you statistics");
-            System.out.println("Write 'INVENTORY' to see your inventory");
+            System.out.println("Write 'FIGHT' or 'F' if you want to fight some monsters.");
+            System.out.println("Write 'MOVE' or 'M' if you want to start moving.");
+            System.out.println("Write 'PICK' or 'P' if you want to pick an item.");
+            System.out.println("Write 'TALK' or 'T' if you want to talk to someone.");
+            System.out.println("Write 'STATS' or 'S' to see you statistics");
+            System.out.println("Write 'INVENTORY' or 'I' to see your inventory");
             System.out.println("Write 'Q' if you want to end the game.");
             ans = console.readLine().toUpperCase().trim();
         }while(!choices.contains(ans));
@@ -103,18 +108,18 @@ public class GameUtil {
     }
 
     public static void doAsAsked(String ans) throws EndOfGameException {
-        if(ans.equals("FIGHT")){
+        if(ans.equals("FIGHT") || ans.equals("F")){
             checkForMonsters();
-        } else if (ans.equals("MOVE")){
+        } else if (ans.equals("MOVE") || ans.equals("M")){
             askForDirections();
-        } else if (ans.equals("PICK")){
+        } else if (ans.equals("PICK") || ans.equals("P")){
             player.getActualRoom().printItems();
             pickChosenItem();
-        } else if (ans.equals("TALK")){
+        } else if (ans.equals("TALK") || ans.equals("T")){
             askWhoToTalk();
-        } else if (ans.equals("STATS")){
+        } else if (ans.equals("STATS") || ans.equals("S")){
             player.printStats();
-        } else if (ans.equals("INVENTORY")){
+        } else if (ans.equals("INVENTORY") || ans.equals("I")){
             player.printInventory();
             if(player.getInventory().containsKey("Map")){
                 checkMap();
@@ -255,20 +260,19 @@ public class GameUtil {
             System.out.println("Resting gives + 2 stamina points");
             player.sleep(2);
         }
-
     }
     public static void askForDirections(){
         String ans = null;
         do{
-                System.out.println("Where do you want to go? Answer with: North, East, South or West, write Stop if you want to stop here.");
+                System.out.println("Where do you want to go? Answer with: North or N, East or E, South or S or West or W, write Stop if you want to stop here.");
                 ans = console.readLine().toUpperCase();
-            if(ans.equals(CardinalPoints.NORTH.toString())){
+            if(ans.equals(CardinalPoints.NORTH.toString()) || ans.equals("N")){
                 player.changeRoom(CardinalPoints.NORTH);
-            } else if(ans.equals(CardinalPoints.EAST.toString())){
+            } else if(ans.equals(CardinalPoints.EAST.toString()) || ans.equals("E")){
                 player.changeRoom(CardinalPoints.EAST);
-            } else if(ans.equals(CardinalPoints.SOUTH.toString())){
+            } else if(ans.equals(CardinalPoints.SOUTH.toString()) || ans.equals("S")){
                 player.changeRoom(CardinalPoints.SOUTH);
-            } else if(ans.equals(CardinalPoints.WEST.toString())){
+            } else if(ans.equals(CardinalPoints.WEST.toString()) || ans.equals("W")){
                 player.changeRoom(CardinalPoints.WEST);
             }
         }while(!ans.equals("STOP"));
