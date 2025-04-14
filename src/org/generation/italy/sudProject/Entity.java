@@ -77,6 +77,7 @@ public abstract class Entity {
         return stats;
     }
     public void die(){
+        entityPosition.getRoomEntities().get(CORPSE_INDEX).add(this);
         numberOfEntities --;
         entityPosition.getRoomEntities().get(indexEntityPosition).removeLast();
         switch (indexEntityPosition){
