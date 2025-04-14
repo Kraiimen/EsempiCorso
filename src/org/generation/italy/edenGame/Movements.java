@@ -7,31 +7,90 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Movements {
+    static {
+        //inizializzazione Movimenti e Rooms
+        Movements movements = new Movements();
+        Room templeSquare = movements.getTempleSquare();
+        templeSquare.addAction("a");
+        templeSquare.addAction("i");
+        templeSquare.addAction("e");
+        templeSquare.addAction("c");
+        templeSquare.addAction("quit");
+
+        Room temple = movements.getTemple();
+        temple.addAction("a");
+        temple.addAction("i");
+        temple.addAction("e");
+        temple.addAction("p");
+        temple.addAction("r");
+        temple.addAction("quit");
+
+        Room marketSquare = movements.getMarketSquare();
+        marketSquare.addAction("a");
+        marketSquare.addAction("i");
+        marketSquare.addAction("e");
+        marketSquare.addAction("c");
+        marketSquare.addAction("quit");
+
+        Room bakery = movements.getBakery();
+        bakery.addAction("a");
+        bakery.addAction("i");
+        bakery.addAction("e");
+        bakery.addAction("quit");
+
+        Room armory = movements.getArmory();
+        armory.addAction("a");
+        armory.addAction("i");
+        armory.addAction("e");
+        armory.addAction("c");
+        armory.addAction("quit");
+
+        Room gardens = movements.getGardens();
+        gardens.addAction("a");
+        gardens.addAction("i");
+        gardens.addAction("e");
+        gardens.addAction("c");
+        gardens.addAction("r");
+        gardens.addAction("quit");
+
+        Room cityDoor = movements.getCityDoor();
+        cityDoor.addAction("a");
+        cityDoor.addAction("i");
+        cityDoor.addAction("e");
+        cityDoor.addAction("quit");
+
+        Room woods = movements.getWoods();
+        woods.addAction("a");
+        woods.addAction("i");
+        woods.addAction("e");
+        woods.addAction("c");
+        woods.addAction("quit");
+    }
 
     //CREAZIONE OGGETTI ROOMs E HASHMAPS DIRECTIONS
-    Map<Compass, String> templeSquareDirections = new HashMap<Compass, String>();
-    Room templeSquare = new TempleSquare("Temple Square", templeSquareDirections);
+    public static Map<Compass, String> templeSquareDirections = new HashMap<Compass, String>();
+    public static Room templeSquare = new TempleSquare("Temple", templeSquareDirections);
 
-    Map<Compass, String> templeDirections = new HashMap<Compass, String>();
-    Room temple = new Temple("Temple", templeDirections);
+    public static Map<Compass, String> templeDirections = new HashMap<Compass, String>();
+    public static Room temple = new Temple("Temple", templeDirections);
 
-    Map<Compass, String> marketSquareDirections = new HashMap<Compass, String>();
-    Room marketSquare = new MarketSquare("Market Square", marketSquareDirections);
+    public static Map<Compass, String> marketSquareDirections = new HashMap<Compass, String>();
+    public static Room marketSquare = new MarketSquare("Market Square", marketSquareDirections);
 
-    Map<Compass, String> bakeryDirections = new HashMap<Compass, String>();
-    Room bakery = new Bakery("The Bakery", bakeryDirections);
+    public static Map<Compass, String> bakeryDirections = new HashMap<Compass, String>();
+    public static Room bakery = new Bakery("The Bakery", bakeryDirections);
 
-    Map<Compass, String> armoryDirections = new HashMap<Compass, String>();
-    Room armory = new Armory("The Armory", armoryDirections);
+    public static Map<Compass, String> armoryDirections = new HashMap<Compass, String>();
+    public static Room armory = new Armory("The Armory", armoryDirections);
 
-    Map<Compass, String> gardensDirections = new HashMap<Compass, String>();
-    Room gardens = new Gardens("The Gardens", gardensDirections);
+    public static Map<Compass, String> gardensDirections = new HashMap<Compass, String>();
+    public static Room gardens = new Gardens("The Gardens", gardensDirections);
 
-    Map<Compass, String> woodsDirections = new HashMap<Compass, String>();
-    Room woods = new Woods("Woods", woodsDirections);
+    public static Map<Compass, String> woodsDirections = new HashMap<Compass, String>();
+    public static Room woods = new Woods("Woods", woodsDirections);
 
-    Map<Compass, String> cityDoorDirections = new HashMap<Compass, String>();
-    Room cityDoor = new CityDoor("City Door", cityDoorDirections);
+    public static Map<Compass, String> cityDoorDirections = new HashMap<Compass, String>();
+    public static Room cityDoor = new CityDoor("City Door", cityDoorDirections);
 
     //CREAZIONE HASHMAP ROOM FINDER
     Map<String, Room> roomFinder = new HashMap<>();

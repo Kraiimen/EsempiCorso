@@ -35,13 +35,7 @@ public class Player extends Entity {
     public void dead() {
         System.out.println("Sei morto");
         setExp(getExp() - 1);
-
     }
-
-    @Override
-    public void attack(Entity target) {
-    }
-
     public Room getCurrentRoom() {
         return currentRoom;
     }
