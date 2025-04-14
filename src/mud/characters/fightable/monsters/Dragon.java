@@ -13,7 +13,6 @@ public class Dragon extends Monster {
         super(name);
         setStrength(dice.nextInt(MIN_DRAGON, MAX));
         setAgility(dice.nextInt(MIN_DRAGON, MAX));
-        setStamina(dice.nextInt(MAX));
         setExp(DRAGON_EXP);
         setExpGiven(DRAGON_EXP_GIVEN);
         setActualRoom(MagicMap.getRooms().get(DRAGON_POSSIBLE_ROOM));

@@ -81,6 +81,10 @@ public abstract class Room {
         }
     }
 
+    public void addPath(CardinalPoints cardinal, Room room){
+        directions.put(cardinal, room);
+    }
+
 
     //getter e setter
     public String getName() {

@@ -1,20 +1,16 @@
 package mud;
 
-import mud.characters.Entity;
 import mud.characters.fightable.*;
 import mud.characters.fightable.Character;
 import mud.characters.fightable.monsters.Guard;
 import mud.characters.fightable.monsters.Monster;
 import mud.characters.fightable.monsters.MonsterMap;
+import mud.items.Map;
 import mud.items.Tree;
-import mud.items.Weapon;
 import mud.rooms.MagicMap;
 
 import java.io.Console;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static mud.GameMap.console;
 import static mud.characters.fightable.Character.dice;
@@ -61,22 +57,21 @@ public class GameUtil {
         }
         delay(800);
         System.out.printf("Initializing %s the %s...%n", player.getName(), player.getClass().getSimpleName());
-        delay(1000);
+        delay(800);
         player.printStats();
-        delay(1500);
+        delay(1000);
         System.out.println("PRESS ENTER TO CONTINUE READING.");
         delay(800);
-        System.out.printf(BLUE + "Welcome %s!%n", player.getName());
+        System.out.printf(BLUE + "Welcome %s!", player.getName());
         continueTheMessage();
-        System.out.println("This city has been waiting for and adventurer like you to come to the rescue.");
+        System.out.print("This city has been waiting for and adventurer like you to come to the rescue.");
         continueTheMessage();
-        System.out.println("Strange monsters and ghosts coming from the dark woods have been creeping around the city entrance in the last days and the civilians are well preoccupied." );
+        System.out.print("Strange monsters and ghosts coming from the dark woods have been creeping around the city entrance in the last days and the civilians are well preoccupied." );
         continueTheMessage();
-        System.out.printf("Will a hero like you be the answer to stop this menace?%n" +
+        System.out.printf("Will you be the hero that's going to stop this menace?%n" +
                 "If you think so, find the sacred Temple and talk to the wise Elf Elrond, he will show you the way to braveness%n" + RESET);
         continueTheMessage();
         System.out.println("Follow the MENU instructions to interact with this magic world, good luck!");
-        delay(1000);
         askWhatToDo();
     }
 
@@ -94,32 +89,20 @@ public class GameUtil {
             System.out.println("Write 'Q' if you want to end the game.");
             ans = console.readLine().toUpperCase().trim();
         }while(!choices.contains(ans));
-        if(ans.equals("FIGHT")){
-            checkForMonsters();
-        } else if (ans.equals("MOVE")){
-            askForDirections();
-        } else if (ans.equals("PICK")){
-            player.getActualRoom().printItems();
-            pickChosenItem();
-        } else if (ans.equals("TALK")){
-            askWhoToTalk();
-        } else if (ans.equals("STATS")){
-            player.printStats();
-        } else if (ans.equals("INVENTORY")){
-            player.printInventory();
-        } else {
-            System.out.println("Thanks for playing. Goodbye!");
-            throw new EndOfGameException("");
-        }
+        doAsAsked(ans);
     }
 
     public static void askWhatToDoWithoutMenu() throws EndOfGameException {
         String ans;
         System.out.println("What do you want to do now?");
-        do{
+        do {
             System.out.println("Write what you want to do or write MENU to see the menu again.");
             ans = console.readLine().toUpperCase().trim();
-        }while(!choices.contains(ans) && !ans.equals("MENU"));
+        } while (!choices.contains(ans) && !ans.equals("MENU"));
+        doAsAsked(ans);
+    }
+
+    public static void doAsAsked(String ans) throws EndOfGameException {
         if(ans.equals("FIGHT")){
             checkForMonsters();
         } else if (ans.equals("MOVE")){
@@ -133,6 +116,9 @@ public class GameUtil {
             player.printStats();
         } else if (ans.equals("INVENTORY")){
             player.printInventory();
+            if(player.getInventory().containsKey("Map")){
+                checkMap();
+            }
         } else if (ans.equals("Q")){
             System.out.println("Thanks for playing. Goodbye!");
             throw new EndOfGameException("");
@@ -142,43 +128,30 @@ public class GameUtil {
 
     }
 
+
     //METODI PER COMBATTERE
 
-    public static void askForRespawn() throws EndOfGameException {
-        String ans = null;
-        if(player.getRespawnCounter() < MAX_RESPAWN){
-            do{
-                System.out.printf("You have %d possibilities to respawn left. Do you want to respawn? Answer Y or N :%n",
-                        MAX_RESPAWN- player.getRespawnCounter());
-                ans = console.readLine().toUpperCase();
-
-            }while(!ans.equals(Answer.N.toString()) && !ans.equals(Answer.Y.toString()));
-            if(ans.equals(Answer.Y.toString())){
-                player.respawn();
-            } else if(ans.equals(Answer.N.toString())){
-                System.out.println("Thanks for playing. Goodbye!");
-                throw new EndOfGameException("");
-            }
-        } else{
-            System.out.println("You can't respawn anymore. End of the game. Goodbye!");
-            throw new EndOfGameException("");
-        }
-    }
 
     public static void checkForMonsters() throws EndOfGameException {
         String ans;
+        List<String> presentClasses = player.getActualRoom().getPresentMonsters().stream()
+                .map(monster -> monster.getClass().getSimpleName()).distinct().toList();
         if (!player.getActualRoom().getPresentMonsters().isEmpty()) {
             do {
-                System.out.println("Looks like there are some Monsters here! Are you ready to fight? Answer with Y or N: ");
+                System.out.println("These are the type of monsters present here: ");
+                presentClasses.forEach(System.out::println);
+                System.out.println("Are you ready to fight? Answer with Y or N: ");
                 ans = console.readLine().toUpperCase();
             } while (!ans.equals(Answer.N.toString()) && !ans.equals(Answer.Y.toString()));
             if (ans.equals(Answer.Y.toString())) {
                 fightChosenMonster(chooseMonster());
             } else if (ans.equals(Answer.N.toString())) {
                 System.out.println("Rest is important too!");
+                delay(400);
             }
         } else{
             System.out.println("There are no monsters to fight here!");
+            delay(400);
         }
     }
 
@@ -188,8 +161,7 @@ public class GameUtil {
                 .map(monster -> monster.getClass().getSimpleName()).distinct().toList();
         do {
             System.out.println("What kind of monster do you want to fight?");
-            System.out.println("These are the types present here: ");
-            presentClasses.forEach(System.out::println);
+
             ans = toTitleCase(console.readLine());
         } while (!presentClasses.contains(ans));
         return ans;
@@ -204,7 +176,7 @@ public class GameUtil {
         if (monsterClass.equals("Cat") && !guardsPresent.isEmpty()) {
             Guard guard = (Guard) guardsPresent.getFirst();
             guard.killForTheCat();
-            askForRespawn();
+            player.askForRespawn();
         }
     }
 //          PRIMA VERSIONE DI QUESTO METODO:
@@ -231,49 +203,60 @@ public class GameUtil {
 //        }
 
     public static void checkForCombat(Character char2) throws EndOfGameException {
-        if(player.getStamina() >= char2.getStamina()){
+        if(player.getStamina()>0){
             combat(char2);
         } else {
-            System.out.println("You don't have enough stamina to fight this monster! Go train some more.");
+            System.out.println("You don't have enough stamina to fight this monster! Go rest somewhere quiet...");
+            delay(500);
         }
     }
 
     public static void combat(Character char2) throws EndOfGameException {
         while (player.checkIfAlive() && char2.checkIfAlive()){
             player.attack(char2);
+            delay(500);
             if(!char2.checkIfAlive()){
                 break;
             }
             char2.attack(player);
+            delay(500);
         }
         if(player.checkIfAlive()){
             player.addKillsCounter();
             if(char2 instanceof Monster monster){
                 player.addExp(monster.getExpGiven());
                 monster.respawn();
+                player.setStamina(player.getStamina()-1);
             }
         } else {
             if(player != null){
-                askForRespawn();
+                player.askForRespawn();
             }
         }
     }
 
     //METODI PER MUOVERSI
 
-//    public static void askIfWantToMove(){
-//        String ans = null;
-//        do{
-//            System.out.println("Do you want to change room? Answer with Y or N: ");
-//            ans = console.readLine().toUpperCase();
-//        }while(!ans.equals(Answer.N.toString()) && !ans.equals(Answer.Y.toString()));
-//        if(ans.equals(Answer.Y.toString())){
-//            askForDirections();
-//        } else if(ans.equals(Answer.N.toString())){
-//            System.out.printf("You are still at %s%n", player.getActualRoom().getName());
-//        }
-//
-//    }
+    public static void askIfWantToRest(){
+        String ans = null;
+        do{
+            System.out.println("It's so calm in here, do you want to rest? Answer with Y or N: ");
+            ans = console.readLine().toUpperCase();
+        }while(!ans.equals(Answer.N.toString()) && !ans.equals(Answer.Y.toString()));
+        if(ans.equals(Answer.Y.toString())){
+            System.out.println("You are falling asleep...");
+            delay(1000);
+            System.out.println("...dreaming of scary dragons...");
+            delay(1000);
+            System.out.println("...the deepness of the woods...");
+            delay(1000);
+            System.out.println("You woke up.");
+            delay(1000);
+            System.out.println("Resting gives + 2 stamina points");
+            player.sleep(2);
+        }
+
+    }
     public static void askForDirections(){
         String ans = null;
         do{
@@ -289,7 +272,19 @@ public class GameUtil {
                 player.changeRoom(CardinalPoints.WEST);
             }
         }while(!ans.equals("STOP"));
+    }
 
+    public static void checkMap(){
+        String ans = null;
+        System.out.println("Do you want to check the map?");
+        do {
+            System.out.println("Answer Y or N: ");
+            ans = console.readLine().toUpperCase();
+        } while (!ans.equals(Answer.N.toString()) && !ans.equals(Answer.Y.toString()));
+        if (ans.equals(Answer.Y.toString())) {
+            Map map = (Map)player.getInventory().get("Map");
+            map.printMap();
+        }
     }
 
     //metodi item
@@ -326,8 +321,6 @@ public class GameUtil {
         }
     }
 
-
-
     //METODO PER FAR SPOSTARE LE GUARDIE ALLA FINE DI OGNI CICLO
     public static void randomizeTheGuards(){
         List<Monster> guards = MonsterMap.getGuards();
@@ -354,14 +347,20 @@ public class GameUtil {
 
     //METODO PER INTERAGIRE
     public static void askWhoToTalk(){
+        String ans = null;
         List<String> names = player.getActualRoom().getPresentEntities().keySet().stream().toList();
         System.out.println("Who do you want to talk to? Write their name: ");
-        String ans = toTitleCase(console.readLine());
+        ans = console.readLine();
+        if(!(ans.isEmpty())){
+            ans = toTitleCase(ans);
+        }
         if(names.contains(ans)){
             player.getActualRoom().getPresentEntities().get(ans).greet();
         } else {
             System.out.println("They're not here right now.");
         }
+
+
     }
 
     //METODI UTIL
@@ -383,8 +382,9 @@ public class GameUtil {
     }
 
 
-    //TODO IMPLEMENTARE METODI PER GLI ITEM (magari direttamente in entity?)
+    //TODO METODI PER L'INVENTORY
     //metodi item: mangiare le cose del mio stesso inventario
+    //EQUIP LE WEAPON, EAT I FOOD E CHECK LA MAPPA
 
     //TODO FAR FINIRE IL GIOCO APPENA HAI L'ANELLO
     //TODO AGGIUNGERE I SOLDI PER COMPRARE LE COSE???

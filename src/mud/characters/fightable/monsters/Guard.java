@@ -7,16 +7,13 @@ import mud.rooms.MagicMap;
 import static mud.GameUtil.player;
 
 public class Guard extends Monster {
-    private static final int GUARD_EXP_GIVEN = 5;
     public static final int GUARD_POSSIBLE_ROOM = 8;
 
     public Guard(String name) {
         super(name);
         setStrength(dice.nextInt(MAX));
         setAgility(dice.nextInt(MAX));
-        setStamina(dice.nextInt(MAX));
         setActualRoom(MagicMap.getRooms().get(dice.nextInt(GUARD_POSSIBLE_ROOM)));
-        setExpGiven(GUARD_EXP_GIVEN);
         setHp(MAX_HP);
     }
 

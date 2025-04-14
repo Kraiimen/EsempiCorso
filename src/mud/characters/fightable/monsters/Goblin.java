@@ -15,7 +15,6 @@ public class Goblin extends Monster {
         super(name);
         setStrength(dice.nextInt(MIN_GOB, MAX_GOB));
         setAgility(dice.nextInt(MIN_GOB, MAX_GOB));
-        setStamina(MAX_GOB);
         setActualRoom(MagicMap.getRooms().get(dice.nextInt(GOB_POSSIBLE_ROOM_START,GOB_POSSIBLE_ROOM_END)));
         setExp(GOB_EXP_GIVEN);
         setHp(GOB_HP);

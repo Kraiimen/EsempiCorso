@@ -1,5 +1,6 @@
 package mud.rooms;
 
+import mud.CardinalPoints;
 import mud.characters.Entity;
 
 public class TempleSquare extends Room{

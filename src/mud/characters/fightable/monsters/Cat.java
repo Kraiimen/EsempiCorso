@@ -17,9 +17,9 @@ public class Cat extends Monster {
         super(name);
         setStrength(dice.nextInt(MIN, MAX_CAT) + 1);
         setAgility(dice.nextInt(MIN, MAX_CAT));
-        setStamina(MIN);
         setActualRoom(MagicMap.getRooms().get(dice.nextInt(CAT_POSSIBLE_ROOM)));
         setHp(CAT_HP);
+        setGreetMessage("Meow!");
     }
 
     @Override
@@ -31,12 +31,6 @@ public class Cat extends Monster {
 //            getActualRoom().getPresentMonsters().add(this);
 //            getActualRoom().getPresentMonstersClasses().add("Cat");
         }
-    }
-
-    @Override
-    public void greet(){
-        System.out.println(getName() + " says :" + BLUE + " Meow!" + RESET);
-        delay(800);
     }
 }
 

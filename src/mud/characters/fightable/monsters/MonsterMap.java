@@ -56,7 +56,7 @@ public class MonsterMap {
 
         //do gli oggetti a qualche mostro
         fluffy.pickItem(new Food("Dead mouse", 2));
-        krenko.pickItem(new Weapon("Rusty sword"));
+        krenko.pickItem(new Weapon("Rusty sword", 1));
 
     }
 

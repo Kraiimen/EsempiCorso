@@ -18,7 +18,8 @@ public abstract class Entity {
     private String name;
     private HashMap<String, Item> inventory;
     private Room actualRoom;
-//    private boolean hasQuest;
+    private boolean hasQuest;
+    private String greetMessage;
 
     public Entity(String name){
         this.name = name;
@@ -28,10 +29,14 @@ public abstract class Entity {
     }
 
     public void greet(){
-        System.out.println(name + " says :" + BLUE + " Hello!" + RESET);
+        System.out.println(name + " says : " + BLUE + greetMessage + RESET);
         delay(800);
     }
     public void printInventory(){
+        if(inventory.isEmpty()){
+            System.out.printf("%s's inventory is empty.%n", name);
+            delay(300);
+        }
         inventory.keySet().forEach(System.out::println);
     }
 
@@ -82,10 +87,18 @@ public abstract class Entity {
         return false;
     }
 
-//    public boolean doesHaveQuest() {
-//        return hasQuest;
-//    }
-//    public void setHasQuest(boolean hasQuest) {
-//        this.hasQuest = hasQuest;
-//    }
+    public boolean doesHaveQuest() {
+        return hasQuest;
+    }
+    public void setHasQuest(boolean hasQuest) {
+        this.hasQuest = hasQuest;
+    }
+
+    public String getGreetMessage() {
+        return greetMessage;
+    }
+
+    public void setGreetMessage(String greetMessage) {
+        this.greetMessage = greetMessage;
+    }
 }

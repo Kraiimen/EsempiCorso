@@ -21,31 +21,36 @@ public class MagicMap {
         Room secondGarden = new Garden("The Dark Garden");
         Room cityDoor = new CityDoor();
         Room woods = new Woods();
+        Room inn = new Inn();
 
-        templeSquare.getDirections().put(CardinalPoints.EAST, theTemple);
-        templeSquare.getDirections().put(CardinalPoints.SOUTH, marketSquare);
+        templeSquare.addPath(CardinalPoints.EAST, theTemple);
+        templeSquare.addPath(CardinalPoints.SOUTH, marketSquare);
+        templeSquare.addPath(CardinalPoints.WEST, inn);
 
-        theTemple.getDirections().put(CardinalPoints.WEST, templeSquare);
+        theTemple.addPath(CardinalPoints.WEST, templeSquare);
 
-        marketSquare.getDirections().put(CardinalPoints.NORTH, templeSquare);
-        marketSquare.getDirections().put(CardinalPoints.EAST, bakery);
-        marketSquare.getDirections().put(CardinalPoints.SOUTH, firstGarden);
-        marketSquare.getDirections().put(CardinalPoints.WEST, armory);
+        marketSquare.addPath(CardinalPoints.NORTH, templeSquare);
+        marketSquare.addPath(CardinalPoints.EAST, bakery);
+        marketSquare.addPath(CardinalPoints.SOUTH, firstGarden);
+        marketSquare.addPath(CardinalPoints.WEST, armory);
 
-        bakery.getDirections().put(CardinalPoints.WEST, marketSquare);
 
-        armory.getDirections().put(CardinalPoints.EAST, marketSquare);
+        bakery.addPath(CardinalPoints.WEST, marketSquare);
 
-        firstGarden.getDirections().put(CardinalPoints.NORTH, marketSquare);
-        firstGarden.getDirections().put(CardinalPoints.SOUTH, secondGarden);
+        armory.addPath(CardinalPoints.EAST, marketSquare);
 
-        secondGarden.getDirections().put(CardinalPoints.NORTH, firstGarden);
-        secondGarden.getDirections().put(CardinalPoints.SOUTH, cityDoor);
+        firstGarden.addPath(CardinalPoints.NORTH, marketSquare);
+        firstGarden.addPath(CardinalPoints.SOUTH, secondGarden);
 
-        cityDoor.getDirections().put(CardinalPoints.NORTH, secondGarden);
-        cityDoor.getDirections().put(CardinalPoints.SOUTH, woods);
+        secondGarden.addPath(CardinalPoints.NORTH, firstGarden);
+        secondGarden.addPath(CardinalPoints.SOUTH, cityDoor);
 
-        woods.getDirections().put(CardinalPoints.NORTH, cityDoor);
+        cityDoor.addPath(CardinalPoints.NORTH, secondGarden);
+        cityDoor.addPath(CardinalPoints.SOUTH, woods);
+
+        woods.addPath(CardinalPoints.NORTH, cityDoor);
+
+        inn.addPath(CardinalPoints.EAST, templeSquare);
 
         rooms.add(templeSquare);
         rooms.add(theTemple);
@@ -56,6 +61,7 @@ public class MagicMap {
         rooms.add(secondGarden);
         rooms.add(cityDoor);
         rooms.add(woods);
+        rooms.add(inn);
 
         //aggiungo gli alberi
         firstGarden.getPresentItems().put("Apple tree", new Tree("Apple tree", "Apple", 1));

@@ -30,14 +30,6 @@ public abstract class Monster extends Character {
         }
     }
 
-
-    public int getExpGiven() {
-        return expGiven;
-    }
-    public void setExpGiven(int expGiven) {
-        this.expGiven = expGiven;
-    }
-
     @Override
     public void die(){
         setHp(MIN);
@@ -52,5 +44,14 @@ public abstract class Monster extends Character {
             System.out.println(getName() + " lost all his belongings dying.");
         }
     }
+
+    public int getExpGiven() {
+        return expGiven;
+    }
+    public void setExpGiven(int expGiven) {
+        this.expGiven = expGiven;
+    }
+
+
 
 }

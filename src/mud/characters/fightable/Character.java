@@ -22,7 +22,6 @@ public abstract class Character extends Entity {
     private int intelligence;
     private int strength;
     private int agility;
-    private int stamina;
     private int exp;
     private boolean isAlive = true;
 
@@ -34,7 +33,6 @@ public abstract class Character extends Entity {
         this.intelligence = dice.nextInt(minIntelligence, MAX);
         this.strength = dice.nextInt(minStrength, MAX);
         this.agility = dice.nextInt(minAgility, MAX);
-        this.stamina = dice.nextInt(minStamina, MAX);
     }
 
     public void changeRoom(CardinalPoints cardinal){
@@ -117,13 +115,6 @@ public abstract class Character extends Entity {
     }
     public void setAgility(int agility) {
         this.agility = agility;
-    }
-
-    public int getStamina() {
-        return stamina;
-    }
-    public void setStamina(int stamina) {
-            this.stamina = stamina;
     }
 
     public int getExp() {
