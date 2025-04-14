@@ -58,7 +58,9 @@ public class Room {
         marketSquare.setDirections(templeSquare, bakery, gardenA, armory);
         marketSquare.setRoomContents();
         armory.setOneDirection(marketSquare, Direction.WEST);
-        marketSquare.setRoomContents();
+        armory.setRoomContents();
+        bakery.setOneDirection(marketSquare, Direction.EAST);
+        bakery.setRoomContents();
         gardenA.setDirections(marketSquare, null, gardenB, null);
         gardenA.setRoomContents();
         gardenB.setDirections(gardenA, null, gardenC, null);
@@ -282,7 +284,11 @@ public class Room {
         boolean hostileInteraction = false;
 
         if(hasEntities){
-            for(Entity entity : entities){
+            List<Entity> aliveEntities = entities.stream()
+                    .filter(e -> !e.isDead())
+                    .toList();
+
+            for(Entity entity : aliveEntities){
                 if(entity instanceof Npc npc && npc.isHostile()){
                     hostileInteraction = true;
                     entity.manageInteraction(player);

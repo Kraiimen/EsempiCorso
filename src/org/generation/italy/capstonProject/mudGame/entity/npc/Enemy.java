@@ -28,7 +28,7 @@ public class Enemy extends Npc{
         }
 
         if(Math.random() < criticalChance){
-            System.out.println("\u001B[31m" + this.getCharName() + "strike a critical attack!" + "\033[0m");
+            System.out.println("\u001B[31m" + this.getCharName() + " strikeS a critical attack!" + "\033[0m");
             finalDamage *= 2;
         }
 
@@ -41,7 +41,7 @@ public class Enemy extends Npc{
     }
 
     public static Enemy generateEnemy(String charName, int maxHP, Room currentRoom) {
-        Enemy enemy = new Enemy(charName, maxHP, (int)(Math.random() * 10), currentRoom, (int)(Math.random() * 1) );
+        Enemy enemy = new Enemy(charName, maxHP, (int)((Math.random() * 9) + 1), currentRoom, ((Math.random() * 0.9) + 0.1) );
 
         Item weapon = new Weapon("Sword1", (int)(Math.random() * 4) + 1);
         enemy.getInventory().addItem(weapon);

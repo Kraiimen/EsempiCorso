@@ -1,6 +1,7 @@
 package org.generation.italy.capstonProject.mudGame.entity.npc;
 
 import org.generation.italy.capstonProject.mudGame.entity.Entity;
+import org.generation.italy.capstonProject.mudGame.entity.GameMenuUtils;
 import org.generation.italy.capstonProject.mudGame.entity.Wallet;
 import org.generation.italy.capstonProject.mudGame.entity.items.Item;
 import org.generation.italy.capstonProject.mudGame.entity.player.Player;
@@ -42,25 +43,41 @@ public class Npc extends Entity {
         }
         System.out.println("\u001B[31m"  +  this.getCharName() + " inflicts " + getDamage() + "/" + getMaxDamage() + " damage."  + "\033[0m");
         target.hasTakenDamage(damage);
-        if(target instanceof Player player) {
-            player.managePlayerInteraction(this, new Scanner(System.in));
-        }
     }
 
     @Override
     public void manageInteraction(Entity target){
-        if (isDead()) return;
+        if (this.isDead()) return;
 
         if(isHostile || getIsUnderAttack()){
-            while(!target.isDead()){
+            while(!target.isDead() && !this.isDead()){
                 attack(target);
                 if(target.isDead()){
                     setIsUnderAttack(false);
                     break;
                 }
+                if (this.isDead()) return;
+                if(target instanceof Player player) {
+                    player.managePlayerInteraction(this, new Scanner(System.in));
+                }
             }
         } else {
             System.out.println("\033[0;33m" + this.getCharName() + " says: " + (messages.isEmpty() ? "Hi " + target.getCharName() + "!" : messages.getFirst())  + "\033[0m");
+        }
+    }
+
+    public void handleAfterCombat(Entity target) {
+        if (target instanceof Player player) {
+            Room room = player.getCurrentRoom();
+            for (Entity e : room.getEntities()) {
+                if (e instanceof Npc npc && npc.isHostile() && !npc.isDead()) {
+                    npc.manageInteraction(player);
+                    return;
+                }
+            }
+//            if (!player.isDead()) {
+//                GameMenuUtils.displayRoomActions(player, new Scanner (System.in));
+//            }
         }
     }
 

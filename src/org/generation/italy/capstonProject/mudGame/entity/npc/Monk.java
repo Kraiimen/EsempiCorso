@@ -25,7 +25,7 @@ public class Monk extends Npc{
             }
         } else {
             System.out.println("\033[0;33m" + this.getCharName() + " says: " + (getMessages().isEmpty() ? "Hi " + target.getCharName() + "!" : getMessages().getFirst())  + "\033[0m");
-            if(target instanceof Player player){
+            if(target instanceof Player player && player.getExperience() > player.getMaxExperience()){
                 System.out.println("\033[0;33m" + "Your aura is strong, and I can see your Hearth is full of courage. It's time for an upgrade!" + "\033[0m");
                 player.levelUp();
             }

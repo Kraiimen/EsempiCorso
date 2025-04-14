@@ -9,6 +9,7 @@ import org.generation.italy.capstonProject.mudGame.entity.rooms.Direction;
 import org.generation.italy.capstonProject.mudGame.entity.rooms.Room;
 
 import java.io.Console;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -52,7 +53,9 @@ public abstract class Player extends Entity {
         System.out.println("\033[0;32m" + this.getCharName() + " attacks " + target.getCharName() + "\033[0m");
         System.out.println("\033[0;32m"  +  this.getCharName() + " inflicts " + getDamage() + "/" + getMaxDamage() + " damage."  + "\033[0m");
         target.hasTakenDamage(damage);
-        target.manageInteraction(this);
+//        if(!target.isDead()){
+//        target.manageInteraction(this);
+//        }
     }
 
     public void gainExperience(int amount){
@@ -87,14 +90,15 @@ public abstract class Player extends Entity {
     public void manageInteraction(Entity target){}
 
     public void managePlayerInteraction(Entity target, Scanner scanner) {
-        if (isDead()) {
+        if (this.isDead()) {
             System.out.println("\033[0;32m" + "You died. Thanks for playing!" + "\033[0m");
             System.exit(0);
         }
+
         if (target instanceof Npc) {
             if (getIsUnderAttack()) {
                 boolean resolved = false;
-                while(!resolved){
+                while(!resolved && !target.isDead()){
                     System.out.println("What do you want to do?");
 
                     List<String> options = List.of("Fight back", "Run away", "Use item from your inventory");
@@ -176,7 +180,22 @@ public abstract class Player extends Entity {
 
     public void manageAttack(Entity target){
         while(getHealthPoints() > (getMaxHP()*0.1) && !target.isDead()){
-            attack(target);
+            this.attack(target);
+            if(target.isDead()){
+                target.setIsUnderAttack(false);
+                this.setIsUnderAttack(false);
+                getCurrentRoom().removeEntityFromRoom(target);
+                if(target instanceof Npc npc){
+                    npc.dropCoins(this);
+                }
+                if(target instanceof Cat){
+                    hasKilledKitties = true;
+                    gainExperience(1);
+                }else{
+                    gainExperience(3);
+                }
+                break;
+            }
             if(target instanceof Cat){
                 for(Entity entity : getCurrentRoom().getEntities()){
                     if(entity instanceof Guard guard){
@@ -188,21 +207,8 @@ public abstract class Player extends Entity {
                     }
                 }
             }
-            if(target.isDead()){
-                if(target instanceof Cat){
-                    hasKilledKitties = true;
-                    gainExperience(1);
-                }else{
-                    gainExperience(3);
-                }
-                if(target instanceof Npc npc){
-                    npc.dropCoins(this);
-                }
-                setIsUnderAttack(false);
-                getCurrentRoom().removeEntityFromRoom(target);
-
-                GameMenuUtils.displayRoomActions(this, scanner);
-                break;
+            if(target instanceof Npc npc) {
+                npc.handleAfterCombat(this);
             }
         }
         if(getHealthPoints() < (getMaxHP()*0.1)){
@@ -225,8 +231,8 @@ public abstract class Player extends Entity {
                         System.out.println("Run away failed");
                         int inflictedDamage = target.calculateDamage();
                         this.subtractHealthPoints(inflictedDamage);
-                        System.out.println("\033[0;32m" + "You lost " + inflictedDamage + " HP." + "\033[0m");
-                        if (isDead()) {
+                        System.out.println("\033[0;32m" + "You lost " + inflictedDamage + " HP and now have " + getHealthPoints() + "/" + getMaxHP() + "\033[0m");
+                        if(this.isDead() || this.getHealthPoints() <= 0) {
                             System.out.println("\033[0;32m" + "You died. Thanks for playing!" + "\033[0m");
                             System.exit(0);
                         } else {
@@ -311,6 +317,7 @@ public abstract class Player extends Entity {
         if(experience >= maxExperience){
             level++;
             maxExperience += 20;
+            setMaxHP(getMaxHP() + 5);
             setMaxDamage(getMaxDamage() + 5);
             if(getIntelligence() < getMAX_INTELLIGENCE()) {
                 setIntelligence(getIntelligence() + 2);
@@ -358,7 +365,7 @@ public abstract class Player extends Entity {
     public void setEquippedWeapon(Weapon weapon){
         this.equippedWeapon = weapon;
         System.out.println("You equipped " + equippedWeapon.getName());
-        System.out.println("+ " + equippedWeapon.getBonusDamage() + "damage points.");
+        System.out.println("+ " + equippedWeapon.getBonusDamage() + " damage points.");
     }
 
     public void removeEquippedWeapon(){
