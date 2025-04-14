@@ -96,6 +96,7 @@ public class Room {
             tavern.setPaths(debugroom, debugroom, debugroom,templeSq);
             tavern.setRoomProperties(false, true, false, false, false);
             tavern.getNPCInRoom().put(Npc.getNpcMap().get("TAVERNKEEPER").getName().toUpperCase(), Npc.getNpcMap().get("TAVERNKEEPER"));
+            tavern.getItemsInRoom().put(Item.itemMap.get("gratesword").getName().toUpperCase(), Item.itemMap.get("gratesword"));
             if (dices.rd100() > 95) {
                 tavern.getItemsInRoom().put(Item.itemMap.get("dagger").getName().toUpperCase(), Item.itemMap.get("dagger"));
                 tavern.hasItems = true;
@@ -148,7 +149,7 @@ public class Room {
         //bakery
         {
         bakery.setPaths(debugroom, debugroom, market, debugroom);
-        bakery.setRoomProperties(false, true, true, false, false);
+        bakery.setRoomProperties(false, true, false, false, false);
         bakery.getNPCInRoom().put(Npc.getNpcMap().get("BAKER").getName().toUpperCase(), Npc.getNpcMap().get("BAKER"));
         if (dices.rd100() > 75) {
             bakery.getItemsInRoom().put(Item.itemMap.get("cupcake").getName().toUpperCase(), Item.itemMap.get("cupcake"));
@@ -164,7 +165,7 @@ public class Room {
         //forge
         {
             forge.setPaths(debugroom, alchemist, debugroom, market);
-            forge.setRoomProperties(false, true, true, false, false);
+            forge.setRoomProperties(false, true, false, false, false);
             forge.getNPCInRoom().put(Npc.getNpcMap().get("ASSISTANT").getName().toUpperCase(), Npc.getNpcMap().get("ASSISTANT"));
             if (dices.rd100() > 95) {
                 forge.getItemsInRoom().put(Item.itemMap.get("chainmail").getName().toUpperCase(), Item.itemMap.get("chainmail"));
