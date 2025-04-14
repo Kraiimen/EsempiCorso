@@ -73,7 +73,7 @@ public class Entity {
         if(this.healthPoints > 100){
             barLenght = 50;
         }
-        int filledLenght = (int)((double) this.healthPoints / maxHp * barLenght);
+        int filledLenght = (int)(((double) this.healthPoints) / maxHp * barLenght);
 
         String bar = " [";
 

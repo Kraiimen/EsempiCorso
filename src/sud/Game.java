@@ -55,6 +55,27 @@ public class Game {
 
     }
 
+
+    private static void intro() throws InterruptedException {
+        Npc king = Npc.getNpcMap().get("KING");
+        System.out.println("<You find yourself in the castle, his majesty himself before you, dying, his gasps of pain might suggest that his last day of life is approaching with every breath he takes.>\n");
+        Thread.sleep(1000);
+        king.speak("Young "+player.getName()+" I have been told you are willing to take charge of my request... see- COUGH COUGH ... I am very ill... and I need your help to get the Magic Ring Of everlasting Vigour back. ..\n");
+        Thread.sleep(1000);
+        System.out.println("<The decrepit old man lets out a laboured sigh. >");
+        Thread.sleep(1000);
+        king.speak("Those goblin bastards managed to steal it from me in my sleep. From now on, any attempted robbery will be severely punished!\n");
+        Thread.sleep(1000);
+        System.out.println("<the king seems to stare at you, as if he wanted to be sure he would choose the right hero.>");
+        Thread.sleep(1000);
+        king.speak(""+player.getName()+"The goblins live in the dark woods, beyond the walls... I'm sure their leader is using my treasure! Be careful, " +
+                "\nequip yourself properly, our tavern will offer you warm food and a place to sleep, in the temple they will help you temper your soul by making you stronger... " +
+                "\nour marketplace will be able to offer you the most suitable equipment to KILL THOSE-\n");
+        Thread.sleep(500);
+        System.out.println("<the sentence is interrupted by a burst of coughing... you almost feel sorry for him. >");
+        Thread.sleep(1000);
+        king.speak("Now go! don't waste time!!!\n");
+    }
     public static void start() throws GameClosingExeption, InterruptedException {
         {
             System.out.println("""
@@ -119,26 +140,7 @@ public class Game {
         interactMenu();
 
     }
-    private static void intro() throws InterruptedException {
-        Npc king = Npc.getNpcMap().get("KING");
-        System.out.println("<You find yourself in the castle, his majesty himself before you, dying, his gasps of pain might suggest that his last day of life is approaching with every breath he takes.>\n");
-        Thread.sleep(1000);
-        king.speak("Young "+player.getName()+" I have been told you are willing to take charge of my request... see- COUGH COUGH ... I am very ill... and I need your help to get the Magic Ring Of everlasting Vigour back. ..\n");
-        Thread.sleep(1000);
-        System.out.println("<The decrepit old man lets out a laboured sigh. >");
-        Thread.sleep(1000);
-        king.speak("Those goblin bastards managed to steal it from me in my sleep. From now on, any attempted robbery will be severely punished!\n");
-        Thread.sleep(1000);
-        System.out.println("<the king seems to stare at you, as if he wanted to be sure he would choose the right hero.>");
-        Thread.sleep(1000);
-        king.speak(""+player.getName()+"The goblins live in the dark woods, beyond the walls... I'm sure their leader is using my treasure! Be careful, " +
-                "\nequip yourself properly, our tavern will offer you warm food and a place to sleep, in the temple they will help you temper your soul by making you stronger... " +
-                "\nour marketplace will be able to offer you the most suitable equipment to KILL THOSE-\n");
-        Thread.sleep(500);
-        System.out.println("<the sentence is interrupted by a burst of coughing... you almost feel sorry for him. >");
-        Thread.sleep(1000);
-        king.speak("Now go! don't waste time!!!\n");
-    }
+
     private static void printAvailablePaths(){
         Room north = player.getCurrentRoom().getNordPath();
         Room south = player.getCurrentRoom().getSudPath();
@@ -242,6 +244,7 @@ public class Game {
     }
     private static void sell (Npc npc, ItemType sellableType,String escapeLine){
         int counter =1;
+
         if(!player.getInventory().isEmpty()){
             for (Item item : player.getInventory()) {
                 if (item.getType() == sellableType) {
@@ -373,7 +376,7 @@ public class Game {
                     if(choice == player.getInventory().size()+1){
                         System.out.printf("<Do you want to unequip: %S>",player.getEquipedArmor().getName());
                         System.out.println("\n(1)-> YES" +
-                                "\n(2)-> NO");
+                                           "\n(2)-> NO");
                         if(player.askPlayerIntInput(2)==1) {
                             if(player.getEquipedWeapon().getName().equalsIgnoreCase("Nothing")){
                                 System.out.println("<You can't do that>");
@@ -386,7 +389,7 @@ public class Game {
                     if(choice == player.getInventory().size()+2){
                         System.out.printf("<What Do you want to unequip: %S>",player.getEquipedWeapon().getName());
                         System.out.printf("\n(1)-> YES\n" +
-                                "(2)-> NO");
+                                            "(2)-> NO");
                         if(player.askPlayerIntInput(2)==1) {
                             if(player.getEquipedWeapon().getName().equalsIgnoreCase("Nothing")){
                                 System.out.println("<You can't do that>");
@@ -744,7 +747,7 @@ public class Game {
         System.out.print(player.getWithColor("|-->"));
         console.readLine();
         do {
-            System.out.println("-------------------------------------");
+            System.out.println("\n-------------------------------------");
             System.out.println("\n<What would you like to do in the " + player.getCurrentRoom().getName() +"?>");
             System.out.println(
                     "\n<Choose one of the following:>" +
