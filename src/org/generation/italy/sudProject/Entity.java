@@ -8,6 +8,7 @@ import org.generation.italy.sudProject.entities.npcTypes.npcs.Guard;
 import org.generation.italy.sudProject.itemManagement.Inventory;
 import org.generation.italy.sudProject.map.Room;
 
+import java.io.Console;
 import java.util.Random;
 
 import static org.generation.italy.sudProject.map.Room.*;
@@ -32,7 +33,11 @@ public abstract class Entity {
     private int intelligence;
     private int wisdom;
     private int charisma;
+
     public static Random dice = new Random();
+    public Console console = System.console();
+
+
     public static int numberOfEntities;
     private Room entityPosition;
     private int indexEntityPosition;
@@ -42,12 +47,13 @@ public abstract class Entity {
     private int atk;
     private boolean canBeAttacked;
     protected Inventory entityInventory;
+    protected int money;
 
 
 
     // /--CONSTRUCTORS--/
     public Entity(String name, int minStatValue, int maxStatValue, int indexClassStat, int classStat, int hp, int maxHp,
-                  int BaseAtk, Room entityPosition, int indexEntityPosition, boolean canBeAttacked, int inventoryCap){
+                  int BaseAtk, Room entityPosition, int indexEntityPosition, boolean canBeAttacked, int inventoryCap, int money){
         int[] stats = getRandomStats(new int[6], minStatValue, maxStatValue);
         if(indexClassStat >= 0){
             stats[indexClassStat] = classStat;
@@ -67,6 +73,7 @@ public abstract class Entity {
         this.indexEntityPosition = indexEntityPosition;
         this.canBeAttacked = canBeAttacked;
         entityInventory = new Inventory(inventoryCap);
+        this.money = money;
     }
 
     //--METHODS--/

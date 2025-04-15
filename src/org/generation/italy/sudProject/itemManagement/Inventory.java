@@ -33,7 +33,7 @@ public class Inventory {
             System.out.println("Inventario pieno, impossibile aggiungere oggetti");
         }
     }
-    private Item getItemFromInventory(String itemName){
+    public Item getItemFromInventory(String itemName){
         String name = itemName.toUpperCase();
         Item item = null;
         for(Item i : itemsStored){
@@ -46,7 +46,7 @@ public class Inventory {
         }
         return item;
     }
-    private void showItemsInInventory(){
+    public void showItemsInInventory(){
         System.out.println("Oggetti:");
         for(Item i : itemsStored){
             if(i!=null){

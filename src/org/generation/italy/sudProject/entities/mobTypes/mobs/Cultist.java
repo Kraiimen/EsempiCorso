@@ -12,7 +12,7 @@ public class Cultist extends Entity {
     // /--CONSTRUCTORS--/
     public Cultist(String name, Room entityPosition, int indexEntityPosition) {
         super(name, 10, 16, DEXTERITY_INDEX, 14, 20, 20, 5,
-                entityPosition, indexEntityPosition, true, 1);
+                entityPosition, indexEntityPosition, true, 1, 12);
         numberOfCultists++;
         this.entityInventory.addItemToInventory(new UniqueItem("Cultist_Medallion", 10, false, medallionDescription));
     }

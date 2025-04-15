@@ -7,9 +7,9 @@ public abstract class PeacefulMob extends Entity {
     // /--ATTRIBUTES--/
     public static int numberOfPeacefulMobs;
     // /--CONSTRUCTORS--/
-    public PeacefulMob(String mobName, int hp, int hpMax, Room mobPosition, int indexMobPosition, int inventoryCap) {
+    public PeacefulMob(String mobName, int hp, int hpMax, Room mobPosition, int indexMobPosition, int inventoryCap, int money) {
         super(mobName, 0, 1, -1, -1, hp, hpMax,0,
-                mobPosition, indexMobPosition, true, inventoryCap);
+                mobPosition, indexMobPosition, true, inventoryCap, money);
         numberOfPeacefulMobs++;
     }
 

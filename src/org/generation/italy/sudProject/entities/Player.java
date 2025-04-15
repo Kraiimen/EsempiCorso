@@ -2,6 +2,8 @@ package org.generation.italy.sudProject.entities;
 
 import org.generation.italy.sudProject.Entity;
 import org.generation.italy.sudProject.Spawner;
+import org.generation.italy.sudProject.itemManagement.Inventory;
+import org.generation.italy.sudProject.items.Item;
 import org.generation.italy.sudProject.items.itemTypes.Food;
 import org.generation.italy.sudProject.map.Room;
 
@@ -25,11 +27,12 @@ public class Player extends Entity{
     private int playerLevel;
     private static final int HP_FIRST_SPAWN = 3;
     private static final int HP_MAX_FIRST_SPAWN = 10;
+    private static final int STARTING_MONEY = 0;
 
     // /--CONSTRUCTORS--/
     public Player(String firstName, String lastName, String email, String password, String playerName, int indexClassStat, int classStat){
         super(playerName, MIN_ATTRIBUTE_P_VALUE, MAX_ATTRIBUTE_P_VALUE, indexClassStat, classStat, HP_FIRST_SPAWN, HP_MAX_FIRST_SPAWN,
-                2, playerPosition, -1, true, 10);
+                2, playerPosition, -1, true, 10, STARTING_MONEY);
         this.firstName = firstName;
         this.lastName = lastName;
         credentials.put(email, password);
@@ -106,6 +109,18 @@ public class Player extends Entity{
     }
     private void eat(Food food){
         regenerateHp(food.getHpValue());
+    }
+    // buy implementato, ma manca decidere se gli oggetti nello shop si refullano dopo un certo limite di tempo/oppure quando è stato acquistato tutto
+    private void buy(Inventory shopInventory){
+        shopInventory.showItemsInInventory();
+        System.out.println("SELECT ITEM TO BUY:");
+        String input = console.readLine();
+        Item i = shopInventory.getItemFromInventory(input);
+        if(i != null){
+            this.entityInventory.addItemToInventory(i);
+        }else{
+            System.out.println("Quest' item non è in vendita");
+        }
     }
 
     // /--GETTER-&-SETTER--/
