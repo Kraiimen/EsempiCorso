@@ -11,8 +11,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.generation.italy.sudProject.map.Room.CAT_INDEX;
-import static org.generation.italy.sudProject.map.Room.GUARD_INDEX;
+import static org.generation.italy.sudProject.map.Room.*;
 import static org.generation.italy.sudProject.map.WorldMap.world;
 
 public class Player extends Entity{
@@ -110,7 +109,6 @@ public class Player extends Entity{
     private void eat(Food food){
         regenerateHp(food.getHpValue());
     }
-    // buy implementato, ma manca decidere se gli oggetti nello shop si refullano dopo un certo limite di tempo/oppure quando è stato acquistato tutto
     private void buy(Inventory shopInventory){
         shopInventory.showItemsInInventory();
         System.out.println("SELECT ITEM TO BUY:");
@@ -122,6 +120,32 @@ public class Player extends Entity{
             System.out.println("Quest' item non è in vendita");
         }
     }
+    private void pickUp(Room room){
+        room.getRoomObjects().showItemsInInventory();
+        System.out.println("SELECT ITEM TO PICK UP:");
+        String input = console.readLine();
+        Item i = room.getRoomObjects().getItemFromInventory(input);
+        if(i != null){
+            this.entityInventory.addItemToInventory(i);
+        }else{
+            System.out.println("Non è presente alcun item con questo nome");
+        }
+    }
+    private void pickFromCorpse(Room room){
+        room.showCorpses();
+        System.out.println("SELECT CORPSE: ");
+        String input = console.readLine();
+        int result = room.getCorpseIndex(input);
+        if(result != -1){
+            //se ha trovato il cadavere
+            Object obj = room.getRoomEntities().get(CORPSE_INDEX).get(result);
+            Entity corpse = (Entity)obj;
+            corpse.getEntityInventory().showItemsInInventory();
+            System.out.println("");
+
+        }
+    }
+
 
     // /--GETTER-&-SETTER--/
 

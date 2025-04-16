@@ -85,7 +85,7 @@ public abstract class Entity {
     }
     public void die(){
         entityPosition.getRoomEntities().get(CORPSE_INDEX).add(this);
-        numberOfEntities --;
+        numberOfEntities--;
         entityPosition.getRoomEntities().get(indexEntityPosition).removeLast();
         switch (indexEntityPosition){
             case CAT_INDEX:
@@ -183,5 +183,9 @@ public abstract class Entity {
 
     public boolean isCanBeAttacked() {
         return canBeAttacked;
+    }
+
+    public Inventory getEntityInventory() {
+        return entityInventory;
     }
 }

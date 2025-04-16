@@ -60,6 +60,28 @@ public class Room{
             }
         }
     }
+    public void showCorpses(){
+        System.out.println("Cadaveri: ");
+        ArrayList<Entity> array = roomEntities.get(CORPSE_INDEX);
+        if(!array.isEmpty()){
+            for(Entity e : array){
+                System.out.print(e.getName()+" ");
+            }
+            System.out.println();
+        }
+    }
+    public int getCorpseIndex(String corpseName){
+        ArrayList<Entity> array = roomEntities.get(CORPSE_INDEX);
+        int index = -1;
+        for(int i=0; i< array.size(); i++){
+            Entity e = array.get(i);
+            if(e.getName().equals(corpseName)){
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
 
     // /--GETTER-&-SETTER--/
 
