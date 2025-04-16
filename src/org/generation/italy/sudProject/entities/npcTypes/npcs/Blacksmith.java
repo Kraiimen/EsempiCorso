@@ -17,10 +17,12 @@ public class Blacksmith extends CanNotBeAttackedNpc {
     }
     // /--METHODS--/
     private void forge(){
-        this.entityInventory.addItemToInventory(new Dagger(25,false));
-        this.entityInventory.addItemToInventory(new Dagger(25,false));
-        this.entityInventory.addItemToInventory(new HolyMace(50,false));
-        this.entityInventory.addItemToInventory(new Sword(50,false));
-        this.entityInventory.addItemToInventory(new Staff(50,false));
+        if(!this.entityInventory.IsInventoryFull()){
+            this.entityInventory.addItemToInventory(new Dagger(25,false));
+            this.entityInventory.addItemToInventory(new Dagger(25,false));
+            this.entityInventory.addItemToInventory(new HolyMace(50,false));
+            this.entityInventory.addItemToInventory(new Sword(50,false));
+            this.entityInventory.addItemToInventory(new Staff(50,false));
+        }
     }
 }

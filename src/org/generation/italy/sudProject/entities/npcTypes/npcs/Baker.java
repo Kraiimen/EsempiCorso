@@ -15,6 +15,8 @@ public class Baker extends CanNotBeAttackedNpc {
 
     // /--METHODS--/
     private void doBread(){
-        this.entityInventory.addItemToInventory(new Bread(10,false));
+        if(!this.entityInventory.IsInventoryFull()){
+            this.entityInventory.addItemToInventory(new Bread(10,false));
+        }
     }
 }

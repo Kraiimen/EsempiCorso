@@ -55,6 +55,9 @@ public class Inventory {
         }
         System.out.println();
     }
+    public boolean IsInventoryFull(){
+        return inventoryCapacity == 0;
+    }
 
     // /--GETTER-&-SETTER--/
 
