@@ -48,12 +48,14 @@ public abstract class Entity {
     private boolean canBeAttacked;
     protected Inventory entityInventory;
     protected int money;
+    protected int xp;
+
 
 
 
     // /--CONSTRUCTORS--/
     public Entity(String name, int minStatValue, int maxStatValue, int indexClassStat, int classStat, int hp, int maxHp,
-                  int BaseAtk, Room entityPosition, int indexEntityPosition, boolean canBeAttacked, int inventoryCap, int money){
+                  int BaseAtk, Room entityPosition, int indexEntityPosition, boolean canBeAttacked, int inventoryCap, int money, int xp){
         int[] stats = getRandomStats(new int[6], minStatValue, maxStatValue);
         if(indexClassStat >= 0){
             stats[indexClassStat] = classStat;
@@ -203,5 +205,9 @@ public abstract class Entity {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public int getXp() {
+        return xp;
     }
 }

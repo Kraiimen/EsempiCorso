@@ -10,6 +10,6 @@ public class CanNotBeAttackedNpc extends Npc {
     public CanNotBeAttackedNpc(String npcName, int minStatValue, int maxStatValue, int indexClassStat, int classStat, int hp,
                                int maxHp, int baseAtk, Room npcPosition, int indexNpcPosition, int inventoryCap, int money) {
         super(npcName, minStatValue, maxStatValue, indexClassStat, classStat, hp, maxHp,
-                baseAtk, npcPosition, indexNpcPosition, false, inventoryCap, money);
+                baseAtk, npcPosition, indexNpcPosition, false, inventoryCap, money, 0);
     }
 }

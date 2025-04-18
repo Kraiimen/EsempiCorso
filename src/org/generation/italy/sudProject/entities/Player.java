@@ -16,22 +16,29 @@ import static org.generation.italy.sudProject.map.WorldMap.world;
 
 public class Player extends Entity{
     // /--ATTRIBUTES--/
+    private static final int HP_FIRST_SPAWN = 3;
+    private static final int HP_MAX_FIRST_SPAWN = 10;
+    private static final int STARTING_MONEY = 0;
+    private static final int STARTING_XP = 0;
+    private static final int STARTING_MAX_XP = 200;
+
+    public static int numberOfPlayers;
+    private static Room playerPosition = world.getFirst();
+
     private String firstName;
     private String lastName;
     private Map<String, String> credentials = new HashMap<>();
     private String playerName;
     private LocalDate creationDate = LocalDate.now();
-    public static int numberOfPlayers;
-    private static Room playerPosition = world.getFirst();
-    private int playerLevel;
-    private static final int HP_FIRST_SPAWN = 3;
-    private static final int HP_MAX_FIRST_SPAWN = 10;
-    private static final int STARTING_MONEY = 0;
+    private int playerLevel = 1;
+    private int xp = STARTING_XP;
+    private int maxXp = STARTING_MAX_XP;
+
 
     // /--CONSTRUCTORS--/
     public Player(String firstName, String lastName, String email, String password, String playerName, int indexClassStat, int classStat){
         super(playerName, MIN_ATTRIBUTE_P_VALUE, MAX_ATTRIBUTE_P_VALUE, indexClassStat, classStat, HP_FIRST_SPAWN, HP_MAX_FIRST_SPAWN,
-                2, playerPosition, -1, true, 10, STARTING_MONEY);
+                2, playerPosition, -1, true, 10, STARTING_MONEY, STARTING_XP);
         this.firstName = firstName;
         this.lastName = lastName;
         credentials.put(email, password);
@@ -103,29 +110,24 @@ public class Player extends Entity{
                 }
         }
         if(isDead(target)){
+            xpUp(target.getXp());
+            this.earnMoney(target.getMoney());
             target.die();
         }
     }
     private void eat(Food food){
         regenerateHp(food.getHpValue());
     }
-    private void pickFromInventory(Inventory inventory){
-        String input = console.readLine();
-        Item i = inventory.getItemFromInventory(input);
-        if(i != null){
-            this.entityInventory.addItemToInventory(i);
-            inventory.deleteItemFromInventory(input);
-        }else{
-            System.out.println("Non è presente alcun item con questo nome");
-        }
-    }
-    private void buy(Inventory shopInventory){
-        shopInventory.showItemsInInventory();
+    private void buy(Npc seller){
+        seller.getEntityInventory().showItemsInInventory();
         System.out.println("SELECT ITEM TO BUY:");
         String input = console.readLine();
-        if(shopInventory.getItemFromInventory(input) != null && shopInventory.getItemFromInventory(input).getValue() < this.money){
-            Item i = shopInventory.getItemFromInventory(input);
+        if(seller.getEntityInventory().getItemFromInventory(input) != null
+                && seller.getEntityInventory().getItemFromInventory(input).getValue() < this.money){
+            Item i = seller.getEntityInventory().getItemFromInventory(input);
             this.entityInventory.addItemToInventory(i);
+            this.pay(i.getValue());
+            seller.earnMoney(i.getValue());
         }else{
             System.out.println("Non puoi comprare quest'oggetto");
         }
@@ -148,6 +150,22 @@ public class Player extends Entity{
     private void pickEnvironmentItems(Room room){
         room.getRoomObjects().showItemsInInventory();
         pickFromInventory(room.getRoomObjects());
+    }
+    private void pickFromInventory(Inventory inventory){
+        String input = console.readLine();
+        Item i = inventory.getItemFromInventory(input);
+        if(i != null){
+            this.entityInventory.addItemToInventory(i);
+            inventory.deleteItemFromInventory(input);
+        }else{
+            System.out.println("Non è presente alcun item con questo nome");
+        }
+    }
+    private void xpUp(int amount){
+        xp += amount;
+    }
+    public boolean xpOverCap(){
+        return xp >= maxXp;
     }
 
 
@@ -204,4 +222,5 @@ public class Player extends Entity{
     public Room getPlayerPosition() {
         return playerPosition;
     }
+
 }
