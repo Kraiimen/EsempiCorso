@@ -61,7 +61,7 @@ public class Inventory {
     public void deleteItemFromInventory(String itemname){
         for(Item i : itemsStored){
             if(i.getItemName().equals(itemname)){
-                itemsStored.remove(i);
+                i = null;
                 break;
             }
         }

@@ -114,6 +114,7 @@ public class Player extends Entity{
         Item i = inventory.getItemFromInventory(input);
         if(i != null){
             this.entityInventory.addItemToInventory(i);
+            inventory.deleteItemFromInventory(input);
         }else{
             System.out.println("Non è presente alcun item con questo nome");
         }
@@ -128,7 +129,6 @@ public class Player extends Entity{
         }else{
             System.out.println("Non puoi comprare quest'oggetto");
         }
-
     }
     private void pickFromCorpse(Room room){
         room.showCorpses();
