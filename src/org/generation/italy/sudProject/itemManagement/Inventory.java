@@ -58,8 +58,13 @@ public class Inventory {
     public boolean IsInventoryFull(){
         return inventoryCapacity == 0;
     }
-    public void deleteItemFromInventory(){
-        //dopo aver dato via un oggetto, questo si deve eliminare dall'inventory
+    public void deleteItemFromInventory(String itemname){
+        for(Item i : itemsStored){
+            if(i.getItemName().equals(itemname)){
+                itemsStored.remove(i);
+                break;
+            }
+        }
     }
 
     // /--GETTER-&-SETTER--/
