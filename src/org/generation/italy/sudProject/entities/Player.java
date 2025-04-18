@@ -109,27 +109,26 @@ public class Player extends Entity{
     private void eat(Food food){
         regenerateHp(food.getHpValue());
     }
-    private void buy(Inventory shopInventory){
-        shopInventory.showItemsInInventory();
-        System.out.println("SELECT ITEM TO BUY:");
+    private void pickFromInventory(Inventory inventory){
         String input = console.readLine();
-        Item i = shopInventory.getItemFromInventory(input);
-        if(i != null){
-            this.entityInventory.addItemToInventory(i);
-        }else{
-            System.out.println("Quest' item non è in vendita");
-        }
-    }
-    private void pickUp(Room room){
-        room.getRoomObjects().showItemsInInventory();
-        System.out.println("SELECT ITEM TO PICK UP:");
-        String input = console.readLine();
-        Item i = room.getRoomObjects().getItemFromInventory(input);
+        Item i = inventory.getItemFromInventory(input);
         if(i != null){
             this.entityInventory.addItemToInventory(i);
         }else{
             System.out.println("Non è presente alcun item con questo nome");
         }
+    }
+    private void buy(Inventory shopInventory){
+        shopInventory.showItemsInInventory();
+        System.out.println("SELECT ITEM TO BUY:");
+        String input = console.readLine();
+        if(shopInventory.getItemFromInventory(input) != null && shopInventory.getItemFromInventory(input).getValue() < this.money){
+            Item i = shopInventory.getItemFromInventory(input);
+            this.entityInventory.addItemToInventory(i);
+        }else{
+            System.out.println("Non puoi comprare quest'oggetto");
+        }
+
     }
     private void pickFromCorpse(Room room){
         room.showCorpses();
@@ -141,9 +140,14 @@ public class Player extends Entity{
             Object obj = room.getRoomEntities().get(CORPSE_INDEX).get(result);
             Entity corpse = (Entity)obj;
             corpse.getEntityInventory().showItemsInInventory();
-            System.out.println("");
-
+            pickFromInventory(corpse.getEntityInventory());
+        }else{
+            System.out.println("Nessun entità cadavere ha questo nome");
         }
+    }
+    private void pickEnvironmentItems(Room room){
+        room.getRoomObjects().showItemsInInventory();
+        pickFromInventory(room.getRoomObjects());
     }
 
 

@@ -116,8 +116,16 @@ public abstract class Entity {
         return (e.getHp() <= 0);
     }
     public abstract void attack(Entity target);
-
-
+    public void earnMoney(int money){
+        this.money += money;
+    }
+    public void pay(int money){
+        if(!((this.money - money) < 0)){
+            this.money -= money;
+        }else{
+            System.out.println("Non hai abbastanza soldi");
+        }
+    }
 
     // /--GETTER-&-SETTER--/
 
@@ -187,5 +195,13 @@ public abstract class Entity {
 
     public Inventory getEntityInventory() {
         return entityInventory;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
     }
 }
