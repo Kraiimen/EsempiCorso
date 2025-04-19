@@ -128,6 +128,14 @@ public abstract class Entity {
             System.out.println("Non hai abbastanza soldi");
         }
     }
+    public void showStats(){
+        System.out.printf("%s:%d%n %s:%d%n %s:%d%n %s:%d%n %s:%d%n %s:%d%n","Strength",strength,
+                "Dexterity",dexterity,
+                "Constitution",constitution,
+                "Intelligence",intelligence,
+                "Wisdom",wisdom,
+                "Charisma",charisma);
+    }
 
     // /--GETTER-&-SETTER--/
 
@@ -209,5 +217,33 @@ public abstract class Entity {
 
     public int getXp() {
         return xp;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public void setDexterity(int dexterity) {
+        this.dexterity = dexterity;
+    }
+
+    public void setConstitution(int constitution) {
+        this.constitution = constitution;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public void setWisdom(int wisdom) {
+        this.wisdom = wisdom;
+    }
+
+    public void setCharisma(int charisma) {
+        this.charisma = charisma;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
     }
 }

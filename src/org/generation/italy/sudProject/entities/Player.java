@@ -20,7 +20,7 @@ public class Player extends Entity{
     private static final int HP_MAX_FIRST_SPAWN = 10;
     private static final int STARTING_MONEY = 0;
     private static final int STARTING_XP = 0;
-    private static final int STARTING_MAX_XP = 200;
+    public static final int STARTING_MAX_XP = 200;
 
     public static int numberOfPlayers;
     private static Room playerPosition = world.getFirst();
@@ -223,4 +223,11 @@ public class Player extends Entity{
         return playerPosition;
     }
 
+    public int getMaxXp() {
+        return maxXp;
+    }
+
+    public void setMaxXp(int maxXp) {
+        this.maxXp = maxXp;
+    }
 }
