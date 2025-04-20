@@ -167,6 +167,16 @@ public class Player extends Entity{
     public boolean xpOverCap(){
         return xp >= maxXp;
     }
+    public void rest(){
+        String roomName = getPlayerPosition().getRoomName();
+        if(roomName.toUpperCase().equals("TEMPLE")){
+            regenerateHp(this.getMaxHp());
+            System.out.println("Ti senti di nuovo in forze");
+            //da implementare il reset di tutte le entità morte
+        }else{
+            System.out.println("Non puoi riposare qui");
+        }
+    }
 
 
     // /--GETTER-&-SETTER--/
