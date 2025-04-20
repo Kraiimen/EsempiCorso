@@ -26,39 +26,38 @@ public class MoonPriest extends CanNotBeAttackedNpc {
                     System.out.println("Scegli la statistica da aumentare:");
                     switch(console.readLine().toUpperCase()){
                         case "STRENGTH":
-                            //controllo se ha raggiunto il cap di 20 e aumento
                             if(player.getStrength() != MAX_ATTRIBUTE_P_VALUE-1){
                                 player.setStrength(player.getStrength()+1);
                                 loop = false;
                             }
                             break;
                         case "DEXTERITY":
-                            if(player.getStrength() != MAX_ATTRIBUTE_P_VALUE-1){
-                                player.setStrength(player.getStrength()+1);
+                            if(player.getDexterity() != MAX_ATTRIBUTE_P_VALUE-1){
+                                player.setDexterity(player.getDexterity()+1);
                                 loop = false;
                             }
                             break;
                         case "CONSTITUTION":
-                            if(player.getStrength() != MAX_ATTRIBUTE_P_VALUE-1){
-                                player.setStrength(player.getStrength()+1);
+                            if(player.getConstitution() != MAX_ATTRIBUTE_P_VALUE-1){
+                                player.setConstitution(player.getConstitution()+1);
                                 loop = false;
                             }
                             break;
                         case "INTELLIGENCE":
-                            if(player.getStrength() != MAX_ATTRIBUTE_P_VALUE-1){
-                                player.setStrength(player.getStrength()+1);
+                            if(player.getIntelligence() != MAX_ATTRIBUTE_P_VALUE-1){
+                                player.setIntelligence(player.getIntelligence()+1);
                                 loop = false;
                             }
                             break;
                         case "WISDOM":
-                            if(player.getStrength() != MAX_ATTRIBUTE_P_VALUE-1){
-                                player.setStrength(player.getStrength()+1);
+                            if(player.getWisdom() != MAX_ATTRIBUTE_P_VALUE-1){
+                                player.setWisdom(player.getWisdom()+1);
                                 loop = false;
                             }
                             break;
                         case "CHARISMA":
-                            if(player.getStrength() != MAX_ATTRIBUTE_P_VALUE-1){
-                                player.setStrength(player.getStrength()+1);
+                            if(player.getCharisma() != MAX_ATTRIBUTE_P_VALUE-1){
+                                player.setCharisma(player.getCharisma()+1);
                                 loop = false;
                             }
                             break;
