@@ -24,7 +24,7 @@ public class EsercizioMap {
     }
     public static void stampaInventario(Map<String, Integer> inventory) {
         inventory.forEach((prodotto, quantita) -> {
-            System.out.println(prodotto + ": " + quantita);
+            System.out.println(prodotto + ": " + quantita); //
         });
     }
 
