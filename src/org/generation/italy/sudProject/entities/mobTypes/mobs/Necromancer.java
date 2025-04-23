@@ -15,7 +15,7 @@ public class Necromancer extends Entity {
     public Necromancer(Room entityPosition, int indexEntityPosition) {
         super("Necromancer", 16, 20, INTELLIGENCE_INDEX, 20, 100, 100, 15, entityPosition,
                 indexEntityPosition, true, 2, MONEY_FOR_KILLER, XP_FOR_KILLER);
-        this.getEntityInventory().addItemToInventory(new UniqueItem("Necromancer_medallion", 50, false, medallionDescription));
+        this.entityInventory.addItemToInventory(new UniqueItem("Necromancer_medallion", 50, false, medallionDescription));
         numberOfNecromancers++;
     }
 
