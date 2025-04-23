@@ -5,10 +5,11 @@ public class Market extends Room {
     private static String templeNpc = "";
     private static String templeLoot = "";
     public Market() {
-        super(templeDescription, templeNpc, templeLoot);
+        super(templeDescription);
     }
 
     public Market(Room north, Room east, Room south, Room west) {
-        super(templeDescription, templeNpc, templeLoot, north, east, south, west);
+        //super(templeDescription, templeNpc, templeLoot, north, east, south, west);
+        super(templeDescription, north, east, south, west);
     }
 }

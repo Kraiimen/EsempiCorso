@@ -6,10 +6,12 @@ public class TempleSquare extends Room{
     private static String templeSquareLoot = "";
 
     public TempleSquare() {
-        super(templeSquareDescription, templeSquareNpc, templeSquareLoot);
+        //super(templeSquareDescription, templeSquareNpc, templeSquareLoot);
+        super(templeSquareDescription);
     }
 
     public TempleSquare(Room north, Room east, Room south, Room west) {
-        super(templeSquareDescription, templeSquareNpc, templeSquareLoot, north, east, south, west);
+        //super(templeSquareDescription, templeSquareNpc, templeSquareLoot, north, east, south, west);
+        super(templeSquareDescription, north, east, south, west);
     }
 }

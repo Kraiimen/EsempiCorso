@@ -6,8 +6,8 @@ import sud.actors.characters.Mage;
 import sud.actors.characters.Paladin;
 import sud.actors.characters.Warrior;
 import sud.engine.GUI.GUI;
-import sud.engine.mechanics.MovementHandler;
-import sud.engine.mechanics.SpawnHandler;
+import sud.engine.mechanics.MovementManager;
+import sud.engine.mechanics.SpawnManager;
 import sud.environment.CardinalDirection;
 import sud.environment.WorldMap;
 import sud.environment.rooms.Room;
@@ -36,6 +36,11 @@ public class Game {
     public static void start() {
         System.out.println("questa è un'avventura grafica, per compiere un'azione scrivi cosa vuoi fare\n");
         WorldMap.generateWorld();
+        //questo metodo lo chiamo su WorldMap, SpawnHandler, o una terza classe che si occupa di prendere uno spawn e metterlo nella mappa?
+        //mi creo una lista di Npc e riuso sempre gli stessi (ho un massimo di npc deciso dalla capacità della lista,
+        //li creo una volta sola e non li elimino mai, li disabilito soltanto), gestisco gli Npc singolarmente (li elimino alla morte,
+        //potenzialmente ne creo infiniti), metto un limite globale/per stanza?
+        //WorldMap.populateWorld();
         player = choosePlayer();
         //GUI.loading();
     }
@@ -69,15 +74,11 @@ public class Game {
     public static void update() {
         currentRoom = player.getPosition();
 
-        //CardinalDirection.valueOf("nord");
         //System.out.print("> ");
-        //String input = scanner.nextLine();
-        //player.move(input);
 
         playerTurn();
         enemyTurn();
-        worldTurn();
-
+        globalTurn();
     }
 
     private static void playerTurn() {
@@ -96,7 +97,7 @@ public class Game {
             }
             if(CardinalDirection.getCompass().contains(input.toLowerCase())){
                 var choice = CardinalDirection.valueOf(input.toUpperCase());
-                MovementHandler.moveCharacter(player, choice);
+                MovementManager.moveCharacter(player, choice);
             }
         }
     }
@@ -196,11 +197,11 @@ public class Game {
         }
     }
 
-    private static void worldTurn() {
+    private static void globalTurn() {
         //un (vero)nemico normale può essere nella stessa stanza di una guardia? se si voglio che combattano in background?
         for(Room r : WorldMap.getWorldMap()){//Prendo TUTTI i movable invece della singola stanza? (ma solo i non mid fight.. i nemici possono fuggire?)
-            MovementHandler.moveCharacters(r.getMovables());
-            SpawnHandler.updatePopulation();
+            MovementManager.moveCharacters(r.getMovables());
+            SpawnManager.updatePopulation();
         }
     }
 

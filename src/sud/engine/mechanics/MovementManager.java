@@ -7,7 +7,7 @@ import sud.environment.rooms.Room;
 
 import java.util.List;
 
-public class MovementHandler {
+public class MovementManager {
     public static void moveCharacter(Actor a, CardinalDirection direction){
         Room prevPosition = a.getPosition();
         Room newPosition = prevPosition.getRoomByDirection(direction);
