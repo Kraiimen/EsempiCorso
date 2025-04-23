@@ -16,7 +16,7 @@ public class Cultist extends Entity {
         super(name, 10, 16, DEXTERITY_INDEX, 14, 20, 20, 5,
                 entityPosition, indexEntityPosition, true, 1, MONEY_FOR_KILLER, XP_FOR_KILLER);
         numberOfCultists++;
-        this.entityInventory.addItemToInventory(new UniqueItem("Cultist_Medallion", 10, false, medallionDescription));
+        this.entityInventory.addItemToInventory(new UniqueItem("Cultist_medallion", 10, false, medallionDescription));
     }
     // /--METHODS--/
     @Override
