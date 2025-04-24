@@ -37,9 +37,9 @@ public class EsercizioMap {
         }
     }
 
-    public static void stampaConFiltro(Map<String, Integer>  inventory, Predicate<Integer> condizone){
+    public static void stampaConFiltro(Map<String, Integer>  inventory, Predicate<Integer> condizione){
         inventory.entrySet().stream().
-                filter(entry -> condizone.test(entry.getValue())).
-                forEach(entry -> System.out.println("Gli elementi nell'inventario magigori della condizione " + entry.getKey() + ":" + entry.getValue() ));
+                filter(entry -> condizione.test(entry.getValue())).
+                forEach(entry -> System.out.println("Gli elementi nell'inventario maggiori della condizione " + entry.getKey() + ":" + entry.getValue() ));
     }
 }
