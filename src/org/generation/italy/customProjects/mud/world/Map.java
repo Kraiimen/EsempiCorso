@@ -1,5 +1,9 @@
 package org.generation.italy.customProjects.mud.world;
 
+import org.generation.italy.customProjects.mud.entities.Wizard;
+
+import java.util.Random;
+
 public class Map {
     private Place templeSquare = new Place("Temple Square", ", l'anima della città");
     private Place templeRoom = new Place("Temple Room", ", sede dei sacerdoti della città...");
@@ -17,6 +21,7 @@ public class Map {
 
     public Map() {
         buildMap();
+
     }
 
     private void buildMap() {
@@ -41,5 +46,10 @@ public class Map {
         woods2.setExit(Direction.NORTH, woods1);
         woods2.setExit(Direction.SOUTH, woods3);
         woods3.setExit(Direction.NORTH, woods2);
+    }
+
+    public void putEntities() {
+        Random entityType = new Random();
+        Random entityNum = new Random();
     }
 }
