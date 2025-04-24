@@ -29,7 +29,7 @@ public class SwitchExamples {
             case "Elvis", "Filippo", "Lorenzo", "Camilla", "Edoardo", "Nicolò" -> "Lo studente è di Ravenclaw";
             case "Emanuele", "Piero", "Rino" -> "Lo studente è Gryffindor";
             default -> "Lo studente è imboscato";
-        }
+        };
 
 
     }
