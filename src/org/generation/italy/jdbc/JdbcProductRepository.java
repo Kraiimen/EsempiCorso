@@ -82,7 +82,6 @@ public class JdbcProductRepository implements ProductRepository{
         } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
         }
-
     }
 
     @Override
