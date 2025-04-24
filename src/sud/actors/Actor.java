@@ -2,6 +2,7 @@ package sud.actors;
 
 import sud.Die;
 import sud.Loot;
+import sud.engine.mechanics.behaviors.Behavior;
 import sud.environment.CardinalDirection;
 import sud.environment.WorldMap;
 import sud.environment.rooms.Room;
@@ -9,8 +10,7 @@ import sud.items.Armor;
 import sud.items.Item;
 import sud.items.Weapon;
 
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public abstract class Actor {
     // /-----------/ CAMPI /-----------/
@@ -51,6 +51,10 @@ public abstract class Actor {
 
     private Random r = new Random();
 
+    private Set<String> statusEffects = new HashSet<>();
+    private Map<String, Behavior> behaviors = new HashMap<>();
+
+
     // /-----------/ CONSTRUCTORS /-----------/
     public Actor(String name) {
         this.name = name;
@@ -90,6 +94,33 @@ public abstract class Actor {
     }
 
     // /-----------/ METHODS /-----------/
+
+
+    public void addStatus(String status) {
+        statusEffects.add(status);
+    }
+
+    public void removeStatus(String status) {
+        statusEffects.remove(status);
+    }
+
+    public boolean hasStatus(String status) {
+        return statusEffects.contains(status);
+    }
+
+    public void perform(String action) {
+        if (action.equals("cast") && hasStatus("silenced")) {
+            System.out.println(getName() + " tries to speak, but no sound comes out.");
+            return;
+        }
+
+        Behavior b = behaviors.get(action);
+        if (b != null) {
+            b.perform(this);
+        } else {
+            System.out.println(getName() + " doesn’t know how to " + action);
+        }
+    }
 
     public void move(Room newPosition){
         if(newPosition.isAdjacent(position)){
