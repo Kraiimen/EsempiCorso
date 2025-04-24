@@ -1,9 +1,12 @@
 package org.generation.italy.capstoneProject;
 
+import org.generation.italy.capstoneProject.models.npc.monsters.Monster;
+import org.generation.italy.capstoneProject.models.utility.InTheWoods;
 import org.generation.italy.capstoneProject.models.worldMap.Map;
 import org.generation.italy.capstoneProject.models.worldMap.Room;
 
 import java.util.List;
+import java.util.Random;
 
 public class Start {
     public static void main(String[] args) {
@@ -12,19 +15,18 @@ public class Start {
         Room current = map.templeSquare;
 
         // Comandi da tastiera: w=nord, s=sud, d=est, a=ovest, x=esci
-        List<String> comandi = List.of(
-                "s", // sud → Market Square
-                "d", // est → Bakery
-                "a", // ovest → Market Square
-                "s", // sud → Gardens
-                "s", // sud → City Gate
-                "x"  // uscita
+        List<String> commands = List.of(
+                "w", // north
+                "d", // east
+                "a", // west
+                "s", // south
+                "x"  // exit
         );
 
         System.out.println("Welcome to M.U.D. !!!");
         int step = 0;
 
-        while (step < comandi.size()) {
+        while (step < commands.size()) {
             System.out.println("\n You are in: " + current.getName());
             System.out.println("Available directions:");
 
@@ -42,10 +44,10 @@ public class Start {
             }
                 System.out.println("x - Exit");
 
-            String comando = comandi.get(step);
-            System.out.println("> You press: " + comando);
+            String command = commands.get(step);
+            System.out.println("> You press: " + command);
 
-            switch (comando) {
+            switch (command) {
                 case "w":
                     if (current.getNorth() != null) {
                         current = current.getNorth();
@@ -86,6 +88,20 @@ public class Start {
             }
 
             System.out.println("Now in: " + current.getName());
+            // Se sei nel bosco o antro, c'è una probabilità di incontrare un mostro
+            if (current.getName().startsWith("Bosco") || current.getName().equals("Antro Oscuro")) {
+                Random random = new Random();
+                boolean generateMonster = random.nextBoolean(); // 50% chance
+
+                if (generateMonster) {
+                    Monster mostro = InTheWoods.generateRandomMonster();
+                    System.out.println("A wild " + mostro.getNome() + " appears!");
+                    mostro.takeAction();
+                } else {
+                    System.out.println("The area seems quiet... for now.");
+                }
+            }
+
             step++;
         }
 

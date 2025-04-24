@@ -20,5 +20,6 @@ public class InTheWoods {
         Random random = new Random();
         return MONSTERS.get(random.nextInt(MONSTERS.size()));
     }
+    
 }
 
