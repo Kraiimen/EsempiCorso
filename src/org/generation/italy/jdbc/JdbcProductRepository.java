@@ -42,7 +42,7 @@ public class JdbcProductRepository implements ProductRepository{
 
     @Override
     public Product create(Product newProduct) {
-        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT)){
+        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)){
             st.setString(1, newProduct.getProductName()); // non metto l'id perché è un serial
             st.setInt(2, newProduct.getSupplierId());
             st.setInt(3, newProduct.getCategoryId());
@@ -50,6 +50,14 @@ public class JdbcProductRepository implements ProductRepository{
             st.setInt(5, newProduct.getDiscontinued());
             st.executeUpdate(); // ignoro l'intero in ritorno perché se non funziona comunque crasha il create
 
+            try (ResultSet generatedKeys = st.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    newProduct.setProductId(generatedKeys.getInt(1));
+                }
+                else {
+                    throw new SQLException("Failed to retrieve insert ID");
+                }
+            }
             return newProduct; // scoprire come leggere il valore dell'id assegnata e assegnarlo al newProduct - come jdbc scopre un id autoassegnato
         } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
