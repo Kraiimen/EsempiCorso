@@ -1,4 +1,5 @@
 package org.generation.italy.jdbc;
+
 import org.postgresql.jdbc.PgConnection;
 
 import java.sql.*;
@@ -6,26 +7,29 @@ import java.sql.*;
 import org.postgresql.Driver;
 
 public class Examples {
-    public static void main(String[] args) throws SQLException {
-       String url = "jdbc:postgresql://localhost:5432/company";
-       String user = "postgresMaster";
-       String password = "gotPostgresgoGo";
-       String query = "SELECT productid AS id, productname, unitprice FROM products";
-//SIMPLE FACTORY IDIOM (Il caso in cui invece di creare io un oggetto invoco FACTORY e lo crea per me)
-        try( Connection con = JdbcConnectionFactory.createConnection();
-             Statement st = con.createStatement()){ //TRY WHITH RESOURCES
+    public static void main (String[] args){
+//        try {
+//            Class.forName("org.postgresql.Driver");
+//        } catch (ClassNotFoundException e) {
+//            System.out.println("Driver jdbc non configurato correttamente");
+//            System.exit(-1);
+//        }
+//        Driver d = null;
+
+        String query = "SELECT productid AS id, productname, unitprice FROM products";
+
+
+        try(Connection con = JdbcConnectionFactory.createConnection(); //Simple Factory Idiom
+            Statement st =  con.createStatement();) { // Factory method pattern
             System.out.println("Connessione stabilita");
             System.out.println(con.getClass().getName());
-            //FACTORY METHOD PATTERN
-            //Metodo createStatement, lo eseguo su un oggetto di classe PgConnection
             System.out.println(st.getClass().getName());
-            ResultSet rs = st.executeQuery(query);
-            while(rs.next()) {
-                System.out.printf("id: %d productname: %s unitprice: %f%n", rs.getInt(1), rs.getString("productname"), rs.getDouble("unitprice"));
+            ResultSet rs = st.executeQuery(query);  // Factory method pattern
+            while(rs.next()){
+                System.out.printf("id: %d productname: %s unitprice: %f%n" , rs.getInt("id"), rs.getString("productname"), rs.getDouble("unitprice"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
     }
 }
