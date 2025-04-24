@@ -26,7 +26,9 @@ public class Examples {
             System.out.println(st.getClass().getName());
             ResultSet rs = st.executeQuery(query);  // Factory method pattern
             while(rs.next()){
-                System.out.printf("id: %d productname: %s unitprice: %f%n" , rs.getInt("id"), rs.getString("productname"), rs.getDouble("unitprice"));
+                System.out.printf("id: %d productname: %s unitprice: %f%n" , rs.getInt("id"),
+                                                                             rs.getString("productname"),
+                                                                             rs.getDouble("unitprice"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
