@@ -9,7 +9,7 @@ public class JdbcProductRepository implements ProductRepository{
     private Connection con;
     private static final String DELETE_PRODUCT = """
             DELETE FROM products
-            WHERE productid =
+            WHERE productid = ?
             """;
     private static final String FIND_BY_ID = """
             SELECT productid, productname, supplierid, categoryid, unitprice, discontinued
@@ -90,7 +90,7 @@ public class JdbcProductRepository implements ProductRepository{
             st.setInt(1, id);
             try(ResultSet rs = st.executeQuery()) {
                 if(rs.next()) {
-                    Product p = getProductFromResultSet(rs);
+                    Product p = fromResultSet(rs);
                     return Optional.of(p);
                 }
                 else {
@@ -107,7 +107,7 @@ public class JdbcProductRepository implements ProductRepository{
         List<Product> products = new ArrayList<>();
         try(Statement st = con.createStatement(); ResultSet rs = st.executeQuery(FIND_ALL)){
             while (rs.next()){
-                Product p = getProductFromResultSet(rs);
+                Product p = fromResultSet(rs);
                 products.add(p);
             }
             return products;
@@ -133,7 +133,7 @@ public class JdbcProductRepository implements ProductRepository{
         }
     }
 
-    private Product getProductFromResultSet(ResultSet rs) throws SQLException{
+    private Product fromResultSet(ResultSet rs) throws SQLException{
         return new Product(
                 rs.getInt("productid"),
                 rs.getString("productname"),
