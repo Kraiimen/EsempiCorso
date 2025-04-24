@@ -53,8 +53,11 @@ public abstract class Character extends Entity {
             if ((hp + heal) <= MAX_HP) {
                 setHp(hp + heal);
             }
+        if(getHp() + heal >MAX_HP){
             setHp(MAX_HP);
             System.out.println("You're at full health.");
+        }
+
         }
     }
 

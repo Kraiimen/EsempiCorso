@@ -56,6 +56,8 @@ public class Elf extends Entity {
         continueTheMessage();
         System.out.print("Yet it's still illegal to kill them, so I would check if there are guards around before doing it if I were you...");
         continueTheMessage();
+        System.out.print("The guards are always moving in the city, so be sure to take a look around even if you think that there's nobody!");
+        continueTheMessage();
         System.out.print("Once you've trained with a few cats, you can search for goblins here in the gardens without worrying about the guards!");
         continueTheMessage();
         System.out.println("If you ever feel lost, don't worry... Take this" + RESET);

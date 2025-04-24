@@ -8,7 +8,7 @@ import mud.items.Item;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static mud.GameUtil.player;
+import static mud.GameUtil.*;
 
 public abstract class Room {
     //field
@@ -67,7 +67,7 @@ public abstract class Room {
             System.out.println("Looks like you're the only one around here right now");
         } else{
             System.out.println("In here there are some other creatures: ");
-            printable.forEach(e -> System.out.println(e + " the " + presentEntities.get(e).getClass().getSimpleName()));
+            printable.forEach(e -> System.out.printf(CYAN + e + " the " + presentEntities.get(e).getClass().getSimpleName() + "%n" + RESET));
         }
     }
 

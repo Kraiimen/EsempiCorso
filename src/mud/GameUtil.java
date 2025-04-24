@@ -20,6 +20,8 @@ public class GameUtil {
     public static final String RESET = "\u001B[0m";
     public static final String BLUE = "\u001B[34m";
     public static final String YELLOW = "\033[0;33m";
+    public static final String PURPLE = "\033[0;35m";
+    public static final String CYAN = "\033[0;36m";
     public static PlayerCharacter player;
     public static List<String> choices = new ArrayList<>();
     public static List<String> directions = new ArrayList<>();
@@ -45,11 +47,11 @@ public class GameUtil {
 
     public static void createNewPlayer() throws EndOfGameException {
         String answer = null;
-        do{System.out.println("Hello! What kind of creature do you want to be?");
-            System.out.println("Choose between: Wizard, Thief, Paladin or Priest: ");
+        do{System.out.printf(PURPLE + "Hello! What kind of creature do you want to be?%n");
+            System.out.printf("Choose between: Wizard, Thief, Paladin or Priest: %n");
             answer = console.readLine().toUpperCase().trim();
         } while (!answer.equals("WIZARD") && !answer.equals("PALADIN")  && !answer.equals("PRIEST")  && !answer.equals("THIEF"));
-        System.out.println("What's your name, hero?");
+        System.out.printf("What's your name, hero?%n" + RESET);
         String answerName = console.readLine().trim();
         //chiediamo il nome
         if(answer.equals("WIZARD")){
@@ -77,6 +79,8 @@ public class GameUtil {
         System.out.printf("Will you be the hero that's going to stop this menace?%n" +
                 "If you think so, find the sacred Temple and talk to the wise Elf Elrond, he will show you the way to braveness%n" + RESET);
         continueTheMessage();
+        System.out.println("You are now at the Temple Square.");
+        player.getActualRoom().printEntities();
         System.out.println("Follow the MENU instructions to interact with this magic world, good luck!");
         askWhatToDo();
     }
@@ -84,7 +88,7 @@ public class GameUtil {
     //METODO PER CHIEDERE AL GIOCATORE CHE FARE APPENA ENTRA IN UNA STANZA
     public static void askWhatToDo() throws EndOfGameException {
         String ans;
-        System.out.println("What do you want to do now?");
+        System.out.printf(PURPLE + "What do you want to do now?%n" + RESET);
         do{
             System.out.println("Write 'FIGHT' or 'F' if you want to fight some monsters.");
             System.out.println("Write 'MOVE' or 'M' if you want to start moving.");
@@ -92,7 +96,7 @@ public class GameUtil {
             System.out.println("Write 'TALK' or 'T' if you want to talk to someone.");
             System.out.println("Write 'STATS' or 'S' to see you statistics");
             System.out.println("Write 'INVENTORY' or 'I' to see your inventory");
-            System.out.println("Write 'Q' if you want to end the game.");
+            System.out.printf("Write 'Q' if you want to end the game.%n");
             ans = console.readLine().toUpperCase().trim();
         }while(!choices.contains(ans));
         doAsAsked(ans);
@@ -100,7 +104,7 @@ public class GameUtil {
 
     public static void askWhatToDoWithoutMenu() throws EndOfGameException {
         String ans;
-        System.out.println("What do you want to do now?");
+        System.out.printf(PURPLE + "What do you want to do now?%n" + RESET);
         do {
             System.out.println("Write what you want to do or write MENU to see the menu again.");
             ans = console.readLine().toUpperCase().trim();
@@ -144,7 +148,7 @@ public class GameUtil {
             do {
                 System.out.println("These are the type of monsters present here: ");
                 presentClasses.forEach(System.out::println);
-                System.out.println("Are you ready to fight? Answer with Y or N: ");
+                System.out.printf(PURPLE + "Are you ready to fight? Answer with Y or N: %n" + RESET);
                 ans = console.readLine().toUpperCase();
             } while (!ans.equals(Answer.N.toString()) && !ans.equals(Answer.Y.toString()));
             if (ans.equals(Answer.Y.toString())) {
@@ -164,7 +168,7 @@ public class GameUtil {
         List<String> presentClasses = player.getActualRoom().getPresentMonsters().stream()
                 .map(monster -> monster.getClass().getSimpleName()).distinct().toList();
         do {
-            System.out.println("What kind of monster do you want to fight?");
+            System.out.printf(PURPLE + "What kind of monster do you want to fight?%n" + RESET);
 
             ans = toTitleCase(console.readLine());
         } while (!presentClasses.contains(ans));
@@ -263,7 +267,7 @@ public class GameUtil {
     public static void askForDirections(){
         String ans = null;
         do{
-                System.out.println("Where do you want to go? Answer with: North or N, East or E, South or S or West or W, write Stop if you want to stop here.");
+                System.out.printf(PURPLE + "Where do you want to go? Answer with: North or N, East or E, South or S or West or W, write Stop if you want to stop here.%n"+ RESET);
                 ans = console.readLine().toUpperCase();
             if(ans.equals(CardinalPoints.NORTH.toString()) || ans.equals("N")){
                 player.changeRoom(CardinalPoints.NORTH);
@@ -297,7 +301,7 @@ public class GameUtil {
     public static void pickChosenItem(){
         Set<String> items = new HashSet<>(player.getActualRoom().getPresentItems().keySet());
         String ans;
-        System.out.println("Do you want to pick anything?");
+        System.out.printf(PURPLE + "Do you want to pick anything?%n" + RESET);
         if(doesWantPick()){
             do{
                 System.out.println("What do you want to pick? You can choose a tree to pick its fruits if they have any left.");
@@ -340,7 +344,7 @@ public class GameUtil {
     public static void askWhoToTalk(){
         String ans = null;
         List<String> names = player.getActualRoom().getPresentEntities().keySet().stream().toList();
-        System.out.println("Who do you want to talk to? Write their name: ");
+        System.out.printf(PURPLE + "Who do you want to talk to? Write their name: %n" + RESET);
         ans = console.readLine();
         if(!(ans.isEmpty())){
             ans = toTitleCase(ans);

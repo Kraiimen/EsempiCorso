@@ -2,6 +2,8 @@ package mud.characters.fightable;
 
 import mud.characters.Entity;
 
+import static mud.GameUtil.*;
+
 public class Paladin extends PlayerCharacter {
     private static final int MIN_INTEL = 3;
     private static final int MIN_AGIL = 10;
@@ -42,17 +44,26 @@ public class Paladin extends PlayerCharacter {
     @Override
     public void printStats(){
         System.out.printf("Here are %s's statistics:%n", getName());
-        System.out.println("Exp: " + getExp());
-        System.out.println("HP: " + getHp());
-        System.out.println("Intelligence: " + getIntelligence());
-        System.out.println("Strength: " + getStrength());
-        System.out.println("Agility: " + getAgility());
-        System.out.println("Stamina: " + getStamina());
-        System.out.println("Respawns Left: " + (MAX_RESPAWN-getRespawnCounter()));
+        delay(800);
+        System.out.printf(YELLOW + "Exp: %d%n", getExp());
+        delay(300);
+        System.out.println("HP: " + getHp() + "/" + MAX_HP);
+        delay(300);
+        System.out.println("Intelligence: " + getIntelligence() + "/" + MAX);
+        delay(300);
+        System.out.println("Strength: " + getStrength() + "/" + MAX);
+        delay(300);
+        System.out.println("Agility: " + getAgility() + "/" + MAX);
+        delay(300);
+        System.out.println("Stamina: " + getStamina() + "/" + MAX);
+        delay(300);
+        System.out.printf("Respawns Left: %d%n", (MAX_RESPAWN-getRespawnCounter()));
+        delay(300);
         if(isVirgin){
             System.out.println("You are still pure");
         } else{
             System.out.println("Your heart has already been corrupted...");
         }
+        System.out.printf(RESET);
     }
 }
