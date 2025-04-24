@@ -21,6 +21,9 @@ public class Product {
     public int getProductId() {
         return productId;
     }
+    public void setProductId(int newId){
+        productId = newId;
+    }
 
     public String getProductName() {
         return productName;
