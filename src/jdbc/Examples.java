@@ -17,7 +17,7 @@ public class Examples {
 //        Driver d = null;
         String query = "SELECT productid, productname, unitprice FROM products";
 
-        try (Connection con = JdbcConnectionFactory.createConnection(); // Simple Factory Idiom
+        try (Connection con = JdbcConnectionFactory.createConnection();
              Statement st = con.createStatement()) { // Factory Method Pattern
             System.out.println("Connessione stabilita!");
             System.out.println(con.getClass().getName());
@@ -25,7 +25,12 @@ public class Examples {
             System.out.println(st.getClass().getName());
             ResultSet rs = st.executeQuery(query); // Factory Method Pattern
             while(rs.next()){
-                System.out.printf("productid: %d productname: %s unitprice: %f%n", rs.getInt("productid"), rs.getString("productname"), rs.getDouble("unitprice"));
+                System.out.printf(
+                        "productid: %d productname: %s unitprice: %f%n",
+                        rs.getInt("productid"),
+                        rs.getString("productname"),
+                        rs.getDouble("unitprice")
+                );
             }
         } catch (SQLException e) {
             e.printStackTrace();
