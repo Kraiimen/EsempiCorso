@@ -44,4 +44,8 @@ public class Product {
     public int getDiscountinued() {
         return discontinued;
     }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 }

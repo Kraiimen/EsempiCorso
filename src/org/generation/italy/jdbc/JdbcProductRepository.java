@@ -54,7 +54,9 @@ public class JdbcProductRepository implements ProductRepository{
             st.executeUpdate(); //ignoro l'intero che mi ritorna, perchè o funziona e sarà 1 o se NON funge crasha
             //qui dovremmo scoprire come leggere il valore dell'id assegnata, e assegnarlo con un set a newProduct e
             //solo a quel punto, ritornarlo.
-
+            ResultSet rs = st.getGeneratedKeys();
+            rs.next();
+            newProduct.setProductId(rs.getInt("productid"));
             return newProduct;
         } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
@@ -79,7 +81,6 @@ public class JdbcProductRepository implements ProductRepository{
         } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
         }
-
     }
 
     @Override
@@ -109,7 +110,6 @@ public class JdbcProductRepository implements ProductRepository{
 
     @Override
     public Optional<Product> findById(int id) throws DataException {
-        //uso Pre
         try(PreparedStatement st = con.prepareStatement(FIND_BY_ID)) {
             st.setInt(1, id);
             try(ResultSet rs = st.executeQuery()) {
