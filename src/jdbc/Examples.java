@@ -22,17 +22,12 @@ public class Examples {
             System.out.println("Connessione stabilita!");
             System.out.println(con.getClass().getName());
 
-            System.out.println(st.getClass().getName());
-            ResultSet rs = st.executeQuery(query); // Factory Method Pattern
-            while(rs.next()){
-                System.out.printf(
-                        "productid: %d productname: %s unitprice: %f%n",
-                        rs.getInt("productid"),
-                        rs.getString("productname"),
-                        rs.getDouble("unitprice")
-                );
-            }
-        } catch (SQLException e) {
+            JdbcProductRepository jpr = new JdbcProductRepository(con);
+            Product p = jpr.create(new Product(0, "Nuovo prodotto", 1, 2, 9.99, 0));
+
+            System.out.println("NewProductId: "+p.getProductId());
+            con.rollback();
+        } catch (DataException | SQLException e) {
             e.printStackTrace();
         }
     }

@@ -41,7 +41,7 @@ public class JdbcProductRepository implements ProductRepository{
 
     @Override
     public Product create(Product newProduct) throws DataException {
-        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT)){
+        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)){
             st.setString(1, newProduct.getProductName());
             st.setInt(2, newProduct.getSupplierId());
             st.setInt(3, newProduct.getCategoryId());
@@ -49,7 +49,11 @@ public class JdbcProductRepository implements ProductRepository{
             st.setInt(5, newProduct.getDiscontinued());
             st.executeUpdate();
 
-            // Qui dovremmo scoprire come leggere il valore dell'id, assegnarlo a newProduct e poi ritornare newProduct
+            ResultSet rs = st.getGeneratedKeys();
+            if(rs.next()) {
+                int generatedKey = rs.getInt("productid");
+                newProduct.setProductId(generatedKey);
+            }
 
             return newProduct;
         } catch (SQLException e) {
@@ -123,7 +127,7 @@ public class JdbcProductRepository implements ProductRepository{
             st.setString(1, "%"+namePart+"%");
             try(ResultSet rs = st.executeQuery()) {
                 while (rs.next()){
-                    Product p = getProductFromResultSet(rs);
+                    Product p = fromResultSet(rs);
                     products.add(p);
                 }
             }
