@@ -10,6 +10,9 @@ public class JdbcConnectionFactory {
     private static final String PASSWORD = "goPostgresGo";
 
     public static Connection createConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        Connection con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        con.setAutoCommit(false);
+        //il metodo nega un autocommit
+        return con;
     }
 }
