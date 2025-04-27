@@ -41,6 +41,8 @@ public class Start {
         doggo.attackHeal(orc2,paladin);
         orc.displayInfo();
         warrior.displayInfo();
+        warrior.doubleSlash(orc2);
+        Battle.test();
 
 
     }

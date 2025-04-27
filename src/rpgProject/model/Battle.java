@@ -16,5 +16,8 @@ public class Battle {
             target.turnManage();
         }
     }
+    public static void test(){
+        System.out.println("test");
+    }
 }
 
