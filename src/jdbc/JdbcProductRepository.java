@@ -51,7 +51,7 @@ public class JdbcProductRepository implements ProductRepository{
 
             ResultSet rs = st.getGeneratedKeys();
             if(rs.next()) {
-                int generatedKey = rs.getInt("productid");
+                int generatedKey = rs.getInt(1);
                 newProduct.setProductId(generatedKey);
             }
 
@@ -123,7 +123,7 @@ public class JdbcProductRepository implements ProductRepository{
     @Override
     public List<Product> findByNameLike(String namePart) throws DataException {
         List<Product> products = new ArrayList<>();
-        try(PreparedStatement st = con.prepareStatement(FIND_BY_ID)) {
+        try(PreparedStatement st = con.prepareStatement(FIND_BY_NAME_LIKE)) {
             st.setString(1, "%"+namePart+"%");
             try(ResultSet rs = st.executeQuery()) {
                 while (rs.next()){
