@@ -156,17 +156,6 @@ public class JdbcProductRepository implements ProductRepository {
         return template.query(FIND_BY_NAME_LIKE, JdbcProductRepository::fromResultSet, "%"+namePart+"%");
     }
 
-    private static Product fromResultSet(ResultSet rs) throws SQLException {
-        return new Product(
-                rs.getInt("productid"),
-                rs.getString("productname"),
-                rs.getInt("supplierid"),
-                rs.getInt("categoryid"),
-                rs.getDouble("unitprice"),
-                rs.getInt("discontinued")
-        );
-    }
-
     public List<Product> queryUsingVarArgs(String query, Object... params) throws DataException {
         List<Product> products = new ArrayList<>();
         try (PreparedStatement ps = con.prepareStatement(query)) {
@@ -203,5 +192,16 @@ public class JdbcProductRepository implements ProductRepository {
         } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
         }
+    }
+
+    private static Product fromResultSet(ResultSet rs) throws SQLException {
+        return new Product(
+                rs.getInt("productid"),
+                rs.getString("productname"),
+                rs.getInt("supplierid"),
+                rs.getInt("categoryid"),
+                rs.getDouble("unitprice"),
+                rs.getInt("discontinued")
+        );
     }
 }
