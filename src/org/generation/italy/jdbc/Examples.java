@@ -20,6 +20,10 @@ public class Examples {
 
         // SIMPLE FACTORY IDIOM
         try(Connection con = JdbcConnectionFactory.createConnection();
+
+
+
+
             Statement st = con.createStatement()) {
             System.out.println("Connessione stabilita");
             System.out.println(con.getClass().getName());
