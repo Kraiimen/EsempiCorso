@@ -50,7 +50,7 @@ public class JdbcProductRepository implements ProductRepository {
     //METHODS
     @Override
     public Product create(Product newProduct) throws DataException { // Torna un product con id nuovo settato
-        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT)) {
+        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
             st.setString(1, newProduct.getProductname()); //1 rappresenta il primo punto interrogativo
             st.setInt(2, newProduct.getSupplierid()); // 2 = secondo ?...
             st.setInt(3, newProduct.getCategoryid());
@@ -60,6 +60,10 @@ public class JdbcProductRepository implements ProductRepository {
             // Ora devo tornare il prodotto con la productid che verrà settata dal DB
             //Se faccio return newProduct; lo torno esattamente come ci è stato dato, con id 0
             //Solo per ora faccio return newProduct, ma da verificare come si fa
+            ResultSet rs = st.getGeneratedKeys();
+            if(rs.next()) {
+            newProduct.setProductId(rs.getInt(), "productid");
+            }
             return newProduct;
         } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
