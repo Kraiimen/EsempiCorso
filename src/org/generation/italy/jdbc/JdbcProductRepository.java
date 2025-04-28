@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class JdbcProductRepository implements ProductRepository{
+public class JdbcProductRepository implements ProductRepository {
 
     private Connection con;
     private static final String WRONG_DELETE_PRODUCT = """
@@ -41,25 +41,25 @@ public class JdbcProductRepository implements ProductRepository{
             WHERE productid = ?;
             """;
 
-    public JdbcProductRepository (Connection con) {
+    public JdbcProductRepository(Connection con) {
         this.con = con;
     }
 
     @Override
     public Product create(Product newProduct) throws DataException {
-        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
 
             st.setString(1, newProduct.getProductName());
             st.setInt(2, newProduct.getSupplierId());
             st.setInt(3, newProduct.getCategoryId());
             st.setDouble(4, newProduct.getUnitPrice());
-            st.setInt(5, newProduct.getDiscountinued());
+            st.setInt(5, newProduct.getDiscontinued());
 
             st.executeUpdate(); //ignoro l'intero che mi ritorna, perchè o funziona e sarà 1 o se NON funge crasha
             //qui dovremmo scoprire come leggere il valore dell'id assegnata, e assegnarlo con un set a newProduct e
             //solo a quel punto, ritornarlo.
-            try(ResultSet rs= st.getGeneratedKeys()){
-                if(rs.next()){
+            try (ResultSet rs = st.getGeneratedKeys()) {
+                if (rs.next()) {
                     newProduct.setProductId(rs.getInt(1));
                 }
             }
@@ -89,7 +89,7 @@ public class JdbcProductRepository implements ProductRepository{
 //        }
         OurJdbcTemplate template = new OurJdbcTemplate(con);
         int ln = template.update(UPDATE_PRODUCT, up.getProductName(), up.getSupplierId(), up.getCategoryId(),
-                                                 up.getUnitPrice(), up.getDiscountinued(), up.getProductId());
+                up.getUnitPrice(), up.getDiscontinued(), up.getProductId());
         return ln == 1;
     }
 
@@ -166,7 +166,7 @@ public class JdbcProductRepository implements ProductRepository{
 //            }
 //        });
         OurJdbcTemplate template = new OurJdbcTemplate(con);
-        return template.query(FIND_BY_NAME_LIKE, JdbcProductRepository::fromResultSet,"%"+namePart+"%");
+        return template.query(FIND_BY_NAME_LIKE, JdbcProductRepository::fromResultSet, "%" + namePart + "%");
     }
 
     private static Product fromResultSet(ResultSet rs) throws SQLException {
@@ -180,35 +180,37 @@ public class JdbcProductRepository implements ProductRepository{
         );
         return p;
     }
+
     public List<Product> query(String query, Object... params) throws DataException {
         List<Product> productList = new ArrayList<>();
-        try(PreparedStatement ps = con.prepareStatement(query)){
-            for(int i = 0; i < params.length; i++){
-                ps.setObject(i+1, params[i]);
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            for (int i = 0; i < params.length; i++) {
+                ps.setObject(i + 1, params[i]);
             }
-            try(ResultSet rs = ps.executeQuery()){
-                while(rs.next()){
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
                     Product p = fromResultSet(rs);
                     productList.add(p);
                 }
                 return productList;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
         }
     }
+
     public List<Product> query2(String query, PreparedStatementFiller filler) throws DataException {
         List<Product> productList = new ArrayList<>();
-        try(PreparedStatement ps = con.prepareStatement(query)){
+        try (PreparedStatement ps = con.prepareStatement(query)) {
             filler.fillStatement(ps);
-            try(ResultSet rs = ps.executeQuery()){
-                while(rs.next()){
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
                     Product p = fromResultSet(rs);
                     productList.add(p);
                 }
                 return productList;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
         }
     }

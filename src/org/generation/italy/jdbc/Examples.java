@@ -1,14 +1,10 @@
 package org.generation.italy.jdbc;
 
-import org.postgresql.jdbc.PgConnection;
-
-import java.sql.*;
+import java.sql.Connection;
 import java.util.List;
 
-import org.postgresql.Driver;
-
 public class Examples {
-    public static void main (String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 //        try {
 //            Class.forName("org.postgresql.Driver");
 //        } catch (ClassNotFoundException e) {
@@ -46,11 +42,11 @@ public class Examples {
         );
         Connection c = JdbcConnectionFactory.createConnection();
         OurJdbcTemplate template = new OurJdbcTemplate(c);
-        List<Product> ps = template.<Product>query(productsByCategoryAndPrice, rowMapper, 2, 20);
-        ps.forEach(p -> System.out.println(p.getProductName()));
+        List<Product> products = template.<Product>query(productsByCategoryAndPrice, rowMapper, 2, 20);
+        products.forEach(p -> System.out.println(p.getProductName()));
         RowMapper<Shipper> rms = rs -> new Shipper(rs.getInt("shipperid"),
-                                                            rs.getString("companyname"),
-                                                            rs.getString("phone"));
+                rs.getString("companyname"),
+                rs.getString("phone"));
         List<Shipper> ls = template.query(shippersByNameLike, rms, "%pippo%");
         ls.forEach(s -> System.out.println(s.getCompanyName()));
         int ln = template.update("DELETE FROM products WHERE productid = ?", 10000);
