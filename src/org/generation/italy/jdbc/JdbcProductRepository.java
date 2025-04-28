@@ -145,19 +145,14 @@ public class JdbcProductRepository implements ProductRepository{
 
     @Override
     public List<Product> findByNameLike(String namePart) throws DataException {
-        List<Product> nameLike = new ArrayList<>();
-        try(PreparedStatement ps = con.prepareStatement(FIND_BY_NAME_LIKE)) {
-            ps.setString(1, "%" + namePart + "%");
-            try(ResultSet rs = ps.executeQuery()) {
-                while(rs.next()) {
-                    Product p = fromResultSet(rs);
-                    nameLike.add(p);
-                }
-                return nameLike;
+//        return query(FIND_BY_NAME_LIKE, "%"+namePart+"%");
+        return query2(FIND_BY_NAME_LIKE, ps -> {
+            try{
+                ps.setString(1, "%"+namePart+"%");
+            }catch(SQLException e){
+                throw new DataException(e.getMessage(), e);
             }
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+        });
     }
 
     private Product fromResultSet(ResultSet rs) throws SQLException {
@@ -171,4 +166,38 @@ public class JdbcProductRepository implements ProductRepository{
         );
         return p;
     }
+    public List<Product> query(String query, Object... params) throws DataException {
+        List<Product> productList = new ArrayList<>();
+        try(PreparedStatement ps = con.prepareStatement(query)){
+            for(int i = 0; i < params.length; i++){
+                ps.setObject(i+1, params[i]);
+            }
+            try(ResultSet rs = ps.executeQuery()){
+                while(rs.next()){
+                    Product p = fromResultSet(rs);
+                    productList.add(p);
+                }
+                return productList;
+            }
+        }catch(SQLException e){
+            throw new DataException(e.getMessage(), e);
+        }
+    }
+    public List<Product> query2(String query, PreparedStatementFiller filler) throws DataException {
+        List<Product> productList = new ArrayList<>();
+        try(PreparedStatement ps = con.prepareStatement(query)){
+            filler.fillStatement(ps);
+            try(ResultSet rs = ps.executeQuery()){
+                while(rs.next()){
+                    Product p = fromResultSet(rs);
+                    productList.add(p);
+                }
+                return productList;
+            }
+        }catch(SQLException e){
+            throw new DataException(e.getMessage(), e);
+        }
+    }
+
+
 }
