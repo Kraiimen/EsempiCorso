@@ -54,11 +54,13 @@ public class JdbcProductRepository implements ProductRepository{
 
             st.executeUpdate(); //ignoro l'intero che mi ritorna, perchè o funziona e sarà 1 o se NON funge crasha
 
-            ResultSet rs = st.getGeneratedKeys();
-            int newId = rs.getInt(1);
-            newProduct.setProductId(newId);
-            return newProduct;
+            try(ResultSet rs = st.getGeneratedKeys();){
+                if(rs.next()){
+                    newProduct.setProductId(rs.getInt(1));
+                }
+            }
 
+            return newProduct;
         } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
         }
