@@ -1,10 +1,6 @@
-package org.generation.italy.jbdc;
-
-import org.postgresql.jdbc.PgConnection;
+package org.generation.italy.jdbc;
 
 import java.sql.*;
-
-import org.postgresql.Driver;
 
 public class Examples {
     public static void main(String[] args){
@@ -16,23 +12,24 @@ public class Examples {
 //        }
 //        Driver d = null;
 
-//        String url = "jdbc:postgresql://localhost:5432/company";
-//        String user = "postgresMaster";
-//        String password = "goPostgresGo";
-//
         String query = "SELECT productid AS id, productname, unitprice FROM products";
 
-        try(Connection con = JbdcConnectionFactory.createConnection(); // Simple Factory Idiom. funzione statica.
-            Statement st = con.createStatement()){ //Factory method pattern
+
+        try(Connection con = JdbcConnectionFactory.createConnection(); //Simple Factory Idiom
+            Statement st =  con.createStatement();) { // Factory method pattern
             System.out.println("Connessione stabilita");
             System.out.println(con.getClass().getName());
             System.out.println(st.getClass().getName());
-            ResultSet rs = st.executeQuery(query); // Factory method pattern
+            ResultSet rs = st.executeQuery(query);  // Factory method pattern
             while(rs.next()){
-                System.out.printf("id: %d productname: %s unitprice: %f%n" , rs.getInt("id"), rs.getString("productname"), rs.getDouble("unitprice"));
+                System.out.printf("id: %d productname: %s unitprice: %f%n" , rs.getInt("id"),
+                        rs.getString("productname"),
+                        rs.getDouble("unitprice"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
     }
 }
