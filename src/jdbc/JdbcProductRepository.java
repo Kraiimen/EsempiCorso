@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class JdbcProductRepository implements ProductRepository{
+public class JdbcProductRepository implements ProductRepository {
     private Connection con;
     private static final String DELETE_PRODUCT = """
             DELETE FROM products
@@ -35,13 +35,13 @@ public class JdbcProductRepository implements ProductRepository{
             WHERE productid = ?
             """;
 
-    public JdbcProductRepository(Connection con){
+    public JdbcProductRepository(Connection con) {
         this.con = con;
     }
 
     @Override
     public Product create(Product newProduct) throws DataException {
-        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)){
+        try (PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
             st.setString(1, newProduct.getProductName());
             st.setInt(2, newProduct.getSupplierId());
             st.setInt(3, newProduct.getCategoryId());
@@ -49,12 +49,12 @@ public class JdbcProductRepository implements ProductRepository{
             st.setInt(5, newProduct.getDiscontinued());
             st.executeUpdate();
 
-            ResultSet rs = st.getGeneratedKeys();
-            if(rs.next()) {
-                int generatedKey = rs.getInt(1);
-                newProduct.setProductId(generatedKey);
+            try (ResultSet rs = st.getGeneratedKeys()) {
+                if (rs.next()) {
+                    int generatedKey = rs.getInt(1);
+                    newProduct.setProductId(generatedKey);
+                }
             }
-
             return newProduct;
         } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
@@ -63,7 +63,7 @@ public class JdbcProductRepository implements ProductRepository{
 
     @Override
     public boolean update(Product updatedProduct) throws DataException {
-        try(PreparedStatement st = con.prepareStatement(UPDATE_PRODUCT)) {
+        try (PreparedStatement st = con.prepareStatement(UPDATE_PRODUCT)) {
             st.setString(1, updatedProduct.getProductName());
             st.setInt(2, updatedProduct.getSupplierId());
             st.setInt(3, updatedProduct.getCategoryId());
@@ -79,7 +79,7 @@ public class JdbcProductRepository implements ProductRepository{
 
     @Override
     public boolean delete(int id) throws DataException {
-        try(PreparedStatement st = con.prepareStatement(DELETE_PRODUCT)){
+        try (PreparedStatement st = con.prepareStatement(DELETE_PRODUCT)) {
             st.setInt(1, id);
             int rows = st.executeUpdate();
             return rows == 1;
@@ -90,9 +90,9 @@ public class JdbcProductRepository implements ProductRepository{
 
     @Override
     public Optional<Product> findById(int id) throws DataException {
-        try(PreparedStatement st = con.prepareStatement(FIND_BY_ID)) {
+        try (PreparedStatement st = con.prepareStatement(FIND_BY_ID)) {
             st.setInt(1, id);
-            try(ResultSet rs = st.executeQuery()) {
+            try (ResultSet rs = st.executeQuery()) {
                 if(rs.next()) {
                     Product p = fromResultSet(rs);
                     return Optional.of(p);
@@ -101,7 +101,7 @@ public class JdbcProductRepository implements ProductRepository{
                     return Optional.empty();
                 }
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
         }
     }
@@ -109,8 +109,8 @@ public class JdbcProductRepository implements ProductRepository{
     @Override
     public List<Product> findAll() throws DataException {
         List<Product> products = new ArrayList<>();
-        try(Statement st = con.createStatement(); ResultSet rs = st.executeQuery(FIND_ALL)){
-            while (rs.next()){
+        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(FIND_ALL)) {
+            while (rs.next()) {
                 Product p = fromResultSet(rs);
                 products.add(p);
             }
@@ -122,22 +122,17 @@ public class JdbcProductRepository implements ProductRepository{
 
     @Override
     public List<Product> findByNameLike(String namePart) throws DataException {
-        List<Product> products = new ArrayList<>();
-        try(PreparedStatement st = con.prepareStatement(FIND_BY_NAME_LIKE)) {
-            st.setString(1, "%"+namePart+"%");
-            try(ResultSet rs = st.executeQuery()) {
-                while (rs.next()){
-                    Product p = fromResultSet(rs);
-                    products.add(p);
-                }
+//        return queryUsingVarArgs(FIND_BY_NAME_LIKE, namePart);
+        return queryUsingFunctionalInterface(FIND_BY_NAME_LIKE, ps -> {
+            try {
+                ps.setString(1,"%"+namePart+"%");
+            } catch (SQLException e) {
+                throw new DataException(e.getMessage(), e);
             }
-            return products;
-        } catch (SQLException e){
-            throw new DataException(e.getMessage(), e);
-        }
+        });
     }
 
-    private Product fromResultSet(ResultSet rs) throws SQLException{
+    private Product fromResultSet(ResultSet rs) throws SQLException {
         return new Product(
                 rs.getInt("productid"),
                 rs.getString("productname"),
@@ -146,5 +141,43 @@ public class JdbcProductRepository implements ProductRepository{
                 rs.getDouble("unitprice"),
                 rs.getInt("discontinued")
         );
+    }
+
+    public List<Product> queryUsingVarArgs(String query, Object... params) throws DataException {
+        List<Product> products = new ArrayList<>();
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            for (int i = 0; i < params.length; i++) {
+                ps.setObject(i+1, params[i]);
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Product p = fromResultSet(rs);
+                    products.add(p);
+                }
+            }
+
+            return products;
+        } catch (SQLException e) {
+            throw new DataException(e.getMessage(), e);
+        }
+    }
+
+    public List<Product> queryUsingFunctionalInterface(String query, PreparedStatementFiller filler) throws DataException {
+        List<Product> products = new ArrayList<>();
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            filler.fillStatement(ps);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Product p = fromResultSet(rs);
+                    products.add(p);
+                }
+            }
+
+            return products;
+        } catch (SQLException e) {
+            throw new DataException(e.getMessage(), e);
+        }
     }
 }
