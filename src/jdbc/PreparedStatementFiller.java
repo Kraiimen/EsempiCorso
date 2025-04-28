@@ -1,6 +1,7 @@
 package jdbc;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 @FunctionalInterface
 public interface PreparedStatementFiller {
