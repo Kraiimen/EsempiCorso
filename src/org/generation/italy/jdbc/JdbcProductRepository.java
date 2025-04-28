@@ -142,22 +142,35 @@ public class JdbcProductRepository implements ProductRepository {
         }
     }
 
+//    @Override
+//    public List<Product> findByNameLike(String namePart) throws DataException {
+//        List<Product> productByName = new ArrayList<>();
+//        try (PreparedStatement ps = con.prepareStatement(FIND_BY_NAME_LIKE)) {
+//            ps.setString(1, "%" + namePart + "%"); //In questo modo devo passargli solo la stringa, i %% per trovarla in SQL è già implicito del metodo
+//            try (ResultSet rs = ps.executeQuery()) {
+//                while(rs.next()) {
+//                    Product p = fromResultSet(rs);
+//                    productByName.add(p);
+//                }
+//                return productByName;
+//            }
+//
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
+//    }
+    // Uso i metodi query
     @Override
     public List<Product> findByNameLike(String namePart) throws DataException {
-        List<Product> productByName = new ArrayList<>();
-        try (PreparedStatement ps = con.prepareStatement(FIND_BY_NAME_LIKE)) {
-            ps.setString(1, "%" + namePart + "%"); //In questo modo devo passargli solo la stringa, i %% per trovarla in SQL è già implicito del metodo
-            try (ResultSet rs = ps.executeQuery()) {
-                while(rs.next()) {
-                    Product p = fromResultSet(rs);
-                    productByName.add(p);
-                }
-                return productByName;
+//       return query(FIND_BY_NAME_LIKE, "%" + namePart + "%");
+        // Provo con query 2
+        return query2(FIND_BY_NAME_LIKE, ps -> {
+            try {
+                ps.setString(1, "%" + namePart + "%");
+            } catch (SQLException e) {
+                throw new DataException(e.getMessage(), e);
             }
-
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+        });
     }
 
     private Product fromResultSet(ResultSet rs) throws SQLException {
@@ -169,6 +182,43 @@ public class JdbcProductRepository implements ProductRepository {
                 rs.getInt("discontinued")
         );
         return p;
+    }
+
+    //Metodo che mi ritorna una List di Oggetti valido per tutte le query
+    // Posso farlo in 2 modi, il primo è questo con i params, secondo con lambda
+    // Object... params --> Var Args, un tot di oggetti
+    public List<Product> query(String query, Object... params) throws DataException{
+        List<Product> productList = new ArrayList<>();
+        try(PreparedStatement ps = con.prepareStatement(query)) {
+            for (int i = 0; i < params.length; i++) {
+                ps.setObject(i + 1, params[i]);
+            }
+            try(ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
+                    Product p = fromResultSet(rs);
+                    productList.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataException(e.getMessage(), e);
+        }
+    }
+    //Secondo modo, con lambda
+    public List<Product> query2(String query, PreparedStatementFiller filler) throws DataException{
+        List<Product> productList = new ArrayList<>();
+        try(PreparedStatement ps = con.prepareStatement(query)) {
+           filler.fillStatement(ps); // la lambda la userò al momento del passaggio
+            try(ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
+                    Product p = fromResultSet(rs);
+                    productList.add(p);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataException(e.getMessage(), e);
+        }
+    }
+
     }
 }
 
