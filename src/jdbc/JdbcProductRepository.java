@@ -63,76 +63,100 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public boolean update(Product updatedProduct) throws DataException {
-        try (PreparedStatement st = con.prepareStatement(UPDATE_PRODUCT)) {
-            st.setString(1, updatedProduct.getProductName());
-            st.setInt(2, updatedProduct.getSupplierId());
-            st.setInt(3, updatedProduct.getCategoryId());
-            st.setDouble(4, updatedProduct.getUnitPrice());
-            st.setInt(5, updatedProduct.getDiscontinued());
-            st.setInt(6, updatedProduct.getProductId());
-            int rows = st.executeUpdate();
-            return rows == 1;
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+//        try (PreparedStatement st = con.prepareStatement(UPDATE_PRODUCT)) {
+//            st.setString(1, updatedProduct.getProductName());
+//            st.setInt(2, updatedProduct.getSupplierId());
+//            st.setInt(3, updatedProduct.getCategoryId());
+//            st.setDouble(4, updatedProduct.getUnitPrice());
+//            st.setInt(5, updatedProduct.getDiscontinued());
+//            st.setInt(6, updatedProduct.getProductId());
+//            int rows = st.executeUpdate();
+//            return rows == 1;
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
+
+        OurJdbcTemplate template = new OurJdbcTemplate(con);
+        int rows = template.update(UPDATE_PRODUCT,
+                updatedProduct.getProductName(),
+                updatedProduct.getSupplierId(),
+                updatedProduct.getCategoryId(),
+                updatedProduct.getUnitPrice(),
+                updatedProduct.getDiscontinued(),
+                updatedProduct.getProductId());
+
+        return rows == 1;
     }
 
     @Override
     public boolean delete(int id) throws DataException {
-        try (PreparedStatement st = con.prepareStatement(DELETE_PRODUCT)) {
-            st.setInt(1, id);
-            int rows = st.executeUpdate();
-            return rows == 1;
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+//        try (PreparedStatement st = con.prepareStatement(DELETE_PRODUCT)) {
+//            st.setInt(1, id);
+//            int rows = st.executeUpdate();
+//            return rows == 1;
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
+
+        OurJdbcTemplate template = new OurJdbcTemplate(con);
+        int rows = template.update(DELETE_PRODUCT, id);
+        return rows == 1;
     }
 
     @Override
     public Optional<Product> findById(int id) throws DataException {
-        try (PreparedStatement st = con.prepareStatement(FIND_BY_ID)) {
-            st.setInt(1, id);
-            try (ResultSet rs = st.executeQuery()) {
-                if(rs.next()) {
-                    Product p = fromResultSet(rs);
-                    return Optional.of(p);
-                }
-                else {
-                    return Optional.empty();
-                }
-            }
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+//        try (PreparedStatement st = con.prepareStatement(FIND_BY_ID)) {
+//            st.setInt(1, id);
+//            try (ResultSet rs = st.executeQuery()) {
+//                if(rs.next()) {
+//                    Product p = fromResultSet(rs);
+//                    return Optional.of(p);
+//                }
+//                else {
+//                    return Optional.empty();
+//                }
+//            }
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
+
+        OurJdbcTemplate template = new OurJdbcTemplate(con);
+        return template.queryForObject(FIND_BY_ID, JdbcProductRepository::fromResultSet, id);
     }
 
     @Override
     public List<Product> findAll() throws DataException {
-        List<Product> products = new ArrayList<>();
-        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(FIND_ALL)) {
-            while (rs.next()) {
-                Product p = fromResultSet(rs);
-                products.add(p);
-            }
-            return products;
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+//        List<Product> products = new ArrayList<>();
+//        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(FIND_ALL)) {
+//            while (rs.next()) {
+//                Product p = fromResultSet(rs);
+//                products.add(p);
+//            }
+//            return products;
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
+
+        OurJdbcTemplate template = new OurJdbcTemplate(con);
+        return template.query(FIND_ALL, JdbcProductRepository::fromResultSet);
     }
 
     @Override
     public List<Product> findByNameLike(String namePart) throws DataException {
 //        return queryUsingVarArgs(FIND_BY_NAME_LIKE, namePart);
-        return queryUsingFunctionalInterface(FIND_BY_NAME_LIKE, ps -> {
-            try {
-                ps.setString(1,"%"+namePart+"%");
-            } catch (SQLException e) {
-                throw new DataException(e.getMessage(), e);
-            }
-        });
+//        return queryUsingFunctionalInterface(FIND_BY_NAME_LIKE, ps -> {
+//            try {
+//                ps.setString(1,"%"+namePart+"%");
+//            } catch (SQLException e) {
+//                throw new DataException(e.getMessage(), e);
+//            }
+//        });
+
+        OurJdbcTemplate template = new OurJdbcTemplate(con);
+        return template.query(FIND_BY_NAME_LIKE, JdbcProductRepository::fromResultSet, "%"+namePart+"%");
     }
 
-    private Product fromResultSet(ResultSet rs) throws SQLException {
+    private static Product fromResultSet(ResultSet rs) throws SQLException {
         return new Product(
                 rs.getInt("productid"),
                 rs.getString("productname"),
