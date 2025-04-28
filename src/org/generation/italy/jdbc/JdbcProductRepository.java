@@ -8,7 +8,6 @@ import java.util.Optional;
 public class JdbcProductRepository implements ProductRepository {
 
     //STATE
-    //Query con metodo collage (ABOMINIO)
     private static final String INSERT_PRODUCT = """
             INSERT INTO products
             (productname, supplierid, categoryid, unitprice, discontinued)
@@ -19,6 +18,8 @@ public class JdbcProductRepository implements ProductRepository {
             SET productname = ?, supplierid = ?, categoryid = ?, unitprice = ?, discontinued = ?
             WHERE productid = ?;
             """;
+
+    //Query con metodo collage (ABOMINIO)
     private static final String DELECT_PRODUCT = """
             DELETE FROM products
             WHERE productid = 
