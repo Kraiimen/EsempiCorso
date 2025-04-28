@@ -29,7 +29,5 @@ public class Examples {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 }

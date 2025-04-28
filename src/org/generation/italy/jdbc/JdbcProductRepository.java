@@ -18,22 +18,22 @@ public class JdbcProductRepository implements ProductRepository{
             WHERE productid = ?
             """;
     private static final String FIND_ALL = """
-            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            SELECT productid, productname, supplierid, categoryid, unitprice, discontinued
             FROM products
             """;
     private static final String FIND_BY_NAME_LIKE = """
-            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            SELECT productid, productname, supplierid, categoryid, unitprice, discontinued
             FROM products
             WHERE productname LIKE ?
             """;
     private static final String INSERT_PRODUCT = """
             INSERT INTO products 
-            (productname, supplierid, categoryid, unitprice, discountinued) 
+            (productname, supplierid, categoryid, unitprice, discontinued) 
             VALUES(?,?,?,?,?)
             """;
     private static final String UPDATE_PRODUCT = """
             UPDATE products
-            SET productname = ?, supplierid = ?, categoryid = ?, unitprice = ?, discountinued = ?
+            SET productname = ?, supplierid = ?, categoryid = ?, unitprice = ?, discontinued = ?
             WHERE productid = ?;
             """;
 
@@ -43,16 +43,21 @@ public class JdbcProductRepository implements ProductRepository{
 
     @Override
     public Product create(Product newProduct) throws DataException {
-        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT)){
+        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)){
             st.setString(1, newProduct.getProductName());
             st.setInt(2, newProduct.getSupplierId());
             st.setInt(3, newProduct.getCategoryId());
             st.setDouble(4, newProduct.getUnitPrice());
-            st.setInt(5, newProduct.getDiscountinued());
+            st.setInt(5, newProduct.getDiscontinued());
 
             st.executeUpdate(); //ignoro l'intero che mi ritorna, perchè o funziona e sarà 1 o se NON funge crasha
             //qui dovremmo scoprire come leggere il valore dell'id assegnata, e assegnarlo con un set a newProduct e
             //solo a quel punto, ritornarlo.
+            try(ResultSet rs = st.getGeneratedKeys()){
+                if(rs.next()){
+                    newProduct.setProductId(rs.getInt(1));
+                }
+            }
             return newProduct;
         } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
@@ -61,13 +66,13 @@ public class JdbcProductRepository implements ProductRepository{
 
     @Override
     public boolean update(Product updatedProduct) throws DataException {
-        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT)) {
+        try(PreparedStatement st = con.prepareStatement(UPDATE_PRODUCT)) {
 
             st.setString(1, updatedProduct.getProductName());
             st.setInt(2, updatedProduct.getSupplierId());
             st.setInt(3, updatedProduct.getCategoryId());
             st.setDouble(4, updatedProduct.getUnitPrice());
-            st.setInt(5, updatedProduct.getDiscountinued());
+            st.setInt(5, updatedProduct.getDiscontinued());
             st.setInt(6, updatedProduct.getProductId());
 
             int rows = st.executeUpdate();

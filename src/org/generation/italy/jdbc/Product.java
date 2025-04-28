@@ -32,7 +32,7 @@ public class Product {
         return categoryId;
     }
 
-    public int getDiscountinued() {
+    public int getDiscontinued() {
         return discontinued;
     }
 
@@ -40,4 +40,6 @@ public class Product {
         return unitPrice;
     }
 
+    public void setProductId(int productid) {
+    }
 }
