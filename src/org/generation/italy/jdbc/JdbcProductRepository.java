@@ -20,11 +20,17 @@ public class JdbcProductRepository implements ProductRepository {
             """;
 
     //Query con metodo collage (ABOMINIO)
-    private static final String DELECT_PRODUCT = """
+    private static final String WRONG_DELETE_PRODUCT = """
             DELETE FROM products
             WHERE productid = 
             """; //I 3 doppi apici indicano una query
     //Query con metodo esatto
+
+    //Versione non abominevole
+    private static final String DELETE_PRODUCT = """
+            DELETE FROM products
+            WHERE productid = ?
+            """;
     private static final String FIND_BY_ID = """
             SELECT productid, productname, supplierid, categoryid, unitprice, discontinued 
             FROM products
@@ -48,6 +54,8 @@ public class JdbcProductRepository implements ProductRepository {
     }
 
     //METHODS
+    //ESERCIZIO: Riscrivere tutti i metodi usando il template!! tranne create
+
     @Override
     public Product create(Product newProduct) throws DataException { // Torna un product con id nuovo settato
         try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
@@ -72,74 +80,96 @@ public class JdbcProductRepository implements ProductRepository {
     }
 
     @Override
-    public boolean update(Product updatedProduct) throws DataException {
-        try(PreparedStatement st = con.prepareStatement(UPDATE_PRODUCT)) {
-            st.setString(1, updatedProduct.getProductname()); //1 rappresenta il primo punto interrogativo
-            st.setInt(2, updatedProduct.getSupplierid()); // 2 = secondo ?...
-            st.setInt(3, updatedProduct.getCategoryid());
-            st.setDouble(4, updatedProduct.getUnitprice());
-            st.setInt(5, updatedProduct.getDiscontinued());
-            st.setInt(6, updatedProduct.getProductid());
-
-            int rows = st.executeUpdate();
-            return rows == 1; // Mi torna true se l'aggiornamento è avvenuto, quindi l'executeUpdate mi torna 1
-
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+    public boolean update(Product up) throws DataException {
+//        try(PreparedStatement st = con.prepareStatement(UPDATE_PRODUCT)) {
+//            st.setString(1, updatedProduct.getProductname()); //1 rappresenta il primo punto interrogativo
+//            st.setInt(2, updatedProduct.getSupplierid()); // 2 = secondo ?...
+//            st.setInt(3, updatedProduct.getCategoryid());
+//            st.setDouble(4, updatedProduct.getUnitprice());
+//            st.setInt(5, updatedProduct.getDiscontinued());
+//            st.setInt(6, updatedProduct.getProductid());
+//
+//            int rows = st.executeUpdate();
+//            return rows == 1; // Mi torna true se l'aggiornamento è avvenuto, quindi l'executeUpdate mi torna 1
+//
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
+        //Riscrivo col template
+        OurJdbctemplate template = new OurJdbctemplate(con);
+        int ln = template.update(UPDATE_PRODUCT, up.getProductname(), up.getSupplierid(),
+                                up.getCategoryid(), up.getUnitprice(),
+                                up.getDiscontinued(), up.getProductid());
+        return ln == 1;
+        //Non c'è il mapper perché quello serve quando leggiamo dei dati, qui stiamo modificando, non devo mappare niente, non devo trasformare ResultSet in oggetti
     }
+
 
     //ABOMINIO! Vedi giù
     @Override
     public boolean delete(int id) throws DataException{
-        try(Statement st = con.createStatement()) {
-            int rows = st.executeUpdate(DELECT_PRODUCT + id); //Con executeUpdate eseguo la query e gli passo l'id da considerare
-            //Per fare una delete non serve una query, perché la query mi ritorna qualcosa, basta un update. executeUpdate mi torna un int, il numero di linee cambiate (?controlla)
-            //In questo caso executeUpdate può tornarmi solo 0 o 1, perché sto facendo un delete passandogli un id
-            return rows == 1; //Torna 1 se la cancellazione va a buon fine
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+//        try(Statement st = con.createStatement()) {
+//            int rows = st.executeUpdate(WRONG_DELECT_PRODUCT + id); //Con executeUpdate eseguo la query e gli passo l'id da considerare
+//            //Per fare una delete non serve una query, perché la query mi ritorna qualcosa, basta un update. executeUpdate mi torna un int, il numero di linee cambiate (?controlla)
+//            //In questo caso executeUpdate può tornarmi solo 0 o 1, perché sto facendo un delete passandogli un id
+//            return rows == 1; //Torna 1 se la cancellazione va a buon fine
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
+        //Questo metodo su è un abominio, perché è una query tramite collage di Stringhe
+        //e questo ci espone a SQL Injection e ai vari svantaggi di questa metodologia
+
+        //Con template
+        OurJdbctemplate template = new OurJdbctemplate(con);
+        int ln = template.update(DELETE_PRODUCT, id);
+        return ln == 1;
     }
-    //Questo metodo su è un abominio, perché è una query tramite collage di Stringhe
-    //e questo ci espone a SQL Injection e ai vari svantaggi di questa metodologia
+
 
     @Override
     public Optional<Product> findById(int id) throws DataException {
-        try(PreparedStatement st = con.prepareStatement(FIND_BY_ID)) {
-            st.setInt(1, id); //1 rappresenta il punto interrogativo, se ce ne fossero di più corrisponderebbero a 2, 3, ecc
-            try(ResultSet rs = st.executeQuery()) {
-                //Non ci sta catch, il try with resources qui serve solo a chiudere il ResultSet
-                if (rs.next()) { //If e non while perché gli sto passando un id, lavoro con solo 1 dato
-                    Product p = new Product(rs.getInt("productid"),
-                                            rs.getString("productname"),
-                                            rs.getInt("supplierid"),
-                                            rs.getInt("categoryid"),
-                                            rs.getDouble("unitprice"),
-                                            rs.getInt("discontinued"));
-                    return Optional.of(p);
-                } else {
-                    return Optional.empty();
-                }
-            }
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+//        try(PreparedStatement st = con.prepareStatement(FIND_BY_ID)) {
+//            st.setInt(1, id); //1 rappresenta il punto interrogativo, se ce ne fossero di più corrisponderebbero a 2, 3, ecc
+//            try(ResultSet rs = st.executeQuery()) {
+//                //Non ci sta catch, il try with resources qui serve solo a chiudere il ResultSet
+//                if (rs.next()) { //If e non while perché gli sto passando un id, lavoro con solo 1 dato
+//                    Product p = new Product(rs.getInt("productid"),
+//                                            rs.getString("productname"),
+//                                            rs.getInt("supplierid"),
+//                                            rs.getInt("categoryid"),
+//                                            rs.getDouble("unitprice"),
+//                                            rs.getInt("discontinued"));
+//                    return Optional.of(p);
+//                } else {
+//                    return Optional.empty();
+//                }
+//            }
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
+
+        //CON TEMPLATE
+        OurJdbctemplate template = new OurJdbctemplate(con);
+        return template.queryForObject(FIND_BY_ID, JdbcProductRepository::fromResultSet, id);
     }
 
     @Override
     public List<Product> findAll() throws DataException {
-        List<Product> allProducts = new ArrayList<>();
-        try (Statement st = con.createStatement();
-             ResultSet rs = st.executeQuery(FIND_ALL)) { // In questo caso non serve un try with resources per il ResultSet perché non sto usando
-             while(rs.next()) {
-                 Product p = fromResultSet(rs);
-                 allProducts.add(p);
-             }
-            return allProducts;
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+//        List<Product> allProducts = new ArrayList<>();
+//        try (Statement st = con.createStatement();
+//             ResultSet rs = st.executeQuery(FIND_ALL)) { // In questo caso non serve un try with resources per il ResultSet perché non sto usando
+//             while(rs.next()) {
+//                 Product p = fromResultSet(rs);
+//                 allProducts.add(p);
+//             }
+//            return allProducts;
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
+
+        //CON TEMPLATE
+        OurJdbctemplate template = new OurJdbctemplate(con);
+        return template.query(FIND_ALL, JdbcProductRepository::fromResultSet);
     }
 
 //    @Override
@@ -164,16 +194,20 @@ public class JdbcProductRepository implements ProductRepository {
     public List<Product> findByNameLike(String namePart) throws DataException {
 //       return query(FIND_BY_NAME_LIKE, "%" + namePart + "%");
         // Provo con query 2
-        return query2(FIND_BY_NAME_LIKE, ps -> {
-            try {
-                ps.setString(1, "%" + namePart + "%");
-            } catch (SQLException e) {
-                throw new DataException(e.getMessage(), e);
-            }
-        });
+//        return query2(FIND_BY_NAME_LIKE, ps -> {
+//            try {
+//                ps.setString(1, "%" + namePart + "%");
+//            } catch (SQLException e) {
+//                throw new DataException(e.getMessage(), e);
+//            }
+//        });
+
+        //CON TEMPLATE
+        OurJdbctemplate template = new OurJdbctemplate(con);
+        return template.query(FIND_BY_NAME_LIKE, JdbcProductRepository::fromResultSet, "%" + namePart + "%");
     }
 
-    private Product fromResultSet(ResultSet rs) throws SQLException {
+    private static Product fromResultSet(ResultSet rs) throws SQLException {
         Product p = new Product(rs.getInt("productid"),
                 rs.getString("productname"),
                 rs.getInt("supplierid"),
@@ -219,6 +253,5 @@ public class JdbcProductRepository implements ProductRepository {
         }
     }
 
-    }
 }
 
