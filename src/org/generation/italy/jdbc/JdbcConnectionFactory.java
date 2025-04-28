@@ -6,13 +6,12 @@ import java.sql.SQLException;
 
 public class JdbcConnectionFactory {
     private static final String URL = "jdbc:postgresql://localhost:5432/company";
-    private static final String USERNAME = "postgresMaster";
+    private static final String USER = "postgresMaster";
     private static final String PASSWORD = "goPostgresGo";
 
     public static Connection createConnection() throws SQLException {
-        Connection con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
         con.setAutoCommit(false);
-        //il metodo nega un autocommit
         return con;
     }
 }
