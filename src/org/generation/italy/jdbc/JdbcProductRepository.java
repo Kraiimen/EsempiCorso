@@ -100,7 +100,7 @@ public class JdbcProductRepository implements ProductRepository{
         //   molte volte, che è una perdita di tempo e sforzo del compilatore.
 
         //   SOLUZIONE:
-        //   passare una quey con n buchi e n parametri
+        //   passare una query con n buchi e n parametri
 
         //   a chi non rispetterà questa legge verrà amputata la parte più sporgente 😱
 
