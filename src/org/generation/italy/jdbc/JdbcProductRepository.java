@@ -60,9 +60,10 @@ public class JdbcProductRepository implements ProductRepository {
             // Ora devo tornare il prodotto con la productid che verrà settata dal DB
             //Se faccio return newProduct; lo torno esattamente come ci è stato dato, con id 0
             //Solo per ora faccio return newProduct, ma da verificare come si fa
-            ResultSet rs = st.getGeneratedKeys();
-            if(rs.next()) {
-            newProduct.setProductId(rs.getInt(), "productid");
+            try (ResultSet rs = st.getGeneratedKeys()) {
+                if (rs.next()) {
+                    newProduct.setProductid(rs.getInt(1));
+                }
             }
             return newProduct;
         } catch (SQLException e) {
