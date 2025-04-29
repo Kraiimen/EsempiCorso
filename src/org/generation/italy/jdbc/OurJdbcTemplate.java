@@ -1,6 +1,9 @@
 package org.generation.italy.jdbc;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,22 +30,11 @@ public class OurJdbcTemplate {
             throw new DataException(e.getMessage(), e);
         }
     }
+
     public int update(String sql, Object... params) throws DataException {
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             setParameters(ps, params);
             return ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
-    }
-
-    public int createAndReturnKey(String sql, Object... params) throws DataException{
-        try(PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            setParameters(ps, params);
-            try(ResultSet rs = ps.getGeneratedKeys()){
-                rs.next();
-                return rs.getInt(1);
-            }
         } catch (SQLException e) {
             throw new DataException(e.getMessage(), e);
         }
@@ -62,9 +54,10 @@ public class OurJdbcTemplate {
         }
     }
 
+
     private void setParameters(PreparedStatement ps, Object... params) throws SQLException{
-        for(int i=0; i < params.length; i++){
-            ps.setObject(i+1, params[i]);
+        for(int i = 0; i < params.length; i++){
+            ps.setObject(i + 1, params[i]);
         }
     }
 }
