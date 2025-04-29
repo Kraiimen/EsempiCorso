@@ -41,24 +41,36 @@ public class JdbcProductRepository implements ProductRepository {
 
     @Override
     public Product create(Product newProduct) throws DataException {
-        try (PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
-            st.setString(1, newProduct.getProductName());
-            st.setInt(2, newProduct.getSupplierId());
-            st.setInt(3, newProduct.getCategoryId());
-            st.setDouble(4, newProduct.getUnitPrice());
-            st.setInt(5, newProduct.getDiscontinued());
-            st.executeUpdate();
+//        try (PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
+//            st.setString(1, newProduct.getProductName());
+//            st.setInt(2, newProduct.getSupplierId());
+//            st.setInt(3, newProduct.getCategoryId());
+//            st.setDouble(4, newProduct.getUnitPrice());
+//            st.setInt(5, newProduct.getDiscontinued());
+//            st.executeUpdate();
+//
+//            try (ResultSet rs = st.getGeneratedKeys()) {
+//                if (rs.next()) {
+//                    int generatedKey = rs.getInt(1);
+//                    newProduct.setProductId(generatedKey);
+//                }
+//            }
+//            return newProduct;
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
 
-            try (ResultSet rs = st.getGeneratedKeys()) {
-                if (rs.next()) {
-                    int generatedKey = rs.getInt(1);
-                    newProduct.setProductId(generatedKey);
-                }
-            }
-            return newProduct;
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+        OurJdbcTemplate template = new OurJdbcTemplate(con);
+        int generatedKey = template.createAndReturnKey(INSERT_PRODUCT,
+                newProduct.getProductName(),
+                newProduct.getSupplierId(),
+                newProduct.getCategoryId(),
+                newProduct.getUnitPrice(),
+                newProduct.getDiscontinued()
+        );
+
+        newProduct.setProductId(generatedKey);
+        return newProduct;
     }
 
     @Override
