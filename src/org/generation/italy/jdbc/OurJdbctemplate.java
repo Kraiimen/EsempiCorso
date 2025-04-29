@@ -52,6 +52,23 @@ public class OurJdbctemplate {
         }
     }
 
+    public Optional<Integer> createAndGenKeys(String sql, Object... params) throws DataException {
+        try(PreparedStatement ps = con.prepareStatement(sql)) {
+            setParameters(ps, params);
+            ps.executeUpdate();
+            try(ResultSet rs = ps.getGeneratedKeys()) {
+                if(rs.next()) {
+                    return Optional.of((rs.getInt(1)));
+                }
+                else {
+                    return Optional.empty();
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataException(e.getMessage(), e);
+        }
+    }
+
 
 
     //Voglio fare un metodo per mandare degli UPDATE di qualsiasi tipo(UPDATE, DELETE, ecc.)

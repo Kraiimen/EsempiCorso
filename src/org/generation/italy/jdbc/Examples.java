@@ -5,6 +5,9 @@ import org.postgresql.Driver;
 import java.sql.*;
 import java.util.List;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DrivermanagerDataSource;
+
 public class Examples {
     public static void main(String[] args) throws Exception{
         //throws Exception sul main è una porcata, la uso ora per non avere errori senza try catch

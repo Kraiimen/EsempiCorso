@@ -53,30 +53,38 @@ public class JdbcProductRepository implements ProductRepository {
         this.con = con;
     }
 
-    //METHODS
+    //METHODSzxqw
     //ESERCIZIO: Riscrivere tutti i metodi usando il template!! tranne create
 
     @Override
-    public Product create(Product newProduct) throws DataException { // Torna un product con id nuovo settato
-        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
-            st.setString(1, newProduct.getProductname()); //1 rappresenta il primo punto interrogativo
-            st.setInt(2, newProduct.getSupplierid()); // 2 = secondo ?...
-            st.setInt(3, newProduct.getCategoryid());
-            st.setDouble(4, newProduct.getUnitprice());
-            st.setInt(5, newProduct.getDiscontinued());
-            st.executeUpdate(); //Ignoro l'intero che mi ritorna, perché o funziona e sarà 1 o crasha il metodo
-            // Ora devo tornare il prodotto con la productid che verrà settata dal DB
-            //Se faccio return newProduct; lo torno esattamente come ci è stato dato, con id 0
-            //Solo per ora faccio return newProduct, ma da verificare come si fa
-            try (ResultSet rs = st.getGeneratedKeys()) {
-                if (rs.next()) {
-                    newProduct.setProductid(rs.getInt(1));
-                }
-            }
-            return newProduct;
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+    public Product create(Product np) throws DataException { // Torna un product con id nuovo settato
+//        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
+//            st.setString(1, newProduct.getProductname()); //1 rappresenta il primo punto interrogativo
+//            st.setInt(2, newProduct.getSupplierid()); // 2 = secondo ?...
+//            st.setInt(3, newProduct.getCategoryid());
+//            st.setDouble(4, newProduct.getUnitprice());
+//            st.setInt(5, newProduct.getDiscontinued());
+//            st.executeUpdate(); //Ignoro l'intero che mi ritorna, perché o funziona e sarà 1 o crasha il metodo
+//            // Ora devo tornare il prodotto con la productid che verrà settata dal DB
+//            //Se faccio return newProduct; lo torno esattamente come ci è stato dato, con id 0
+//            //Solo per ora faccio return newProduct, ma da verificare come si fa
+//            try (ResultSet rs = st.getGeneratedKeys()) {
+//                if (rs.next()) {
+//                    newProduct.setProductid(rs.getInt(1));
+//                }
+//            }
+//            return newProduct;
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
+
+        //CON TEMPLATE
+        OurJdbctemplate template = new OurJdbctemplate(con);
+        Optional<Integer> key = template.createAndGenKeys(INSERT_PRODUCT, np.getProductname(), np.getSupplierid(),
+                                    np.getCategoryid(), np.getUnitprice(),
+                                    np.getDiscontinued(), np.getProductid());
+        key.ifPresent((np::setProductid));
+        return np;
     }
 
     @Override
