@@ -7,21 +7,45 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
 public class SpringJdbcProductRepository {
     private JdbcTemplate template;
-    private static final String INSERT_PRODUCT = """
-            INSERT INTO products 
-            (productname, supplierid, categoryid, unitprice, discountinued) 
-            VALUES(?,?,?,?,?)
+
+    private static final String WRONG_DELETE_PRODUCT = """
+            DELETE FROM products
+            WHERE productid = 
+            """;
+    private static final String DELETE_PRODUCT = """
+            DELETE FROM products
+            WHERE productid = ?
             """;
     private static final String FIND_BY_ID = """
             SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
             FROM products
             WHERE productid = ?
+            """;
+    private static final String FIND_ALL = """
+            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            FROM products
+            """;
+    private static final String FIND_BY_NAME_LIKE = """
+            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            FROM products
+            WHERE productname LIKE ?
+            """;
+    private static final String INSERT_PRODUCT = """
+            INSERT INTO products 
+            (productname, supplierid, categoryid, unitprice, discountinued) 
+            VALUES(?,?,?,?,?)
+            """;
+    private static final String UPDATE_PRODUCT = """
+            UPDATE products
+            SET productname = ?, supplierid = ?, categoryid = ?, unitprice = ?, discountinued = ?
+            WHERE productid = ?;
             """;
 
     public SpringJdbcProductRepository(DataSource ds){
@@ -32,11 +56,12 @@ public class SpringJdbcProductRepository {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(con -> {
             PreparedStatement ps= con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, newProduct.getProductName());
-            ps.setInt(2, newProduct.getSupplierId());
-            ps.setInt(3, newProduct.getCategoryId());
-            ps.setDouble(4, newProduct.getUnitPrice());
-            ps.setInt(5, newProduct.getDiscountinued());
+            setParameters(ps, newProduct.getProductName(),
+                              newProduct.getSupplierId(),
+                              newProduct.getCategoryId(),
+                              newProduct.getUnitPrice(),
+                              newProduct.getDiscountinued()
+            );
             return ps;
         }, keyHolder);
         int key = keyHolder.getKey().intValue();
@@ -49,22 +74,36 @@ public class SpringJdbcProductRepository {
     }
 
     public int update(Product product){
-        return 0;
+        return template.update(con -> {
+            PreparedStatement ps = con.prepareStatement(UPDATE_PRODUCT);
+            setParameters(ps,
+                    product.getProductName(),
+                    product.getSupplierId(),
+                    product.getCategoryId(),
+                    product.getUnitPrice(),
+                    product.getDiscountinued(),
+                    product.getProductId()
+            );
+            return ps;
+        });
     }
+
     public boolean delete(int id){
-        return false;
+        int linesAffected = template.update(con -> {
+            PreparedStatement ps = con.prepareStatement(DELETE_PRODUCT);
+            ps.setInt(1, id);
+            return ps;
+        });
+        return linesAffected == 1;
     }
 
     public List<Product> findAll(){
-        return null;
+        return template.queryForList(FIND_ALL, Product.class);
     }
 
     public List<Product> findByNameLike(String namePart){
-        return null;
+        return template.queryForList(FIND_BY_NAME_LIKE, Product.class, namePart);
     }
-
-
-
 
     private RowMapper<Product> rowMapper = (rs, rowNum) ->{
         Product p = new Product(
@@ -77,6 +116,11 @@ public class SpringJdbcProductRepository {
         );
         return p;
     };
+    private void setParameters(PreparedStatement ps, Object... params) throws SQLException {
+        for(int i = 0; i < params.length; i++){
+            ps.setObject(i + 1, params[i]);
+        }
+    }
 }
 
 
