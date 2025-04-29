@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,24 @@ public class SpringJdbcProductRepository {
             SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
             FROM products
             WHERE productid = ?
+            """;
+    private static final String UPDATE_PRODUCT = """
+            UPDATE products
+            SET productname = ?, supplierid = ?, categoryid = ?, unitprice = ?, discountinued = ?
+            WHERE productid = ?;
+            """;
+    private static final String DELETE_PRODUCT = """
+            DELETE FROM products
+            WHERE productid = ?
+            """;
+    private static final String FIND_ALL = """
+            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            FROM products
+            """;
+    private static final String FIND_BY_NAME_LIKE = """
+            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            FROM products
+            WHERE productname LIKE ?
             """;
 
     public SpringJdbcProductRepository(DataSource ds){
@@ -49,21 +68,34 @@ public class SpringJdbcProductRepository {
     }
 
     public int update(Product product){
-        return 0;
+        int ln = template.update(con -> {
+                PreparedStatement ps= con.prepareStatement(UPDATE_PRODUCT);
+        ps.setString(1, product.getProductName());
+        ps.setInt(2, product.getSupplierId());
+        ps.setInt(3, product.getCategoryId());
+        ps.setDouble(4, product.getUnitPrice());
+        ps.setInt(5, product.getDiscountinued());
+        return ps;
+    });
+        return ln;
     }
+
     public boolean delete(int id){
-        return false;
+        int ln = template.update(con -> {
+            PreparedStatement ps = con.prepareStatement(DELETE_PRODUCT);
+            ps.setInt(1, id);
+            return ps;
+        });
+        return ln == 1;
     }
 
     public List<Product> findAll(){
-        return null;
+        return template.queryForList(FIND_ALL, Product.class);
     }
 
     public List<Product> findByNameLike(String namePart){
-        return null;
+        return template.queryForList(FIND_BY_NAME_LIKE, Product.class, "%"+namePart+"%");
     }
-
-
 
 
     private RowMapper<Product> rowMapper = (rs, rowNum) ->{
