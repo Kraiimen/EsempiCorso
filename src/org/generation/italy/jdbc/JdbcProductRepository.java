@@ -41,27 +41,31 @@ public class JdbcProductRepository implements ProductRepository{
     }
 
     @Override
-    public Product create(Product newProduct) {
-        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)){ // il secondo parametro serve a mandare info agggiuntive, è un intero, dobbiamo dire che se facciamo un insert abbiamo bisogno della chiave
-            st.setString(1, newProduct.getProductName()); // non metto l'id perché è un serial
-            st.setInt(2, newProduct.getSupplierId());
-            st.setInt(3, newProduct.getCategoryId());
-            st.setDouble(4, newProduct.getUnitPrice());
-            st.setInt(5, newProduct.getDiscontinued());
-            st.executeUpdate(); // ignoro l'intero in ritorno perché se non funziona comunque crasha il create
-
-            try (ResultSet generatedKeys = st.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    newProduct.setProductId(generatedKeys.getInt(1));
-                }
-                else {
-                    throw new SQLException("Failed to retrieve insert ID");
-                }
-            }
-            return newProduct; // scoprire come leggere il valore dell'id assegnata e assegnarlo al newProduct - come jdbc scopre un id autoassegnato
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
+    public Product create(Product np) {
+//        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)){ // il secondo parametro serve a mandare info agggiuntive, è un intero, dobbiamo dire che se facciamo un insert abbiamo bisogno della chiave
+//            st.setString(1, np.getProductName()); // non metto l'id perché è un serial
+//            st.setInt(2, np.getSupplierId());
+//            st.setInt(3, np.getCategoryId());
+//            st.setDouble(4, np.getUnitPrice());
+//            st.setInt(5, np.getDiscontinued());
+//            st.executeUpdate(); // ignoro l'intero in ritorno perché se non funziona comunque crasha il create
+//
+//            try (ResultSet generatedKeys = st.getGeneratedKeys()) {
+//                if (generatedKeys.next()) {
+//                    np.setProductId(generatedKeys.getInt(1));
+//                }
+//                else {
+//                    throw new SQLException("Failed to retrieve insert ID");
+//                }
+//            }
+//            return newProduct; // scoprire come leggere il valore dell'id assegnata e assegnarlo al newProduct - come jdbc scopre un id autoassegnato
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
+        OurJdbcTemplate template = new OurJdbcTemplate(con); // con template generico
+        int ln = template.createAndReturnKey(INSERT_PRODUCT, np.getProductName(), np.getSupplierId(), np.getCategoryId(), np.getUnitPrice(), np.getDiscontinued());
+        np.setProductId(ln);
+        return np;
     }
 
     @Override
@@ -79,7 +83,7 @@ public class JdbcProductRepository implements ProductRepository{
 //        } catch (SQLException e) {
 //            throw new DataException(e.getMessage(), e);
 //        }
-        OurJdbcTemplate template = new OurJdbcTemplate(con);
+        OurJdbcTemplate template = new OurJdbcTemplate(con); // con template generico
         int ln = template.update(UPDATE_PRODUCT, up.getProductName(), up.getSupplierId(), up.getCategoryId(),
                                                     up.getUnitPrice(), up.getDiscontinued(), up.getProductId());
         return ln == 1;
@@ -144,7 +148,6 @@ public class JdbcProductRepository implements ProductRepository{
         // con template
         OurJdbcTemplate template = new OurJdbcTemplate(con);
         return template.query(FIND_ALL, JdbcProductRepository::fromResultSet);
-
     }
 
     @Override

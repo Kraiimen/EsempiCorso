@@ -1,5 +1,8 @@
 package org.generation.italy.jdbc;
 
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.List;
 
@@ -54,6 +57,21 @@ public class Examples {
 //        int upln = template.update(updateProd, "Product Pippo", 15, 1);
 //        System.out.println(upln);
 //        c.commit();
+
+        DriverManagerDataSource ds = new DriverManagerDataSource();
+        ds.setDriverClassName("org.postgresql.Driver");
+        ds.setUrl("jdbc:postgresql://localhost:5432/company");
+        ds.setUsername("postgresMaster");
+        ds.setPassword("goPostgresGo");
+
+        SpringJdbcProductRepository sjpr = new SpringJdbcProductRepository(ds);
+        Product p = new Product(1, "Product p2", 1, 1, 1.00, 1);
+        sjpr.create(p);
+
+//        List<Product> ps2 = sjpr.findByNameLike("AQ");
+//        ps2.forEach(s -> System.out.println(s.getProductName()));
+
+//        sjpr.update2(p);
 
     }
 
