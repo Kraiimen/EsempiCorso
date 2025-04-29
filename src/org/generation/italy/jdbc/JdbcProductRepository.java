@@ -47,27 +47,30 @@ public class JdbcProductRepository implements ProductRepository{
 
     @Override
     public Product create(Product newProduct) throws DataException {
-        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
-
-            st.setString(1, newProduct.getProductName());
-            st.setInt(2, newProduct.getSupplierId());
-            st.setInt(3, newProduct.getCategoryId());
-            st.setDouble(4, newProduct.getUnitPrice());
-            st.setInt(5, newProduct.getDiscountinued());
-
-            st.executeUpdate(); //ignoro l'intero che mi ritorna, perchè o funziona e sarà 1 o se NON funge crasha
-            //qui dovremmo scoprire come leggere il valore dell'id assegnata, e assegnarlo con un set a newProduct e
-            //solo a quel punto, ritornarlo.
-            try(ResultSet rs= st.getGeneratedKeys()){
-                if(rs.next()){
-                    newProduct.setProductId(rs.getInt(1));
-                }
-            }
-            return newProduct;
-        } catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
-
+//        try(PreparedStatement st = con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS)) {
+//
+//            st.setString(1, newProduct.getProductName());
+//            st.setInt(2, newProduct.getSupplierId());
+//            st.setInt(3, newProduct.getCategoryId());
+//            st.setDouble(4, newProduct.getUnitPrice());
+//            st.setInt(5, newProduct.getDiscountinued());
+//
+//            st.executeUpdate(); //ignoro l'intero che mi ritorna, perchè o funziona e sarà 1 o se NON funge crasha
+//            //qui dovremmo scoprire come leggere il valore dell'id assegnata, e assegnarlo con un set a newProduct e
+//            //solo a quel punto, ritornarlo.
+//            try(ResultSet rs= st.getGeneratedKeys()){
+//                if(rs.next()){
+//                    newProduct.setProductId(rs.getInt(1));
+//                }
+//            }
+//            return newProduct;
+//        } catch (SQLException e) {
+//            throw new DataException(e.getMessage(), e);
+//        }
+        OurJdbcTemplate template = new OurJdbcTemplate(con);
+        int key = template.createAndReturnKey(INSERT_PRODUCT, newProduct.getProductName(), newProduct.getSupplierId(), newProduct.getCategoryId(), newProduct.getUnitPrice(), newProduct.getDiscountinued() );
+        newProduct.setProductId(key);
+        return newProduct;
     }
 
     @Override
