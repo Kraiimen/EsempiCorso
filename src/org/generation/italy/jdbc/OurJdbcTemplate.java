@@ -1,10 +1,7 @@
 package org.generation.italy.jdbc;
 
 import javax.swing.text.html.Option;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,10 +50,33 @@ public class OurJdbcTemplate {
         }
     }
 
+//    public String createAndGetKeys(PreparedStatement ps, Object... params) throws DataException{
+//        try(PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+//            setParameters(ps, params);
+//            ps.executeUpdate();
+//            // solo per data base che supportano RETURNING
+//            try(ResultSet rs = ps.executeQuery()){
+//                if (rs.next()){
+//                    int id = rs.getInt(1);
+//                }
+//            }
+//            // universale
+//            try(ResultSet rs = ps.getGeneratedKeys()){
+//                if(rs.next()){
+//                    return rs.getInt(1);
+//                }
+//            }
+//            return 0;
+//
+//        } catch(SQLException e){
+//            throw new DataException(e.getMessage(), e);
+//        }
+//    }
 
     private void setParameters(PreparedStatement ps, Object... params) throws SQLException{
         for(int i=0; i < params.length; i++){
             ps.setObject(i+1, params[i]);
         }
     }
+
 }
