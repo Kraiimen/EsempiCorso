@@ -166,4 +166,22 @@ public class JdbcProductRepository implements ProductRepository{
         );
         return p;
     }
+    public List<Integer> create(String sql, Object... params) throws DataException {
+        List<Integer> listOfKeys = new ArrayList<>();
+        try(PreparedStatement ps = con.prepareStatement(sql)){
+            setParameters(ps, params);
+            ps.executeUpdate();
+            try(ResultSet rs = ps.getGeneratedKeys()){
+                while(rs.next()){
+                    listOfKeys.add(rs.getInt(1));
+                }
+                return listOfKeys;
+            }
+        }catch (SQLException e) {
+            throw new DataException(e.getMessage(), e);
+        }
+    }
+
+    private void setParameters(PreparedStatement ps, Object[] params) {
+    }
 }
