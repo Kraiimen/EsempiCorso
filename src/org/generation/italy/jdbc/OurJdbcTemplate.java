@@ -36,6 +36,7 @@ public class OurJdbcTemplate {
             throw new DataException(e.getMessage(), e);
         }
     }
+
     public <T> Optional<T> queryForObject(String sql, RowMapper<T> mapper, Object... params) throws DataException{
         try(PreparedStatement ps = con.prepareStatement(sql)){
             setParameters(ps, params);
@@ -52,8 +53,8 @@ public class OurJdbcTemplate {
 
 
     private void setParameters(PreparedStatement ps, Object... params) throws SQLException{
-        for(int i=0; i < params.length; i++){
-            ps.setObject(i+1, params[i]);
+        for(int i = 0; i < params.length; i++){
+            ps.setObject(i + 1, params[i]);
         }
     }
     public int createAndGetKeys(String sql, Object... params) throws DataException {
