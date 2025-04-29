@@ -28,6 +28,14 @@ public class SpringJdbcProductRepository {
             SET productname = ?, supplierid = ?, categoryid = ?, unitprice = ?, discountinued = ?
             WHERE productid = ?;
             """;
+    private static final String DELETE_PRODUCT = """
+            DELETE FROM products
+            WHERE productid = ?
+            """;
+    private static final String FIND_ALL = """
+            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            FROM products
+            """;
 
     public SpringJdbcProductRepository(DataSource ds){
         this.template = new JdbcTemplate(ds);
@@ -54,13 +62,22 @@ public class SpringJdbcProductRepository {
     }
 
     public int update(Product product){
-        return 0;
+        return template.update(UPDATE_PRODUCT,
+                product.getProductName(),
+                product.getSupplierId(),
+                product.getCategoryId(),
+                product.getUnitPrice(),
+                product.getDiscountinued(),
+                product.getProductId()
+        );
     }
+
     public boolean delete(int id){
-        return false;
+        return template.update(DELETE_PRODUCT, id) == 1;
     }
 
     public List<Product> findAll(){
+        template.queryForList(FIND_ALL, Product.class);
         return null;
     }
 
