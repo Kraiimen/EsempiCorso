@@ -91,11 +91,11 @@ public class SpringJdbcProductRepository {
     }
 
     public List<Product> findAll(){
-        return template.queryForList(FIND_ALL, Product.class);
+        return template.query(FIND_ALL, rowMapper);
     }
 
     public List<Product> findByNameLike(String namePart){
-        return template.queryForList(FIND_BY_NAME_LIKE, Product.class, "%"+namePart+"%");
+        return template.query(FIND_BY_NAME_LIKE, rowMapper, "%"+namePart+"%");
     }
 
 
