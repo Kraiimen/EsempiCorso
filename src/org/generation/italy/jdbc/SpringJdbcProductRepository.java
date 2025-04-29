@@ -14,20 +14,45 @@ import java.util.Optional;
 public class SpringJdbcProductRepository {
     private JdbcTemplate template;
     private static final String INSERT_PRODUCT = """
-            INSERT INTO products 
-            (productname, supplierid, categoryid, unitprice, discountinued) 
+            INSERT INTO products
+            (productname, supplierid, categoryid, unitprice, discontinued)
             VALUES(?,?,?,?,?)
             """;
     private static final String FIND_BY_ID = """
-            SELECT productid =?, productname=?, supplierid=?, categoryid=?, unitprice=?, discountinued=?
+            SELECT productid, productname, supplierid, categoryid, unitprice, discontinued
             FROM products
             WHERE productid = ?
             """;
     private static final String UPDATE = """
             UPDATE products
-            SET productname, supplierid, categoryid, unitprice, discountinued
+            SET productname =?, supplierid=?, categoryid=?, unitprice=?, discontinued=?
             WHERE productid = ?
             """;
+    private static final String DELETE = """
+            DELETE FROM products
+            WHERE productid = ?
+            """;
+    private static final String  FIND_ALL = """
+            SELECT productid, productname, supplierid, categoryid, unitprice, discontinued
+            FROM products
+            """;
+    private static final String  FIND_BY_NAME_LIKE = """
+            SELECT productid, productname, supplierid, categoryid, unitprice, discontinued
+            FROM products
+            WHERE productname LIKE ?
+            """;
+
+    private RowMapper<Product> rowMapper = (rs, rowNum) ->{
+        Product p = new Product(
+                rs.getInt("productid"),
+                rs.getString("productname"),
+                rs.getInt("supplierid"),
+                rs.getInt("categoryid"),
+                rs.getDouble("unitprice"),
+                rs.getInt("discontinued")
+        );
+        return p;
+    };
     public SpringJdbcProductRepository(DataSource ds){
         this.template = new JdbcTemplate(ds);
     }
@@ -52,35 +77,36 @@ public class SpringJdbcProductRepository {
         return Optional.ofNullable(template.queryForObject(FIND_BY_ID, rowMapper, id));
     }
 
-//    public int update(Product product){
-//
-//    }
+    public int update(Product product){
+        return template.update(con ->{
+            PreparedStatement ps = con.prepareStatement(UPDATE);
+            ps.setString(1, product.getProductName());
+            ps.setInt(2, product.getSupplierId());
+            ps.setInt(3, product.getCategoryId());
+            ps.setDouble(4, product.getUnitPrice());
+            ps.setInt(5, product.getDiscountinued());
+            ps.setInt(6, product.getProductId());
+            return ps;
+        });
+    }
     public boolean delete(int id){
-        return false;
+        // ritorna il valore della quary paragonato a 1
+        return (template.update(con ->{
+            PreparedStatement ps = con.prepareStatement(DELETE);
+            ps.setInt(1, id);
+            return ps;
+        })==1);
     }
 
     public List<Product> findAll(){
-        return null;
+        return template.query(FIND_ALL, rowMapper);
     }
 
     public List<Product> findByNameLike(String namePart){
-        return null;
+        return template.query(FIND_BY_NAME_LIKE, rowMapper,"%"+namePart+"%");
     }
 
 
-
-
-    private RowMapper<Product> rowMapper = (rs, rowNum) ->{
-        Product p = new Product(
-                rs.getInt("productid"),
-                rs.getString("productname"),
-                rs.getInt("supplierid"),
-                rs.getInt("categoryid"),
-                rs.getDouble("unitprice"),
-                rs.getInt("discontinued")
-        );
-        return p;
-    };
 }
 
 

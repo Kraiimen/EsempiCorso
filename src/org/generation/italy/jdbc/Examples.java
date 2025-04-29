@@ -73,14 +73,17 @@ public class Examples {
         dataSource.setUsername("postgresMaster");
         dataSource.setPassword("goPostgresGo");
 
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+//
+//        Integer count = jdbcTemplate.queryForObject(
+//                "SELECT COUNT(*) FROM products",
+//                Integer.class
+//        );
+//
+//        System.out.println("Total products: " + count);
+        SpringJdbcProductRepository sjpr = new SpringJdbcProductRepository(dataSource);
+        System.out.println(sjpr.findAll());
 
-        Integer count = jdbcTemplate.queryForObject(
-                "SELECT COUNT(*) FROM products",
-                Integer.class
-        );
-
-        System.out.println("Total products: " + count);
 
     }
 }
