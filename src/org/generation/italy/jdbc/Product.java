@@ -44,8 +44,4 @@ public class Product {
     public double getUnitPrice() {
         return unitPrice;
     }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
 }
