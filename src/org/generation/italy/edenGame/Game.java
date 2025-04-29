@@ -13,6 +13,7 @@ public class Game {
     Random dice = new Random();
     Player player = null;
     Movements movements = new Movements();
+
     public void printIntro() {
         //INTRO DEL GIOCO
         System.out.println(" ");

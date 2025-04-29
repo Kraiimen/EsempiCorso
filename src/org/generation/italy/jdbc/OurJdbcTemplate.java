@@ -1,9 +1,6 @@
 package org.generation.italy.jdbc;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +27,7 @@ public class OurJdbcTemplate {
             throw new DataException(e.getMessage(), e);
         }
     }
+
     public int update(String sql, Object... params) throws DataException {
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             setParameters(ps, params);
@@ -58,4 +56,28 @@ public class OurJdbcTemplate {
             ps.setObject(i+1, params[i]);
         }
     }
+    public int createAndGetKeys(String sql, Object... params) throws DataException {
+        try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            setParameters(ps, params);
+            ps.executeUpdate();
+            //Solo per db che supportano RETURNING
+//            try(ResultSet rs = ps.executeQuery()) {
+//                if(rs.next()){
+//                    int id = rs.getInt(1);
+//                }
+//
+//            }
+            //universale
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+            return 0;
+
+        } catch (SQLException e) {
+            throw new DataException(e.getMessage(), e);
+        }
+    }
+
 }
