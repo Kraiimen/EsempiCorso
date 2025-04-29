@@ -75,6 +75,7 @@ public class SpringJdbcProductRepository {
         ps.setInt(3, product.getCategoryId());
         ps.setDouble(4, product.getUnitPrice());
         ps.setInt(5, product.getDiscountinued());
+        ps.setInt(6, product.getProductId());
         return ps;
     });
         return ln;
