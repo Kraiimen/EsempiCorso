@@ -40,6 +40,7 @@ public class OurJdbcTemplate {
         }
     }
 
+
     public <T> Optional<T> queryForObject(String sql, RowMapper<T> mapper, Object... params) throws DataException {
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             setParameters(ps, params);

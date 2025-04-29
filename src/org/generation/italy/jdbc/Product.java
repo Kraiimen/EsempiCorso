@@ -18,6 +18,13 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
+    @Override
+    public String toString() {
+        return productId + ", " + productName +
+                ", " + supplierId + ", " + categoryId + ", "
+                + discontinued + ", " + unitPrice;
+    }
+
     public int getProductId() {
         return productId;
     }
