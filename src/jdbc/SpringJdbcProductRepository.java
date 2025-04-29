@@ -22,6 +22,14 @@ public class SpringJdbcProductRepository {
             FROM products
             WHERE productid = ?
             """;
+    private static final String DELETE_PRODUCT = """
+            DELETE FROM products
+            WHERE productid = ?
+            """;
+    private static final String FIND_ALL = """
+            SELECT productid, productname, supplierid, categoryid, unitprice, discontinued
+            FROM products
+            """;
 
     public SpringJdbcProductRepository(DataSource ds) {
         this.template = new JdbcTemplate(ds);
@@ -38,7 +46,7 @@ public class SpringJdbcProductRepository {
             ps.setInt(5, newProduct.getDiscontinued());
             return ps;
         }, keyHolder);
-        int key = keyHolder.getKey().intValue();
+        int key = (Integer) keyHolder.getKeys().get("productid");
         newProduct.setProductId(key);
         return newProduct;
     }
@@ -48,19 +56,27 @@ public class SpringJdbcProductRepository {
     }
 
     public int update(Product product) {
-        return 0;
+        return template.update(INSERT_PRODUCT,
+                product.getProductName(),
+                product.getSupplierId(),
+                product.getCategoryId(),
+                product.getUnitPrice(),
+                product.getDiscontinued(),
+                product.getProductId()
+        );
     }
 
     public boolean delete(int id) {
-        return false;
+       int rows = template.update(DELETE_PRODUCT, id);
+       return rows == 1;
     }
 
     public List<Product> findAll() {
-        return null;
+        return template.query(FIND_ALL, rowMapper);
     }
 
     public List<Product> findByNameLike(String namePart) {
-        return null;
+        return template.query(FIND_ALL, rowMapper, namePart);
     }
 
     private RowMapper<Product> rowMapper = (rs, rowNum) -> new Product(

@@ -1,7 +1,9 @@
 package jdbc;
 
 import org.postgresql.Driver;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.List;
 // import org.postgresql.Driver;
@@ -33,29 +35,38 @@ public class Examples {
 //            e.printStackTrace();
 //        }
 
-        String productsByCategoryAndPrice = "SELECT productid, productname, supplierid, categoryid, unitprice, discontinued FROM products WHERE categoryid = ? AND unitprice < ?";
-        String shippersByNameLike = "SELECT shipperid, companyname, phone FROM shippers WHERE companyname LIKE ?";
+//        String productsByCategoryAndPrice = "SELECT productid, productname, supplierid, categoryid, unitprice, discontinued FROM products WHERE categoryid = ? AND unitprice < ?";
+//        String shippersByNameLike = "SELECT shipperid, companyname, phone FROM shippers WHERE companyname LIKE ?";
+//
+//        RowMapper<Product> rowMapper = rs -> new Product(
+//                rs.getInt("productid"),
+//                rs.getString("productname"),
+//                rs.getInt("supplierid"),
+//                rs.getInt("categoryid"),
+//                rs.getDouble("unitprice"),
+//                rs.getInt("discontinued")
+//        );
+//        OurJdbcTemplate template = new OurJdbcTemplate(JdbcConnectionFactory.createConnection());
+//        List<Product> results = template.query(productsByCategoryAndPrice, rowMapper, 2, 20);
+//        results.forEach(p -> System.out.println(p.getProductName()));
+//
+//        System.out.println();
+//
+//        RowMapper<Shipper> rms = rs -> new Shipper(
+//                rs.getInt("shipperid"),
+//                rs.getString("companyname"),
+//                rs.getString("phone")
+//        );
+//        List<Shipper> results1 = template.query(shippersByNameLike, rms, "%_S%");
+//        results1.forEach(s -> System.out.println(s.getCompanyName()));
 
-        RowMapper<Product> rowMapper = rs -> new Product(
-                rs.getInt("productid"),
-                rs.getString("productname"),
-                rs.getInt("supplierid"),
-                rs.getInt("categoryid"),
-                rs.getDouble("unitprice"),
-                rs.getInt("discontinued")
-        );
-        OurJdbcTemplate template = new OurJdbcTemplate(JdbcConnectionFactory.createConnection());
-        List<Product> results = template.query(productsByCategoryAndPrice, rowMapper, 2, 20);
-        results.forEach(p -> System.out.println(p.getProductName()));
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/company");
+        dataSource.setUsername("postgresMaster");
+        dataSource.setPassword("goPostgresGo");
 
-        System.out.println();
-
-        RowMapper<Shipper> rms = rs -> new Shipper(
-                rs.getInt("shipperid"),
-                rs.getString("companyname"),
-                rs.getString("phone")
-        );
-        List<Shipper> results1 = template.query(shippersByNameLike, rms, "%_S%");
-        results1.forEach(s -> System.out.println(s.getCompanyName()));
+        SpringJdbcProductRepository spring = new SpringJdbcProductRepository(dataSource);
+        List<Product> products = spring.findAll();
     }
 }

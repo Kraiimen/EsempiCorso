@@ -17,6 +17,11 @@ public class Product {
         this.discontinued = discontinued;
     }
 
+    @Override
+    public String toString() {
+        return productId + ", " + productName + ", " + supplierId + ", " + categoryId + ", " + unitPrice + ", " + discontinued;
+    }
+
     public int getProductId() {
         return productId;
     }
