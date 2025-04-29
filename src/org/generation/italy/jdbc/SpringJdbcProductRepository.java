@@ -11,7 +11,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
-public class SpringJdbcProductRepository {
+public class SpringJdbcProductRepository implements ProductRepository{
     private JdbcTemplate template;
     private static final String INSERT_PRODUCT = """
             INSERT INTO products 
@@ -28,7 +28,7 @@ public class SpringJdbcProductRepository {
         this.template = new JdbcTemplate(ds);
     }
 
-    public Product insert(Product newProduct){
+    public Product create(Product newProduct){
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(con -> {
             PreparedStatement ps= con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS);
@@ -48,9 +48,10 @@ public class SpringJdbcProductRepository {
         return Optional.ofNullable(template.queryForObject(FIND_BY_ID, rowMapper, id));
     }
 
-    public int update(Product product){
-        return 0;
+    public boolean update(Product product){
+        return false;
     }
+
     public boolean delete(int id){
         return false;
     }
