@@ -19,11 +19,15 @@ public class SpringJdbcProductRepository {
             VALUES(?,?,?,?,?)
             """;
     private static final String FIND_BY_ID = """
-            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            SELECT productid =?, productname=?, supplierid=?, categoryid=?, unitprice=?, discountinued=?
             FROM products
             WHERE productid = ?
             """;
-
+    private static final String UPDATE = """
+            UPDATE products
+            SET productname, supplierid, categoryid, unitprice, discountinued
+            WHERE productid = ?
+            """;
     public SpringJdbcProductRepository(DataSource ds){
         this.template = new JdbcTemplate(ds);
     }
@@ -48,9 +52,9 @@ public class SpringJdbcProductRepository {
         return Optional.ofNullable(template.queryForObject(FIND_BY_ID, rowMapper, id));
     }
 
-    public int update(Product product){
-        return 0;
-    }
+//    public int update(Product product){
+//
+//    }
     public boolean delete(int id){
         return false;
     }
