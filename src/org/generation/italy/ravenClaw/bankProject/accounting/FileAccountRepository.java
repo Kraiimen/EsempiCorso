@@ -18,8 +18,7 @@ public class FileAccountRepository implements AccountRepository {
     }
 
     @Override
-    public ArrayList<Account> getAll() {
-       return (ArrayList<Account>)accountHashMap.values();
+    public ArrayList<Account> getAll() {return (ArrayList<Account>)accountHashMap.values();
 
     }
 

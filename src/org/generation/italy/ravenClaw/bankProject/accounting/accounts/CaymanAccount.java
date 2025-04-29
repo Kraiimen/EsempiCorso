@@ -8,12 +8,8 @@ import java.util.Random;
 
 public class CaymanAccount extends Account {
     private String secretCode;
-
-    public CaymanAccount(){
-        this(10_000);
-    }
-    public CaymanAccount(double initialBalance){
-        super(initialBalance);
+    public CaymanAccount(double initialBalance, String ownerCode){
+        super(initialBalance,ownerCode);
         secretCode = "xxx";
     }
 

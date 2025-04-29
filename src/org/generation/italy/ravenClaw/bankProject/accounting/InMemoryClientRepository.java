@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class InMemoryClientRepository implements ClientRepository {
 
-    private HashMap<String, Client> clientHashMap = new HashMap<>();
+    private static HashMap<String, Client> clientHashMap = new HashMap<>();
 
 
     @Override

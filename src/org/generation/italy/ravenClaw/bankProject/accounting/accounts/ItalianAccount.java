@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class ItalianAccount extends Account {
     private static final double TAXES = 0.1;
 
-    public ItalianAccount(double balance){
-        super(balance);
+    public ItalianAccount(double balance, String ownerCode){
+        super(balance, ownerCode);
     }
 
     @Override
