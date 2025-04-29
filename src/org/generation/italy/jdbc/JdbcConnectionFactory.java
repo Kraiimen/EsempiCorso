@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// Creazione di un idioma (tecnica che in generale delegano delle attività
+
 public class JdbcConnectionFactory {
     private static final String URL = "jdbc:postgresql://localhost:5432/company";
     private static final String USER = "postgresMaster";

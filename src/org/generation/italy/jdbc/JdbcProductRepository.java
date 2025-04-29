@@ -17,27 +17,27 @@ public class JdbcProductRepository implements ProductRepository{
             WHERE productid = ?
             """;
     private static final String FIND_BY_ID = """
-            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            SELECT productid, productname, supplierid, categoryid, unitprice, discontinued
             FROM products
             WHERE productid = ?
             """;
     private static final String FIND_ALL = """
-            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            SELECT productid, productname, supplierid, categoryid, unitprice, discontinued
             FROM products
             """;
     private static final String FIND_BY_NAME_LIKE = """
-            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            SELECT productid, productname, supplierid, categoryid, unitprice, discontinued
             FROM products
             WHERE productname LIKE ?
             """;
     private static final String INSERT_PRODUCT = """
             INSERT INTO products 
-            (productname, supplierid, categoryid, unitprice, discountinued) 
+            (productname, supplierid, categoryid, unitprice, discontinued) 
             VALUES(?,?,?,?,?)
             """;
     private static final String UPDATE_PRODUCT = """
             UPDATE products
-            SET productname = ?, supplierid = ?, categoryid = ?, unitprice = ?, discountinued = ?
+            SET productname = ?, supplierid = ?, categoryid = ?, unitprice = ?, discontinued = ?
             WHERE productid = ?;
             """;
 
@@ -73,7 +73,7 @@ public class JdbcProductRepository implements ProductRepository{
                 newProduct.getSupplierId(),
                 newProduct.getCategoryId() ,
                 newProduct.getUnitPrice(),
-                newProduct.getDiscountinued());
+                newProduct.getDiscontinued());
         newProduct.setProductId(key);
         return newProduct;
     }
@@ -97,7 +97,7 @@ public class JdbcProductRepository implements ProductRepository{
 //        }
         OurJdbcTemplate template = new OurJdbcTemplate(con);
         int ln = template.update(UPDATE_PRODUCT, up.getProductName(), up.getSupplierId(), up.getCategoryId(),
-                                                 up.getUnitPrice(), up.getDiscountinued(), up.getProductId());
+                                                 up.getUnitPrice(), up.getDiscontinued(), up.getProductId());
         return ln == 1;
     }
 

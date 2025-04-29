@@ -4,12 +4,15 @@ import org.postgresql.jdbc.PgConnection;
 
 import java.sql.*;
 import java.util.List;
-import java.util.Optional;
 
 import org.postgresql.Driver;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import javax.sql.DataSource;
 
 public class Examples {
-    public static void main (String[] args) throws Exception {
+    public static void main (String[] args) throws Exception{
 //        try {
 //            Class.forName("org.postgresql.Driver");
 //        } catch (ClassNotFoundException e) {
@@ -35,68 +38,56 @@ public class Examples {
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
-        String productsByCategoryAndPrice = "SELECT productid, productname, supplierid, categoryid, unitprice, discontinued FROM products WHERE categoryid = ? AND unitprice < ?";
-        String shippersByNameLike = "SELECT shipperid, companyname, phone FROM shippers WHERE companyname LIKE ?";
-        RowMapper<Product> rowMapper = rs -> new Product(
-                rs.getInt("productid"),
-                rs.getString("productname"),
-                rs.getInt("supplierid"),
-                rs.getInt("categoryid"),
-                rs.getDouble("unitprice"),
-                rs.getInt("discontinued")
+//        String productsByCategoryAndPrice = "SELECT productid, productname, supplierid, categoryid, unitprice, discontinued FROM products WHERE categoryid = ? AND unitprice < ?";
+//        String shippersByNameLike = "SELECT shipperid, companyname, phone FROM shippers WHERE companyname LIKE ?";
+//        RowMapper<Product> rowMapper = rs -> new Product(
+//                rs.getInt("productid"),
+//                rs.getString("productname"),
+//                rs.getInt("supplierid"),
+//                rs.getInt("categoryid"),
+//                rs.getDouble("unitprice"),
+//                rs.getInt("discontinued")
+//        );
+//        Connection c = JdbcConnectionFactory.createConnection();
+//        OurJdbcTemplate template = new OurJdbcTemplate(c);
+//        List<Product> ps = template.<Product>query(productsByCategoryAndPrice, rowMapper, 2, 20);
+//        ps.forEach(p -> System.out.println(p.getProductName()));
+//        RowMapper<Shipper> rms = rs -> new Shipper(rs.getInt("shipperid"),
+//                                                            rs.getString("companyname"),
+//                                                            rs.getString("phone"));
+//        List<Shipper> ls = template.query(shippersByNameLike, rms, "%pippo%");
+//        ls.forEach(s -> System.out.println(s.getCompanyName()));
+//        int ln = template.update("DELETE FROM products WHERE productid = ?", 10000);
+//        System.out.println(ln);
+//        c.commit();
+//        String updateProd = """
+//                UPDATE products
+//                SET productname = ?, unitprice = ?
+//                WHERE productid = ?
+//                """;
+//        int upLn = template.update(updateProd, "Product pippo", 15, 1);
+//        System.out.println(upLn);
+//        c.commit();
+
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/company");
+        dataSource.setUsername("postgresMaster");
+        dataSource.setPassword("goPostgresGo");
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+        Integer count = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM products",
+                Integer.class
         );
-        Connection c = JdbcConnectionFactory.createConnection();
-        OurJdbcTemplate template = new OurJdbcTemplate(c);
-        List<Product> ps = template.<Product>query(productsByCategoryAndPrice, rowMapper, 2, 20);
-        ps.forEach(p -> System.out.println(p.getProductName()));
 
-        RowMapper<Shipper> rms = rs -> new Shipper(rs.getInt("shipperid"),
-                rs.getString("companyname"),
-                rs.getString("phone"));
-
-        List<Shipper> ls = template.query(shippersByNameLike, rms, "%_S%");
-        ls.forEach(s -> System.out.println(s.getCompanyName()));
-        int ln = template.update("DELETE FROM products WHERE productid = ?", 10000);
-        System.out.println(ln);
-        c.commit();
-        String updateProd = """
-                UPDATE products
-                SET productname = ?, unitprice = ?
-                WHERE productid = ?
-                """;
-        int upLn = template.update(updateProd, "Product pippo", 15, 1);
-        System.out.println(upLn);
-        c.commit();
+        System.out.println("Total products: " + count);
 
 
-        String updateProd1 = """
-                DELETE FROM products
-                WHERE productname = ? AND unitprice = ? AND
-                productid = ?
-                """;
-        Connection c1 = JdbcConnectionFactory.createConnection();
-        OurJdbcTemplate template2 = new OurJdbcTemplate(c1);
-        int deleteOne = template2.update(updateProd1, "Pron", 15, 79);
-        System.out.println(deleteOne);
-        c1.commit();
-
-
-        String querySql = " SELECT productid, productname, supplierid, categoryid, unitprice, discontinued FROM products WHERE productname LIKE ? AND unitprice > ?";
-        RowMapper<Product> pm1 = rs -> new Product(
-                rs.getInt("productid"),
-                rs.getString("productname"),
-                rs.getInt("supplierid"),
-                rs.getInt("categoryid"),
-                rs.getDouble("unitprice"),
-                rs.getInt("discontinued")
-
-        );
-        List<Product> pl = template2.query(querySql, pm1, "%R%", 10);
-        pl.forEach(p1 -> System.out.println(p1.getProductName()));
-
-
-        String querySql1 = " SELECT productid, productname, supplierid, categoryid, unitprice, discontinued FROM products WHERE productid = ?";
-        Optional<Product> pl1 = template2.queryForObject(querySql1, pm1, 3);
-        pl1.ifPresent(product -> System.out.println("L'ID " + product.getProductId() +" corrisponde a "+ product.getProductName()));
+//        DataSource ds = new DriverManagerDataSource();
+        SpringJdbcProductRepository sjpr = new SpringJdbcProductRepository(dataSource);
+        Product p = new Product(79,"Carmine l'errante",1,1, 15,0);
+        sjpr.insert(p);
     }
 }
