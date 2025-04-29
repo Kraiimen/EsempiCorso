@@ -1,6 +1,9 @@
 package org.generation.italy.jdbc;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +30,7 @@ public class OurJdbcTemplate {
             throw new DataException(e.getMessage(), e);
         }
     }
+
     public int update(String sql, Object... params) throws DataException {
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             setParameters(ps, params);
@@ -35,6 +39,7 @@ public class OurJdbcTemplate {
             throw new DataException(e.getMessage(), e);
         }
     }
+
     public <T> Optional<T> queryForObject(String sql, RowMapper<T> mapper, Object... params) throws DataException{
         try(PreparedStatement ps = con.prepareStatement(sql)){
             setParameters(ps, params);
@@ -48,27 +53,11 @@ public class OurJdbcTemplate {
             throw  new DataException(e.getMessage(), e);
         }
     }
-    public List<Integer> create(String sql, Object... params) throws DataException {
-        try(PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-            setParameters(ps, params);
-            ps.executeUpdate();
-            try(ResultSet rs = ps.getGeneratedKeys()){
-                List<Integer> keys = new ArrayList<>();
-                while(rs.next()){
-                    keys.add(rs.getInt(1));
-                }
-                return keys;
-            }
-        }catch (SQLException e) {
-            throw new DataException(e.getMessage(), e);
-        }
-    }
-
 
 
     private void setParameters(PreparedStatement ps, Object... params) throws SQLException{
-        for(int i=0; i < params.length; i++){
-            ps.setObject(i+1, params[i]);
+        for(int i = 0; i < params.length; i++){
+            ps.setObject(i + 1, params[i]);
         }
     }
 }
