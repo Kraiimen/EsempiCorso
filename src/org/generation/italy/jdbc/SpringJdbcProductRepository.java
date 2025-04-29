@@ -23,6 +23,11 @@ public class SpringJdbcProductRepository {
             FROM products
             WHERE productid = ?
             """;
+    private static final String UPDATE_PRODUCT = """
+            UPDATE products
+            SET productname = ?, supplierid = ?, categoryid = ?, unitprice = ?, discountinued = ?
+            WHERE productid = ?;
+            """;
 
     public SpringJdbcProductRepository(DataSource ds){
         this.template = new JdbcTemplate(ds);

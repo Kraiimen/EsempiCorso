@@ -50,7 +50,7 @@ public class OurJdbcTemplate {
                 return Optional.empty();
             }
         }catch(SQLException e){
-            throw  new DataException(e.getMessage(), e);
+            throw new DataException(e.getMessage(), e);
         }
     }
 
