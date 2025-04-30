@@ -1,6 +1,4 @@
-package org.generation.italy.jdbc;
-
-import java.sql.ResultSet;
+package org.generation.italy.jdbc.model;
 
 public class Product {
     private int productId;

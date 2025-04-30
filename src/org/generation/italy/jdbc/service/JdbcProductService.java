@@ -1,6 +1,9 @@
-package org.generation.italy.jdbc;
+package org.generation.italy.jdbc.service;
 
-import java.sql.SQLException;
+import org.generation.italy.jdbc.DataException;
+import org.generation.italy.jdbc.model.Product;
+import org.generation.italy.jdbc.repository.ProductRepository;
+
 import java.util.List;
 import java.util.Optional;
 

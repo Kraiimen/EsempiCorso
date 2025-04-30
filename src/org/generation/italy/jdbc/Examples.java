@@ -1,8 +1,10 @@
 package org.generation.italy.jdbc;
 
+import org.generation.italy.jdbc.model.Product;
+import org.generation.italy.jdbc.model.Shipper;
+import org.generation.italy.jdbc.repository.SpringJdbcProductRepository;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.List;
 

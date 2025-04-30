@@ -1,4 +1,9 @@
-package org.generation.italy.jdbc;
+package org.generation.italy.jdbc.repository;
+
+import org.generation.italy.jdbc.DataException;
+import org.generation.italy.jdbc.OurJdbcTemplate;
+import org.generation.italy.jdbc.PreparedStatementFiller;
+import org.generation.italy.jdbc.model.Product;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -151,7 +156,7 @@ public class JdbcProductRepository implements ProductRepository{
     }
 
     @Override
-    public List<Product> findByNameLike(String namePart) throws DataException{
+    public List<Product> findByNameLike(String namePart) throws DataException {
 //        List<Product> productByNameLike = new ArrayList<>();
 //        try(PreparedStatement st = con.prepareStatement(FIND_BY_NAME_LIKE)){
 //            st.setString(1, "%" + namePart + "%");

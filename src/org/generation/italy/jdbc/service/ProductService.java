@@ -1,4 +1,6 @@
-package org.generation.italy.jdbc;
+package org.generation.italy.jdbc.service;
+
+import org.generation.italy.jdbc.model.Product;
 
 import java.util.List;
 import java.util.Optional;
