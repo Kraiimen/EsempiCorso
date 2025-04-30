@@ -24,6 +24,7 @@ public class Player extends Entity{
     @Override
     protected boolean canNotAttack(Entity target){
         boolean res = super.canNotAttack(target);
+
         if ( !(res) && isNpc(target)){
             Npc npc = (Npc)target;
             res = !(npc.getCanBeAttacked());
