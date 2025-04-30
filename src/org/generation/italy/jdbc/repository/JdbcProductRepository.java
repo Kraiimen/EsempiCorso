@@ -1,4 +1,9 @@
-package org.generation.italy.jdbc;
+package org.generation.italy.jdbc.repository;
+
+import org.generation.italy.jdbc.DataException;
+import org.generation.italy.jdbc.OurJdbctemplate;
+import org.generation.italy.jdbc.PreparedStatementFiller;
+import org.generation.italy.jdbc.model.Product;
 
 import java.sql.*;
 import java.util.ArrayList;

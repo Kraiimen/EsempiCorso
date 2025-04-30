@@ -1,11 +1,11 @@
 package org.generation.italy.jdbc;
 
-import org.postgresql.Driver;
+import org.generation.italy.jdbc.model.Product;
 
 import java.sql.*;
 import java.util.List;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.generation.italy.jdbc.model.Shipper;
 import org.springframework.jdbc.datasource.DrivermanagerDataSource;
 
 public class Examples {

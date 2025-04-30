@@ -1,4 +1,4 @@
-package org.generation.italy.jdbc;
+package org.generation.italy.jdbc.model;
 
 public class Product {
 
