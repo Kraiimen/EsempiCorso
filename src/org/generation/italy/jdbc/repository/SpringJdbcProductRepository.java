@@ -1,7 +1,6 @@
-package org.generation.italy.jdbc;
+package org.generation.italy.jdbc.repository;
 
 import org.generation.italy.jdbc.model.Product;
-import org.generation.italy.jdbc.repository.ProductRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
