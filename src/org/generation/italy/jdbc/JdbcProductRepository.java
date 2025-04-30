@@ -53,7 +53,7 @@ public class JdbcProductRepository implements ProductRepository{
             st.setInt(2, newProduct.getSupplierId());
             st.setInt(3, newProduct.getCategoryId());
             st.setDouble(4, newProduct.getUnitPrice());
-            st.setInt(5, newProduct.getDiscountinued());
+            st.setInt(5, newProduct.getDiscontinued());
 
             st.executeUpdate(); //ignoro l'intero che mi ritorna, perchè o funziona e sarà 1 o se NON funge crasha
             //qui dovremmo scoprire come leggere il valore dell'id assegnata, e assegnarlo con un set a newProduct e
@@ -89,7 +89,7 @@ public class JdbcProductRepository implements ProductRepository{
 //        }
         OurJdbcTemplate template = new OurJdbcTemplate(con);
         int ln = template.update(UPDATE_PRODUCT, up.getProductName(), up.getSupplierId(), up.getCategoryId(),
-                                                 up.getUnitPrice(), up.getDiscountinued(), up.getProductId());
+                                                 up.getUnitPrice(), up.getDiscontinued(), up.getProductId());
         return ln == 1;
     }
 

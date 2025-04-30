@@ -82,5 +82,10 @@ public class Examples {
 
         System.out.println("Total products: " + count);
 
+//        SpringJdbcProductRepository skhl = new SpringJdbcProductRepository(dataSource);
+//        List<Product> allProducts = skhl.findAll();
+//        allProducts.forEach(System.out::println);
+
+
     }
 }

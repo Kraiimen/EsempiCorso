@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,24 @@ public class SpringJdbcProductRepository {
             FROM products
             WHERE productid = ?
             """;
+    private static final String UPDATE_PRODUCT = """
+            UPDATE products
+            SET productname = ?, supplierid = ?, categoryid = ?, unitprice = ?, discountinued = ?
+            WHERE productid = ?;
+            """;
+    private static final String DELETE_PRODUCT = """
+            DELETE FROM products
+            WHERE productid = ?
+            """;
+    private static final String FIND_ALL = """
+            SELECT productid, productname, supplierid, categoryid, unitprice, discontinued
+            FROM products
+            """;
+    private static final String FIND_BY_NAME_LIKE = """
+            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            FROM products
+            WHERE productname LIKE ?
+            """;
 
     public SpringJdbcProductRepository(DataSource ds){
         this.template = new JdbcTemplate(ds);
@@ -36,7 +55,7 @@ public class SpringJdbcProductRepository {
             ps.setInt(2, newProduct.getSupplierId());
             ps.setInt(3, newProduct.getCategoryId());
             ps.setDouble(4, newProduct.getUnitPrice());
-            ps.setInt(5, newProduct.getDiscountinued());
+            ps.setInt(5, newProduct.getDiscontinued());
             return ps;
         }, keyHolder);
         int key = keyHolder.getKey().intValue();
@@ -49,18 +68,26 @@ public class SpringJdbcProductRepository {
     }
 
     public int update(Product product){
-        return 0;
+        return template.update(UPDATE_PRODUCT,
+                product.getProductName(),
+                product.getSupplierId(),
+                product.getCategoryId(),
+                product.getUnitPrice(),
+                product.getDiscontinued(),
+                product.getProductId()
+        );
     }
+
     public boolean delete(int id){
-        return false;
+        return template.update(DELETE_PRODUCT, id) == 1;
     }
 
     public List<Product> findAll(){
-        return null;
+       return template.query(FIND_ALL, rowMapper);
     }
 
     public List<Product> findByNameLike(String namePart){
-        return null;
+        return template.query(FIND_BY_NAME_LIKE, rowMapper, namePart);
     }
 
 
