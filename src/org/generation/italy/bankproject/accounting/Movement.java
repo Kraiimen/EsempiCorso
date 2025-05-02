@@ -23,8 +23,6 @@ public class Movement {
         mvId++;
         id = mvId;
     }
-
-    //metodi dell'oggetto
     public double getAmount() {
         return amount;
     }
