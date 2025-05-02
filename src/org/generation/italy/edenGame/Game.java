@@ -52,7 +52,7 @@ public class Game {
                 int strength = dice.nextInt(5);
                 int agility = dice.nextInt(10);
                 int stamina = dice.nextInt(10);
-                player = new Wizard(name, 10, 10, 1, 0, templeSquare, playerName, intelligence, strength, agility, stamina);
+                player = new Wizard(name, 10, 10, 1, 0, movements.getTempleSquare(), playerName, intelligence, strength, agility, stamina);
                 System.out.println("Ottimo, il tuo giocatore si chiama " + name + " ed è un Wizard");
                 System.out.printf(" intelligence: %d%n strength: %d%n agility: %d%n stamina %d%n", intelligence, strength, agility, stamina);
 
@@ -61,7 +61,7 @@ public class Game {
                 int strength = dice.nextInt(20);
                 int agility = dice.nextInt(5);
                 int stamina = dice.nextInt(15);
-                player = new Paladin(name, 10, 10, 1, 0, templeSquare, playerName, intelligence, strength, agility, stamina);
+                player = new Paladin(name, 10, 10, 1, 0, movements.getTempleSquare(), playerName, intelligence, strength, agility, stamina);
                 System.out.println("Ottimo, il tuo giocatore si chiama " + name + " ed è un Paladin");
                 System.out.printf(" intelligence: %d%n strength: %d%n agility: %d%n stamina %d%n", intelligence, strength, agility, stamina);
 
@@ -70,7 +70,7 @@ public class Game {
                 int strength = dice.nextInt(5);
                 int agility = dice.nextInt(5);
                 int stamina = dice.nextInt(20);
-                player = new Priest(name, 10, 10, 1, 0, templeSquare, playerName, intelligence, strength, agility, stamina);
+                player = new Priest(name, 10, 10, 1, 0, movements.getTempleSquare(), playerName, intelligence, strength, agility, stamina);
                 System.out.println("Ottimo, il tuo giocatore si chiama " + name + " ed è un Priest");
                 System.out.printf(" intelligence: %d%n strength: %d%n agility: %d%n stamina %d%n", intelligence, strength, agility, stamina);
 
@@ -79,7 +79,7 @@ public class Game {
                 int strength = dice.nextInt(5);
                 int agility = dice.nextInt(20);
                 int stamina = dice.nextInt(5);
-                player = new Thief(name, 10, 10, 1, 0, templeSquare, playerName, intelligence, strength, agility, stamina);
+                player = new Thief(name, 10, 10, 1, 0, movements.getTempleSquare(), playerName, intelligence, strength, agility, stamina);
                 System.out.println("Ottimo, il tuo giocatore si chiama " + name + " ed è un Thief");
                 System.out.printf(" intelligence: %d%n strength: %d%n agility: %d%n stamina %d%n", intelligence, strength, agility, stamina);
             }
@@ -92,14 +92,14 @@ public class Game {
     }
     public void exec(){
         System.out.println("La tua storia inizia qui: " + "\n");
-        player.setCurrentRoom(templeSquare);
+        player.setCurrentRoom(movements.getTempleSquare());
         System.out.println(" ");
 
         String a2;
 
         do {
             if (player.getHealthPoints() <= 0) {
-                player.setCurrentRoom(temple);
+                player.setCurrentRoom(movements.getTemple());
                 player.setHealthPoints(player.getMaxHp());
             }
             boolean checkEnemies = player.getCurrentRoom().getCheckEnemies();
@@ -122,7 +122,7 @@ public class Game {
                 switch (a2) {
                     case "e" -> {
                         player.getCurrentRoom().setCheckSearch(true);
-                        movements.moveFromRoom(player);
+                       // movements.moveFromRoom(player);
                     }
                     case "a" -> {
                         if (checkEnemies) {

@@ -70,6 +70,10 @@ public abstract class Room {
         this.checkSearch = checkSearch;
     }
 
+    public Map<Compass, Room> getDirections(){
+        return directions;
+    }
+
     public void setEnemy(Enemies enemy) {
         this.enemy = enemy;
         this.checkEnemies = true;

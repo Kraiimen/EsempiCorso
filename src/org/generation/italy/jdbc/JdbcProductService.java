@@ -11,7 +11,7 @@ public class JdbcProductService implements ProductService {
 
     @Override
     public Product findProductById(int id) {
-        return productRepo.findById(id);
+        return null;
     }
 
     @Override

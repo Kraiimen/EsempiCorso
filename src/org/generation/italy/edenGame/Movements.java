@@ -7,17 +7,43 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Movements {
+    public static Map<String, Room> roomFinder = new HashMap<>();
     static {
+
+
+        //CREAZIONE OGGETTI ROOMs E HASHMAPS DIRECTIONS
+        Map<Compass, String> templeSquareDirections = new HashMap<Compass, String>();
+        Room templeSquare = new TempleSquare("Temple", templeSquareDirections);
+
+        Map<Compass, String> templeDirections = new HashMap<Compass, String>();
+        Room temple = new Temple("Temple", templeDirections);
+
+        Map<Compass, String> marketSquareDirections = new HashMap<Compass, String>();
+        Room marketSquare = new MarketSquare("Market Square", marketSquareDirections);
+
+        Map<Compass, String> bakeryDirections = new HashMap<Compass, String>();
+        Room bakery = new Bakery("The Bakery", bakeryDirections);
+
+        Map<Compass, String> armoryDirections = new HashMap<Compass, String>();
+        Room armory = new Armory("The Armory", armoryDirections);
+
+        Map<Compass, String> gardensDirections = new HashMap<Compass, String>();
+        Room gardens = new Gardens("The Gardens", gardensDirections);
+
+        Map<Compass, String> woodsDirections = new HashMap<Compass, String>();
+        Room woods = new Woods("Woods", woodsDirections);
+
+        Map<Compass, String> cityDoorDirections = new HashMap<Compass, String>();
+        Room cityDoor = new CityDoor("City Door", cityDoorDirections);
+
         //inizializzazione Movimenti e Rooms
-        Movements movements = new Movements();
-        Room templeSquare = movements.getTempleSquare();
+
         templeSquare.addAction("a");
         templeSquare.addAction("i");
         templeSquare.addAction("e");
         templeSquare.addAction("c");
         templeSquare.addAction("quit");
 
-        Room temple = movements.getTemple();
         temple.addAction("a");
         temple.addAction("i");
         temple.addAction("e");
@@ -25,27 +51,23 @@ public class Movements {
         temple.addAction("r");
         temple.addAction("quit");
 
-        Room marketSquare = movements.getMarketSquare();
         marketSquare.addAction("a");
         marketSquare.addAction("i");
         marketSquare.addAction("e");
         marketSquare.addAction("c");
         marketSquare.addAction("quit");
 
-        Room bakery = movements.getBakery();
         bakery.addAction("a");
         bakery.addAction("i");
         bakery.addAction("e");
         bakery.addAction("quit");
 
-        Room armory = movements.getArmory();
         armory.addAction("a");
         armory.addAction("i");
         armory.addAction("e");
         armory.addAction("c");
         armory.addAction("quit");
 
-        Room gardens = movements.getGardens();
         gardens.addAction("a");
         gardens.addAction("i");
         gardens.addAction("e");
@@ -53,49 +75,20 @@ public class Movements {
         gardens.addAction("r");
         gardens.addAction("quit");
 
-        Room cityDoor = movements.getCityDoor();
         cityDoor.addAction("a");
         cityDoor.addAction("i");
         cityDoor.addAction("e");
         cityDoor.addAction("quit");
 
-        Room woods = movements.getWoods();
         woods.addAction("a");
         woods.addAction("i");
         woods.addAction("e");
         woods.addAction("c");
         woods.addAction("quit");
-    }
 
-    //CREAZIONE OGGETTI ROOMs E HASHMAPS DIRECTIONS
-    public static Map<Compass, String> templeSquareDirections = new HashMap<Compass, String>();
-    public static Room templeSquare = new TempleSquare("Temple", templeSquareDirections);
 
-    public static Map<Compass, String> templeDirections = new HashMap<Compass, String>();
-    public static Room temple = new Temple("Temple", templeDirections);
+        //CREAZIONE HASHMAP ROOM FINDER
 
-    public static Map<Compass, String> marketSquareDirections = new HashMap<Compass, String>();
-    public static Room marketSquare = new MarketSquare("Market Square", marketSquareDirections);
-
-    public static Map<Compass, String> bakeryDirections = new HashMap<Compass, String>();
-    public static Room bakery = new Bakery("The Bakery", bakeryDirections);
-
-    public static Map<Compass, String> armoryDirections = new HashMap<Compass, String>();
-    public static Room armory = new Armory("The Armory", armoryDirections);
-
-    public static Map<Compass, String> gardensDirections = new HashMap<Compass, String>();
-    public static Room gardens = new Gardens("The Gardens", gardensDirections);
-
-    public static Map<Compass, String> woodsDirections = new HashMap<Compass, String>();
-    public static Room woods = new Woods("Woods", woodsDirections);
-
-    public static Map<Compass, String> cityDoorDirections = new HashMap<Compass, String>();
-    public static Room cityDoor = new CityDoor("City Door", cityDoorDirections);
-
-    //CREAZIONE HASHMAP ROOM FINDER
-    Map<String, Room> roomFinder = new HashMap<>();
-
-    public Movements() {
 
         //RIEMPIMENTO DEL ROOM FINDER
 
@@ -143,520 +136,525 @@ public class Movements {
         woodsDirections.put(Compass.NORTH, cityDoor.getNameRoom());
     }
 
+
+    public Movements() {
+
+    }
+
     //METODI DI MOVIMENTO DA UNA SPECIFICA STANZA
 
-    public void moveFromTempleSquare(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
-        Console console = System.console();
-        String a;
-        Compass newDirection = null;
-        Room currentRoom = templeSquare;
-
-        System.out.println("Queste sono le direzione dove andare:  " + templeSquareDirections);
-        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
-        do {
-            System.out.println("Segli solo una delle direzioni alla volta");
-            a = console.readLine().toUpperCase();
-            if (a.contains("NORTH")) {
-                newDirection = Compass.NORTH;
-                if (templeSquareDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Nord: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(templeSquareDirections.get(newDirection)));
-                }
-            } else if (a.contains("SOUTH")) {
-                newDirection = Compass.SOUTH;
-                if (templeSquareDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Sud: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(templeSquareDirections.get(newDirection)));
-                }
-            } else if (a.contains("WEST")) {
-                newDirection = Compass.WEST;
-                if (templeSquareDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Ovest: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(templeSquareDirections.get(newDirection)));
-                }
-            } else if (a.contains("EAST")) {
-                newDirection = Compass.EAST;
-                if (templeSquareDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Est: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(templeSquareDirections.get(newDirection)));
-                }
-            }
-        } while (!a.contains("SOUTH") && !a.contains("EAST"));
-
-    }
-
-    public void moveFromTemple(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
-        Console console = System.console();
-        String a;
-        Compass newDirection = null;
-        Room currentRoom = temple;
-
-        System.out.println("Queste sono le direzione dove andare:  " + templeDirections);
-        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
-        do {
-            System.out.println("Segli solo una delle direzioni alla volta");
-            a = console.readLine().toUpperCase();
-            if (a.contains("NORTH")) {
-                newDirection = Compass.NORTH;
-                if (templeDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Nord: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(templeDirections.get(newDirection)));
-                }
-            } else if (a.contains("SOUTH")) {
-                newDirection = Compass.SOUTH;
-                if (templeDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Sud: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(templeDirections.get(newDirection)));
-                }
-            } else if (a.contains("WEST")) {
-                newDirection = Compass.WEST;
-                if (templeDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Ovest: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(templeDirections.get(newDirection)));
-                }
-            } else if (a.contains("EAST")) {
-                newDirection = Compass.EAST;
-                if (templeDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Est: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(templeDirections.get(newDirection)));
-                }
-            }
-        } while (!a.contains("SOUTH") && !a.contains("WEST"));
-
-    }
-
-
-    public void moveFromMarketSquare(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
-        Console console = System.console();
-        String a;
-        Compass newDirection = null;
-        Room currentRoom = marketSquare;
-
-        System.out.println("Queste sono le direzione dove andare:  " + marketSquareDirections);
-        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
-        do {
-            System.out.println("Segli solo una delle direzioni alla volta");
-            a = console.readLine().toUpperCase();
-            if (a.contains("NORTH")) {
-                newDirection = Compass.NORTH;
-                if (marketSquareDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Nord: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(marketSquareDirections.get(newDirection)));
-                }
-            } else if (a.contains("SOUTH")) {
-                newDirection = Compass.SOUTH;
-                if (marketSquareDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Sud: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(marketSquareDirections.get(newDirection)));
-                }
-            } else if (a.contains("WEST")) {
-                newDirection = Compass.WEST;
-                if (marketSquareDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Ovest: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(marketSquareDirections.get(newDirection)));
-                }
-            } else if (a.contains("EAST")) {
-                newDirection = Compass.EAST;
-                if (marketSquareDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Est: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(marketSquareDirections.get(newDirection)));
-                }
-            }
-        } while (!a.contains("NORTH") && !a.contains("SOUTH") && !a.contains("WEST") && !a.contains("EAST"));
-
-    }
-
-    public void moveFromBakery(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
-        Console console = System.console();
-        String a;
-        Compass newDirection = null;
-        Room currentRoom = bakery;
-
-        System.out.println("Queste sono le direzione dove andare:  " + bakeryDirections);
-        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
-        do {
-            System.out.println("Segli solo una delle direzioni alla volta");
-            a = console.readLine().toUpperCase();
-            if (a.contains("NORTH")) {
-                newDirection = Compass.NORTH;
-                if (bakeryDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Nord: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(bakeryDirections.get(newDirection)));
-                }
-            } else if (a.contains("SOUTH")) {
-                newDirection = Compass.SOUTH;
-                if (bakeryDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Sud: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(bakeryDirections.get(newDirection)));
-                }
-            } else if (a.contains("WEST")) {
-                newDirection = Compass.WEST;
-                if (bakeryDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Ovest: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(bakeryDirections.get(newDirection)));
-                }
-            } else if (a.contains("EAST")) {
-                newDirection = Compass.EAST;
-                if (bakeryDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Est: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(bakeryDirections.get(newDirection)));
-                }
-            }
-        } while (!a.contains("NORTH") && !a.contains("WEST"));
-
-    }
-
-    public void moveFromArmory(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
-        Console console = System.console();
-        String a;
-        Compass newDirection = null;
-        Room currentRoom = armory;
-
-        System.out.println("Queste sono le direzione dove andare:  " + armoryDirections);
-        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
-        do {
-            System.out.println("Segli solo una delle direzioni alla volta");
-            a = console.readLine().toUpperCase();
-            if (a.contains("NORTH")) {
-                newDirection = Compass.NORTH;
-                if (armoryDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Nord: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(armoryDirections.get(newDirection)));
-                }
-            } else if (a.contains("SOUTH")) {
-                newDirection = Compass.SOUTH;
-                if (armoryDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Sud: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(armoryDirections.get(newDirection)));
-                }
-            } else if (a.contains("WEST")) {
-                newDirection = Compass.WEST;
-                if (armoryDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Ovest: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(armoryDirections.get(newDirection)));
-                }
-            } else if (a.contains("EAST")) {
-                newDirection = Compass.EAST;
-                if (armoryDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Est: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(armoryDirections.get(newDirection)));
-                }
-            }
-        } while (!a.contains("EAST"));
-
-    }
-
-
-    public void moveFromGardens(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
-        Console console = System.console();
-        String a;
-        Compass newDirection = null;
-        Room currentRoom = gardens;
-
-        System.out.println("Queste sono le direzione dove andare:  " + gardensDirections);
-        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
-        do {
-            System.out.println("Segli solo una delle direzioni alla volta");
-            a = console.readLine().toUpperCase();
-            if (a.contains("NORTH")) {
-                newDirection = Compass.NORTH;
-                if (gardensDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Nord: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(gardensDirections.get(newDirection)));
-                }
-            } else if (a.contains("SOUTH")) {
-                newDirection = Compass.SOUTH;
-                if (gardensDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Sud: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(gardensDirections.get(newDirection)));
-                }
-            } else if (a.contains("WEST")) {
-                newDirection = Compass.WEST;
-                if (gardensDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Ovest: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(gardensDirections.get(newDirection)));
-                }
-            } else if (a.contains("EAST")) {
-                newDirection = Compass.EAST;
-                if (gardensDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Est: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(gardensDirections.get(newDirection)));
-                }
-            }
-        } while (!a.contains("NORTH") && !a.contains("SOUTH"));
-    }
-
-    public void moveFromCityDoor(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
-        Console console = System.console();
-        String a;
-        Compass newDirection = null;
-        Room currentRoom = cityDoor;
-
-        System.out.println("Queste sono le direzione dove andare:  " + cityDoorDirections);
-        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
-        do {
-            System.out.println("Segli solo una delle direzioni alla volta");
-            a = console.readLine().toUpperCase();
-            if (a.contains("NORTH")) {
-                newDirection = Compass.NORTH;
-                if (cityDoorDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Nord: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(cityDoorDirections.get(newDirection)));
-                }
-            } else if (a.contains("SOUTH")) {
-                newDirection = Compass.SOUTH;
-                if (cityDoorDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Sud: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(cityDoorDirections.get(newDirection)));
-                }
-            } else if (a.contains("WEST")) {
-                newDirection = Compass.WEST;
-                if (cityDoorDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Ovest: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(cityDoorDirections.get(newDirection)));
-                }
-            } else if (a.contains("EAST")) {
-                newDirection = Compass.EAST;
-                if (cityDoorDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Est: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(cityDoorDirections.get(newDirection)));
-                }
-            }
-        } while (!a.contains("NORTH") && !a.contains("SOUTH"));
-    }
-
-    public void moveFromWoods(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
-        Console console = System.console();
-        String a;
-        Compass newDirection = null;
-        Room currentRoom = woods;
-
-        System.out.println("Queste sono le direzione dove andare:  " + woodsDirections);
-        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
-        do {
-            System.out.println("Segli solo una delle direzioni alla volta");
-            a = console.readLine().toUpperCase();
-            if (a.contains("NORTH")) {
-                newDirection = Compass.NORTH;
-                if (woodsDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Nord: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(woodsDirections.get(newDirection)));
-                }
-            } else if (a.contains("SOUTH")) {
-                newDirection = Compass.SOUTH;
-                if (woodsDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Sud: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(woodsDirections.get(newDirection)));
-                }
-            } else if (a.contains("WEST")) {
-                newDirection = Compass.WEST;
-                if (woodsDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Ovest: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(woodsDirections.get(newDirection)));
-                }
-            } else if (a.contains("EAST")) {
-                newDirection = Compass.EAST;
-                if (woodsDirections.get(newDirection) == null) {
-                    System.out.println("Questa via non la puoi percorrere");
-                } else {
-                    System.out.println("Ti sei spostato a Est: ");
-                    System.out.println(" ");
-                    player.setCurrentRoom(roomFinder.get(woodsDirections.get(newDirection)));
-                }
-            }
-        } while (!a.contains("NORTH"));
-    }
-
-    //METODO DI MOVIMENTO GENERALE
-
-    public void moveFromRoom(Player player) {
-
-        if(player.getCurrentRoom().equals(templeSquare)) {
-            moveFromTempleSquare(player, templeSquareDirections, roomFinder);
-
-        } else if(player.getCurrentRoom().equals(temple)) {
-            moveFromTemple(player, templeDirections, roomFinder);
-
-        } else if(player.getCurrentRoom().equals(marketSquare)) {
-            moveFromMarketSquare(player, marketSquareDirections, roomFinder);
-
-        } else if(player.getCurrentRoom().equals(bakery)) {
-            moveFromBakery(player, bakeryDirections, roomFinder);
-
-        } else if(player.getCurrentRoom().equals(armory)) {
-            moveFromArmory(player, armoryDirections, roomFinder);
-
-        } else if(player.getCurrentRoom().equals(gardens)) {
-            moveFromGardens(player, gardensDirections, roomFinder);
-
-        } else if(player.getCurrentRoom().equals(cityDoor)) {
-            moveFromCityDoor(player, cityDoorDirections, roomFinder);
-
-        } else if(player.getCurrentRoom().equals(woods)) {
-            moveFromWoods(player, woodsDirections, roomFinder);
-
-        }
-    }
-
+//    public void moveFromTempleSquare(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+//        Console console = System.console();
+//        String a;
+//        Compass newDirection = null;
+//        Room currentRoom = movements.getTempleSquare();
+//
+//        System.out.println("Queste sono le direzione dove andare:  " + templeSquareDirections);
+//        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
+//        do {
+//            System.out.println("Segli solo una delle direzioni alla volta");
+//            a = console.readLine().toUpperCase();
+//            if (a.contains("NORTH")) {
+//                newDirection = Compass.NORTH;
+//                if (templeSquareDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Nord: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(templeSquareDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("SOUTH")) {
+//                newDirection = Compass.SOUTH;
+//                if (templeSquareDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Sud: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(templeSquareDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("WEST")) {
+//                newDirection = Compass.WEST;
+//                if (templeSquareDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Ovest: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(templeSquareDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("EAST")) {
+//                newDirection = Compass.EAST;
+//                if (templeSquareDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Est: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(templeSquareDirections.get(newDirection)));
+//                }
+//            }
+//        } while (!a.contains("SOUTH") && !a.contains("EAST"));
+//
+//    }
+//
+//    public void moveFromTemple(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+//        Console console = System.console();
+//        String a;
+//        Compass newDirection = null;
+//        Room currentRoom = temple;
+//
+//        System.out.println("Queste sono le direzione dove andare:  " + templeDirections);
+//        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
+//        do {
+//            System.out.println("Segli solo una delle direzioni alla volta");
+//            a = console.readLine().toUpperCase();
+//            if (a.contains("NORTH")) {
+//                newDirection = Compass.NORTH;
+//                if (templeDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Nord: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(templeDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("SOUTH")) {
+//                newDirection = Compass.SOUTH;
+//                if (templeDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Sud: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(templeDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("WEST")) {
+//                newDirection = Compass.WEST;
+//                if (templeDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Ovest: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(templeDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("EAST")) {
+//                newDirection = Compass.EAST;
+//                if (templeDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Est: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(templeDirections.get(newDirection)));
+//                }
+//            }
+//        } while (!a.contains("SOUTH") && !a.contains("WEST"));
+//
+//    }
+//
+//
+//    public void moveFromMarketSquare(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+//        Console console = System.console();
+//        String a;
+//        Compass newDirection = null;
+//        Room currentRoom = marketSquare;
+//
+//        System.out.println("Queste sono le direzione dove andare:  " + marketSquareDirections);
+//        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
+//        do {
+//            System.out.println("Segli solo una delle direzioni alla volta");
+//            a = console.readLine().toUpperCase();
+//            if (a.contains("NORTH")) {
+//                newDirection = Compass.NORTH;
+//                if (marketSquareDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Nord: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(marketSquareDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("SOUTH")) {
+//                newDirection = Compass.SOUTH;
+//                if (marketSquareDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Sud: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(marketSquareDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("WEST")) {
+//                newDirection = Compass.WEST;
+//                if (marketSquareDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Ovest: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(marketSquareDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("EAST")) {
+//                newDirection = Compass.EAST;
+//                if (marketSquareDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Est: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(marketSquareDirections.get(newDirection)));
+//                }
+//            }
+//        } while (!a.contains("NORTH") && !a.contains("SOUTH") && !a.contains("WEST") && !a.contains("EAST"));
+//
+//    }
+//
+//    public void moveFromBakery(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+//        Console console = System.console();
+//        String a;
+//        Compass newDirection = null;
+//        Room currentRoom = bakery;
+//
+//        System.out.println("Queste sono le direzione dove andare:  " + bakeryDirections);
+//        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
+//        do {
+//            System.out.println("Segli solo una delle direzioni alla volta");
+//            a = console.readLine().toUpperCase();
+//            if (a.contains("NORTH")) {
+//                newDirection = Compass.NORTH;
+//                if (bakeryDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Nord: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(bakeryDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("SOUTH")) {
+//                newDirection = Compass.SOUTH;
+//                if (bakeryDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Sud: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(bakeryDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("WEST")) {
+//                newDirection = Compass.WEST;
+//                if (bakeryDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Ovest: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(bakeryDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("EAST")) {
+//                newDirection = Compass.EAST;
+//                if (bakeryDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Est: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(bakeryDirections.get(newDirection)));
+//                }
+//            }
+//        } while (!a.contains("NORTH") && !a.contains("WEST"));
+//
+//    }
+//
+//    public void moveFromArmory(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+//        Console console = System.console();
+//        String a;
+//        Compass newDirection = null;
+//        Room currentRoom = armory;
+//
+//        System.out.println("Queste sono le direzione dove andare:  " + armoryDirections);
+//        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
+//        do {
+//            System.out.println("Segli solo una delle direzioni alla volta");
+//            a = console.readLine().toUpperCase();
+//            if (a.contains("NORTH")) {
+//                newDirection = Compass.NORTH;
+//                if (armoryDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Nord: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(armoryDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("SOUTH")) {
+//                newDirection = Compass.SOUTH;
+//                if (armoryDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Sud: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(armoryDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("WEST")) {
+//                newDirection = Compass.WEST;
+//                if (armoryDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Ovest: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(armoryDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("EAST")) {
+//                newDirection = Compass.EAST;
+//                if (armoryDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Est: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(armoryDirections.get(newDirection)));
+//                }
+//            }
+//        } while (!a.contains("EAST"));
+//
+//    }
+//
+//
+//    public void moveFromGardens(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+//        Console console = System.console();
+//        String a;
+//        Compass newDirection = null;
+//        Room currentRoom = gardens;
+//
+//        System.out.println("Queste sono le direzione dove andare:  " + gardensDirections);
+//        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
+//        do {
+//            System.out.println("Segli solo una delle direzioni alla volta");
+//            a = console.readLine().toUpperCase();
+//            if (a.contains("NORTH")) {
+//                newDirection = Compass.NORTH;
+//                if (gardensDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Nord: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(gardensDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("SOUTH")) {
+//                newDirection = Compass.SOUTH;
+//                if (gardensDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Sud: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(gardensDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("WEST")) {
+//                newDirection = Compass.WEST;
+//                if (gardensDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Ovest: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(gardensDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("EAST")) {
+//                newDirection = Compass.EAST;
+//                if (gardensDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Est: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(gardensDirections.get(newDirection)));
+//                }
+//            }
+//        } while (!a.contains("NORTH") && !a.contains("SOUTH"));
+//    }
+//
+//    public void moveFromCityDoor(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+//        Console console = System.console();
+//        String a;
+//        Compass newDirection = null;
+//        Room currentRoom = cityDoor;
+//
+//        System.out.println("Queste sono le direzione dove andare:  " + cityDoorDirections);
+//        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
+//        do {
+//            System.out.println("Scegli solo una delle direzioni alla volta");
+//            a = console.readLine().toUpperCase();
+//            if (a.contains("NORTH")) {
+//                newDirection = Compass.NORTH;
+//                if (cityDoorDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Nord: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(cityDoorDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("SOUTH")) {
+//                newDirection = Compass.SOUTH;
+//                if (cityDoorDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Sud: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(cityDoorDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("WEST")) {
+//                newDirection = Compass.WEST;
+//                if (cityDoorDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Ovest: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(cityDoorDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("EAST")) {
+//                newDirection = Compass.EAST;
+//                if (cityDoorDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Est: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(cityDoorDirections.get(newDirection)));
+//                }
+//            }
+//        } while (!a.contains("NORTH") && !a.contains("SOUTH"));
+//    }
+//
+//    public void moveFromWoods(Player player, Map<Compass, String> directions, Map<String, Room> roomFinder){
+//        Console console = System.console();
+//        String a;
+//        Compass newDirection = null;
+//        Room currentRoom = woods;
+//
+//        System.out.println("Queste sono le direzione dove andare:  " + woodsDirections);
+//        System.out.println("Scrivi NORTH, SOUTH, WEST, EAST in base a dove vuoi andare");
+//        do {
+//            System.out.println("Segli solo una delle direzioni alla volta");
+//            a = console.readLine().toUpperCase();
+//            if (a.contains("NORTH")) {
+//                newDirection = Compass.NORTH;
+//                if (woodsDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Nord: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(woodsDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("SOUTH")) {
+//                newDirection = Compass.SOUTH;
+//                if (woodsDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Sud: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(woodsDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("WEST")) {
+//                newDirection = Compass.WEST;
+//                if (woodsDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Ovest: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(woodsDirections.get(newDirection)));
+//                }
+//            } else if (a.contains("EAST")) {
+//                newDirection = Compass.EAST;
+//                if (woodsDirections.get(newDirection) == null) {
+//                    System.out.println("Questa via non la puoi percorrere");
+//                } else {
+//                    System.out.println("Ti sei spostato a Est: ");
+//                    System.out.println(" ");
+//                    player.setCurrentRoom(roomFinder.get(woodsDirections.get(newDirection)));
+//                }
+//            }
+//        } while (!a.contains("NORTH"));
+//    }
+//
+//    //METODO DI MOVIMENTO GENERALE
+//
+//    public void moveFromRoom(Player player) {
+//
+//        if(player.getCurrentRoom().equals(templeSquare)) {
+//            moveFromTempleSquare(player, templeSquareDirections, roomFinder);
+//
+//        } else if(player.getCurrentRoom().equals(temple)) {
+//            moveFromTemple(player, templeDirections, roomFinder);
+//
+//        } else if(player.getCurrentRoom().equals(marketSquare)) {
+//            moveFromMarketSquare(player, marketSquareDirections, roomFinder);
+//
+//        } else if(player.getCurrentRoom().equals(bakery)) {
+//            moveFromBakery(player, bakeryDirections, roomFinder);
+//
+//        } else if(player.getCurrentRoom().equals(armory)) {
+//            moveFromArmory(player, armoryDirections, roomFinder);
+//
+//        } else if(player.getCurrentRoom().equals(gardens)) {
+//            moveFromGardens(player, gardensDirections, roomFinder);
+//
+//        } else if(player.getCurrentRoom().equals(cityDoor)) {
+//            moveFromCityDoor(player, cityDoorDirections, roomFinder);
+//
+//        } else if(player.getCurrentRoom().equals(woods)) {
+//            moveFromWoods(player, woodsDirections, roomFinder);
+//
+//        }
+//    }
+//
     //GETTER E SETTER
     public Map<String, Room> getRoomFinder() {
         return roomFinder;
     }
 
-    public Map<Compass, String> getTempleSquareDirections() {
-        return templeSquareDirections;
-    }
+//    public Map<Compass, String> getTempleSquareDirections() {
+//        return roomFinder;
+//    }
 
     public Room getTempleSquare() {
-        return templeSquare;
+        return roomFinder.get("Temple Square");
     }
 
-    public Map<Compass, String> getTempleDirections() {
-        return templeDirections;
-    }
+//    public Map<Compass, String> getTempleDirections() {
+//        return roomFinder.get("Temple").getDirections();
+//    }
 
     public Room getTemple() {
-        return temple;
+        return roomFinder.get("Temple");
     }
 
-    public Map<Compass, String> getMarketSquareDirections() {
-        return marketSquareDirections;
-    }
+//    public Map<Compass, String> getMarketSquareDirections() {
+//        return marketSquareDirections;
+//    }
 
     public Room getMarketSquare() {
-        return marketSquare;
+        return roomFinder.get("Market Square");
     }
 
-    public Map<Compass, String> getBakeryDirections() {
-        return bakeryDirections;
-    }
+//    public Map<Compass, String> getBakeryDirections() {
+//        return bakeryDirections;
+//    }
 
     public Room getBakery() {
-        return bakery;
+        return roomFinder.get("Bakery");
     }
 
-    public Map<Compass, String> getArmoryDirections() {
-        return armoryDirections;
-    }
+//    public Map<Compass, String> getArmoryDirections() {
+//        return armoryDirections;
+//    }
 
     public Room getArmory() {
-        return armory;
+        return roomFinder.get("Armory");
     }
 
-    public Map<Compass, String> getGardensDirections() {
-        return gardensDirections;
-    }
+//    public Map<Compass, String> getGardensDirections() {
+//        return gardensDirections;
+//    }
 
     public Room getGardens() {
-        return gardens;
+        return roomFinder.get("Gardens");
     }
 
-    public Map<Compass, String> getWoodsDirections() {
-        return woodsDirections;
-    }
+//    public Map<Compass, String> getWoodsDirections() {
+//        return woodsDirections;
+//    }
 
     public Room getWoods() {
-        return woods;
+        return roomFinder.get("Woods");
     }
 
-    public Map<Compass, String> getCityDoorDirections() {
-        return cityDoorDirections;
-    }
+//    public Map<Compass, String> getCityDoorDirections() {
+//        return cityDoorDirections;
+//    }
 
     public Room getCityDoor() {
-        return cityDoor;
+        return roomFinder.get("City Door");
     }
 }
