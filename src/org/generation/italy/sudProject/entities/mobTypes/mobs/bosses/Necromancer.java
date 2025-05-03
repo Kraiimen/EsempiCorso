@@ -1,4 +1,4 @@
-package org.generation.italy.sudProject.entities.mobTypes.mobs;
+package org.generation.italy.sudProject.entities.mobTypes.mobs.bosses;
 
 import org.generation.italy.sudProject.Entity;
 import org.generation.italy.sudProject.entities.mobTypes.mobs.bosses.minions.UndeadCat;
