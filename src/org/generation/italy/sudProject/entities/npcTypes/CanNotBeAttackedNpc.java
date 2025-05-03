@@ -12,4 +12,14 @@ public class CanNotBeAttackedNpc extends Npc {
         super(npcName, minStatValue, maxStatValue, indexClassStat, classStat, hp, maxHp,
                 baseAtk, npcPosition, indexNpcPosition, false, inventoryCap, money, 0);
     }
+    // /--METHODS--/
+    @Override
+    public void attack(Entity target) {
+        if(target.isCanBeAttacked()){
+            target.setHp(target.getHp() - this.getAtk());
+        }
+        if(isDead(target)){
+            target.die();
+        }
+    }
 }
