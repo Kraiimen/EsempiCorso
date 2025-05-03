@@ -5,6 +5,7 @@ import org.generation.italy.sudProject.entities.mobTypes.mobs.Cat;
 import org.generation.italy.sudProject.entities.mobTypes.PeacefulMob;
 import org.generation.italy.sudProject.entities.mobTypes.mobs.Cultist;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.Guard;
+import org.generation.italy.sudProject.interfaces.Attack;
 import org.generation.italy.sudProject.itemManagement.Inventory;
 import org.generation.italy.sudProject.map.Room;
 
@@ -14,7 +15,7 @@ import java.util.Random;
 import static org.generation.italy.sudProject.map.Room.*;
 
 
-public abstract class Entity {
+public abstract class Entity implements Attack {
     // /--ATTRIBUTES--/
     protected static final int MAX_ATTRIBUTE_P_VALUE = 21;
     protected static final int MIN_ATTRIBUTE_P_VALUE = 8;
@@ -117,7 +118,15 @@ public abstract class Entity {
     public boolean isDead(Entity e){
         return (e.getHp() <= 0);
     }
-    public abstract void attack(Entity target);
+    @Override
+    public void attack(Entity target) {
+        if(target.isCanBeAttacked()){
+            target.setHp(target.getHp() - this.getAtk());
+        }
+        if(isDead(target)){
+            target.die();
+        }
+    }
     public void earnMoney(int money){
         this.money += money;
     }

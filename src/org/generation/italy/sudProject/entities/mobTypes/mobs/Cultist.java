@@ -19,13 +19,5 @@ public class Cultist extends Entity {
         this.entityInventory.addItemToInventory(new UniqueItem("Cultist_medallion", 10, false, medallionDescription));
     }
     // /--METHODS--/
-    @Override
-    public void attack(Entity target) {
-        if(target.isCanBeAttacked()){
-            target.setHp(target.getHp() - this.getAtk());
-        }
-        if(isDead(target)){
-            target.die();
-        }
-    }
+
 }
