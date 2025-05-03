@@ -101,6 +101,8 @@ public abstract class Entity {
             case CULTIST_INDEX:
                 Cultist.numberOfCultists--;
                 break;
+            case BOSS_INDEX:
+                break;
             default:
                 System.out.println("Sei Morto");
                 break;

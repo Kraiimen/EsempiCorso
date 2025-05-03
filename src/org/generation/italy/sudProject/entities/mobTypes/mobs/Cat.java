@@ -23,4 +23,7 @@ public class Cat extends PeacefulMob {
 
     // /--GETTER-&-SETTER--/
 
+    public static int getNumberOfCats() {
+        return numberOfCats;
+    }
 }

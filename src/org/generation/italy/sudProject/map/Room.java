@@ -21,6 +21,8 @@ public class Room{
     public static final int CULTIST_INDEX = 2;
     public static final int CORPSE_INDEX = 3;
     public static final int ROOM_MAIN_NPC_INDEX = 4;
+    public static final int UNDEAD_CAT_INDEX = 5;
+    public static final int BOSS_INDEX = 6;
 
     private int maxGuardsInRoom;
     private Inventory roomObjects = new Inventory(20);
@@ -30,7 +32,7 @@ public class Room{
     // /--CONSTRUCTORS--/
     public Room(String roomName, int maxGuardsInRoom){
         this.roomName = roomName;
-        addEntityType(5);
+        addEntityType(7);
         this.maxGuardsInRoom = maxGuardsInRoom;
     }
     // /--METHODS--/

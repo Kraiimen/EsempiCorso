@@ -4,14 +4,15 @@ import org.generation.italy.sudProject.Entity;
 import org.generation.italy.sudProject.map.Room;
 
 public class UndeadCat extends Entity {
+    private static final int HP_FIRST_SPAWN = 2;
+    private static final int HP_MAX_FIRST_SPAWN = 2;
+    private static final int XP_FOR_KILLER = 10;
+    private static final int MONEY_FOR_KILLER = 1;
 
-    public UndeadCat(String name, int minStatValue, int maxStatValue, int indexClassStat, int classStat, int hp,
-                     int maxHp, int BaseAtk, Room entityPosition, int indexEntityPosition, boolean canBeAttacked,
-                     int inventoryCap, int money, int xp) {
-        super(name, minStatValue, maxStatValue, indexClassStat, classStat, hp, maxHp, BaseAtk, entityPosition,
-                indexEntityPosition, canBeAttacked, inventoryCap, money, xp);
+    public UndeadCat(Room position, int indexEntityPosition) {
+        super("UndeadCat", 1, 1, DEXTERITY_INDEX, 2, HP_FIRST_SPAWN, HP_MAX_FIRST_SPAWN, 1, position,
+                indexEntityPosition, true, 0, MONEY_FOR_KILLER, XP_FOR_KILLER);
     }
-
     @Override
     public void attack(Entity target) {
         if(target.isCanBeAttacked()){
