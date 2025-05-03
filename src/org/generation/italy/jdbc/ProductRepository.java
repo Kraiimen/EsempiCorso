@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ProductRepository  {
     //METODI CRUD
     Product create(Product newProduct) throws DataException;
-    boolean update(Product product)throws DataException;
+    int update(Product product)throws DataException;
     boolean delete(int id)throws DataException;
     Optional<Product> findByID(int id)throws DataException;
     List<Product> findAll()throws DataException;

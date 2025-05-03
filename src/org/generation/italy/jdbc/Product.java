@@ -23,4 +23,28 @@ public class Product {
     public String getProductName() {
         return productName;
     }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public int getSupplierId() {
+        return supplierId;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public int getDiscontinued() {
+        return discontinued;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 }
