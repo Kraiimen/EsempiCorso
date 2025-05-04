@@ -1,17 +1,21 @@
 package org.generation.italy.sudProject;
 
 import org.generation.italy.sudProject.entities.Npc;
+import org.generation.italy.sudProject.entities.Player;
 import org.generation.italy.sudProject.entities.mobTypes.mobs.Cat;
 import org.generation.italy.sudProject.entities.mobTypes.PeacefulMob;
 import org.generation.italy.sudProject.entities.mobTypes.mobs.Cultist;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.Guard;
 import org.generation.italy.sudProject.itemManagement.Inventory;
 import org.generation.italy.sudProject.map.Room;
+import org.generation.italy.sudProject.map.WorldMap;
 
 import java.io.Console;
 import java.util.Random;
 
 import static org.generation.italy.sudProject.map.Room.*;
+import static org.generation.italy.sudProject.map.WorldMap.TEMPLE_INDEX;
+import static org.generation.italy.sudProject.map.WorldMap.world;
 
 
 public abstract class Entity {
@@ -86,26 +90,32 @@ public abstract class Entity {
         return stats;
     }
     public void die(){
-        entityPosition.getRoomEntities().get(CORPSE_INDEX).add(this);
-        numberOfEntities--;
-        entityPosition.getRoomEntities().get(indexEntityPosition).removeLast();
-        switch (indexEntityPosition){
-            case CAT_INDEX:
-                Cat.numberOfCats--;
-                PeacefulMob.numberOfPeacefulMobs--;
-                break;
-            case GUARD_INDEX:
-                Guard.numberOfGuards--;
-                Npc.numberOfNpcs--;
-                break;
-            case CULTIST_INDEX:
-                Cultist.numberOfCultists--;
-                break;
-            case BOSS_INDEX:
-                break;
-            default:
-                System.out.println("Sei Morto");
-                break;
+        if(this instanceof Player){
+            Player.setPlayerPosition(world.get(TEMPLE_INDEX)); //spawn
+            //respawn(riposo)
+            ((Player) this).rest();
+        }else{
+            entityPosition.getRoomEntities().get(CORPSE_INDEX).add(this);
+            numberOfEntities--;
+            entityPosition.getRoomEntities().get(indexEntityPosition).removeLast();
+            switch (indexEntityPosition){
+                case CAT_INDEX:
+                    Cat.numberOfCats--;
+                    WorldMap.numberOfDeadCats++;
+                    PeacefulMob.numberOfPeacefulMobs--;
+                    break;
+                case GUARD_INDEX:
+                    Guard.numberOfGuards--;
+                    Npc.numberOfNpcs--;
+                    break;
+                case CULTIST_INDEX:
+                    Cultist.numberOfCultists--;
+                    break;
+                case BOSS_INDEX:
+                    break;
+                case UNDEAD_CAT_INDEX:
+                    break;
+            }
         }
     }
     protected void regenerateHp(int amount){
@@ -114,8 +124,6 @@ public abstract class Entity {
             hp = maxHp;
         }
     }
-
-
     public boolean isDead(Entity e){
         return (e.getHp() <= 0);
     }

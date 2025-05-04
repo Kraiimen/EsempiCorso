@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.generation.italy.sudProject.Spawner.respawnEntities;
 import static org.generation.italy.sudProject.map.Room.*;
 import static org.generation.italy.sudProject.map.WorldMap.world;
 
@@ -172,7 +173,7 @@ public class Player extends Entity{
         if(roomName.toUpperCase().equals("TEMPLE")){
             regenerateHp(this.getMaxHp());
             System.out.println("Ti senti di nuovo in forze");
-            //da implementare il reset di tutte le entità morte
+            Spawner.respawnEntities();
         }else{
             System.out.println("Non puoi riposare qui");
         }
@@ -239,5 +240,9 @@ public class Player extends Entity{
 
     public void setMaxXp(int maxXp) {
         this.maxXp = maxXp;
+    }
+
+    public static void setPlayerPosition(Room playerPosition) {
+        Player.playerPosition = playerPosition;
     }
 }

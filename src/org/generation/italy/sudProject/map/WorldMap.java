@@ -26,6 +26,7 @@ public class WorldMap {
     public static final int GARDEN_2_INDEX = 6;
     public static final int GARDEN_3_INDEX = 7;
     public static final int WOODS_INDEX = 8;
+    public static int numberOfDeadCats = 0;
 
     // /--CONSTRUCTORS--/
     public WorldMap(){
@@ -60,15 +61,7 @@ public class WorldMap {
         world.get(GARDEN_3_INDEX).setRoomDescription("La fine dei Giardini, ma anche l'inizio per chi entra per la prima volta in città");
         world.get(WOODS_INDEX).setRoomDescription("Un bosco illuminato dalla luna, la tua unica fonte di luce. Il fuoco è inutilizzabile per via di una maledizione");
         //aggiunge entità generiche in ciascuna stanza
-        Spawner.generateRoomEntities(world.get(TEMPLE_SQUARE_INDEX), 3, 0);
-        Spawner.generateRoomEntities(world.get(MARKET_SQUARE_INDEX), 3, 0);
-        Spawner.generateRoomEntities(world.get(TEMPLE_INDEX), 0,0);
-        Spawner.generateRoomEntities(world.get(BAKERY_INDEX), 0,0);
-        Spawner.generateRoomEntities(world.get(ARMORY_INDEX), 0,0);
-        Spawner.generateRoomEntities(world.get(GARDEN_1_INDEX), 3,0);
-        Spawner.generateRoomEntities(world.get(GARDEN_2_INDEX), 3,0);
-        Spawner.generateRoomEntities(world.get(GARDEN_3_INDEX), 3,0);
-        Spawner.generateRoomEntities(world.get(WOODS_INDEX), 0,3);
+        recallGenerateRoomEntities();
         //aggiunge entità uniche alle stanze
         addNewEntityType(world.get(TEMPLE_INDEX));
         world.get(TEMPLE_INDEX).getRoomEntities().get(ROOM_MAIN_NPC_INDEX).add(new MoonPriest("Moon_Priest", world.get(TEMPLE_INDEX), ROOM_MAIN_NPC_INDEX));
@@ -81,5 +74,18 @@ public class WorldMap {
         //aggiunge oggetti nelle stanze
         world.get(TEMPLE_INDEX).getRoomObjects().addItemToInventory(new UniqueItem("Avviso ai cittadini di Moonveil!",
                 0, true, "La città è invasa da membri di uno strano culto! rimanete in allerta e preferibilmente lontani dai vicoli!"));
+    }
+
+    // /--METHODS--/
+    public static void recallGenerateRoomEntities(){
+        Spawner.generateRoomEntities(world.get(TEMPLE_SQUARE_INDEX), 3, 0);
+        Spawner.generateRoomEntities(world.get(MARKET_SQUARE_INDEX), 3, 0);
+        Spawner.generateRoomEntities(world.get(TEMPLE_INDEX), 0,0);
+        Spawner.generateRoomEntities(world.get(BAKERY_INDEX), 0,0);
+        Spawner.generateRoomEntities(world.get(ARMORY_INDEX), 0,0);
+        Spawner.generateRoomEntities(world.get(GARDEN_1_INDEX), 3,0);
+        Spawner.generateRoomEntities(world.get(GARDEN_2_INDEX), 3,0);
+        Spawner.generateRoomEntities(world.get(GARDEN_3_INDEX), 3,0);
+        Spawner.generateRoomEntities(world.get(WOODS_INDEX), 0,3);
     }
 }

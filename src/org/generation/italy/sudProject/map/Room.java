@@ -25,6 +25,7 @@ public class Room{
     public static final int BOSS_INDEX = 6;
 
     private int maxGuardsInRoom;
+
     private Inventory roomObjects = new Inventory(20);
 
     private ArrayList<ArrayList> roomEntities;
