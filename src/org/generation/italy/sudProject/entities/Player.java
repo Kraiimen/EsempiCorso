@@ -2,16 +2,17 @@ package org.generation.italy.sudProject.entities;
 
 import org.generation.italy.sudProject.Entity;
 import org.generation.italy.sudProject.Spawner;
+import org.generation.italy.sudProject.itemManagement.Equipment;
 import org.generation.italy.sudProject.itemManagement.Inventory;
 import org.generation.italy.sudProject.items.Item;
 import org.generation.italy.sudProject.items.itemTypes.Food;
+import org.generation.italy.sudProject.items.itemTypes.Weapon;
 import org.generation.italy.sudProject.map.Room;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.generation.italy.sudProject.Spawner.respawnEntities;
 import static org.generation.italy.sudProject.map.Room.*;
 import static org.generation.italy.sudProject.map.WorldMap.world;
 
@@ -34,6 +35,7 @@ public class Player extends Entity{
     private int playerLevel = 1;
     private int xp = STARTING_XP;
     private int maxXp = STARTING_MAX_XP;
+    Equipment playerEquipment = new Equipment();
 
 
     // /--CONSTRUCTORS--/
@@ -105,10 +107,12 @@ public class Player extends Entity{
                 }else{
                     System.out.println("Ci sono guardie nei dintorni, non puoi attaccare");
                 }
+                break;
             default:
                 if(target.isCanBeAttacked()){
                     target.setHp(target.getHp() - this.getAtk());
                 }
+                break;
         }
         if(isDead(target)){
             xpUp(target.getXp());
@@ -143,25 +147,25 @@ public class Player extends Entity{
             Object obj = room.getRoomEntities().get(CORPSE_INDEX).get(result);
             Entity corpse = (Entity)obj;
             corpse.getEntityInventory().showItemsInInventory();
-            pickFromInventory(corpse.getEntityInventory());
+            addFromInventoryToInventory(corpse.getEntityInventory());
         }else{
             System.out.println("Nessun entità cadavere ha questo nome");
         }
     }
     private void pickEnvironmentItems(Room room){
         room.getRoomObjects().showItemsInInventory();
-        pickFromInventory(room.getRoomObjects());
+        addFromInventoryToInventory(room.getRoomObjects());
     }
-    private void pickFromInventory(Inventory inventory){
-        String input = console.readLine();
-        Item i = inventory.getItemFromInventory(input);
+    private void addFromInventoryToInventory(Inventory inventory){
+        Item i = selectItemFromInventory(inventory);
         if(i != null){
             this.entityInventory.addItemToInventory(i);
-            inventory.deleteItemFromInventory(input);
+            inventory.deleteItemFromInventory(i.getItemName());
         }else{
             System.out.println("Non è presente alcun item con questo nome");
         }
     }
+
     private void xpUp(int amount){
         xp += amount;
     }
@@ -178,7 +182,101 @@ public class Player extends Entity{
             System.out.println("Non puoi riposare qui");
         }
     }
+    private void equip(){
+        this.entityInventory.showItemsInInventory();
+        Item i = selectItemFromInventory(this.entityInventory);
+        if(i != null){
+            System.out.println("Scegli dove equipaggiare l'item: ");
+            playerEquipment.showEquip();
+            String input = console.readLine().toUpperCase().trim();
+            switch(input){
+                case "LEFTHAND":
+                    if(i instanceof Weapon && playerEquipment.getLeftHand() != null){
+                        playerEquipment.setLeftHand(i);
+                    }else{
+                        System.out.println("Impossibile equipaggiare");
+                    }
+                    break;
+                case "RIGHTHAND":
+                    if(i instanceof Weapon && playerEquipment.getRightHand() != null){
+                        playerEquipment.setRightHand(i);
+                    }else{
+                        System.out.println("Impossibile equipaggiare");
+                    }
+                    break;
+                default:
+                    System.out.println("Non puoi equipaggiarlo qui");
+                    break;
+            }
+        }else{
+            System.out.println("Non è presente alcun item con questo nome");
+        }
+    }
+    private void removeFromEquipment(){
+        System.out.println("Seleziona la parte dell'equipaggiamento da togliere: ");
+        playerEquipment.showEquip();
+        String input = console.readLine().toUpperCase().trim();
+        switch(input){
+            case "HEAD":
+                if(playerEquipment.getHead() != null){
+                    this.entityInventory.addItemToInventory(playerEquipment.getHead());
+                    playerEquipment.setHead(null);
+                }else{
+                    System.out.println("Nessun oggetto equipaggiato in HEAD");
+                }
+                break;
+            case "BODY":
+                if(playerEquipment.getBody() != null){
+                    this.entityInventory.addItemToInventory(playerEquipment.getBody());
+                    playerEquipment.setBody(null);
+                }else{
+                    System.out.println("Nessun oggetto equipaggiato in BODY");
+                }
+                break;
+            case "ARMS":
+                if(playerEquipment.getArms() != null){
+                    this.entityInventory.addItemToInventory(playerEquipment.getArms());
+                    playerEquipment.setArms(null);
+                }else{
+                    System.out.println("Nessun oggetto equipaggiato in ARMS");
+                }
+                break;
+            case "LEGS":
+                if(playerEquipment.getLegs() != null){
+                    this.entityInventory.addItemToInventory(playerEquipment.getLegs());
+                    playerEquipment.setLegs(null);
+                }else{
+                    System.out.println("Nessun oggetto equipaggiato in HEAD");
+                }
+                break;
+            case "LEFTHAND":
+                if(playerEquipment.getLeftHand() != null){
+                    this.entityInventory.addItemToInventory(playerEquipment.getLeftHand());
+                    playerEquipment.setLeftHand(null);
+                }else{
+                    System.out.println("Nessun oggetto equipaggiato in LEFT HAND");
+                }
+                break;
+            case "RIGHTHAND":
+                if(playerEquipment.getRightHand() != null){
+                    this.entityInventory.addItemToInventory(playerEquipment.getRightHand());
+                    playerEquipment.setRightHand(null);
+                }else{
+                    System.out.println("Nessun oggetto equipaggiato in RIGHT HAND");
+                }
+                break;
+            default:
+                System.out.println("Non hai selezionato alcuna parte");
+                break;
+        }
+    }
 
+    private Item selectItemFromInventory(Inventory inventory){
+        System.out.println("Seleziona l'oggetto da aggiungere: ");
+        String input = console.readLine();
+        Item i = inventory.getItemFromInventory(input);
+        return i;
+    }
 
     // /--GETTER-&-SETTER--/
 

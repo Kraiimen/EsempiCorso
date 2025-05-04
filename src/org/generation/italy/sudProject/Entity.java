@@ -6,6 +6,7 @@ import org.generation.italy.sudProject.entities.mobTypes.mobs.Cat;
 import org.generation.italy.sudProject.entities.mobTypes.PeacefulMob;
 import org.generation.italy.sudProject.entities.mobTypes.mobs.Cultist;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.Guard;
+import org.generation.italy.sudProject.itemManagement.Equipment;
 import org.generation.italy.sudProject.itemManagement.Inventory;
 import org.generation.italy.sudProject.map.Room;
 import org.generation.italy.sudProject.map.WorldMap;
@@ -141,7 +142,8 @@ public abstract class Entity {
         }
     }
     public void showStats(){
-        System.out.printf("%s:%d%n %s:%d%n %s:%d%n %s:%d%n %s:%d%n %s:%d%n","Strength",strength,
+        System.out.printf("%s:%d%n %s:%d%n %s:%d%n %s:%d%n %s:%d%n %s:%d%n",
+                "Strength",strength,
                 "Dexterity",dexterity,
                 "Constitution",constitution,
                 "Intelligence",intelligence,
