@@ -7,15 +7,20 @@ public class Product {
     private int supplierId;
     private int categoryId;
     private double unitPrice;
-    private int discountinued;
+    private int discontinued;
 
     public Product(int productId, String productName, int supplierId, int categoryId, double unitPrice, int discountinued) {
         this.productId = productId;
         this.productName = productName;
         this.supplierId = supplierId;
         this.categoryId = categoryId;
-        this.discountinued = discountinued;
+        this.discontinued = discountinued;
         this.unitPrice = unitPrice;
+    }
+
+    @Override
+    public String toString() {
+        return this.productId + ", " + productName + ", " + supplierId + ", " + categoryId + ", " +
     }
 
     public int getProductId() {
@@ -34,8 +39,8 @@ public class Product {
         return categoryId;
     }
 
-    public int getDiscountinued() {
-        return discountinued;
+    public int getDiscontinued() {
+        return discontinued;
     }
 
     public double getUnitPrice() {

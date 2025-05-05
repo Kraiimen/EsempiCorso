@@ -36,6 +36,11 @@ public class SpringJdbcProductRepository {
             SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
             FROM products
             """;
+    private static final String FIND_BY_NAME_LIKE = """
+            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
+            FROM products
+            WHERE productname LIKE ?
+            """;
 
     public SpringJdbcProductRepository(DataSource ds){
         this.template = new JdbcTemplate(ds);
@@ -49,7 +54,7 @@ public class SpringJdbcProductRepository {
             ps.setInt(2, newProduct.getSupplierId());
             ps.setInt(3, newProduct.getCategoryId());
             ps.setDouble(4, newProduct.getUnitPrice());
-            ps.setInt(5, newProduct.getDiscountinued());
+            ps.setInt(5, newProduct.getDiscontinued());
             return ps;
         }, keyHolder);
         int key = keyHolder.getKey().intValue();
@@ -67,7 +72,7 @@ public class SpringJdbcProductRepository {
                 product.getSupplierId(),
                 product.getCategoryId(),
                 product.getUnitPrice(),
-                product.getDiscountinued(),
+                product.getDiscontinued(),
                 product.getProductId()
         );
     }
@@ -77,12 +82,11 @@ public class SpringJdbcProductRepository {
     }
 
     public List<Product> findAll(){
-        template.queryForList(FIND_ALL, Product.class);
-        return null;
+        return template.query(FIND_ALL, rowMapper);
     }
 
     public List<Product> findByNameLike(String namePart){
-        return null;
+        return template.query(FIND_BY_NAME_LIKE, rowMapper, namePart);
     }
 
 
