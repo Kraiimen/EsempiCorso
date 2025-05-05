@@ -5,3 +5,4 @@ public class DataException extends Exception {
         super(message, cause);
     }
 }
+
