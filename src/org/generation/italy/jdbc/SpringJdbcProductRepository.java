@@ -11,7 +11,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
 
-public class SpringJdbcProductRepository {
+public class SpringJdbcProductRepository implements ProductRepository{
     private JdbcTemplate template;
     private static final String INSERT_PRODUCT = """
             INSERT INTO products 
@@ -23,30 +23,12 @@ public class SpringJdbcProductRepository {
             FROM products
             WHERE productid = ?
             """;
-    private static final String UPDATE_PRODUCT = """
-            UPDATE products
-            SET productname = ?, supplierid = ?, categoryid = ?, unitprice = ?, discountinued = ?
-            WHERE productid = ?;
-            """;
-    private static final String DELETE_PRODUCT = """
-            DELETE FROM products
-            WHERE productid = ?
-            """;
-    private static final String FIND_ALL = """
-            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
-            FROM products
-            """;
-    private static final String FIND_BY_NAME_LIKE = """
-            SELECT productid, productname, supplierid, categoryid, unitprice, discountinued
-            FROM products
-            WHERE productname LIKE ?
-            """;
 
     public SpringJdbcProductRepository(DataSource ds){
         this.template = new JdbcTemplate(ds);
     }
 
-    public Product insert(Product newProduct){
+    public Product create(Product newProduct){
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(con -> {
             PreparedStatement ps= con.prepareStatement(INSERT_PRODUCT, Statement.RETURN_GENERATED_KEYS);
@@ -54,7 +36,7 @@ public class SpringJdbcProductRepository {
             ps.setInt(2, newProduct.getSupplierId());
             ps.setInt(3, newProduct.getCategoryId());
             ps.setDouble(4, newProduct.getUnitPrice());
-            ps.setInt(5, newProduct.getDiscontinued());
+            ps.setInt(5, newProduct.getDiscountinued());
             return ps;
         }, keyHolder);
         int key = keyHolder.getKey().intValue();
@@ -66,27 +48,20 @@ public class SpringJdbcProductRepository {
         return Optional.ofNullable(template.queryForObject(FIND_BY_ID, rowMapper, id));
     }
 
-    public int update(Product product){
-        return template.update(UPDATE_PRODUCT,
-                product.getProductName(),
-                product.getSupplierId(),
-                product.getCategoryId(),
-                product.getUnitPrice(),
-                product.getDiscontinued(),
-                product.getProductId()
-        );
+    public boolean update(Product product){
+        return false;
     }
 
     public boolean delete(int id){
-        return template.update(DELETE_PRODUCT, id) == 1;
+        return false;
     }
 
     public List<Product> findAll(){
-        return template.query(FIND_ALL, rowMapper);
+        return null;
     }
 
     public List<Product> findByNameLike(String namePart){
-        return template.query(FIND_BY_NAME_LIKE, rowMapper, namePart);
+        return null;
     }
 
 
