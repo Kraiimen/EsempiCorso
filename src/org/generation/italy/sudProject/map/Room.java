@@ -1,7 +1,9 @@
 package org.generation.italy.sudProject.map;
 
 import org.generation.italy.sudProject.Entity;
+import org.generation.italy.sudProject.MapOutput;
 import org.generation.italy.sudProject.itemManagement.Inventory;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,7 @@ public class Room{
     private Room southRoom;
     private Room eastRoom;
     private Room westRoom;
+    private String mapOutput;
 
     public static final int PLAYER_INDEX = -1;
     public static final int CAT_INDEX = 0;
@@ -42,6 +45,7 @@ public class Room{
         this.southRoom = southRoom;
         this.eastRoom = eastRoom;
         this.westRoom = westRoom;
+        mapOutput = MapOutput.getRoomOutput(northRoom, southRoom, eastRoom, westRoom);
     }
 
 
@@ -84,6 +88,9 @@ public class Room{
             }
         }
         return index;
+    }
+    public void printMapOutput() {
+        System.out.println(mapOutput);
     }
 
     // /--GETTER-&-SETTER--/

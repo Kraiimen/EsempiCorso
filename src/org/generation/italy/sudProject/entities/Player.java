@@ -63,31 +63,38 @@ public class Player extends Entity{
     }
 
     //NORD 0, SUD 1, EST 2, OVEST 3
-    private void playerMove(String d) {
-        String direction = d.toUpperCase();
-        switch (direction) {
+    private void playerMove() {
+        System.out.println("Luogo attuale: ");
+        playerPosition.printMapOutput();
+        System.out.println("Dove Vuoi Andare? : (NORD) (SOUTH) (EAST) (WEST)");
+        String direction = console.readLine();
+        switch (direction.toUpperCase().trim()) {
             case "NORD":
                 if (playerPosition.getNorthRoom() != null) {
                     playerPosition = playerPosition.getNorthRoom();
                     Spawner.resetGuardsInRoom(playerPosition);
+                    playerPosition.printMapOutput();
                 }
                 break;
             case "SOUTH":
                 if (playerPosition.getSouthRoom() != null) {
                     playerPosition = playerPosition.getSouthRoom();
                     Spawner.resetGuardsInRoom(playerPosition);
+                    playerPosition.printMapOutput();
                 }
                 break;
             case "EAST":
                 if (playerPosition.getEastRoom() != null) {
                     playerPosition = playerPosition.getEastRoom();
                     Spawner.resetGuardsInRoom(playerPosition);
+                    playerPosition.printMapOutput();
                 }
                 break;
             case "WEST":
                 if (playerPosition.getWestRoom() != null) {
                     playerPosition = playerPosition.getWestRoom();
                     Spawner.resetGuardsInRoom(playerPosition);
+                    playerPosition.printMapOutput();
                 }
                 break;
             default:
