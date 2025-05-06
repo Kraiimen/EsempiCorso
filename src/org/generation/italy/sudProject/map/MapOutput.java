@@ -1,6 +1,4 @@
-package org.generation.italy.sudProject;
-
-import org.generation.italy.sudProject.map.Room;
+package org.generation.italy.sudProject.map;
 
 public class MapOutput {
     private static String mapNSEO=

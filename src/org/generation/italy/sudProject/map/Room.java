@@ -1,9 +1,7 @@
 package org.generation.italy.sudProject.map;
 
 import org.generation.italy.sudProject.Entity;
-import org.generation.italy.sudProject.MapOutput;
 import org.generation.italy.sudProject.itemManagement.Inventory;
-import org.springframework.core.env.SystemEnvironmentPropertySource;
 
 import java.util.ArrayList;
 
