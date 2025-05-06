@@ -28,7 +28,7 @@ public class Guard extends Npc {
     @Override
     public void attack(Entity target) {
         if(target.isCanBeAttacked()){
-            target.setHp(target.getHp() - this.getAtk());
+            target.setHp(target.getHp() - this.getAtk() + this.getAtkBonusFromStat());
         }
         if(isDead(target) || target.getIndexEntityPosition()==PLAYER_INDEX){
             target.setHp(0);

@@ -6,12 +6,13 @@ import org.generation.italy.sudProject.entities.mobTypes.mobs.Cat;
 import org.generation.italy.sudProject.entities.mobTypes.PeacefulMob;
 import org.generation.italy.sudProject.entities.mobTypes.mobs.Cultist;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.Guard;
-import org.generation.italy.sudProject.itemManagement.Equipment;
 import org.generation.italy.sudProject.itemManagement.Inventory;
 import org.generation.italy.sudProject.map.Room;
 import org.generation.italy.sudProject.map.WorldMap;
 
 import java.io.Console;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static org.generation.italy.sudProject.map.Room.*;
@@ -54,6 +55,7 @@ public abstract class Entity {
     protected Inventory entityInventory;
     protected int money;
     protected int xp;
+    protected int indexClassStat;
 
 
 
@@ -81,6 +83,7 @@ public abstract class Entity {
         this.canBeAttacked = canBeAttacked;
         entityInventory = new Inventory(inventoryCap);
         this.money = money;
+        this.indexClassStat = indexClassStat;
     }
 
     //--METHODS--/
@@ -149,6 +152,29 @@ public abstract class Entity {
                 "Intelligence",intelligence,
                 "Wisdom",wisdom,
                 "Charisma",charisma);
+    }
+    protected int getAtkBonusFromStat(){
+        int bonus = 4;
+        int[] stats = getStats();
+        for(int i = 20; i > 0; i-=5){
+            if(stats[indexClassStat] == i){
+                return bonus;
+            }else{
+                bonus--;
+            }
+        }
+        return bonus;
+    }
+
+    private int[] getStats(){
+        int[] stats = new int[6];
+        stats[0] = strength;
+        stats[1] = dexterity;
+        stats[2] = constitution;
+        stats[3] = intelligence;
+        stats[4] = wisdom;
+        stats[5] = charisma;
+        return stats;
     }
 
     // /--GETTER-&-SETTER--/

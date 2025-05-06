@@ -5,7 +5,6 @@ import org.generation.italy.sudProject.entities.mobTypes.mobs.bosses.minions.Und
 import org.generation.italy.sudProject.items.itemTypes.UniqueItem;
 import org.generation.italy.sudProject.map.Room;
 
-import static org.generation.italy.sudProject.entities.mobTypes.mobs.Cat.numberOfCats;
 import static org.generation.italy.sudProject.map.Room.BOSS_INDEX;
 import static org.generation.italy.sudProject.map.Room.UNDEAD_CAT_INDEX;
 import static org.generation.italy.sudProject.map.WorldMap.numberOfDeadCats;
@@ -34,7 +33,7 @@ public class Necromancer extends Entity {
             timeToAttack = true;
         }else{
             if(target.isCanBeAttacked()){
-                target.setHp(target.getHp() - this.getAtk());
+                target.setHp(target.getHp() - this.getAtk() + this.getAtkBonusFromStat());
             }
             if(isDead(target)){
                 numberOfSummons = numberOfDeadCats;
