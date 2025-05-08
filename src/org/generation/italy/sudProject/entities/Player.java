@@ -27,7 +27,6 @@ public class Player extends Entity{
 
     public static int numberOfPlayers;
     private static Room playerPosition = world.getFirst();
-    public List worldMap = world;
 
     private String firstName;
     private String lastName;

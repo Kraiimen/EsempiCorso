@@ -6,14 +6,12 @@ import org.generation.italy.sudProject.entities.playerClasses.*;
 import java.io.Console;
 import java.util.Arrays;
 
-import static org.generation.italy.sudProject.PlayerData.*;
-
 public class GameMenu {
     public Console console = System.console();
     String className;
 
     // /--METHODS--/
-    public void registerNewPlayer(){
+    public Player createNewPlayer(){
         System.out.println("CREAZIONE GIOCATORE:");
         System.out.println("INSERISCI FIRSTNAME:");
         String firstname = console.readLine();
@@ -43,21 +41,6 @@ public class GameMenu {
             case ROGUE -> new Rogue(firstname, lastname, email, password, playerName);
             case WIZARD -> new Wizard(firstname, lastname, email, password, playerName);
         };
-        addPlayerData(player);
-    }
-    public Player login(){
-        System.out.println("INSERISCI EMAIL:");
-        String email = console.readLine();
-        System.out.println("INSERISCI PASSWORD");
-        String password = console.readLine();
-        Player player = checkCredentials(email, password);
-        if(player == null) {
-            System.out.println("Credenziali errate o inesistenti");
-        }
         return player;
-    }
-    public void showMenuOptions(){
-        System.out.println("REGISTRATI O EFFETTUA IL LOGIN:");
-        System.out.println("(REGISTER)\n"+"(LOGIN)");
     }
 }
