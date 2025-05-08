@@ -8,10 +8,11 @@ import org.generation.italy.sudProject.items.Item;
 import org.generation.italy.sudProject.items.itemTypes.Food;
 import org.generation.italy.sudProject.items.itemTypes.Weapon;
 import org.generation.italy.sudProject.map.Room;
+import org.generation.italy.sudProject.map.WorldMap;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import static org.generation.italy.sudProject.map.Room.*;
 import static org.generation.italy.sudProject.map.WorldMap.world;
@@ -26,10 +27,11 @@ public class Player extends Entity{
 
     public static int numberOfPlayers;
     private static Room playerPosition = world.getFirst();
+    public List worldMap = world;
 
     private String firstName;
     private String lastName;
-    private Map<String, String> credentials = new HashMap<>();
+    private HashMap<String, String> credentials = new HashMap<>();
     private String playerName;
     private LocalDate creationDate = LocalDate.now();
     private int playerLevel = 1;
@@ -49,24 +51,12 @@ public class Player extends Entity{
         numberOfPlayers++;
     }
     // /--METHODS--/
-    public void login(boolean check){
-        if(check){
-            System.out.println("Welcome " +playerName+ " to MOON RISES AGAIN");
-        }
-    }
-    public void logout(){
-        System.out.println("Bye "+playerName);
-    }
-    //controlla che le credenziali siano giuste
-    private boolean checkCredentials(String email, String password){
-        return credentials.containsKey(email) && credentials.containsValue(password);
-    }
 
     //NORD 0, SUD 1, EST 2, OVEST 3
     private void playerMove() {
         System.out.println("Luogo attuale: ");
         playerPosition.printMapOutput();
-        System.out.println("Dove Vuoi Andare? : (NORD) (SOUTH) (EAST) (WEST)");
+        System.out.println("Dove vuoi andare? : (NORD) (SOUTH) (EAST) (WEST)");
         String direction = console.readLine();
         switch (direction.toUpperCase().trim()) {
             case "NORD":
@@ -107,19 +97,16 @@ public class Player extends Entity{
     }
     @Override
     public void attack(Entity target) {
-        switch(target.getIndexEntityPosition()){
-            case CAT_INDEX:
-                if(playerPosition.getRoomEntities().get(GUARD_INDEX) != null){
-                    target.setHp(target.getHp() - this.getAtk() + this.getAtkBonusFromStat());
-                }else{
-                    System.out.println("Ci sono guardie nei dintorni, non puoi attaccare");
-                }
-                break;
-            default:
-                if(target.isCanBeAttacked()){
-                    target.setHp(target.getHp() - this.getAtk());
-                }
-                break;
+        if(target.getIndexEntityPosition() == CAT_INDEX) {
+            if (playerPosition.getRoomEntities().get(GUARD_INDEX) != null) {
+                target.setHp(target.getHp() - this.getAtk() + this.getAtkBonusFromStat());
+            } else {
+                System.out.println("Ci sono guardie nei dintorni, non puoi attaccare");
+            }
+        } else {
+            if (target.isCanBeAttacked()) {
+                target.setHp(target.getHp() - this.getAtk());
+            }
         }
         if(isDead(target)){
             xpUp(target.getXp());
@@ -303,11 +290,11 @@ public class Player extends Entity{
         this.lastName = lastName;
     }
 
-    public Map<String, String> getCredentials() {
+    public HashMap getCredentials() {
         return credentials;
     }
 
-    public void setCredentials(Map<String, String> credentials) {
+    public void setCredentials(HashMap<String, String> credentials) {
         this.credentials = credentials;
     }
 
