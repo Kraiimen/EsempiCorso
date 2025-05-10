@@ -1,6 +1,6 @@
 package org.generation.italy.sudProject;
 
-public class Start {
+public class GameStart {
     public static void main(String[] args){
 
     }

@@ -10,8 +10,8 @@ public class GameEngine {
         GameMenu menu = new GameMenu();
         WorldMap worldMap = new WorldMap();
         Player player = menu.createNewPlayer();
-
-
-
     }
+
+    // /--METHODS--/
+
 }
