@@ -7,11 +7,15 @@ import java.io.Console;
 
 public class GameEngine {
     static{
+        boolean exit = false;
         GameMenu menu = new GameMenu();
         WorldMap worldMap = new WorldMap();
         Player player = menu.createNewPlayer();
+        player.printRoomAndDesc(); //primo spawn
+        do{
+
+
+
+        }while(!exit);
     }
-
-    // /--METHODS--/
-
 }

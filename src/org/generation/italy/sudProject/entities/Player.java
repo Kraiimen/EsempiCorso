@@ -53,47 +53,53 @@ public class Player extends Entity{
 
     //NORD 0, SUD 1, EST 2, OVEST 3
     private void playerMove() {
-        System.out.println("Luogo attuale: ");
+        System.out.println("Luogo attuale: "+playerPosition.getRoomName());
         playerPosition.printMapOutput();
         System.out.println("Dove vuoi andare? : (NORD) (SOUTH) (EAST) (WEST)");
+        boolean directionSwitch = false;
         String direction = console.readLine();
         switch (direction.toUpperCase().trim()) {
             case "NORD":
                 if (playerPosition.getNorthRoom() != null) {
                     playerPosition = playerPosition.getNorthRoom();
-                    Spawner.resetGuardsInRoom(playerPosition);
-                    playerPosition.printMapOutput();
+                    directionSwitch = true;
                 }
                 break;
             case "SOUTH":
                 if (playerPosition.getSouthRoom() != null) {
                     playerPosition = playerPosition.getSouthRoom();
-                    Spawner.resetGuardsInRoom(playerPosition);
-                    playerPosition.printMapOutput();
+                    directionSwitch = true;
                 }
                 break;
             case "EAST":
                 if (playerPosition.getEastRoom() != null) {
                     playerPosition = playerPosition.getEastRoom();
-                    Spawner.resetGuardsInRoom(playerPosition);
-                    playerPosition.printMapOutput();
+                    directionSwitch = true;
                 }
                 break;
             case "WEST":
                 if (playerPosition.getWestRoom() != null) {
                     playerPosition = playerPosition.getWestRoom();
-                    Spawner.resetGuardsInRoom(playerPosition);
-                    playerPosition.printMapOutput();
+                    directionSwitch = true;
                 }
                 break;
             default:
                 System.out.println("INSERISCI LA DIREZIONE!");
                 break;
         }
+        if(directionSwitch){
+            Spawner.resetGuardsInRoom(playerPosition);
+            playerPosition.printMapOutput();
+            printRoomAndDesc();
+        }
+    }
+    public void printRoomAndDesc(){
+        playerPosition.printMapOutput();
         System.out.println("Luogo attuale: "+playerPosition.getRoomName());
         System.out.println(playerPosition.getRoomDescription());
         playerPosition.showEntitiesInRoom();
     }
+
     @Override
     public void attack(Entity target) {
         if(target.getIndexEntityPosition() == CAT_INDEX) {
@@ -270,6 +276,7 @@ public class Player extends Entity{
         Item i = inventory.getItemFromInventory(input);
         return i;
     }
+
 
     // /--GETTER-&-SETTER--/
 
