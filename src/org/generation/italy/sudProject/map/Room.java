@@ -90,6 +90,9 @@ public class Room{
     public void printMapOutput() {
         System.out.println(mapOutput);
     }
+    public boolean isWayOut(){
+        return northRoom != null && southRoom != null && eastRoom != null && westRoom != null;
+    }
 
     // /--GETTER-&-SETTER--/
 

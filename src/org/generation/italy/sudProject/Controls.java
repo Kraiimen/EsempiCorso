@@ -10,15 +10,16 @@ public enum Controls {
     BUY("BUY"),
     EAT("EAT"),
     EQUIP("EQUIP"),
-    QUIT("QUIT");
+    QUIT("QUIT"),
+    REST("REST");
 
-    private final String string;
+    private final String value;
 
-    Controls(String controlState){
-        this.string = controlState;
+    Controls(String value){
+        this.value = value;
     }
-    public String getControlState() {
-        return string;
+    public String getValue() {
+        return value;
     }
 }
 

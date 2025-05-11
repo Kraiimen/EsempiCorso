@@ -6,9 +6,8 @@ import org.generation.italy.sudProject.entities.playerClasses.*;
 import java.io.Console;
 import java.util.Arrays;
 
-public class GameMenu {
+public class PlayerCreator {
     public Console console = System.console();
-    String className;
 
     // /--METHODS--/
     public Player createNewPlayer(){
@@ -24,6 +23,7 @@ public class GameMenu {
         System.out.println("INSERISCI PLAYER NAME:");
         String playerName = console.readLine();
         boolean state = false;
+        String className;
         do {
             System.out.println("SCEGLI LA CLASSE DEL TUO PERSONAGGIO:");
             System.out.println(Arrays.toString(Classes.values()));
