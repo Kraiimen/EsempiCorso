@@ -8,7 +8,8 @@ public interface ProductRepository {
     Product create(Product newProduct) throws DataException;
     boolean update(Product product) throws DataException;
     boolean delete(int id) throws DataException;
-    Optional<Product> findById(int Id) throws DataException;
+    Optional<Product> findById(int id) throws DataException;
     List<Product> findAll() throws DataException;
     List<Product> findByNameLike(String namePart) throws DataException;
+
 }

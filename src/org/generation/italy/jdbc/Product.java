@@ -1,21 +1,23 @@
 package org.generation.italy.jdbc;
 
 public class Product {
+
     private int productId;
     private String productName;
     private int supplierId;
     private int categoryId;
     private double unitPrice;
-    private int discontinued;
+    private int discountinued;
 
-    public Product(int productId, String productName, int supplierId, int categoryId,double unitPrice, int discontinued) {
+    public Product(int productId, String productName, int supplierId, int categoryId, double unitPrice, int discountinued) {
         this.productId = productId;
         this.productName = productName;
         this.supplierId = supplierId;
         this.categoryId = categoryId;
+        this.discountinued = discountinued;
         this.unitPrice = unitPrice;
-        this.discontinued = discontinued;
     }
+
     public int getProductId() {
         return productId;
     }
@@ -32,15 +34,15 @@ public class Product {
         return categoryId;
     }
 
-    public int getDiscontinued() {
-        return discontinued;
+    public int getDiscountinued() {
+        return discountinued;
     }
 
     public double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setProductId(int productid) {
-
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 }

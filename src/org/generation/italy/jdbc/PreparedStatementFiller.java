@@ -1,4 +1,5 @@
 package org.generation.italy.jdbc;
+
 import java.sql.PreparedStatement;
 
 @FunctionalInterface

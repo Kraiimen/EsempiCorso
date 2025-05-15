@@ -15,20 +15,20 @@ public class Shipper {
         return shipperid;
     }
 
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
     public void setShipperid(int shipperid) {
         this.shipperid = shipperid;
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public void setPhone(String phone) {
