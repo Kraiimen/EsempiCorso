@@ -5,11 +5,14 @@ import java.util.List;
 public enum Controls {
     MOVE("MOVE"),
     ATTACK("ATTACK"),
+    ESCAPE("ESCAPE"),
+    LEVEL_UP("LEVELUP"),
     PICK_FROM_CORPSE("PICKFROMCORPSE"),
     PICK_UP("PICKUP"),
     BUY("BUY"),
     EAT("EAT"),
     EQUIP("EQUIP"),
+    UNEQUIP("UNEQUIP"),
     QUIT("QUIT"),
     REST("REST");
 

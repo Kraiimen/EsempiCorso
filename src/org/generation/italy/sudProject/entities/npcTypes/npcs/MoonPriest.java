@@ -17,7 +17,7 @@ public class MoonPriest extends CanNotBeAttackedNpc {
         if(player.xpOverCap()){
             player.setXp(player.getXp()-player.getMaxXp());
             player.setPlayerLevel(player.getPlayerLevel() + 1);
-            player.setMaxXp(player.getMaxXp()+player.STARTING_MAX_XP);
+            player.setMaxXp(player.getMaxXp()+ Player.STARTING_MAX_XP);
             player.setMaxHp(player.getMaxHp() + 5);
             player.setHp(player.getMaxHp());
             if(player.getPlayerLevel()%5==0){

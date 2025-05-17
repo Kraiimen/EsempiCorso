@@ -127,6 +127,7 @@ public abstract class Entity {
         if(hp > maxHp){
             hp = maxHp;
         }
+        System.out.println("HP rigenerati = " + amount);
     }
     public boolean isDead(Entity e){
         return (e.getHp() <= 0);
