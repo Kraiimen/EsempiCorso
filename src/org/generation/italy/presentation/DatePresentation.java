@@ -60,8 +60,8 @@ public class DatePresentation {
     Queste classi hanno tutte un metodo .now() che fa esattamente quello che intende.
 
 
-       LocalDate dNow = LocalDate.now();
-       System.out.println(dNow);
+//       LocalDate dNow = LocalDate.now();
+//       System.out.println(dNow);
 
     /*
     In testing si può utilizzare un oggetto clock che può essere settato con qualunque orario si voglia
@@ -104,9 +104,9 @@ public class DatePresentation {
 
     Esempio:
     */
-    //      System.out.println("Data di adesso + ora : "+LocalDateTime.now());
-    //      System.out.println("Ora : "+DateTimeFormatter.ISO_LOCAL_TIME.format(LocalDateTime.now()));
-    //      System.out.println("Data : "+DateTimeFormatter.ISO_LOCAL_DATE.format(LocalDateTime.now()));
+//          System.out.println("Data di adesso + ora : "+LocalDateTime.now());
+//          System.out.println("Ora : "+DateTimeFormatter.ISO_LOCAL_TIME.format(LocalDateTime.now()));
+//          System.out.println("Data : "+DateTimeFormatter.ISO_LOCAL_DATE.format(LocalDateTime.now()));
 
     /*
     Obiettivo:
@@ -117,10 +117,10 @@ public class DatePresentation {
 
     esempio:
     */
-    //  ZonedDateTime dt = ZonedDateTime.now();
-    //  Locale locale = Locale.TAIWAN;
-    //  DateTimeFormatter f = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
-    //  System.out.println(locale.toString() + "--->" + f.format(dt));
+//      ZonedDateTime dt = ZonedDateTime.now();
+//      Locale locale = Locale.TAIWAN;
+//      DateTimeFormatter f = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+//      System.out.println(locale.toString() + "--->" + f.format(dt));
     /*
     Si puo' anche personalizzare il pattern di formattazione delle date utilizzando la funzione:
     DateTimeFormatter.of Pattern(String pattern).
@@ -155,10 +155,10 @@ public class DatePresentation {
     SOLUZIONE:
     Utilizzare il metodo ZonedDateTime.ofInstant(epochSec, zId) per gestire la conversione da istante a data o viceversa.
     */
-    //  Instant epochSec = Instant.ofEpochSecond(1000000000L);
-    //  ZoneId zId = ZoneId.systemDefault();
-    //  ZonedDateTime then = ZonedDateTime.ofInstant(epochSec, zId);
-    //  System.out.println("Data in quell'istante: "+then);
+//      Instant epochSec = Instant.ofEpochSecond(1000000000L);
+//      ZoneId zId = ZoneId.systemDefault();
+//      ZonedDateTime then = ZonedDateTime.ofInstant(epochSec, zId);
+//      System.out.println("Data in quell'istante: "+then);
 
     /*
     PROBLEMA:
@@ -279,27 +279,27 @@ public class DatePresentation {
     SOLUZIONE:
     Usare metodi di conversione tra API legacy e moderna.
 
-        Legacy Class	            Converti in Legacy	                    Converti in Moderno
+    Legacy Class:	                Converti in Legacy:	                    Converti in Moderno:
     java.util.Date	                Date.from(Instant)	                    date.toInstant()
-    java.util.Calendar	            calendar.toInstant()                    (non applicabile)
+    java.util.Calendar	            GregorianCalendar.from(zonedDateTime)   calendar.toInstant()
     java.util.GregorianCalendar	    GregorianCalendar.from(ZonedDateTime)	calendar.toZonedDateTime()
-    java.util.TimeZone		        timeZone.toZoneId()                     (non applicabile)
+    java.util.TimeZone		        TimeZone.getTimeZone(ZoneId)            timeZone.toZoneId()
     java.text.Format	            dateTimeFormatter.toFormat()	        (non applicabile)
 
     Esempio:
     */
-          //java.util.Date → LocalDateTime
-    //      Date legacyDate = new Date();
-    //      System.out.println("Legacy Date: " + legacyDate);
-    //
-    //      LocalDateTime modernDate = LocalDateTime.ofInstant(
-    //              legacyDate.toInstant(), ZoneId.systemDefault());
-    //      System.out.println("Converted to LocalDateTime: " + modernDate);
-    //
-    //      // LocalDateTime → java.util.Date
-    //      Date backAgain = Date.from(modernDate
-    //              .atZone(ZoneId.systemDefault())
-    //              .toInstant());
-    //      System.out.println("Back to legacy Date: " + backAgain);
+//         //java.util.Date → LocalDateTime
+//          Date legacyDate = new Date();
+//          System.out.println("Legacy Date: " + legacyDate);
+//
+//          LocalDateTime modernDate = LocalDateTime.ofInstant(
+//                  legacyDate.toInstant(), ZoneId.systemDefault());
+//          System.out.println("Converted to LocalDateTime: " + modernDate);
+//
+//          // LocalDateTime → java.util.Date
+//          Date backAgain = Date.from(modernDate
+//                  .atZone(ZoneId.systemDefault())
+//                  .toInstant());
+//          System.out.println("Back to legacy Date: " + backAgain);
     }
 }
