@@ -9,7 +9,8 @@ import java.io.Console;
 import java.util.List;
 
 import static org.generation.italy.sudProject.RoomScanner.fightControls;
-import static org.generation.italy.sudProject.map.Room.ROOM_MAIN_NPC_INDEX;
+import static org.generation.italy.sudProject.map.Room.*;
+import static org.generation.italy.sudProject.map.Room.BOSS_INDEX;
 
 public class GameEngine {
     static{
@@ -44,7 +45,19 @@ public class GameEngine {
                 case "ATTACK":
                     boolean playerTurn = true; //se == true tocca al player, altrimenti ai nemici
                     //selezionare chi attaccare
-
+                    System.out.println("Seleziona il bersaglio:");
+                    //mostra i bersagli
+                    player.getPlayerPosition().showEntitiesInRoom();
+                    String targetSelected = console.readLine();
+                    Entity target = (Entity) switch (targetSelected.trim().toUpperCase()){
+                        case "CAT" -> player.getPlayerPosition().getRoomEntities().get(CAT_INDEX).();
+                        case
+                        default -> null;
+                    }
+                    if(target == null){
+                        System.out.println("Non puoi attaccare quest'entità");
+                        break;
+                    }
 
                     boolean endFight = false;
                     do{
