@@ -32,10 +32,10 @@ public class RoomScanner {
         if(room.isWayOut()){
             controls.add(Controls.MOVE);
         }
-        if(room.getRoomEntities().get(CORPSE_INDEX) != null){
+        if(!room.getRoomEntities().get(CORPSE_INDEX).isEmpty()){
             controls.add(Controls.PICK_FROM_CORPSE);
         }
-        if(room.getRoomObjects() != null){
+        if(!room.getRoomObjects().getItemsStored().isEmpty()){
             controls.add(Controls.PICK_UP);
         }
         if(!room.getRoomEntities().get(ROOM_MAIN_NPC_INDEX).isEmpty()){

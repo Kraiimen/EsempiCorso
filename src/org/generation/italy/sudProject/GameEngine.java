@@ -78,9 +78,9 @@ public class GameEngine {
                             do {
                                 System.out.println("(ATTACK) (ESCAPE)");
                                 System.out.println("Seleziona l'azione da compiere: ");
-                                input = console.readLine();
+                                input = console.readLine().trim().toUpperCase();
                                 for(Controls c : fightControls){
-                                    if (input.trim().toUpperCase().equals(c.getValue())) {
+                                    if (input.equals(c.getValue())) {
                                         actionIsSelected = true;
                                         break;
                                     }
@@ -89,6 +89,7 @@ public class GameEngine {
                             switch (input){
                                 case "ATTACK":
                                     player.attack(target);
+                                    System.out.println("il giocatore attacca!");
                                     playerTurn = false;
                                     break;
                                 case "ESCAPE":
@@ -98,6 +99,7 @@ public class GameEngine {
                         }else{
                             //enemy turn
                             target.attack(player);
+                            System.out.println("il nemico attacca!");
                             playerTurn = true;
                         }
                         //termina il combattimento (se uno dei due muore)

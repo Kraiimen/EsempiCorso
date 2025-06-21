@@ -103,7 +103,7 @@ public class Player extends Entity{
     @Override
     public void attack(Entity target) {
         if(target.getIndexEntityPosition() == CAT_INDEX) {
-            if (playerPosition.getRoomEntities().get(GUARD_INDEX) != null) {
+            if (playerPosition.getRoomEntities().get(GUARD_INDEX).isEmpty()) {
                 target.setHp(target.getHp() - this.getAtk() + this.getAtkBonusFromStat());
             } else {
                 System.out.println("Ci sono guardie nei dintorni, non puoi attaccare");
