@@ -36,7 +36,7 @@ public class Inventory {
     public Item getItemFromInventory(String itemName){
         String name = itemName.toUpperCase();
         Item item = null;
-        if(!itemsStored.isEmpty()){
+        if(itemsStored.getFirst() != null){
             for(Item i : itemsStored){
                 if(name.equals(i.getItemName().toUpperCase())){
                     item = i;
