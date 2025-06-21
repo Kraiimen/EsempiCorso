@@ -2,9 +2,6 @@ package org.generation.italy.sudProject;
 
 import org.generation.italy.sudProject.entities.Npc;
 import org.generation.italy.sudProject.entities.Player;
-import org.generation.italy.sudProject.entities.mobTypes.mobs.Cat;
-import org.generation.italy.sudProject.entities.mobTypes.mobs.Cultist;
-import org.generation.italy.sudProject.entities.mobTypes.mobs.bosses.Necromancer;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.MoonPriest;
 import org.generation.italy.sudProject.map.WorldMap;
 
@@ -102,6 +99,9 @@ public class GameEngine {
                                     break;
                                 case "ESCAPE":
                                     endFight = escapeDice.nextInt(11) < 3;
+                                    if(!endFight){
+                                        playerTurn = false;
+                                    }
                                     break;
                             }
                         }else{

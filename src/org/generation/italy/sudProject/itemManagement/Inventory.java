@@ -12,19 +12,19 @@ public class Inventory {
     public Inventory(int capacity){
         this.itemsStored = new ArrayList<>();
         addCapacity(capacity);
-        inventoryCapacity = capacity;
     }
     // /--METHODS--/
     private void addCapacity(int numOfNewItems){
         for(int i=0; i<numOfNewItems; i++){
             itemsStored.add(null);
         }
+        inventoryCapacity += numOfNewItems;
     }
     public void addItemToInventory(Item item){
-        if(inventoryCapacity != 0){
-            for(Item i : itemsStored){
-                if(i == null){
-                    i = item;
+        if(inventoryCapacity > 0){
+            for (int i = 0; i < itemsStored.size(); i++) {
+                if (itemsStored.get(i) == null) {
+                    itemsStored.set(i, item);
                     inventoryCapacity--;
                     break;
                 }
@@ -38,11 +38,13 @@ public class Inventory {
         Item item = null;
         if(itemsStored.getFirst() != null){
             for(Item i : itemsStored){
-                if(name.equals(i.getItemName().toUpperCase())){
-                    item = i;
-                    itemsStored.remove(i);
-                    inventoryCapacity++;
-                    break;
+                if(i != null){
+                    if(name.equals(i.getItemName().toUpperCase())){
+                        item = i;
+                        itemsStored.remove(i);
+                        inventoryCapacity++;
+                        break;
+                    }
                 }
             }
         }
@@ -60,10 +62,13 @@ public class Inventory {
     public boolean IsInventoryFull(){
         return inventoryCapacity == 0;
     }
+
     public void deleteItemFromInventory(String itemname){
-        for(Item i : itemsStored){
-            if(i.getItemName().equals(itemname)){
-                i = null;
+        for(int i = 0; i < itemsStored.size(); i++){
+            Item item = itemsStored.get(i);
+            if(item != null && item.getItemName().equals(itemname)){
+                itemsStored.set(i, null);
+                inventoryCapacity++;
                 break;
             }
         }
