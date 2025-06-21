@@ -30,7 +30,7 @@ public class Room{
 
     private Inventory roomObjects = new Inventory(20);
 
-    private ArrayList<LinkedList> roomEntities;
+    private ArrayList<ArrayList> roomEntities = new ArrayList<>();
 
     // /--CONSTRUCTORS--/
     public Room(String roomName, int maxGuardsInRoom){
@@ -50,13 +50,13 @@ public class Room{
 
     private void addEntityType(int numOfGameEntities){
         for(int i=0; i<numOfGameEntities; i++){
-            roomEntities.add(new LinkedList<Entity>());
+            roomEntities.add(new ArrayList<Entity>());
         }
     }
 
     public void showEntitiesInRoom(){
         System.out.println("Entità del luogo: ");
-        for(LinkedList a : roomEntities){
+        for(ArrayList a : roomEntities){
             if(!a.isEmpty()){
                 for(Object object : a){
                     Entity entity = (Entity) object;
@@ -68,7 +68,7 @@ public class Room{
     }
     public void showCorpses(){
         System.out.println("Cadaveri: ");
-        LinkedList<Entity> array = roomEntities.get(CORPSE_INDEX);
+        ArrayList<Entity> array = roomEntities.get(CORPSE_INDEX);
         if(!array.isEmpty()){
             for(Entity e : array){
                 System.out.print(e.getName()+" ");
@@ -77,7 +77,7 @@ public class Room{
         }
     }
     public int getCorpseIndex(String corpseName){
-        LinkedList<Entity> array = roomEntities.get(CORPSE_INDEX);
+        ArrayList<Entity> array = roomEntities.get(CORPSE_INDEX);
         int index = -1;
         for(int i=0; i< array.size(); i++){
             Entity e = array.get(i);
@@ -130,7 +130,7 @@ public class Room{
         this.roomName = roomName;
     }
 
-    public ArrayList<LinkedList> getRoomEntities() {
+    public ArrayList<ArrayList> getRoomEntities() {
         return roomEntities;
     }
 

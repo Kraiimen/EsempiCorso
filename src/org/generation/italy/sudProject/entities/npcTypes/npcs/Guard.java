@@ -30,9 +30,8 @@ public class Guard extends Npc {
         if(target.isCanBeAttacked()){
             target.setHp(target.getHp() - this.getAtk() + this.getAtkBonusFromStat());
         }
-        if(isDead(target) || target.getIndexEntityPosition()==PLAYER_INDEX){
+        if(target.getIndexEntityPosition()==PLAYER_INDEX){
             target.setHp(0);
-            target.die();
         }
     }
     // /--GETTER-&-SETTER--/

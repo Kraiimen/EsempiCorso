@@ -36,12 +36,14 @@ public class Inventory {
     public Item getItemFromInventory(String itemName){
         String name = itemName.toUpperCase();
         Item item = null;
-        for(Item i : itemsStored){
-            if(name.equals(i.getItemName().toUpperCase())){
-                item = i;
-                i = null;
-                inventoryCapacity++;
-                break;
+        if(!itemsStored.isEmpty()){
+            for(Item i : itemsStored){
+                if(name.equals(i.getItemName().toUpperCase())){
+                    item = i;
+                    itemsStored.remove(i);
+                    inventoryCapacity++;
+                    break;
+                }
             }
         }
         return item;

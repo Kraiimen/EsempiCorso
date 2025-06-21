@@ -129,7 +129,7 @@ public abstract class Entity {
         }
         System.out.println("HP rigenerati = " + amount);
     }
-    public boolean isDead(Entity e){
+    public static boolean isDead(Entity e){
         return (e.getHp() <= 0);
     }
 

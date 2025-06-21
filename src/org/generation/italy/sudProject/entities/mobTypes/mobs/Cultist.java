@@ -12,7 +12,7 @@ public class Cultist extends Entity {
 
     // /--CONSTRUCTORS--/
     public Cultist(String name, Room entityPosition, int indexEntityPosition) {
-        super(name, 10, 16, DEXTERITY_INDEX, 14, 20, 20, 5,
+        super("Cultist", 10, 16, DEXTERITY_INDEX, 14, 20, 20, 5,
                 entityPosition, indexEntityPosition, true, 1, MONEY_FOR_KILLER, XP_FOR_KILLER);
         numberOfCultists++;
         this.entityInventory.addItemToInventory(new UniqueItem("Cultist_medallion", 10, false, medallionDescription));
@@ -22,9 +22,6 @@ public class Cultist extends Entity {
     public void attack(Entity target) {
         if(target.isCanBeAttacked()){
             target.setHp(target.getHp() - this.getAtk() + this.getAtkBonusFromStat());
-        }
-        if(isDead(target)){
-            target.die();
         }
     }
 }

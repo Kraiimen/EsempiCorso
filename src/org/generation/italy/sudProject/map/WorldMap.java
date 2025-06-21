@@ -15,7 +15,7 @@ import static org.generation.italy.sudProject.map.Room.ROOM_MAIN_NPC_INDEX;
 
 public class WorldMap {
     // /--ATTRIBUTES--/
-    public static ArrayList<Room> world;
+    public static ArrayList<Room> world = new ArrayList<>();
 
     public static final int TEMPLE_SQUARE_INDEX = 0;
     public static final int MARKET_SQUARE_INDEX = 1;

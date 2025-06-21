@@ -18,8 +18,5 @@ public class CanNotBeAttackedNpc extends Npc {
         if(target.isCanBeAttacked()){
             target.setHp(target.getHp() - this.getAtk() + this.getAtkBonusFromStat());
         }
-        if(isDead(target)){
-            target.die();
-        }
     }
 }

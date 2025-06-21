@@ -116,7 +116,6 @@ public class Player extends Entity{
         if(isDead(target)){
             xpUp(target.getXp());
             this.earnMoney(target.getMoney());
-            target.die();
         }
     }
     public void eat(){

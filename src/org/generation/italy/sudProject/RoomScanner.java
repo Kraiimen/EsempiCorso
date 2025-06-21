@@ -16,7 +16,7 @@ public class RoomScanner {
     public static StringBuilder sb = new StringBuilder();
 
     public static List<Controls> scan(Room room){
-        sb = null;
+        sb = new StringBuilder();
         controls.clear();
         controls.add(Controls.QUIT);
         controls.add(Controls.EQUIP);
@@ -38,16 +38,18 @@ public class RoomScanner {
         if(room.getRoomObjects() != null){
             controls.add(Controls.PICK_UP);
         }
-        if(room.getRoomEntities().get(ROOM_MAIN_NPC_INDEX).getFirst() instanceof MoonPriest){
-            controls.add(Controls.REST);
-            controls.add(Controls.LEVEL_UP);
-        }
-        if(room.getRoomEntities().get(ROOM_MAIN_NPC_INDEX).getFirst() instanceof Baker ||
-                room.getRoomEntities().get(ROOM_MAIN_NPC_INDEX).getFirst() instanceof Blacksmith){
-            controls.add(Controls.BUY);
+        if(!room.getRoomEntities().get(ROOM_MAIN_NPC_INDEX).isEmpty()){
+            if(room.getRoomEntities().get(ROOM_MAIN_NPC_INDEX).getFirst() instanceof MoonPriest){
+                controls.add(Controls.REST);
+                controls.add(Controls.LEVEL_UP);
+            }
+            if(room.getRoomEntities().get(ROOM_MAIN_NPC_INDEX).getFirst() instanceof Baker ||
+                    room.getRoomEntities().get(ROOM_MAIN_NPC_INDEX).getFirst() instanceof Blacksmith){
+                controls.add(Controls.BUY);
+            }
         }
         for(Controls c : controls){
-            sb.append(c.getValue());
+            sb.append(c.getValue()+" ");
         }
         return controls;
     }

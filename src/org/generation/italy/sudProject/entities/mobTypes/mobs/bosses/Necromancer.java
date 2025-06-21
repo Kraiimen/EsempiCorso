@@ -1,6 +1,7 @@
 package org.generation.italy.sudProject.entities.mobTypes.mobs.bosses;
 
 import org.generation.italy.sudProject.Entity;
+import org.generation.italy.sudProject.entities.Player;
 import org.generation.italy.sudProject.entities.mobTypes.mobs.bosses.minions.UndeadCat;
 import org.generation.italy.sudProject.items.itemTypes.UniqueItem;
 import org.generation.italy.sudProject.map.Room;
@@ -28,17 +29,27 @@ public class Necromancer extends Entity {
     public void attack(Entity target) {
         if(!timeToAttack && numberOfDeadCats > 0){
             //evoca
-            this.getEntityPosition().getRoomEntities().get(UNDEAD_CAT_INDEX).add(new UndeadCat(this.getEntityPosition(), UNDEAD_CAT_INDEX));
+            this.getEntityPosition().getRoomEntities().get(UNDEAD_CAT_INDEX).add(new UndeadCat(this.getEntityPosition()));
             numberOfSummons--;
             timeToAttack = true;
         }else{
             if(target.isCanBeAttacked()){
                 target.setHp(target.getHp() - this.getAtk() + this.getAtkBonusFromStat());
             }
-            if(isDead(target)){
+            timeToAttack = false;
+            if(target instanceof Player && isDead(target)){
                 numberOfSummons = numberOfDeadCats;
-                target.die();
             }
         }
+    }
+
+    // /--GETTER & SETTER--/
+
+    public int getNumberOfSummons() {
+        return numberOfSummons;
+    }
+
+    public void setNumberOfSummons(int numberOfSummons) {
+        this.numberOfSummons = numberOfSummons;
     }
 }
