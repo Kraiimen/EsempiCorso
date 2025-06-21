@@ -102,22 +102,15 @@ public class Player extends Entity{
 
     @Override
     public void attack(Entity target) {
-        if(target.getIndexEntityPosition() == CAT_INDEX) {
-            if (playerPosition.getRoomEntities().get(GUARD_INDEX).isEmpty()) {
+        if (target.isCanBeAttacked()) {
                 target.setHp(target.getHp() - this.getAtk() + this.getAtkBonusFromStat());
-            } else {
-                System.out.println("Ci sono guardie nei dintorni, non puoi attaccare");
-            }
-        } else {
-            if (target.isCanBeAttacked()) {
-                target.setHp(target.getHp() - this.getAtk());
-            }
         }
         if(isDead(target)){
             xpUp(target.getXp());
             this.earnMoney(target.getMoney());
         }
     }
+
     public void eat(){
         entityInventory.showItemsInInventory();
         Item item = selectItemFromInventory(entityInventory);

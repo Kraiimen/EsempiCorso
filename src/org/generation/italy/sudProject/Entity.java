@@ -158,13 +158,15 @@ public abstract class Entity {
         int bonus = 4;
         int[] stats = getStats();
         for(int i = 20; i > 0; i-=5){
-            if(stats[indexClassStat] == i){
-                return bonus;
-            }else{
-                bonus--;
+            if(indexClassStat != -1){
+                if(stats[indexClassStat] == i){
+                    return bonus;
+                }else{
+                    bonus--;
+                }
             }
         }
-        return bonus;
+        return 0;
     }
 
     private int[] getStats(){

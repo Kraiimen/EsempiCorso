@@ -2,6 +2,7 @@ package org.generation.italy.sudProject;
 
 import org.generation.italy.sudProject.entities.Npc;
 import org.generation.italy.sudProject.entities.Player;
+import org.generation.italy.sudProject.entities.mobTypes.mobs.Cat;
 import org.generation.italy.sudProject.entities.mobTypes.mobs.Cultist;
 import org.generation.italy.sudProject.entities.mobTypes.mobs.bosses.Necromancer;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.MoonPriest;
@@ -88,8 +89,15 @@ public class GameEngine {
                             }while(!actionIsSelected);
                             switch (input){
                                 case "ATTACK":
+                                    if(target.getIndexEntityPosition() == CAT_INDEX){
+                                        if (!player.getPlayerPosition().getRoomEntities().get(GUARD_INDEX).isEmpty()){
+                                            System.out.println("Non puoi attaccare, ci sono guardie nei dintorni!");
+                                            endFight = true;
+                                            break;
+                                        }
+                                    }
                                     player.attack(target);
-                                    System.out.println("il giocatore attacca!");
+                                    System.out.println("il giocatore ha terminato l'attacco");
                                     playerTurn = false;
                                     break;
                                 case "ESCAPE":
@@ -99,7 +107,7 @@ public class GameEngine {
                         }else{
                             //enemy turn
                             target.attack(player);
-                            System.out.println("il nemico attacca!");
+                            System.out.println("il nemico ha terminato l'attacco");
                             playerTurn = true;
                         }
                         //termina il combattimento (se uno dei due muore)
