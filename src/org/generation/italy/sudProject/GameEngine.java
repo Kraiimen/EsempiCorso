@@ -149,6 +149,9 @@ public class GameEngine {
                 case "REST":
                     player.rest();
                     break;
+                case "DROP":
+                    player.dropItemFromInventory(player.entityInventory);
+                    break;
             }
         }while(!exit);
         System.out.println("\nYOU QUITTED THE GAME");

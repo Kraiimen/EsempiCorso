@@ -36,7 +36,7 @@ public class Inventory {
     public Item getItemFromInventory(String itemName){
         String name = itemName.toUpperCase();
         Item item = null;
-        if(itemsStored.getFirst() != null){
+        if(!itemsStored.isEmpty()){
             for(Item i : itemsStored){
                 if(i != null){
                     if(name.equals(i.getItemName().toUpperCase())){
@@ -50,6 +50,7 @@ public class Inventory {
         }
         return item;
     }
+
     public void showItemsInInventory(){
         System.out.println("Oggetti:");
         for(Item i : itemsStored){
@@ -59,6 +60,24 @@ public class Inventory {
         }
         System.out.println();
     }
+
+    //metodo getItem ma senza rimozione dell'oggetto dall'inventario (per visualizzare l'oggetto)
+    public Item viewItemFromInventory(String itemName){
+        String name = itemName.toUpperCase();
+        Item item = null;
+        if(!itemsStored.isEmpty()){
+            for(Item i : itemsStored){
+                if(i != null){
+                    if(name.equals(i.getItemName().toUpperCase())){
+                        item = i;
+                        break;
+                    }
+                }
+            }
+        }
+        return item;
+    }
+
     public boolean IsInventoryFull(){
         return inventoryCapacity == 0;
     }

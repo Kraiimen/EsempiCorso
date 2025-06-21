@@ -9,6 +9,7 @@ public enum Controls {
     LEVEL_UP("LEVELUP"),
     PICK_FROM_CORPSE("PICKFROMCORPSE"),
     PICK_UP("PICKUP"),
+    DROP("DROP"),
     BUY("BUY"),
     EAT("EAT"),
     EQUIP("EQUIP"),

@@ -28,7 +28,7 @@ public class Room{
 
     private int maxGuardsInRoom;
 
-    private Inventory roomObjects = new Inventory(20);
+    private Inventory roomObjects = new Inventory(100);
 
     private ArrayList<ArrayList> roomEntities = new ArrayList<>();
 

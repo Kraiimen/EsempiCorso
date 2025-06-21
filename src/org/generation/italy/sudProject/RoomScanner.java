@@ -22,6 +22,7 @@ public class RoomScanner {
         controls.add(Controls.EQUIP);
         controls.add(Controls.UNEQUIP);
         controls.add(Controls.EAT);
+        controls.add(Controls.DROP);
         if(!room.getRoomEntities().get(CAT_INDEX).isEmpty() ||
                 !room.getRoomEntities().get(GUARD_INDEX).isEmpty() ||
                 !room.getRoomEntities().get(CULTIST_INDEX).isEmpty() ||

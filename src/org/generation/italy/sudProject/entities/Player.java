@@ -125,16 +125,19 @@ public class Player extends Entity{
         seller.getEntityInventory().showItemsInInventory();
         System.out.println("SELECT ITEM TO BUY:");
         String input = console.readLine();
-        if(seller.getEntityInventory().getItemFromInventory(input) != null
-                && seller.getEntityInventory().getItemFromInventory(input).getValue() < this.money){
-            Item i = seller.getEntityInventory().getItemFromInventory(input);
-            entityInventory.addItemToInventory(i);
-            pay(i.getValue());
-            seller.earnMoney(i.getValue());
-        }else{
+
+        Item item = seller.getEntityInventory().viewItemFromInventory(input);
+
+        if (item != null && item.getValue() <= this.money) {
+            entityInventory.addItemToInventory(item);
+            seller.getEntityInventory().deleteItemFromInventory(input);
+            pay(item.getValue());
+            seller.earnMoney(item.getValue());
+        } else {
             System.out.println("Non puoi comprare quest'oggetto");
         }
     }
+
     public void pickFromCorpse(Room room){
         room.showCorpses();
         System.out.println("SELECT CORPSE: ");
@@ -158,6 +161,9 @@ public class Player extends Entity{
         Item i = selectItemFromInventory(inventory);
         if(i != null){
             entityInventory.addItemToInventory(i);
+            if(i.isDropped()){
+                System.out.println("Hai preso l'oggetto selezionato da terra");
+            }
             inventory.deleteItemFromInventory(i.getItemName());
         }else{
             System.out.println("Non è presente alcun item con questo nome");
@@ -269,6 +275,17 @@ public class Player extends Entity{
             default:
                 System.out.println("Non hai selezionato alcuna parte");
                 break;
+        }
+    }
+    public void dropItemFromInventory(Inventory inventory){
+        inventory.showItemsInInventory();
+        Item item = selectItemFromInventory(inventory); //prende l'oggetto o null
+        if(item != null){
+            item.setDropped(true);
+            playerPosition.getRoomObjects().addItemToInventory(item);
+            System.out.println("hai lasciato cadere l'oggetto " + item.getItemName());
+        }else{
+            System.out.println("Non è presente alcun item con questo nome");
         }
     }
 

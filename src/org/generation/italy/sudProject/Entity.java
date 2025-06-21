@@ -95,7 +95,9 @@ public abstract class Entity {
     }
     public void die(){
         if(this instanceof Player){
-            Player.setPlayerPosition(world.get(TEMPLE_INDEX)); //spawn
+            System.out.println("SEI MORTO");
+            Player.setPlayerPosition(world.get(TEMPLE_INDEX));//spawn
+            ((Player) this).printRoomAndDesc();
             //respawn(riposo)
             ((Player) this).rest();
         }else{
