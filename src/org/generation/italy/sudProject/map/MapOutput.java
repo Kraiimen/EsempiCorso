@@ -1,386 +1,73 @@
 package org.generation.italy.sudProject.map;
 
 public class MapOutput {
-    private static String mapNSEO=
-            "|====================          ====================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "                                                    \n" +
-            "                                                    \n" +
-            "                                                    \n" +
-            "                                                    \n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|====================          ====================|\n";
-    private static String map =
-            "|==================================================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|==================================================|\n";
-    private static String mapN =
-            "|====================          ====================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|==================================================|\n";
-    private static String mapS =
-            "|==================================================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|====================          ====================|\n";
-    private static String mapO =
-            "|==================================================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "                                                   |\n" +
-            "                                                   |\n" +
-            "                                                   |\n" +
-            "                                                   |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|==================================================|\n";
-    private static String mapE =
-            "|==================================================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                   \n" +
-            "|                                                   \n" +
-            "|                                                   \n" +
-            "|                                                   \n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|==================================================|\n";
-    private static String mapEO =
-            "|==================================================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "                                                    \n" +
-            "                                                    \n" +
-            "                                                    \n" +
-            "                                                    \n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|==================================================|\n";
-    private static String mapNS =
-            "|====================          ====================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|====================          ====================|\n";
-    private static String mapNE =
-            "|====================          ====================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                   \n" +
-            "|                                                   \n" +
-            "|                                                   \n" +
-            "|                                                   \n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|==================================================|\n";
-    private static String mapNO =
-            "|====================          ====================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "                                                   |\n" +
-            "                                                   |\n" +
-            "                                                   |\n" +
-            "                                                   |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|==================================================|\n";
-    private static String mapNEO =
-            "|====================          ====================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "                                                    \n" +
-            "                                                    \n" +
-            "                                                    \n" +
-            "                                                    \n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|==================================================|\n";
-    private static String mapSE =
-            "|==================================================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                   \n" +
-            "|                                                   \n" +
-            "|                                                   \n" +
-            "|                                                   \n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|====================          ====================|\n";
-    private static String mapSO =
-            "|==================================================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "                                                   |\n" +
-            "                                                   |\n" +
-            "                                                   |\n" +
-            "                                                   |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|====================          ====================|\n";
-    private static String mapSEO =
-            "|==================================================|\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "                                                    \n" +
-            "                                                    \n" +
-            "                                                    \n" +
-            "                                                    \n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|                                                  |\n" +
-            "|====================          ====================|\n";
+    public static String getRoomOutput(Room northRoom, Room southRoom, Room eastRoom, Room westRoom) {
+        boolean n = northRoom != null;
+        boolean s = southRoom != null;
+        boolean e = eastRoom != null;
+        boolean o = westRoom != null;
+        return buildMap(n, s, e, o);
+    }
 
+    private static String buildMap(boolean n, boolean s, boolean e, boolean o) {
+        StringBuilder sb = new StringBuilder();
 
-    // /--METHODS--/
-    public static String getRoomOutput(Room northRoom, Room southRoom, Room eastRoom, Room westRoom){
-        if(northRoom != null && southRoom != null && eastRoom != null && westRoom != null){
-            return mapNSEO;
-        }else if(northRoom != null && southRoom == null && eastRoom == null && westRoom == null){
-            return mapN;
-        }else if(northRoom == null && southRoom != null && eastRoom == null && westRoom == null){
-            return mapS;
-        }else if(northRoom == null && southRoom == null && eastRoom != null && westRoom == null){
-            return mapE;
-        }else if(northRoom == null && southRoom == null && eastRoom == null && westRoom != null){
-            return mapO;
-        }else if(northRoom == null && southRoom != null && eastRoom != null && westRoom != null){
-            return mapSEO;
-        }else if(northRoom == null && southRoom != null && eastRoom != null){
-            return mapSE;
-        }else if(northRoom == null && southRoom != null){
-            return mapSO;
-        }else if(northRoom == null && eastRoom != null){
-            return mapEO;
-        }else if(northRoom != null && southRoom == null && eastRoom != null && westRoom != null){
-            return mapNEO;
-        }else if(northRoom != null && southRoom == null && eastRoom != null){
-            return mapNE;
-        }else if(northRoom != null && southRoom == null){
-            return mapNO;
-        }else if(northRoom != null && eastRoom == null && westRoom == null){
-            return mapNS;
-        }else return map;
+        // Riga superiore (con apertura nord)
+        if (n) {
+            sb.append("|====================          ====================|\n");
+        } else {
+            sb.append("|==================================================|\n");
+        }
+
+        // Prime 10 righe normali
+        for (int i = 0; i < 10; i++) {
+            sb.append(getStandardLine());
+        }
+
+        // 4 righe centrali (righe 11–14) con eventuali porte est/ovest
+        for (int i = 0; i < 4; i++) {
+            sb.append(getDoorLine(e, o));
+        }
+
+        // Ultime 9 righe normali
+        for (int i = 0; i < 9; i++) {
+            sb.append(getStandardLine());
+        }
+
+        // Riga inferiore (con apertura sud)
+        if (s) {
+            sb.append("|====================          ====================|\n");
+        } else {
+            sb.append("|==================================================|\n");
+        }
+
+        return sb.toString();
+    }
+
+    // Riga normale con entrambi i lati chiusi
+    private static String getStandardLine() {
+        return "|                                                  |\n";
+    }
+
+    // Riga con aperture laterali (porte) a est e/o ovest
+    private static String getDoorLine(boolean east, boolean west) {
+        StringBuilder line = new StringBuilder();
+
+        if (west) {
+            line.append(" "); // Porta aperta a ovest
+        } else {
+            line.append("|");
+        }
+
+        line.append("                                                  ");
+
+        if (east) {
+            line.append(" "); // Porta aperta a est
+        } else {
+            line.append("|");
+        }
+
+        line.append("\n");
+        return line.toString();
     }
 }
