@@ -84,6 +84,7 @@ public abstract class Entity {
         entityInventory = new Inventory(inventoryCap);
         this.money = money;
         this.indexClassStat = indexClassStat;
+        this.xp = xp;
     }
 
     //--METHODS--/

@@ -34,7 +34,6 @@ public class Player extends Entity{
     private String playerName;
     private LocalDate creationDate = LocalDate.now();
     private int playerLevel = 1;
-    private int xp = STARTING_XP;
     private int maxXp = STARTING_MAX_XP;
     Equipment playerEquipment = new Equipment();
 
@@ -55,11 +54,11 @@ public class Player extends Entity{
     public void playerMove() {
         System.out.println("Luogo attuale: "+playerPosition.getRoomName());
         playerPosition.printMapOutput();
-        System.out.println("Dove vuoi andare? : (NORD) (SOUTH) (EAST) (WEST)");
+        System.out.println("Dove vuoi andare? : (NORTH) (SOUTH) (EAST) (WEST)");
         boolean directionSwitch = false;
         String direction = console.readLine();
         switch (direction.toUpperCase().trim()) {
-            case "NORD":
+            case "NORTH":
                 if (playerPosition.getNorthRoom() != null) {
                     playerPosition = playerPosition.getNorthRoom();
                     directionSwitch = true;
@@ -103,19 +102,24 @@ public class Player extends Entity{
     @Override
     public void attack(Entity target) {
         if (target.isCanBeAttacked()) {
-                target.setHp(target.getHp() - this.getAtk() + this.getAtkBonusFromStat());
+                target.setHp(target.getHp() - (this.getAtk() + this.getAtkBonusFromStat()));
         }
         if(isDead(target)){
-            xpUp(target.getXp());
+            this.xpUp(target.getXp());
+            System.out.println("XP GUADAGNATI: " + target.getXp());
             this.earnMoney(target.getMoney());
+            System.out.println("SOLDI GUADAGNATI: " + target.getMoney());
         }
     }
 
     public void eat(){
         entityInventory.showItemsInInventory();
-        Item item = selectItemFromInventory(entityInventory);
+        System.out.println("Seleziona l'oggetto: ");
+        String input = console.readLine();
+        Item item = entityInventory.viewItemFromInventory(input);
         if(item instanceof Food){
             regenerateHp(((Food) item).getHpValue());
+            entityInventory.deleteItemFromInventory(input);
         }else{
             System.out.println("Quest'oggetto non si può mangiare");
             entityInventory.addItemToInventory(item);
@@ -141,7 +145,7 @@ public class Player extends Entity{
     public void pickFromCorpse(Room room){
         room.showCorpses();
         System.out.println("SELECT CORPSE: ");
-        String input = console.readLine();
+        String input = console.readLine().trim().toUpperCase();
         int result = room.getCorpseIndex(input);
         if(result != -1){
             //se ha trovato il cadavere
@@ -149,6 +153,7 @@ public class Player extends Entity{
             Entity corpse = (Entity)obj;
             corpse.getEntityInventory().showItemsInInventory();
             addFromInventoryToInventory(corpse.getEntityInventory());
+            room.getRoomEntities().get(CORPSE_INDEX).remove(result);
         }else{
             System.out.println("Nessun entità cadavere ha questo nome");
         }
@@ -171,8 +176,9 @@ public class Player extends Entity{
     }
 
     private void xpUp(int amount){
-        xp += amount;
+        this.setXp(this.getXp() + amount);
     }
+
     public boolean xpOverCap(){
         return xp >= maxXp;
     }

@@ -17,16 +17,6 @@ import static org.generation.italy.sudProject.map.Room.BOSS_INDEX;
 
 public class GameEngine {
     //COSE DA AGGIUNGERE:
-//    aggiustare la scritta nord
-//
-//    scelta cadavere da dove prendere gli item
-//
-//    nel pickfromcorpse aggiustare il nome in modo che quando seleziono cat invece di Cat sia valido
-//
-//    guadagno xp all'uccisione
-//
-//    barra della vita durante le fight
-//
 //    spawn del boss
 //
 //    ciclo giorno notte
@@ -138,6 +128,7 @@ public class GameEngine {
                             endFight = true;
                         }
                     }while(!endFight);
+                    System.out.println("COMBATTIMENTO TERMINATO!\n");
                     break;
                 case "LEVELUP":
                     MoonPriest moonPriest = (MoonPriest) player.getPlayerPosition().getRoomEntities().get(ROOM_MAIN_NPC_INDEX).getFirst();

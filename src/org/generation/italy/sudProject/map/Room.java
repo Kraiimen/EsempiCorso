@@ -81,7 +81,7 @@ public class Room{
         int index = -1;
         for(int i=0; i< array.size(); i++){
             Entity e = array.get(i);
-            if(e.getName().equals(corpseName)){
+            if(e.getName().trim().toUpperCase().equals(corpseName)){
                 index = i;
                 break;
             }
