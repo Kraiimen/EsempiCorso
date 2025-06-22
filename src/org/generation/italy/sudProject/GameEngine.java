@@ -2,6 +2,7 @@ package org.generation.italy.sudProject;
 
 import org.generation.italy.sudProject.entities.Npc;
 import org.generation.italy.sudProject.entities.Player;
+import org.generation.italy.sudProject.entities.mobTypes.mobs.bosses.Necromancer;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.MoonPriest;
 import org.generation.italy.sudProject.map.WorldMap;
 
@@ -20,12 +21,16 @@ public class GameEngine {
 //    spawn del boss
 //
 //    ciclo giorno notte
+//
+//    fine gioco una volta sconfitto il boss
 
     static{
+        boolean endGame = false;
         boolean exit = false;
         Console console = System.console();
         PlayerCreator playerCreator = new PlayerCreator();
         WorldMap worldMap = new WorldMap();
+        TimeHandler timeHandler = new TimeHandler();
         Player player = playerCreator.createNewPlayer();
         player.printRoomAndDesc(); //primo spawn
         String stringControls;
@@ -120,6 +125,9 @@ public class GameEngine {
                         }
                         //termina il combattimento (se uno dei due muore)
                         if(isDead(target)){
+                            if(target instanceof Necromancer){
+                                endGame = true;
+                            }
                             target.die();
                             endFight = true;
                         }
@@ -129,6 +137,7 @@ public class GameEngine {
                         }
                     }while(!endFight);
                     System.out.println("COMBATTIMENTO TERMINATO!\n");
+                    timeHandler.increaseTime(100);
                     break;
                 case "LEVELUP":
                     MoonPriest moonPriest = (MoonPriest) player.getPlayerPosition().getRoomEntities().get(ROOM_MAIN_NPC_INDEX).getFirst();
@@ -157,12 +166,27 @@ public class GameEngine {
                     break;
                 case "REST":
                     player.rest();
+                    timeHandler.increaseTime(500);
                     break;
                 case "DROP":
                     player.dropItemFromInventory(player.entityInventory);
                     break;
             }
-        }while(!exit);
-        System.out.println("\nYOU QUITTED THE GAME");
+            //visualizza tempo
+            timeHandler.showTime();
+
+            //gestione spawn boss
+            if(TimeHandler.day >= 30 && TimeHandler.timePhase.getValue().equals("NIGHT")){
+                System.out.println("LA NOTTE SEMBRA NON FINIRE MAI...");
+                System.out.println("Si sente una strana presenza proveniente dai boschi\n");
+                //boss spawn
+                WorldMap.spawnNecromancer();
+            }
+        }while(!exit && !endGame);
+        if(exit){
+            System.out.println("\nYOU QUITTED THE GAME");
+        }else{
+            System.out.println("\nHAI RIPORTATO LA LUCE A MOONVEIL!");
+        }
     }
 }

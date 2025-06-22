@@ -11,8 +11,7 @@ import java.util.List;
 import static org.generation.italy.sudProject.Entity.dice;
 import static org.generation.italy.sudProject.entities.npcTypes.npcs.Guard.deleteGuards;
 import static org.generation.italy.sudProject.map.Room.*;
-import static org.generation.italy.sudProject.map.WorldMap.recallGenerateRoomEntities;
-import static org.generation.italy.sudProject.map.WorldMap.world;
+import static org.generation.italy.sudProject.map.WorldMap.*;
 
 public class Spawner {
 
@@ -49,6 +48,7 @@ public class Spawner {
             r.getRoomEntities().get(GUARD_INDEX).clear();
             r.getRoomEntities().get(CAT_INDEX).clear();
             r.getRoomEntities().get(CULTIST_INDEX).clear();
+            r.getRoomEntities().get(BOSS_INDEX).clear();
         }
         recallGenerateRoomEntities();
     }

@@ -1,7 +1,10 @@
 package org.generation.italy.sudProject.map;
 
 import org.generation.italy.sudProject.Entity;
+import org.generation.italy.sudProject.GameEngine;
 import org.generation.italy.sudProject.Spawner;
+import org.generation.italy.sudProject.TimeHandler;
+import org.generation.italy.sudProject.entities.mobTypes.mobs.bosses.Necromancer;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.Baker;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.Blacksmith;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.MoonPriest;
@@ -10,6 +13,7 @@ import org.generation.italy.sudProject.items.itemTypes.UniqueItem;
 import java.util.ArrayList;
 
 import static org.generation.italy.sudProject.Spawner.addNewEntityType;
+import static org.generation.italy.sudProject.map.Room.BOSS_INDEX;
 import static org.generation.italy.sudProject.map.Room.ROOM_MAIN_NPC_INDEX;
 
 
@@ -86,6 +90,16 @@ public class WorldMap {
         Spawner.generateRoomEntities(world.get(GARDEN_1_INDEX), 3,0);
         Spawner.generateRoomEntities(world.get(GARDEN_2_INDEX), 3,0);
         Spawner.generateRoomEntities(world.get(GARDEN_3_INDEX), 3,0);
-        Spawner.generateRoomEntities(world.get(WOODS_INDEX), 0,3);
+        if(TimeHandler.day < TimeHandler.ETERNAL_NIGHT){
+            Spawner.generateRoomEntities(world.get(WOODS_INDEX), 0,3);
+        }else{
+            //genera la stanza vuota e inserisci nuovamente il boss
+            Spawner.generateRoomEntities(world.get(WOODS_INDEX), 0,0);
+            spawnNecromancer();
+        }
+    }
+
+    public static void spawnNecromancer(){
+        world.get(WOODS_INDEX).getRoomEntities().get(BOSS_INDEX).add(new Necromancer(world.get(WOODS_INDEX)));
     }
 }
