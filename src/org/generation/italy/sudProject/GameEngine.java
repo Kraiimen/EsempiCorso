@@ -10,11 +10,27 @@ import java.util.List;
 import java.util.Random;
 
 import static org.generation.italy.sudProject.Entity.isDead;
+import static org.generation.italy.sudProject.Entity.showFightStats;
 import static org.generation.italy.sudProject.RoomScanner.fightControls;
 import static org.generation.italy.sudProject.map.Room.*;
 import static org.generation.italy.sudProject.map.Room.BOSS_INDEX;
 
 public class GameEngine {
+    //COSE DA AGGIUNGERE:
+//    aggiustare la scritta nord
+//
+//    scelta cadavere da dove prendere gli item
+//
+//    nel pickfromcorpse aggiustare il nome in modo che quando seleziono cat invece di Cat sia valido
+//
+//    guadagno xp all'uccisione
+//
+//    barra della vita durante le fight
+//
+//    spawn del boss
+//
+//    ciclo giorno notte
+
     static{
         boolean exit = false;
         Console console = System.console();
@@ -93,6 +109,7 @@ public class GameEngine {
                                             break;
                                         }
                                     }
+                                    showFightStats(player, target);
                                     player.attack(target);
                                     System.out.println("il giocatore ha terminato l'attacco");
                                     playerTurn = false;
@@ -106,6 +123,7 @@ public class GameEngine {
                             }
                         }else{
                             //enemy turn
+                            showFightStats(player, target);
                             target.attack(player);
                             System.out.println("il nemico ha terminato l'attacco");
                             playerTurn = true;

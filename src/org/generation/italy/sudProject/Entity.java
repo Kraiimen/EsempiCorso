@@ -148,7 +148,7 @@ public abstract class Entity {
         }
     }
     public void showStats(){
-        System.out.printf("%s:%d%n %s:%d%n %s:%d%n %s:%d%n %s:%d%n %s:%d%n",
+        System.out.printf("%s: %d%n %s: %d%n %s: %d%n %s: %d%n %s: %d%n %s: %d%n",
                 "Strength",strength,
                 "Dexterity",dexterity,
                 "Constitution",constitution,
@@ -156,6 +156,7 @@ public abstract class Entity {
                 "Wisdom",wisdom,
                 "Charisma",charisma);
     }
+
     protected int getAtkBonusFromStat(){
         int bonus = 4;
         int[] stats = getStats();
@@ -180,6 +181,19 @@ public abstract class Entity {
         stats[4] = wisdom;
         stats[5] = charisma;
         return stats;
+    }
+
+    public static void showFightStats(Entity fighter1, Entity fighter2){
+        System.out.printf(
+                "%-30s        | %-30s%n"+
+                "%-30s: %-5d | %-30s: %-5d%n" +
+                "%-30s: %-5d | %-30s: %-5d%n" +
+                "%-30s: %-5d | %-30s: %-5d%n",
+                fighter1.getName(), fighter2.getName(),
+                "HP", fighter1.hp, "HP", fighter2.hp,
+                "XP", fighter1.xp, "XP", fighter2.xp,
+                "Money", fighter1.money, "Money", fighter2.money
+        );
     }
 
     // /--GETTER-&-SETTER--/
