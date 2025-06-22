@@ -17,13 +17,6 @@ import static org.generation.italy.sudProject.map.Room.*;
 import static org.generation.italy.sudProject.map.Room.BOSS_INDEX;
 
 public class GameEngine {
-    //COSE DA AGGIUNGERE:
-//    spawn del boss
-//
-//    ciclo giorno notte
-//
-//    fine gioco una volta sconfitto il boss
-
     static{
         boolean endGame = false;
         boolean exit = false;
