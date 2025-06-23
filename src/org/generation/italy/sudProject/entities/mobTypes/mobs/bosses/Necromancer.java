@@ -27,7 +27,7 @@ public class Necromancer extends Entity {
     // /--METHODS--/
     @Override
     public void attack(Entity target) {
-        if(!timeToAttack && numberOfDeadCats > 0){
+        if(!timeToAttack && numberOfDeadCats > 0 && numberOfSummons > 0){
             //evoca
             this.getEntityPosition().getRoomEntities().get(UNDEAD_CAT_INDEX).add(new UndeadCat(this.getEntityPosition()));
             numberOfSummons--;
