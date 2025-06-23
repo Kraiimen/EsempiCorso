@@ -126,6 +126,7 @@ public class GameEngine {
                         }
                         if(isDead(player)){
                             player.die();
+                            timeHandler.increaseTime(500);
                             endFight = true;
                         }
                     }while(!endFight);
