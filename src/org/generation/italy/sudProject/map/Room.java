@@ -55,7 +55,8 @@ public class Room{
     }
 
     public void showEntitiesInRoom(){
-        System.out.println("Entità del luogo: ");
+        System.out.println("\nEntità del luogo: ");
+        boolean state = true;
         for(ArrayList a : roomEntities){
             if(!(a == roomEntities.get(CORPSE_INDEX))){
                 if(!a.isEmpty()){
@@ -65,12 +66,15 @@ public class Room{
                     }
                     System.out.println();
                 }
+            }else if(state){
+                showCorpses();
+                state = false;
             }
         }
     }
 
     public void showCorpses(){
-        System.out.println("Cadaveri: ");
+        System.out.println("\nCadaveri: ");
         ArrayList<Entity> array = roomEntities.get(CORPSE_INDEX);
         if(!array.isEmpty()){
             for(Entity e : array){
