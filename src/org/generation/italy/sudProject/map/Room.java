@@ -57,15 +57,18 @@ public class Room{
     public void showEntitiesInRoom(){
         System.out.println("Entità del luogo: ");
         for(ArrayList a : roomEntities){
-            if(!a.isEmpty()){
-                for(Object object : a){
-                    Entity entity = (Entity) object;
-                    System.out.print((entity.getName())+" ");
+            if(!(a == roomEntities.get(CORPSE_INDEX))){
+                if(!a.isEmpty()){
+                    for(Object object : a){
+                        Entity entity = (Entity) object;
+                        System.out.print((entity.getName())+" ");
+                    }
+                    System.out.println();
                 }
-                System.out.println();
             }
         }
     }
+
     public void showCorpses(){
         System.out.println("Cadaveri: ");
         ArrayList<Entity> array = roomEntities.get(CORPSE_INDEX);

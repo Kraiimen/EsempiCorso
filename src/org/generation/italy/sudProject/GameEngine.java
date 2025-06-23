@@ -50,86 +50,99 @@ public class GameEngine {
                     player.playerMove();
                     break;
                 case "ATTACK":
-                    boolean playerTurn = true; //se == true tocca al player, altrimenti ai nemici
-                    //selezionare chi attaccare
-                    System.out.println("Seleziona il bersaglio:");
-                    //mostra i bersagli
-                    player.getPlayerPosition().showEntitiesInRoom();
-                    String targetSelected = console.readLine();
-                    Entity target = (Entity) switch (targetSelected.trim().toUpperCase()){
-                        case "CAT" ->!player.getPlayerPosition().getRoomEntities().get(CAT_INDEX).isEmpty()? player.getPlayerPosition().
-                                getRoomEntities().get(CAT_INDEX).getLast(): null;
-                        case "CULTIST" ->!player.getPlayerPosition().getRoomEntities().get(CULTIST_INDEX).isEmpty()? player.getPlayerPosition().
-                                getRoomEntities().get(CULTIST_INDEX).getLast(): null;
-                        case "GUARD" ->!player.getPlayerPosition().getRoomEntities().get(GUARD_INDEX).isEmpty()? player.getPlayerPosition().
-                                getRoomEntities().get(GUARD_INDEX).getLast(): null;
-                        case "UNDEADCAT" ->!player.getPlayerPosition().getRoomEntities().get(UNDEAD_CAT_INDEX).isEmpty()? player.getPlayerPosition().
-                                getRoomEntities().get(UNDEAD_CAT_INDEX).getLast(): null;
-                        case "NECROMANCER" ->!player.getPlayerPosition().getRoomEntities().get(BOSS_INDEX).isEmpty()? player.getPlayerPosition().
-                                getRoomEntities().get(BOSS_INDEX).getLast(): null;
-                        default -> null;
-                    };
-                    if(target == null){
-                        System.out.println("Non puoi attaccare quest'entità");
-                        break;
-                    }
                     boolean endFight = false;
-                    do{
-                        if(playerTurn){
-                            boolean actionIsSelected = false;
-                            do {
-                                System.out.println("(ATTACK) (ESCAPE)");
-                                System.out.println("Seleziona l'azione da compiere: ");
-                                input = console.readLine().trim().toUpperCase();
-                                for(Controls c : fightControls){
-                                    if (input.equals(c.getValue())) {
-                                        actionIsSelected = true;
+                    do {
+                        //selezionare chi attaccare
+                        System.out.println("Seleziona il bersaglio:");
+                        //mostra i bersagli
+                        player.getPlayerPosition().showEntitiesInRoom();
+                        String targetSelected = console.readLine();
+                        Entity target = (Entity) switch (targetSelected.trim().toUpperCase()) {
+                            case "CAT" ->
+                                    !player.getPlayerPosition().getRoomEntities().get(CAT_INDEX).isEmpty() ? player.getPlayerPosition().
+                                            getRoomEntities().get(CAT_INDEX).getLast() : null;
+                            case "CULTIST" ->
+                                        !player.getPlayerPosition().getRoomEntities().get(CULTIST_INDEX).isEmpty() ? player.getPlayerPosition().
+                                                getRoomEntities().get(CULTIST_INDEX).getLast() : null;
+                            case "GUARD" ->
+                                        !player.getPlayerPosition().getRoomEntities().get(GUARD_INDEX).isEmpty() ? player.getPlayerPosition().
+                                                getRoomEntities().get(GUARD_INDEX).getLast() : null;
+                            case "UNDEADCAT" ->
+                                        !player.getPlayerPosition().getRoomEntities().get(UNDEAD_CAT_INDEX).isEmpty() ? player.getPlayerPosition().
+                                                getRoomEntities().get(UNDEAD_CAT_INDEX).getLast() : null;
+                            case "NECROMANCER" ->
+                                        !player.getPlayerPosition().getRoomEntities().get(BOSS_INDEX).isEmpty() ? player.getPlayerPosition().
+                                                getRoomEntities().get(BOSS_INDEX).getLast() : null;
+                            default -> null;
+                        };
+                        if (target == null) {
+                            System.out.println("Non puoi attaccare quest'entità");
+                            break;
+                        }
+                        boolean actionIsSelected = false;
+                        do {
+                            System.out.println("(ATTACK) (ESCAPE)");
+                            System.out.println("Seleziona l'azione da compiere: ");
+                            input = console.readLine().trim().toUpperCase();
+                            for (Controls c : fightControls) {
+                                if (input.equals(c.getValue())) {
+                                    actionIsSelected = true;
+                                    break;
+                                }
+                            }
+                        }while(!actionIsSelected);
+                        switch (input) {
+                            case "ATTACK":
+                                if (target.getIndexEntityPosition() == CAT_INDEX) {
+                                    if (!player.getPlayerPosition().getRoomEntities().get(GUARD_INDEX).isEmpty()) {
+                                        System.out.println("Non puoi attaccare, ci sono guardie nei dintorni!");
+                                        endFight = true;
                                         break;
                                     }
                                 }
-                            }while(!actionIsSelected);
-                            switch (input){
-                                case "ATTACK":
-                                    if(target.getIndexEntityPosition() == CAT_INDEX){
-                                        if (!player.getPlayerPosition().getRoomEntities().get(GUARD_INDEX).isEmpty()){
-                                            System.out.println("Non puoi attaccare, ci sono guardie nei dintorni!");
-                                            endFight = true;
-                                            break;
-                                        }
+                                showFightStats(player, target);
+                                player.attack(target);
+                                System.out.println("il giocatore ha terminato l'attacco");
+                                if (isDead(target)) {
+                                    if (target instanceof Necromancer) {
+                                        endGame = true;
+                                        endFight = true;
+                                    }else{
+                                        target.die();
+                                        endFight = true;
                                     }
-                                    showFightStats(player, target);
-                                    player.attack(target);
-                                    System.out.println("il giocatore ha terminato l'attacco");
-                                    playerTurn = false;
-                                    break;
-                                case "ESCAPE":
-                                    endFight = escapeDice.nextInt(11) < 3;
-                                    if(!endFight){
-                                        playerTurn = false;
-                                    }
-                                    break;
+                                }
+                                break;
+                            case "ESCAPE":
+                                endFight = escapeDice.nextInt(11) < 3;
+                                break;
+                        }
+                        if (!endFight) {
+                            //attacco dei nemici presenti nella zona se si tratta del necromancer
+                            if (target instanceof Necromancer) {
+                                //attacco del necromancer
+                                target.attack(player);
+                                System.out.println("il nemico" + target.getName() + " ha terminato l'attacco");
+                                //attacco di undead cats
+                                for(int i = 0; i < player.getEntityPosition().getRoomEntities().get(UNDEAD_CAT_INDEX).size(); i++){
+                                    target = (Entity) player.getEntityPosition().getRoomEntities().get(UNDEAD_CAT_INDEX).get(i);
+                                    target.attack(player);
+                                    System.out.println("il nemico" + target.getName() + " ha terminato l'attacco");
+                                }
+                                target = (Entity) player.getPlayerPosition().getRoomEntities().get(BOSS_INDEX).getLast();
+                            } else {
+                                showFightStats(player, target);
+                                target.attack(player);
+                                System.out.println("il nemico " + target.getName() + " ha terminato l'attacco");
                             }
-                        }else{
-                            //enemy turn
-                            showFightStats(player, target);
-                            target.attack(player);
-                            System.out.println("il nemico ha terminato l'attacco");
-                            playerTurn = true;
-                        }
-                        //termina il combattimento (se uno dei due muore)
-                        if(isDead(target)){
-                            if(target instanceof Necromancer){
-                                endGame = true;
+                            //termina il combattimento (se uno dei due muore / se muoiono tutti i nemici)
+                            if (isDead(player)) {
+                                player.die();
+                                timeHandler.increaseTime(500);
+                                endFight = true;
                             }
-                            target.die();
-                            endFight = true;
                         }
-                        if(isDead(player)){
-                            player.die();
-                            timeHandler.increaseTime(500);
-                            endFight = true;
-                        }
-                    }while(!endFight);
+                    }while (!endFight);
                     System.out.println("COMBATTIMENTO TERMINATO!\n");
                     timeHandler.increaseTime(100);
                     break;
@@ -168,11 +181,10 @@ public class GameEngine {
             }
             //visualizza tempo
             timeHandler.showTime();
-
             //gestione spawn boss
             if(TimeHandler.day >= 30 && TimeHandler.timePhase.getValue().equals("NIGHT")){
                 System.out.println("LA NOTTE SEMBRA NON FINIRE MAI...");
-                System.out.println("Si sente una strana presenza proveniente dai boschi\n");
+                System.out.println("Si sente una strana presenza provenire dai boschi\n");
                 //boss spawn
                 WorldMap.spawnNecromancer();
             }

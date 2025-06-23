@@ -97,6 +97,8 @@ public class Player extends Entity{
         System.out.println("Luogo attuale: "+playerPosition.getRoomName());
         System.out.println(playerPosition.getRoomDescription());
         playerPosition.showEntitiesInRoom();
+        System.out.println();
+        playerPosition.getRoomObjects().showItemsInInventory();
     }
 
     @Override

@@ -71,6 +71,7 @@ public class MoonPriest extends CanNotBeAttackedNpc {
             }
         }else{
             System.out.println("Non puoi ancora salire di livello");
+            System.out.println("Punti esperienza:   "+ player.getXp() + " / " + player.getMaxXp());
         }
     }
 }
