@@ -9,7 +9,7 @@ public class MapFrame extends JFrame {
 
     public MapFrame() {
         setTitle("Mappa");
-        setSize(800, 800);
+        setSize(900, 800);
         setLocationRelativeTo(null);
         setAlwaysOnTop(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -57,13 +57,13 @@ public class WorldMap {
         //aggiunge la descrizione a ciascuna stanza
         world.get(TEMPLE_SQUARE_INDEX).setRoomDescription("Una grande piazza, con al centro una statua raffigurante una divinità cara al popolo di Moonveil");
         world.get(MARKET_SQUARE_INDEX).setRoomDescription("Un mercato povero di negozianti, ma ricco di banditi");
-        world.get(TEMPLE_INDEX).setRoomDescription("Uno dei più grandi della storia. Un luogo di preghiera per chi cerca perdono, ma anche un tetto sulla testa");
-        world.get(BAKERY_INDEX).setRoomDescription("Il forno dedicato alla sacra divinità della città, si presenta come un luogo buio, ma almeno qui un pezzo di pane si trova, se riesci a permettertelo");
-        world.get(ARMORY_INDEX).setRoomDescription("Nulla è meglio di una lama per sgozzare chi detesti, se cerchi questa o protezione, allora sei nel posto giusto!");
-        world.get(GARDEN_1_INDEX).setRoomDescription("I Giardini si presentano come un luogo deserto, il sole non raggiunge mai questo luogo avvolto dal mistero");
-        world.get(GARDEN_2_INDEX).setRoomDescription("Il centro dei Giardini presenta un pozzo, dove in parecchi sono rimasti vittime di caduta. Nessuno sa quanto sia profondo");
-        world.get(GARDEN_3_INDEX).setRoomDescription("La fine dei Giardini, ma anche l'inizio per chi entra per la prima volta in città");
-        world.get(WOODS_INDEX).setRoomDescription("Un bosco illuminato dalla luna, la tua unica fonte di luce. Il fuoco è inutilizzabile per via di una maledizione");
+        world.get(TEMPLE_INDEX).setRoomDescription("Uno dei più grandi della storia.\nUn luogo di preghiera per chi cerca perdono, ma anche un tetto sulla testa");
+        world.get(BAKERY_INDEX).setRoomDescription("Il forno dedicato alla sacra divinità della città,\nsi presenta come un luogo buio, ma almeno qui un pezzo di pane si trova,\nse riesci a permettertelo");
+        world.get(ARMORY_INDEX).setRoomDescription("Nulla è meglio di una lama per sgozzare chi detesti,\nse cerchi questa o protezione, allora sei nel posto giusto!");
+        world.get(GARDEN_1_INDEX).setRoomDescription("I Giardini si presentano come un luogo deserto,\nil sole non raggiunge mai questo luogo avvolto dal mistero");
+        world.get(GARDEN_2_INDEX).setRoomDescription("Il centro dei Giardini presenta un pozzo,\ndove in parecchi sono rimasti vittime di caduta. Nessuno sa quanto sia profondo");
+        world.get(GARDEN_3_INDEX).setRoomDescription("La fine dei Giardini");
+        world.get(WOODS_INDEX).setRoomDescription("Un bosco illuminato dalla luna,\nla tua unica fonte di luce. Il fuoco è inutilizzabile per via di una maledizione");
         //aggiunge entità generiche in ciascuna stanza
         recallGenerateRoomEntities();
         //aggiunge entità uniche alle stanze

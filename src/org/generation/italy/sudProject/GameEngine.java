@@ -28,8 +28,7 @@ public class GameEngine {
         Player player = playerCreator.createNewPlayer();
         MapFrame mapFrame = new MapFrame();
         Player.setMapFrame(mapFrame);
-        mapFrame.updateMap(player.getPlayerPosition().getMapOutput());
-        player.printRoomAndDesc(); //primo spawn
+        mapFrame.updateMap(player.printRoomAndDesc() + player.getPlayerPosition().getMapOutput()); //primo spawn
         String stringControls;
         List<Controls> controls;
         String input;

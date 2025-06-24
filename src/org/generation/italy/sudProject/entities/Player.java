@@ -89,16 +89,22 @@ public class Player extends Entity{
         }
         if(directionSwitch){
             Spawner.resetGuardsInRoom(playerPosition);
-            mapFrame.updateMap(playerPosition.getMapOutput());
+            mapFrame.updateMap(printRoomAndDesc() + playerPosition.getMapOutput());
             printRoomAndDesc();
         }
     }
-    public void printRoomAndDesc(){
-        System.out.println("Luogo attuale: "+playerPosition.getRoomName());
-        System.out.println(playerPosition.getRoomDescription());
-        playerPosition.showEntitiesInRoom();
-        System.out.println();
-        playerPosition.getRoomObjects().showItemsInInventory();
+    public String printRoomAndDesc(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Luogo attuale: ")
+                .append(playerPosition.getRoomName())
+                .append("\n")
+                .append(playerPosition.getRoomDescription())
+                .append("\n\n");
+        return sb.toString();
+
+//        playerPosition.showEntitiesInRoom();
+//        System.out.println();
+//        playerPosition.getRoomObjects().showItemsInInventory();
     }
 
     @Override
