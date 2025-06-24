@@ -8,11 +8,9 @@ public enum Controls {
     ESCAPE("ESCAPE"),
     LEVEL_UP("LEVELUP"),
     PICK_FROM_CORPSE("PICKFROMCORPSE"),
+    INVENTORY("INVENTORY"),
     PICK_UP("PICKUP"),
-    DROP("DROP"),
     BUY("BUY"),
-    EAT("EAT"),
-    EQUIP("EQUIP"),
     UNEQUIP("UNEQUIP"),
     QUIT("QUIT"),
     REST("REST");

@@ -63,12 +63,12 @@ public class Inventory {
 
     //metodo getItem ma senza rimozione dell'oggetto dall'inventario (per visualizzare l'oggetto)
     public Item viewItemFromInventory(String itemName){
-        String name = itemName.toUpperCase();
+        String name = itemName.trim().toUpperCase();
         Item item = null;
         if(!itemsStored.isEmpty()){
             for(Item i : itemsStored){
                 if(i != null){
-                    if(name.equals(i.getItemName().toUpperCase())){
+                    if(name.equals(i.getItemName().trim().toUpperCase())){
                         item = i;
                         break;
                     }

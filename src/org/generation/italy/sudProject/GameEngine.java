@@ -153,17 +153,14 @@ public class GameEngine {
                 case "PICKFROMCORPSE":
                     player.pickFromCorpse(player.getPlayerPosition());
                     break;
+                case "INVENTORY":
+                    player.openInventory();
+                    break;
                 case "PICKUP":
                     player.pickEnvironmentItems(player.getPlayerPosition());
                     break;
                 case "BUY":
                     player.buy((Npc) player.getPlayerPosition().getRoomEntities().get(ROOM_MAIN_NPC_INDEX).getFirst());
-                    break;
-                case "EAT":
-                    player.eat();
-                    break;
-                case "EQUIP":
-                    player.equip();
                     break;
                 case "UNEQUIP":
                     player.removeFromEquipment();
@@ -174,9 +171,6 @@ public class GameEngine {
                 case "REST":
                     player.rest();
                     timeHandler.increaseTime(500);
-                    break;
-                case "DROP":
-                    player.dropItemFromInventory(player.entityInventory);
                     break;
             }
             //visualizza tempo

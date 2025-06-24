@@ -82,6 +82,7 @@ public class Room{
             }
             System.out.println();
         }
+        System.out.println();
     }
     public int getCorpseIndex(String corpseName){
         ArrayList<Entity> array = roomEntities.get(CORPSE_INDEX);
