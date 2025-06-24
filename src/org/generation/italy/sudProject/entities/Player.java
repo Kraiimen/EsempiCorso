@@ -55,7 +55,6 @@ public class Player extends Entity{
     //NORD 0, SUD 1, EST 2, OVEST 3
     public void playerMove() {
         System.out.println("Luogo attuale: "+playerPosition.getRoomName());
-        playerPosition.printMapOutput();
         System.out.println("Dove vuoi andare? : (NORTH) (SOUTH) (EAST) (WEST)");
         boolean directionSwitch = false;
         String direction = console.readLine();
@@ -90,13 +89,11 @@ public class Player extends Entity{
         }
         if(directionSwitch){
             Spawner.resetGuardsInRoom(playerPosition);
-            playerPosition.printMapOutput();
             mapFrame.updateMap(playerPosition.getMapOutput());
             printRoomAndDesc();
         }
     }
     public void printRoomAndDesc(){
-        playerPosition.printMapOutput();
         System.out.println("Luogo attuale: "+playerPosition.getRoomName());
         System.out.println(playerPosition.getRoomDescription());
         playerPosition.showEntitiesInRoom();
