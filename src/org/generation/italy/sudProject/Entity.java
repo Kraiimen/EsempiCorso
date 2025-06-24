@@ -11,8 +11,6 @@ import org.generation.italy.sudProject.map.Room;
 import org.generation.italy.sudProject.map.WorldMap;
 
 import java.io.Console;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import static org.generation.italy.sudProject.map.Room.*;
@@ -98,7 +96,7 @@ public abstract class Entity {
         if(this instanceof Player){
             System.out.println("SEI MORTO");
             Player.setPlayerPosition(world.get(TEMPLE_INDEX));//spawn
-            ((Player) this).printRoomAndDesc();
+            ((Player) this).printRoomNameAndDesc();
             //respawn(riposo)
             ((Player) this).rest();
         }else{

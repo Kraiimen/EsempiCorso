@@ -23,4 +23,8 @@ public class MapFrame extends JFrame {
     public void updateMap(String mapText) {
         mapPanel.setMapText(mapText);
     }
+
+    public void updateTime(String timeText) {
+        mapPanel.setTimeText(timeText);
+    }
 }

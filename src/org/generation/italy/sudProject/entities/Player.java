@@ -2,6 +2,7 @@ package org.generation.italy.sudProject.entities;
 
 import org.generation.italy.sudProject.Entity;
 import org.generation.italy.sudProject.Spawner;
+import org.generation.italy.sudProject.TimeHandler;
 import org.generation.italy.sudProject.itemManagement.Equipment;
 import org.generation.italy.sudProject.itemManagement.Inventory;
 import org.generation.italy.sudProject.items.Item;
@@ -9,11 +10,9 @@ import org.generation.italy.sudProject.items.itemTypes.Food;
 import org.generation.italy.sudProject.items.itemTypes.Weapon;
 import org.generation.italy.sudProject.map.MapFrame;
 import org.generation.italy.sudProject.map.Room;
-import org.generation.italy.sudProject.map.WorldMap;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
 
 import static org.generation.italy.sudProject.map.Room.*;
 import static org.generation.italy.sudProject.map.WorldMap.world;
@@ -89,11 +88,12 @@ public class Player extends Entity{
         }
         if(directionSwitch){
             Spawner.resetGuardsInRoom(playerPosition);
-            mapFrame.updateMap(printRoomAndDesc() + playerPosition.getMapOutput());
-            printRoomAndDesc();
+            mapFrame.updateMap(printRoomNameAndDesc() + playerPosition.getMapOutput());
+            TimeHandler.increaseTime(20);
+            mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
         }
     }
-    public String printRoomAndDesc(){
+    public String printRoomNameAndDesc(){
         StringBuilder sb = new StringBuilder();
         sb.append("Luogo attuale: ")
                 .append(playerPosition.getRoomName())

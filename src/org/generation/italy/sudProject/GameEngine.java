@@ -28,7 +28,8 @@ public class GameEngine {
         Player player = playerCreator.createNewPlayer();
         MapFrame mapFrame = new MapFrame();
         Player.setMapFrame(mapFrame);
-        mapFrame.updateMap(player.printRoomAndDesc() + player.getPlayerPosition().getMapOutput()); //primo spawn
+        mapFrame.updateMap(player.printRoomNameAndDesc() + player.getPlayerPosition().getMapOutput()); //primo spawn
+        mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
         String stringControls;
         List<Controls> controls;
         String input;
@@ -174,6 +175,7 @@ public class GameEngine {
                 case "REST":
                     player.rest();
                     timeHandler.increaseTime(500);
+                    mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
                     break;
             }
             //visualizza tempo

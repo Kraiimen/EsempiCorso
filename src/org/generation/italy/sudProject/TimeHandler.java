@@ -12,7 +12,7 @@ public class TimeHandler {
         timePhase = TimePhase.DAY;
     }
 
-    public void increaseTime(int amount){
+    public static void increaseTime(int amount){
         time += amount;
         if(time >= 1000){
             time = 0;
