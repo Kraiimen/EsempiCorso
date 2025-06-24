@@ -178,8 +178,6 @@ public class GameEngine {
                     mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
                     break;
             }
-            //visualizza tempo
-            timeHandler.showTime();
             //gestione spawn boss
             if(TimeHandler.day >= 30 && TimeHandler.timePhase.getValue().equals("NIGHT")){
                 System.out.println("LA NOTTE SEMBRA NON FINIRE MAI...");

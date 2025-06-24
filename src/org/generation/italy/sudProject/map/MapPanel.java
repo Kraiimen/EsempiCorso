@@ -1,5 +1,8 @@
 package org.generation.italy.sudProject.map;
 
+import org.generation.italy.sudProject.TimeHandler;
+import org.generation.italy.sudProject.TimePhase;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,7 +14,11 @@ public class MapPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        setBackground(Color.BLACK);
+        if(TimeHandler.timePhase == TimePhase.DAY){
+            setBackground(Color.DARK_GRAY);
+        }else{
+            setBackground(Color.BLACK);
+        }
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(new Color(255, 165, 0)); // Arancione
