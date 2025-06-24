@@ -4,6 +4,7 @@ import org.generation.italy.sudProject.entities.Npc;
 import org.generation.italy.sudProject.entities.Player;
 import org.generation.italy.sudProject.entities.mobTypes.mobs.bosses.Necromancer;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.MoonPriest;
+import org.generation.italy.sudProject.map.MapFrame;
 import org.generation.italy.sudProject.map.WorldMap;
 
 import java.io.Console;
@@ -25,6 +26,9 @@ public class GameEngine {
         WorldMap worldMap = new WorldMap();
         TimeHandler timeHandler = new TimeHandler();
         Player player = playerCreator.createNewPlayer();
+        MapFrame mapFrame = new MapFrame();
+        Player.setMapFrame(mapFrame);
+        mapFrame.updateMap(player.getPlayerPosition().getMapOutput());
         player.printRoomAndDesc(); //primo spawn
         String stringControls;
         List<Controls> controls;
@@ -185,6 +189,7 @@ public class GameEngine {
         }while(!exit && !endGame);
         if(exit){
             System.out.println("\nYOU QUITTED THE GAME");
+            mapFrame.dispose();
         }else{
             System.out.println("\nHAI RIPORTATO LA LUCE A MOONVEIL!");
         }

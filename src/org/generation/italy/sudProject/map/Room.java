@@ -148,4 +148,8 @@ public class Room{
     public Inventory getRoomObjects(){
         return roomObjects;
     }
+
+    public String getMapOutput() {
+        return mapOutput;
+    }
 }

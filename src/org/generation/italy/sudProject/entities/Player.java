@@ -7,6 +7,7 @@ import org.generation.italy.sudProject.itemManagement.Inventory;
 import org.generation.italy.sudProject.items.Item;
 import org.generation.italy.sudProject.items.itemTypes.Food;
 import org.generation.italy.sudProject.items.itemTypes.Weapon;
+import org.generation.italy.sudProject.map.MapFrame;
 import org.generation.italy.sudProject.map.Room;
 import org.generation.italy.sudProject.map.WorldMap;
 
@@ -25,6 +26,7 @@ public class Player extends Entity{
     private static final int STARTING_XP = 0;
     public static final int STARTING_MAX_XP = 200;
 
+    private static MapFrame mapFrame;
     public static int numberOfPlayers;
     private static Room playerPosition = world.getFirst();
 
@@ -89,6 +91,7 @@ public class Player extends Entity{
         if(directionSwitch){
             Spawner.resetGuardsInRoom(playerPosition);
             playerPosition.printMapOutput();
+            mapFrame.updateMap(playerPosition.getMapOutput());
             printRoomAndDesc();
         }
     }
@@ -372,5 +375,9 @@ public class Player extends Entity{
 
     public static void setPlayerPosition(Room playerPosition) {
         Player.playerPosition = playerPosition;
+    }
+
+    public static void setMapFrame(MapFrame mapFrame) {
+        Player.mapFrame = mapFrame;
     }
 }
