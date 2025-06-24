@@ -11,6 +11,7 @@ public class MapFrame extends JFrame {
         setTitle("Mappa");
         setSize(800, 800);
         setLocationRelativeTo(null);
+        setAlwaysOnTop(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         mapPanel = new MapPanel();
