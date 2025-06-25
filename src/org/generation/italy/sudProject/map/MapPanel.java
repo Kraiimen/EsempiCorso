@@ -15,14 +15,16 @@ public class MapPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(TimeHandler.timePhase == TimePhase.DAY){
-            setBackground(Color.darkGray);
-        } else {
-            setBackground(Color.BLACK);
-        }
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(new Color(255, 165, 0)); // Arancione
+        if(TimeHandler.timePhase == TimePhase.DAY){
+            setBackground(Color.darkGray);
+            g2d.setColor(new Color(255, 255, 255)); // Bianco
+        } else {
+            setBackground(Color.BLACK);
+            g2d.setColor(new Color(255, 165, 0)); // Arancione
+        }
+
         g2d.setFont(new Font("Monospaced", Font.PLAIN, 14));
 
         FontMetrics fm = g2d.getFontMetrics();
