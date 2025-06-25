@@ -100,6 +100,8 @@ public class WorldMap {
     }
 
     public static void spawnNecromancer(){
-        world.get(WOODS_INDEX).getRoomEntities().get(BOSS_INDEX).add(new Necromancer(world.get(WOODS_INDEX)));
+        if(world.get(WOODS_INDEX).getRoomEntities().get(BOSS_INDEX).isEmpty()){
+            world.get(WOODS_INDEX).getRoomEntities().get(BOSS_INDEX).add(new Necromancer(world.get(WOODS_INDEX)));
+        }
     }
 }

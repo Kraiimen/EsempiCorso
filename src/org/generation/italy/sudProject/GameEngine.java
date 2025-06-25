@@ -14,6 +14,8 @@ import java.util.Random;
 import static org.generation.italy.sudProject.Entity.isDead;
 import static org.generation.italy.sudProject.Entity.showFightStats;
 import static org.generation.italy.sudProject.RoomScanner.fightControls;
+import static org.generation.italy.sudProject.entities.Player.mapFrame;
+import static org.generation.italy.sudProject.entities.Player.printRoomNameAndDesc;
 import static org.generation.italy.sudProject.map.Room.*;
 import static org.generation.italy.sudProject.map.Room.BOSS_INDEX;
 
@@ -30,10 +32,12 @@ public class GameEngine {
         Player.setMapFrame(mapFrame);
         mapFrame.updateMap(player.printRoomNameAndDesc() + player.getPlayerPosition().getMapOutput()); //primo spawn
         mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
+        mapFrame.updateEntities(player.getPlayerPosition().getEntitiesText());
         String stringControls;
         List<Controls> controls;
         String input;
         Random escapeDice = new Random();
+        boolean spawnBoss = true;
         do{
             controls = RoomScanner.scan(player.getPlayerPosition());
             stringControls = RoomScanner.getSb().toString();
@@ -55,16 +59,17 @@ public class GameEngine {
                     break;
                 case "ATTACK":
                     boolean endFight = false;
+                    boolean hasFought = false;
                     do {
                         //selezionare chi attaccare
                         System.out.println("Seleziona il bersaglio:");
                         //mostra i bersagli
-                        player.getPlayerPosition().showEntitiesInRoom();
+                        mapFrame.updateEntities(player.getPlayerPosition().getEntitiesText());
                         String targetSelected = console.readLine();
                         Entity target = (Entity) switch (targetSelected.trim().toUpperCase()) {
                             case "CAT" ->
-                                    !player.getPlayerPosition().getRoomEntities().get(CAT_INDEX).isEmpty() ? player.getPlayerPosition().
-                                            getRoomEntities().get(CAT_INDEX).getLast() : null;
+                                    !player.getPlayerPosition().getRoomEntities().get(CAT_INDEX).isEmpty() && player.getPlayerPosition().getRoomEntities().get(GUARD_INDEX).isEmpty() ?
+                                            player.getPlayerPosition().getRoomEntities().get(CAT_INDEX).getLast() : null;
                             case "CULTIST" ->
                                         !player.getPlayerPosition().getRoomEntities().get(CULTIST_INDEX).isEmpty() ? player.getPlayerPosition().
                                                 getRoomEntities().get(CULTIST_INDEX).getLast() : null;
@@ -81,7 +86,11 @@ public class GameEngine {
                         };
                         if (target == null) {
                             System.out.println("Non puoi attaccare quest'entità");
-                            break;
+                            if(!hasFought){
+                                break;
+                            }else{
+                                continue;
+                            }
                         }
                         boolean actionIsSelected = false;
                         do {
@@ -97,15 +106,9 @@ public class GameEngine {
                         }while(!actionIsSelected);
                         switch (input) {
                             case "ATTACK":
-                                if (target.getIndexEntityPosition() == CAT_INDEX) {
-                                    if (!player.getPlayerPosition().getRoomEntities().get(GUARD_INDEX).isEmpty()) {
-                                        System.out.println("Non puoi attaccare, ci sono guardie nei dintorni!");
-                                        endFight = true;
-                                        break;
-                                    }
-                                }
                                 showFightStats(player, target);
                                 player.attack(target);
+                                hasFought = true;
                                 System.out.println("il giocatore ha terminato l'attacco");
                                 if (isDead(target)) {
                                     if (target instanceof Necromancer) {
@@ -119,6 +122,7 @@ public class GameEngine {
                                 break;
                             case "ESCAPE":
                                 endFight = escapeDice.nextInt(11) < 3;
+                                hasFought = true;
                                 break;
                         }
                         if (!endFight) {
@@ -143,12 +147,17 @@ public class GameEngine {
                             if (isDead(player)) {
                                 player.die();
                                 timeHandler.increaseTime(500);
+                                mapFrame.updateMap(printRoomNameAndDesc() + player.getPlayerPosition().getMapOutput());
+                                mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
                                 endFight = true;
                             }
                         }
                     }while (!endFight);
                     System.out.println("COMBATTIMENTO TERMINATO!\n");
-                    timeHandler.increaseTime(100);
+                    if(hasFought){
+                        timeHandler.increaseTime(100);
+                        mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
+                    }
                     break;
                 case "LEVELUP":
                     MoonPriest moonPriest = (MoonPriest) player.getPlayerPosition().getRoomEntities().get(ROOM_MAIN_NPC_INDEX).getFirst();
@@ -179,11 +188,12 @@ public class GameEngine {
                     break;
             }
             //gestione spawn boss
-            if(TimeHandler.day >= 30 && TimeHandler.timePhase.getValue().equals("NIGHT")){
+            if(TimeHandler.day >= 30 && TimeHandler.timePhase.getValue().equals("NIGHT") && spawnBoss){
                 System.out.println("LA NOTTE SEMBRA NON FINIRE MAI...");
                 System.out.println("Si sente una strana presenza provenire dai boschi\n");
                 //boss spawn
                 WorldMap.spawnNecromancer();
+                spawnBoss = false;
             }
         }while(!exit && !endGame);
         if(exit){

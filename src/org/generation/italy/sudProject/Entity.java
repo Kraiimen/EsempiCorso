@@ -13,6 +13,8 @@ import org.generation.italy.sudProject.map.WorldMap;
 import java.io.Console;
 import java.util.Random;
 
+import static org.generation.italy.sudProject.entities.Player.mapFrame;
+import static org.generation.italy.sudProject.entities.Player.printRoomNameAndDesc;
 import static org.generation.italy.sudProject.map.Room.*;
 import static org.generation.italy.sudProject.map.WorldMap.TEMPLE_INDEX;
 import static org.generation.italy.sudProject.map.WorldMap.world;
@@ -96,7 +98,6 @@ public abstract class Entity {
         if(this instanceof Player){
             System.out.println("SEI MORTO");
             Player.setPlayerPosition(world.get(TEMPLE_INDEX));//spawn
-            ((Player) this).printRoomNameAndDesc();
             //respawn(riposo)
             ((Player) this).rest();
         }else{
@@ -121,6 +122,7 @@ public abstract class Entity {
                 case UNDEAD_CAT_INDEX:
                     break;
             }
+            mapFrame.updateEntities(entityPosition.getEntitiesText());
         }
     }
     protected void regenerateHp(int amount){

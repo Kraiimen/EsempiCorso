@@ -54,36 +54,40 @@ public class Room{
         }
     }
 
-    public void showEntitiesInRoom(){
-        System.out.println("\nEntità del luogo: ");
-        boolean state = true;
-        for(ArrayList a : roomEntities){
-            if(!(a == roomEntities.get(CORPSE_INDEX))){
-                if(!a.isEmpty()){
-                    for(Object object : a){
-                        Entity entity = (Entity) object;
-                        System.out.print((entity.getName())+" ");
-                    }
-                    System.out.println();
+    public String getEntitiesText(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Entità del luogo:\n");
+
+        for(int i = 0; i < roomEntities.size(); i++){
+            if(i == CORPSE_INDEX) continue;
+
+            ArrayList<Entity> entitiesList = roomEntities.get(i);
+            if(!entitiesList.isEmpty()){
+                for(Entity e : entitiesList){
+                    sb.append(e.getName()).append(" ");
                 }
-            }else if(state){
-                showCorpses();
-                state = false;
+                sb.append("\n");
             }
         }
+
+        sb.append(getCorpsesText());  // usa il metodo che restituisce i cadaveri
+
+        return sb.toString();
     }
 
-    public void showCorpses(){
-        System.out.println("\nCadaveri: ");
+    public String getCorpsesText(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\nCadaveri:\n");
         ArrayList<Entity> array = roomEntities.get(CORPSE_INDEX);
         if(!array.isEmpty()){
             for(Entity e : array){
-                System.out.print(e.getName()+" ");
+                sb.append(e.getName()).append(" ");
             }
-            System.out.println();
+            sb.append("\n");
         }
-        System.out.println();
+        return sb.toString();
     }
+
     public int getCorpseIndex(String corpseName){
         ArrayList<Entity> array = roomEntities.get(CORPSE_INDEX);
         int index = -1;

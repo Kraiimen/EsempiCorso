@@ -25,7 +25,7 @@ public class Player extends Entity{
     private static final int STARTING_XP = 0;
     public static final int STARTING_MAX_XP = 200;
 
-    private static MapFrame mapFrame;
+    public static MapFrame mapFrame;
     public static int numberOfPlayers;
     private static Room playerPosition = world.getFirst();
 
@@ -91,9 +91,10 @@ public class Player extends Entity{
             mapFrame.updateMap(printRoomNameAndDesc() + playerPosition.getMapOutput());
             TimeHandler.increaseTime(20);
             mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
+            mapFrame.updateEntities(playerPosition.getEntitiesText());
         }
     }
-    public String printRoomNameAndDesc(){
+    public static String printRoomNameAndDesc(){
         StringBuilder sb = new StringBuilder();
         sb.append("Luogo attuale: ")
                 .append(playerPosition.getRoomName())
@@ -146,7 +147,6 @@ public class Player extends Entity{
     }
 
     public void pickFromCorpse(Room room){
-        room.showCorpses();
         System.out.println("SELECT CORPSE: ");
         String input = console.readLine().trim().toUpperCase();
         int result = room.getCorpseIndex(input);
@@ -185,6 +185,7 @@ public class Player extends Entity{
     public boolean xpOverCap(){
         return xp >= maxXp;
     }
+
     public void rest(){
         String roomName = getPlayerPosition().getRoomName();
         if(roomName.toUpperCase().equals("TEMPLE")){
@@ -195,6 +196,7 @@ public class Player extends Entity{
             System.out.println("Non puoi riposare qui");
         }
     }
+
     public void equip(Item item){
         System.out.println("Scegli dove equipaggiare l'item: ");
         playerEquipment.showEquip();
@@ -221,6 +223,7 @@ public class Player extends Entity{
                 break;
         }
     }
+
     public void removeFromEquipment(){
         System.out.println("Seleziona la parte dell'equipaggiamento da togliere: ");
         playerEquipment.showEquip();
@@ -279,6 +282,7 @@ public class Player extends Entity{
                 break;
         }
     }
+
     public void dropItemFromInventory(Inventory inventory, Item item){
         item.setDropped(true);
         playerPosition.getRoomObjects().addItemToInventory(item);
@@ -383,4 +387,5 @@ public class Player extends Entity{
     public static void setMapFrame(MapFrame mapFrame) {
         Player.mapFrame = mapFrame;
     }
+
 }

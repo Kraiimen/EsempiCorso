@@ -27,4 +27,8 @@ public class MapFrame extends JFrame {
     public void updateTime(String timeText) {
         mapPanel.setTimeText(timeText);
     }
+
+    public void updateEntities(String entitiesText) {
+        mapPanel.setEntitiesText(entitiesText);
+    }
 }
