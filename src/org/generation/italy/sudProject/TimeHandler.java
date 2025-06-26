@@ -1,5 +1,9 @@
 package org.generation.italy.sudProject;
 
+import org.generation.italy.sudProject.map.MapFrame;
+
+import java.util.Map;
+
 public class TimeHandler {
     public static int time;
     public static int day;

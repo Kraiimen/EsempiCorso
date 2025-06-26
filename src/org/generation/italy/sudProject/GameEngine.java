@@ -33,6 +33,8 @@ public class GameEngine {
         mapFrame.updateMap(player.printRoomNameAndDesc() + player.getPlayerPosition().getMapOutput()); //primo spawn
         mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
         mapFrame.updateEntities(player.getPlayerPosition().getEntitiesText());
+        mapFrame.refreshPlayerStats(player);
+        mapFrame.updateColorTheme();
         String stringControls;
         List<Controls> controls;
         String input;
@@ -43,8 +45,12 @@ public class GameEngine {
             stringControls = RoomScanner.getSb().toString();
             boolean checkInput = false;
             do {
-                System.out.println("AZIONI DISPONIBILI: " + stringControls);
-                System.out.println("Seleziona l'azione da compiere: ");
+                String actionsString = "AZIONI DISPONIBILI: " +
+                        stringControls +
+                        "\n" +
+                        "Seleziona l'azione da compiere: ";
+                MapFrame.appendToLog(actionsString);
+
                 input = console.readLine().toUpperCase().trim();
                 for (Controls c : controls) {
                     if (input.equals(c.getValue())) {
@@ -52,6 +58,7 @@ public class GameEngine {
                         break;
                     }
                 }
+                MapFrame.setLog("");
             }while(!checkInput);
             switch (input){
                 case "MOVE":
@@ -62,7 +69,7 @@ public class GameEngine {
                     boolean hasFought = false;
                     do {
                         //selezionare chi attaccare
-                        System.out.println("Seleziona il bersaglio:");
+                        MapFrame.appendToLog("Seleziona il bersaglio:");
                         //mostra i bersagli
                         mapFrame.updateEntities(player.getPlayerPosition().getEntitiesText());
                         String targetSelected = console.readLine();
@@ -85,17 +92,17 @@ public class GameEngine {
                             default -> null;
                         };
                         if (target == null) {
-                            System.out.println("Non puoi attaccare quest'entità");
+                            MapFrame.appendToLog("\nNon puoi attaccare quest'entità");
                             if(!hasFought){
                                 break;
                             }else{
+                                MapFrame.setLog("");
                                 continue;
                             }
                         }
                         boolean actionIsSelected = false;
                         do {
-                            System.out.println("(ATTACK) (ESCAPE)");
-                            System.out.println("Seleziona l'azione da compiere: ");
+                            MapFrame.setLog("Seleziona l'azione da compiere: (ATTACK) (ESCAPE) ");
                             input = console.readLine().trim().toUpperCase();
                             for (Controls c : fightControls) {
                                 if (input.equals(c.getValue())) {
@@ -103,13 +110,14 @@ public class GameEngine {
                                     break;
                                 }
                             }
+                            MapFrame.setLog("");
                         }while(!actionIsSelected);
                         switch (input) {
                             case "ATTACK":
                                 showFightStats(player, target);
                                 player.attack(target);
                                 hasFought = true;
-                                System.out.println("il giocatore ha terminato l'attacco");
+                                MapFrame.appendToLog("il giocatore ha terminato l'attacco\n");
                                 if (isDead(target)) {
                                     if (target instanceof Necromancer) {
                                         endGame = true;
@@ -130,33 +138,42 @@ public class GameEngine {
                             if (target instanceof Necromancer) {
                                 //attacco del necromancer
                                 target.attack(player);
-                                System.out.println("il nemico" + target.getName() + " ha terminato l'attacco");
+                                MapFrame.appendToLog("il nemico " + target.getName() + " ha terminato l'attacco\n");
                                 //attacco di undead cats
                                 for(int i = 0; i < player.getEntityPosition().getRoomEntities().get(UNDEAD_CAT_INDEX).size(); i++){
                                     target = (Entity) player.getEntityPosition().getRoomEntities().get(UNDEAD_CAT_INDEX).get(i);
                                     target.attack(player);
-                                    System.out.println("il nemico" + target.getName() + " ha terminato l'attacco");
+                                    MapFrame.appendToLog("il nemico " + target.getName() + " ha terminato l'attacco\n");
                                 }
                                 target = (Entity) player.getPlayerPosition().getRoomEntities().get(BOSS_INDEX).getLast();
                             } else {
                                 showFightStats(player, target);
                                 target.attack(player);
-                                System.out.println("il nemico " + target.getName() + " ha terminato l'attacco");
+                                MapFrame.appendToLog("il nemico " + target.getName() + " ha terminato l'attacco\n");
                             }
                             //termina il combattimento (se uno dei due muore / se muoiono tutti i nemici)
                             if (isDead(player)) {
                                 player.die();
-                                timeHandler.increaseTime(500);
+                                TimeHandler.increaseTime(500);
                                 mapFrame.updateMap(printRoomNameAndDesc() + player.getPlayerPosition().getMapOutput());
                                 mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
+                                mapFrame.updateEntities(player.getPlayerPosition().getEntitiesText());
+                                mapFrame.updateColorTheme();
                                 endFight = true;
                             }
                         }
                     }while (!endFight);
-                    System.out.println("COMBATTIMENTO TERMINATO!\n");
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    MapFrame.setLog("COMBATTIMENTO TERMINATO!\n");
+                    MapFrame.clearFightStats();
                     if(hasFought){
-                        timeHandler.increaseTime(100);
+                        TimeHandler.increaseTime(100);
                         mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
+                        mapFrame.updateColorTheme();
                     }
                     break;
                 case "LEVELUP":
@@ -183,24 +200,27 @@ public class GameEngine {
                     break;
                 case "REST":
                     player.rest();
-                    timeHandler.increaseTime(500);
+                    TimeHandler.increaseTime(500);
                     mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
+                    mapFrame.updateColorTheme();
                     break;
             }
             //gestione spawn boss
             if(TimeHandler.day >= 30 && TimeHandler.timePhase.getValue().equals("NIGHT") && spawnBoss){
-                System.out.println("LA NOTTE SEMBRA NON FINIRE MAI...");
-                System.out.println("Si sente una strana presenza provenire dai boschi\n");
+                MapFrame.appendToLog("""
+                        LA NOTTE SEMBRA NON FINIRE MAI...
+                        Si sente una strana presenza provenire dai boschi
+                        """);
                 //boss spawn
                 WorldMap.spawnNecromancer();
                 spawnBoss = false;
             }
         }while(!exit && !endGame);
         if(exit){
-            System.out.println("\nYOU QUITTED THE GAME");
+            MapFrame.setLog("\nYOU QUITTED THE GAME");
             mapFrame.dispose();
         }else{
-            System.out.println("\nHAI RIPORTATO LA LUCE A MOONVEIL!");
+            MapFrame.setLog("\nHAI RIPORTATO LA LUCE A MOONVEIL!");
         }
     }
 }

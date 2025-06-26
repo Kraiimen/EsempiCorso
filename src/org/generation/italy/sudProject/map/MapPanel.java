@@ -29,7 +29,7 @@ public class MapPanel extends JPanel {
 
         FontMetrics fm = g2d.getFontMetrics();
 
-        // Disegna la mappa centrata (come prima)
+        // Disegna la mappa centrata
         String[] mapLines = mapText.split("\n");
         int lineHeight = fm.getHeight();
         int totalMapHeight = mapLines.length * lineHeight;
@@ -42,7 +42,7 @@ public class MapPanel extends JPanel {
             y += lineHeight;
         }
 
-        // Disegna il tempo in alto a sinistra (come prima)
+        // Disegna il tempo in alto a sinistra
         if (timeText != null && !timeText.isEmpty()) {
             String[] timeLines = timeText.split("\n");
             int timeY = 20;

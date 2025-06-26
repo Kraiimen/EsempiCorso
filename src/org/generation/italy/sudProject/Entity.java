@@ -7,6 +7,7 @@ import org.generation.italy.sudProject.entities.mobTypes.PeacefulMob;
 import org.generation.italy.sudProject.entities.mobTypes.mobs.Cultist;
 import org.generation.italy.sudProject.entities.npcTypes.npcs.Guard;
 import org.generation.italy.sudProject.itemManagement.Inventory;
+import org.generation.italy.sudProject.map.MapFrame;
 import org.generation.italy.sudProject.map.Room;
 import org.generation.italy.sudProject.map.WorldMap;
 
@@ -89,11 +90,12 @@ public abstract class Entity {
 
     //--METHODS--/
     private static int[] getRandomStats(int[] stats, int minValue, int maxValue){
-        for(int n : stats){
-            n = dice.nextInt(minValue, maxValue);
+        for (int i = 0; i < stats.length; i++) {
+            stats[i] = dice.nextInt(minValue, maxValue);
         }
         return stats;
     }
+
     public void die(){
         if(this instanceof Player){
             System.out.println("SEI MORTO");
@@ -141,6 +143,7 @@ public abstract class Entity {
     public void earnMoney(int money){
         this.money += money;
     }
+
     public void pay(int money){
         if(!((this.money - money) < 0)){
             this.money -= money;
@@ -148,6 +151,7 @@ public abstract class Entity {
             System.out.println("Non hai abbastanza soldi");
         }
     }
+
     public void showStats(){
         System.out.printf("%s: %d%n %s: %d%n %s: %d%n %s: %d%n %s: %d%n %s: %d%n",
                 "Strength",strength,
@@ -184,17 +188,8 @@ public abstract class Entity {
         return stats;
     }
 
-    public static void showFightStats(Entity fighter1, Entity fighter2){
-        System.out.printf(
-                "%-30s        | %-30s%n"+
-                "%-30s: %-5d | %-30s: %-5d%n" +
-                "%-30s: %-5d | %-30s: %-5d%n" +
-                "%-30s: %-5d | %-30s: %-5d%n",
-                fighter1.getName(), fighter2.getName(),
-                "HP", fighter1.hp, "HP", fighter2.hp,
-                "XP", fighter1.xp, "XP", fighter2.xp,
-                "Money", fighter1.money, "Money", fighter2.money
-        );
+    public static void showFightStats(Entity fighter1, Entity fighter2) {
+        MapFrame.updateFightStats(fighter1, fighter2);
     }
 
     // /--GETTER-&-SETTER--/

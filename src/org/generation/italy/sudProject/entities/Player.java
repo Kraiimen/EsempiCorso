@@ -53,8 +53,7 @@ public class Player extends Entity{
 
     //NORD 0, SUD 1, EST 2, OVEST 3
     public void playerMove() {
-        System.out.println("Luogo attuale: "+playerPosition.getRoomName());
-        System.out.println("Dove vuoi andare? : (NORTH) (SOUTH) (EAST) (WEST)");
+        MapFrame.setLog("Dove vuoi andare? : (NORTH) (SOUTH) (EAST) (WEST)\n");
         boolean directionSwitch = false;
         String direction = console.readLine();
         switch (direction.toUpperCase().trim()) {
@@ -83,7 +82,7 @@ public class Player extends Entity{
                 }
                 break;
             default:
-                System.out.println("INSERISCI LA DIREZIONE!");
+                MapFrame.appendToLog("INSERISCI LA DIREZIONE!\n");
                 break;
         }
         if(directionSwitch){
@@ -93,6 +92,7 @@ public class Player extends Entity{
             mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
             mapFrame.updateEntities(playerPosition.getEntitiesText());
         }
+        MapFrame.setLog("");
     }
     public static String printRoomNameAndDesc(){
         StringBuilder sb = new StringBuilder();
@@ -115,9 +115,8 @@ public class Player extends Entity{
         }
         if(isDead(target)){
             this.xpUp(target.getXp());
-            System.out.println("XP GUADAGNATI: " + target.getXp());
             this.earnMoney(target.getMoney());
-            System.out.println("SOLDI GUADAGNATI: " + target.getMoney());
+            MapFrame.appendToLog("XP GUADAGNATI: " + target.getXp() + "\nSOLDI GUADAGNATI: "+ target.getMoney() + "\n");
         }
     }
 
