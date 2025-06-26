@@ -12,7 +12,7 @@ public class TimeHandler {
 
     public TimeHandler(){
         time = 0;
-        day = 30;
+        day = 1;
         timePhase = TimePhase.DAY;
     }
 
