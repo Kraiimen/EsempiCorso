@@ -151,6 +151,7 @@ public class GameEngine {
                                 target.attack(player);
                                 MapFrame.appendToLog("il nemico " + target.getName() + " ha terminato l'attacco\n");
                             }
+                            mapFrame.refreshPlayerStats(player);
                             //termina il combattimento (se uno dei due muore / se muoiono tutti i nemici)
                             if (isDead(player)) {
                                 player.die();
@@ -159,6 +160,7 @@ public class GameEngine {
                                 mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
                                 mapFrame.updateEntities(player.getPlayerPosition().getEntitiesText());
                                 mapFrame.updateColorTheme();
+                                mapFrame.refreshPlayerStats(player);
                                 endFight = true;
                             }
                         }
@@ -170,6 +172,7 @@ public class GameEngine {
                     }
                     MapFrame.setLog("COMBATTIMENTO TERMINATO!\n");
                     MapFrame.clearFightStats();
+                    mapFrame.refreshPlayerStats(player);
                     if(hasFought){
                         TimeHandler.increaseTime(100);
                         mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
@@ -179,12 +182,14 @@ public class GameEngine {
                 case "LEVELUP":
                     MoonPriest moonPriest = (MoonPriest) player.getPlayerPosition().getRoomEntities().get(ROOM_MAIN_NPC_INDEX).getFirst();
                     moonPriest.levelUpPlayer(player);
+                    mapFrame.refreshPlayerStats(player);
                     break;
                 case "PICKFROMCORPSE":
                     player.pickFromCorpse(player.getPlayerPosition());
                     break;
                 case "INVENTORY":
                     player.openInventory();
+                    mapFrame.refreshPlayerStats(player);
                     break;
                 case "PICKUP":
                     player.pickEnvironmentItems(player.getPlayerPosition());
@@ -194,6 +199,7 @@ public class GameEngine {
                     break;
                 case "UNEQUIP":
                     player.removeFromEquipment();
+                    mapFrame.refreshPlayerStats(player);
                     break;
                 case "QUIT":
                     exit = true;
@@ -203,6 +209,7 @@ public class GameEngine {
                     TimeHandler.increaseTime(500);
                     mapFrame.updateTime("Giorno: " + TimeHandler.day + "\nOrario: " + TimeHandler.time + "\nFase: " + TimeHandler.timePhase.getValue());
                     mapFrame.updateColorTheme();
+                    mapFrame.refreshPlayerStats(player);
                     break;
             }
             //gestione spawn boss

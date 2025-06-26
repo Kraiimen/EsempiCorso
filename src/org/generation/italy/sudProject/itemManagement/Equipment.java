@@ -11,14 +11,26 @@ public class Equipment{
     private Item leftHand = null;
 
     // /--METHODS--/
-    public void showEquip(){
-        System.out.println("Equipaggiamento attuale:");
-        System.out.print("HEAD:"+head+"\n"+
-                         "BODY:"+body+"\n"+
-                         "ARMS:"+arms+"\n"+
-                         "LEGS:"+legs+"\n"+
-                         "RIGHT HAND:"+rightHand+"\n"+
-                         "LEFT HAND:"+leftHand+"\n");
+    public String showEquip(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Equipaggiamento attuale:\n");
+        sb.append("HEAD:")
+                .append(formatItem(head)).append("\n")
+                .append("BODY:")
+                .append(formatItem(body)).append("\n")
+                .append("ARMS:")
+                .append(formatItem(arms)).append("\n")
+                .append("LEGS:")
+                .append(formatItem(legs)).append("\n")
+                .append("RIGHT HAND:")
+                .append(formatItem(rightHand)).append("\n")
+                .append("LEFT HAND:")
+                .append(formatItem(leftHand)).append("\n");
+        return sb.toString();
+    }
+
+    private String formatItem(Item item) {
+        return item != null ? item.toString() : " ";
     }
     // /--GETTER-&-SETTER--/
 

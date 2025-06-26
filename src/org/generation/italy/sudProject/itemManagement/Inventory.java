@@ -51,14 +51,16 @@ public class Inventory {
         return item;
     }
 
-    public void showItemsInInventory(){
-        System.out.println("Oggetti:");
+    public String showItemsInInventory(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Oggetti:\n");
         for(Item i : itemsStored){
             if(i!=null){
-                System.out.print(i.getItemName()+" ");
+                sb.append(i.getItemName()+" ");
             }
         }
-        System.out.println();
+        sb.append("\n");
+        return sb.toString();
     }
 
     //metodo getItem ma senza rimozione dell'oggetto dall'inventario (per visualizzare l'oggetto)

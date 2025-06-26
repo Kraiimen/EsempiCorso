@@ -2,6 +2,7 @@ package org.generation.italy.sudProject.entities.npcTypes.npcs;
 
 import org.generation.italy.sudProject.entities.Player;
 import org.generation.italy.sudProject.entities.npcTypes.CanNotBeAttackedNpc;
+import org.generation.italy.sudProject.map.MapFrame;
 import org.generation.italy.sudProject.map.Room;
 
 public class MoonPriest extends CanNotBeAttackedNpc {
@@ -24,8 +25,7 @@ public class MoonPriest extends CanNotBeAttackedNpc {
                 boolean loop = true;
                 do{
                     //aumenta statistiche
-                    player.showStats();
-                    System.out.println("Scegli la statistica da aumentare:");
+                    MapFrame.setLog("Scegli la statistica da aumentare: (STRENGTH) (DEXTERITY) (CONSTITUTION) (INTELLIGENCE) (WISDOM) (CHARISMA)\n");
                     switch(console.readLine().toUpperCase()){
                         case "STRENGTH":
                             if(player.getStrength() != MAX_ATTRIBUTE_P_VALUE-1){
@@ -64,14 +64,13 @@ public class MoonPriest extends CanNotBeAttackedNpc {
                             }
                             break;
                         default:
-                            System.out.println("Nome statistica errato, riprova");
+                            MapFrame.appendToLog("Nome statistica errato, riprova\n");
                             break;
                     }
                 }while(loop);
             }
         }else{
-            System.out.println("Non puoi ancora salire di livello");
-            System.out.println("Punti esperienza:   "+ player.getXp() + " / " + player.getMaxXp());
+            MapFrame.setLog("Non puoi ancora salire di livello\nPunti esperienza:   "+ player.getXp() + " / " + player.getMaxXp() +"\n");
         }
     }
 }

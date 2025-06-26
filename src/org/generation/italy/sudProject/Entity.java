@@ -132,7 +132,7 @@ public abstract class Entity {
         if(hp > maxHp){
             hp = maxHp;
         }
-        System.out.println("HP rigenerati = " + amount);
+        MapFrame.appendToLog("HP rigenerati = " + amount + "\n");
     }
     public static boolean isDead(Entity e){
         return (e.getHp() <= 0);
@@ -148,7 +148,7 @@ public abstract class Entity {
         if(!((this.money - money) < 0)){
             this.money -= money;
         }else{
-            System.out.println("Non hai abbastanza soldi");
+            MapFrame.setLog("Non hai abbastanza soldi\n");
         }
     }
 
